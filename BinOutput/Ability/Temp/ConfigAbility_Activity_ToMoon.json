@@ -1,576 +1,604 @@
 [
-  //////////////////////////////////////////////////////////////////////////////////////////////
-  ///
-  ///    逐月节战斗挑战 - 食神供奉
-  ///    ServerUploadTool Save to [/root/env/data/json/ability/Temp]
-  ///    蒙德区域供奉Buff
-  ///    2级供奉等级 ： 每击败一个敌方目标，全队攻击伤害提升XX%，至多提升XX%
-  ///    4级供奉等级 ： 防御力提升XX%
-  ///
-  //////////////////////////////////////////////////////////////////////////////////////////////
-  {
-    "Default": {
-      "$type": "ConfigAbility",
-      "abilityName": "ActivityAbility_ToMoon_FoodChallenge_Part1",
-      "isDynamicAbility": true,
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "key": "_Activity_ToMoon_Part1_Level",
-          "value": 0
-        },
-        {
-          "$type": "AttachModifier",
-          "modifierName": "Activity_ToMoon_Part1_Handler"
-        }
-      ],
-      "modifiers": {
-        //供奉等级处理器
-        "Activity_ToMoon_Part1_Handler": {
-          "modifierMixins": [
-            {
-              "$type": "ServerUpdateGlobalValueMixin",
-              "key": "_Activity_ToMoon_Part1_Level",
-              "useLimitRange": true,
-              "minValue": 0,
-              "maxValue": 10
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "ActivityAbility_ToMoon_FoodChallenge_Part1",
+            "abilitySpecials": {
+                "Kill_Count": 0.0,
+                "Kill_MaxCount": 10.0,
+                "Kill_PerDamgeUp": 0.05999999865889549,
+                "Attack_Duration": 90.0,
+                "Heal_Interval": 1.0,
+                "Heal_Ratio": 0.10000000149011612
             },
-            {
-              "$type": "AttachModifierToSelfGlobalValueMixin",
-              "globalValueKey": "_Activity_ToMoon_Part1_Level",
-              "valueSteps": [1.5, 3.5, 10],
-              "modifierNameSteps": [
-                "Activity_ToMoon_Part1_Lv2",
-                "Activity_ToMoon_Part1_Lv4"
-              ]
-            }
-          ],
-          "onAdded": [
-            {
-              "$type": "ServerLuaCall",
-              "luaCallType": "CurChallengeGroup",
-              "funcName": "RefreshSacrificeNum"
-            }
-          ]
-        },
-        //2级供奉解锁攻击Buff
-        "Activity_ToMoon_Part1_Lv2": {
-          "onAdded": [
-            {
-              "$type": "AttachModifier",
-              "modifierName": "Activity_ToMoon_Part1_AttackBuff"
-            }
-          ]
-        },
-        //4级供奉解锁攻击+防御Buff
-        "Activity_ToMoon_Part1_Lv4": {
-          "onAdded": [
-            {
-              "$type": "AttachModifier",
-              "modifierName": "Activity_ToMoon_Part1_AttackBuff"
-            },
-            {
-              "$type": "AttachModifier",
-              "modifierName": "Activity_ToMoon_Part1_DefendBuff"
-            }
-          ]
-        },
-        //=========================================//
-        //蒙德区域攻击Buff
-        "Activity_ToMoon_Part1_AttackBuff": {
-          "onAdded": [
-            {
-              "$type": "SetGlobalValue",
-              "key": "_ABILITY_Activity_ToMoon_Part1_Count",
-              "target": "Team",
-              "value": 0
-            },
-            {
-              "$type": "AttachModifier",
-              "modifierName": "Activity_ToMoon_Part1_AttackBuff_OnAvatar",
-              "target": "CurTeamAvatars",
-              "doOffStage": true
-            }
-          ],
-          "thinkInterval": 1.0,
-          //实时更新队伍配置，给队友上Buff
-          "onThinkInterval": [
-            {
-              "$type": "AttachModifier",
-              "modifierName": "Activity_ToMoon_Part1_AttackBuff_OnAvatar",
-              "target": "CurTeamAvatars",
-              "doOffStage": true
-            }
-          ]
-        },
-        //队内角色身上的杀人计算器
-        "Activity_ToMoon_Part1_AttackBuff_OnAvatar": {
-          "stacking": "Unique",
-          "modifierMixins": [
-            {
-              "$type": "DoActionByKillingMixin",
-              "detectWindow": 0.4, //这里可能有个坑，一个在后场和前场的人同时对一个怪击杀后可能会叠2层，可能还是需要限制堆叠CD
-              "onKill": [
-                {
-                  "$type": "Predicated",
-                  "target": "Other",
-                  "doOffStage": true,
-                  "targetPredicates": [
-                    {
-                      "$type": "ByEntityTypes",
-                      "target": "Target",
-                      "entityTypes": ["Monster"]
+            "modifiers": {
+                "Activity_ToMoon_Part1_Handler": {
+                    "modifierName": "",
+                    "elementDurability": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ServerUpdateGlobalValueMixin",
+                            "key": "_Activity_ToMoon_Part1_Level",
+                            "useLimitRange": true,
+                            "maxValue": 10.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "_Activity_ToMoon_Part1_Level",
+                            "defaultGlobalValueOnCreate": 0.0,
+                            "valueSteps": [
+                                1.5,
+                                3.5,
+                                10.0
+                            ],
+                            "modifierNameSteps": [
+                                "Activity_ToMoon_Part1_Lv2",
+                                "Activity_ToMoon_Part1_Lv4"
+                            ]
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "ServerLuaCall",
+                            "luaCallType": "CurChallengeGroup",
+                            "funcName": "RefreshSacrificeNum",
+                            "LIOGECEPJAH": 0.0,
+                            "FDDPMCCJIKN": 0.0,
+                            "KNJMHMKNCKF": 0.0
+                        }
+                    ]
+                },
+                "Activity_ToMoon_Part1_Lv2": {
+                    "modifierName": "",
+                    "elementDurability": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "Activity_ToMoon_Part1_AttackBuff"
+                        }
+                    ]
+                },
+                "Activity_ToMoon_Part1_Lv4": {
+                    "modifierName": "",
+                    "elementDurability": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "Activity_ToMoon_Part1_AttackBuff"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "Activity_ToMoon_Part1_DefendBuff"
+                        }
+                    ]
+                },
+                "Activity_ToMoon_Part1_AttackBuff": {
+                    "modifierName": "",
+                    "elementDurability": 100.0,
+                    "thinkInterval": 1.0,
+                    "onAdded": [
+                        {
+                            "$type": "SetGlobalValue",
+                            "target": "Team",
+                            "value": 0.0,
+                            "key": "_ABILITY_Activity_ToMoon_Part1_Count",
+                            "maxValue": 0.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "target": "CurTeamAvatars",
+                            "doOffStage": true,
+                            "modifierName": "Activity_ToMoon_Part1_AttackBuff_OnAvatar"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "AttachModifier",
+                            "target": "CurTeamAvatars",
+                            "doOffStage": true,
+                            "modifierName": "Activity_ToMoon_Part1_AttackBuff_OnAvatar"
+                        }
+                    ]
+                },
+                "Activity_ToMoon_Part1_AttackBuff_OnAvatar": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "elementDurability": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "DoActionByKillingMixin",
+                            "detectWindow": 0.4000000059604645,
+                            "onKill": [
+                                {
+                                    "$type": "Predicated",
+                                    "target": "Other",
+                                    "doOffStage": true,
+                                    "targetPredicates": [
+                                        {
+                                            "$type": "ByEntityTypes",
+                                            "entityTypes": [
+                                                "Monster"
+                                            ]
+                                        },
+                                        {
+                                            "$type": "ByTargetGlobalValue",
+                                            "key": "_ANIMAL_ENTITY_TYPE",
+                                            "value": 0.0,
+                                            "compareType": "NoneOrEqual"
+                                        }
+                                    ],
+                                    "successActions": [
+                                        {
+                                            "$type": "AddGlobalValue",
+                                            "target": "Team",
+                                            "doOffStage": true,
+                                            "value": 1.0,
+                                            "key": "_ABILITY_Activity_ToMoon_Part1_Count",
+                                            "useLimitRange": true,
+                                            "maxValue": "Kill_MaxCount",
+                                            "minValue": 0.0
+                                        },
+                                        {
+                                            "$type": "SetGlobalValueToOverrideMap",
+                                            "target": "Team",
+                                            "doOffStage": true,
+                                            "globalValueKey": "_ABILITY_Activity_ToMoon_Part1_Count",
+                                            "overrideMapKey": "Kill_Count"
+                                        },
+                                        {
+                                            "$type": "RemoveUniqueModifier",
+                                            "target": "CurTeamAvatars",
+                                            "doOffStage": true,
+                                            "modifierName": "UNIQUE_Activity_ToMoon_Part1_AttackBuff"
+                                        },
+                                        {
+                                            "$type": "AttachModifier",
+                                            "target": "CurTeamAvatars",
+                                            "doOffStage": true,
+                                            "modifierName": "UNIQUE_Activity_ToMoon_Part1_AttackBuff"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "UNIQUE_Activity_ToMoon_Part1_AttackBuff": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": "Attack_Duration",
+                    "elementDurability": 100.0,
+                    "properties": {
+                        "Actor_AddHurtDelta": [
+                            "Kill_PerDamgeUp",
+                            "Kill_Count",
+                            "Mul"
+                        ]
                     },
-                    {
-                      "$type": "ByTargetGlobalValue",
-                      "key": "_ANIMAL_ENTITY_TYPE",
-                      "value": 0,
-                      "compareType": "NoneOrEqual"
-                    }
-                  ],
-                  //ActionList中必须后场生效
-                  "successActions": [
-                    {
-                      "$type": "AddGlobalValue",
-                      "key": "_ABILITY_Activity_ToMoon_Part1_Count",
-                      "value": 1,
-                      "useLimitRange": true,
-                      "maxValue": "%Kill_MaxCount",
-                      "minValue": 0,
-                      "target": "Team",
-                      "doOffStage": true
-                    },
-                    {
-                      "$type": "SetGlobalValueToOverrideMap",
-                      "globalValueKey": "_ABILITY_Activity_ToMoon_Part1_Count",
-                      "overrideMapKey": "Kill_Count",
-                      "target": "Team",
-                      "doOffStage": true
-                    },
-                    {
-                      "$type": "RemoveUniqueModifier",
-                      "modifierName": "UNIQUE_Activity_ToMoon_Part1_AttackBuff",
-                      "target": "CurTeamAvatars",
-                      "doOffStage": true
-                    },
-                    {
-                      "$type": "AttachModifier",
-                      "modifierName": "UNIQUE_Activity_ToMoon_Part1_AttackBuff",
-                      "target": "CurTeamAvatars",
-                      "doOffStage": true
-                    }
-                  ]
+                    "state": "AttackUp",
+                    "isLimitedProperties": true
+                },
+                "Activity_ToMoon_Part1_DefendBuff": {
+                    "modifierName": "",
+                    "elementDurability": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "CurLocalAvatarMixin",
+                            "modifierName": "Activity_ToMoon_Part1_DefendBuff_OnAvatar"
+                        }
+                    ]
+                },
+                "Activity_ToMoon_Part1_DefendBuff_OnAvatar": {
+                    "modifierName": "",
+                    "elementDurability": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "AttachToStateIDMixin",
+                            "stateIDs": [
+                                "FlyStart",
+                                "Fly"
+                            ],
+                            "modifierName": "Activity_ToMoon_Part1_DefendBuff_FlyHealHP",
+                            "PJOHJMEEANH": true
+                        }
+                    ]
+                },
+                "Activity_ToMoon_Part1_DefendBuff_FlyHealHP": {
+                    "modifierName": "",
+                    "elementDurability": 100.0,
+                    "thinkInterval": "Heal_Interval",
+                    "onThinkInterval": [
+                        {
+                            "$type": "HealHP",
+                            "amountByTargetMaxHPRatio": "Heal_Ratio"
+                        }
+                    ]
                 }
-              ]
-            }
-          ]
-        },
-        //攻击增益效果
-        "UNIQUE_Activity_ToMoon_Part1_AttackBuff": {
-          "duration": "%Attack_Duration",
-          "isUnique": true,
-          "stacking": "Unique",
-          "isLimitedProperties": true,
-          "state": "AttackUp",
-          "properties": {
-            "Actor_AddHurtDelta": "%Kill_PerDamgeUp*%Kill_Count"
-          }
-        },
-
-        //=========================================//
-        //蒙德区域防御Buff
-        "Activity_ToMoon_Part1_DefendBuff": {
-          "modifierMixins": [
-            {
-              "$type": "CurLocalAvatarMixin",
-              "modifierName": "Activity_ToMoon_Part1_DefendBuff_OnAvatar"
-            }
-          ]
-        },
-        //角色滑翔时间隔回血
-        "Activity_ToMoon_Part1_DefendBuff_OnAvatar": {
-          "modifierMixins": [
-            {
-              "$type": "AttachToStateIDMixin",
-              "stateIDs": ["FlyStart", "Fly"],
-              "modifierName": "Activity_ToMoon_Part1_DefendBuff_FlyHealHP",
-              "isCheckOnAttach": true
-            }
-          ]
-        },
-        //飞行状态间隔回血Buff
-        "Activity_ToMoon_Part1_DefendBuff_FlyHealHP": {
-          "thinkInterval": "%Heal_Interval",
-          "onThinkInterval": [
-            {
-              "$type": "HealHP",
-              "amountByTargetMaxHPRatio": "%Heal_Ratio"
-            }
-          ]
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "value": 0.0,
+                    "key": "_Activity_ToMoon_Part1_Level",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "Activity_ToMoon_Part1_Handler"
+                }
+            ],
+            "isDynamicAbility": true
         }
-      },
-      "abilitySpecials": {
-        //攻击向Buff
-        "Kill_Count": 0, //OverrideMapKey 不参与计算
-        "Kill_MaxCount": 10, //最大叠层数
-        "Kill_PerDamgeUp": 0.06, //单次叠层伤害提升百分比
-        "Attack_Duration": 90, //Buff持续时长
-
-        //防御向Buff
-        "Heal_Interval": 1.0, //治疗间隔
-        "Heal_Ratio": 0.1 //治疗最大生命百分比
-      }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "ActivityAbility_ToMoon_FoodChallenge_Part2",
+            "abilitySpecials": {
+                "MasteryUp": 300.0,
+                "Heal_Ratio": 0.10000000149011612,
+                "Heal_Interval": 2.0
+            },
+            "modifiers": {
+                "Activity_ToMoon_Part2_Handler": {
+                    "modifierName": "",
+                    "elementDurability": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ServerUpdateGlobalValueMixin",
+                            "key": "_Activity_ToMoon_Part2_Level",
+                            "useLimitRange": true,
+                            "maxValue": 10.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "_Activity_ToMoon_Part2_Level",
+                            "defaultGlobalValueOnCreate": 0.0,
+                            "valueSteps": [
+                                1.5,
+                                3.5,
+                                10.0
+                            ],
+                            "modifierNameSteps": [
+                                "Activity_ToMoon_Part2_Lv2_OnTeam",
+                                "Activity_ToMoon_Part2_Lv4_OnTeam"
+                            ]
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "ServerLuaCall",
+                            "luaCallType": "CurChallengeGroup",
+                            "funcName": "RefreshSacrificeNum",
+                            "LIOGECEPJAH": 0.0,
+                            "FDDPMCCJIKN": 0.0,
+                            "KNJMHMKNCKF": 0.0
+                        }
+                    ]
+                },
+                "Activity_ToMoon_Part2_Lv2_OnTeam": {
+                    "modifierName": "",
+                    "elementDurability": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "CurLocalAvatarMixinV2",
+                            "modifierName": "Activity_ToMoon_Part2_Lv2_OnAvatar"
+                        }
+                    ]
+                },
+                "Activity_ToMoon_Part2_Lv2_OnAvatar": {
+                    "modifierName": "",
+                    "elementDurability": 100.0,
+                    "thinkInterval": 0.5,
+                    "onThinkInterval": [
+                        {
+                            "$type": "Predicated",
+                            "otherTargets": {
+                                "$type": "SelectTargetsByShape",
+                                "shapeName": "CircleR6.5H5",
+                                "campTargetType": "All",
+                                "sizeRatio": 1.0
+                            },
+                            "targetPredicates": [
+                                {
+                                    "$type": "ByEntityTypes",
+                                    "entityTypes": [
+                                        "Gadget"
+                                    ]
+                                },
+                                {
+                                    "$type": "ByTargetGlobalValue",
+                                    "key": "_ABILITY_SceneObj_ToMoon_WarmTag",
+                                    "value": 1.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "RemoveUniqueModifier",
+                                    "target": "CurTeamAvatars",
+                                    "modifierName": "UNIQUE_Activity_ToMoon_Part2_MasteryUp"
+                                },
+                                {
+                                    "$type": "AttachModifier",
+                                    "target": "CurTeamAvatars",
+                                    "modifierName": "UNIQUE_Activity_ToMoon_Part2_MasteryUp"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "UNIQUE_Activity_ToMoon_Part2_MasteryUp": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "isUnique": true,
+                    "duration": 1.0,
+                    "elementDurability": 100.0,
+                    "properties": {
+                        "Actor_ElemMasteryDelta": "MasteryUp"
+                    },
+                    "state": "AttackUp",
+                    "isLimitedProperties": true
+                },
+                "Activity_ToMoon_Part2_Lv4_OnTeam": {
+                    "modifierName": "",
+                    "elementDurability": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "CurLocalAvatarMixinV2",
+                            "modifierName": "Activity_ToMoon_Part2_Lv4_OnAvatar"
+                        }
+                    ]
+                },
+                "Activity_ToMoon_Part2_Lv4_OnAvatar": {
+                    "modifierName": "",
+                    "elementDurability": 100.0,
+                    "thinkInterval": 0.5,
+                    "onThinkInterval": [
+                        {
+                            "$type": "Predicated",
+                            "otherTargets": {
+                                "$type": "SelectTargetsByShape",
+                                "shapeName": "CircleR6.5H5",
+                                "campTargetType": "All",
+                                "sizeRatio": 1.0
+                            },
+                            "targetPredicates": [
+                                {
+                                    "$type": "ByEntityTypes",
+                                    "entityTypes": [
+                                        "Gadget"
+                                    ]
+                                },
+                                {
+                                    "$type": "ByTargetGlobalValue",
+                                    "key": "_ABILITY_SceneObj_ToMoon_WarmTag",
+                                    "value": 1.0
+                                }
+                            ],
+                            "successActions": [
+                                {
+                                    "$type": "RemoveUniqueModifier",
+                                    "target": "CurTeamAvatars",
+                                    "modifierName": "UNIQUE_Activity_ToMoon_Part2_MasteryUp"
+                                },
+                                {
+                                    "$type": "AttachModifier",
+                                    "target": "CurTeamAvatars",
+                                    "modifierName": "UNIQUE_Activity_ToMoon_Part2_MasteryUp"
+                                },
+                                {
+                                    "$type": "ApplyModifier",
+                                    "target": "Other",
+                                    "modifierName": "Activity_ToMoon_Part2_HealWarmFire"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "Activity_ToMoon_Part2_HealWarmFire": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "duration": [
+                        "Heal_Interval",
+                        0.20000000298023224,
+                        "Sub"
+                    ],
+                    "elementDurability": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "HealHP",
+                            "amountByTargetMaxHPRatio": "Heal_Ratio"
+                        }
+                    ]
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "value": 0.0,
+                    "key": "_Activity_ToMoon_Part2_Level",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "Activity_ToMoon_Part2_Handler"
+                }
+            ],
+            "isDynamicAbility": true
+        }
+    },
+    {
+        "Default": {
+            "$type": "ConfigAbility",
+            "abilityName": "ActivityAbility_ToMoon_FoodChallenge_Part3",
+            "abilitySpecials": {
+                "Attack_Ratio": 0.30000001192092896,
+                "Attack_Duration": 10.0,
+                "Shield_Up": 0.6000000238418579
+            },
+            "modifiers": {
+                "Activity_ToMoon_Part3_Handler": {
+                    "modifierName": "",
+                    "elementDurability": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "ServerUpdateGlobalValueMixin",
+                            "key": "_Activity_ToMoon_Part3_Level",
+                            "useLimitRange": true,
+                            "maxValue": 10.0,
+                            "minValue": 0.0
+                        },
+                        {
+                            "$type": "AttachModifierToSelfGlobalValueMixin",
+                            "globalValueKey": "_Activity_ToMoon_Part3_Level",
+                            "defaultGlobalValueOnCreate": 0.0,
+                            "valueSteps": [
+                                1.5,
+                                3.5,
+                                10.0
+                            ],
+                            "modifierNameSteps": [
+                                "Activity_ToMoon_Part3_Lv2",
+                                "Activity_ToMoon_Part3_Lv4"
+                            ]
+                        }
+                    ],
+                    "onAdded": [
+                        {
+                            "$type": "ServerLuaCall",
+                            "luaCallType": "CurChallengeGroup",
+                            "funcName": "RefreshSacrificeNum",
+                            "LIOGECEPJAH": 0.0,
+                            "FDDPMCCJIKN": 0.0,
+                            "KNJMHMKNCKF": 0.0
+                        }
+                    ]
+                },
+                "Activity_ToMoon_Part3_Lv2": {
+                    "modifierName": "",
+                    "elementDurability": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "Activity_ToMoon_Part3_AttackBuff"
+                        }
+                    ]
+                },
+                "Activity_ToMoon_Part3_Lv4": {
+                    "modifierName": "",
+                    "elementDurability": 100.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "Activity_ToMoon_Part3_AttackBuff"
+                        },
+                        {
+                            "$type": "AttachModifier",
+                            "modifierName": "Activity_ToMoon_Part3_DefendBuff"
+                        }
+                    ]
+                },
+                "Activity_ToMoon_Part3_AttackBuff": {
+                    "modifierName": "",
+                    "elementDurability": 100.0,
+                    "thinkInterval": 1.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "target": "CurTeamAvatars",
+                            "modifierName": "Activity_ToMoon_Part3_AttackBuff_BurstCheck"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "AttachModifier",
+                            "target": "CurTeamAvatars",
+                            "modifierName": "Activity_ToMoon_Part3_AttackBuff_BurstCheck"
+                        }
+                    ]
+                },
+                "Activity_ToMoon_Part3_AttackBuff_BurstCheck": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "elementDurability": 100.0,
+                    "modifierMixins": [
+                        {
+                            "$type": "OnAvatarUseSkillMixin",
+                            "onTriggerUltimateSkill": [
+                                {
+                                    "$type": "AttachModifier",
+                                    "target": "CurTeamAvatars",
+                                    "modifierName": "Activity_ToMoon_Part3_AttackUp"
+                                }
+                            ],
+                            "CAHFPMLJFAK": 0.20000000298023224
+                        }
+                    ]
+                },
+                "Activity_ToMoon_Part3_AttackUp": {
+                    "stacking": "MultipleRefresh",
+                    "stackingOption": {
+                        "abilitySpecialName": "",
+                        "maxModifierNumForMultipleType": 4.0
+                    },
+                    "modifierName": "",
+                    "duration": "Attack_Duration",
+                    "elementDurability": 100.0,
+                    "properties": {
+                        "Actor_AttackRatio": "Attack_Ratio"
+                    },
+                    "state": "AttackUp",
+                    "isLimitedProperties": true
+                },
+                "Activity_ToMoon_Part3_DefendBuff": {
+                    "modifierName": "",
+                    "elementDurability": 100.0,
+                    "thinkInterval": 1.0,
+                    "onAdded": [
+                        {
+                            "$type": "AttachModifier",
+                            "target": "CurTeamAvatars",
+                            "modifierName": "Activity_ToMoon_Part3_ShieldUp"
+                        }
+                    ],
+                    "onThinkInterval": [
+                        {
+                            "$type": "AttachModifier",
+                            "target": "CurTeamAvatars",
+                            "modifierName": "Activity_ToMoon_Part3_ShieldUp"
+                        }
+                    ]
+                },
+                "Activity_ToMoon_Part3_ShieldUp": {
+                    "stacking": "Unique",
+                    "modifierName": "",
+                    "elementDurability": 100.0,
+                    "properties": {
+                        "Actor_ShieldCostMinusRatio": "Shield_Up"
+                    },
+                    "isLimitedProperties": true
+                }
+            },
+            "onAdded": [
+                {
+                    "$type": "SetGlobalValue",
+                    "value": 0.0,
+                    "key": "_Activity_ToMoon_Part3_Level",
+                    "maxValue": 0.0,
+                    "minValue": 0.0
+                },
+                {
+                    "$type": "AttachModifier",
+                    "modifierName": "Activity_ToMoon_Part3_Handler"
+                }
+            ],
+            "isDynamicAbility": true
+        }
     }
-  },
-
-  //////////////////////////////////////////////////////////////////////////////////////////////
-  ///
-  ///    逐月节战斗挑战 - 食神供奉
-  ///    雪山区域供奉Buff
-  ///    2级供奉等级 ： 处于暖源范围内时，队内所有角色元素精通提升300点
-  ///    4级供奉等级 ： 处于暖源范围内时，暖源每2秒恢复10%
-  ///
-  //////////////////////////////////////////////////////////////////////////////////////////////
-  {
-    "Default": {
-      "$type": "ConfigAbility",
-      "abilityName": "ActivityAbility_ToMoon_FoodChallenge_Part2",
-      "isDynamicAbility": true,
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "key": "_Activity_ToMoon_Part2_Level",
-          "value": 0
-        },
-        {
-          "$type": "AttachModifier",
-          "modifierName": "Activity_ToMoon_Part2_Handler"
-        }
-      ],
-      "modifiers": {
-        //供奉等级处理器
-        "Activity_ToMoon_Part2_Handler": {
-          "modifierMixins": [
-            {
-              "$type": "ServerUpdateGlobalValueMixin",
-              "key": "_Activity_ToMoon_Part2_Level",
-              "useLimitRange": true,
-              "minValue": 0,
-              "maxValue": 10
-            },
-            {
-              "$type": "AttachModifierToSelfGlobalValueMixin",
-              "globalValueKey": "_Activity_ToMoon_Part2_Level",
-              "valueSteps": [1.5, 3.5, 10],
-              "modifierNameSteps": [
-                "Activity_ToMoon_Part2_Lv2_OnTeam",
-                "Activity_ToMoon_Part2_Lv4_OnTeam"
-              ]
-            }
-          ],
-          "onAdded": [
-            {
-              "$type": "ServerLuaCall",
-              "luaCallType": "CurChallengeGroup",
-              "funcName": "RefreshSacrificeNum"
-            }
-          ]
-        },
-        //雪山区域攻击Buff
-        "Activity_ToMoon_Part2_Lv2_OnTeam": {
-          "modifierMixins": [
-            {
-              "$type": "CurLocalAvatarMixinV2",
-              "modifierName": "Activity_ToMoon_Part2_Lv2_OnAvatar"
-            }
-          ]
-        },
-        "Activity_ToMoon_Part2_Lv2_OnAvatar": {
-          "thinkInterval": 0.5,
-          "onThinkInterval": [
-            {
-              "$type": "Predicated",
-              "otherTargets": {
-                "$type": "SelectTargetsByShape",
-                "shapeName": "CircleR6.5H5",
-                "centerBasedOn": "Self",
-                "campTargetType": "All",
-                "campBasedOn": "Self"
-              },
-              "targetPredicates": [
-                {
-                  "$type": "ByEntityTypes",
-                  "entityTypes": ["Gadget"]
-                },
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_ABILITY_SceneObj_ToMoon_WarmTag",
-                  "value": 1,
-                  "compareType": "Equal"
-                }
-              ],
-              "successActions": [
-                {
-                  "$type": "RemoveUniqueModifier",
-                  "modifierName": "UNIQUE_Activity_ToMoon_Part2_MasteryUp",
-                  "target": "CurTeamAvatars"
-                },
-                {
-                  "$type": "AttachModifier",
-                  "modifierName": "UNIQUE_Activity_ToMoon_Part2_MasteryUp",
-                  "target": "CurTeamAvatars"
-                }
-              ]
-            }
-          ]
-        },
-        //全队角色元素精通提升
-        "UNIQUE_Activity_ToMoon_Part2_MasteryUp": {
-          "isUnique": true,
-          "stacking": "Unique",
-          "duration": 1.0,
-          "state": "AttackUp",
-          "isLimitedProperties": true,
-          "properties": {
-            "Actor_ElemMasteryDelta": "%MasteryUp"
-          }
-        },
-        //雪山区域攻击+防御Buff
-        "Activity_ToMoon_Part2_Lv4_OnTeam": {
-          "modifierMixins": [
-            {
-              "$type": "CurLocalAvatarMixinV2",
-              "modifierName": "Activity_ToMoon_Part2_Lv4_OnAvatar"
-            }
-          ]
-        },
-        "Activity_ToMoon_Part2_Lv4_OnAvatar": {
-          "thinkInterval": 0.5,
-          "onThinkInterval": [
-            {
-              "$type": "Predicated",
-              "otherTargets": {
-                "$type": "SelectTargetsByShape",
-                "shapeName": "CircleR6.5H5",
-                "centerBasedOn": "Self",
-                "campTargetType": "All",
-                "campBasedOn": "Self"
-              },
-              "targetPredicates": [
-                {
-                  "$type": "ByEntityTypes",
-                  "entityTypes": ["Gadget"]
-                },
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_ABILITY_SceneObj_ToMoon_WarmTag",
-                  "value": 1,
-                  "compareType": "Equal"
-                }
-              ],
-              "successActions": [
-                {
-                  "$type": "RemoveUniqueModifier",
-                  "modifierName": "UNIQUE_Activity_ToMoon_Part2_MasteryUp",
-                  "target": "CurTeamAvatars"
-                },
-                {
-                  "$type": "AttachModifier",
-                  "modifierName": "UNIQUE_Activity_ToMoon_Part2_MasteryUp",
-                  "target": "CurTeamAvatars"
-                },
-                {
-                  "$type": "ApplyModifier",
-                  "modifierName": "Activity_ToMoon_Part2_HealWarmFire",
-                  "target": "Other"
-                }
-              ]
-            }
-          ]
-        },
-        //处于暖源内时间隔回复暖源生命
-        "Activity_ToMoon_Part2_HealWarmFire": {
-          "duration": "%Heal_Interval-0.2",
-          "stacking": "Unique",
-          "onAdded": [
-            {
-              "$type": "HealHP",
-              "amountByTargetMaxHPRatio": "%Heal_Ratio"
-            }
-          ]
-        }
-      },
-      "abilitySpecials": {
-        //攻击向Buff
-        "MasteryUp": 300, //元素精通提升点数
-
-        //防御向Buff
-        "Heal_Ratio": 0.1, //暖源治疗生命百分比
-        "Heal_Interval": 2.0 //治疗间隔
-      }
-    }
-  },
-
-  //////////////////////////////////////////////////////////////////////////////////////////////
-  ///
-  ///    逐月节战斗挑战 - 食神供奉
-  ///    璃月区域供奉Buff
-  ///    2级供奉等级 ： 队内角色每次释放元素爆发，全队角色攻击力提升30%，至多叠加4层，每层独立计时
-  ///    4级供奉等级 ： 全队护盾强效提升60%
-  ///
-  //////////////////////////////////////////////////////////////////////////////////////////////
-  {
-    "Default": {
-      "$type": "ConfigAbility",
-      "abilityName": "ActivityAbility_ToMoon_FoodChallenge_Part3",
-      "isDynamicAbility": true,
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "key": "_Activity_ToMoon_Part3_Level",
-          "value": 0
-        },
-        {
-          "$type": "AttachModifier",
-          "modifierName": "Activity_ToMoon_Part3_Handler"
-        }
-      ],
-      "modifiers": {
-        //供奉等级处理器
-        "Activity_ToMoon_Part3_Handler": {
-          "modifierMixins": [
-            {
-              "$type": "ServerUpdateGlobalValueMixin",
-              "key": "_Activity_ToMoon_Part3_Level",
-              "useLimitRange": true,
-              "minValue": 0,
-              "maxValue": 10
-            },
-            {
-              "$type": "AttachModifierToSelfGlobalValueMixin",
-              "globalValueKey": "_Activity_ToMoon_Part3_Level",
-              "valueSteps": [1.5, 3.5, 10],
-              "modifierNameSteps": [
-                "Activity_ToMoon_Part3_Lv2",
-                "Activity_ToMoon_Part3_Lv4"
-              ]
-            }
-          ],
-          "onAdded": [
-            {
-              "$type": "ServerLuaCall",
-              "luaCallType": "CurChallengeGroup",
-              "funcName": "RefreshSacrificeNum"
-            }
-          ]
-        },
-        //璃月区域2级供奉
-        "Activity_ToMoon_Part3_Lv2": {
-          "onAdded": [
-            {
-              "$type": "AttachModifier",
-              "modifierName": "Activity_ToMoon_Part3_AttackBuff"
-            }
-          ]
-        },
-        //璃月区域4级供奉
-        "Activity_ToMoon_Part3_Lv4": {
-          "onAdded": [
-            {
-              "$type": "AttachModifier",
-              "modifierName": "Activity_ToMoon_Part3_AttackBuff"
-            },
-            {
-              "$type": "AttachModifier",
-              "modifierName": "Activity_ToMoon_Part3_DefendBuff"
-            }
-          ]
-        },
-        //=========================================//
-        //璃月区域攻击Buff
-        "Activity_ToMoon_Part3_AttackBuff": {
-          "onAdded": [
-            {
-              "$type": "AttachModifier",
-              "modifierName": "Activity_ToMoon_Part3_AttackBuff_BurstCheck",
-              "target": "CurTeamAvatars"
-            }
-          ],
-          "thinkInterval": 1.0,
-          "onThinkInterval": [
-            {
-              "$type": "AttachModifier",
-              "modifierName": "Activity_ToMoon_Part3_AttackBuff_BurstCheck",
-              "target": "CurTeamAvatars"
-            }
-          ]
-        },
-        //检测释放大招
-        "Activity_ToMoon_Part3_AttackBuff_BurstCheck": {
-          "stacking": "Unique",
-          "modifierMixins": [
-            {
-              "$type": "OnAvatarUseSkillMixin",
-              "clearSkillIdDelay": 0.2,
-              "onTriggerUltimateSkill": [
-                {
-                  "$type": "AttachModifier",
-                  "modifierName": "Activity_ToMoon_Part3_AttackUp",
-                  "target": "CurTeamAvatars"
-                }
-              ]
-            }
-          ]
-        },
-        //全队攻击力提升
-        "Activity_ToMoon_Part3_AttackUp": {
-          "duration": "%Attack_Duration",
-          "stacking": "MultipleRefresh",
-          "stackingOption": {
-            "maxModifierNumForMultipleType": 4
-          },
-          "state": "AttackUp",
-          "isLimitedProperties": true,
-          "properties": {
-            "Actor_AttackRatio": "%Attack_Ratio"
-          }
-        },
-        //=========================================//
-        //璃月区域防御Buff
-        "Activity_ToMoon_Part3_DefendBuff": {
-          "onAdded": [
-            {
-              "$type": "AttachModifier",
-              "modifierName": "Activity_ToMoon_Part3_ShieldUp",
-              "target": "CurTeamAvatars"
-            }
-          ],
-          "thinkInterval": 1.0,
-          "onThinkInterval": [
-            {
-              "$type": "AttachModifier",
-              "modifierName": "Activity_ToMoon_Part3_ShieldUp",
-              "target": "CurTeamAvatars"
-            }
-          ]
-        },
-        //护盾精通提升
-        "Activity_ToMoon_Part3_ShieldUp": {
-          "stacking": "Unique",
-          "isLimitedProperties": true,
-          "properties": {
-            "Actor_ShieldCostMinusRatio": "%Shield_Up"
-          }
-        }
-      },
-      "abilitySpecials": {
-        //攻击向Buff
-        "Attack_Ratio": 0.3, //单层攻击百分比
-        "Attack_Duration": 10, //单层Buff时间
-
-        //防御向Buff
-        "Shield_Up": 0.6 //护盾强效提升百分比
-      }
-    }
-  }
 ]

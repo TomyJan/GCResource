@@ -1,347 +1,272 @@
 {
-  //////////////////////////////////////////////////////////////////////////////////////////////////
-  //
-  // 气候配置
-  //
-  //////////////////////////////////////////////////////////////////////////////////////////////////
-  //common里填写的是所有气候公用的参数。
-  "common": {
-    "length": 100, //表示气候量表的最大值。
-    "thresholdRatio": 1.0, //表示量表比例大于等于这个值时，进入“高额状态（开始掉血）”
-    "uiWarningRatio": 0.7, //表示量表比例大于等于这个值时，低温条开始闪红
-    //表示气候量表处于不同阶段下的debuff调用，每个climateType对应2个，分别表示低额和高额时的debuff。没有填写的climateType就不加载
-    "debuffs": {
-      "Cold": [
-        300001, //使用ServerBuff的逻辑挂接效果，分别表示进入区域、达到高额状态时需要挂接的BUFF。离开区域时二者都要移除，脱离高额状态时需要移除第二个BUFF。
-        300002
-      ],
-      "ColdMonster": [
-        300015, //使用ServerBuff的逻辑挂接效果，分别表示进入区域、达到高额状态时需要挂接的BUFF。离开区域时二者都要移除，脱离高额状态时需要移除第二个BUFF。
-        300004
-      ],
-      "HotMonster": [
-        300009, //使用ServerBuff的逻辑挂接效果，分别表示进入区域、达到高额状态时需要挂接的BUFF。离开区域时二者都要移除，脱离高额状态时需要移除第二个BUFF。
-        300010
-      ],
-      "TatariRegion": [300008, 300007],
-      "SeiraiStorm": [300012, 300013],
-      "TsurumiThunder": [300008, 300007]
+    "common": {
+        "uiLenLerpSpeed": 100.0,
+        "thresholdRatio": 1.0,
+        "debuffs": {
+            "Cold": [
+                300001,
+                300002
+            ],
+            "ColdMonster": [
+                300015,
+                300004
+            ],
+            "HotMonster": [
+                300009,
+                300010
+            ],
+            "TatariRegion": [
+                300008,
+                300007
+            ],
+            "SeiraiStorm": [
+                300012,
+                300013
+            ],
+            "TsurumiThunder": [
+                300008,
+                300007
+            ]
+        },
+        "areaBuffs": {
+            "Cold": [
+                300003
+            ],
+            "ColdMonster": [
+                300005
+            ],
+            "HotMonster": [
+                300011
+            ],
+            "TatariRegion": [
+                300006
+            ],
+            "SeiraiStorm": [
+                300014
+            ],
+            "TsurumiThunder": [
+                300006
+            ],
+            "TsurumiRegionalMist": [
+                300017
+            ]
+        },
+        "miscs": {
+            "fadeSpeed": 1.0,
+            "dampingTime": 5.0
+        },
+        "uiWarningRatio": 0.699999988079071,
+        "uiLenWeakIntensity": 0.3499999940395355
     },
-    //进入气候区域时挂载的BUFF,没有填写的climateType就不加载
-    "areaBuffs": {
-      "Cold": [
-        300003 //使用ServerBuff的逻辑挂接效果，进入区域时会一直挂载在玩家身上
-      ],
-      "ColdMonster": [
-        300005 //使用ServerBuff的逻辑挂接效果，进入区域时会一直挂载在玩家身上
-      ],
-      "HotMonster": [
-        300011 //使用ServerBuff的逻辑挂接效果，进入区域时会一直挂载在玩家身上
-      ],
-      "TatariRegion": [300006],
-      "SeiraiStorm": [300014],
-      "TsurumiThunder": [300006],
-      "TsurumiRegionalMist": [300017]
-    },
-    //杂项
-    "miscs": {
-      "dampingTime": 1, //消退粘滞时间，单位为秒。表示短时间内既没有被行为影响，也没有收到气候区域影响后，气候量表就开始消退。
-      "fadeSpeed": 5 //量表消退速度，默认值为5点/秒，表示按这个速度退回零点。消退速度尽可能平滑，参考体力值。
-    },
-    "uiLenWeakIntensity": 0.35, //当气候量表的百分比达到uiWarningRatio时，屏幕滤镜的强度（1是气候量表满时屏幕滤镜的强度）。
-    "uiLenLerpSpeed": 1.0 //屏幕滤镜为了平滑状态变化而使用的插值时长。
-  },
-  //以下为供策划调用的模板
-  "templates": {
-    //表格中填写这个配置名称
-    "Full_Params_TsurumiThunder": {
-      "$type": "ConfigClimateInfo",
-      "climateType": "TsurumiThunder", //枚举项
-      //所有会影响气候量表变化的环境效果参数。
-      "temperatureOptions": {
-        "speed": 50.0 //默认为5点/秒，表示处于该区域时，气候量表的变化速度。同时受到多个模板规则下的该参数影响时，请报错（一般这种情况，策划已经把区域配错了，直接报error吧）
-      },
-      //与温度类型对应的相关UI资源配置
-      "climateUIInfo": {
-        "climateInfoBtnIcon": "ART/UI/Atlas/ButtonIcon/UI_BtnIcon_Climate_Tsurumi", //小地图旁气候按键的Icon图标路径
-        "climateDialogTitle": "UI_GUIDE_TsurumiRegional_CLIMATE_TITLE", //小地图旁气候dialog的文字描述title (TextMap里配置)
-        "climateDialogDesc": "UI_GUIDE_TsurumiRegional_CLIMATE_DESC", //小地图旁气候dialog的文字描述desc (TextMap里配置)
-        "climateDialogLeftIcon": "ART/UI/Atlas/ElementIcons/UI_Icon_Climate_Tsurumi", //小地图旁气候dialog的左侧图标值
-        "climateDialogLeftBg": "ART/UI/Atlas/ClimatePic/UI_Img_Climate_Tsurumi", //小地图旁气候dialog的背景图标
-
-        "showClimateMeter": "false", //是否显示屏幕下方的温度条
-        "screenEffectIndex": 1,
-
-        "climateInfoShowWithMeterType": "false" //根据气候值类型来展示
-      }
-    },
-
-    //表格中填写这个配置名称
-    "Full_Params_TsurumiRegionalMist": {
-      "$type": "ConfigClimateInfo",
-      "climateType": "TsurumiRegionalMist", //枚举项
-      //所有会影响气候量表变化的环境效果参数。
-      "temperatureOptions": {
-        "speed": 5.0 //默认为5点/秒，表示处于该区域时，气候量表的变化速度。同时受到多个模板规则下的该参数影响时，请报错（一般这种情况，策划已经把区域配错了，直接报error吧）
-      },
-      //与温度类型对应的相关UI资源配置
-      "climateUIInfo": {
-        "climateInfoBtnIcon": "ART/UI/Atlas/ButtonIcon/UI_BtnIcon_Climate_Foggy", //小地图旁气候按键的Icon图标路径
-        "climateDialogTitle": "UI_GUIDE_TsurumiRegional_CLIMATE_TITLE", //小地图旁气候dialog的文字描述title (TextMap里配置)
-        "climateDialogDesc": "UI_GUIDE_TsurumiRegional_CLIMATE_DESC", //小地图旁气候dialog的文字描述desc (TextMap里配置)
-        "climateDialogLeftIcon": "ART/UI/Atlas/ElementIcons/UI_Icon_Climate_Foggy", //小地图旁气候dialog的左侧图标值
-        "climateDialogLeftBg": "ART/UI/Atlas/ClimatePic/UI_Img_Climate_Foggy", //小地图旁气候dialog的背景图标
-
-        "showClimateMeter": "false", //是否显示屏幕下方的温度条
-        "screenEffectIndex": 1,
-
-        "climateInfoShowWithMeterType": "true", //根据气候值类型来展示
-        "uiLowWarningRatio": 0.35,
-        "uiLenLowIntensity": 0.35,
-        "uiMiddleWarningRatio": 0.7,
-        "uiLenMiddleIntensity": 1.0
-      }
-    },
-
-    //表格中填写这个配置名称
-    "Full_Params_TsurumiMist": {
-      "$type": "ConfigClimateInfo",
-      "climateType": "TsurumiMist", //枚举项
-      //所有会影响气候量表变化的环境效果参数。
-      "temperatureOptions": {
-        "speed": 30.0 //默认为5点/秒，表示处于该区域时，气候量表的变化速度。同时受到多个模板规则下的该参数影响时，请报错（一般这种情况，策划已经把区域配错了，直接报error吧）
-      },
-      //与温度类型对应的相关UI资源配置
-      "climateUIInfo": {
-        "climateInfoBtnIcon": "ART/UI/Atlas/ButtonIcon/UI_BtnIcon_Climate_Foggy", //小地图旁气候按键的Icon图标路径
-        "climateDialogTitle": "UI_GUIDE_Tsurumi_CLIMATE_TITLE", //小地图旁气候dialog的文字描述title (TextMap里配置)
-        "climateDialogDesc": "UI_GUIDE_TsurumiRegional_CLIMATE_DESC", //小地图旁气候dialog的文字描述desc (TextMap里配置)
-        "climateDialogLeftIcon": "ART/UI/Atlas/ElementIcons/UI_Icon_Climate_Foggy", //小地图旁气候dialog的左侧图标值
-        "climateDialogLeftBg": "ART/UI/Atlas/ClimatePic/UI_Img_Climate_Foggy", //小地图旁气候dialog的背景图标
-
-        "showClimateMeter": "false", //是否显示屏幕下方的温度条
-        "screenEffectIndex": 1,
-
-        "climateInfoShowWithMeterType": "true", //根据气候值类型来展示
-        "uiLowWarningRatio": 0.35,
-        "uiLenLowIntensity": 0.35,
-        "uiMiddleWarningRatio": 0.7,
-        "uiLenMiddleIntensity": 1.0
-      }
-    },
-
-    //表格中填写这个配置名称
-    "Full_Params_TransClimate": {
-      "$type": "ConfigClimateInfo",
-      "climateType": "TransClimate", //枚举项
-      //所有会影响气候量表变化的环境效果参数。
-      "temperatureOptions": {
-        "speed": 25.0 //默认为5点/秒，表示处于该区域时，气候量表的变化速度。同时受到多个模板规则下的该参数影响时，请报错（一般这种情况，策划已经把区域配错了，直接报error吧）
-      },
-      //与温度类型对应的相关UI资源配置
-      "climateUIInfo": {
-        "climateInfoBtnIcon": "ART/UI/Atlas/ButtonIcon/UI_BtnIcon_Climate_TatariRegion", //小地图旁气候按键的Icon图标路径
-        "climateDialogTitle": "UI_GUIDE_TRANSCLIMATE_TITLE", //小地图旁气候dialog的文字描述title (TextMap里配置)
-        "climateDialogDesc": "UI_GUIDE_TRANSCLIMATE_DESC", //小地图旁气候dialog的文字描述desc (TextMap里配置)
-        "climateDialogLeftIcon": "ART/UI/Atlas/ElementIcons/UI_Icon_Climate_TatariRegion", //小地图旁气候dialog的左侧图标值
-        "climateDialogLeftBg": "ART/UI/Atlas/ClimatePic/UI_Img_Climate_TatariRegion", //小地图旁气候dialog的背景图标
-
-        "showClimateMeter": "false", //是否显示屏幕下方的温度条
-        "screenEffectIndex": 3,
-
-        "climateInfoShowWithMeterType": "false" //根据气候值类型来展示
-      }
-    },
-    //表格中填写这个配置名称
-    "Full_Params_TatariRegion": {
-      "$type": "ConfigClimateInfo",
-      "climateType": "TatariRegion", //枚举项
-      //所有会影响气候量表变化的环境效果参数。
-      "temperatureOptions": {
-        "speed": 50.0 //默认为5点/秒，表示处于该区域时，气候量表的变化速度。同时受到多个模板规则下的该参数影响时，请报错（一般这种情况，策划已经把区域配错了，直接报error吧）
-      },
-      //与温度类型对应的相关UI资源配置
-      "climateUIInfo": {
-        "climateInfoBtnIcon": "ART/UI/Atlas/ButtonIcon/UI_BtnIcon_Climate_TatariRegion", //小地图旁气候按键的Icon图标路径
-        "climateDialogTitle": "UI_GUIDE_TATARICLIMATE_TITLE", //小地图旁气候dialog的文字描述title (TextMap里配置)
-        "climateDialogDesc": "UI_GUIDE_TATARICLIMATE_DESC", //小地图旁气候dialog的文字描述desc (TextMap里配置)
-        "climateDialogLeftIcon": "ART/UI/Atlas/ElementIcons/UI_Icon_Climate_TatariRegion", //小地图旁气候dialog的左侧图标值
-        "climateDialogLeftBg": "ART/UI/Atlas/ClimatePic/UI_Img_Climate_TatariRegion", //小地图旁气候dialog的背景图标
-
-        "showClimateMeter": "false", //是否显示屏幕下方的温度条
-        "screenEffectIndex": 3,
-
-        "climateInfoShowWithMeterType": "false" //根据气候值类型来展示
-      },
-      //音效 雷电
-      "climateScreenEffAudio": {
-        "uiLenStopAudio": "Stop_ui_feedback_climate_elec",
-        "uiLenLowAudio": "Play_ui_feedback_climate_elec_lv12",
-        "uiLenMiddleAudio": "Play_ui_feedback_climate_elec_lv12",
-        "uiLenMaxAudio": "Play_ui_feedback_climate_elec_lv3"
-      }
-    },
-    //雷云风暴区
-    "Full_Params_SeiraiStorm": {
-      "$type": "ConfigClimateInfo",
-      "climateType": "SeiraiStorm", //枚举项
-      //所有会影响气候量表变化的环境效果参数。
-      "temperatureOptions": {
-        "speed": 50.0 //默认为5点/秒，表示处于该区域时，气候量表的变化速度。同时受到多个模板规则下的该参数影响时，请报错（一般这种情况，策划已经把区域配错了，直接报error吧）
-      },
-      //与温度类型对应的相关UI资源配置
-      "climateUIInfo": {
-        "climateInfoBtnIcon": "ART/UI/Atlas/ButtonIcon/UI_BtnIcon_Climate_TatariRegion", //小地图旁气候按键的Icon图标路径
-        "climateDialogTitle": "UI_GUIDE_TATARICLIMATE_TITLE", //小地图旁气候dialog的文字描述title (TextMap里配置)
-        "climateDialogDesc": "UI_GUIDE_TATARICLIMATE_DESC", //小地图旁气候dialog的文字描述desc (TextMap里配置)
-        "climateDialogLeftIcon": "ART/UI/Atlas/ElementIcons/UI_Icon_Climate_TatariRegion", //小地图旁气候dialog的左侧图标值
-        "climateDialogLeftBg": "ART/UI/Atlas/ClimatePic/UI_Img_Climate_TatariRegion", //小地图旁气候dialog的背景图标
-
-        "showClimateMeter": "false", //是否显示屏幕下方的温度条
-        "screenEffectIndex": 3,
-
-        "climateInfoShowWithMeterType": "false" //根据气候值类型来展示
-      },
-      //音效 雷电
-      "climateScreenEffAudio": {
-        "uiLenStopAudio": "Stop_ui_feedback_climate_elec",
-        "uiLenLowAudio": "Play_ui_feedback_climate_elec_lv12",
-        "uiLenMiddleAudio": "Play_ui_feedback_climate_elec_lv12",
-        "uiLenMaxAudio": "Play_ui_feedback_climate_elec_lv3"
-      }
-    },
-    //表格中填写这个配置名称
-    "Full_Params_HeroCourse": {
-      "$type": "ConfigClimateInfo",
-      "climateType": "HeroCourse", //枚举项
-      //所有会影响气候量表变化的环境效果参数。
-      "temperatureOptions": {
-        "speed": 0.0 //默认为5点/秒，表示处于该区域时，气候量表的变化速度。同时受到多个模板规则下的该参数影响时，请报错（一般这种情况，策划已经把区域配错了，直接报error吧）
-      },
-      //与温度类型对应的相关UI资源配置
-      "climateUIInfo": {
-        "climateInfoBtnIcon": "ART/UI/Atlas/ButtonIcon/UI_BtnIcon_Climate_Foggy", //小地图旁气候按键的Icon图标路径
-        "climateDialogTitle": "UI_GUIDE_SeaMistCLIMATE_TITLE", //小地图旁气候dialog的文字描述title (TextMap里配置)
-        "climateDialogDesc": "UI_GUIDE_SeaMistCLIMATE_DESC", //小地图旁气候dialog的文字描述desc (TextMap里配置)
-        "climateDialogLeftIcon": "ART/UI/Atlas/ElementIcons/UI_Icon_Climate_Foggy", //小地图旁气候dialog的左侧图标值
-        "climateDialogLeftBg": "ART/UI/Atlas/ClimatePic/UI_Img_Climate_Foggy", //小地图旁气候dialog的背景图标
-
-        "showClimateMeter": "false", //是否显示屏幕下方的温度条
-        "screenEffectIndex": 1,
-
-        "climateInfoShowWithMeterType": "true" //根据气候值类型来展示
-      }
-    },
-    //表格中填写这个配置名称
-    "Full_Params_SeaMist": {
-      "$type": "ConfigClimateInfo",
-      "climateType": "SeaMist", //枚举项，目前只有Cold。
-      //所有会影响气候量表变化的环境效果参数。
-      "temperatureOptions": {
-        "speed": 0.0 //默认为5点/秒，表示处于该区域时，气候量表的变化速度。同时受到多个模板规则下的该参数影响时，请报错（一般这种情况，策划已经把区域配错了，直接报error吧）
-      },
-      //与温度类型对应的相关UI资源配置
-      "climateUIInfo": {
-        "climateInfoBtnIcon": "ART/UI/Atlas/ButtonIcon/UI_BtnIcon_Climate_Foggy", //小地图旁气候按键的Icon图标路径
-        "climateDialogTitle": "UI_GUIDE_SeaMistCLIMATE_TITLE", //小地图旁气候dialog的文字描述title (TextMap里配置)
-        "climateDialogDesc": "UI_GUIDE_SeaMistCLIMATE_DESC", //小地图旁气候dialog的文字描述desc (TextMap里配置)
-        "climateDialogLeftIcon": "ART/UI/Atlas/ElementIcons/UI_Icon_Climate_Foggy", //小地图旁气候dialog的左侧图标值
-        "climateDialogLeftBg": "ART/UI/Atlas/ClimatePic/UI_Img_Climate_Foggy", //小地图旁气候dialog的背景图标
-
-        "showClimateMeter": "false", //是否显示屏幕下方的温度条
-        "screenEffectIndex": 1,
-
-        "climateInfoShowWithMeterType": "true", //根据气候值类型来展示
-        "uiLowWarningRatio": 0.35,
-        "uiLenLowIntensity": 0.35,
-        "uiMiddleWarningRatio": 0.7,
-        "uiLenMiddleIntensity": 1.0
-      }
-    },
-    //表格中填写这个配置名称
-    "Full_Params_Example_Cold": {
-      "$type": "ConfigClimateInfo",
-      "climateType": "Cold", //枚举项，目前只有Cold。
-      //所有会影响气候量表变化的环境效果参数。
-      "temperatureOptions": {
-        "speed": 1.0 //默认为5点/秒，表示处于该区域时，气候量表的变化速度。同时受到多个模板规则下的该参数影响时，请报错（一般这种情况，策划已经把区域配错了，直接报error吧）
-      },
-      //与温度类型对应的相关UI资源配置
-      "climateUIInfo": {
-        "climateInfoBtnIcon": "ART/UI/Atlas/BuffElement/UI_Buff_Element_Frost", //小地图旁气候按键的Icon图标路径
-        "climateDialogTitle": "UI_GUIDE_COLDCLIMATE_TITLE", //小地图旁气候dialog的文字描述title (TextMap里配置)
-        "climateDialogDesc": "UI_GUIDE_COLDCLIMATE_DESC", //小地图旁气候dialog的文字描述desc (TextMap里配置)
-        "climateDialogLeftIcon": "ART/UI/Atlas/ElementIcons/UI_Icon_Element_Ice", //小地图旁气候dialog的左侧图标值
-        "climateDialogLeftBg": "ART/UI/Atlas/ClimatePic/UI_Img_Climate_Cold", //小地图旁气候dialog的背景图标
-        "showClimateMeter": "true", //是否显示屏幕下方的温度条
-        "climateMeterColorIndex": "0", //温度条对应的填充颜色index(对应挂载在InLevelMainPage/GrpMainPage/GameInfo的MonoInLevelGameInfo脚本上)
-        "screenEffectIndex": "0", //屏幕特效ScreenEffectProfile_UEfuction (请去unity中查找）对应的index
-
-        "climateInfoShowWithMeterType": "false" //根据气候区域类型来展示
-      },
-      //音效 低温 雪山
-      "climateScreenEffAudio": {
-        "uiLenStopAudio": "Stop_ui_feedback_climate_cold_hurt",
-        "uiLenLowAudio": "Stop_ui_feedback_climate_cold_hurt",
-        "uiLenMiddleAudio": "Stop_ui_feedback_climate_cold_hurt",
-        "uiLenMaxAudio": "Play_ui_feedback_climate_cold_hurt"
-      }
-    },
-    //表格中填写这个配置名称
-    "ColdMonster_LaSignora": {
-      "$type": "ConfigClimateInfo",
-      "climateType": "ColdMonster", //枚举项，目前只有Cold。
-      //所有会影响气候量表变化的环境效果参数。
-      "temperatureOptions": {
-        "speed": 3 //默认为5点/秒，表示处于该区域时，气候量表的变化速度。同时受到多个模板规则下的该参数影响时，请报错（一般这种情况，策划已经把区域配错了，直接报error吧）
-      },
-      //与温度类型对应的相关UI资源配置
-      "climateUIInfo": {
-        "climateInfoBtnIcon": "ART/UI/Atlas/BuffElement/UI_Buff_Element_Frost", //小地图旁气候按键的Icon图标路径
-        "climateDialogTitle": "UI_GUIDE_COLDCLIMATE_TITLE", //小地图旁气候dialog的文字描述title (TextMap里配置)
-        "climateDialogDesc": "UI_GUIDE_COLDCLIMATE_DESC", //小地图旁气候dialog的文字描述desc (TextMap里配置)
-        "climateDialogLeftIcon": "ART/UI/Atlas/ElementIcons/UI_Icon_Element_Ice", //小地图旁气候dialog的左侧图标值
-        "climateDialogLeftBg": "ART/UI/Atlas/ClimatePic/UI_Img_Climate_Cold", //小地图旁气候dialog的背景图标
-        "showClimateMeter": "true", //是否显示屏幕下方的温度条
-        "climateMeterColorIndex": "0", //温度条对应的填充颜色index (对应挂载在InLevelMainPage/GrpMainPage/GameInfo的MonoInLevelGameInfo脚本上)
-        "climateMeterBgColorIndex": "0", //温度条背景对应的填充颜色index (对应挂载在InLevelMainPage/GrpMainPage/GameInfo的MonoInLevelGameInfo脚本上)
-        "screenEffectIndex": "0" //屏幕特效ScreenEffectProfile_UEfuction (请去unity中查找）对应的index
-      },
-      //音效 低温 女士
-      "climateScreenEffAudio": {
-        "uiLenStopAudio": "Stop_ui_feedback_climate_cold_hurt",
-        "uiLenLowAudio": "Stop_ui_feedback_climate_cold_hurt",
-        "uiLenMiddleAudio": "Stop_ui_feedback_climate_cold_hurt",
-        "uiLenMaxAudio": "Play_ui_feedback_climate_cold_hurt"
-      }
-    },
-    //表格中填写这个配置名称
-    "HotMonster_LaSignora": {
-      "$type": "ConfigClimateInfo",
-      "climateType": "HotMonster", //枚举项，目前只有Cold。
-      //所有会影响气候量表变化的环境效果参数。
-      "temperatureOptions": {
-        "speed": 3 //默认为5点/秒，表示处于该区域时，气候量表的变化速度。同时受到多个模板规则下的该参数影响时，请报错（一般这种情况，策划已经把区域配错了，直接报error吧）
-      },
-      //与温度类型对应的相关UI资源配置
-      "climateUIInfo": {
-        "climateInfoBtnIcon": "ART/UI/Atlas/ButtonIcon/UI_BtnIcon_Climate_Heat", //小地图旁气候按键的Icon图标路径
-        "climateDialogTitle": "UI_GUIDE_COLDCLIMATE_TITLE", //小地图旁气候dialog的文字描述title (TextMap里配置)
-        "climateDialogDesc": "UI_GUIDE_COLDCLIMATE_DESC", //小地图旁气候dialog的文字描述desc (TextMap里配置)
-        "climateDialogLeftIcon": "ART/UI/Atlas/ElementIcons/UI_Icon_Climate_Heat", //小地图旁气候dialog的左侧图标值
-        "climateDialogLeftBg": "ART/UI/Atlas/ClimatePic/UI_Img_Climate_Heat", //小地图旁气候dialog的背景图标
-        "showClimateMeter": "true", //是否显示屏幕下方的温度条
-        "climateMeterColorIndex": "1", //温度条对应的填充颜色index (对应挂载在InLevelMainPage/GrpMainPage/GameInfo的MonoInLevelGameInfo脚本上)
-        "climateMeterBgColorIndex": "1", //温度条背景对应的填充颜色index (对应挂载在InLevelMainPage/GrpMainPage/GameInfo的MonoInLevelGameInfo脚本上)
-        "screenEffectIndex": "2" //屏幕特效ScreenEffectProfile_UEfuction (请去unity中查找）对应的index
-      },
-      //音效 高温 女士
-      "climateScreenEffAudio": {
-        "uiLenStopAudio": "Stop_ui_feedback_climate_hot_hurt",
-        "uiLenLowAudio": "Stop_ui_feedback_climate_hot_hurt",
-        "uiLenMiddleAudio": "Stop_ui_feedback_climate_hot_hurt",
-        "uiLenMaxAudio": "Play_ui_feedback_climate_hot_hurt"
-      }
+    "templates": {
+        "Full_Params_TsurumiThunder": {
+            "$type": "ConfigClimateInfo",
+            "climateType": "TsurumiThunder",
+            "NCIHCIAIGHN": {
+                "FMMJLOCHHLM": 50.0
+            },
+            "AJGPCOIKJFL": {
+                "CDHGHJGPJME": "ART/UI/Atlas/ButtonIcon/UI_BtnIcon_Climate_Tsurumi",
+                "OLMELPOIFJO": "UI_GUIDE_TsurumiRegional_CLIMATE_TITLE",
+                "CPIGCDHNDOH": "UI_GUIDE_TsurumiRegional_CLIMATE_DESC",
+                "KFGDAIDCCOE": "ART/UI/Atlas/ElementIcons/UI_Icon_Climate_Tsurumi",
+                "NLLIHPIGFHC": "ART/UI/Atlas/ClimatePic/UI_Img_Climate_Tsurumi",
+                "MDDHAANJCBE": false,
+                "PMPEHMNJLFG": 1
+            }
+        },
+        "Full_Params_TsurumiRegionalMist": {
+            "$type": "ConfigClimateInfo",
+            "climateType": "TsurumiRegionalMist",
+            "NCIHCIAIGHN": {
+                "FMMJLOCHHLM": 5.0
+            },
+            "AJGPCOIKJFL": {
+                "CDHGHJGPJME": "ART/UI/Atlas/ButtonIcon/UI_BtnIcon_Climate_Foggy",
+                "OLMELPOIFJO": "UI_GUIDE_TsurumiRegional_CLIMATE_TITLE",
+                "CPIGCDHNDOH": "UI_GUIDE_TsurumiRegional_CLIMATE_DESC",
+                "KFGDAIDCCOE": "ART/UI/Atlas/ElementIcons/UI_Icon_Climate_Foggy",
+                "NLLIHPIGFHC": "ART/UI/Atlas/ClimatePic/UI_Img_Climate_Foggy",
+                "MDDHAANJCBE": false,
+                "PMPEHMNJLFG": 1,
+                "IMEJLKKMHGL": true,
+                "NJOIEBHMNAK": 0.3499999940395355,
+                "KKCOHGCOHIK": 1.0
+            }
+        },
+        "Full_Params_TsurumiMist": {
+            "$type": "ConfigClimateInfo",
+            "climateType": "TsurumiMist",
+            "NCIHCIAIGHN": {
+                "FMMJLOCHHLM": 30.0
+            },
+            "AJGPCOIKJFL": {
+                "CDHGHJGPJME": "ART/UI/Atlas/ButtonIcon/UI_BtnIcon_Climate_Foggy",
+                "OLMELPOIFJO": "UI_GUIDE_Tsurumi_CLIMATE_TITLE",
+                "CPIGCDHNDOH": "UI_GUIDE_TsurumiRegional_CLIMATE_DESC",
+                "KFGDAIDCCOE": "ART/UI/Atlas/ElementIcons/UI_Icon_Climate_Foggy",
+                "NLLIHPIGFHC": "ART/UI/Atlas/ClimatePic/UI_Img_Climate_Foggy",
+                "MDDHAANJCBE": false,
+                "PMPEHMNJLFG": 1,
+                "IMEJLKKMHGL": true,
+                "NJOIEBHMNAK": 0.3499999940395355,
+                "KKCOHGCOHIK": 1.0
+            }
+        },
+        "Full_Params_TransClimate": {
+            "$type": "ConfigClimateInfo",
+            "climateType": "TransClimate",
+            "NCIHCIAIGHN": {
+                "FMMJLOCHHLM": 25.0
+            },
+            "AJGPCOIKJFL": {
+                "CDHGHJGPJME": "ART/UI/Atlas/ButtonIcon/UI_BtnIcon_Climate_TatariRegion",
+                "OLMELPOIFJO": "UI_GUIDE_TRANSCLIMATE_TITLE",
+                "CPIGCDHNDOH": "UI_GUIDE_TRANSCLIMATE_DESC",
+                "KFGDAIDCCOE": "ART/UI/Atlas/ElementIcons/UI_Icon_Climate_TatariRegion",
+                "NLLIHPIGFHC": "ART/UI/Atlas/ClimatePic/UI_Img_Climate_TatariRegion",
+                "MDDHAANJCBE": false,
+                "PMPEHMNJLFG": 3
+            }
+        },
+        "Full_Params_TatariRegion": {
+            "$type": "ConfigClimateInfo",
+            "climateType": "TatariRegion",
+            "NCIHCIAIGHN": {
+                "FMMJLOCHHLM": 50.0
+            },
+            "AJGPCOIKJFL": {
+                "CDHGHJGPJME": "ART/UI/Atlas/ButtonIcon/UI_BtnIcon_Climate_TatariRegion",
+                "OLMELPOIFJO": "UI_GUIDE_TATARICLIMATE_TITLE",
+                "CPIGCDHNDOH": "UI_GUIDE_TATARICLIMATE_DESC",
+                "KFGDAIDCCOE": "ART/UI/Atlas/ElementIcons/UI_Icon_Climate_TatariRegion",
+                "NLLIHPIGFHC": "ART/UI/Atlas/ClimatePic/UI_Img_Climate_TatariRegion",
+                "MDDHAANJCBE": false,
+                "PMPEHMNJLFG": 3
+            },
+            "IFADMBLKJJJ": {
+                "GKMHLGPPLEI": "Stop_ui_feedback_climate_elec",
+                "EIOOMDHBOOO": "Play_ui_feedback_climate_elec_lv12",
+                "LHHDJGDIBFE": "Play_ui_feedback_climate_elec_lv12",
+                "AEGAPEOPKAH": "Play_ui_feedback_climate_elec_lv3"
+            }
+        },
+        "Full_Params_SeiraiStorm": {
+            "$type": "ConfigClimateInfo",
+            "climateType": "SeiraiStorm",
+            "NCIHCIAIGHN": {
+                "FMMJLOCHHLM": 50.0
+            },
+            "AJGPCOIKJFL": {
+                "CDHGHJGPJME": "ART/UI/Atlas/ButtonIcon/UI_BtnIcon_Climate_TatariRegion",
+                "OLMELPOIFJO": "UI_GUIDE_TATARICLIMATE_TITLE",
+                "CPIGCDHNDOH": "UI_GUIDE_TATARICLIMATE_DESC",
+                "KFGDAIDCCOE": "ART/UI/Atlas/ElementIcons/UI_Icon_Climate_TatariRegion",
+                "NLLIHPIGFHC": "ART/UI/Atlas/ClimatePic/UI_Img_Climate_TatariRegion",
+                "MDDHAANJCBE": false,
+                "PMPEHMNJLFG": 3
+            },
+            "IFADMBLKJJJ": {
+                "GKMHLGPPLEI": "Stop_ui_feedback_climate_elec",
+                "EIOOMDHBOOO": "Play_ui_feedback_climate_elec_lv12",
+                "LHHDJGDIBFE": "Play_ui_feedback_climate_elec_lv12",
+                "AEGAPEOPKAH": "Play_ui_feedback_climate_elec_lv3"
+            }
+        },
+        "Full_Params_HeroCourse": {
+            "$type": "ConfigClimateInfo",
+            "climateType": "HeroCourse",
+            "NCIHCIAIGHN": {},
+            "AJGPCOIKJFL": {
+                "CDHGHJGPJME": "ART/UI/Atlas/ButtonIcon/UI_BtnIcon_Climate_Foggy",
+                "OLMELPOIFJO": "UI_GUIDE_SeaMistCLIMATE_TITLE",
+                "CPIGCDHNDOH": "UI_GUIDE_SeaMistCLIMATE_DESC",
+                "KFGDAIDCCOE": "ART/UI/Atlas/ElementIcons/UI_Icon_Climate_Foggy",
+                "NLLIHPIGFHC": "ART/UI/Atlas/ClimatePic/UI_Img_Climate_Foggy",
+                "MDDHAANJCBE": false,
+                "PMPEHMNJLFG": 1,
+                "IMEJLKKMHGL": true
+            }
+        },
+        "Full_Params_SeaMist": {
+            "$type": "ConfigClimateInfo",
+            "climateType": "SeaMist",
+            "NCIHCIAIGHN": {},
+            "AJGPCOIKJFL": {
+                "CDHGHJGPJME": "ART/UI/Atlas/ButtonIcon/UI_BtnIcon_Climate_Foggy",
+                "OLMELPOIFJO": "UI_GUIDE_SeaMistCLIMATE_TITLE",
+                "CPIGCDHNDOH": "UI_GUIDE_SeaMistCLIMATE_DESC",
+                "KFGDAIDCCOE": "ART/UI/Atlas/ElementIcons/UI_Icon_Climate_Foggy",
+                "NLLIHPIGFHC": "ART/UI/Atlas/ClimatePic/UI_Img_Climate_Foggy",
+                "MDDHAANJCBE": false,
+                "PMPEHMNJLFG": 1,
+                "IMEJLKKMHGL": true,
+                "NJOIEBHMNAK": 0.3499999940395355,
+                "KKCOHGCOHIK": 1.0
+            }
+        },
+        "Full_Params_Example_Cold": {
+            "$type": "ConfigClimateInfo",
+            "climateType": "Cold",
+            "NCIHCIAIGHN": {
+                "FMMJLOCHHLM": 1.0
+            },
+            "AJGPCOIKJFL": {
+                "CDHGHJGPJME": "ART/UI/Atlas/BuffElement/UI_Buff_Element_Frost",
+                "OLMELPOIFJO": "UI_GUIDE_COLDCLIMATE_TITLE",
+                "CPIGCDHNDOH": "UI_GUIDE_COLDCLIMATE_DESC",
+                "KFGDAIDCCOE": "ART/UI/Atlas/ElementIcons/UI_Icon_Element_Ice",
+                "NLLIHPIGFHC": "ART/UI/Atlas/ClimatePic/UI_Img_Climate_Cold"
+            },
+            "IFADMBLKJJJ": {
+                "GKMHLGPPLEI": "Stop_ui_feedback_climate_cold_hurt",
+                "EIOOMDHBOOO": "Stop_ui_feedback_climate_cold_hurt",
+                "LHHDJGDIBFE": "Stop_ui_feedback_climate_cold_hurt",
+                "AEGAPEOPKAH": "Play_ui_feedback_climate_cold_hurt"
+            }
+        },
+        "ColdMonster_LaSignora": {
+            "$type": "ConfigClimateInfo",
+            "climateType": "ColdMonster",
+            "NCIHCIAIGHN": {
+                "FMMJLOCHHLM": 3.0
+            },
+            "AJGPCOIKJFL": {
+                "CDHGHJGPJME": "ART/UI/Atlas/BuffElement/UI_Buff_Element_Frost",
+                "OLMELPOIFJO": "UI_GUIDE_COLDCLIMATE_TITLE",
+                "CPIGCDHNDOH": "UI_GUIDE_COLDCLIMATE_DESC",
+                "KFGDAIDCCOE": "ART/UI/Atlas/ElementIcons/UI_Icon_Element_Ice",
+                "NLLIHPIGFHC": "ART/UI/Atlas/ClimatePic/UI_Img_Climate_Cold"
+            },
+            "IFADMBLKJJJ": {
+                "GKMHLGPPLEI": "Stop_ui_feedback_climate_cold_hurt",
+                "EIOOMDHBOOO": "Stop_ui_feedback_climate_cold_hurt",
+                "LHHDJGDIBFE": "Stop_ui_feedback_climate_cold_hurt",
+                "AEGAPEOPKAH": "Play_ui_feedback_climate_cold_hurt"
+            }
+        },
+        "HotMonster_LaSignora": {
+            "$type": "ConfigClimateInfo",
+            "climateType": "HotMonster",
+            "NCIHCIAIGHN": {
+                "FMMJLOCHHLM": 3.0
+            },
+            "AJGPCOIKJFL": {
+                "CDHGHJGPJME": "ART/UI/Atlas/ButtonIcon/UI_BtnIcon_Climate_Heat",
+                "OLMELPOIFJO": "UI_GUIDE_COLDCLIMATE_TITLE",
+                "CPIGCDHNDOH": "UI_GUIDE_COLDCLIMATE_DESC",
+                "KFGDAIDCCOE": "ART/UI/Atlas/ElementIcons/UI_Icon_Climate_Heat",
+                "NLLIHPIGFHC": "ART/UI/Atlas/ClimatePic/UI_Img_Climate_Heat",
+                "KFOEMANGJHJ": 1,
+                "FNFNJEKCKLJ": 1,
+                "PMPEHMNJLFG": 2
+            },
+            "IFADMBLKJJJ": {
+                "GKMHLGPPLEI": "Stop_ui_feedback_climate_hot_hurt",
+                "EIOOMDHBOOO": "Stop_ui_feedback_climate_hot_hurt",
+                "LHHDJGDIBFE": "Stop_ui_feedback_climate_hot_hurt",
+                "AEGAPEOPKAH": "Play_ui_feedback_climate_hot_hurt"
+            }
+        }
     }
-  }
 }
