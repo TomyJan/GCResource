@@ -121,13 +121,9 @@ suites = {
 
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_LIVE_7013(context, evt)
-
 	if 7001 ~= evt.param1 then
-		ScriptLib.PrintContextLog(context,"@@ LUA_WARNING : 7001 already there so no need check " ..evt.param1)
 		return false
 	end
-
-	ScriptLib.PrintContextLog(context,"YAY")
 	
 	return true
 end
@@ -151,9 +147,6 @@ end
 
 -- 触发操作
 function action_EVENT_CHALLENGE_SUCCESS_7014(context, evt)
-
-	ScriptLib.PrintContextLog(context,"lulus")
-
 	-- 将剩余时间记录在触发此challenge的group变量TPL_TIME中
 	    if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "TPL_TIME", evt.param2, 233717005) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : save_challenge_remainTime")
@@ -167,14 +160,12 @@ function action_EVENT_CHALLENGE_SUCCESS_7014(context, evt)
 	end
 	
 	-- 将本组内变量名为 "stage" 的变量设置为 1
-	ScriptLib.PrintContextLog(context,"atur stage 1")
 	if 0 ~= ScriptLib.SetGroupVariableValueByGroup(context, "stage", 1, 233717005) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable_by_group")
 	  return -1
 	end
 	
 	-- 爬塔更换队伍2
-	ScriptLib.PrintContextLog(context,"ganti team ke 2")
 	if 0 ~= ScriptLib.TowerMirrorTeamSetUp(context, 2) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : tower_team_setup")
 		return -1

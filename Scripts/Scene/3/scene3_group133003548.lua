@@ -70,7 +70,7 @@ function LF_random_timer_suite(table, stage)
 	math.randomseed(tostring(os.time()):reverse():sub(1,5))
 	return array[math.random(1,#array)]
 end
-
+PrintLog(context, "
 function LF_set_timer(context)
 	local i = ScriptLib.GetGroupVariableValue(context, timer_counter)
 	if i > #defs.crucible_timer then
@@ -85,7 +85,7 @@ function LF_set_timer(context)
 		duration = defs.crucible_timer[i]
 	else
 		duration = defs.crucible_timer[i+1] - defs.crucible_timer[i]
-	eScriptLib.PrintLog(context, "
+	endPrintLog(context, "
 
 	local dur = duration - defs.crucible_timer_prepare
 	if dur <= 0 then 

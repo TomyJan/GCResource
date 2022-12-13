@@ -4,7 +4,7 @@ scene_config = {
 	size = { x = 11264.0, z = 12288.0 },
 	born_pos = { x = 2747.562, y = 194.633, z = -1719.386 },
 	born_rot = { x = 0.000, y = 307.000, z = 0.000 },
-	die_y = -280,
+	die_y = -900,
 	vision_anchor = { x = -8192.0, z = -8192.0 }
 }
 

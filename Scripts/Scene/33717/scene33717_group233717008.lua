@@ -102,7 +102,6 @@ suites = {
 -- 触发条件
 function condition_EVENT_ANY_MONSTER_LIVE_8002(context, evt)
 	if 8004 ~= evt.param1 then
-		ScriptLib.PrintContextLog(context,"@@ LUA_WARNING : 8004 already there so no need check " ..evt.param1)
 		return false
 	end
 	
@@ -111,8 +110,8 @@ end
 
 -- 触发操作
 function action_EVENT_ANY_MONSTER_LIVE_8002(context, evt)
-	-- Create a regional challenge with number 2 (identification id challenge) and challenge content 198, param1 must be time
-    -- Take the corresponding value from the variable TPL_TIME of 233717005 and start the challenge
+	-- 创建编号为2（该挑战的识别id),挑战内容为198的区域挑战，param1必须为时间
+	-- 从233717005的变量TPL_TIME中取出对应值并开启挑战
 	  local tpl_time = ScriptLib.GetGroupVariableValueByGroup(context, "TPL_TIME", 233717005)
 	  if tpl_time == nil or tpl_time < 0 then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge_by_remainTime")
