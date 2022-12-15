@@ -250,7 +250,7 @@ end
 function action_EVENT_CLIENT_EXECUTE_43(context, evt)
 	-- 针对groupid为 220009002 中该config对应的物件进行状态改变操作
 	local this_gadget = ScriptLib.GetGadgetConfigId(context, { gadget_eid = evt.source_eid })
-		--ScriptLib.PrintLog(context, "config_id="..this_gadget)
+		--ScriptLib.PrintLog("config_id="..this_gadget)
 	
 		
 	  ScriptLib.SetGadgetEnableInteract(context, 220009002, this_gadget, true)

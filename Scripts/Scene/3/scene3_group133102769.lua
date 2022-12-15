@@ -52,9 +52,9 @@ function LF_Get_Array_Pos(table, value)
 		end
 	end
 	if index == 0 then
-		ScriptLib.PrintLog(context, "## LF_Get_Array_Pos Fail!! | value = "..value)
+		ScriptLib.PrintLog("## LF_Get_Array_Pos Fail!! | value = "..value)
 		for i,v in ipairs(table) do
-			ScriptLib.PrintLog(context, "## LF_Get_Array_Pos Fail!! | i="..i.." v="..v)
+			ScriptLib.PrintLog("## LF_Get_Array_Pos Fail!! | i="..i.." v="..v)
 		end
 		index = 1
 	end
@@ -358,7 +358,7 @@ end
 function LF_Create_Boss(context, index)
 	--LF_Log(context, "## LF_Create_Boss | index = "..index)
 	ScriptLib.ForceRefreshAuthorityByConfigId(context, 769005, context.uid)
-	ScriptLib.SetGroupVariableValue(context, "auth_uid_p1", math.floor(context.uid/10000))
+	ScriptLib.SetGroupVariableValue(context, "auth_uid_p1", context.uid//10000)
 	ScriptLib.SetGroupVariableValue(context, "auth_uid_p2", context.uid%10000)
 	--初始化平台位置信息
 	for i,v in ipairs(defs.gadget_platform_list) do

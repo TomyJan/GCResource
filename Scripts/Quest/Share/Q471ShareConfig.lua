@@ -1,28 +1,18 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1
 main_id = 471
-
-sub_ids =
-{
-    47101,
-    47102,
-}
-
----存放断线重连生成内容，和questdata配的存档点对应
-rewind_data = {}
-
-rewind_data["47101"] = 
-{
-
-}
-
-rewind_data["47102"] = 
-{
-    
-}
----校验用，和任务lua中生成NPC/monster/gadget/item等对应
-quest_data = {}
-
-
+L0_1 = {}
+L1_1 = 47101
+L2_1 = 47102
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["47101"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["47102"] = L1_1
+L0_1 = {}
+quest_data = L0_1

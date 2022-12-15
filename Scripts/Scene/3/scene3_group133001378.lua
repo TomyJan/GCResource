@@ -165,7 +165,7 @@ function action_EVENT_ANY_MONSTER_DIE_378005(context, evt)
 	end
 	
 	-- 改变指定group组133001377中， configid为377001的gadget的state
-	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133001377, 377001, GadgetState.GearStop) then
+	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 133001377, 377001, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
 		end 

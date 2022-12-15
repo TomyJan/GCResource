@@ -1,45 +1,54 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1
 main_id = 40006
-
-sub_ids =
-{
-    4000601,
-}
-
----存放断线重连生成内容，和questdata配的存档点对应
-rewind_data = {}
-rewind_data["4000601"] = 
-{
-
-}
-
-
----校验用，和任务lua中生成NPC/monster/gadget/item等对应
-quest_data = {}
-
-quest_data["4000601"] = 
-{
-   
-}
-
----任务被销毁时要执行的事情
-cancel_action = 
-{
-        CLIENT = {},
-        SERVER = {        
-                QUEST_EXEC_REFRESH_GROUP_SUITE = 
-                {
-                        {"3","133107011,1"},
-                        {"3","133107018,1"},
-                        {"3","133104903,1"},
-                        {"3","133107903,1"},
-                },
-                QUEST_EXEC_DEL_ALL_SPECIFIC_PACK_ITEM = 
-                {
-                        {"100237,100238"},
-                }
-        },
-}
+L0_1 = {}
+L1_1 = 4000601
+L0_1[1] = L1_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["4000601"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L0_1["4000601"] = L1_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L4_1 = "3"
+L5_1 = "133107011,1"
+L3_1[1] = L4_1
+L3_1[2] = L5_1
+L4_1 = {}
+L5_1 = "3"
+L6_1 = "133107018,1"
+L4_1[1] = L5_1
+L4_1[2] = L6_1
+L5_1 = {}
+L6_1 = "3"
+L7_1 = "133104903,1"
+L5_1[1] = L6_1
+L5_1[2] = L7_1
+L6_1 = {}
+L7_1 = "3"
+L8_1 = "133107903,1"
+L6_1[1] = L7_1
+L6_1[2] = L8_1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.QUEST_EXEC_REFRESH_GROUP_SUITE = L2_1
+L2_1 = {}
+L3_1 = {}
+L4_1 = "100237,100238"
+L3_1[1] = L4_1
+L2_1[1] = L3_1
+L1_1.QUEST_EXEC_DEL_ALL_SPECIFIC_PACK_ITEM = L2_1
+L0_1.SERVER = L1_1
+cancel_action = L0_1

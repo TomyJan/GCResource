@@ -1,1 +1,99 @@
--- 任务配置数据开始-----------------------------main_id = 70125sub_ids = {	7012501,	7012502,	7012503,}-- 任务配置数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 父任务执行项数据开始-----------------------------finish_action = {	CLIENT = { },	SERVER = { },}fail_action = {	CLIENT = { },	SERVER = { },}cancel_action = {	CLIENT = { },	SERVER = { },}-- 父任务执行项数据结束------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- Actor模块数据开始---------------------------------- 空-- Actor模块数据结束---------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 文本模块数据开始----------------------------------- 空-- 文本模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 路点模块数据开始----------------------------------- 空-- 路点模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 断线重连生成内容 开始------------------------------ 和questdata配的存档点对应rewind_data = {	["7012501"] = { },	["7012502"] = 	{		npcs = 		{			{				id = 1005,				alias = "Paimon",				script = "Actor/Quest/Q352/Paimon",				pos = "Q7012105",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7012503"] = 	{		npcs = 		{			{				id = 1005,				alias = "Paimon",				script = "Actor/Quest/Q352/Paimon",				pos = "Q7012105",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},}-- 断线重连生成内容 结束------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 校验数据 开始------------------------------------ 和任务lua中生成NPC/Monster/Gadget/Item等对应quest_data = {	["7012501"] = 	{		npcs = 		{			{				id = 1005,				alias = "Paimon",				script = "Actor/Quest/Q352/Paimon",				pos = "Q7012105",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7012502"] = 	{		npcs = 		{			{				id = 1005,				alias = "Paimon",				script = "Actor/Quest/Q352/Paimon",				pos = "Q7012105",				scene_id = 3,				room_id = 0,				data_index = 1,			},		}, 	},	["7012503"] = 	{		npcs = 		{			{				id = 1005,				alias = "Paimon",				script = "Actor/Quest/Q352/Paimon",				pos = "Q7012105",				scene_id = 3,				room_id = 0,				data_index = 1,			},		}, 	},}-- 校验数据 结束------------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+local L0_1, L1_1, L2_1, L3_1
+main_id = 70125
+L0_1 = {}
+L1_1 = 7012501
+L2_1 = 7012502
+L3_1 = 7012503
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["7012501"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q7012105"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7012502"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q7012105"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7012503"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q7012105"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7012501"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q7012105"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7012502"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q7012105"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7012503"] = L1_1
+quest_data = L0_1

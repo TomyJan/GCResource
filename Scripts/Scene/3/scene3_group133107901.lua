@@ -88,7 +88,7 @@ suites = {
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_901001(context, evt)
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 4000101) == QuestState.UNFINISHED and evt.param1 == 901001 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 4000101) == QuestState.UNFINISHED and evt.param1 == 901001 then
 		return true
 	end
 	return false
@@ -96,7 +96,7 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_901002(context, evt)
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and (ScriptLib.GetQuestState(context, evt.target_eid, 4000206) == QuestState.UNFINISHED or 
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and (ScriptLib.GetQuestState(context, evt.target_eid, 4000206) == QuestState.UNFINISHED or 
 	ScriptLib.GetQuestState(context, evt.target_eid, 4000306) == QuestState.UNFINISHED)
 	and evt.param1 == 901002 then
 		return true
@@ -106,7 +106,7 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_901003(context, evt)
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 4000204) == QuestState.UNFINISHED and evt.param1 == 901003 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 4000204) == QuestState.UNFINISHED and evt.param1 == 901003 then
 		return true
 	end
 	return false
@@ -114,7 +114,7 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_901004(context, evt)
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and (ScriptLib.GetQuestState(context, evt.target_eid, 4000110) == QuestState.UNFINISHED or 
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and (ScriptLib.GetQuestState(context, evt.target_eid, 4000110) == QuestState.UNFINISHED or 
 	ScriptLib.GetQuestState(context, evt.target_eid, 4000300) == QuestState.UNFINISHED) 
 	and evt.param1 == 901004 then
 		return true
@@ -124,7 +124,7 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_901005(context, evt)
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 4000406) == QuestState.UNFINISHED and evt.param1 == 901005 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 4000406) == QuestState.UNFINISHED and evt.param1 == 901005 then
 		return true
 	end
 	return false
@@ -132,7 +132,7 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_901006(context, evt)
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 4000501) == QuestState.UNFINISHED and evt.param1 == 901006 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 4000501) == QuestState.UNFINISHED and evt.param1 == 901006 then
 		return true
 	end
 	return false
@@ -140,7 +140,7 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_901007(context, evt)
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 4000506) == QuestState.UNFINISHED and evt.param1 == 901007 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 4000506) == QuestState.UNFINISHED and evt.param1 == 901007 then
 		return true
 	end
 	return false
@@ -148,7 +148,7 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_901008(context, evt)
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 2230202) == QuestState.UNFINISHED and evt.param1 == 901008 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 2230202) == QuestState.UNFINISHED and evt.param1 == 901008 then
 		return true
 	end
 	return false

@@ -1,347 +1,320 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1
 main_id = 427
-
-sub_ids =
-{
-    42709,
-    42701,
-    42702,
-    42703,
-    42704,
-    42705,
-    42706,
-    42707,
-    42708,
-}
-
-rewind_data = {}
-
-rewind_data["42701"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Ambor_FlyBegin",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		}
-    }
-}
-
-rewind_data["42703"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Ambor_FlyBegin",
-			scene_id = 3,
-			room_ID = 0,
-			data_index = 0,
-		}
-    }
-}
-
-
-rewind_data["42704"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Knight_Roof_Ambor",
-			scene_id = 3,
-			room_ID = 0,
-			data_index = 0,
-		}
-    }
-}
-
-rewind_data["42706"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Knight_Roof_Ambor",
-			scene_id = 3,
-			room_ID = 0,
-			data_index = 0,
-		}
-    }
-}
-
-rewind_data["42707"] = 
-{
-
-}
-
-rewind_data["42708"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "42708AmborHidden",
-			scene_id = 3,
-			room_ID = 0,
-			data_index = 0,
-		}
-	},
-	avatar = {
-        scene_id = 3,
-        pos = "Q42707Player"
-    },
-}
-
-quest_data = {}
-quest_data["42702"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Knight_Roof_Ambor",
-			scene_id = 3,
-			room_ID = 0,
-			data_index = 0,
-		},
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Ambor_FlyBegin",
-			scene_id = 3,
-			room_ID = 0,
-			data_index = 0,
-		}
-    },
-    gadgets = {
-        {
-            id = 70710005,
-            pos = "Q427Wind1",
-            alias = "Wind1", 
-            scene_id = 3, 
-            room_id = 0,  
-		},
-		{
-            id = 70690001,
-            pos = "Q427Wind1",
-            alias = "Wind1", 
-            scene_id = 3, 
-            room_id = 0,  
-        },
-	},
-	transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 3,
-            pos = "Q375RunStart"
-        },
-    }
-}
-
-quest_data["42709"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Ambor_FlyBegin",
-			scene_id = 3,
-			room_ID = 0,
-			data_index = 0,
-		},
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Knight_Roof_Ambor",
-			scene_id = 3,
-			room_ID = 0,
-			data_index = 0,
-		}
-    }
-}
-
-quest_data["42701"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Ambor_FlyBegin",
-			scene_id = 3,
-			room_ID = 0,
-			data_index = 0,
-		},
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Knight_Roof_Ambor",
-			scene_id = 3,
-			room_ID = 0,
-			data_index = 0,
-		}
-    }
-}
-
-quest_data["42703"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Ambor_FlyBegin",
-			scene_id = 3,
-			room_ID = 0,
-			data_index = 0,
-		},
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Knight_Roof_Ambor",
-			scene_id = 3,
-			room_ID = 0,
-			data_index = 0,
-		}
-    }
-}
-
-
-quest_data["42704"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Knight_Roof_Ambor",
-			scene_id = 3,
-			room_ID = 0,
-			data_index = 0,
-		}
-    }
-}
-
-quest_data["42705"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Knight_Roof_Ambor",
-			scene_id = 3,
-			room_ID = 0,
-			data_index = 0,
-		}
-    },
-    gadgets = {
-        {
-            id = 70710005,
-            pos = "Q427Wind1",
-            alias = "Wind1", 
-            scene_id = 3, 
-            room_id = 0,  
-		},
-		{
-            id = 70690001,
-            pos = "Q427Wind1",
-            alias = "Wind1", 
-            scene_id = 3, 
-            room_id = 0,  
-        },
-	},
-	transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 3,
-            pos = "Knight_Roof"
-        },
-    }
-}
-
-quest_data["42706"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Knight_Roof_Ambor",
-			scene_id = 3,
-			room_ID = 0,
-			data_index = 0,
-		}
-    }
-}
-
-quest_data["42707"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "42708AmborHidden",
-			scene_id = 3,
-			room_ID = 0,
-			data_index = 0,
-		}
-    }
-}
-
-quest_data["42708"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "42708AmborHidden",
-			scene_id = 3,
-			room_ID = 0,
-			data_index = 0,
-		},
-		{
-			alias = "Npc1483",
-			script = "Actor/Npc/TempNPC",
-			id = 1483,
-			pos = "Q427Soilder2",
-			scene_id = 3,
-			room_ID = 0,
-			data_index = 0,
-		},
-    }
-}
+L0_1 = {}
+L1_1 = 42709
+L2_1 = 42701
+L3_1 = 42702
+L4_1 = 42703
+L5_1 = 42704
+L6_1 = 42705
+L7_1 = 42706
+L8_1 = 42707
+L9_1 = 42708
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Ambor_FlyBegin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["42701"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Ambor_FlyBegin"
+L3_1.scene_id = 3
+L3_1.room_ID = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["42703"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Knight_Roof_Ambor"
+L3_1.scene_id = 3
+L3_1.room_ID = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["42704"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Knight_Roof_Ambor"
+L3_1.scene_id = 3
+L3_1.room_ID = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["42706"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["42707"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "42708AmborHidden"
+L3_1.scene_id = 3
+L3_1.room_ID = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L2_1.scene_id = 3
+L2_1.pos = "Q42707Player"
+L1_1.avatar = L2_1
+L0_1["42708"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Knight_Roof_Ambor"
+L3_1.scene_id = 3
+L3_1.room_ID = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Ambor"
+L4_1.script = "Actor/Quest/Q301/Ambor301"
+L4_1.id = 1002
+L4_1.pos = "Ambor_FlyBegin"
+L4_1.scene_id = 3
+L4_1.room_ID = 0
+L4_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710005
+L3_1.pos = "Q427Wind1"
+L3_1.alias = "Wind1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L4_1 = {}
+L4_1.id = 70690001
+L4_1.pos = "Q427Wind1"
+L4_1.alias = "Wind1"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.gadgets = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q375RunStart"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["42702"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Ambor_FlyBegin"
+L3_1.scene_id = 3
+L3_1.room_ID = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Ambor"
+L4_1.script = "Actor/Quest/Q301/Ambor301"
+L4_1.id = 1002
+L4_1.pos = "Knight_Roof_Ambor"
+L4_1.scene_id = 3
+L4_1.room_ID = 0
+L4_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["42709"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Ambor_FlyBegin"
+L3_1.scene_id = 3
+L3_1.room_ID = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Ambor"
+L4_1.script = "Actor/Quest/Q301/Ambor301"
+L4_1.id = 1002
+L4_1.pos = "Knight_Roof_Ambor"
+L4_1.scene_id = 3
+L4_1.room_ID = 0
+L4_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["42701"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Ambor_FlyBegin"
+L3_1.scene_id = 3
+L3_1.room_ID = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Ambor"
+L4_1.script = "Actor/Quest/Q301/Ambor301"
+L4_1.id = 1002
+L4_1.pos = "Knight_Roof_Ambor"
+L4_1.scene_id = 3
+L4_1.room_ID = 0
+L4_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["42703"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Knight_Roof_Ambor"
+L3_1.scene_id = 3
+L3_1.room_ID = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["42704"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Knight_Roof_Ambor"
+L3_1.scene_id = 3
+L3_1.room_ID = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710005
+L3_1.pos = "Q427Wind1"
+L3_1.alias = "Wind1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L4_1 = {}
+L4_1.id = 70690001
+L4_1.pos = "Q427Wind1"
+L4_1.alias = "Wind1"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.gadgets = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Knight_Roof"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["42705"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Knight_Roof_Ambor"
+L3_1.scene_id = 3
+L3_1.room_ID = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["42706"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "42708AmborHidden"
+L3_1.scene_id = 3
+L3_1.room_ID = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["42707"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "42708AmborHidden"
+L3_1.scene_id = 3
+L3_1.room_ID = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Npc1483"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.id = 1483
+L4_1.pos = "Q427Soilder2"
+L4_1.scene_id = 3
+L4_1.room_ID = 0
+L4_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["42708"] = L1_1

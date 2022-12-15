@@ -1,391 +1,365 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1, L11_1, L12_1, L13_1
 main_id = 10101
-
-sub_ids =
-{
-    1010101,
-    1010102,
-    1010103,
-    1010104,
-    1010105,
-    1010106,
-    1010108,
-    1010109,
-	1010111,
-	1010114,
-	1010117,
-	1010118,
-	1010119,
-}
-
-rewind_data = {}
-
-rewind_data["1010107"] = 
-{
-	gadgets =
-	{
-		{
-			id = 70710062,
-			pos = "Q10101DungeonOpenEffect",
-			alias = "Q10101DungeonOpenEffect", 
-			scene_id = 3,
-			room_id = 0,
-			data_index = 5,
-		}
-	}
-}
-
-rewind_data["1010108"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Lisa",
-			script = "Actor/Quest/Q411/Lisa",
-			id = 1007,
-			pos = "Q1010108Lisa",
-			scene_id = 20010,
-			room_id = 0,
-			data_index = 0,
-        }
-	},
-}
-
-quest_data = {}
-
-quest_data["1010102"] = 
-{
-	gadgets =
-	{
-		{
-			id = 70700006,
-			alias = "Q10101Compass", 
-			scene_id = 3,
-			room_id = 0,
-			data_index = 1,
-		}
-	}
-}
-
-quest_data["1010103"] = 
-{
-	gadgets =
-	{
-		{
-			id = 70700006,
-			alias = "Q10101Compass", 
-			scene_id = 3,
-			room_id = 0,
-			data_index = 1,
-		}
-	}
-}
-
-quest_data["1010104"] = 
-{
-	gadgets =
-	{
-		{
-			id = 70700006,
-			alias = "Q10101Compass", 
-			scene_id = 3,
-			room_id = 0,
-			data_index = 1,
-		}
-	}
-}
-
-quest_data["1010105"] = 
-{
-	gadgets =
-	{
-		{
-			id = 70700006,
-			alias = "Q10101Compass", 
-			scene_id = 3,
-			room_id = 0,
-			data_index = 1,
-		},
-		{
-			id = 70700013,
-			pos = "Q10101LisaThunder1",
-			alias = "Q10101DungeonSealEffect", 
-			scene_id = 3,
-			room_id = 0,
-			data_index = 2,
-		}
-	}
-}
-
-quest_data["1010106"] = 
-{
-	gadgets =
-	{
-		{
-			id = 70700006,
-			alias = "Q10101Compass", 
-			scene_id = 3,
-			room_id = 0,
-			data_index = 1,
-		}
-	},
-	npcs = 
-	{
-		{
-			alias = "Lisa",
-			script = "Actor/Quest/Q411/Lisa",
-			id = 1007,
-			pos = "Q10101Lisa1",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        }
-    }
-}
-
-quest_data["1010107"] = 
-{
-	transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 1004,
-            pos = "Q10101Player"
-        },
-    }
-}
-
-quest_data["1010108"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Lisa",
-			script = "Actor/Quest/Q411/Lisa",
-			id = 1007,
-			pos = "Q1010108Lisa",
-			scene_id = 20010,
-			room_id = 0,
-			data_index = 0,
-        },
-        {
-			alias = "Paimon",
-			script = "Actor/Quest/Q352/Paimon",
-			id = 1005,
-			pos = "Q1010108Paimon",
-			scene_id = 20010,
-			room_id = 0,
-			data_index = 0,
-        }
-	},
-	transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 20010,
-            pos = "Q1010108Player"
-        },
-    }
-}
-
-quest_data["1010109"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Lisa",
-			script = "Actor/Quest/Q411/Lisa",
-			id = 1007,
-			pos = "Q10100Lisa",
-			scene_id = 1004,
-			room_id = 100401,
-			data_index = 0,
-        }
-	},
-	transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 1004,
-            pos = "Q10101Player"
-        },
-    }
-}
-
-quest_data["1010110"] = 
-{
-	gadgets =
-	{
-		{
-			id = 70700015,
-			pos = "Q10101Book",
-			alias = "Q10101Book", 
-			scene_id = 1004,
-			room_id = 100401,
-			data_index = 1,
-		}
-	}
-}
-
-quest_data["1010112"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Lisa",
-			script = "Actor/Quest/Q411/Lisa",
-			id = 1007,
-			pos = "Q1010112Lisa",
-			scene_id = 20010,
-			room_id = 0,
-			data_index = 0,
-        },
-        {
-			alias = "Paimon",
-			script = "Actor/Quest/Q352/Paimon",
-			id = 1005,
-			pos = "Q1010112Paimon",
-			scene_id = 20010,
-			room_id = 0,
-			data_index = 0,
-        },
-		{
-			alias = "Npc10282",
-			script = "Actor/Npc/TempNPC",
-			id = 10282,
-			pos = "Q1010112Abyss",
-			scene_id = 20010,
-			room_id = 0,
-			data_index = 0,
-        },
-	},
-	gadgets =
-	{
-		{
-			id = 70700011,
-			pos = "Q1010112Lisa",
-			alias = "Q10101SkillEffect", 
-			scene_id = 20010,
-			room_id = 0,
-			data_index = 1,
-		},
-	},
-	transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 20010,
-            pos = "Q1010112Player"
-        },
-    }
-}
-
-quest_data["1010114"] = 
-{
-	gadgets =
-	{
-		{
-			id = 70700010,
-			pos = "Q10101LisaThunder1",
-			alias = "Q10101HitEffect", 
-			scene_id = 3,
-			room_id = 0,
-			data_index = 1,
-		},
-		{
-			id = 70700010,
-			pos = "Q10101LisaThunder2",
-			alias = "Q10101HitEffect", 
-			scene_id = 3,
-			room_id = 0,
-			data_index = 2,
-		},
-		{
-			id = 70700010,
-			pos = "Q10101LisaThunder3",
-			alias = "Q10101HitEffect", 
-			scene_id = 3,
-			room_id = 0,
-			data_index = 3,
-		},
-		{
-			id = 70700014,
-			pos = "Q10101LisaThunder1",
-			alias = "Q10101DungeonSealBreak", 
-			scene_id = 3,
-			room_id = 0,
-			data_index = 4,
-		},
-		{
-			id = 70710062,
-			pos = "Q10101DungeonOpenEffect",
-			alias = "Q10101DungeonOpenEffect", 
-			scene_id = 3,
-			room_id = 0,
-			data_index = 5,
-		}
-	}
-}
-
-quest_data["1010117"] = 
-{
-	gadgets =
-	{
-		{
-			id = 70700005,
-			pos = "RoutBookClue1",
-			alias = "Q10101Bookclue", 
-			scene_id = 3,
-			room_id = 0,
-			data_index = 1,
-		}
-	}
-}
-
-quest_data["1010118"] = 
-{
-	gadgets =
-	{
-		{
-			id = 70700005,
-			pos = "RoutBookClue3",
-			alias = "Q10101Bookclue", 
-			scene_id = 3,
-			room_id = 0,
-			data_index = 1,
-		}
-	}
-}
-
-quest_data["1010119"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Lisa",
-			script = "Actor/Quest/Q411/Lisa",
-			id = 1007,
-			pos = "RoutBookClue4",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        }
-    },
-	gadgets =
-	{
-		{
-			id = 70700005,
-			pos = "RoutBookClue4",
-			alias = "Q10101Bookclue", 
-			scene_id = 3,
-			room_id = 0,
-			data_index = 1,
-		}
-	},
-	transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 3,
-            pos = "Q10101_Player"
-        },
-    }
-}
+L0_1 = {}
+L1_1 = 1010101
+L2_1 = 1010102
+L3_1 = 1010103
+L4_1 = 1010104
+L5_1 = 1010105
+L6_1 = 1010106
+L7_1 = 1010108
+L8_1 = 1010109
+L9_1 = 1010111
+L10_1 = 1010114
+L11_1 = 1010117
+L12_1 = 1010118
+L13_1 = 1010119
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+L0_1[11] = L11_1
+L0_1[12] = L12_1
+L0_1[13] = L13_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710062
+L3_1.pos = "Q10101DungeonOpenEffect"
+L3_1.alias = "Q10101DungeonOpenEffect"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 5
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["1010107"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Lisa"
+L3_1.script = "Actor/Quest/Q411/Lisa"
+L3_1.id = 1007
+L3_1.pos = "Q1010108Lisa"
+L3_1.scene_id = 20010
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1010108"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70700006
+L3_1.alias = "Q10101Compass"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["1010102"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70700006
+L3_1.alias = "Q10101Compass"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["1010103"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70700006
+L3_1.alias = "Q10101Compass"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["1010104"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70700006
+L3_1.alias = "Q10101Compass"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 70700013
+L4_1.pos = "Q10101LisaThunder1"
+L4_1.alias = "Q10101DungeonSealEffect"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.gadgets = L2_1
+L0_1["1010105"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70700006
+L3_1.alias = "Q10101Compass"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Lisa"
+L3_1.script = "Actor/Quest/Q411/Lisa"
+L3_1.id = 1007
+L3_1.pos = "Q10101Lisa1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1010106"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 1004
+L3_1.pos = "Q10101Player"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["1010107"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Lisa"
+L3_1.script = "Actor/Quest/Q411/Lisa"
+L3_1.id = 1007
+L3_1.pos = "Q1010108Lisa"
+L3_1.scene_id = 20010
+L3_1.room_id = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Paimon"
+L4_1.script = "Actor/Quest/Q352/Paimon"
+L4_1.id = 1005
+L4_1.pos = "Q1010108Paimon"
+L4_1.scene_id = 20010
+L4_1.room_id = 0
+L4_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 20010
+L3_1.pos = "Q1010108Player"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["1010108"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Lisa"
+L3_1.script = "Actor/Quest/Q411/Lisa"
+L3_1.id = 1007
+L3_1.pos = "Q10100Lisa"
+L3_1.scene_id = 1004
+L3_1.room_id = 100401
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 1004
+L3_1.pos = "Q10101Player"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["1010109"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70700015
+L3_1.pos = "Q10101Book"
+L3_1.alias = "Q10101Book"
+L3_1.scene_id = 1004
+L3_1.room_id = 100401
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["1010110"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Lisa"
+L3_1.script = "Actor/Quest/Q411/Lisa"
+L3_1.id = 1007
+L3_1.pos = "Q1010112Lisa"
+L3_1.scene_id = 20010
+L3_1.room_id = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Paimon"
+L4_1.script = "Actor/Quest/Q352/Paimon"
+L4_1.id = 1005
+L4_1.pos = "Q1010112Paimon"
+L4_1.scene_id = 20010
+L4_1.room_id = 0
+L4_1.data_index = 0
+L5_1 = {}
+L5_1.alias = "Npc10282"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.id = 10282
+L5_1.pos = "Q1010112Abyss"
+L5_1.scene_id = 20010
+L5_1.room_id = 0
+L5_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70700011
+L3_1.pos = "Q1010112Lisa"
+L3_1.alias = "Q10101SkillEffect"
+L3_1.scene_id = 20010
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 20010
+L3_1.pos = "Q1010112Player"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["1010112"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70700010
+L3_1.pos = "Q10101LisaThunder1"
+L3_1.alias = "Q10101HitEffect"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 70700010
+L4_1.pos = "Q10101LisaThunder2"
+L4_1.alias = "Q10101HitEffect"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 70700010
+L5_1.pos = "Q10101LisaThunder3"
+L5_1.alias = "Q10101HitEffect"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 70700014
+L6_1.pos = "Q10101LisaThunder1"
+L6_1.alias = "Q10101DungeonSealBreak"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 70710062
+L7_1.pos = "Q10101DungeonOpenEffect"
+L7_1.alias = "Q10101DungeonOpenEffect"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L1_1.gadgets = L2_1
+L0_1["1010114"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70700005
+L3_1.pos = "RoutBookClue1"
+L3_1.alias = "Q10101Bookclue"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["1010117"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70700005
+L3_1.pos = "RoutBookClue3"
+L3_1.alias = "Q10101Bookclue"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["1010118"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Lisa"
+L3_1.script = "Actor/Quest/Q411/Lisa"
+L3_1.id = 1007
+L3_1.pos = "RoutBookClue4"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70700005
+L3_1.pos = "RoutBookClue4"
+L3_1.alias = "Q10101Bookclue"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q10101_Player"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["1010119"] = L1_1

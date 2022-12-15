@@ -1,140 +1,137 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1, L11_1, L12_1, L13_1, L14_1, L15_1, L16_1
 main_id = 21007
-
-sub_ids =
-{
-    2100700,--派蒙说话
-    2100701,--探寻明蕴镇的异养
-    2100702,--寻找宝藏线索
-    2100703,--线索A
-    2100704,--线索B
-    2100705,--线索C
-    2100706,--线索D
-    2100711,--对话A
-    2100712,--对话B
-    2100713,--对话C
-    2100714,--对话D
-    2100709,--防御回滚
-    2100707,--前往藏宝的地点
-    2100708,--击败敌人
-    2100710,--总结对话
-    2100715,--挖掘
-}
-
----存放断线重连生成内容，和questdata配的存档点对应
-
-rewind_data = {}
-
-
-quest_data = {}
-
-quest_data["2100711"] = --元成
-{
-    npcs = 
-    {
-        {
-            id = 20072,
-            alias = "Npc20072",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q2100715_Target",
-            scene_id  = 3,
-            room_id = 0,
-            data_index = 1,
-        }
-    }
-}
-quest_data["2100712"] = --元清
-{
-    npcs = 
-    {
-        {
-            id = 20070,
-            alias = "Npc20070",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q2100709_Target",
-            scene_id  = 3,
-            room_id = 0,
-            data_index = 1,
-        }
-    }
-}
-
-quest_data["2100713"] = --元良
-{
-    npcs = 
-    {
-        {
-            id = 20071,
-            alias = "Npc20071",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q2100711_Target",
-            scene_id  = 3,
-            room_id = 0,
-            data_index = 1,
-        }
-    }
-}
-
-quest_data["2100714"] = --元鸿
-{
-    npcs = 
-    {
-        {
-            id = 20069,
-            alias = "Npc20069",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q2100713_Target",
-            scene_id  = 3,
-            room_id = 0,
-            data_index = 1,
-        }
-    }
-}
-
-quest_data["2100710"] = 
-{
-    npcs = 
-    {
-        {
-            id = 20069,
-            alias = "Npc20069",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q2100717_Target",
-            scene_id  = 3,
-            room_id = 0,
-            data_index = 1,
-        },
-        {
-            id = 20070,
-            alias = "Npc20070",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q2100718_Target",
-            scene_id  = 3,
-            room_id = 0,
-            data_index = 2,
-        },
-        {
-            id = 20071,
-            alias = "Npc20071",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q2100719_Target",
-            scene_id  = 3,
-            room_id = 0,
-            data_index = 3,
-        },
-        {
-            id = 20072,
-            alias = "Npc20072",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q2100720_Target",
-            scene_id  = 3,
-            room_id = 0,
-            data_index = 4,
-        }
-
-    }
-}
-
+L0_1 = {}
+L1_1 = 2100700
+L2_1 = 2100701
+L3_1 = 2100702
+L4_1 = 2100703
+L5_1 = 2100704
+L6_1 = 2100705
+L7_1 = 2100706
+L8_1 = 2100711
+L9_1 = 2100712
+L10_1 = 2100713
+L11_1 = 2100714
+L12_1 = 2100709
+L13_1 = 2100707
+L14_1 = 2100708
+L15_1 = 2100710
+L16_1 = 2100715
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+L0_1[11] = L11_1
+L0_1[12] = L12_1
+L0_1[13] = L13_1
+L0_1[14] = L14_1
+L0_1[15] = L15_1
+L0_1[16] = L16_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20072
+L3_1.alias = "Npc20072"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q2100715_Target"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2100711"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20070
+L3_1.alias = "Npc20070"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q2100709_Target"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2100712"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20071
+L3_1.alias = "Npc20071"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q2100711_Target"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2100713"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20069
+L3_1.alias = "Npc20069"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q2100713_Target"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2100714"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20069
+L3_1.alias = "Npc20069"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q2100717_Target"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20070
+L4_1.alias = "Npc20070"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q2100718_Target"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20071
+L5_1.alias = "Npc20071"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q2100719_Target"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20072
+L6_1.alias = "Npc20072"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q2100720_Target"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["2100710"] = L1_1

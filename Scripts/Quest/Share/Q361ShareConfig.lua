@@ -1,40 +1,27 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1
 main_id = 361
-
-sub_ids =
-{
-    36100,
-    36101,
-}
-
----存放断线重连生成内容，和questdata配的存档点对应
-rewind_data = {}
-
-
-rewind_data["36100"] = 
-{
-    -- avatar = {
-    --     pos = "Q361PlayerRewind1"
-    -- },
-}
-
-rewind_data["36101"] = 
-{
-    
-}
-
----校验用，和任务lua中生成NPC/monster/gadget/item等对应
-quest_data = {}
-
-quest_data["36100"] = 
-{
-    gadgets = {
-        {
-            id = 70900002,
-            pos = "Q361DragonTriggerCenter",
-        }
-    }
-}
+L0_1 = {}
+L1_1 = 36100
+L2_1 = 36101
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["36100"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["36101"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70900002
+L3_1.pos = "Q361DragonTriggerCenter"
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["36100"] = L1_1

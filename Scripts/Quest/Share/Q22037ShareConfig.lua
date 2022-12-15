@@ -1,3 +1,129 @@
--- 任务配置数据开始-----------------------------
-
-main_id = 22037sub_ids = {	2203701,	2203702,	2203705,	2203706,	2203703,	2203704,}-- 任务配置数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 父任务执行项数据开始-----------------------------finish_action = {	CLIENT = { },	SERVER = { },}fail_action = {	CLIENT = { },	SERVER = { },}cancel_action = {	CLIENT = { },	SERVER = 	{		QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP = 		{			{ "133220354", "", },		},		QUEST_EXEC_DEL_ALL_SPECIFIC_PACK_ITEM = 		{			{ "101538", },		},	},}-- 父任务执行项数据结束------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- Actor模块数据开始---------------------------------- 空-- Actor模块数据结束---------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 文本模块数据开始----------------------------------- 空-- 文本模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 路点模块数据开始----------------------------------- 空-- 路点模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 断线重连生成内容 开始------------------------------ 和questdata配的存档点对应rewind_data = {	["2203701"] = { },	["2203702"] = { },	["2203704"] = 	{		npcs = 		{			{				id = 3151,				alias = "Npc3151",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q22036_PIKA",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["2203706"] = 	{		npcs = 		{			{				id = 3151,				alias = "Npc3151",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q22036_PIKA",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["2203703"] = 	{		npcs = 		{			{				id = 3151,				alias = "Npc3151",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q22036_PIKA",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},}-- 断线重连生成内容 结束------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 校验数据 开始------------------------------------ 和任务lua中生成NPC/Monster/Gadget/Item等对应quest_data = {	["2203701"] = 	{		npcs = 		{			{				id = 3080,				alias = "Npc3080",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q22036_WAXIDE",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["2203702"] = 	{		npcs = 		{			{				id = 3151,				alias = "Npc3151",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q22036_PIKA",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["2203703"] = { },	["2203704"] = { },	["2203705"] = { },	["2203706"] = { },}-- 校验数据 结束------------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1
+main_id = 22037
+L0_1 = {}
+L1_1 = 2203701
+L2_1 = 2203702
+L3_1 = 2203705
+L4_1 = 2203706
+L5_1 = 2203703
+L6_1 = 2203704
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L4_1 = "133220354"
+L5_1 = ""
+L3_1[1] = L4_1
+L3_1[2] = L5_1
+L2_1[1] = L3_1
+L1_1.QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP = L2_1
+L2_1 = {}
+L3_1 = {}
+L4_1 = "101538"
+L3_1[1] = L4_1
+L2_1[1] = L3_1
+L1_1.QUEST_EXEC_DEL_ALL_SPECIFIC_PACK_ITEM = L2_1
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["2203701"] = L1_1
+L1_1 = {}
+L0_1["2203702"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3151
+L3_1.alias = "Npc3151"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q22036_PIKA"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2203704"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3151
+L3_1.alias = "Npc3151"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q22036_PIKA"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2203706"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3151
+L3_1.alias = "Npc3151"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q22036_PIKA"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2203703"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3080
+L3_1.alias = "Npc3080"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q22036_WAXIDE"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2203701"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3151
+L3_1.alias = "Npc3151"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q22036_PIKA"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2203702"] = L1_1
+L1_1 = {}
+L0_1["2203703"] = L1_1
+L1_1 = {}
+L0_1["2203704"] = L1_1
+L1_1 = {}
+L0_1["2203705"] = L1_1
+L1_1 = {}
+L0_1["2203706"] = L1_1
+quest_data = L0_1

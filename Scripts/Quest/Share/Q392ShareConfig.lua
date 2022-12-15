@@ -1,78 +1,78 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1
 main_id = 392
-
-sub_ids =
-{
-    39201,
-    39202,
-    39203,
-    39204,
-    39205,
-    39206,
-    39207,
-    39208,
-    39209,
-    39210,
-}
-
-rewind_data = {}
-
-rewind_data["39201"] = 
-{
-    npcs = {
-    }
-}
-
-rewind_data["39202"] = 
-{
-    npcs = {
-    }
-}
-
-rewind_data["39203"] = 
-{
-    npcs = {
-    }
-}
-
-rewind_data["39204"] = 
-{
-    npcs = {
-    }
-}
-
-rewind_data["39205"] = 
-{
-}
-
-rewind_data["39206"] = 
-{
-    npcs = {
-    }
-}
-
-rewind_data["39207"] = 
-{
-}
-
-rewind_data["39208"] = 
-{
-}
-
-rewind_data["39209"] = 
-{
-}
-
-quest_data = {}
-
-quest_data["39201"] = 
-{
-    trial_actors = {},
-    actors = {},
-    items = {},
-    monsters = {},
-    gadgets = {}
-}
+L0_1 = {}
+L1_1 = 39201
+L2_1 = 39202
+L3_1 = 39203
+L4_1 = 39204
+L5_1 = 39205
+L6_1 = 39206
+L7_1 = 39207
+L8_1 = 39208
+L9_1 = 39209
+L10_1 = 39210
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L1_1.npcs = L2_1
+L0_1["39201"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L1_1.npcs = L2_1
+L0_1["39202"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L1_1.npcs = L2_1
+L0_1["39203"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L1_1.npcs = L2_1
+L0_1["39204"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["39205"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L1_1.npcs = L2_1
+L0_1["39206"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["39207"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["39208"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["39209"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L1_1.trial_actors = L2_1
+L2_1 = {}
+L1_1.actors = L2_1
+L2_1 = {}
+L1_1.items = L2_1
+L2_1 = {}
+L1_1.monsters = L2_1
+L2_1 = {}
+L1_1.gadgets = L2_1
+L0_1["39201"] = L1_1

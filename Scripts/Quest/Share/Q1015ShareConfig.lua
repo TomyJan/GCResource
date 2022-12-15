@@ -1,328 +1,319 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1, L11_1, L12_1, L13_1, L14_1
 main_id = 1015
-
-sub_ids =
-{
-    101501,
-    101502,
-    101503,
-    101504,
-    101505,
-    101506,
-    101507,
-    101508,
-    101509,
-    101510,
-    101511,
-    101512,
-    101513,
-    101514,
-}
-
-rewind_data = {}
-
-rewind_data["101501"] = 
-{
-     npcs = {
-         {
-             id = 10233,
-             alias = "Npc10233",
-             script = "Actor/Quest/Q411/Qin",
-             pos = "Q101501Qiqi",
-             scene_id = 3,
-             data_index = 0,
-         },
-    }
-}
-rewind_data["101513"] = 
-{
-
-}
-
-rewind_data["101509"] = 
-{
-     npcs = {
-         {
-             id = 10233,
-             alias = "Npc10233",
-             script = "Actor/Quest/Q411/Qin",
-             pos = "Q101501Qiqi",
-             scene_id = 3,
-             data_index = 0,
-         },
-    }
-}
-rewind_data["101508"] = 
-{
-
-}
-rewind_data["101503"] = 
-{
-
-}
-
-rewind_data["101505"] = 
-{
-
-}
-rewind_data["101506"] = 
-{
-
-}
-rewind_data["101507"] = 
-{
-     npcs = {
-         {
-             id = 10233,
-             alias = "Npc10233",
-             script = "Actor/Quest/Q411/Qin",
-             pos = "Q101507Qiqi",
-             scene_id = 3,
-             data_index = 0,
-         },
-    }
-}
-rewind_data["101511"] = 
-{
-     npcs = {
-         {
-             id = 10232,
-             alias = "Npc10232",
-             script = "Actor/Npc/TempNPC",
-             pos = "Q101511stack",
-             scene_id = 3,
-             data_index = 0,
-         },
-    }
-}
-rewind_data["101514"] = 
-{
-
-}
-
-
-
-
-quest_data = {}
-
-quest_data["101501"] = 
-{
-     npcs = {
-         {
-             id = 10233,
-             alias = "Npc10233",
-             script = "Actor/Quest/Q411/Qin",
-             pos = "Q101501Qiqi",
-             scene_id = 3,
-             data_index = 0,
-         },
-    }
-}
-quest_data["101513"] = 
-{
-     npcs = {
-         {
-            id = 1005,
-            alias = "Paimon",
-            script = "Actor/Quest/Q352/Paimon",
-            pos = "Q101513paimon",
-            scene_id = 3,
-            data_index = 0,
-         },
-    },
-    transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 3,
-            pos = "Q101513born"
-        },
-    }
-}
-quest_data["101508"] = 
-{
-	gadgets =
-	{
-		{
-			id = 71700100,
-			pos = "Q101402Machine",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-			alias = "Machine", -- optional default : ""
-			scene_id = 3, -- optional default : sceneData.DefaultSceneID
-			room_id = 0,
-		}
-	}
-}
-quest_data["101503"] = 
-{
-     npcs = {
-         {
-            id = 1005,
-            alias = "Paimon",
-            script = "Actor/Quest/Q352/Paimon",
-            pos = "Q101503Paimon",
-            scene_id = 3,
-            data_index = 0,
-         },
-         {
-            id = 10232,
-            alias = "Npc10232",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101506Zl",
-            scene_id = 3,
-            data_index = 1,
-        },
-    },
-    transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 3,
-            pos = "Q101503Born"
-        },
-    }
-}
-
-quest_data["101505"] = 
-{
-	gadgets =
-	{
-		{
-			id = 71700107,
-			pos = "Q101402Machine",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-			alias = "Machine", -- optional default : ""
-			scene_id = 3, -- optional default : sceneData.DefaultSceneID
-			room_id = 0,
-		}
-	}
-}
-quest_data["101506"] = 
-{
-     npcs = {
-         {
-             id = 1005,
-             alias = "Paimon",
-             script = "Actor/Quest/Q352/Paimon",
-             pos = "Q101506Paimon",
-             scene_id = 3,
-             data_index = 0,
-         },
-         {
-            id = 10232,
-            alias = "Npc10232",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101506Zl",
-            scene_id = 3,
-            data_index = 1,
-        },
-         {
-            id = 10247,
-            alias = "Npc10237",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101506Monster1",
-            scene_id = 3,
-            data_index = 2,
-        },
-        {
-            id = 10238,
-            alias = "Npc10238",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101506Monster2",
-            scene_id = 3,
-            data_index = 3,
-        },  
-     },
-     transmit_points = {
-         {
-             point_id = 1,
-             scene_id = 3,
-             pos = "Q101506Born"
-         },
-     }
-     
-}
-quest_data["101504"] = 
-{
-    gadgets =
-    {
-        {
-            id = 70300118,
-            pos = "Q101504Pos",
-            alias = "Q101504Guild", 
-            scene_id = 3 , -- optional default : sceneData.DefaultSceneID
-            room_id = 0 , -- optional default : 0
-            is_show_cutscene = false, -- 宝箱专用配置 optional default : false
-            chest_drop_id = 0 , -- 宝箱专用配置 optional default : 0
-        }
-    }
-}
-quest_data["101507"] = 
-{
-     npcs = {
-         {
-             id = 10233,
-             alias = "Npc10233",
-             script = "Actor/Quest/Q411/Qin",
-             pos = "Q101507Qiqi",
-             scene_id = 3,
-             data_index = 0,
-         },
-         {
-            id = 10234,
-            alias = "Npc10234",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101507BS",
-            scene_id = 3,
-            data_index = 1,
-        },
-    }
-}
-quest_data["101511"] = 
-{
-     npcs = {
-         {
-             id = 10232,
-             alias = "Npc10232",
-             script = "Actor/Npc/TempNPC",
-             pos = "Q101511stack",
-             scene_id = 3,
-             data_index = 0,
-         },
-         {
-            id = 10234,
-            alias = "Npc10234",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101507BS",
-            scene_id = 3,
-            data_index = 1,
-        },
-    }
-}
-quest_data["101514"] = 
-{
-     npcs = {
-         {
-             id = 1005,
-             alias = "Paimon",
-             script = "Actor/Quest/Q352/Paimon",
-             pos = "Q101514Paimon",
-             scene_id = 3,
-             data_index = 0,
-         },
-         {
-            id = 10232,
-            alias = "Npc10232",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101514ZL",
-            scene_id = 3,
-            data_index = 1,
-        }, 
-     },
-     transmit_points = {
-         {
-             point_id = 1,
-             scene_id = 3,
-             pos = "Q101514Born"
-         },
-     }
-}
+L0_1 = {}
+L1_1 = 101501
+L2_1 = 101502
+L3_1 = 101503
+L4_1 = 101504
+L5_1 = 101505
+L6_1 = 101506
+L7_1 = 101507
+L8_1 = 101508
+L9_1 = 101509
+L10_1 = 101510
+L11_1 = 101511
+L12_1 = 101512
+L13_1 = 101513
+L14_1 = 101514
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+L0_1[11] = L11_1
+L0_1[12] = L12_1
+L0_1[13] = L13_1
+L0_1[14] = L14_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10233
+L3_1.alias = "Npc10233"
+L3_1.script = "Actor/Quest/Q411/Qin"
+L3_1.pos = "Q101501Qiqi"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["101501"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["101513"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10233
+L3_1.alias = "Npc10233"
+L3_1.script = "Actor/Quest/Q411/Qin"
+L3_1.pos = "Q101501Qiqi"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["101509"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["101508"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["101503"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["101505"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["101506"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10233
+L3_1.alias = "Npc10233"
+L3_1.script = "Actor/Quest/Q411/Qin"
+L3_1.pos = "Q101507Qiqi"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["101507"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10232
+L3_1.alias = "Npc10232"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q101511stack"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["101511"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["101514"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10233
+L3_1.alias = "Npc10233"
+L3_1.script = "Actor/Quest/Q411/Qin"
+L3_1.pos = "Q101501Qiqi"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["101501"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q101513paimon"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q101513born"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["101513"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 71700100
+L3_1.pos = "Q101402Machine"
+L3_1.alias = "Machine"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["101508"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q101503Paimon"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.id = 10232
+L4_1.alias = "Npc10232"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q101506Zl"
+L4_1.scene_id = 3
+L4_1.data_index = 1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q101503Born"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["101503"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 71700107
+L3_1.pos = "Q101402Machine"
+L3_1.alias = "Machine"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["101505"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q101506Paimon"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.id = 10232
+L4_1.alias = "Npc10232"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q101506Zl"
+L4_1.scene_id = 3
+L4_1.data_index = 1
+L5_1 = {}
+L5_1.id = 10247
+L5_1.alias = "Npc10237"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q101506Monster1"
+L5_1.scene_id = 3
+L5_1.data_index = 2
+L6_1 = {}
+L6_1.id = 10238
+L6_1.alias = "Npc10238"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q101506Monster2"
+L6_1.scene_id = 3
+L6_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q101506Born"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["101506"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70300118
+L3_1.pos = "Q101504Pos"
+L3_1.alias = "Q101504Guild"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.is_show_cutscene = false
+L3_1.chest_drop_id = 0
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["101504"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10233
+L3_1.alias = "Npc10233"
+L3_1.script = "Actor/Quest/Q411/Qin"
+L3_1.pos = "Q101507Qiqi"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.id = 10234
+L4_1.alias = "Npc10234"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q101507BS"
+L4_1.scene_id = 3
+L4_1.data_index = 1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["101507"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10232
+L3_1.alias = "Npc10232"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q101511stack"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.id = 10234
+L4_1.alias = "Npc10234"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q101507BS"
+L4_1.scene_id = 3
+L4_1.data_index = 1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["101511"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q101514Paimon"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.id = 10232
+L4_1.alias = "Npc10232"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q101514ZL"
+L4_1.scene_id = 3
+L4_1.data_index = 1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q101514Born"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["101514"] = L1_1

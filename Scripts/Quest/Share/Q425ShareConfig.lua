@@ -1,81 +1,55 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1
 main_id = 425
-
-sub_ids =
-{
-    42501,
-    42502,
-    42503,
-    42504,
-}
-
-rewind_data = {}
-
-rewind_data["42502"] = 
-{
-    npcs = {
-        {
-            id = 1160,
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            pos = "QuestNpc",
-            data_index = 0,
-            scene_id  = 1015,
-        },
-
-    }
-}
-
-rewind_data["42503"] = 
-{
-    npcs = {
-        {
-            id = 1160,
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            pos = "QuestNpc",
-            data_index = 0,
-            scene_id  = 1015,
-        },
-
-    }
-}
-
-quest_data = {}
-
-quest_data["42502"] = 
-{
-    trial_actors = {
-
-    },
-    actors = {
-        
-    },
-    items = {
-        -- {
-        --     id = 100004,
-        --     pos = "Q404Pos2",
-        --     alias = "Ball",
-        -- },
-    },
-    monsters = {
-        -- {
-        --     id = 20010801,
-        --     pos = "Q404Pos2",
-        -- },
-        -- {
-        --     id = 20010801,
-        --     pos = "Q404Pos2",
-        -- }
-    },
-    gadgets = {
-        -- {
-        --     id = 70300004,
-        --     pos = "Q404Pos2",
-        --     alias = "GoalMarker404",
-        -- }
-    }
-}
+L0_1 = {}
+L1_1 = 42501
+L2_1 = 42502
+L3_1 = 42503
+L4_1 = 42504
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1160
+L3_1.alias = "Wendy"
+L3_1.script = "Actor/Quest/Q301/Wendy301"
+L3_1.pos = "QuestNpc"
+L3_1.data_index = 0
+L3_1.scene_id = 1015
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["42502"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1160
+L3_1.alias = "Wendy"
+L3_1.script = "Actor/Quest/Q301/Wendy301"
+L3_1.pos = "QuestNpc"
+L3_1.data_index = 0
+L3_1.scene_id = 1015
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["42503"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L1_1.trial_actors = L2_1
+L2_1 = {}
+L1_1.actors = L2_1
+L2_1 = {}
+L1_1.items = L2_1
+L2_1 = {}
+L1_1.monsters = L2_1
+L2_1 = {}
+L1_1.gadgets = L2_1
+L0_1["42502"] = L1_1

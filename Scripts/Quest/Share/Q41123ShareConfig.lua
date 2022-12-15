@@ -1,3 +1,295 @@
--- 任务配置数据开始-----------------------------
-
-main_id = 41123sub_ids = {	4112310,	4112301,	4112302,	4112303,	4112304,	4112305,	4112306,	4112307,	4112308,	4112309,}-- 任务配置数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 父任务执行项数据开始-----------------------------finish_action = {	CLIENT = { },	SERVER = 	{		QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP = 		{			{ "133004336", },			{ "133002400", },			{ "133002401", },			{ "133002402", },		},	},}fail_action = {	CLIENT = { },	SERVER = 	{		QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP = 		{			{ "133004336", },			{ "133002400", },			{ "133002401", },			{ "133002402", },		},	},}cancel_action = {	CLIENT = { },	SERVER = 	{		QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP = 		{			{ "133004336", },			{ "133002400", },			{ "133002401", },			{ "133002402", },		},	},}-- 父任务执行项数据结束------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- Actor模块数据开始---------------------------------- 空-- Actor模块数据结束---------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 文本模块数据开始----------------------------------- 空-- 文本模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 路点模块数据开始----------------------------------- 空-- 路点模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 断线重连生成内容 开始------------------------------ 和questdata配的存档点对应rewind_data = {	["4112301"] = { },	["4112302"] = 	{		npcs = 		{			{				id = 1433,				alias = "Npc1433",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q41123_Hofuman1_InitPos",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["4112303"] = 	{		npcs = 		{			{				id = 1433,				alias = "Npc1433",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q41123_Hofuman1_InitPos",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["4112304"] = 	{		npcs = 		{			{				id = 1433,				alias = "Npc1433",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q41123_Hofuman1_InitPos",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["4112305"] = 	{		npcs = 		{			{				id = 1433,				alias = "Npc1433",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q41123_Hofuman1_InitPos",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 1575,				alias = "Npc1575",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q41123_Molo_InitPos",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["4112306"] = 	{		npcs = 		{			{				id = 1433,				alias = "Npc1433",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q41123_Hofuman1_InitPos",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 1575,				alias = "Npc1575",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q41123_Molo_InitPos",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["4112307"] = 	{		npcs = 		{			{				id = 1433,				alias = "Npc1433",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q41123_Hofuman1_InitPos",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 1575,				alias = "Npc1575",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q41123_Molo_InitPos",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["4112308"] = 	{		npcs = 		{			{				id = 1433,				alias = "Npc1433",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q41123_Hofuman1_InitPos",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 1575,				alias = "Npc1575",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q41123_Molo_InitPos",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["4112309"] = 	{		npcs = 		{			{				id = 1433,				alias = "Npc1433",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q41123_Hofuman1_InitPos",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 1575,				alias = "Npc1575",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q41123_Molo_InitPos",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["4112310"] = { },}-- 断线重连生成内容 结束------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 校验数据 开始------------------------------------ 和任务lua中生成NPC/Monster/Gadget/Item等对应quest_data = {	["4112301"] = 	{		npcs = 		{			{				id = 1433,				alias = "Npc1433",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q41123_Hofuman1_InitPos",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["4112302"] = { },	["4112303"] = { },	["4112304"] = 	{		npcs = 		{			{				id = 1575,				alias = "Npc1575",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q41123_Molo_InitPos",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["4112305"] = { },	["4112306"] = { },	["4112307"] = { },	["4112308"] = { },	["4112309"] = { },	["4112310"] = { },}-- 校验数据 结束------------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1
+main_id = 41123
+L0_1 = {}
+L1_1 = 4112310
+L2_1 = 4112301
+L3_1 = 4112302
+L4_1 = 4112303
+L5_1 = 4112304
+L6_1 = 4112305
+L7_1 = 4112306
+L8_1 = 4112307
+L9_1 = 4112308
+L10_1 = 4112309
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L4_1 = "133004336"
+L3_1[1] = L4_1
+L4_1 = {}
+L5_1 = "133002400"
+L4_1[1] = L5_1
+L5_1 = {}
+L6_1 = "133002401"
+L5_1[1] = L6_1
+L6_1 = {}
+L7_1 = "133002402"
+L6_1[1] = L7_1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP = L2_1
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L4_1 = "133004336"
+L3_1[1] = L4_1
+L4_1 = {}
+L5_1 = "133002400"
+L4_1[1] = L5_1
+L5_1 = {}
+L6_1 = "133002401"
+L5_1[1] = L6_1
+L6_1 = {}
+L7_1 = "133002402"
+L6_1[1] = L7_1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP = L2_1
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L4_1 = "133004336"
+L3_1[1] = L4_1
+L4_1 = {}
+L5_1 = "133002400"
+L4_1[1] = L5_1
+L5_1 = {}
+L6_1 = "133002401"
+L5_1[1] = L6_1
+L6_1 = {}
+L7_1 = "133002402"
+L6_1[1] = L7_1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP = L2_1
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["4112301"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1433
+L3_1.alias = "Npc1433"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q41123_Hofuman1_InitPos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["4112302"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1433
+L3_1.alias = "Npc1433"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q41123_Hofuman1_InitPos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["4112303"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1433
+L3_1.alias = "Npc1433"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q41123_Hofuman1_InitPos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["4112304"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1433
+L3_1.alias = "Npc1433"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q41123_Hofuman1_InitPos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1575
+L4_1.alias = "Npc1575"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q41123_Molo_InitPos"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["4112305"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1433
+L3_1.alias = "Npc1433"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q41123_Hofuman1_InitPos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1575
+L4_1.alias = "Npc1575"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q41123_Molo_InitPos"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["4112306"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1433
+L3_1.alias = "Npc1433"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q41123_Hofuman1_InitPos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1575
+L4_1.alias = "Npc1575"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q41123_Molo_InitPos"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["4112307"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1433
+L3_1.alias = "Npc1433"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q41123_Hofuman1_InitPos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1575
+L4_1.alias = "Npc1575"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q41123_Molo_InitPos"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["4112308"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1433
+L3_1.alias = "Npc1433"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q41123_Hofuman1_InitPos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1575
+L4_1.alias = "Npc1575"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q41123_Molo_InitPos"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["4112309"] = L1_1
+L1_1 = {}
+L0_1["4112310"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1433
+L3_1.alias = "Npc1433"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q41123_Hofuman1_InitPos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["4112301"] = L1_1
+L1_1 = {}
+L0_1["4112302"] = L1_1
+L1_1 = {}
+L0_1["4112303"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1575
+L3_1.alias = "Npc1575"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q41123_Molo_InitPos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["4112304"] = L1_1
+L1_1 = {}
+L0_1["4112305"] = L1_1
+L1_1 = {}
+L0_1["4112306"] = L1_1
+L1_1 = {}
+L0_1["4112307"] = L1_1
+L1_1 = {}
+L0_1["4112308"] = L1_1
+L1_1 = {}
+L0_1["4112309"] = L1_1
+L1_1 = {}
+L0_1["4112310"] = L1_1
+quest_data = L0_1

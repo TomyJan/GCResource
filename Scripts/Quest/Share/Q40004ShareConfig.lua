@@ -1,105 +1,91 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1
 main_id = 40004
-
-sub_ids =
-{
-    4000401,
-    4000402,
-    4000403,
-}
-
----存放断线重连生成内容，和questdata配的存档点对应
-rewind_data = {}
-rewind_data["4000401"] = 
-{
-
-}
-
-
----校验用，和任务lua中生成NPC/monster/gadget/item等对应
-quest_data = {}
-
-quest_data["4000402"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Keaya",
-			script = "Actor/Quest/Q301/Gaia301",
-			id = 1004,
-			pos = "Q40004_Kaeya",
-			scene_id = 1009,
-			room_id = 1,
-			data_index = 0,
-		}
-    }
-}
-
-quest_data["4000403"] = 
-{
-    npcs = 
-    {
-        {
-            alias = "Npc146101",
-            script = "Actor/Npc/TempNPC",
-            id = 146101,
-            pos = "Q40004_Spy",
-            sceneID = 3,
-            roomID = 0,
-            subIndex = 0,
-        }
-    },
-}
-
-quest_data["4000406"] = 
-{
-    npcs = 
-    {
-        {
-            alias = "Npc10207",
-            script = "Actor/Npc/TempNPC",
-            id = 10207,
-            pos = "Q40004Thoarder1",
-            sceneID = 3,
-            roomID = 0,
-            subIndex = 0,
-        },
-        {
-            alias = "Npc10208",
-            script = "Actor/Npc/TempNPC",
-            id = 10208,
-            pos = "Q40004Thoarder2",
-            sceneID = 3,
-            roomID = 0,
-            subIndex = 0,
-        }
-    },
-}
-
-quest_data["4000408"] = 
-{
-    npcs = 
-    {
-        {
-            alias = "Npc10207",
-            script = "Actor/Npc/TempNPC",
-            id = 10207,
-            pos = "Q40004Thoarder1",
-            sceneID = 3,
-            roomID = 0,
-            subIndex = 0,
-        },
-        {
-            alias = "Npc10208",
-            script = "Actor/Npc/TempNPC",
-            id = 10208,
-            pos = "Q40004Thoarder2",
-            sceneID = 3,
-            roomID = 0,
-            subIndex = 0,
-        }
-    },
-}
+L0_1 = {}
+L1_1 = 4000401
+L2_1 = 4000402
+L3_1 = 4000403
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["4000401"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Keaya"
+L3_1.script = "Actor/Quest/Q301/Gaia301"
+L3_1.id = 1004
+L3_1.pos = "Q40004_Kaeya"
+L3_1.scene_id = 1009
+L3_1.room_id = 1
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["4000402"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc146101"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 146101
+L3_1.pos = "Q40004_Spy"
+L3_1.sceneID = 3
+L3_1.roomID = 0
+L3_1.subIndex = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["4000403"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc10207"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 10207
+L3_1.pos = "Q40004Thoarder1"
+L3_1.sceneID = 3
+L3_1.roomID = 0
+L3_1.subIndex = 0
+L4_1 = {}
+L4_1.alias = "Npc10208"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.id = 10208
+L4_1.pos = "Q40004Thoarder2"
+L4_1.sceneID = 3
+L4_1.roomID = 0
+L4_1.subIndex = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["4000406"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc10207"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 10207
+L3_1.pos = "Q40004Thoarder1"
+L3_1.sceneID = 3
+L3_1.roomID = 0
+L3_1.subIndex = 0
+L4_1 = {}
+L4_1.alias = "Npc10208"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.id = 10208
+L4_1.pos = "Q40004Thoarder2"
+L4_1.sceneID = 3
+L4_1.roomID = 0
+L4_1.subIndex = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["4000408"] = L1_1

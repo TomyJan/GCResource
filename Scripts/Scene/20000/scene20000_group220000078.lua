@@ -155,6 +155,6 @@ end
 
 -- 触发操作
 function action_EVENT_PLATFORM_REACH_POINT_171(context, evt)
-	ScriptLib.PrintLog(context, "## point_id = "..evt.param3)
+	ScriptLib.PrintLog("## point_id = "..evt.param3)
 	return 0
 end

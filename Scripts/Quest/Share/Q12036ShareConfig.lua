@@ -1,3 +1,100 @@
--- 任务配置数据开始-----------------------------
-
-main_id = 12036sub_ids = {	1203601,}-- 任务配置数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 父任务执行项数据开始-----------------------------finish_action = {	CLIENT = { },	SERVER = { },}fail_action = {	CLIENT = { },	SERVER = { },}cancel_action = {	CLIENT = { },	SERVER = { },}-- 父任务执行项数据结束------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- Actor模块数据开始---------------------------------- 空-- Actor模块数据结束---------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 文本模块数据开始----------------------------------- 空-- 文本模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 路点模块数据开始----------------------------------- 空-- 路点模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 断线重连生成内容 开始------------------------------ 和questdata配的存档点对应rewind_data = {	["1203601"] = 	{		quest_var = { 1, -1, -1, -1, -1, },	},}-- 断线重连生成内容 结束------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 校验数据 开始------------------------------------ 和任务lua中生成NPC/Monster/Gadget/Item等对应quest_data = {	["1203601"] = 	{		npcs = 		{			{				id = 1047,				alias = "Npc1047",				script = "Actor/Npc/TempNPC",				pos = "Q1203304_N1005",				scene_id = 1061,				room_id = 1,				data_index = 1,			},			{				id = 1033,				alias = "Npc1033",				script = "Actor/Npc/TempNPC",				pos = "Q1203304_N10000005",				scene_id = 1061,				room_id = 1,				data_index = 2,			},			{				id = 12451,				alias = "Npc12451",				script = "Actor/Npc/TempNPC",				pos = "Q1203410_guide",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 12523,				alias = "Npc12523",				script = "Actor/Npc/TempNPC",				pos = "Q1203410board",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 12528,				alias = "Npc12528",				script = "Actor/Npc/TempNPC",				pos = "Q12034board3",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 12529,				alias = "Npc12529",				script = "Actor/Npc/TempNPC",				pos = "Q12034board4",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},}-- 校验数据 结束------------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1
+main_id = 12036
+L0_1 = {}
+L1_1 = 1203601
+L0_1[1] = L1_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = 1
+L4_1 = -1
+L5_1 = -1
+L6_1 = -1
+L7_1 = -1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L1_1.quest_var = L2_1
+L0_1["1203601"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1047
+L3_1.alias = "Npc1047"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q1203304_N1005"
+L3_1.scene_id = 1061
+L3_1.room_id = 1
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1033
+L4_1.alias = "Npc1033"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q1203304_N10000005"
+L4_1.scene_id = 1061
+L4_1.room_id = 1
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 12451
+L5_1.alias = "Npc12451"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q1203410_guide"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 12523
+L6_1.alias = "Npc12523"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q1203410board"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 12528
+L7_1.alias = "Npc12528"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q12034board3"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 12529
+L8_1.alias = "Npc12529"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q12034board4"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["1203601"] = L1_1
+quest_data = L0_1

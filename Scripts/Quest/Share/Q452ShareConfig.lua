@@ -1,193 +1,169 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1
 main_id = 452
-
-sub_ids =
-{
-    45201,
-    45202,
-    45203,
-    45204,
-    45205,
-    45206,
-}
-AmborData = 
-{
-	ID = 1002,
-	Alias = "Ambor",
-}
-
-FarmerData = 
-{
-	ID = 163101,
-	Alias = "Npc163101",
-}
-
-PaimonData = 
-{
-	ID = 1005,
-	Alias = "Paimon",
-}
-
-rewind_data = {}
-rewind_data["45202"] = 
-{
-    npcs = 
-    {
-        {
-            id = 1002,
-            alias = "Ambor",
-            script = "Actor/Quest/Q301/Ambor301",
-            pos = "Q452AmborFight",
-            data_index = 0,
-            scene_id  = 3,
-            roomID = 0,
-			subIndex = 0,
-        },
-    }
-}
-
-rewind_data["45203"] = 
-{
-    npcs = 
-    {
-        {
-            id = 1002,
-            alias = "Ambor",
-            script = "Actor/Quest/Q301/Ambor301",
-            pos = "Q452AmborFight",
-            data_index = 0,
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-    }
-}
-
-rewind_data["45204"] = 
-{
-    npcs = 
-    {
-        {
-            id = 1002,
-            alias = "Ambor",
-            script = "Actor/Quest/Q301/Ambor301",
-            pos = "Q452AmborFight",
-            data_index = 0,
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-    }
-}
-
-rewind_data["45205"] = 
-{
-    npcs = 
-    {
-
-        {
-            id = 1002,
-            alias = "Ambor",
-            script = "Actor/Quest/Q301/Ambor301",
-            pos = "Q452AmborEnd",
-            data_index = 0,
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-    }
-
-}
-
-quest_data = {}
-
-quest_data["45201"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Q452AmborBorn",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		} 
-    }
-}
-
-quest_data["45202"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Q452AmborFight",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		} 
-    }
-}
-
-quest_data["45203"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Npc163101",
-			script = "Actor/Npc/TempNPC",
-			id = 163101,
-			pos = "Q452FightFarmer",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		} 
-    }
-}
-
-quest_data["45205"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Npc163101",
-			script = "Actor/Npc/TempNPC",
-			id = 163101,
-			pos = "Q452FightFarmer",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		} 
-    }
-}
-
-quest_data["45206"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Q452AmborEnd",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		} 
-    },
-
-    transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 3,
-            pos = "Q45203_PlayerPos"
-        },
-    }
-}
+L0_1 = {}
+L1_1 = 45201
+L2_1 = 45202
+L3_1 = 45203
+L4_1 = 45204
+L5_1 = 45205
+L6_1 = 45206
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+sub_ids = L0_1
+L0_1 = {}
+L0_1.ID = 1002
+L0_1.Alias = "Ambor"
+AmborData = L0_1
+L0_1 = {}
+L0_1.ID = 163101
+L0_1.Alias = "Npc163101"
+FarmerData = L0_1
+L0_1 = {}
+L0_1.ID = 1005
+L0_1.Alias = "Paimon"
+PaimonData = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1002
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.pos = "Q452AmborFight"
+L3_1.data_index = 0
+L3_1.scene_id = 3
+L3_1.roomID = 0
+L3_1.subIndex = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["45202"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1002
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.pos = "Q452AmborFight"
+L3_1.data_index = 0
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["45203"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1002
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.pos = "Q452AmborFight"
+L3_1.data_index = 0
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["45204"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1002
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.pos = "Q452AmborEnd"
+L3_1.data_index = 0
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["45205"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Q452AmborBorn"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["45201"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Q452AmborFight"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["45202"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc163101"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 163101
+L3_1.pos = "Q452FightFarmer"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["45203"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc163101"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 163101
+L3_1.pos = "Q452FightFarmer"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["45205"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Q452AmborEnd"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q45203_PlayerPos"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["45206"] = L1_1

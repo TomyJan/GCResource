@@ -1,315 +1,286 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1, L11_1, L12_1, L13_1, L14_1, L15_1, L16_1, L17_1
 main_id = 454
-
-sub_ids =
-{
-	45407,
-	45401,
-	45410,
-	45411,
-	45412,
-	45413,
-	45414,
-	45408,
-	45409,
-	45415,
-    45402,
-    45403,
-	45404,
-	45416,
-	45417,
-    45405,
-    45406,
-}
-
-AmborData = 
-{
-	ID = 1002,
-	Alias = "Ambor",
-}
-
-RazorData = 
-{
-	ID = 1011,
-	Alias = "Razor",
-}
-
-WolfWoundData = 
-{
-	ID = 1165,
-	Alias = "WolfWound",
-}
-
-WolfBossData = 
-{
-	ID = 1176,
-	Alias = "WolfBoss",
-}
-
-Farmer1Data = 
-{
-	ID = 154301,
-	Alias = "Npc154301",
-}
-
-Farmer2Data = 
-{
-	ID = 163201,
-	Alias = "Npc163201",
-}
-
-rewind_data = {}
-
-rewind_data["45406"] =
-{
-    avatar = {
-        scene_id = 3,
-        pos = "Q45406PlayerTalk"
-    }, 
-
-    npcs = {
-        {
-            id = 1176,
-            alias = "WolfBoss",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q454WolfBoss",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-        {
-            id = 1011,
-            alias = "Razor",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q45406Razor",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-        {
-            id = 1002,
-            alias = "Ambor",
-            script = "Actor/Quest/Q301/Ambor301",
-            pos = "Q454AmborEnd",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        }
-
-    }
-}
-
-quest_data = {}
-
-quest_data["45407"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Q45401Ambor",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-
-        {
-			alias = "Razor",
-			script = "Actor/Npc/TempNPC",
-			id = 1011,
-			pos = "Q45401Razor",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-    }
-}
-
-quest_data["45410"] = 
-{
-	gadgets =
-	{
-		{
-			id = 70300074,
-			pos = "Q45411BloodHint",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-			alias = "BloodHint", -- optional default : ""
-			scene_id = 3, -- optional default : sceneData.DefaultSceneID
-		}
-	}
-}
-
-quest_data["45411"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Q45411Ambor",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-
-        {
-			alias = "Razor",
-			script = "Actor/Npc/TempNPC",
-			id = 1011,
-			pos = "Q45411Razor",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-	},
-	
-	gadgets =
-	{
-		{
-			id = 70300074,
-			pos = "Q45411BloodHint",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-			alias = "BloodHint", -- optional default : ""
-			scene_id = 3, -- optional default : sceneData.DefaultSceneID
-		}
-	},
-
-    transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 3,
-            pos = "Q45411PlayerPos"
-        },
-    }
-}
-
-quest_data["45412"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Q45413Ambor",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-
-        {
-			alias = "Razor",
-			script = "Actor/Npc/TempNPC",
-			id = 1011,
-			pos = "Q45413Razor",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-        
-        {
-			alias = "WolfWound",
-			script = "Actor/Npc/RazorWolfWound",
-			id = 1165,
-			pos = "Q45413WoundWolf",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-    }
-}
-
-quest_data["45414"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Q454Ambor",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-
-        {
-			alias = "Razor",
-			script = "Actor/Npc/TempNPC",
-			id = 1011,
-			pos = "Q454Razor",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-        
-        {
-			alias = "WolfWound",
-			script = "Actor/Npc/RazorWolfWound",
-			id = 1165,
-			pos = "Q454WolfWound",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-    }
-}
-
-quest_data["45406"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Q454AmborEnd",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-
-        {
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Q454Ambor2End",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 1,
-        },
-
-        {
-			alias = "Razor",
-			script = "Actor/Npc/TempNPC",
-			id = 1011,
-			pos = "Q45406Razor",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-        
-        {
-			alias = "WolfBoss",
-			script = "Actor/Npc/RazorWolfWound",
-			id = 1165,
-			pos = "Q454WolfBoss",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-    },
-
-    transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 3,
-            pos = "Q45406PlayerTalk"
-        },
-    }
-}
-
+L0_1 = {}
+L1_1 = 45407
+L2_1 = 45401
+L3_1 = 45410
+L4_1 = 45411
+L5_1 = 45412
+L6_1 = 45413
+L7_1 = 45414
+L8_1 = 45408
+L9_1 = 45409
+L10_1 = 45415
+L11_1 = 45402
+L12_1 = 45403
+L13_1 = 45404
+L14_1 = 45416
+L15_1 = 45417
+L16_1 = 45405
+L17_1 = 45406
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+L0_1[11] = L11_1
+L0_1[12] = L12_1
+L0_1[13] = L13_1
+L0_1[14] = L14_1
+L0_1[15] = L15_1
+L0_1[16] = L16_1
+L0_1[17] = L17_1
+sub_ids = L0_1
+L0_1 = {}
+L0_1.ID = 1002
+L0_1.Alias = "Ambor"
+AmborData = L0_1
+L0_1 = {}
+L0_1.ID = 1011
+L0_1.Alias = "Razor"
+RazorData = L0_1
+L0_1 = {}
+L0_1.ID = 1165
+L0_1.Alias = "WolfWound"
+WolfWoundData = L0_1
+L0_1 = {}
+L0_1.ID = 1176
+L0_1.Alias = "WolfBoss"
+WolfBossData = L0_1
+L0_1 = {}
+L0_1.ID = 154301
+L0_1.Alias = "Npc154301"
+Farmer1Data = L0_1
+L0_1 = {}
+L0_1.ID = 163201
+L0_1.Alias = "Npc163201"
+Farmer2Data = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L2_1.scene_id = 3
+L2_1.pos = "Q45406PlayerTalk"
+L1_1.avatar = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1176
+L3_1.alias = "WolfBoss"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q454WolfBoss"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.id = 1011
+L4_1.alias = "Razor"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q45406Razor"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 0
+L5_1 = {}
+L5_1.id = 1002
+L5_1.alias = "Ambor"
+L5_1.script = "Actor/Quest/Q301/Ambor301"
+L5_1.pos = "Q454AmborEnd"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["45406"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Q45401Ambor"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Razor"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.id = 1011
+L4_1.pos = "Q45401Razor"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["45407"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70300074
+L3_1.pos = "Q45411BloodHint"
+L3_1.alias = "BloodHint"
+L3_1.scene_id = 3
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["45410"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Q45411Ambor"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Razor"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.id = 1011
+L4_1.pos = "Q45411Razor"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70300074
+L3_1.pos = "Q45411BloodHint"
+L3_1.alias = "BloodHint"
+L3_1.scene_id = 3
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q45411PlayerPos"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["45411"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Q45413Ambor"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Razor"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.id = 1011
+L4_1.pos = "Q45413Razor"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 0
+L5_1 = {}
+L5_1.alias = "WolfWound"
+L5_1.script = "Actor/Npc/RazorWolfWound"
+L5_1.id = 1165
+L5_1.pos = "Q45413WoundWolf"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["45412"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Q454Ambor"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Razor"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.id = 1011
+L4_1.pos = "Q454Razor"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 0
+L5_1 = {}
+L5_1.alias = "WolfWound"
+L5_1.script = "Actor/Npc/RazorWolfWound"
+L5_1.id = 1165
+L5_1.pos = "Q454WolfWound"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["45414"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Q454AmborEnd"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Ambor"
+L4_1.script = "Actor/Quest/Q301/Ambor301"
+L4_1.id = 1002
+L4_1.pos = "Q454Ambor2End"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 1
+L5_1 = {}
+L5_1.alias = "Razor"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.id = 1011
+L5_1.pos = "Q45406Razor"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 0
+L6_1 = {}
+L6_1.alias = "WolfBoss"
+L6_1.script = "Actor/Npc/RazorWolfWound"
+L6_1.id = 1165
+L6_1.pos = "Q454WolfBoss"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q45406PlayerTalk"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["45406"] = L1_1

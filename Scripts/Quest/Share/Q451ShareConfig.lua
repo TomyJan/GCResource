@@ -1,109 +1,98 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1
 main_id = 451
-
-sub_ids =
-{
-    45101,
-    45102,
-    45103,
-    45104,
-    45105,
-    45106,
-    45107,
-    45108,
-    45109,
-}
-
-PaimonData = 
-{
-	ID = 1005,
-	Alias = "Paimon",
-}
-
-RazorData = 
-{
-	ID = 1011,
-	Alias = "Razor",
-}
-
-rewind_data = {}
-
-rewind_data["45104"] = 
-{
-    npcs = 
-    {
-        {
-            id = 1011,
-            alias = "Razor",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q451Razor",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-    }
-}
-
-rewind_data["45105"] = 
-{
-    npcs = 
-    {
-        {
-            id = 1011,
-            alias = "Razor",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q451Razor",
-            data_index = 0,
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-    }
-}
-
-quest_data = {}
-
-quest_data["45102"] = 
-{
-    npcs = 
-    {
-        {
-            id = 1005,
-            alias = "Paimon",
-            script = "Actor/Quest/Q352/Paimon",
-            pos = "Q451WolfRunStart",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-    }
-}
-
-
-quest_data["45103"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Razor",
-			script = "Actor/Npc/TempNPC",
-			id = 1011,
-			pos = "Q451Razor",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		} 
-    },
-
-    transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 3,
-            pos = "Q451PlayerPos"
-        },
-    }
-}
-
+L0_1 = {}
+L1_1 = 45101
+L2_1 = 45102
+L3_1 = 45103
+L4_1 = 45104
+L5_1 = 45105
+L6_1 = 45106
+L7_1 = 45107
+L8_1 = 45108
+L9_1 = 45109
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+sub_ids = L0_1
+L0_1 = {}
+L0_1.ID = 1005
+L0_1.Alias = "Paimon"
+PaimonData = L0_1
+L0_1 = {}
+L0_1.ID = 1011
+L0_1.Alias = "Razor"
+RazorData = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1011
+L3_1.alias = "Razor"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q451Razor"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["45104"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1011
+L3_1.alias = "Razor"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q451Razor"
+L3_1.data_index = 0
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["45105"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q451WolfRunStart"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["45102"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Razor"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 1011
+L3_1.pos = "Q451Razor"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q451PlayerPos"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["45103"] = L1_1

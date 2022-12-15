@@ -173,7 +173,7 @@ function action_EVENT_ENTER_REGION_297003(context, evt)
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	return 0
 end
@@ -202,7 +202,7 @@ function action_EVENT_ENTER_REGION_297004(context, evt)
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	return 0
 end
@@ -231,7 +231,7 @@ function action_EVENT_ENTER_REGION_297005(context, evt)
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	return 0
 end
@@ -260,7 +260,7 @@ function action_EVENT_ENTER_REGION_297007(context, evt)
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	return 0
 end
@@ -289,7 +289,7 @@ function action_EVENT_ENTER_REGION_297008(context, evt)
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	return 0
 end
@@ -318,7 +318,7 @@ function action_EVENT_ENTER_REGION_297010(context, evt)
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	return 0
 end
@@ -347,7 +347,7 @@ function action_EVENT_ENTER_REGION_297011(context, evt)
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	return 0
 end
@@ -376,7 +376,7 @@ function action_EVENT_ENTER_REGION_297012(context, evt)
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	return 0
 end
@@ -405,7 +405,7 @@ function action_EVENT_ENTER_REGION_297013(context, evt)
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	return 0
 end
@@ -434,7 +434,7 @@ function action_EVENT_ENTER_REGION_297014(context, evt)
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	return 0
 end
@@ -463,7 +463,7 @@ function action_EVENT_ENTER_REGION_297015(context, evt)
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	return 0
 end
@@ -492,7 +492,7 @@ function action_EVENT_ENTER_REGION_297016(context, evt)
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	return 0
 end
@@ -521,7 +521,7 @@ function action_EVENT_ENTER_REGION_297017(context, evt)
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	return 0
 end
@@ -550,7 +550,7 @@ function action_EVENT_ENTER_REGION_297018(context, evt)
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	return 0
 end
@@ -579,7 +579,7 @@ function action_EVENT_ENTER_REGION_297019(context, evt)
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	return 0
 end
@@ -608,7 +608,7 @@ function action_EVENT_ENTER_REGION_297020(context, evt)
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	return 0
 end
@@ -637,7 +637,7 @@ function action_EVENT_ENTER_REGION_297022(context, evt)
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	return 0
 end
@@ -666,7 +666,7 @@ function action_EVENT_ENTER_REGION_297023(context, evt)
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	return 0
 end
@@ -695,7 +695,7 @@ function action_EVENT_ENTER_REGION_297024(context, evt)
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	return 0
 end
@@ -724,7 +724,7 @@ function action_EVENT_ENTER_REGION_297026(context, evt)
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	return 0
 end
@@ -753,7 +753,7 @@ function action_EVENT_ENTER_REGION_297028(context, evt)
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	return 0
 end
@@ -782,7 +782,7 @@ function action_EVENT_ENTER_REGION_297029(context, evt)
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	return 0
 end
@@ -811,7 +811,7 @@ function action_EVENT_ENTER_REGION_297030(context, evt)
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	return 0
 end
@@ -840,7 +840,7 @@ function action_EVENT_ENTER_REGION_297031(context, evt)
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	return 0
 end
@@ -869,7 +869,7 @@ function action_EVENT_ENTER_REGION_297032(context, evt)
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	return 0
 end
@@ -898,7 +898,7 @@ function action_EVENT_ENTER_REGION_297033(context, evt)
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	return 0
 end
@@ -927,7 +927,7 @@ function action_EVENT_ENTER_REGION_297034(context, evt)
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	return 0
 end
@@ -956,7 +956,7 @@ function action_EVENT_ENTER_REGION_297035(context, evt)
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	return 0
 end
@@ -985,7 +985,7 @@ function action_EVENT_ENTER_REGION_297036(context, evt)
 	-- 在0面前， 5 到 10 范围里，30 角度内，刷{297001,297002}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {297001,297002}, ranges = { 5, 10 }, angle = 30 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	return 0
 end

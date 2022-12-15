@@ -127,7 +127,7 @@ suites = {
 -- 触发条件
 function condition_EVENT_ENTER_REGION_19(context, evt)
 	-- 判断角色数量不少于1
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 38902) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_1 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 38902) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_1 then
 		return true
 	end
 	return false
@@ -136,7 +136,7 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_20(context, evt)
 	-- 判断角色数量不少于1
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 38904) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_2 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 38904) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_2 then
 		return true
 	end
 	return false
@@ -145,7 +145,7 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_21(context, evt)
 	-- 判断角色数量不少于1
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 38901) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_3 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 38901) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_3 then
 		return true
 	end
 	return false
@@ -153,7 +153,7 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_33(context, evt)
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 38806) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_4 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 38806) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_4 then
 		return true
 	end
 	return false
@@ -161,7 +161,7 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_97(context, evt)
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 39001) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_5 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 39001) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_5 then
 		return true
 	end
 	return false
@@ -169,7 +169,7 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_98(context, evt)
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 39101) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_6 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 39101) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_6 then
 		return true
 	end
 	return false
@@ -177,7 +177,7 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_99(context, evt)
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 39201) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_7 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 39201) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_7 then
 		return true
 	end
 	return false
@@ -185,7 +185,7 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_118(context, evt)
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 39002) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_8 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 39002) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_8 then
 		return true
 	end
 	return false
@@ -193,7 +193,7 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_119(context, evt)
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 39102) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_9 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 39102) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_9 then
 		return true
 	end
 	return false
@@ -201,7 +201,7 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_120(context, evt)
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 39202) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_10 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 39202) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_10 then
 		return true
 	end
 	return false
@@ -210,7 +210,7 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_178(context, evt)
 	-- 判断角色数量不少于1
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and (ScriptLib.GetQuestState(context, evt.target_eid, 38905) == QuestState.UNFINISHED or ScriptLib.GetQuestState(context, evt.target_eid, 39302) == QuestState.UNFINISHED) 
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and (ScriptLib.GetQuestState(context, evt.target_eid, 38905) == QuestState.UNFINISHED or ScriptLib.GetQuestState(context, evt.target_eid, 39302) == QuestState.UNFINISHED) 
 	and evt.param1 == defs.gadget_id_11 then
 		return true
 	end
@@ -219,7 +219,7 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_257(context, evt)
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 38907) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_12 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 38907) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_12 then
 		return true
 	end
 	return false
@@ -227,7 +227,7 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_258(context, evt)
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 38908) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_13 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 38908) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_13 then
 		return true
 	end
 	return false
@@ -235,7 +235,7 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_259(context, evt)
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 38909) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_14 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 38909) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_14 then
 		return true
 	end
 	return false
@@ -243,7 +243,7 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_333(context, evt)
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 2001509) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_15 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 2001509) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_15 then
 		return true
 	end
 	return false
@@ -251,7 +251,7 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_334(context, evt)
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 2001508) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_16 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 2001508) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_16 then
 		return true
 	end
 	return false
@@ -259,7 +259,7 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_901001(context, evt)
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 38910) == QuestState.UNFINISHED and evt.param1 == 901001 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 38910) == QuestState.UNFINISHED and evt.param1 == 901001 then
 		return true
 	end
 	return false

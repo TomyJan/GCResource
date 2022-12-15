@@ -1,64 +1,65 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1
 main_id = 1016
-
-sub_ids =
-{
-    101601,
-    101602,
-    101603,
-    101604,
-    101605,
-    101606,
-    101607,
-    101608,
-    101609,
-}
-
-rewind_data = {}
-
-rewind_data["101601"] = 
-{
-    npcs = {
-        {
-            id = 10232,
-            alias = "Npc10232",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q1016ZhongliSpawn",
-            scene_id = 3,
-            data_index = 1,
-        },
-   }
-}
-
-
-quest_data = {}
-
-quest_data["101605"] = 
-{
-     npcs = {
-         {
-             id = 10232,
-             alias = "Npc10232",
-             script = "Actor/Npc/TempNPC",
-             pos = "Q1016ZhongliSpawn",
-             scene_id = 3,
-             data_index = 1,
-         },
-    }
-}
-quest_data["101610"] = 
-{
-     npcs = {
-         {
-             id = 10232,
-             alias = "Npc10232",
-             script = "Actor/Npc/TempNPC",
-             pos = "Q1016ZhongliSpawn",
-             scene_id = 3,
-             data_index = 1,
-         },
-    }
-}
+L0_1 = {}
+L1_1 = 101601
+L2_1 = 101602
+L3_1 = 101603
+L4_1 = 101604
+L5_1 = 101605
+L6_1 = 101606
+L7_1 = 101607
+L8_1 = 101608
+L9_1 = 101609
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10232
+L3_1.alias = "Npc10232"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q1016ZhongliSpawn"
+L3_1.scene_id = 3
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["101601"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10232
+L3_1.alias = "Npc10232"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q1016ZhongliSpawn"
+L3_1.scene_id = 3
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["101605"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10232
+L3_1.alias = "Npc10232"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q1016ZhongliSpawn"
+L3_1.scene_id = 3
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["101610"] = L1_1

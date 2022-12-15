@@ -151,13 +151,13 @@ function action_EVENT_GADGET_STATE_CHANGE_98(context, evt)
 	local c_num_1 = ScriptLib.GetGroupVariableValue(context, "count")
 	local c_num = c_num_1 + 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "count", c_num) then
-	ScriptLib.PrintLog(context, "c_num="..c_num)
+	ScriptLib.PrintLog("c_num="..c_num)
 	    return -1
 	end
 	
 	if c_num == 9 then
 	 if 0 ~= ScriptLib.CreateGadget(context, { config_id = defs.gadget_id_9 }) then
-	ScriptLib.PrintLog(context, "create")
+	ScriptLib.PrintLog("create")
 	  return -1
 	       end
 	end

@@ -1,43 +1,34 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1
 main_id = 318
-
-sub_ids =
-{
-    31801,
-    31802,
-}
-
-rewind_data = {}
-
-rewind_data["31801"] = 
-{
-}
-
-rewind_data["31802"] = 
-{
-}
-
-
-quest_data = {}
-
-quest_data["31801"] = 
-{
-   
-}
-
-quest_data["31802"] = 
-{
-    npcs = {
-        {
-			alias = "Npc10092",
-			script = "Actor/Npc/TempNPC",
-			id = 10092,
-			pos = "Q37301Venti",
-            data_index = 0,
-            scene_id  = 3,
-        },
-    }
-}
+L0_1 = {}
+L1_1 = 31801
+L2_1 = 31802
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["31801"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["31802"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L0_1["31801"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc10092"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 10092
+L3_1.pos = "Q37301Venti"
+L3_1.data_index = 0
+L3_1.scene_id = 3
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["31802"] = L1_1

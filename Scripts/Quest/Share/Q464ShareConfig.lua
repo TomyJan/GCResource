@@ -1,156 +1,141 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1
 main_id = 464
-
-sub_ids =
-{
-    46400,
-    46401,
-    46402,
-    46403,
-    46404,
-    46407,
-    46408,
-    46409,
-}
-
----存放断线重连生成内容，和questdata配的存档点对应
-rewind_data = {}
-
-rewind_data["46405"] = 
-{
-    
-}
-
-rewind_data["46407"] = 
-{
-    npcs = {
-        {
-            id = 1009,
-            alias = "Diluc",
-            script = "Actor/Quest/Q376/Diluc",
-            pos = "Q464Diluc1",
-            scene_id = 3,
-			room_id = 0,
-			data_index = 1,
-        },
---[[         {
-            id = 1218,
-            alias = "Hoffman",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q464Hoffman1",
-            data_index = 0,
-        }, ]]
-    }
-}
-
-rewind_data["46408"] = 
-{
-
-}
-
-rewind_data["46409"] = 
-{
-    npcs = {
-        {
-            id = 1218,
-            alias = "Hoffman",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q464Hoffman2",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 1,
-        },
-    }
-}
----校验用，和任务lua中生成NPC/monster/gadget/item等对应
-quest_data = {}
-
-quest_data["46406"] = 
-{
-    npcs = {
-        {
-            alias = "Diluc",
-            script = "Actor/Quest/Q376/Diluc",
-            id = 1009,
-            pos = "Q464Diluc1",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 1,
-        },
-    }
-}
-
-quest_data["46407"] = 
-{
-    npcs = {
-        {
-            id = 1009,
-            alias = "Diluc",
-            script = "Actor/Quest/Q376/Diluc",
-            pos = "Q301Hidden",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 1,
-        },
-        {
-            id = 1505,
-            alias = "QQ1",
-            script = "Actor/Quest/Q410/Qiuqiu",
-            pos = "Q464Monster6",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 2,
-        },
-        {
-            id = 1506,
-            alias = "QQ2",
-            script = "Actor/Quest/Q410/Qiuqiu",
-            pos = "Q464Monster5",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 3,
-        },
-        {
-            id = 1507,
-            alias = "QQ3",
-            script = "Actor/Quest/Q410/Qiuqiu",
-            pos = "Q464Monster4",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 4,
-        },
-    }
-}
-
-quest_data["46408"] = 
-{
-    npcs = {
-        {
-            alias = "Hoffman",
-            script = "Actor/Npc/TempNPC",
-            id = 1218,
-            pos = "Q464Hoffman2",
-		 	scene_id = 3,
-		 	room_id = 0,
-         	data_index = 1,
-        },
-    }
-}
-
-quest_data["46409"] = 
-{
-    npcs = {
-        {
-            alias = "Hoffman",
-            script = "Actor/Npc/TempNPC",
-            id = 1218,
-            pos = "Q465Hoffman2",
-		 	scene_id = 3,
-		 	room_id = 0,
-         	data_index = 1,
-        },
-    }
-}
+L0_1 = {}
+L1_1 = 46400
+L2_1 = 46401
+L3_1 = 46402
+L4_1 = 46403
+L5_1 = 46404
+L6_1 = 46407
+L7_1 = 46408
+L8_1 = 46409
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["46405"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1009
+L3_1.alias = "Diluc"
+L3_1.script = "Actor/Quest/Q376/Diluc"
+L3_1.pos = "Q464Diluc1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["46407"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["46408"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1218
+L3_1.alias = "Hoffman"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q464Hoffman2"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["46409"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Diluc"
+L3_1.script = "Actor/Quest/Q376/Diluc"
+L3_1.id = 1009
+L3_1.pos = "Q464Diluc1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["46406"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1009
+L3_1.alias = "Diluc"
+L3_1.script = "Actor/Quest/Q376/Diluc"
+L3_1.pos = "Q301Hidden"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1505
+L4_1.alias = "QQ1"
+L4_1.script = "Actor/Quest/Q410/Qiuqiu"
+L4_1.pos = "Q464Monster6"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1506
+L5_1.alias = "QQ2"
+L5_1.script = "Actor/Quest/Q410/Qiuqiu"
+L5_1.pos = "Q464Monster5"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1507
+L6_1.alias = "QQ3"
+L6_1.script = "Actor/Quest/Q410/Qiuqiu"
+L6_1.pos = "Q464Monster4"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["46407"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Hoffman"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 1218
+L3_1.pos = "Q464Hoffman2"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["46408"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Hoffman"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 1218
+L3_1.pos = "Q465Hoffman2"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["46409"] = L1_1

@@ -1,3 +1,509 @@
--- 任务配置数据开始-----------------------------
-
-main_id = 12016sub_ids = {	1201601,	1201602,	1201603,	1201604,	1201605,	1201615,	1201606,	1201607,	1201608,	1201609,	1201610,	1201611,	1201612,	1201613,	1201614,}-- 任务配置数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 父任务执行项数据开始-----------------------------finish_action = {	CLIENT = { },	SERVER = { },}fail_action = {	CLIENT = { },	SERVER = { },}cancel_action = {	CLIENT = { },	SERVER = { },}-- 父任务执行项数据结束------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- Actor模块数据开始---------------------------------- 空-- Actor模块数据结束---------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 文本模块数据开始----------------------------------- 空-- 文本模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 路点模块数据开始----------------------------------- 空-- 路点模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 断线重连生成内容 开始------------------------------ 和questdata配的存档点对应rewind_data = {	["1201601"] = { },	["1201602"] = 	{		npcs = 		{			{				id = 3064,				alias = "Npc3064",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12015Shouwei2",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["1201606"] = { },	["1201607"] = { },	["1201608"] = 	{		npcs = 		{			{				id = 12076,				alias = "Npc12076",				script = "Actor/Npc/TempNPC",				pos = "Q12016ShougunYing2",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3029,				alias = "Npc3029",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12016Kuroda1",				scene_id = 3,				room_id = 0,				data_index = 9,			},		},	},	["1201609"] = 	{		npcs = 		{			{				id = 3029,				alias = "Npc3029",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12016Kuroda1",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["1201610"] = 	{		npcs = 		{			{				id = 3029,				alias = "Npc3029",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12016Kuroda1",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["1201611"] = 	{		npcs = 		{			{				id = 3029,				alias = "Npc3029",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12016Kuroda1",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["1201614"] = 	{		npcs = 		{			{				id = 12076,				alias = "Npc12076",				script = "Actor/Npc/TempNPC",				pos = "Q12016ShougunYing5",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3029,				alias = "Npc3029",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12016Kuroda1",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 12082,				alias = "Npc12082",				script = "Actor/Npc/TempNPC",				pos = "Q12016Book1",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 12083,				alias = "Npc12083",				script = "Actor/Npc/TempNPC",				pos = "Q12016Book1",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 12084,				alias = "Npc12084",				script = "Actor/Npc/TempNPC",				pos = "Q12016Book1",				scene_id = 3,				room_id = 0,				data_index = 5,			},		},	},}-- 断线重连生成内容 结束------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 校验数据 开始------------------------------------ 和任务lua中生成NPC/Monster/Gadget/Item等对应quest_data = {	["1201601"] = 	{		npcs = 		{			{				id = 12076,				alias = "Npc12076",				script = "Actor/Npc/TempNPC",				pos = "Q12016ShougunYing1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3064,				alias = "Npc3064",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12015Shouwei2",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["1201602"] = 	{		npcs = 		{			{				id = 12076,				alias = "Npc12076",				script = "Actor/Npc/TempNPC",				pos = "Q12016ShougunYing1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3006,				alias = "Npc3006",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12016OguraMio1",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3024,				alias = "Npc3024",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12016Rie1",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 3003,				alias = "Npc3003",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12016MikoshiGenichiro1",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 3038,				alias = "Npc3038",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12016AikawaSusumu1",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 3005,				alias = "Npc3005",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12016FuruyaNoboru1",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 3018,				alias = "Npc3018",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12016Matsumoto1",				scene_id = 3,				room_id = 0,				data_index = 7,			},		},	},	["1201603"] = 	{		npcs = 		{			{				id = 12076,				alias = "Npc12076",				script = "Actor/Npc/TempNPC",				pos = "Q12016ShougunYing1",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["1201604"] = 	{		npcs = 		{			{				id = 12076,				alias = "Npc12076",				script = "Actor/Npc/TempNPC",				pos = "Q12016Watch1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3173,				alias = "Npc3173",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12016Milk1",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["1201605"] = 	{		npcs = 		{			{				id = 12076,				alias = "Npc12076",				script = "Actor/Npc/TempNPC",				pos = "Q12016Watch1",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["1201606"] = 	{		npcs = 		{			{				id = 12076,				alias = "Npc12076",				script = "Actor/Npc/TempNPC",				pos = "Q12016ShougunYing4",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["1201607"] = 	{		npcs = 		{			{				id = 12076,				alias = "Npc12076",				script = "Actor/Npc/TempNPC",				pos = "Q12016ShougunYing4",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3029,				alias = "Npc3029",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12016Kuroda1",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["1201608"] = { },	["1201609"] = 	{		npcs = 		{			{				id = 12076,				alias = "Npc12076",				script = "Actor/Npc/TempNPC",				pos = "Q12016ShougunYing2",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["1201610"] = 	{		npcs = 		{			{				id = 12076,				alias = "Npc12076",				script = "Actor/Npc/TempNPC",				pos = "Q12016ShougunYing3",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["1201611"] = 	{		npcs = 		{			{				id = 12076,				alias = "Npc12076",				script = "Actor/Npc/TempNPC",				pos = "Q12016ShougunYing5",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 12082,				alias = "Npc12082",				script = "Actor/Npc/TempNPC",				pos = "Q12016Book1",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 12083,				alias = "Npc12083",				script = "Actor/Npc/TempNPC",				pos = "Q12016Book1",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 12084,				alias = "Npc12084",				script = "Actor/Npc/TempNPC",				pos = "Q12016Book1",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},	},	["1201612"] = 	{		npcs = 		{			{				id = 12076,				alias = "Npc12076",				script = "Actor/Npc/TempNPC",				pos = "Q12016ShougunYing5",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 12082,				alias = "Npc12082",				script = "Actor/Npc/TempNPC",				pos = "Q12016Book1",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 12083,				alias = "Npc12083",				script = "Actor/Npc/TempNPC",				pos = "Q12016Book1",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 12084,				alias = "Npc12084",				script = "Actor/Npc/TempNPC",				pos = "Q12016Book1",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},	},	["1201613"] = 	{		npcs = 		{			{				id = 12076,				alias = "Npc12076",				script = "Actor/Npc/TempNPC",				pos = "Q12016ShougunYing5",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 12082,				alias = "Npc12082",				script = "Actor/Npc/TempNPC",				pos = "Q12016Book1",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 12083,				alias = "Npc12083",				script = "Actor/Npc/TempNPC",				pos = "Q12016Book1",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 12084,				alias = "Npc12084",				script = "Actor/Npc/TempNPC",				pos = "Q12016Book1",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},	},	["1201614"] = { },	["1201615"] = { },}-- 校验数据 结束------------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1, L11_1, L12_1, L13_1, L14_1, L15_1
+main_id = 12016
+L0_1 = {}
+L1_1 = 1201601
+L2_1 = 1201602
+L3_1 = 1201603
+L4_1 = 1201604
+L5_1 = 1201605
+L6_1 = 1201615
+L7_1 = 1201606
+L8_1 = 1201607
+L9_1 = 1201608
+L10_1 = 1201609
+L11_1 = 1201610
+L12_1 = 1201611
+L13_1 = 1201612
+L14_1 = 1201613
+L15_1 = 1201614
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+L0_1[11] = L11_1
+L0_1[12] = L12_1
+L0_1[13] = L13_1
+L0_1[14] = L14_1
+L0_1[15] = L15_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["1201601"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3064
+L3_1.alias = "Npc3064"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q12015Shouwei2"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 3
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1201602"] = L1_1
+L1_1 = {}
+L0_1["1201606"] = L1_1
+L1_1 = {}
+L0_1["1201607"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12076
+L3_1.alias = "Npc12076"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q12016ShougunYing2"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3029
+L4_1.alias = "Npc3029"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q12016Kuroda1"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 9
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["1201608"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3029
+L3_1.alias = "Npc3029"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q12016Kuroda1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1201609"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3029
+L3_1.alias = "Npc3029"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q12016Kuroda1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1201610"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3029
+L3_1.alias = "Npc3029"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q12016Kuroda1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1201611"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12076
+L3_1.alias = "Npc12076"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q12016ShougunYing5"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3029
+L4_1.alias = "Npc3029"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q12016Kuroda1"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 12082
+L5_1.alias = "Npc12082"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q12016Book1"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 12083
+L6_1.alias = "Npc12083"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q12016Book1"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 12084
+L7_1.alias = "Npc12084"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q12016Book1"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L1_1.npcs = L2_1
+L0_1["1201614"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12076
+L3_1.alias = "Npc12076"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q12016ShougunYing1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3064
+L4_1.alias = "Npc3064"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q12015Shouwei2"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["1201601"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12076
+L3_1.alias = "Npc12076"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q12016ShougunYing1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3006
+L4_1.alias = "Npc3006"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q12016OguraMio1"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3024
+L5_1.alias = "Npc3024"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q12016Rie1"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 3003
+L6_1.alias = "Npc3003"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q12016MikoshiGenichiro1"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 3038
+L7_1.alias = "Npc3038"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q12016AikawaSusumu1"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 3005
+L8_1.alias = "Npc3005"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q12016FuruyaNoboru1"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 3018
+L9_1.alias = "Npc3018"
+L9_1.script = "Actor/Npc/NpcFSMBehaviour"
+L9_1.pos = "Q12016Matsumoto1"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L1_1.npcs = L2_1
+L0_1["1201602"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12076
+L3_1.alias = "Npc12076"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q12016ShougunYing1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1201603"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12076
+L3_1.alias = "Npc12076"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q12016Watch1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3173
+L4_1.alias = "Npc3173"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q12016Milk1"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["1201604"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12076
+L3_1.alias = "Npc12076"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q12016Watch1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1201605"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12076
+L3_1.alias = "Npc12076"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q12016ShougunYing4"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1201606"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12076
+L3_1.alias = "Npc12076"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q12016ShougunYing4"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3029
+L4_1.alias = "Npc3029"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q12016Kuroda1"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["1201607"] = L1_1
+L1_1 = {}
+L0_1["1201608"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12076
+L3_1.alias = "Npc12076"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q12016ShougunYing2"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1201609"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12076
+L3_1.alias = "Npc12076"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q12016ShougunYing3"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1201610"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12076
+L3_1.alias = "Npc12076"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q12016ShougunYing5"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 12082
+L4_1.alias = "Npc12082"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q12016Book1"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 12083
+L5_1.alias = "Npc12083"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q12016Book1"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 12084
+L6_1.alias = "Npc12084"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q12016Book1"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["1201611"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12076
+L3_1.alias = "Npc12076"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q12016ShougunYing5"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 12082
+L4_1.alias = "Npc12082"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q12016Book1"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 12083
+L5_1.alias = "Npc12083"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q12016Book1"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 12084
+L6_1.alias = "Npc12084"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q12016Book1"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["1201612"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12076
+L3_1.alias = "Npc12076"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q12016ShougunYing5"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 12082
+L4_1.alias = "Npc12082"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q12016Book1"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 12083
+L5_1.alias = "Npc12083"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q12016Book1"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 12084
+L6_1.alias = "Npc12084"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q12016Book1"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["1201613"] = L1_1
+L1_1 = {}
+L0_1["1201614"] = L1_1
+L1_1 = {}
+L0_1["1201615"] = L1_1
+quest_data = L0_1

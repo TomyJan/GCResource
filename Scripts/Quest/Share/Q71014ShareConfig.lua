@@ -1,3 +1,2608 @@
--- 任务配置数据开始-----------------------------
-
-main_id = 71014sub_ids = {	7101401,	7101402,	7101403,	7101404,	7101405,	7101406,	7101407,	7101408,	7101409,	7101410,	7101411,	7101412,	7101413,	7101414,	7101415,}-- 任务配置数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 父任务执行项数据开始-----------------------------finish_action = {	CLIENT = { },	SERVER = 	{		QUEST_EXEC_DEL_PACK_ITEM = 		{			{ "100600", "1", },			{ "100595", "1", },		},	},}fail_action = {	CLIENT = { },	SERVER = { },}cancel_action = {	CLIENT = { },	SERVER = { },}-- 父任务执行项数据结束------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- Actor模块数据开始---------------------------------- 空-- Actor模块数据结束---------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 文本模块数据开始----------------------------------- 空-- 文本模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 路点模块数据开始----------------------------------- 空-- 路点模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 断线重连生成内容 开始------------------------------ 和questdata配的存档点对应rewind_data = {	["7101401"] = 	{		npcs = 		{			{				id = 2447,				alias = "Npc2447",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Cuier",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 2037,				alias = "Npc2037",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Chaoxi",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 2076,				alias = "Npc2076",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Sisi",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 2443,				alias = "Npc2443",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Guanhong",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 2446,				alias = "Npc2446",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71014_Lijiulang",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 2445,				alias = "Npc2445",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Luofeng",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 2444,				alias = "Npc2444",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Makeximu",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 2448,				alias = "Npc2448",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Qiuge",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 2442,				alias = "Npc2442",				script = "Actor/Npc/TempNPC",				pos = "Q71014_luoxia",				scene_id = 3,				room_id = 0,				data_index = 9,			},		},	},	["7101402"] = 	{		npcs = 		{			{				id = 2447,				alias = "Npc2447",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Cuier",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 2037,				alias = "Npc2037",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Chaoxi",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 2076,				alias = "Npc2076",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Sisi",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 2443,				alias = "Npc2443",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Guanhong",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 2446,				alias = "Npc2446",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71014_Lijiulang",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 2445,				alias = "Npc2445",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Luofeng",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 2444,				alias = "Npc2444",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Makeximu",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 2448,				alias = "Npc2448",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Qiuge",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 2442,				alias = "Npc2442",				script = "Actor/Npc/TempNPC",				pos = "Q71014_luoxia",				scene_id = 3,				room_id = 0,				data_index = 9,			},		},	},	["7101403"] = 	{		npcs = 		{			{				id = 2447,				alias = "Npc2447",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Cuier",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 2037,				alias = "Npc2037",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Chaoxi",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 2076,				alias = "Npc2076",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Sisi",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 2443,				alias = "Npc2443",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Guanhong",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 2446,				alias = "Npc2446",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71014_Lijiulang",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 2445,				alias = "Npc2445",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Luofeng",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 2444,				alias = "Npc2444",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Makeximu",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 2448,				alias = "Npc2448",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Qiuge",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 2442,				alias = "Npc2442",				script = "Actor/Npc/TempNPC",				pos = "Q71014_luoxia",				scene_id = 3,				room_id = 0,				data_index = 9,			},		},	},	["7101404"] = 	{		npcs = 		{			{				id = 2447,				alias = "Npc2447",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Cuier",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 2037,				alias = "Npc2037",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Chaoxi",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 2076,				alias = "Npc2076",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Sisi",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 2443,				alias = "Npc2443",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Guanhong",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 2446,				alias = "Npc2446",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71014_Lijiulang",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 2445,				alias = "Npc2445",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Luofeng",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 2444,				alias = "Npc2444",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Makeximu",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 2448,				alias = "Npc2448",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Qiuge",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 2442,				alias = "Npc2442",				script = "Actor/Npc/TempNPC",				pos = "Q71014_luoxia",				scene_id = 3,				room_id = 0,				data_index = 9,			},		},	},	["7101405"] = 	{		npcs = 		{			{				id = 2447,				alias = "Npc2447",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Cuier",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 2037,				alias = "Npc2037",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Chaoxi",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 2076,				alias = "Npc2076",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Sisi",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 2443,				alias = "Npc2443",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Guanhong",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 2446,				alias = "Npc2446",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71014_Lijiulang",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 2445,				alias = "Npc2445",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Luofeng",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 2444,				alias = "Npc2444",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Makeximu",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 2448,				alias = "Npc2448",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Qiuge",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 2442,				alias = "Npc2442",				script = "Actor/Npc/TempNPC",				pos = "Q71014_luoxia",				scene_id = 3,				room_id = 0,				data_index = 9,			},		},	},	["7101406"] = 	{		npcs = 		{			{				id = 2447,				alias = "Npc2447",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Cuier",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 2037,				alias = "Npc2037",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Chaoxi",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 2076,				alias = "Npc2076",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Sisi",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 2443,				alias = "Npc2443",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Guanhong",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 2446,				alias = "Npc2446",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71014_Lijiulang",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 2445,				alias = "Npc2445",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Luofeng",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 2444,				alias = "Npc2444",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Makeximu",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 2448,				alias = "Npc2448",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Qiuge",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 2442,				alias = "Npc2442",				script = "Actor/Npc/TempNPC",				pos = "Q71014_luoxia",				scene_id = 3,				room_id = 0,				data_index = 9,			},		},	},	["7101407"] = 	{		npcs = 		{			{				id = 2447,				alias = "Npc2447",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Cuier",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 2037,				alias = "Npc2037",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Chaoxi",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 2076,				alias = "Npc2076",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Sisi",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 2443,				alias = "Npc2443",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Guanhong",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 2446,				alias = "Npc2446",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71014_Lijiulang",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 2445,				alias = "Npc2445",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Luofeng",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 2444,				alias = "Npc2444",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Makeximu",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 2448,				alias = "Npc2448",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Qiuge",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 2442,				alias = "Npc2442",				script = "Actor/Npc/TempNPC",				pos = "Q71014_luoxia",				scene_id = 3,				room_id = 0,				data_index = 9,			},		},	},	["7101408"] = 	{		npcs = 		{			{				id = 2447,				alias = "Npc2447",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Cuier",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 2037,				alias = "Npc2037",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Chaoxi",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 2076,				alias = "Npc2076",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Sisi",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 2443,				alias = "Npc2443",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Guanhong",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 2446,				alias = "Npc2446",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71014_Lijiulang",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 2445,				alias = "Npc2445",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Luofeng",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 2444,				alias = "Npc2444",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Makeximu",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 2448,				alias = "Npc2448",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Qiuge",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 2442,				alias = "Npc2442",				script = "Actor/Npc/TempNPC",				pos = "Q71014_luoxia",				scene_id = 3,				room_id = 0,				data_index = 9,			},		},	},	["7101409"] = 	{		npcs = 		{			{				id = 2447,				alias = "Npc2447",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Cuier",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 2037,				alias = "Npc2037",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Chaoxi",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 2076,				alias = "Npc2076",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Sisi",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 2443,				alias = "Npc2443",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Guanhong",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 2446,				alias = "Npc2446",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71014_Lijiulang",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 2445,				alias = "Npc2445",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Luofeng",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 2444,				alias = "Npc2444",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Makeximu",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 2448,				alias = "Npc2448",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Qiuge",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 2442,				alias = "Npc2442",				script = "Actor/Npc/TempNPC",				pos = "Q71014_luoxia",				scene_id = 3,				room_id = 0,				data_index = 9,			},		},	},	["7101410"] = 	{		npcs = 		{			{				id = 2447,				alias = "Npc2447",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Cuier",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 2037,				alias = "Npc2037",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Chaoxi",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 2076,				alias = "Npc2076",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Sisi",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 2443,				alias = "Npc2443",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Guanhong",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 2446,				alias = "Npc2446",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71014_Lijiulang",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 2445,				alias = "Npc2445",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Luofeng",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 2444,				alias = "Npc2444",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Makeximu",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 2448,				alias = "Npc2448",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Qiuge",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 2442,				alias = "Npc2442",				script = "Actor/Npc/TempNPC",				pos = "Q71014_luoxia",				scene_id = 3,				room_id = 0,				data_index = 9,			},		},	},	["7101411"] = 	{		npcs = 		{			{				id = 2447,				alias = "Npc2447",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Cuier",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 2037,				alias = "Npc2037",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Chaoxi",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 2076,				alias = "Npc2076",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Sisi",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 2443,				alias = "Npc2443",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Guanhong",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 2446,				alias = "Npc2446",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71014_Lijiulang",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 2445,				alias = "Npc2445",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Luofeng",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 2444,				alias = "Npc2444",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Makeximu",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 2448,				alias = "Npc2448",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Qiuge",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 2442,				alias = "Npc2442",				script = "Actor/Npc/TempNPC",				pos = "Q71014_luoxia",				scene_id = 3,				room_id = 0,				data_index = 9,			},		},	},	["7101412"] = 	{		npcs = 		{			{				id = 2447,				alias = "Npc2447",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Cuier",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 2037,				alias = "Npc2037",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Chaoxi",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 2076,				alias = "Npc2076",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Sisi",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 2443,				alias = "Npc2443",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Guanhong",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 2446,				alias = "Npc2446",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71014_Lijiulang",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 2445,				alias = "Npc2445",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Luofeng",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 2444,				alias = "Npc2444",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Makeximu",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 2448,				alias = "Npc2448",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Qiuge",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 2442,				alias = "Npc2442",				script = "Actor/Npc/TempNPC",				pos = "Q71014_luoxia",				scene_id = 3,				room_id = 0,				data_index = 9,			},		},	},	["7101413"] = 	{		npcs = 		{			{				id = 2447,				alias = "Npc2447",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Cuier",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 2037,				alias = "Npc2037",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Chaoxi",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 2076,				alias = "Npc2076",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Sisi",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 2443,				alias = "Npc2443",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Guanhong",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 2446,				alias = "Npc2446",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71014_Lijiulang",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 2445,				alias = "Npc2445",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Luofeng",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 2444,				alias = "Npc2444",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Makeximu",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 2448,				alias = "Npc2448",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Qiuge",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 2442,				alias = "Npc2442",				script = "Actor/Npc/TempNPC",				pos = "Q71014_luoxia",				scene_id = 3,				room_id = 0,				data_index = 9,			},		},	},	["7101414"] = 	{		npcs = 		{			{				id = 2447,				alias = "Npc2447",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Cuier",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 2037,				alias = "Npc2037",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Chaoxi",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 2076,				alias = "Npc2076",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Sisi",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 2443,				alias = "Npc2443",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Guanhong",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 2446,				alias = "Npc2446",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71014_Lijiulang",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 2445,				alias = "Npc2445",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Luofeng",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 2444,				alias = "Npc2444",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Makeximu",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 2448,				alias = "Npc2448",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Qiuge",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 2442,				alias = "Npc2442",				script = "Actor/Npc/TempNPC",				pos = "Q71014_luoxia",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 2450,				alias = "Npc2450",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Pinghai",				scene_id = 3,				room_id = 0,				data_index = 10,			},		},	},	["7101415"] = { },}-- 断线重连生成内容 结束------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 校验数据 开始------------------------------------ 和任务lua中生成NPC/Monster/Gadget/Item等对应quest_data = {	["7101401"] = 	{		npcs = 		{			{				id = 2447,				alias = "Npc2447",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Cuier",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 2037,				alias = "Npc2037",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Chaoxi",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 2076,				alias = "Npc2076",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Sisi",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 2443,				alias = "Npc2443",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Guanhong",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 2446,				alias = "Npc2446",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71014_Lijiulang",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 2445,				alias = "Npc2445",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Luofeng",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 2444,				alias = "Npc2444",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Makeximu",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 2448,				alias = "Npc2448",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Qiuge",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 2442,				alias = "Npc2442",				script = "Actor/Npc/TempNPC",				pos = "Q71014_luoxia",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 2450,				alias = "Npc2450",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Pinghai",				scene_id = 3,				room_id = 0,				data_index = 10,			},		},		transmit_points = 		{			{				point_id = 1,				scene_id = 3,				pos = "Q71014_Start",			},			{				point_id = 2,				scene_id = 3,				pos = "Q71014_Player",			},		},	},	["7101402"] = 	{		npcs = 		{			{				id = 2447,				alias = "Npc2447",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Cuier",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 2037,				alias = "Npc2037",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Chaoxi",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 2076,				alias = "Npc2076",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Sisi",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 2443,				alias = "Npc2443",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Guanhong",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 2446,				alias = "Npc2446",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71014_Lijiulang",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 2445,				alias = "Npc2445",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Luofeng",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 2444,				alias = "Npc2444",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Makeximu",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 2448,				alias = "Npc2448",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Qiuge",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 2442,				alias = "Npc2442",				script = "Actor/Npc/TempNPC",				pos = "Q71014_luoxia",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 2450,				alias = "Npc2450",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Pinghai",				scene_id = 3,				room_id = 0,				data_index = 10,			},		},	},	["7101403"] = 	{		npcs = 		{			{				id = 2447,				alias = "Npc2447",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Cuier",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 2037,				alias = "Npc2037",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Chaoxi",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 2076,				alias = "Npc2076",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Sisi",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 2443,				alias = "Npc2443",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Guanhong",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 2446,				alias = "Npc2446",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71014_Lijiulang",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 2445,				alias = "Npc2445",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Luofeng",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 2444,				alias = "Npc2444",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Makeximu",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 2448,				alias = "Npc2448",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Qiuge",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 2442,				alias = "Npc2442",				script = "Actor/Npc/TempNPC",				pos = "Q71014_luoxia",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 2450,				alias = "Npc2450",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Pinghai",				scene_id = 3,				room_id = 0,				data_index = 10,			},		},	},	["7101404"] = 	{		npcs = 		{			{				id = 2447,				alias = "Npc2447",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Cuier",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 2037,				alias = "Npc2037",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Chaoxi",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 2076,				alias = "Npc2076",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Sisi",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 2443,				alias = "Npc2443",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Guanhong",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 2446,				alias = "Npc2446",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71014_Lijiulang",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 2445,				alias = "Npc2445",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Luofeng",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 2444,				alias = "Npc2444",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Makeximu",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 2448,				alias = "Npc2448",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Qiuge",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 2442,				alias = "Npc2442",				script = "Actor/Npc/TempNPC",				pos = "Q71014_luoxia",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 2450,				alias = "Npc2450",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Pinghai",				scene_id = 3,				room_id = 0,				data_index = 10,			},		},	},	["7101405"] = 	{		npcs = 		{			{				id = 2447,				alias = "Npc2447",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Cuier",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 2037,				alias = "Npc2037",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Chaoxi",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 2076,				alias = "Npc2076",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Sisi",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 2443,				alias = "Npc2443",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Guanhong",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 2446,				alias = "Npc2446",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71014_Lijiulang",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 2445,				alias = "Npc2445",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Luofeng",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 2444,				alias = "Npc2444",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Makeximu",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 2448,				alias = "Npc2448",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Qiuge",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 2442,				alias = "Npc2442",				script = "Actor/Npc/TempNPC",				pos = "Q71014_luoxia",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 2450,				alias = "Npc2450",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Pinghai",				scene_id = 3,				room_id = 0,				data_index = 10,			},		},	},	["7101406"] = 	{		npcs = 		{			{				id = 2447,				alias = "Npc2447",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Cuier",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 2037,				alias = "Npc2037",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Chaoxi",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 2076,				alias = "Npc2076",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Sisi",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 2443,				alias = "Npc2443",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Guanhong",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 2446,				alias = "Npc2446",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71014_Lijiulang",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 2445,				alias = "Npc2445",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Luofeng",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 2444,				alias = "Npc2444",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Makeximu",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 2448,				alias = "Npc2448",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Qiuge",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 2442,				alias = "Npc2442",				script = "Actor/Npc/TempNPC",				pos = "Q71014_luoxia",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 2450,				alias = "Npc2450",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Pinghai",				scene_id = 3,				room_id = 0,				data_index = 10,			},		},	},	["7101407"] = 	{		npcs = 		{			{				id = 2447,				alias = "Npc2447",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Cuier",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 2037,				alias = "Npc2037",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Chaoxi",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 2076,				alias = "Npc2076",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Sisi",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 2443,				alias = "Npc2443",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Guanhong",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 2446,				alias = "Npc2446",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71014_Lijiulang",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 2445,				alias = "Npc2445",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Luofeng",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 2444,				alias = "Npc2444",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Makeximu",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 2448,				alias = "Npc2448",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Qiuge",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 2442,				alias = "Npc2442",				script = "Actor/Npc/TempNPC",				pos = "Q71014_luoxia",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 2450,				alias = "Npc2450",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Pinghai",				scene_id = 3,				room_id = 0,				data_index = 10,			},		},	},	["7101408"] = 	{		npcs = 		{			{				id = 2447,				alias = "Npc2447",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Cuier",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 2037,				alias = "Npc2037",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Chaoxi",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 2076,				alias = "Npc2076",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Sisi",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 2443,				alias = "Npc2443",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Guanhong",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 2446,				alias = "Npc2446",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71014_Lijiulang",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 2445,				alias = "Npc2445",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Luofeng",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 2444,				alias = "Npc2444",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Makeximu",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 2448,				alias = "Npc2448",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Qiuge",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 2442,				alias = "Npc2442",				script = "Actor/Npc/TempNPC",				pos = "Q71014_luoxia",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 2450,				alias = "Npc2450",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Pinghai",				scene_id = 3,				room_id = 0,				data_index = 10,			},		},	},	["7101409"] = 	{		npcs = 		{			{				id = 2447,				alias = "Npc2447",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Cuier",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 2037,				alias = "Npc2037",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Chaoxi",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 2076,				alias = "Npc2076",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Sisi",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 2443,				alias = "Npc2443",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Guanhong",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 2446,				alias = "Npc2446",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71014_Lijiulang",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 2445,				alias = "Npc2445",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Luofeng",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 2444,				alias = "Npc2444",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Makeximu",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 2448,				alias = "Npc2448",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Qiuge",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 2442,				alias = "Npc2442",				script = "Actor/Npc/TempNPC",				pos = "Q71014_luoxia",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 2450,				alias = "Npc2450",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Pinghai",				scene_id = 3,				room_id = 0,				data_index = 10,			},		},	},	["7101410"] = 	{		npcs = 		{			{				id = 2447,				alias = "Npc2447",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Cuier",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 2037,				alias = "Npc2037",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Chaoxi",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 2076,				alias = "Npc2076",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Sisi",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 2443,				alias = "Npc2443",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Guanhong",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 2446,				alias = "Npc2446",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71014_Lijiulang",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 2445,				alias = "Npc2445",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Luofeng",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 2444,				alias = "Npc2444",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Makeximu",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 2448,				alias = "Npc2448",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Qiuge",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 2442,				alias = "Npc2442",				script = "Actor/Npc/TempNPC",				pos = "Q71014_luoxia",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 2450,				alias = "Npc2450",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Pinghai",				scene_id = 3,				room_id = 0,				data_index = 10,			},		},	},	["7101411"] = 	{		npcs = 		{			{				id = 2447,				alias = "Npc2447",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Cuier",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 2037,				alias = "Npc2037",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Chaoxi",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 2076,				alias = "Npc2076",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Sisi",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 2443,				alias = "Npc2443",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Guanhong",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 2446,				alias = "Npc2446",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71014_Lijiulang",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 2445,				alias = "Npc2445",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Luofeng",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 2444,				alias = "Npc2444",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Makeximu",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 2448,				alias = "Npc2448",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Qiuge",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 2442,				alias = "Npc2442",				script = "Actor/Npc/TempNPC",				pos = "Q71014_luoxia",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 2450,				alias = "Npc2450",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Pinghai",				scene_id = 3,				room_id = 0,				data_index = 10,			},		},	},	["7101412"] = 	{		npcs = 		{			{				id = 2447,				alias = "Npc2447",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Cuier",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 2037,				alias = "Npc2037",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Chaoxi",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 2076,				alias = "Npc2076",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Sisi",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 2443,				alias = "Npc2443",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Guanhong",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 2446,				alias = "Npc2446",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71014_Lijiulang",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 2445,				alias = "Npc2445",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Luofeng",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 2444,				alias = "Npc2444",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Makeximu",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 2448,				alias = "Npc2448",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Qiuge",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 2442,				alias = "Npc2442",				script = "Actor/Npc/TempNPC",				pos = "Q71014_luoxia",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 2450,				alias = "Npc2450",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Pinghai",				scene_id = 3,				room_id = 0,				data_index = 10,			},		},	},	["7101413"] = 	{		npcs = 		{			{				id = 2447,				alias = "Npc2447",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Cuier",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 2037,				alias = "Npc2037",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Chaoxi",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 2076,				alias = "Npc2076",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Sisi",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 2443,				alias = "Npc2443",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Guanhong",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 2446,				alias = "Npc2446",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71014_Lijiulang",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 2445,				alias = "Npc2445",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Luofeng",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 2444,				alias = "Npc2444",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Makeximu",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 2448,				alias = "Npc2448",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Qiuge",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 2442,				alias = "Npc2442",				script = "Actor/Npc/TempNPC",				pos = "Q71014_luoxia",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 2450,				alias = "Npc2450",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Pinghai",				scene_id = 3,				room_id = 0,				data_index = 10,			},		},	},	["7101414"] = 	{		npcs = 		{			{				id = 2447,				alias = "Npc2447",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Cuier",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 2037,				alias = "Npc2037",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Chaoxi",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 2076,				alias = "Npc2076",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Sisi",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 2443,				alias = "Npc2443",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Guanhong",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 2446,				alias = "Npc2446",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71014_Lijiulang",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 2445,				alias = "Npc2445",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Luofeng",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 2444,				alias = "Npc2444",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Makeximu",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 2448,				alias = "Npc2448",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Qiuge",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 2442,				alias = "Npc2442",				script = "Actor/Npc/TempNPC",				pos = "Q71014_luoxia",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 2450,				alias = "Npc2450",				script = "Actor/Npc/TempNPC",				pos = "Q71014_Pinghai",				scene_id = 3,				room_id = 0,				data_index = 10,			},		},	},	["7101415"] = 	{		transmit_points = 		{			{				point_id = 3,				scene_id = 3,				pos = "Q71014_End",			},		},	},}-- 校验数据 结束------------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1, L11_1, L12_1, L13_1, L14_1, L15_1
+main_id = 71014
+L0_1 = {}
+L1_1 = 7101401
+L2_1 = 7101402
+L3_1 = 7101403
+L4_1 = 7101404
+L5_1 = 7101405
+L6_1 = 7101406
+L7_1 = 7101407
+L8_1 = 7101408
+L9_1 = 7101409
+L10_1 = 7101410
+L11_1 = 7101411
+L12_1 = 7101412
+L13_1 = 7101413
+L14_1 = 7101414
+L15_1 = 7101415
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+L0_1[11] = L11_1
+L0_1[12] = L12_1
+L0_1[13] = L13_1
+L0_1[14] = L14_1
+L0_1[15] = L15_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L4_1 = "100600"
+L5_1 = "1"
+L3_1[1] = L4_1
+L3_1[2] = L5_1
+L4_1 = {}
+L5_1 = "100595"
+L6_1 = "1"
+L4_1[1] = L5_1
+L4_1[2] = L6_1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.QUEST_EXEC_DEL_PACK_ITEM = L2_1
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2447
+L3_1.alias = "Npc2447"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q71014_Cuier"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2037
+L4_1.alias = "Npc2037"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q71014_Chaoxi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 2076
+L5_1.alias = "Npc2076"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q71014_Sisi"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 2443
+L6_1.alias = "Npc2443"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q71014_Guanhong"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 2446
+L7_1.alias = "Npc2446"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71014_Lijiulang"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 2445
+L8_1.alias = "Npc2445"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q71014_Luofeng"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 2444
+L9_1.alias = "Npc2444"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q71014_Makeximu"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 2448
+L10_1.alias = "Npc2448"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q71014_Qiuge"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 2442
+L11_1.alias = "Npc2442"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q71014_luoxia"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L1_1.npcs = L2_1
+L0_1["7101401"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2447
+L3_1.alias = "Npc2447"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q71014_Cuier"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2037
+L4_1.alias = "Npc2037"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q71014_Chaoxi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 2076
+L5_1.alias = "Npc2076"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q71014_Sisi"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 2443
+L6_1.alias = "Npc2443"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q71014_Guanhong"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 2446
+L7_1.alias = "Npc2446"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71014_Lijiulang"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 2445
+L8_1.alias = "Npc2445"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q71014_Luofeng"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 2444
+L9_1.alias = "Npc2444"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q71014_Makeximu"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 2448
+L10_1.alias = "Npc2448"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q71014_Qiuge"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 2442
+L11_1.alias = "Npc2442"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q71014_luoxia"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L1_1.npcs = L2_1
+L0_1["7101402"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2447
+L3_1.alias = "Npc2447"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q71014_Cuier"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2037
+L4_1.alias = "Npc2037"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q71014_Chaoxi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 2076
+L5_1.alias = "Npc2076"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q71014_Sisi"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 2443
+L6_1.alias = "Npc2443"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q71014_Guanhong"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 2446
+L7_1.alias = "Npc2446"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71014_Lijiulang"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 2445
+L8_1.alias = "Npc2445"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q71014_Luofeng"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 2444
+L9_1.alias = "Npc2444"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q71014_Makeximu"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 2448
+L10_1.alias = "Npc2448"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q71014_Qiuge"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 2442
+L11_1.alias = "Npc2442"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q71014_luoxia"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L1_1.npcs = L2_1
+L0_1["7101403"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2447
+L3_1.alias = "Npc2447"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q71014_Cuier"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2037
+L4_1.alias = "Npc2037"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q71014_Chaoxi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 2076
+L5_1.alias = "Npc2076"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q71014_Sisi"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 2443
+L6_1.alias = "Npc2443"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q71014_Guanhong"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 2446
+L7_1.alias = "Npc2446"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71014_Lijiulang"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 2445
+L8_1.alias = "Npc2445"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q71014_Luofeng"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 2444
+L9_1.alias = "Npc2444"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q71014_Makeximu"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 2448
+L10_1.alias = "Npc2448"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q71014_Qiuge"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 2442
+L11_1.alias = "Npc2442"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q71014_luoxia"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L1_1.npcs = L2_1
+L0_1["7101404"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2447
+L3_1.alias = "Npc2447"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q71014_Cuier"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2037
+L4_1.alias = "Npc2037"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q71014_Chaoxi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 2076
+L5_1.alias = "Npc2076"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q71014_Sisi"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 2443
+L6_1.alias = "Npc2443"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q71014_Guanhong"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 2446
+L7_1.alias = "Npc2446"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71014_Lijiulang"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 2445
+L8_1.alias = "Npc2445"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q71014_Luofeng"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 2444
+L9_1.alias = "Npc2444"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q71014_Makeximu"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 2448
+L10_1.alias = "Npc2448"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q71014_Qiuge"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 2442
+L11_1.alias = "Npc2442"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q71014_luoxia"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L1_1.npcs = L2_1
+L0_1["7101405"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2447
+L3_1.alias = "Npc2447"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q71014_Cuier"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2037
+L4_1.alias = "Npc2037"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q71014_Chaoxi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 2076
+L5_1.alias = "Npc2076"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q71014_Sisi"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 2443
+L6_1.alias = "Npc2443"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q71014_Guanhong"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 2446
+L7_1.alias = "Npc2446"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71014_Lijiulang"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 2445
+L8_1.alias = "Npc2445"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q71014_Luofeng"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 2444
+L9_1.alias = "Npc2444"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q71014_Makeximu"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 2448
+L10_1.alias = "Npc2448"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q71014_Qiuge"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 2442
+L11_1.alias = "Npc2442"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q71014_luoxia"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L1_1.npcs = L2_1
+L0_1["7101406"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2447
+L3_1.alias = "Npc2447"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q71014_Cuier"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2037
+L4_1.alias = "Npc2037"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q71014_Chaoxi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 2076
+L5_1.alias = "Npc2076"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q71014_Sisi"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 2443
+L6_1.alias = "Npc2443"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q71014_Guanhong"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 2446
+L7_1.alias = "Npc2446"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71014_Lijiulang"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 2445
+L8_1.alias = "Npc2445"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q71014_Luofeng"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 2444
+L9_1.alias = "Npc2444"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q71014_Makeximu"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 2448
+L10_1.alias = "Npc2448"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q71014_Qiuge"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 2442
+L11_1.alias = "Npc2442"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q71014_luoxia"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L1_1.npcs = L2_1
+L0_1["7101407"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2447
+L3_1.alias = "Npc2447"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q71014_Cuier"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2037
+L4_1.alias = "Npc2037"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q71014_Chaoxi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 2076
+L5_1.alias = "Npc2076"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q71014_Sisi"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 2443
+L6_1.alias = "Npc2443"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q71014_Guanhong"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 2446
+L7_1.alias = "Npc2446"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71014_Lijiulang"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 2445
+L8_1.alias = "Npc2445"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q71014_Luofeng"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 2444
+L9_1.alias = "Npc2444"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q71014_Makeximu"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 2448
+L10_1.alias = "Npc2448"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q71014_Qiuge"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 2442
+L11_1.alias = "Npc2442"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q71014_luoxia"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L1_1.npcs = L2_1
+L0_1["7101408"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2447
+L3_1.alias = "Npc2447"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q71014_Cuier"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2037
+L4_1.alias = "Npc2037"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q71014_Chaoxi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 2076
+L5_1.alias = "Npc2076"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q71014_Sisi"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 2443
+L6_1.alias = "Npc2443"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q71014_Guanhong"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 2446
+L7_1.alias = "Npc2446"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71014_Lijiulang"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 2445
+L8_1.alias = "Npc2445"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q71014_Luofeng"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 2444
+L9_1.alias = "Npc2444"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q71014_Makeximu"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 2448
+L10_1.alias = "Npc2448"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q71014_Qiuge"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 2442
+L11_1.alias = "Npc2442"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q71014_luoxia"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L1_1.npcs = L2_1
+L0_1["7101409"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2447
+L3_1.alias = "Npc2447"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q71014_Cuier"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2037
+L4_1.alias = "Npc2037"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q71014_Chaoxi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 2076
+L5_1.alias = "Npc2076"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q71014_Sisi"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 2443
+L6_1.alias = "Npc2443"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q71014_Guanhong"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 2446
+L7_1.alias = "Npc2446"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71014_Lijiulang"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 2445
+L8_1.alias = "Npc2445"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q71014_Luofeng"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 2444
+L9_1.alias = "Npc2444"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q71014_Makeximu"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 2448
+L10_1.alias = "Npc2448"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q71014_Qiuge"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 2442
+L11_1.alias = "Npc2442"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q71014_luoxia"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L1_1.npcs = L2_1
+L0_1["7101410"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2447
+L3_1.alias = "Npc2447"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q71014_Cuier"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2037
+L4_1.alias = "Npc2037"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q71014_Chaoxi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 2076
+L5_1.alias = "Npc2076"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q71014_Sisi"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 2443
+L6_1.alias = "Npc2443"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q71014_Guanhong"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 2446
+L7_1.alias = "Npc2446"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71014_Lijiulang"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 2445
+L8_1.alias = "Npc2445"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q71014_Luofeng"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 2444
+L9_1.alias = "Npc2444"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q71014_Makeximu"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 2448
+L10_1.alias = "Npc2448"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q71014_Qiuge"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 2442
+L11_1.alias = "Npc2442"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q71014_luoxia"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L1_1.npcs = L2_1
+L0_1["7101411"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2447
+L3_1.alias = "Npc2447"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q71014_Cuier"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2037
+L4_1.alias = "Npc2037"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q71014_Chaoxi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 2076
+L5_1.alias = "Npc2076"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q71014_Sisi"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 2443
+L6_1.alias = "Npc2443"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q71014_Guanhong"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 2446
+L7_1.alias = "Npc2446"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71014_Lijiulang"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 2445
+L8_1.alias = "Npc2445"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q71014_Luofeng"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 2444
+L9_1.alias = "Npc2444"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q71014_Makeximu"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 2448
+L10_1.alias = "Npc2448"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q71014_Qiuge"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 2442
+L11_1.alias = "Npc2442"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q71014_luoxia"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L1_1.npcs = L2_1
+L0_1["7101412"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2447
+L3_1.alias = "Npc2447"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q71014_Cuier"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2037
+L4_1.alias = "Npc2037"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q71014_Chaoxi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 2076
+L5_1.alias = "Npc2076"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q71014_Sisi"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 2443
+L6_1.alias = "Npc2443"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q71014_Guanhong"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 2446
+L7_1.alias = "Npc2446"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71014_Lijiulang"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 2445
+L8_1.alias = "Npc2445"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q71014_Luofeng"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 2444
+L9_1.alias = "Npc2444"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q71014_Makeximu"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 2448
+L10_1.alias = "Npc2448"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q71014_Qiuge"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 2442
+L11_1.alias = "Npc2442"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q71014_luoxia"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L1_1.npcs = L2_1
+L0_1["7101413"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2447
+L3_1.alias = "Npc2447"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q71014_Cuier"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2037
+L4_1.alias = "Npc2037"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q71014_Chaoxi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 2076
+L5_1.alias = "Npc2076"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q71014_Sisi"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 2443
+L6_1.alias = "Npc2443"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q71014_Guanhong"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 2446
+L7_1.alias = "Npc2446"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71014_Lijiulang"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 2445
+L8_1.alias = "Npc2445"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q71014_Luofeng"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 2444
+L9_1.alias = "Npc2444"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q71014_Makeximu"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 2448
+L10_1.alias = "Npc2448"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q71014_Qiuge"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 2442
+L11_1.alias = "Npc2442"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q71014_luoxia"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 2450
+L12_1.alias = "Npc2450"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q71014_Pinghai"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L1_1.npcs = L2_1
+L0_1["7101414"] = L1_1
+L1_1 = {}
+L0_1["7101415"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2447
+L3_1.alias = "Npc2447"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q71014_Cuier"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2037
+L4_1.alias = "Npc2037"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q71014_Chaoxi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 2076
+L5_1.alias = "Npc2076"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q71014_Sisi"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 2443
+L6_1.alias = "Npc2443"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q71014_Guanhong"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 2446
+L7_1.alias = "Npc2446"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71014_Lijiulang"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 2445
+L8_1.alias = "Npc2445"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q71014_Luofeng"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 2444
+L9_1.alias = "Npc2444"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q71014_Makeximu"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 2448
+L10_1.alias = "Npc2448"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q71014_Qiuge"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 2442
+L11_1.alias = "Npc2442"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q71014_luoxia"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 2450
+L12_1.alias = "Npc2450"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q71014_Pinghai"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q71014_Start"
+L4_1 = {}
+L4_1.point_id = 2
+L4_1.scene_id = 3
+L4_1.pos = "Q71014_Player"
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.transmit_points = L2_1
+L0_1["7101401"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2447
+L3_1.alias = "Npc2447"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q71014_Cuier"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2037
+L4_1.alias = "Npc2037"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q71014_Chaoxi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 2076
+L5_1.alias = "Npc2076"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q71014_Sisi"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 2443
+L6_1.alias = "Npc2443"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q71014_Guanhong"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 2446
+L7_1.alias = "Npc2446"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71014_Lijiulang"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 2445
+L8_1.alias = "Npc2445"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q71014_Luofeng"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 2444
+L9_1.alias = "Npc2444"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q71014_Makeximu"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 2448
+L10_1.alias = "Npc2448"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q71014_Qiuge"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 2442
+L11_1.alias = "Npc2442"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q71014_luoxia"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 2450
+L12_1.alias = "Npc2450"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q71014_Pinghai"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L1_1.npcs = L2_1
+L0_1["7101402"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2447
+L3_1.alias = "Npc2447"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q71014_Cuier"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2037
+L4_1.alias = "Npc2037"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q71014_Chaoxi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 2076
+L5_1.alias = "Npc2076"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q71014_Sisi"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 2443
+L6_1.alias = "Npc2443"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q71014_Guanhong"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 2446
+L7_1.alias = "Npc2446"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71014_Lijiulang"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 2445
+L8_1.alias = "Npc2445"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q71014_Luofeng"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 2444
+L9_1.alias = "Npc2444"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q71014_Makeximu"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 2448
+L10_1.alias = "Npc2448"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q71014_Qiuge"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 2442
+L11_1.alias = "Npc2442"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q71014_luoxia"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 2450
+L12_1.alias = "Npc2450"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q71014_Pinghai"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L1_1.npcs = L2_1
+L0_1["7101403"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2447
+L3_1.alias = "Npc2447"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q71014_Cuier"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2037
+L4_1.alias = "Npc2037"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q71014_Chaoxi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 2076
+L5_1.alias = "Npc2076"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q71014_Sisi"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 2443
+L6_1.alias = "Npc2443"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q71014_Guanhong"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 2446
+L7_1.alias = "Npc2446"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71014_Lijiulang"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 2445
+L8_1.alias = "Npc2445"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q71014_Luofeng"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 2444
+L9_1.alias = "Npc2444"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q71014_Makeximu"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 2448
+L10_1.alias = "Npc2448"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q71014_Qiuge"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 2442
+L11_1.alias = "Npc2442"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q71014_luoxia"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 2450
+L12_1.alias = "Npc2450"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q71014_Pinghai"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L1_1.npcs = L2_1
+L0_1["7101404"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2447
+L3_1.alias = "Npc2447"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q71014_Cuier"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2037
+L4_1.alias = "Npc2037"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q71014_Chaoxi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 2076
+L5_1.alias = "Npc2076"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q71014_Sisi"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 2443
+L6_1.alias = "Npc2443"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q71014_Guanhong"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 2446
+L7_1.alias = "Npc2446"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71014_Lijiulang"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 2445
+L8_1.alias = "Npc2445"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q71014_Luofeng"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 2444
+L9_1.alias = "Npc2444"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q71014_Makeximu"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 2448
+L10_1.alias = "Npc2448"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q71014_Qiuge"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 2442
+L11_1.alias = "Npc2442"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q71014_luoxia"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 2450
+L12_1.alias = "Npc2450"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q71014_Pinghai"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L1_1.npcs = L2_1
+L0_1["7101405"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2447
+L3_1.alias = "Npc2447"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q71014_Cuier"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2037
+L4_1.alias = "Npc2037"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q71014_Chaoxi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 2076
+L5_1.alias = "Npc2076"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q71014_Sisi"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 2443
+L6_1.alias = "Npc2443"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q71014_Guanhong"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 2446
+L7_1.alias = "Npc2446"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71014_Lijiulang"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 2445
+L8_1.alias = "Npc2445"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q71014_Luofeng"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 2444
+L9_1.alias = "Npc2444"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q71014_Makeximu"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 2448
+L10_1.alias = "Npc2448"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q71014_Qiuge"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 2442
+L11_1.alias = "Npc2442"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q71014_luoxia"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 2450
+L12_1.alias = "Npc2450"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q71014_Pinghai"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L1_1.npcs = L2_1
+L0_1["7101406"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2447
+L3_1.alias = "Npc2447"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q71014_Cuier"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2037
+L4_1.alias = "Npc2037"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q71014_Chaoxi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 2076
+L5_1.alias = "Npc2076"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q71014_Sisi"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 2443
+L6_1.alias = "Npc2443"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q71014_Guanhong"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 2446
+L7_1.alias = "Npc2446"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71014_Lijiulang"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 2445
+L8_1.alias = "Npc2445"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q71014_Luofeng"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 2444
+L9_1.alias = "Npc2444"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q71014_Makeximu"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 2448
+L10_1.alias = "Npc2448"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q71014_Qiuge"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 2442
+L11_1.alias = "Npc2442"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q71014_luoxia"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 2450
+L12_1.alias = "Npc2450"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q71014_Pinghai"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L1_1.npcs = L2_1
+L0_1["7101407"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2447
+L3_1.alias = "Npc2447"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q71014_Cuier"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2037
+L4_1.alias = "Npc2037"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q71014_Chaoxi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 2076
+L5_1.alias = "Npc2076"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q71014_Sisi"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 2443
+L6_1.alias = "Npc2443"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q71014_Guanhong"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 2446
+L7_1.alias = "Npc2446"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71014_Lijiulang"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 2445
+L8_1.alias = "Npc2445"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q71014_Luofeng"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 2444
+L9_1.alias = "Npc2444"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q71014_Makeximu"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 2448
+L10_1.alias = "Npc2448"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q71014_Qiuge"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 2442
+L11_1.alias = "Npc2442"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q71014_luoxia"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 2450
+L12_1.alias = "Npc2450"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q71014_Pinghai"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L1_1.npcs = L2_1
+L0_1["7101408"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2447
+L3_1.alias = "Npc2447"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q71014_Cuier"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2037
+L4_1.alias = "Npc2037"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q71014_Chaoxi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 2076
+L5_1.alias = "Npc2076"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q71014_Sisi"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 2443
+L6_1.alias = "Npc2443"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q71014_Guanhong"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 2446
+L7_1.alias = "Npc2446"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71014_Lijiulang"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 2445
+L8_1.alias = "Npc2445"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q71014_Luofeng"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 2444
+L9_1.alias = "Npc2444"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q71014_Makeximu"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 2448
+L10_1.alias = "Npc2448"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q71014_Qiuge"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 2442
+L11_1.alias = "Npc2442"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q71014_luoxia"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 2450
+L12_1.alias = "Npc2450"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q71014_Pinghai"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L1_1.npcs = L2_1
+L0_1["7101409"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2447
+L3_1.alias = "Npc2447"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q71014_Cuier"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2037
+L4_1.alias = "Npc2037"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q71014_Chaoxi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 2076
+L5_1.alias = "Npc2076"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q71014_Sisi"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 2443
+L6_1.alias = "Npc2443"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q71014_Guanhong"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 2446
+L7_1.alias = "Npc2446"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71014_Lijiulang"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 2445
+L8_1.alias = "Npc2445"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q71014_Luofeng"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 2444
+L9_1.alias = "Npc2444"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q71014_Makeximu"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 2448
+L10_1.alias = "Npc2448"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q71014_Qiuge"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 2442
+L11_1.alias = "Npc2442"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q71014_luoxia"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 2450
+L12_1.alias = "Npc2450"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q71014_Pinghai"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L1_1.npcs = L2_1
+L0_1["7101410"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2447
+L3_1.alias = "Npc2447"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q71014_Cuier"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2037
+L4_1.alias = "Npc2037"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q71014_Chaoxi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 2076
+L5_1.alias = "Npc2076"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q71014_Sisi"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 2443
+L6_1.alias = "Npc2443"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q71014_Guanhong"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 2446
+L7_1.alias = "Npc2446"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71014_Lijiulang"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 2445
+L8_1.alias = "Npc2445"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q71014_Luofeng"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 2444
+L9_1.alias = "Npc2444"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q71014_Makeximu"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 2448
+L10_1.alias = "Npc2448"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q71014_Qiuge"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 2442
+L11_1.alias = "Npc2442"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q71014_luoxia"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 2450
+L12_1.alias = "Npc2450"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q71014_Pinghai"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L1_1.npcs = L2_1
+L0_1["7101411"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2447
+L3_1.alias = "Npc2447"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q71014_Cuier"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2037
+L4_1.alias = "Npc2037"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q71014_Chaoxi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 2076
+L5_1.alias = "Npc2076"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q71014_Sisi"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 2443
+L6_1.alias = "Npc2443"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q71014_Guanhong"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 2446
+L7_1.alias = "Npc2446"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71014_Lijiulang"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 2445
+L8_1.alias = "Npc2445"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q71014_Luofeng"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 2444
+L9_1.alias = "Npc2444"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q71014_Makeximu"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 2448
+L10_1.alias = "Npc2448"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q71014_Qiuge"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 2442
+L11_1.alias = "Npc2442"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q71014_luoxia"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 2450
+L12_1.alias = "Npc2450"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q71014_Pinghai"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L1_1.npcs = L2_1
+L0_1["7101412"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2447
+L3_1.alias = "Npc2447"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q71014_Cuier"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2037
+L4_1.alias = "Npc2037"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q71014_Chaoxi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 2076
+L5_1.alias = "Npc2076"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q71014_Sisi"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 2443
+L6_1.alias = "Npc2443"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q71014_Guanhong"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 2446
+L7_1.alias = "Npc2446"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71014_Lijiulang"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 2445
+L8_1.alias = "Npc2445"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q71014_Luofeng"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 2444
+L9_1.alias = "Npc2444"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q71014_Makeximu"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 2448
+L10_1.alias = "Npc2448"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q71014_Qiuge"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 2442
+L11_1.alias = "Npc2442"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q71014_luoxia"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 2450
+L12_1.alias = "Npc2450"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q71014_Pinghai"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L1_1.npcs = L2_1
+L0_1["7101413"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2447
+L3_1.alias = "Npc2447"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q71014_Cuier"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2037
+L4_1.alias = "Npc2037"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q71014_Chaoxi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 2076
+L5_1.alias = "Npc2076"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q71014_Sisi"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 2443
+L6_1.alias = "Npc2443"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q71014_Guanhong"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 2446
+L7_1.alias = "Npc2446"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71014_Lijiulang"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 2445
+L8_1.alias = "Npc2445"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q71014_Luofeng"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 2444
+L9_1.alias = "Npc2444"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q71014_Makeximu"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 2448
+L10_1.alias = "Npc2448"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q71014_Qiuge"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 2442
+L11_1.alias = "Npc2442"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q71014_luoxia"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 2450
+L12_1.alias = "Npc2450"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q71014_Pinghai"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L1_1.npcs = L2_1
+L0_1["7101414"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 3
+L3_1.scene_id = 3
+L3_1.pos = "Q71014_End"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["7101415"] = L1_1
+quest_data = L0_1

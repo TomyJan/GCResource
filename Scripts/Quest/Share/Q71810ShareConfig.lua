@@ -1,3 +1,210 @@
--- 任务配置数据开始-----------------------------
-
-main_id = 71810sub_ids = {	7181001,	7181002,	7181003,	7181004,	7181005,	7181006,	7181007,	7181008,	7181009,}-- 任务配置数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 父任务执行项数据开始-----------------------------finish_action = {	CLIENT = { },	SERVER = { },}fail_action = {	CLIENT = { },	SERVER = { },}cancel_action = {	CLIENT = { },	SERVER = { },}-- 父任务执行项数据结束------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- Actor模块数据开始---------------------------------- 空-- Actor模块数据结束---------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 文本模块数据开始----------------------------------- 空-- 文本模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 路点模块数据开始----------------------------------- 空-- 路点模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 断线重连生成内容 开始------------------------------ 和questdata配的存档点对应rewind_data = {	["7181002"] = { },	["7181003"] = 	{		npcs = 		{			{				id = 20088,				alias = "NPC20088",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71810Alrani2",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7181004"] = { },	["7181008"] = { },	["7181009"] = 	{		npcs = 		{			{				id = 20088,				alias = "NPC20088",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71810Alrani3",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},}-- 断线重连生成内容 结束------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 校验数据 开始------------------------------------ 和任务lua中生成NPC/Monster/Gadget/Item等对应quest_data = {	["7181001"] = 	{		npcs = 		{			{				id = 20088,				alias = "NPC20088",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71810Alrani1",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7181002"] = 	{		npcs = 		{			{				id = 20088,				alias = "NPC20088",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71810Alrani2",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},		transmit_points = 		{			{				point_id = 1,				scene_id = 3,				pos = "Q71810Player",			},		},	},	["7181003"] = 	{		npcs = 		{			{				id = 20088,				alias = "NPC20088",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71810Alrani2",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},		transmit_points = 		{			{				point_id = 1,				scene_id = 3,				pos = "Q71810Player",			},		},	},	["7181004"] = 	{		gadgets = 		{			{				id = 70700006,				alias = "Q71810Hint",				pos = "Q71810Target1",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7181005"] = 	{		gadgets = 		{			{				id = 70700006,				alias = "Q71810Hint",				pos = "Q71810Target1",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7181006"] = 	{		gadgets = 		{			{				id = 70700006,				alias = "Q71810Hint",				pos = "Q71810Target1",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7181007"] = 	{		gadgets = 		{			{				id = 70700006,				alias = "Q71810Hint",				pos = "Q71810Target1",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7181008"] = 	{		npcs = 		{			{				id = 20088,				alias = "NPC20088",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71810Alrani3",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},		transmit_points = 		{			{				point_id = 1,				scene_id = 3,				pos = "Q71810Player2",			},		},	},	["7181009"] = 	{		npcs = 		{			{				id = 20088,				alias = "NPC20088",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71810Alrani3",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},}-- 校验数据 结束------------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1
+main_id = 71810
+L0_1 = {}
+L1_1 = 7181001
+L2_1 = 7181002
+L3_1 = 7181003
+L4_1 = 7181004
+L5_1 = 7181005
+L6_1 = 7181006
+L7_1 = 7181007
+L8_1 = 7181008
+L9_1 = 7181009
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["7181002"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20088
+L3_1.alias = "NPC20088"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71810Alrani2"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7181003"] = L1_1
+L1_1 = {}
+L0_1["7181004"] = L1_1
+L1_1 = {}
+L0_1["7181008"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20088
+L3_1.alias = "NPC20088"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71810Alrani3"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7181009"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20088
+L3_1.alias = "NPC20088"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71810Alrani1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7181001"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20088
+L3_1.alias = "NPC20088"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71810Alrani2"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q71810Player"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["7181002"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20088
+L3_1.alias = "NPC20088"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71810Alrani2"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q71810Player"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["7181003"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70700006
+L3_1.alias = "Q71810Hint"
+L3_1.pos = "Q71810Target1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["7181004"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70700006
+L3_1.alias = "Q71810Hint"
+L3_1.pos = "Q71810Target1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["7181005"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70700006
+L3_1.alias = "Q71810Hint"
+L3_1.pos = "Q71810Target1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["7181006"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70700006
+L3_1.alias = "Q71810Hint"
+L3_1.pos = "Q71810Target1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["7181007"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20088
+L3_1.alias = "NPC20088"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71810Alrani3"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q71810Player2"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["7181008"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20088
+L3_1.alias = "NPC20088"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71810Alrani3"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7181009"] = L1_1
+quest_data = L0_1

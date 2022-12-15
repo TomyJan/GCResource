@@ -1,188 +1,186 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1
 main_id = 10113
-
-sub_ids =
-{
-    1011301,
-    1011302,
-    1011303,
-    1011304,
-    1011305,
-    1011306,
-}
-
-rewind_data = {}
-
-rewind_data["1011304"] = 
-{
-    npcs = {
-        {
-            alias = "Npc141101",
-            script = "Actor/Npc/TempNPC",
-            id = 141101,
-            pos = "Q1011301Stanley",
-            scene_id = 1009,
-            room_id = 1,
-            data_index = 0,
-        },
-        {
-            alias = "Diluc",
-            script = "Actor/Quest/Q376/Diluc",
-            id = 1009,
-            pos = "Q49009Diluke",
-            scene_id = 1009,
-            room_id = 1,
-            data_index = 0,
-        }
-    },
-
-    quest_var = {
-        2, -1, -1, -1, -1
-    }
-}
-
-rewind_data["1011305"] = 
-{
-    npcs = {
-        {
-            alias = "Diluc",
-            script = "Actor/Quest/Q376/Diluc",
-            id = 1009,
-            pos = "Q49009Diluke",
-            scene_id = 1009,
-            room_id = 1,
-            data_index = 0,
-        }
-    }
-}
-
-
-quest_data = {}
-
-quest_data["1011301"] = 
-{
-    npcs = 
-    {
-        {
-            alias = "Npc141101",
-            script = "Actor/Npc/TempNPC",
-            id = 141101,
-            pos = "Q1011301Stanley",
-            scene_id = 1009,
-            room_id = 1,
-            data_index = 0,
-        },
-        {
-            alias = "Diluc",
-            script = "Actor/Quest/Q376/Diluc",
-            id = 1009,
-            pos = "Q49009Diluke",
-            scene_id = 1009,
-            room_id = 1,
-            data_index = 0,
-        },
-        {
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            id = 1001,
-            pos = "Q1011303Wendy",
-            scene_id = 1009,
-            room_id = 1,
-            data_index = 0,
-        },
-    },
-}
-
-quest_data["1011302"] = 
-{
-    npcs = 
-    {
-        {
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            id = 1001,
-            pos = "Q1011303Wendy",
-            scene_id = 1009,
-            room_id = 1,
-            data_index = 0,
-        },
-        {
-            alias = "Npc141101",
-            script = "Actor/Npc/TempNPC",
-            id = 141101,
-            pos = "Q1011301Stanley",
-            scene_id = 1009,
-            room_id = 1,
-            data_index = 0,
-        },
-        {
-            alias = "Diluc",
-            script = "Actor/Quest/Q376/Diluc",
-            id = 1009,
-            pos = "Q49009Diluke",
-            scene_id = 1009,
-            room_id = 1,
-            data_index = 0,
-        }
-    },
-    transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 1009,
-            pos = "Q1011303Player"
-        },
-    }
-}
-
-quest_data["1011303"] = 
-{
-    npcs = 
-    {
-        {
-            alias = "Npc141101",
-            script = "Actor/Npc/TempNPC",
-            id = 141101,
-            pos = "Q1011301Stanley",
-            scene_id = 1009,
-            room_id = 1,
-            data_index = 0,
-        },
-        {
-            alias = "Diluc",
-            script = "Actor/Quest/Q376/Diluc",
-            id = 1009,
-            pos = "Q49009Diluke",
-            scene_id = 1009,
-            room_id = 1,
-            data_index = 0,
-        },
-        {
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            id = 1001,
-            pos = "Q1011303Wendy",
-            scene_id = 1009,
-            room_id = 1,
-            data_index = 0,
-        },
-    },
-}
-
-quest_data["1011305"] = 
-{
-    npcs = 
-    {
-        {
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            id = 1001,
-            pos = "Q1011303Wendy",
-            scene_id = 3,
-            room_id = 0,
-            data_index = 0,
-        }
-    },
-}
+L0_1 = {}
+L1_1 = 1011301
+L2_1 = 1011302
+L3_1 = 1011303
+L4_1 = 1011304
+L5_1 = 1011305
+L6_1 = 1011306
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc141101"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 141101
+L3_1.pos = "Q1011301Stanley"
+L3_1.scene_id = 1009
+L3_1.room_id = 1
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Diluc"
+L4_1.script = "Actor/Quest/Q376/Diluc"
+L4_1.id = 1009
+L4_1.pos = "Q49009Diluke"
+L4_1.scene_id = 1009
+L4_1.room_id = 1
+L4_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = 2
+L4_1 = -1
+L5_1 = -1
+L6_1 = -1
+L7_1 = -1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L1_1.quest_var = L2_1
+L0_1["1011304"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Diluc"
+L3_1.script = "Actor/Quest/Q376/Diluc"
+L3_1.id = 1009
+L3_1.pos = "Q49009Diluke"
+L3_1.scene_id = 1009
+L3_1.room_id = 1
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1011305"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc141101"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 141101
+L3_1.pos = "Q1011301Stanley"
+L3_1.scene_id = 1009
+L3_1.room_id = 1
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Diluc"
+L4_1.script = "Actor/Quest/Q376/Diluc"
+L4_1.id = 1009
+L4_1.pos = "Q49009Diluke"
+L4_1.scene_id = 1009
+L4_1.room_id = 1
+L4_1.data_index = 0
+L5_1 = {}
+L5_1.alias = "Wendy"
+L5_1.script = "Actor/Quest/Q301/Wendy301"
+L5_1.id = 1001
+L5_1.pos = "Q1011303Wendy"
+L5_1.scene_id = 1009
+L5_1.room_id = 1
+L5_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["1011301"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Wendy"
+L3_1.script = "Actor/Quest/Q301/Wendy301"
+L3_1.id = 1001
+L3_1.pos = "Q1011303Wendy"
+L3_1.scene_id = 1009
+L3_1.room_id = 1
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Npc141101"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.id = 141101
+L4_1.pos = "Q1011301Stanley"
+L4_1.scene_id = 1009
+L4_1.room_id = 1
+L4_1.data_index = 0
+L5_1 = {}
+L5_1.alias = "Diluc"
+L5_1.script = "Actor/Quest/Q376/Diluc"
+L5_1.id = 1009
+L5_1.pos = "Q49009Diluke"
+L5_1.scene_id = 1009
+L5_1.room_id = 1
+L5_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 1009
+L3_1.pos = "Q1011303Player"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["1011302"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc141101"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 141101
+L3_1.pos = "Q1011301Stanley"
+L3_1.scene_id = 1009
+L3_1.room_id = 1
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Diluc"
+L4_1.script = "Actor/Quest/Q376/Diluc"
+L4_1.id = 1009
+L4_1.pos = "Q49009Diluke"
+L4_1.scene_id = 1009
+L4_1.room_id = 1
+L4_1.data_index = 0
+L5_1 = {}
+L5_1.alias = "Wendy"
+L5_1.script = "Actor/Quest/Q301/Wendy301"
+L5_1.id = 1001
+L5_1.pos = "Q1011303Wendy"
+L5_1.scene_id = 1009
+L5_1.room_id = 1
+L5_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["1011303"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Wendy"
+L3_1.script = "Actor/Quest/Q301/Wendy301"
+L3_1.id = 1001
+L3_1.pos = "Q1011303Wendy"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1011305"] = L1_1

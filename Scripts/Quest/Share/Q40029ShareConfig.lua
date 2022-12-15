@@ -1,3 +1,265 @@
--- 任务配置数据开始-----------------------------
-
-main_id = 40029sub_ids = {	4002901,	4002902,	4002903,	4002904,	4002905,	4002906,}-- 任务配置数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 父任务执行项数据开始-----------------------------finish_action = {	CLIENT = { },	SERVER = { },}fail_action = {	CLIENT = { },	SERVER = { },}cancel_action = {	CLIENT = { },	SERVER = { },}-- 父任务执行项数据结束------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- Actor模块数据开始---------------------------------- 空-- Actor模块数据结束---------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 文本模块数据开始----------------------------------- 空-- 文本模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 路点模块数据开始----------------------------------- 空-- 路点模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 断线重连生成内容 开始------------------------------ 和questdata配的存档点对应rewind_data = {	["4002901"] = { },	["4002902"] = 	{		npcs = 		{			{				id = 1018,				alias = "Npc1018",				script = "Actor/Npc/TempNPC",				pos = "Q4002901_albedo",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["4002903"] = { },	["4002904"] = 	{		npcs = 		{			{				id = 1668,				alias = "Npc1668",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q40029_Joel_01",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 1002,				alias = "Ambor",				script = "Actor/Quest/Q301/Ambor301",				pos = "Q40029_ambor_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 1029,				alias = "Npc1029",				script = "Actor/Npc/TempNPC",				pos = "Q40029_eula_01",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 1674,				alias = "Npc1674",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q40029_JoelF",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 1024,				alias = "Npc1024",				script = "Actor/Npc/TempNPC",				pos = "Q40029_bannett",				scene_id = 3,				room_id = 0,				data_index = 7,			},		},	},	["4002905"] = { },	["4002906"] = 	{		npcs = 		{			{				id = 1018,				alias = "Npc1018",				script = "Actor/Npc/TempNPC",				pos = "Q4002905_albedo",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 1587,				alias = "Npc1587",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "DUMMY_POS_40025_Timaeus01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 12254,				alias = "Npc12254",				script = "Actor/Npc/TempNPC",				pos = "Q4002905_albedo",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},}-- 断线重连生成内容 结束------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 校验数据 开始------------------------------------ 和任务lua中生成NPC/Monster/Gadget/Item等对应quest_data = {	["4002901"] = 	{		npcs = 		{			{				id = 1018,				alias = "Npc1018",				script = "Actor/Npc/TempNPC",				pos = "Q4002901_albedo",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["4002902"] = 	{		npcs = 		{			{				id = 1002,				alias = "Ambor",				script = "Actor/Quest/Q301/Ambor301",				pos = "Q4002901_ambor",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 1029,				alias = "Npc1029",				script = "Actor/Npc/TempNPC",				pos = "Q4002901_eula",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["4002903"] = 	{		npcs = 		{			{				id = 1018,				alias = "Npc1018",				script = "Actor/Npc/TempNPC",				pos = "Q4002901_albedo",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 1668,				alias = "Npc1668",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q40029_Joel_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 1002,				alias = "Ambor",				script = "Actor/Quest/Q301/Ambor301",				pos = "Q40029_ambor_01",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 1029,				alias = "Npc1029",				script = "Actor/Npc/TempNPC",				pos = "Q40029_eula_01",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 1674,				alias = "Npc1674",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q40029_JoelF",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 1024,				alias = "Npc1024",				script = "Actor/Npc/TempNPC",				pos = "Q40029_bannett",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["4002904"] = { },	["4002905"] = 	{		npcs = 		{			{				id = 1018,				alias = "Npc1018",				script = "Actor/Npc/TempNPC",				pos = "Q4002905_albedo",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 1587,				alias = "Npc1587",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "DUMMY_POS_40025_Timaeus01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 12254,				alias = "Npc12254",				script = "Actor/Npc/TempNPC",				pos = "Q4002905_albedo",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["4002906"] = { },}-- 校验数据 结束------------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1
+main_id = 40029
+L0_1 = {}
+L1_1 = 4002901
+L2_1 = 4002902
+L3_1 = 4002903
+L4_1 = 4002904
+L5_1 = 4002905
+L6_1 = 4002906
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["4002901"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1018
+L3_1.alias = "Npc1018"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4002901_albedo"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["4002902"] = L1_1
+L1_1 = {}
+L0_1["4002903"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1668
+L3_1.alias = "Npc1668"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q40029_Joel_01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1002
+L4_1.alias = "Ambor"
+L4_1.script = "Actor/Quest/Q301/Ambor301"
+L4_1.pos = "Q40029_ambor_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1029
+L5_1.alias = "Npc1029"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q40029_eula_01"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1674
+L6_1.alias = "Npc1674"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q40029_JoelF"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 1024
+L7_1.alias = "Npc1024"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q40029_bannett"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 7
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L1_1.npcs = L2_1
+L0_1["4002904"] = L1_1
+L1_1 = {}
+L0_1["4002905"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1018
+L3_1.alias = "Npc1018"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4002905_albedo"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1587
+L4_1.alias = "Npc1587"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "DUMMY_POS_40025_Timaeus01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 12254
+L5_1.alias = "Npc12254"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q4002905_albedo"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["4002906"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1018
+L3_1.alias = "Npc1018"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4002901_albedo"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["4002901"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1002
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.pos = "Q4002901_ambor"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1029
+L4_1.alias = "Npc1029"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q4002901_eula"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["4002902"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1018
+L3_1.alias = "Npc1018"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4002901_albedo"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1668
+L4_1.alias = "Npc1668"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q40029_Joel_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1002
+L5_1.alias = "Ambor"
+L5_1.script = "Actor/Quest/Q301/Ambor301"
+L5_1.pos = "Q40029_ambor_01"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1029
+L6_1.alias = "Npc1029"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q40029_eula_01"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 1674
+L7_1.alias = "Npc1674"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q40029_JoelF"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 1024
+L8_1.alias = "Npc1024"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q40029_bannett"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["4002903"] = L1_1
+L1_1 = {}
+L0_1["4002904"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1018
+L3_1.alias = "Npc1018"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4002905_albedo"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1587
+L4_1.alias = "Npc1587"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "DUMMY_POS_40025_Timaeus01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 12254
+L5_1.alias = "Npc12254"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q4002905_albedo"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["4002905"] = L1_1
+L1_1 = {}
+L0_1["4002906"] = L1_1
+quest_data = L0_1

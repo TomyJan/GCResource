@@ -1,3 +1,147 @@
--- 任务配置数据开始-----------------------------
-
-main_id = 72184sub_ids = {	7218401,	7218402,	7218403,	7218404,	7218405,}-- 任务配置数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 父任务执行项数据开始-----------------------------finish_action = {	CLIENT = { },	SERVER = { },}fail_action = {	CLIENT = { },	SERVER = { },}cancel_action = {	CLIENT = { },	SERVER = { },}-- 父任务执行项数据结束------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- Actor模块数据开始---------------------------------- 空-- Actor模块数据结束---------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 文本模块数据开始----------------------------------- 空-- 文本模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 路点模块数据开始----------------------------------- 空-- 路点模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 断线重连生成内容 开始------------------------------ 和questdata配的存档点对应rewind_data = {	["7218401"] = { },	["7218402"] = { },	["7218403"] = 	{		npcs = 		{			{				id = 3044,				alias = "Npc3044",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200601FoodOwner",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3024,				alias = "Npc3024",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q7218402Rie",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["7218404"] = 	{		npcs = 		{			{				id = 3044,				alias = "Npc3044",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200601FoodOwner",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3024,				alias = "Npc3024",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q7218402Rie",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["7218405"] = 	{		npcs = 		{			{				id = 3044,				alias = "Npc3044",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200601FoodOwner",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3024,				alias = "Npc3024",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q7218402Rie",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},}-- 断线重连生成内容 结束------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 校验数据 开始------------------------------------ 和任务lua中生成NPC/Monster/Gadget/Item等对应quest_data = {	["7218401"] = 	{		npcs = 		{			{				id = 3044,				alias = "Npc3044",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200601FoodOwner",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7218402"] = 	{		npcs = 		{			{				id = 3044,				alias = "Npc3044",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200601FoodOwner",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3024,				alias = "Npc3024",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q7218402Rie",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["7218403"] = { },	["7218404"] = { },	["7218405"] = { },}-- 校验数据 结束------------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1
+main_id = 72184
+L0_1 = {}
+L1_1 = 7218401
+L2_1 = 7218402
+L3_1 = 7218403
+L4_1 = 7218404
+L5_1 = 7218405
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["7218401"] = L1_1
+L1_1 = {}
+L0_1["7218402"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3044
+L3_1.alias = "Npc3044"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q1200601FoodOwner"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3024
+L4_1.alias = "Npc3024"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q7218402Rie"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["7218403"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3044
+L3_1.alias = "Npc3044"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q1200601FoodOwner"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3024
+L4_1.alias = "Npc3024"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q7218402Rie"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["7218404"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3044
+L3_1.alias = "Npc3044"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q1200601FoodOwner"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3024
+L4_1.alias = "Npc3024"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q7218402Rie"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["7218405"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3044
+L3_1.alias = "Npc3044"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q1200601FoodOwner"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7218401"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3044
+L3_1.alias = "Npc3044"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q1200601FoodOwner"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3024
+L4_1.alias = "Npc3024"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q7218402Rie"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["7218402"] = L1_1
+L1_1 = {}
+L0_1["7218403"] = L1_1
+L1_1 = {}
+L0_1["7218404"] = L1_1
+L1_1 = {}
+L0_1["7218405"] = L1_1
+quest_data = L0_1

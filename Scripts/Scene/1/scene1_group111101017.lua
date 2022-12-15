@@ -12,17 +12,17 @@ local defs = {
 routeInfo = {route_1 = {1},route_2 = {2},route_3 = {3}}
 
 function MovePlatform(context)
-	ScriptLib.PrintLog(context, "Hit platform to move")
+	ScriptLib.PrintLog("Hit platform to move")
 
 
 	local index = ScriptLib.GetGroupVariableValue(context,"route")
-	ScriptLib.PrintLog(context, "Hit platform to move : get index = ".. index)
+	ScriptLib.PrintLog("Hit platform to move : get index = ".. index)
 	local route = "route_" ..index
-	ScriptLib.PrintLog(context, "Hit platform to move : get key = ".. route)
+	ScriptLib.PrintLog("Hit platform to move : get key = ".. route)
 
 	ScriptLib.SetPlatformPointArray(context, 17002, 110100010, routeInfo[route], { route_type = 0 })
 
-	ScriptLib.PrintLog(context, "Hit platform to move : start platform")
+	ScriptLib.PrintLog("Hit platform to move : start platform")
 	index = index + 1
 	if index > defs.maxRouteCount then 
 		index = 1

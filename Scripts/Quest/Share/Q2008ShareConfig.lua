@@ -1,201 +1,174 @@
--- 任务配置数据开始-----------------------------
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1
 main_id = 2008
-
-sub_ids = 
-{
-	200807,
-	200805,
-	200806,
-	200801,
-	200802,
-	200803,
-	200804,
-	200808,
-}
--- 任务配置数据结束---------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
--- 父任务执行项数据开始-----------------------------
-finish_action = 
-{
-	CLIENT = { },
-	SERVER = { },
-}
-
-fail_action = 
-{
-	CLIENT = { },
-	SERVER = { },
-}
-
-cancel_action = 
-{
-	CLIENT = { },
-	SERVER = { },
-}
--- 父任务执行项数据结束-----------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
--- Actor模块数据开始--------------------------------
--- 空
--- Actor模块数据结束--------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
--- 文本模块数据开始---------------------------------
--- 空
--- 文本模块数据结束---------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
--- 路点模块数据开始---------------------------------
--- 空
--- 路点模块数据结束---------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-
--- 断线重连生成内容 开始----------------------------
--- 和questdata配的存档点对应
-rewind_data = 
-{
-	["200801"] = { },
-	["200803"] = { },
-	["200804"] = { },
-	["200805"] = { },
-	["200806"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 1013,
-				alias = "Npc1013",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q2003tuoma",
-				scene_id = 1060,
-				room_id = 1,
-				data_index = 2,
-			},
-		},
-	},
-	["200808"] = { },
-}
--- 断线重连生成内容 结束----------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
--- 校验数据 开始----------------------------------
--- 和任务lua中生成NPC/Monster/Gadget/Item等对应
-quest_data = 
-{
-	["200801"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 1005,
-				alias = "Paimon",
-				script = "Actor/Quest/Q352/Paimon",
-				pos = "Q200801paimon",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 1036,
-				alias = "Npc1036",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q200801yayi",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-			{
-				id = 12008,
-				alias = "Npc12008",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q200801mass1",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 3,
-			},
-			{
-				id = 12009,
-				alias = "Npc12009",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q200801mass2",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 4,
-			},
-		},
-		gadgets = 
-		{
-			{
-				id = 70710476,
-				alias = "Gadget70710476",
-				pos = "Q200801tuoma",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-	},
-	["200802"] = { },
-	["200803"] = { },
-	["200804"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 1005,
-				alias = "Paimon",
-				script = "Actor/Quest/Q352/Paimon",
-				pos = "Q2008paimon",
-				scene_id = 20112,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-		transmit_points = 
-		{
-			{
-				point_id = 1,
-				scene_id = 20112,
-				pos = "Q2008born",
-			},
-		},
-	},
-	["200805"] = { },
-	["200806"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 1005,
-				alias = "Paimon",
-				script = "Actor/Quest/Q352/Paimon",
-				pos = "Q2003paimon",
-				scene_id = 1060,
-				room_id = 1,
-				data_index = 1,
-			},
-			{
-				id = 1013,
-				alias = "Npc1013",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q2003tuoma",
-				scene_id = 1060,
-				room_id = 1,
-				data_index = 2,
-			},
-		},
-	},
-	["200807"] = { },
-	["200808"] = { 
-		transmit_points = 
-		{
-			{
-				point_id = 2,
-				scene_id = 3,
-				pos = "Q200901born",
-			},
-		},
-	},
-}
--- 校验数据 结束----------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+L0_1 = {}
+L1_1 = 200807
+L2_1 = 200805
+L3_1 = 200806
+L4_1 = 200801
+L5_1 = 200802
+L6_1 = 200803
+L7_1 = 200804
+L8_1 = 200808
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["200801"] = L1_1
+L1_1 = {}
+L0_1["200803"] = L1_1
+L1_1 = {}
+L0_1["200804"] = L1_1
+L1_1 = {}
+L0_1["200805"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1013
+L3_1.alias = "Npc1013"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q2003tuoma"
+L3_1.scene_id = 1060
+L3_1.room_id = 1
+L3_1.data_index = 2
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["200806"] = L1_1
+L1_1 = {}
+L0_1["200808"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q200801paimon"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1036
+L4_1.alias = "Npc1036"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q200801yayi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 12008
+L5_1.alias = "Npc12008"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q200801mass1"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 12009
+L6_1.alias = "Npc12009"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q200801mass2"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710476
+L3_1.alias = "Gadget70710476"
+L3_1.pos = "Q200801tuoma"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["200801"] = L1_1
+L1_1 = {}
+L0_1["200802"] = L1_1
+L1_1 = {}
+L0_1["200803"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q2008paimon"
+L3_1.scene_id = 20112
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 20112
+L3_1.pos = "Q2008born"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["200804"] = L1_1
+L1_1 = {}
+L0_1["200805"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q2003paimon"
+L3_1.scene_id = 1060
+L3_1.room_id = 1
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1013
+L4_1.alias = "Npc1013"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q2003tuoma"
+L4_1.scene_id = 1060
+L4_1.room_id = 1
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["200806"] = L1_1
+L1_1 = {}
+L0_1["200807"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 2
+L3_1.scene_id = 3
+L3_1.pos = "Q200901born"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["200808"] = L1_1
+quest_data = L0_1

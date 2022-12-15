@@ -1,212 +1,188 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1, L11_1
 main_id = 485
-
-sub_ids =
-{
-    48501,
-    48511,
-    48509,
-    48510,
-    48502,
-    48503,
-    48504,
-    48505,
-    48506,
-    48507,
-    48508,
-}
-
-rewind_data = {}
-
-rewind_data["48511"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Q48511Ambor",
-			scene_id = 1015,
-			room_id = 0,
-			data_index = 0,
-		}
-    }
-}
-
-
-rewind_data["48501"] = 
-{
-}
-
-rewind_data["48502"] = 
-{
-}
-
-rewind_data["48503"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Q48503Ambor",
-			scene_id = 1016,
-			room_id = 0,
-			data_index = 0,
-		}
-    }
-}
-
-rewind_data["48504"] = 
-{
-}
-
-rewind_data["48505"] = 
-{
-}
-
-rewind_data["48506"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Q48506Ambor",
-			scene_id = 1016,
-			room_id = 0,
-			data_index = 0,
-		}
-    }
-}
-
-rewind_data["48507"] = 
-{
-}
-
-rewind_data["48508"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Q48508Ambor",
-			scene_id = 1008,
-			room_id = 1,
-			data_index = 0,
-		}
-    }
-}
-
-quest_data = {}
-
-quest_data["48511"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Q48511Ambor",
-			scene_id = 1015,
-			room_id = 0,
-			data_index = 0,
-		}
-    }
-}
-
-
-quest_data["48501"] = 
-{
-}
-
-quest_data["48502"] = 
-{
-}
-
-quest_data["48503"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Q48503Ambor",
-			scene_id = 1016,
-			room_id = 0,
-			data_index = 0,
-		}
-    }
-}
-
-quest_data["48504"] = 
-{
-	gadgets = {
-        {
-            id = 70900201,
-            pos = "Q48503Chief",
-            alias = "Goal", 
-            scene_id = 1016, 
-            room_id = 0,  
-
-		},
-		{
-			id = 40200020,
-			pos = "Q48503Chief",
-			alias = "Goal", 
-			scene_id = 1016, 
-			room_id = 0,  
-
-		},
-    }
-}
-
-quest_data["48505"] = 
-{
-}
-
-quest_data["48506"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Q48506Ambor",
-			scene_id = 1016,
-			room_id = 0,
-			data_index = 0,
-		}
-    }
-}
-
-quest_data["48507"] = 
-{
-}
-
-quest_data["48508"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Q48508Ambor",
-			scene_id = 1008,
-			room_id = 1,
-			data_index = 0,
-		}
-    }
-}
+L0_1 = {}
+L1_1 = 48501
+L2_1 = 48511
+L3_1 = 48509
+L4_1 = 48510
+L5_1 = 48502
+L6_1 = 48503
+L7_1 = 48504
+L8_1 = 48505
+L9_1 = 48506
+L10_1 = 48507
+L11_1 = 48508
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+L0_1[11] = L11_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Q48511Ambor"
+L3_1.scene_id = 1015
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["48511"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["48501"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["48502"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Q48503Ambor"
+L3_1.scene_id = 1016
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["48503"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["48504"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["48505"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Q48506Ambor"
+L3_1.scene_id = 1016
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["48506"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["48507"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Q48508Ambor"
+L3_1.scene_id = 1008
+L3_1.room_id = 1
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["48508"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Q48511Ambor"
+L3_1.scene_id = 1015
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["48511"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L0_1["48501"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L0_1["48502"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Q48503Ambor"
+L3_1.scene_id = 1016
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["48503"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70900201
+L3_1.pos = "Q48503Chief"
+L3_1.alias = "Goal"
+L3_1.scene_id = 1016
+L3_1.room_id = 0
+L4_1 = {}
+L4_1.id = 40200020
+L4_1.pos = "Q48503Chief"
+L4_1.alias = "Goal"
+L4_1.scene_id = 1016
+L4_1.room_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.gadgets = L2_1
+L0_1["48504"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L0_1["48505"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Q48506Ambor"
+L3_1.scene_id = 1016
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["48506"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L0_1["48507"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Q48508Ambor"
+L3_1.scene_id = 1008
+L3_1.room_id = 1
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["48508"] = L1_1

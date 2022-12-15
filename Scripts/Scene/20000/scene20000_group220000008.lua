@@ -84,9 +84,9 @@ suites = {
 
 -- 触发条件
 function condition_EVENT_GADGET_STATE_CHANGE_26(context, evt)
-	ScriptLib.PrintLog(context, "enter firebox condition")
+	ScriptLib.PrintLog("enter firebox condition")
 	if defs.gadget_id_1 ~= evt.param2 or GadgetState.GearStart ~= evt.param1 then
-	ScriptLib.PrintLog(context, "fire box not match")
+	ScriptLib.PrintLog("fire box not match")
 		return false
 	end
 	

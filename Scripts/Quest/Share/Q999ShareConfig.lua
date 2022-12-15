@@ -1,199 +1,172 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1
 main_id = 999
-
-sub_ids =
-{
-    99901,
-    99902,
-    99922,
-    99923,
-}
-
-rewind_data = {}
-
-rewind_data["99901"] = 
-{
-    avatar = {
-        scene_id = 3,
-        pos = "Q351FirstQuest"
-    },
-    npcs = {
-        {
-            id = 1120,
-            alias = "QQ",
-            script = "Actor/Npc/TempNpcActor",
-            pos = "Q351FirstQuest",
-            data_index = 0,
-        }
-    }
-}
-
-rewind_data["99902"] = 
-{
-    avatar = {
-        pos = "Q351FirstClimb"
-    },
-    npcs = {
-        {
-            id = 1120,
-            alias = "QQ",
-            script = "Actor/Npc/TempNpcActor",
-            pos = "Q351FirstClimb"
-        }
-    }
-}
-
-quest_data = {}
-
-quest_data["99901"] = 
-{
-    trial_actors = {
-
-    },
-    actors = {
-        
-    },
-    items = {
-        -- {
-        --     id = 100004,
-        --     pos = "Q351FirstQuest",
-        --     alias = "Ball",
-        -- },
-    },
-    monsters = {
-        {
-            id = 20010801,
-            pos = "Q351FirstQuest",
-        },
-        {
-            id = 20010801,
-            pos = "Q351FirstQuest",
-        }
-    },
-    gadgets = {
-        {
-            id = 70300018,
-            pos = "Q351FirstQuest",
-            alias = "Target",
-        }
-    }
-}
-
-quest_data["99907"] = 
-{
-    npcs = {
-        {
-            id = 1001,
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            pos = "Q37201Player",
-            data_index = 1,
-            scene_id  = 3,
-
-        },
-    }
-}
-
-
-quest_data["99908"] = 
-{
-    npcs = {
-        {
-            id = 1001,
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            pos = "Q37201Player",
-            data_index = 1,
-            scene_id  = 3,
-
-        },
-    }
-}
-
-
-quest_data["99909"] = 
-{
-    npcs = {
-        {
-            id = 1001,
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            pos = "Q37201Player",
-            data_index = 1,
-            scene_id  = 3,
-
-        },
-    }
-}
-
-
-quest_data["99913"] = 
-{
-    npcs = {
-        {
-            id = 1001,
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            pos = "Q37201Player",
-            data_index = 1,
-            scene_id  = 3,
-
-        },
-    }
-}
-
-quest_data["99914"] = 
-{
-    npcs = {
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q37201Paimon",
-            scene_id = 3,
-            data_index = 2,
-        },
-    }
-}
-
-quest_data["99922"] = 
-{
-    npcs = {
-        {
-            id = 1001,
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            pos = "Q37201Player",
-            data_index = 1,
-            scene_id  = 3,
-
-        },
-        {
-            id = 3133,
-            alias = "Npc3133",
-            script = "Actor/Npc/NpcFSMBehaviour",
-            pos = "TestNpcYacao",
-            scene_id = 3,
-            room_id = 0,
-            data_index = 2,
-        },
-    }
-}
-
-quest_data["99923"] = 
-{
-    npcs = {
-        {
-            id = 1001,
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            pos = "Q37201Player",
-            data_index = 1,
-            scene_id  = 3,
-
-        },
-    }
-}
+L0_1 = {}
+L1_1 = 99901
+L2_1 = 99902
+L3_1 = 99922
+L4_1 = 99923
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L2_1.scene_id = 3
+L2_1.pos = "Q351FirstQuest"
+L1_1.avatar = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1120
+L3_1.alias = "QQ"
+L3_1.script = "Actor/Npc/TempNpcActor"
+L3_1.pos = "Q351FirstQuest"
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["99901"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L2_1.pos = "Q351FirstClimb"
+L1_1.avatar = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1120
+L3_1.alias = "QQ"
+L3_1.script = "Actor/Npc/TempNpcActor"
+L3_1.pos = "Q351FirstClimb"
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["99902"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L1_1.trial_actors = L2_1
+L2_1 = {}
+L1_1.actors = L2_1
+L2_1 = {}
+L1_1.items = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20010801
+L3_1.pos = "Q351FirstQuest"
+L4_1 = {}
+L4_1.id = 20010801
+L4_1.pos = "Q351FirstQuest"
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.monsters = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70300018
+L3_1.pos = "Q351FirstQuest"
+L3_1.alias = "Target"
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["99901"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1001
+L3_1.alias = "Wendy"
+L3_1.script = "Actor/Quest/Q301/Wendy301"
+L3_1.pos = "Q37201Player"
+L3_1.data_index = 1
+L3_1.scene_id = 3
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["99907"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1001
+L3_1.alias = "Wendy"
+L3_1.script = "Actor/Quest/Q301/Wendy301"
+L3_1.pos = "Q37201Player"
+L3_1.data_index = 1
+L3_1.scene_id = 3
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["99908"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1001
+L3_1.alias = "Wendy"
+L3_1.script = "Actor/Quest/Q301/Wendy301"
+L3_1.pos = "Q37201Player"
+L3_1.data_index = 1
+L3_1.scene_id = 3
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["99909"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1001
+L3_1.alias = "Wendy"
+L3_1.script = "Actor/Quest/Q301/Wendy301"
+L3_1.pos = "Q37201Player"
+L3_1.data_index = 1
+L3_1.scene_id = 3
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["99913"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1006
+L3_1.alias = "Qin"
+L3_1.script = "Actor/Quest/Q411/Qin"
+L3_1.pos = "Q37201Paimon"
+L3_1.scene_id = 3
+L3_1.data_index = 2
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["99914"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1001
+L3_1.alias = "Wendy"
+L3_1.script = "Actor/Quest/Q301/Wendy301"
+L3_1.pos = "Q37201Player"
+L3_1.data_index = 1
+L3_1.scene_id = 3
+L4_1 = {}
+L4_1.id = 3133
+L4_1.alias = "Npc3133"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "TestNpcYacao"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["99922"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1001
+L3_1.alias = "Wendy"
+L3_1.script = "Actor/Quest/Q301/Wendy301"
+L3_1.pos = "Q37201Player"
+L3_1.data_index = 1
+L3_1.scene_id = 3
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["99923"] = L1_1

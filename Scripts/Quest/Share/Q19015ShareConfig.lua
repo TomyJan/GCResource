@@ -1,3 +1,498 @@
--- 任务配置数据开始-----------------------------
-
-main_id = 19015sub_ids = {	1901501,	1901502,	1901511,	1901503,	1901508,	1901509,	1901510,	1901504,	1901505,	1901506,	1901507,}-- 任务配置数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 父任务执行项数据开始-----------------------------finish_action = {	CLIENT = { },	SERVER = 	{		QUEST_EXEC_REMOVE_TRIAL_AVATAR = 		{			{ "502", },		},		QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP = 		{			{ "133220674", "", },			{ "133220647", "", },		},	},}fail_action = {	CLIENT = { },	SERVER = { },}cancel_action = {	CLIENT = { },	SERVER = 	{		QUEST_EXEC_REMOVE_TRIAL_AVATAR = 		{			{ "502", },		},		QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP = 		{			{ "133220674", "", },			{ "133220647", "", },		},	},}-- 父任务执行项数据结束------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- Actor模块数据开始---------------------------------- 空-- Actor模块数据结束---------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 文本模块数据开始----------------------------------- 空-- 文本模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 路点模块数据开始----------------------------------- 空-- 路点模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 断线重连生成内容 开始------------------------------ 和questdata配的存档点对应rewind_data = {	["1901501"] = { },	["1901504"] = { },	["1901506"] = { },	["1901507"] = { },	["1901510"] = { },}-- 断线重连生成内容 结束------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 校验数据 开始------------------------------------ 和任务lua中生成NPC/Monster/Gadget/Item等对应quest_data = {	["1901501"] = 	{		npcs = 		{			{				id = 12170,				alias = "Npc12170",				script = "Actor/Npc/TempNPC",				pos = "Q19015_Sayu1_Pos",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 504,				alias = "Coop_Sayu",				script = "Actor/Npc/TempNPC",				pos = "Q19015_Sayu1_Pos",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3106,				alias = "Npc3106",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q19015_Player1_Pos",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 1040,				alias = "Npc1040",				script = "Actor/Npc/TempNPC",				pos = "Q19015_Sayu1_Pos",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},	},	["1901502"] = 	{		npcs = 		{			{				id = 504,				alias = "Coop_Sayu",				script = "Actor/Npc/TempNPC",				pos = "Q19015_Sayu1_Pos",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3106,				alias = "Npc3106",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q19015_Player1_Pos",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 1040,				alias = "Npc1040",				script = "Actor/Npc/TempNPC",				pos = "Q19015_Sayu1_Pos",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},		transmit_points = 		{			{				point_id = 1,				scene_id = 3,				pos = "Q19010_Player_Pos",			},		},	},	["1901503"] = 	{		npcs = 		{			{				id = 504,				alias = "Coop_Sayu",				script = "Actor/Npc/TempNPC",				pos = "Q19015_Sayu2_Pos",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3106,				alias = "Npc3106",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q19015_Wunv2_Pos",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 1040,				alias = "Npc1040",				script = "Actor/Npc/TempNPC",				pos = "Q19015_Sayu2_Pos",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["1901504"] = 	{		npcs = 		{			{				id = 12170,				alias = "Npc12170",				script = "Actor/Npc/TempNPC",				pos = "Q19015_Sayu3_Pos",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 504,				alias = "Coop_Sayu",				script = "Actor/Npc/TempNPC",				pos = "Q19015_Sayu3_Pos",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3106,				alias = "Npc3106",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q19015_Wunv3_Pos",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 1040,				alias = "Npc1040",				script = "Actor/Npc/TempNPC",				pos = "Q19015_Sayu3_Pos",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},	},	["1901505"] = 	{		npcs = 		{			{				id = 504,				alias = "Coop_Sayu",				script = "Actor/Npc/TempNPC",				pos = "Q19015_Sayu3_Pos",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3106,				alias = "Npc3106",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q19015_Wunv3_Pos",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 1040,				alias = "Npc1040",				script = "Actor/Npc/TempNPC",				pos = "Q19015_Sayu3_Pos",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["1901506"] = 	{		npcs = 		{			{				id = 12170,				alias = "Npc12170",				script = "Actor/Npc/TempNPC",				pos = "Q19015_Sayu3_Pos",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 504,				alias = "Coop_Sayu",				script = "Actor/Npc/TempNPC",				pos = "Q19015_Sayu3_Pos",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3106,				alias = "Npc3106",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q19015_Wunv3_Pos",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 1040,				alias = "Npc1040",				script = "Actor/Npc/TempNPC",				pos = "Q19015_Sayu3_Pos",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},	},	["1901507"] = 	{		npcs = 		{			{				id = 12170,				alias = "Npc12170",				script = "Actor/Npc/TempNPC",				pos = "Q19015_Sayu4_Pos",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 504,				alias = "Coop_Sayu",				script = "Actor/Npc/TempNPC",				pos = "Q19015_Sayu4_Pos",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3106,				alias = "Npc3106",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q19015_Wunv3_Pos",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 1040,				alias = "Npc1040",				script = "Actor/Npc/TempNPC",				pos = "Q19015_Sayu4_Pos",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},	},	["1901508"] = 	{		npcs = 		{			{				id = 504,				alias = "Coop_Sayu",				script = "Actor/Npc/TempNPC",				pos = "Q19015_Sayu2_Pos",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3106,				alias = "Npc3106",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q19015_Wunv2_Pos",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 1040,				alias = "Npc1040",				script = "Actor/Npc/TempNPC",				pos = "Q19015_Sayu2_Pos",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["1901509"] = 	{		npcs = 		{			{				id = 504,				alias = "Coop_Sayu",				script = "Actor/Npc/TempNPC",				pos = "Q19015_Sayu2_Pos",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3106,				alias = "Npc3106",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q19015_Wunv3_Pos",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 1040,				alias = "Npc1040",				script = "Actor/Npc/TempNPC",				pos = "Q19015_Sayu2_Pos",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["1901510"] = 	{		npcs = 		{			{				id = 12170,				alias = "Npc12170",				script = "Actor/Npc/TempNPC",				pos = "Q19015_Sayu2_Pos",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 504,				alias = "Coop_Sayu",				script = "Actor/Npc/TempNPC",				pos = "Q19015_Sayu2_Pos",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3106,				alias = "Npc3106",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q19015_Wunv3_Pos",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 1040,				alias = "Npc1040",				script = "Actor/Npc/TempNPC",				pos = "Q19015_Sayu2_Pos",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},	},	["1901511"] = 	{		npcs = 		{			{				id = 504,				alias = "Coop_Sayu",				script = "Actor/Npc/TempNPC",				pos = "Q19015_Sayu1_Pos",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3106,				alias = "Npc3106",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q19015_Player1_Pos",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 1040,				alias = "Npc1040",				script = "Actor/Npc/TempNPC",				pos = "Q19015_Sayu1_Pos",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},		transmit_points = 		{			{				point_id = 1,				scene_id = 3,				pos = "Q19010_Player_Pos",			},		},	},}-- 校验数据 结束------------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1, L11_1
+main_id = 19015
+L0_1 = {}
+L1_1 = 1901501
+L2_1 = 1901502
+L3_1 = 1901511
+L4_1 = 1901503
+L5_1 = 1901508
+L6_1 = 1901509
+L7_1 = 1901510
+L8_1 = 1901504
+L9_1 = 1901505
+L10_1 = 1901506
+L11_1 = 1901507
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+L0_1[11] = L11_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L4_1 = "502"
+L3_1[1] = L4_1
+L2_1[1] = L3_1
+L1_1.QUEST_EXEC_REMOVE_TRIAL_AVATAR = L2_1
+L2_1 = {}
+L3_1 = {}
+L4_1 = "133220674"
+L5_1 = ""
+L3_1[1] = L4_1
+L3_1[2] = L5_1
+L4_1 = {}
+L5_1 = "133220647"
+L6_1 = ""
+L4_1[1] = L5_1
+L4_1[2] = L6_1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP = L2_1
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L4_1 = "502"
+L3_1[1] = L4_1
+L2_1[1] = L3_1
+L1_1.QUEST_EXEC_REMOVE_TRIAL_AVATAR = L2_1
+L2_1 = {}
+L3_1 = {}
+L4_1 = "133220674"
+L5_1 = ""
+L3_1[1] = L4_1
+L3_1[2] = L5_1
+L4_1 = {}
+L5_1 = "133220647"
+L6_1 = ""
+L4_1[1] = L5_1
+L4_1[2] = L6_1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP = L2_1
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["1901501"] = L1_1
+L1_1 = {}
+L0_1["1901504"] = L1_1
+L1_1 = {}
+L0_1["1901506"] = L1_1
+L1_1 = {}
+L0_1["1901507"] = L1_1
+L1_1 = {}
+L0_1["1901510"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12170
+L3_1.alias = "Npc12170"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q19015_Sayu1_Pos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 504
+L4_1.alias = "Coop_Sayu"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q19015_Sayu1_Pos"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3106
+L5_1.alias = "Npc3106"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q19015_Player1_Pos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1040
+L6_1.alias = "Npc1040"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q19015_Sayu1_Pos"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["1901501"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 504
+L3_1.alias = "Coop_Sayu"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q19015_Sayu1_Pos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3106
+L4_1.alias = "Npc3106"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q19015_Player1_Pos"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1040
+L5_1.alias = "Npc1040"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q19015_Sayu1_Pos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q19010_Player_Pos"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["1901502"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 504
+L3_1.alias = "Coop_Sayu"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q19015_Sayu2_Pos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3106
+L4_1.alias = "Npc3106"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q19015_Wunv2_Pos"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1040
+L5_1.alias = "Npc1040"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q19015_Sayu2_Pos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["1901503"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12170
+L3_1.alias = "Npc12170"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q19015_Sayu3_Pos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 504
+L4_1.alias = "Coop_Sayu"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q19015_Sayu3_Pos"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3106
+L5_1.alias = "Npc3106"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q19015_Wunv3_Pos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1040
+L6_1.alias = "Npc1040"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q19015_Sayu3_Pos"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["1901504"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 504
+L3_1.alias = "Coop_Sayu"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q19015_Sayu3_Pos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3106
+L4_1.alias = "Npc3106"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q19015_Wunv3_Pos"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1040
+L5_1.alias = "Npc1040"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q19015_Sayu3_Pos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["1901505"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12170
+L3_1.alias = "Npc12170"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q19015_Sayu3_Pos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 504
+L4_1.alias = "Coop_Sayu"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q19015_Sayu3_Pos"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3106
+L5_1.alias = "Npc3106"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q19015_Wunv3_Pos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1040
+L6_1.alias = "Npc1040"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q19015_Sayu3_Pos"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["1901506"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12170
+L3_1.alias = "Npc12170"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q19015_Sayu4_Pos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 504
+L4_1.alias = "Coop_Sayu"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q19015_Sayu4_Pos"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3106
+L5_1.alias = "Npc3106"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q19015_Wunv3_Pos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1040
+L6_1.alias = "Npc1040"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q19015_Sayu4_Pos"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["1901507"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 504
+L3_1.alias = "Coop_Sayu"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q19015_Sayu2_Pos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3106
+L4_1.alias = "Npc3106"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q19015_Wunv2_Pos"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1040
+L5_1.alias = "Npc1040"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q19015_Sayu2_Pos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["1901508"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 504
+L3_1.alias = "Coop_Sayu"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q19015_Sayu2_Pos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3106
+L4_1.alias = "Npc3106"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q19015_Wunv3_Pos"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1040
+L5_1.alias = "Npc1040"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q19015_Sayu2_Pos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["1901509"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12170
+L3_1.alias = "Npc12170"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q19015_Sayu2_Pos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 504
+L4_1.alias = "Coop_Sayu"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q19015_Sayu2_Pos"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3106
+L5_1.alias = "Npc3106"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q19015_Wunv3_Pos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1040
+L6_1.alias = "Npc1040"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q19015_Sayu2_Pos"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["1901510"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 504
+L3_1.alias = "Coop_Sayu"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q19015_Sayu1_Pos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3106
+L4_1.alias = "Npc3106"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q19015_Player1_Pos"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1040
+L5_1.alias = "Npc1040"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q19015_Sayu1_Pos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q19010_Player_Pos"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["1901511"] = L1_1
+quest_data = L0_1

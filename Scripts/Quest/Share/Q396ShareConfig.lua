@@ -1,254 +1,236 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1
 main_id = 396
-
-sub_ids =
-{
-    39601,
-    39602,
-    39603,
-    39604,
-    39605,
-    39606,
-}
-
-rewind_data = {}
-
-rewind_data["39601"] = 
-{
-    npcs = { 
-        {
-            id = 1008,
-            alias = "Barbara",
-            script = "Actor/Quest/Q413/Barbara",
-            pos = "Q396BBR",
-            data_index = 0,
-            scene_id  = 1008,
-            room_id = 1,
-
-        },
-        {
-            id = 1001,
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            pos = "Q39602Wendy",
-            data_index = 0,
-            scene_id  = 1008,
-            room_id = 1,
-
-        },
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q39602Qin",
-            data_index = 0,
-            scene_id  = 1008,
-            room_id = 1,
-
-        },
-    }
-}
-
-rewind_data["39602"] = 
-{
-    npcs = { 
-        {
-            id = 1008,
-            alias = "Barbara",
-            script = "Actor/Quest/Q413/Barbara",
-            pos = "Q396BBR",
-            data_index = 0,
-            scene_id  = 1008,
-            room_id = 1,
-
-        },
-        {
-            id = 1001,
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            pos = "Q39602Wendy",
-            data_index = 0,
-            scene_id  = 1008,
-            room_id = 1,
-
-        },
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q39602Qin",
-            data_index = 0,
-            scene_id  = 1008,
-            room_id = 1,
-
-        },
-    }
-}
-
-rewind_data["39603"] = 
-{
-    npcs = {
-        {
-            id = 1008,
-            alias = "Barbara",
-            script = "Actor/Quest/Q413/Barbara",
-            pos = "Q396BBR",
-            data_index = 0,
-            scene_id  = 1008,
-            room_id = 1,
-
-        },
-        {
-            id = 1001,
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            pos = "Q39602Wendy",
-            data_index = 0,
-            scene_id  = 1008,
-            room_id = 1,
-
-        },
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q39602Qin",
-            data_index = 0,
-            scene_id  = 1008,
-            room_id = 1,
-
-        },
-    }
-}
-
-rewind_data["39604"] = 
-{
-    npcs = {
-        {
-            id = 1001,
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            pos = "Q39602Wendy",
-            data_index = 0,
-            scene_id  = 1008,
-            room_id = 1,
-
-        },
-    }
-}
-
-rewind_data["39605"] = 
-{
-    npcs = {
-        {
-            id = 1008,
-            alias = "Barbara",
-            script = "Actor/Quest/Q413/Barbara",
-            pos = "Q39605BBR",
-            scene_id  = 3,
-            room_id = 0,
-            data_index = 0,
-        },
-    },
-    avatar = {
-        scene_id = 3,
-        pos = "Q39605Player"
-    },
-}
-
-rewind_data["39606"] = 
-{
-    npcs = {
-        {
-            id = 1001,
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            pos = "Q371Wendy",
-            data_index = 0,
-        },
-    }
-}
-
-quest_data = {}
-
-quest_data["39602"] = 
-{
-    npcs = { 
-        {
-            id = 1008,
-            alias = "Barbara",
-            script = "Actor/Quest/Q413/Barbara",
-            pos = "Q396BBR",
-            scene_id  = 1008,
-            room_id = 1,
-            data_index = 1,
-        },
-        {
-            id = 1001,
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            pos = "Q39602Wendy",
-            scene_id  = 1008,
-            room_id = 1,
-            data_index = 2,
-        },
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q39602Qin",
-            scene_id  = 1008,
-            room_id = 1,
-            data_index = 3,
-        },
-        {
-            id = 1008,
-            alias = "Barbara",
-            script = "Actor/Quest/Q413/Barbara",
-            pos = "Q39606Barbara",
-            scene_id  = 3,
-            room_id = 0,
-            data_index = 4,
-        },
-    },
-    transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 3,
-            pos = "Q39606Player"
-        },
-    }
-}
-
-quest_data["39604"] = 
-{
-    npcs = { 
-        {
-            id = 1001,
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            pos = "Q39604Wendy2",
-            scene_id  = 3,
-            room_id = 0,
-            data_index = 1,
-        },
-    }
-}
-
-quest_data["39606"] = 
-{
-    npcs = { 
-        {
-            id = 1008,
-            alias = "Barbara",
-            script = "Actor/Quest/Q413/Barbara",
-            pos = "Q39606Barbara",
-            scene_id  = 3,
-            room_id = 0,
-            data_index = 0,
-        },
-    }
-}
+L0_1 = {}
+L1_1 = 39601
+L2_1 = 39602
+L3_1 = 39603
+L4_1 = 39604
+L5_1 = 39605
+L6_1 = 39606
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1008
+L3_1.alias = "Barbara"
+L3_1.script = "Actor/Quest/Q413/Barbara"
+L3_1.pos = "Q396BBR"
+L3_1.data_index = 0
+L3_1.scene_id = 1008
+L3_1.room_id = 1
+L4_1 = {}
+L4_1.id = 1001
+L4_1.alias = "Wendy"
+L4_1.script = "Actor/Quest/Q301/Wendy301"
+L4_1.pos = "Q39602Wendy"
+L4_1.data_index = 0
+L4_1.scene_id = 1008
+L4_1.room_id = 1
+L5_1 = {}
+L5_1.id = 1006
+L5_1.alias = "Qin"
+L5_1.script = "Actor/Quest/Q411/Qin"
+L5_1.pos = "Q39602Qin"
+L5_1.data_index = 0
+L5_1.scene_id = 1008
+L5_1.room_id = 1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["39601"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1008
+L3_1.alias = "Barbara"
+L3_1.script = "Actor/Quest/Q413/Barbara"
+L3_1.pos = "Q396BBR"
+L3_1.data_index = 0
+L3_1.scene_id = 1008
+L3_1.room_id = 1
+L4_1 = {}
+L4_1.id = 1001
+L4_1.alias = "Wendy"
+L4_1.script = "Actor/Quest/Q301/Wendy301"
+L4_1.pos = "Q39602Wendy"
+L4_1.data_index = 0
+L4_1.scene_id = 1008
+L4_1.room_id = 1
+L5_1 = {}
+L5_1.id = 1006
+L5_1.alias = "Qin"
+L5_1.script = "Actor/Quest/Q411/Qin"
+L5_1.pos = "Q39602Qin"
+L5_1.data_index = 0
+L5_1.scene_id = 1008
+L5_1.room_id = 1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["39602"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1008
+L3_1.alias = "Barbara"
+L3_1.script = "Actor/Quest/Q413/Barbara"
+L3_1.pos = "Q396BBR"
+L3_1.data_index = 0
+L3_1.scene_id = 1008
+L3_1.room_id = 1
+L4_1 = {}
+L4_1.id = 1001
+L4_1.alias = "Wendy"
+L4_1.script = "Actor/Quest/Q301/Wendy301"
+L4_1.pos = "Q39602Wendy"
+L4_1.data_index = 0
+L4_1.scene_id = 1008
+L4_1.room_id = 1
+L5_1 = {}
+L5_1.id = 1006
+L5_1.alias = "Qin"
+L5_1.script = "Actor/Quest/Q411/Qin"
+L5_1.pos = "Q39602Qin"
+L5_1.data_index = 0
+L5_1.scene_id = 1008
+L5_1.room_id = 1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["39603"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1001
+L3_1.alias = "Wendy"
+L3_1.script = "Actor/Quest/Q301/Wendy301"
+L3_1.pos = "Q39602Wendy"
+L3_1.data_index = 0
+L3_1.scene_id = 1008
+L3_1.room_id = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["39604"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1008
+L3_1.alias = "Barbara"
+L3_1.script = "Actor/Quest/Q413/Barbara"
+L3_1.pos = "Q39605BBR"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L2_1.scene_id = 3
+L2_1.pos = "Q39605Player"
+L1_1.avatar = L2_1
+L0_1["39605"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1001
+L3_1.alias = "Wendy"
+L3_1.script = "Actor/Quest/Q301/Wendy301"
+L3_1.pos = "Q371Wendy"
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["39606"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1008
+L3_1.alias = "Barbara"
+L3_1.script = "Actor/Quest/Q413/Barbara"
+L3_1.pos = "Q396BBR"
+L3_1.scene_id = 1008
+L3_1.room_id = 1
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1001
+L4_1.alias = "Wendy"
+L4_1.script = "Actor/Quest/Q301/Wendy301"
+L4_1.pos = "Q39602Wendy"
+L4_1.scene_id = 1008
+L4_1.room_id = 1
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1006
+L5_1.alias = "Qin"
+L5_1.script = "Actor/Quest/Q411/Qin"
+L5_1.pos = "Q39602Qin"
+L5_1.scene_id = 1008
+L5_1.room_id = 1
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1008
+L6_1.alias = "Barbara"
+L6_1.script = "Actor/Quest/Q413/Barbara"
+L6_1.pos = "Q39606Barbara"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q39606Player"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["39602"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1001
+L3_1.alias = "Wendy"
+L3_1.script = "Actor/Quest/Q301/Wendy301"
+L3_1.pos = "Q39604Wendy2"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["39604"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1008
+L3_1.alias = "Barbara"
+L3_1.script = "Actor/Quest/Q413/Barbara"
+L3_1.pos = "Q39606Barbara"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["39606"] = L1_1

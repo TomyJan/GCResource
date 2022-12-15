@@ -1,3 +1,57 @@
--- 任务配置数据开始-----------------------------
-
-main_id = 72231sub_ids = {	7223101,}-- 任务配置数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 父任务执行项数据开始-----------------------------finish_action = {	CLIENT = { },	SERVER = { },}fail_action = {	CLIENT = { },	SERVER = { },}cancel_action = {	CLIENT = { },	SERVER = { },}-- 父任务执行项数据结束------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- Actor模块数据开始---------------------------------- 空-- Actor模块数据结束---------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 文本模块数据开始----------------------------------- 空-- 文本模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 路点模块数据开始----------------------------------- 空-- 路点模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 校验数据 开始------------------------------------ 和任务lua中生成NPC/Monster/Gadget/Item等对应quest_data = {	["7223101"] = 	{		npcs = 		{			{				id = 3182,				alias = "Npc3182",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ72216_Chunping",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3180,				alias = "Npc3180",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ72231_Yuezi",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3181,				alias = "Npc3181",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ72231_Dayou",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},}-- 校验数据 结束------------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1
+main_id = 72231
+L0_1 = {}
+L1_1 = 7223101
+L0_1[1] = L1_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3182
+L3_1.alias = "Npc3182"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "WQ72216_Chunping"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3180
+L4_1.alias = "Npc3180"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "WQ72231_Yuezi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3181
+L5_1.alias = "Npc3181"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "WQ72231_Dayou"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["7223101"] = L1_1
+quest_data = L0_1

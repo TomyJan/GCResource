@@ -1,192 +1,198 @@
--- 父任务id
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1
 main_id = 22004
-
--- 子任务id
-sub_ids = {
-	2200401,
-	2200402,
-	2200403,
-	2200404,
-	2200405
-}
-
--- 存放断线重连生成内容，和questdata配的存档点对应
-rewind_data = {
-	["2200401"] = {
-		npcs = {
-			{
-				id = 220101,
-				alias = "Npc220101",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22004JiangXueBorn",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 0,
-			}
-		}
-	},
-	["2200402"] = {
-		npcs = {
-			{
-				id = 220101,
-				alias = "Npc220101",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22004JiangXueBorn",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 0,
-			}
-		}
-	},
-	["2200403"] = {
-		npcs = {
-			{
-				id = 220101,
-				alias = "Npc220101",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22004JiangXueBorn",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 0,
-			}
-		}
-	},
-	["2200404"] = {
-		npcs = {
-			{
-				id = 220101,
-				alias = "Npc220101",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22004JiangXueBorn",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 0,
-			}
-		}
-	},
-	["2200405"] = {
-		npcs = {
-			{
-				id = 220101,
-				alias = "Npc220101",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22004JiangXueBorn",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 0,
-			}
-		}
-	}
-}
-
--- 校验用，和任务lua中生成NPC/monster/gadget/item等对应
-quest_data = {
-	["2200401"] = {
-		npcs = {
-			{
-				id = 220101,
-				alias = "Npc220101",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22004JiangXueBorn",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-					id = 1005,
-					alias = "Paimon",
-					script = "Actor/Quest/Q352/Paimon",
-					pos = "Q22004JiangXueBorn",
-					scene_id = 3,
-					data_index = 2,
-			},
-		}
-	},
-	["2200402"] = {
-		npcs = {
-			{
-				id = 220101,
-				alias = "Npc220101",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22004JiangXueBorn",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 0,
-			}
-		}
-	},
-	["2200403"] = {
-		npcs = {
-			{
-				id = 220101,
-				alias = "Npc220101",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22004JiangXueBorn",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 0,
-			}
-		}
-	},
-	["2200404"] = {
-		npcs = {
-			{
-				id = 220101,
-				alias = "Npc220101",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22004JiangXueBorn",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 0,
-			}
-		}
-	},
-	["2200405"] = {
-		npcs = {
-			{
-				id = 220101,
-				alias = "Npc220101",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22004JiangXueBorn",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 0,
-			},
-			{
-					id = 1005,
-					alias = "Paimon",
-					script = "Actor/Quest/Q352/Paimon",
-					pos = "Q22004JiangXueBorn",
-					scene_id = 3,
-					data_index = 2,
-			},
-		}
-	}
-}
-
-finish_action = {}
-fail_action = {}
-cancel_action = {}
-
-finish_action =
-{
-	CLIENT = {},
-	SERVER = {
-		QUEST_EXEC_REFRESH_GROUP_SUITE =
-		{
-			{"3","133104901,1"},
-		},
-	},
-}
-
-
-cancel_action =
-{
-	CLIENT = {},
-	SERVER = {
-		QUEST_EXEC_REFRESH_GROUP_SUITE =
-		{
-      {"3","133104901,1"},
-		},
-	},
-}
+L0_1 = {}
+L1_1 = 2200401
+L2_1 = 2200402
+L3_1 = 2200403
+L4_1 = 2200404
+L5_1 = 2200405
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 220101
+L3_1.alias = "Npc220101"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q22004JiangXueBorn"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2200401"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 220101
+L3_1.alias = "Npc220101"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q22004JiangXueBorn"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2200402"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 220101
+L3_1.alias = "Npc220101"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q22004JiangXueBorn"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2200403"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 220101
+L3_1.alias = "Npc220101"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q22004JiangXueBorn"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2200404"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 220101
+L3_1.alias = "Npc220101"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q22004JiangXueBorn"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2200405"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 220101
+L3_1.alias = "Npc220101"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q22004JiangXueBorn"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1005
+L4_1.alias = "Paimon"
+L4_1.script = "Actor/Quest/Q352/Paimon"
+L4_1.pos = "Q22004JiangXueBorn"
+L4_1.scene_id = 3
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["2200401"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 220101
+L3_1.alias = "Npc220101"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q22004JiangXueBorn"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2200402"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 220101
+L3_1.alias = "Npc220101"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q22004JiangXueBorn"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2200403"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 220101
+L3_1.alias = "Npc220101"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q22004JiangXueBorn"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2200404"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 220101
+L3_1.alias = "Npc220101"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q22004JiangXueBorn"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.id = 1005
+L4_1.alias = "Paimon"
+L4_1.script = "Actor/Quest/Q352/Paimon"
+L4_1.pos = "Q22004JiangXueBorn"
+L4_1.scene_id = 3
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["2200405"] = L1_1
+quest_data = L0_1
+L0_1 = {}
+finish_action = L0_1
+L0_1 = {}
+fail_action = L0_1
+L0_1 = {}
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L4_1 = "3"
+L5_1 = "133104901,1"
+L3_1[1] = L4_1
+L3_1[2] = L5_1
+L2_1[1] = L3_1
+L1_1.QUEST_EXEC_REFRESH_GROUP_SUITE = L2_1
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L4_1 = "3"
+L5_1 = "133104901,1"
+L3_1[1] = L4_1
+L3_1[2] = L5_1
+L2_1[1] = L3_1
+L1_1.QUEST_EXEC_REFRESH_GROUP_SUITE = L2_1
+L0_1.SERVER = L1_1
+cancel_action = L0_1

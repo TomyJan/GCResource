@@ -466,7 +466,7 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_622076(context, evt)
 	-- 判断任务7100522未完成
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 7100522) == QuestState.UNFINISHED and
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 7100522) == QuestState.UNFINISHED and
 	evt.param1 == 622076 then
 		return true
 	end

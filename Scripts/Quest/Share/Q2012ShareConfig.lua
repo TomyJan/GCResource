@@ -1,537 +1,480 @@
--- 任务配置数据开始-----------------------------
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1, L11_1, L12_1, L13_1, L14_1, L15_1, L16_1, L17_1
 main_id = 2012
-
-sub_ids = 
-{
-	201201,
-	201202,
-	201203,
-	201204,
-	201205,
-	201206,
-	201210,
-	201211,
-	201216,
-	201217,
-	201212,
-	201207,
-	201213,
-	201208,
-	201214,
-	201209,
-	201215,
-}
--- 任务配置数据结束---------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
--- 父任务执行项数据开始-----------------------------
-finish_action = 
-{
-	CLIENT = { },
-	SERVER = { },
-}
-
-fail_action = 
-{
-	CLIENT = { },
-	SERVER = { },
-}
-
-cancel_action = 
-{
-	CLIENT = { },
-	SERVER = { },
-}
--- 父任务执行项数据结束-----------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
--- Actor模块数据开始--------------------------------
--- 空
--- Actor模块数据结束--------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
--- 文本模块数据开始---------------------------------
--- 空
--- 文本模块数据结束---------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
--- 路点模块数据开始---------------------------------
--- 空
--- 路点模块数据结束---------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-
--- 断线重连生成内容 开始----------------------------
--- 和questdata配的存档点对应
-rewind_data = 
-{
-	["201201"] = { },
-	["201202"] = { },
-	["201203"] = { },
-	["201204"] = { 
-		npcs = 
-		{
-			{
-				id = 1033,
-				alias = "Npc1033",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q2012TuomaWait01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-	},
-	["201205"] = { 
-		npcs = 
-		{
-			{
-				id = 12043,
-				alias = "Npc12043",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q2012Heishang01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-	},
-	["201206"] = {
-		npcs = 
-		{
-			{
-				id = 1033,
-				alias = "Npc1033",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q2012TuomaWait01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-	 },
-	["201207"] = 
-	{
-		-- npcs = 
-		-- {
-		-- 	{
-		-- 		id = 12044,
-		-- 		alias = "Npc12044",
-		-- 		script = "Actor/Npc/NpcFSMBehaviour",
-		-- 		pos = "Q2012Zuqing01",
-		-- 		scene_id = 3,
-		-- 		room_id = 0,
-		-- 		data_index = 1,
-		-- 	},
-		-- },
-	},
-	["201208"] = { },
-	["201209"] = { },
-	["201210"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 12043,
-				alias = "Npc12043",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q2012Heishang01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-	},
-	["201211"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 12043,
-				alias = "Npc12043",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q2012Heishang01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-	},
-	["201216"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 12043,
-				alias = "Npc12043",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q2012Heishang01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-	},
-	["201217"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 12043,
-				alias = "Npc12043",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q2012Heishang01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-	},
-	["201212"] = { },
-	["201213"] = { },
-	["201214"] = { },
-	["201215"] = { 
-		npcs = 
-		{
-			{
-				id = 3084,
-				alias = "Npc3084",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q2012JiulixuLast",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 3083,
-				alias = "Npc3083",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q2012LiyueShangren01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-		},
-	},
-}
--- 断线重连生成内容 结束----------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
--- 校验数据 开始----------------------------------
--- 和任务lua中生成NPC/Monster/Gadget/Item等对应
-quest_data = 
-{
-	["201201"] = { 
-		npcs = 
-		{
-			{
-				id = 3075,
-				alias = "Npc3075",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q2012Check01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 1033,
-				alias = "Npc1033",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q2012Tuoma01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-		},
-	},
-	["201202"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 3089,
-				alias = "Npc3089",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q2012Check02",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 1033,
-				alias = "Npc1033",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q2012Tuoma02",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-		},
-	},
-	["201203"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 3084,
-				alias = "Npc3084",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q2012Wgshanghui01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 1033,
-				alias = "Npc1033",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q2012TuomaWait01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-		},
-	},
-	["201204"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 12043,
-				alias = "Npc12043",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q2012Heishang01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 3084,
-				alias = "Npc3084",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q2012Wgshanghui01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-		},
-	},
-	["201205"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 1033,
-				alias = "Npc1033",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q2012TuomaWait01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-	},
-	["201206"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 12043,
-				alias = "Npc12043",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q2012Heishang01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-	},
-	["201207"] = 
-	{
-		transmit_points = {
-			{
-				point_id = 1,
-				scene_id = 3,
-				pos = "Q2012AvatarFail"
-			},
-		},
-		npcs = 
-		{
-			{
-				alias = "Npc12051",
-				script = "Actor/Npc/FollowNPC",
-				id = 12051,
-				pos = "Q2012Zuqing01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 12043,
-				alias = "Npc12043",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q2012Heishang02",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-			{
-				id = 3078,
-				alias = "Npc3078",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q2012Liangzi01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 3,
-			},
-		},
-	},
-	["201208"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 12043,
-				alias = "Npc12043",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q2012Heishang02",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-		gadgets = 
-		{
-			{
-				id = 71700283,
-				alias = "Gadget71700283",
-				pos = "Q2012ZhangbenPos",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-	},
-	["201209"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 3084,
-				alias = "Npc3084",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q2012JiulixuLast",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 12044,
-				alias = "Npc12044",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q2012QCLLast",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-			{
-				id = 3083,
-				alias = "Npc3083",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q2012LiyueShangren01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 3,
-			},
-			{
-				id = 12045,
-				alias = "Npc12045",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q2012Player03",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 4,
-			},
-		},
-	},
-	["201210"] = { },
-	["201211"] = { },
-	["201212"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 12043,
-				alias = "Npc12043",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q2012Heishang03",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 12044,
-				alias = "Npc12044",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q2012Zuqing01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-		},
-	},
-	["201213"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 12043,
-				alias = "Npc12043",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q2012Heishang02",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 12044,
-				alias = "Npc12044",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q2012Zuqing01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-		},
-	},
-	["201214"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 12043,
-				alias = "Npc12043",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q2012Heishang02",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-	},
-	["201215"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 1033,
-				alias = "Npc1033",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q2012TuomaLast",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-	},
-}
--- 校验数据 结束----------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+L0_1 = {}
+L1_1 = 201201
+L2_1 = 201202
+L3_1 = 201203
+L4_1 = 201204
+L5_1 = 201205
+L6_1 = 201206
+L7_1 = 201210
+L8_1 = 201211
+L9_1 = 201216
+L10_1 = 201217
+L11_1 = 201212
+L12_1 = 201207
+L13_1 = 201213
+L14_1 = 201208
+L15_1 = 201214
+L16_1 = 201209
+L17_1 = 201215
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+L0_1[11] = L11_1
+L0_1[12] = L12_1
+L0_1[13] = L13_1
+L0_1[14] = L14_1
+L0_1[15] = L15_1
+L0_1[16] = L16_1
+L0_1[17] = L17_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["201201"] = L1_1
+L1_1 = {}
+L0_1["201202"] = L1_1
+L1_1 = {}
+L0_1["201203"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1033
+L3_1.alias = "Npc1033"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q2012TuomaWait01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["201204"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12043
+L3_1.alias = "Npc12043"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q2012Heishang01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["201205"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1033
+L3_1.alias = "Npc1033"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q2012TuomaWait01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["201206"] = L1_1
+L1_1 = {}
+L0_1["201207"] = L1_1
+L1_1 = {}
+L0_1["201208"] = L1_1
+L1_1 = {}
+L0_1["201209"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12043
+L3_1.alias = "Npc12043"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q2012Heishang01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["201210"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12043
+L3_1.alias = "Npc12043"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q2012Heishang01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["201211"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12043
+L3_1.alias = "Npc12043"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q2012Heishang01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["201216"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12043
+L3_1.alias = "Npc12043"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q2012Heishang01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["201217"] = L1_1
+L1_1 = {}
+L0_1["201212"] = L1_1
+L1_1 = {}
+L0_1["201213"] = L1_1
+L1_1 = {}
+L0_1["201214"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3084
+L3_1.alias = "Npc3084"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q2012JiulixuLast"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3083
+L4_1.alias = "Npc3083"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q2012LiyueShangren01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["201215"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3075
+L3_1.alias = "Npc3075"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q2012Check01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1033
+L4_1.alias = "Npc1033"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q2012Tuoma01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["201201"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3089
+L3_1.alias = "Npc3089"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q2012Check02"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1033
+L4_1.alias = "Npc1033"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q2012Tuoma02"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["201202"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3084
+L3_1.alias = "Npc3084"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q2012Wgshanghui01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1033
+L4_1.alias = "Npc1033"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q2012TuomaWait01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["201203"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12043
+L3_1.alias = "Npc12043"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q2012Heishang01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3084
+L4_1.alias = "Npc3084"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q2012Wgshanghui01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["201204"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1033
+L3_1.alias = "Npc1033"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q2012TuomaWait01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["201205"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12043
+L3_1.alias = "Npc12043"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q2012Heishang01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["201206"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q2012AvatarFail"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc12051"
+L3_1.script = "Actor/Npc/FollowNPC"
+L3_1.id = 12051
+L3_1.pos = "Q2012Zuqing01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 12043
+L4_1.alias = "Npc12043"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q2012Heishang02"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3078
+L5_1.alias = "Npc3078"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q2012Liangzi01"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["201207"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12043
+L3_1.alias = "Npc12043"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q2012Heishang02"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 71700283
+L3_1.alias = "Gadget71700283"
+L3_1.pos = "Q2012ZhangbenPos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["201208"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3084
+L3_1.alias = "Npc3084"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q2012JiulixuLast"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 12044
+L4_1.alias = "Npc12044"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q2012QCLLast"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3083
+L5_1.alias = "Npc3083"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q2012LiyueShangren01"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 12045
+L6_1.alias = "Npc12045"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q2012Player03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["201209"] = L1_1
+L1_1 = {}
+L0_1["201210"] = L1_1
+L1_1 = {}
+L0_1["201211"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12043
+L3_1.alias = "Npc12043"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q2012Heishang03"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 12044
+L4_1.alias = "Npc12044"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q2012Zuqing01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["201212"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12043
+L3_1.alias = "Npc12043"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q2012Heishang02"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 12044
+L4_1.alias = "Npc12044"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q2012Zuqing01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["201213"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12043
+L3_1.alias = "Npc12043"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q2012Heishang02"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["201214"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1033
+L3_1.alias = "Npc1033"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q2012TuomaLast"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["201215"] = L1_1
+quest_data = L0_1

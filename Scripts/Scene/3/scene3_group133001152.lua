@@ -115,7 +115,7 @@ function action_EVENT_ENTER_REGION_190(context, evt)
 	-- 在0面前， 5 到 10 范围里，15 角度内，刷{780,781}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {780,781}, ranges = { 5, 10 }, angle = 15 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	-- 将本组内变量名为 "lock" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "lock", 1) then
@@ -154,7 +154,7 @@ function action_EVENT_ENTER_REGION_191(context, evt)
 	-- 在0面前， 5 到 10 范围里，15 角度内，刷{781,779}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {781,779}, ranges = { 5, 10 }, angle = 15 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	-- 将本组内变量名为 "lock" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "lock", 1) then
@@ -188,7 +188,7 @@ function action_EVENT_ENTER_REGION_262(context, evt)
 	-- 在0面前， 5 到 10 范围里，15 角度内，刷{781,779,780,1076}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {781,779,780,1076}, ranges = { 5, 10 }, angle = 15 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	return 0
 end
@@ -215,7 +215,7 @@ function action_EVENT_ENTER_REGION_324(context, evt)
 	-- 在0面前， 5 到 10 范围里，15 角度内，刷{780,781}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {780,781}, ranges = { 5, 10 }, angle = 15 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	-- 将本组内变量名为 "lock" 的变量设置为 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "lock", 1) then

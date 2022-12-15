@@ -93,7 +93,7 @@ suites = {
 -- 触发条件
 function condition_EVENT_ENTER_REGION_911001(context, evt)
 	-- 判断角色数量不少于1
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 2004203) == QuestState.UNFINISHED and evt.param1 == defs.gadget_1 and ScriptLib.GetGroupVariableValue(context, "AnyTrigger") == 0 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 2004203) == QuestState.UNFINISHED and evt.param1 == defs.gadget_1 and ScriptLib.GetGroupVariableValue(context, "AnyTrigger") == 0 then
 		return true
 	end
 	return false
@@ -119,7 +119,7 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_911002(context, evt)
 	-- 判断角色数量不少于1
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 2004203) == QuestState.UNFINISHED and evt.param1 == defs.gadget_2 and ScriptLib.GetGroupVariableValue(context, "AnyTrigger") == 0 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 2004203) == QuestState.UNFINISHED and evt.param1 == defs.gadget_2 and ScriptLib.GetGroupVariableValue(context, "AnyTrigger") == 0 then
 		return true
 	end
 	return false

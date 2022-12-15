@@ -1,3 +1,132 @@
--- 任务配置数据开始-----------------------------
-
-main_id = 71809sub_ids = {	7180901,	7180902,	7180903,	7180904,	7180905,	7180906,	7180907,	7180908,	7180909,}-- 任务配置数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 父任务执行项数据开始-----------------------------finish_action = {	CLIENT = { },	SERVER = { },}fail_action = {	CLIENT = { },	SERVER = { },}cancel_action = {	CLIENT = { },	SERVER = { },}-- 父任务执行项数据结束------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- Actor模块数据开始---------------------------------- 空-- Actor模块数据结束---------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 文本模块数据开始----------------------------------- 空-- 文本模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 路点模块数据开始----------------------------------- 空-- 路点模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 断线重连生成内容 开始------------------------------ 和questdata配的存档点对应rewind_data = {	["7180902"] = { },	["7180903"] = { },	["7180904"] = { },	["7180908"] = 	{		npcs = 		{			{				id = 2060,				alias = "Npc2060",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71809Haozai",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 2011,				alias = "Npc2011",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71809Fanerye",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["7180909"] = 	{		npcs = 		{			{				id = 2060,				alias = "Npc2060",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71809Haozai",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 2011,				alias = "Npc2011",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71809Fanerye",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},}-- 断线重连生成内容 结束------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 校验数据 开始------------------------------------ 和任务lua中生成NPC/Monster/Gadget/Item等对应quest_data = {	["7180901"] = { },	["7180902"] = { },	["7180903"] = { },	["7180904"] = 	{		npcs = 		{			{				id = 2060,				alias = "Npc2060",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71809Haozai",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 2011,				alias = "Npc2011",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71809Fanerye",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["7180905"] = { },	["7180906"] = { },	["7180907"] = { },	["7180908"] = { },	["7180909"] = { },}-- 校验数据 结束------------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1
+main_id = 71809
+L0_1 = {}
+L1_1 = 7180901
+L2_1 = 7180902
+L3_1 = 7180903
+L4_1 = 7180904
+L5_1 = 7180905
+L6_1 = 7180906
+L7_1 = 7180907
+L8_1 = 7180908
+L9_1 = 7180909
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["7180902"] = L1_1
+L1_1 = {}
+L0_1["7180903"] = L1_1
+L1_1 = {}
+L0_1["7180904"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2060
+L3_1.alias = "Npc2060"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71809Haozai"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2011
+L4_1.alias = "Npc2011"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71809Fanerye"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["7180908"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2060
+L3_1.alias = "Npc2060"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71809Haozai"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2011
+L4_1.alias = "Npc2011"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71809Fanerye"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["7180909"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["7180901"] = L1_1
+L1_1 = {}
+L0_1["7180902"] = L1_1
+L1_1 = {}
+L0_1["7180903"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2060
+L3_1.alias = "Npc2060"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71809Haozai"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2011
+L4_1.alias = "Npc2011"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71809Fanerye"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["7180904"] = L1_1
+L1_1 = {}
+L0_1["7180905"] = L1_1
+L1_1 = {}
+L0_1["7180906"] = L1_1
+L1_1 = {}
+L0_1["7180907"] = L1_1
+L1_1 = {}
+L0_1["7180908"] = L1_1
+L1_1 = {}
+L0_1["7180909"] = L1_1
+quest_data = L0_1

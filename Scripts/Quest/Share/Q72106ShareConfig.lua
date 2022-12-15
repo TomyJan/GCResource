@@ -1,3 +1,1631 @@
--- 任务配置数据开始-----------------------------
-
-main_id = 72106sub_ids = {	7210601,	7210602,	7210622,	7210626,	7210603,	7210621,	7210604,	7210605,	7210606,	7210607,	7210608,	7210609,	7210610,	7210611,	7210618,	7210619,	7210623,	7210624,	7210625,	7210628,	7210612,	7210613,	7210614,	7210615,	7210627,	7210616,	7210631,	7210617,	7210620,	7210630,	7210629,	7210632,}-- 任务配置数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 父任务执行项数据开始-----------------------------finish_action = {	CLIENT = { },	SERVER = { },}fail_action = {	CLIENT = { },	SERVER = { },}cancel_action = {	CLIENT = { },	SERVER = { },}-- 父任务执行项数据结束------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- Actor模块数据开始---------------------------------- 空-- Actor模块数据结束---------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 文本模块数据开始----------------------------------- 空-- 文本模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 路点模块数据开始----------------------------------- 空-- 路点模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 断线重连生成内容 开始------------------------------ 和questdata配的存档点对应rewind_data = {	["7210601"] = 	{		npcs = 		{			{				id = 20222,				alias = "Npc20222",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "q72001_wunv_1",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7210602"] = 	{		npcs = 		{			{				id = 20222,				alias = "Npc20222",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "q72001_wunv_1",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7210603"] = 	{		npcs = 		{			{				id = 20221,				alias = "Npc20221",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "q72001_wunv_1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},	},	["7210604"] = 	{		npcs = 		{			{				id = 20221,				alias = "Npc20221",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "q72001_wunv_1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210605"] = 	{		npcs = 		{			{				id = 20221,				alias = "Npc20221",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "q72001_wunv_1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210606"] = 	{		npcs = 		{			{				id = 20221,				alias = "Npc20221",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "q72001_wunv_1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210607"] = 	{		npcs = 		{			{				id = 20221,				alias = "Npc20221",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "q72001_wunv_1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210608"] = 	{		npcs = 		{			{				id = 20221,				alias = "Npc20221",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "q72001_wunv_1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210609"] = 	{		npcs = 		{			{				id = 20221,				alias = "Npc20221",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "q72001_wunv_1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210610"] = 	{		npcs = 		{			{				id = 20221,				alias = "Npc20221",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "q72001_wunv_1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210611"] = 	{		npcs = 		{			{				id = 20221,				alias = "Npc20221",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "q72001_wunv_1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210612"] = 	{		npcs = 		{			{				id = 20221,				alias = "Npc20221",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "q72001_wunv_1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210613"] = 	{		npcs = 		{			{				id = 20221,				alias = "Npc20221",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "q72001_wunv_1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210614"] = 	{		npcs = 		{			{				id = 20221,				alias = "Npc20221",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "q72001_wunv_1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210615"] = 	{		npcs = 		{			{				id = 20221,				alias = "Npc20221",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "q72001_wunv_1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210616"] = { },	["7210617"] = { },	["7210618"] = 	{		npcs = 		{			{				id = 20221,				alias = "Npc20221",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "q72001_wunv_1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210619"] = 	{		npcs = 		{			{				id = 20221,				alias = "Npc20221",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "q72001_wunv_1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210620"] = { },	["7210621"] = 	{		npcs = 		{			{				id = 20221,				alias = "Npc20221",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "q72001_wunv_1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210622"] = { },	["7210623"] = 	{		npcs = 		{			{				id = 20221,				alias = "Npc20221",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "q72001_wunv_1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["7210624"] = 	{		npcs = 		{			{				id = 20221,				alias = "Npc20221",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "q72001_wunv_1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210625"] = 	{		npcs = 		{			{				id = 20221,				alias = "Npc20221",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "q72001_wunv_1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210626"] = { },	["7210627"] = { },	["7210628"] = 	{		npcs = 		{			{				id = 20221,				alias = "Npc20221",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "q72001_wunv_1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210629"] = { },	["7210630"] = { },	["7210631"] = { },	["7210632"] = { },}-- 断线重连生成内容 结束------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 校验数据 开始------------------------------------ 和任务lua中生成NPC/Monster/Gadget/Item等对应quest_data = {	["7210601"] = 	{		npcs = 		{			{				id = 20222,				alias = "Npc20222",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "q72001_wunv_1",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7210602"] = 	{		npcs = 		{			{				id = 20222,				alias = "Npc20222",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "q72001_wunv_1",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7210603"] = 	{		npcs = 		{			{				id = 20221,				alias = "Npc20221",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "q72001_wunv_1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},	},	["7210604"] = 	{		npcs = 		{			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210605"] = 	{		npcs = 		{			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210606"] = 	{		npcs = 		{			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210607"] = 	{		npcs = 		{			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210608"] = 	{		npcs = 		{			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210609"] = 	{		npcs = 		{			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210610"] = 	{		npcs = 		{			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210611"] = 	{		npcs = 		{			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210612"] = 	{		npcs = 		{			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210613"] = 	{		npcs = 		{			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210614"] = 	{		npcs = 		{			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210615"] = 	{		npcs = 		{			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210616"] = { },	["7210617"] = { },	["7210618"] = 	{		npcs = 		{			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210619"] = 	{		npcs = 		{			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210620"] = { },	["7210621"] = 	{		npcs = 		{			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 1005,				alias = "Paimon",				script = "Actor/Quest/Q352/Paimon",				pos = "Q3_72106_Paimon",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},	},	["7210622"] = { },	["7210623"] = 	{		npcs = 		{			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210624"] = 	{		npcs = 		{			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210625"] = 	{		npcs = 		{			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210626"] = { },	["7210627"] = 	{		npcs = 		{			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210628"] = 	{		npcs = 		{			{				id = 3152,				alias = "Npc3152",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Takeru",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3153,				alias = "Npc3153",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_Futaba",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3154,				alias = "Npc3154",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q3_72106_SaimonEri",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7210629"] = { },	["7210630"] = { },	["7210631"] = { },	["7210632"] = { },}-- 校验数据 结束------------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1, L11_1, L12_1, L13_1, L14_1, L15_1, L16_1, L17_1, L18_1, L19_1, L20_1, L21_1, L22_1, L23_1, L24_1, L25_1, L26_1, L27_1, L28_1, L29_1, L30_1, L31_1, L32_1
+main_id = 72106
+L0_1 = {}
+L1_1 = 7210601
+L2_1 = 7210602
+L3_1 = 7210622
+L4_1 = 7210626
+L5_1 = 7210603
+L6_1 = 7210621
+L7_1 = 7210604
+L8_1 = 7210605
+L9_1 = 7210606
+L10_1 = 7210607
+L11_1 = 7210608
+L12_1 = 7210609
+L13_1 = 7210610
+L14_1 = 7210611
+L15_1 = 7210618
+L16_1 = 7210619
+L17_1 = 7210623
+L18_1 = 7210624
+L19_1 = 7210625
+L20_1 = 7210628
+L21_1 = 7210612
+L22_1 = 7210613
+L23_1 = 7210614
+L24_1 = 7210615
+L25_1 = 7210627
+L26_1 = 7210616
+L27_1 = 7210631
+L28_1 = 7210617
+L29_1 = 7210620
+L30_1 = 7210630
+L31_1 = 7210629
+L32_1 = 7210632
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+L0_1[11] = L11_1
+L0_1[12] = L12_1
+L0_1[13] = L13_1
+L0_1[14] = L14_1
+L0_1[15] = L15_1
+L0_1[16] = L16_1
+L0_1[17] = L17_1
+L0_1[18] = L18_1
+L0_1[19] = L19_1
+L0_1[20] = L20_1
+L0_1[21] = L21_1
+L0_1[22] = L22_1
+L0_1[23] = L23_1
+L0_1[24] = L24_1
+L0_1[25] = L25_1
+L0_1[26] = L26_1
+L0_1[27] = L27_1
+L0_1[28] = L28_1
+L0_1[29] = L29_1
+L0_1[30] = L30_1
+L0_1[31] = L31_1
+L0_1[32] = L32_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20222
+L3_1.alias = "Npc20222"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "q72001_wunv_1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7210601"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20222
+L3_1.alias = "Npc20222"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "q72001_wunv_1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7210602"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20221
+L3_1.alias = "Npc20221"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "q72001_wunv_1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3152
+L4_1.alias = "Npc3152"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Takeru"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3153
+L5_1.alias = "Npc3153"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_Futaba"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 3154
+L6_1.alias = "Npc3154"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q3_72106_SaimonEri"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["7210603"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20221
+L3_1.alias = "Npc20221"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "q72001_wunv_1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3152
+L4_1.alias = "Npc3152"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Takeru"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 1
+L5_1 = {}
+L5_1.id = 3153
+L5_1.alias = "Npc3153"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_Futaba"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 2
+L6_1 = {}
+L6_1.id = 3154
+L6_1.alias = "Npc3154"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q3_72106_SaimonEri"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["7210604"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20221
+L3_1.alias = "Npc20221"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "q72001_wunv_1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3152
+L4_1.alias = "Npc3152"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Takeru"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 1
+L5_1 = {}
+L5_1.id = 3153
+L5_1.alias = "Npc3153"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_Futaba"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 2
+L6_1 = {}
+L6_1.id = 3154
+L6_1.alias = "Npc3154"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q3_72106_SaimonEri"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["7210605"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20221
+L3_1.alias = "Npc20221"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "q72001_wunv_1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3152
+L4_1.alias = "Npc3152"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Takeru"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 1
+L5_1 = {}
+L5_1.id = 3153
+L5_1.alias = "Npc3153"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_Futaba"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 2
+L6_1 = {}
+L6_1.id = 3154
+L6_1.alias = "Npc3154"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q3_72106_SaimonEri"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["7210606"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20221
+L3_1.alias = "Npc20221"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "q72001_wunv_1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3152
+L4_1.alias = "Npc3152"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Takeru"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 1
+L5_1 = {}
+L5_1.id = 3153
+L5_1.alias = "Npc3153"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_Futaba"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 2
+L6_1 = {}
+L6_1.id = 3154
+L6_1.alias = "Npc3154"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q3_72106_SaimonEri"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["7210607"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20221
+L3_1.alias = "Npc20221"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "q72001_wunv_1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3152
+L4_1.alias = "Npc3152"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Takeru"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 1
+L5_1 = {}
+L5_1.id = 3153
+L5_1.alias = "Npc3153"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_Futaba"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 2
+L6_1 = {}
+L6_1.id = 3154
+L6_1.alias = "Npc3154"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q3_72106_SaimonEri"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["7210608"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20221
+L3_1.alias = "Npc20221"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "q72001_wunv_1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3153
+L4_1.alias = "Npc3153"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Futaba"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3154
+L5_1.alias = "Npc3154"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_SaimonEri"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["7210609"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20221
+L3_1.alias = "Npc20221"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "q72001_wunv_1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3152
+L4_1.alias = "Npc3152"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Takeru"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 1
+L5_1 = {}
+L5_1.id = 3153
+L5_1.alias = "Npc3153"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_Futaba"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 2
+L6_1 = {}
+L6_1.id = 3154
+L6_1.alias = "Npc3154"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q3_72106_SaimonEri"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["7210610"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20221
+L3_1.alias = "Npc20221"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "q72001_wunv_1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3152
+L4_1.alias = "Npc3152"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Takeru"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 1
+L5_1 = {}
+L5_1.id = 3153
+L5_1.alias = "Npc3153"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_Futaba"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 2
+L6_1 = {}
+L6_1.id = 3154
+L6_1.alias = "Npc3154"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q3_72106_SaimonEri"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["7210611"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20221
+L3_1.alias = "Npc20221"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "q72001_wunv_1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3152
+L4_1.alias = "Npc3152"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Takeru"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 1
+L5_1 = {}
+L5_1.id = 3153
+L5_1.alias = "Npc3153"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_Futaba"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 2
+L6_1 = {}
+L6_1.id = 3154
+L6_1.alias = "Npc3154"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q3_72106_SaimonEri"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["7210612"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20221
+L3_1.alias = "Npc20221"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "q72001_wunv_1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3152
+L4_1.alias = "Npc3152"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Takeru"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 1
+L5_1 = {}
+L5_1.id = 3153
+L5_1.alias = "Npc3153"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_Futaba"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 2
+L6_1 = {}
+L6_1.id = 3154
+L6_1.alias = "Npc3154"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q3_72106_SaimonEri"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["7210613"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20221
+L3_1.alias = "Npc20221"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "q72001_wunv_1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3152
+L4_1.alias = "Npc3152"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Takeru"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 1
+L5_1 = {}
+L5_1.id = 3153
+L5_1.alias = "Npc3153"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_Futaba"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 2
+L6_1 = {}
+L6_1.id = 3154
+L6_1.alias = "Npc3154"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q3_72106_SaimonEri"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["7210614"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20221
+L3_1.alias = "Npc20221"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "q72001_wunv_1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3152
+L4_1.alias = "Npc3152"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Takeru"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 1
+L5_1 = {}
+L5_1.id = 3153
+L5_1.alias = "Npc3153"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_Futaba"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 2
+L6_1 = {}
+L6_1.id = 3154
+L6_1.alias = "Npc3154"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q3_72106_SaimonEri"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["7210615"] = L1_1
+L1_1 = {}
+L0_1["7210616"] = L1_1
+L1_1 = {}
+L0_1["7210617"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20221
+L3_1.alias = "Npc20221"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "q72001_wunv_1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3152
+L4_1.alias = "Npc3152"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Takeru"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 1
+L5_1 = {}
+L5_1.id = 3153
+L5_1.alias = "Npc3153"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_Futaba"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 2
+L6_1 = {}
+L6_1.id = 3154
+L6_1.alias = "Npc3154"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q3_72106_SaimonEri"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["7210618"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20221
+L3_1.alias = "Npc20221"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "q72001_wunv_1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3152
+L4_1.alias = "Npc3152"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Takeru"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 1
+L5_1 = {}
+L5_1.id = 3153
+L5_1.alias = "Npc3153"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_Futaba"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 2
+L6_1 = {}
+L6_1.id = 3154
+L6_1.alias = "Npc3154"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q3_72106_SaimonEri"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["7210619"] = L1_1
+L1_1 = {}
+L0_1["7210620"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20221
+L3_1.alias = "Npc20221"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "q72001_wunv_1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3152
+L4_1.alias = "Npc3152"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Takeru"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 1
+L5_1 = {}
+L5_1.id = 3153
+L5_1.alias = "Npc3153"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_Futaba"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 2
+L6_1 = {}
+L6_1.id = 3154
+L6_1.alias = "Npc3154"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q3_72106_SaimonEri"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["7210621"] = L1_1
+L1_1 = {}
+L0_1["7210622"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20221
+L3_1.alias = "Npc20221"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "q72001_wunv_1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3152
+L4_1.alias = "Npc3152"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Takeru"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 1
+L5_1 = {}
+L5_1.id = 3153
+L5_1.alias = "Npc3153"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_Futaba"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["7210623"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20221
+L3_1.alias = "Npc20221"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "q72001_wunv_1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3152
+L4_1.alias = "Npc3152"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Takeru"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 1
+L5_1 = {}
+L5_1.id = 3153
+L5_1.alias = "Npc3153"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_Futaba"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 2
+L6_1 = {}
+L6_1.id = 3154
+L6_1.alias = "Npc3154"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q3_72106_SaimonEri"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["7210624"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20221
+L3_1.alias = "Npc20221"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "q72001_wunv_1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3152
+L4_1.alias = "Npc3152"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Takeru"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 1
+L5_1 = {}
+L5_1.id = 3153
+L5_1.alias = "Npc3153"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_Futaba"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 2
+L6_1 = {}
+L6_1.id = 3154
+L6_1.alias = "Npc3154"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q3_72106_SaimonEri"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["7210625"] = L1_1
+L1_1 = {}
+L0_1["7210626"] = L1_1
+L1_1 = {}
+L0_1["7210627"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20221
+L3_1.alias = "Npc20221"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "q72001_wunv_1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3152
+L4_1.alias = "Npc3152"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Takeru"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 1
+L5_1 = {}
+L5_1.id = 3153
+L5_1.alias = "Npc3153"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_Futaba"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 2
+L6_1 = {}
+L6_1.id = 3154
+L6_1.alias = "Npc3154"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q3_72106_SaimonEri"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["7210628"] = L1_1
+L1_1 = {}
+L0_1["7210629"] = L1_1
+L1_1 = {}
+L0_1["7210630"] = L1_1
+L1_1 = {}
+L0_1["7210631"] = L1_1
+L1_1 = {}
+L0_1["7210632"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20222
+L3_1.alias = "Npc20222"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "q72001_wunv_1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7210601"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20222
+L3_1.alias = "Npc20222"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "q72001_wunv_1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7210602"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20221
+L3_1.alias = "Npc20221"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "q72001_wunv_1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3152
+L4_1.alias = "Npc3152"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Takeru"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3153
+L5_1.alias = "Npc3153"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_Futaba"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 3154
+L6_1.alias = "Npc3154"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q3_72106_SaimonEri"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["7210603"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3152
+L3_1.alias = "Npc3152"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q3_72106_Takeru"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3153
+L4_1.alias = "Npc3153"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Futaba"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3154
+L5_1.alias = "Npc3154"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_SaimonEri"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["7210604"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3152
+L3_1.alias = "Npc3152"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q3_72106_Takeru"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3153
+L4_1.alias = "Npc3153"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Futaba"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3154
+L5_1.alias = "Npc3154"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_SaimonEri"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["7210605"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3152
+L3_1.alias = "Npc3152"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q3_72106_Takeru"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3153
+L4_1.alias = "Npc3153"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Futaba"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3154
+L5_1.alias = "Npc3154"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_SaimonEri"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["7210606"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3152
+L3_1.alias = "Npc3152"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q3_72106_Takeru"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3153
+L4_1.alias = "Npc3153"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Futaba"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3154
+L5_1.alias = "Npc3154"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_SaimonEri"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["7210607"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3152
+L3_1.alias = "Npc3152"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q3_72106_Takeru"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3153
+L4_1.alias = "Npc3153"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Futaba"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3154
+L5_1.alias = "Npc3154"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_SaimonEri"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["7210608"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3152
+L3_1.alias = "Npc3152"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q3_72106_Takeru"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3153
+L4_1.alias = "Npc3153"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Futaba"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3154
+L5_1.alias = "Npc3154"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_SaimonEri"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["7210609"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3152
+L3_1.alias = "Npc3152"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q3_72106_Takeru"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3153
+L4_1.alias = "Npc3153"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Futaba"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3154
+L5_1.alias = "Npc3154"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_SaimonEri"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["7210610"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3152
+L3_1.alias = "Npc3152"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q3_72106_Takeru"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3153
+L4_1.alias = "Npc3153"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Futaba"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3154
+L5_1.alias = "Npc3154"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_SaimonEri"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["7210611"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3152
+L3_1.alias = "Npc3152"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q3_72106_Takeru"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3153
+L4_1.alias = "Npc3153"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Futaba"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3154
+L5_1.alias = "Npc3154"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_SaimonEri"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["7210612"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3152
+L3_1.alias = "Npc3152"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q3_72106_Takeru"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3153
+L4_1.alias = "Npc3153"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Futaba"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3154
+L5_1.alias = "Npc3154"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_SaimonEri"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["7210613"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3152
+L3_1.alias = "Npc3152"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q3_72106_Takeru"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3153
+L4_1.alias = "Npc3153"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Futaba"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3154
+L5_1.alias = "Npc3154"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_SaimonEri"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["7210614"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3152
+L3_1.alias = "Npc3152"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q3_72106_Takeru"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3153
+L4_1.alias = "Npc3153"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Futaba"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3154
+L5_1.alias = "Npc3154"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_SaimonEri"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["7210615"] = L1_1
+L1_1 = {}
+L0_1["7210616"] = L1_1
+L1_1 = {}
+L0_1["7210617"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3152
+L3_1.alias = "Npc3152"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q3_72106_Takeru"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3153
+L4_1.alias = "Npc3153"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Futaba"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3154
+L5_1.alias = "Npc3154"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_SaimonEri"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["7210618"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3152
+L3_1.alias = "Npc3152"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q3_72106_Takeru"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3153
+L4_1.alias = "Npc3153"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Futaba"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3154
+L5_1.alias = "Npc3154"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_SaimonEri"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["7210619"] = L1_1
+L1_1 = {}
+L0_1["7210620"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3152
+L3_1.alias = "Npc3152"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q3_72106_Takeru"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3153
+L4_1.alias = "Npc3153"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Futaba"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3154
+L5_1.alias = "Npc3154"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_SaimonEri"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1005
+L6_1.alias = "Paimon"
+L6_1.script = "Actor/Quest/Q352/Paimon"
+L6_1.pos = "Q3_72106_Paimon"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["7210621"] = L1_1
+L1_1 = {}
+L0_1["7210622"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3152
+L3_1.alias = "Npc3152"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q3_72106_Takeru"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3153
+L4_1.alias = "Npc3153"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Futaba"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3154
+L5_1.alias = "Npc3154"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_SaimonEri"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["7210623"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3152
+L3_1.alias = "Npc3152"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q3_72106_Takeru"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3153
+L4_1.alias = "Npc3153"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Futaba"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3154
+L5_1.alias = "Npc3154"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_SaimonEri"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["7210624"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3152
+L3_1.alias = "Npc3152"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q3_72106_Takeru"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3153
+L4_1.alias = "Npc3153"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Futaba"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3154
+L5_1.alias = "Npc3154"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_SaimonEri"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["7210625"] = L1_1
+L1_1 = {}
+L0_1["7210626"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3152
+L3_1.alias = "Npc3152"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q3_72106_Takeru"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3153
+L4_1.alias = "Npc3153"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Futaba"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3154
+L5_1.alias = "Npc3154"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_SaimonEri"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["7210627"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3152
+L3_1.alias = "Npc3152"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q3_72106_Takeru"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3153
+L4_1.alias = "Npc3153"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q3_72106_Futaba"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3154
+L5_1.alias = "Npc3154"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q3_72106_SaimonEri"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["7210628"] = L1_1
+L1_1 = {}
+L0_1["7210629"] = L1_1
+L1_1 = {}
+L0_1["7210630"] = L1_1
+L1_1 = {}
+L0_1["7210631"] = L1_1
+L1_1 = {}
+L0_1["7210632"] = L1_1
+quest_data = L0_1

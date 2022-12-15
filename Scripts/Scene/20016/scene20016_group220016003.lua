@@ -105,7 +105,7 @@ function condition_EVENT_QUEST_FINISH_8(context, evt)
 		return false
 	end
 	
-	ScriptLib.PrintLog(context, "quest 46306 finish")
+	ScriptLib.PrintLog("quest 46306 finish")
 	return true
 end
 

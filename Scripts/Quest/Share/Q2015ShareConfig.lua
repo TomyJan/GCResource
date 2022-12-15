@@ -1,216 +1,178 @@
--- 任务配置数据开始-----------------------------
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1
 main_id = 2015
-
-sub_ids = 
-{
-	201501,
-	201502,
-	201503,
-	201504,
-	201505,
-}
--- 任务配置数据结束---------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
--- 父任务执行项数据开始-----------------------------
-finish_action = 
-{
-	CLIENT = { },
-	SERVER = { },
-}
-
-fail_action = 
-{
-	CLIENT = { },
-	SERVER = { },
-}
-
-cancel_action = 
-{
-	CLIENT = { },
-	SERVER = { },
-}
--- 父任务执行项数据结束-----------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
--- Actor模块数据开始--------------------------------
--- 空
--- Actor模块数据结束--------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
--- 文本模块数据开始---------------------------------
--- 空
--- 文本模块数据结束---------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
--- 路点模块数据开始---------------------------------
--- 空
--- 路点模块数据结束---------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-
--- 断线重连生成内容 开始----------------------------
--- 和questdata配的存档点对应
-rewind_data = 
-{
-	["201501"] = { },
-	["201502"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 12072,
-				alias = "Npc12072",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q201407Zheping",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-	},
-	["201503"] = { },
-	["201504"] = { },
-	["201505"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 12296,
-				alias = "Npc12296",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q201504_letter",
-				scene_id = 20113,
-				room_id = 1,
-				data_index = 1,
-			},
-		},
-		gadgets = 
-		{
-			{
-				id = 71700323,
-				alias = "Gadget71700323",
-				pos = "Q201504_letter",
-				scene_id = 20113,
-				room_id = 1,
-				data_index = 1,
-			},
-		},
-	},
-}
--- 断线重连生成内容 结束----------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
--- 校验数据 开始----------------------------------
--- 和任务lua中生成NPC/Monster/Gadget/Item等对应
-quest_data = 
-{
-	["201501"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 1037,
-				alias = "Npc1037",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q201501Xinhai",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 12072,
-				alias = "Npc12072",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q201407Zheping",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-			{
-				id = 3146,
-				alias = "Npc3146",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q201501Xinhai",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 3,
-			},
-			{
-				id = 1039,
-				alias = "Npc1039",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q201501Wulang",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 4,
-			},
-		},
-	},
-	["201502"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 3146,
-				alias = "Npc3146",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q201501Xinhai",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-	},
-	["201503"] = { },
-	["201504"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 10013,
-				alias = "Npc10013",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q201504Sanbing",
-				scene_id = 20113,
-				room_id = 1,
-				data_index = 1,
-			},
-			{
-				id = 12296,
-				alias = "Npc12296",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q201504_letter",
-				scene_id = 20113,
-				room_id = 1,
-				data_index = 2,
-			},
-		},
-		gadgets = 
-		{
-			{
-				id = 71700323,
-				alias = "Gadget71700323",
-				pos = "Q201504_letter",
-				scene_id = 20113,
-				room_id = 1,
-				data_index = 1,
-			},
-		},
-	},
-	["201505"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 10013,
-				alias = "Npc10013",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q201504Sanbing",
-				scene_id = 20113,
-				room_id = 1,
-				data_index = 1,
-			},
-		},
-	},
-}
--- 校验数据 结束----------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+L0_1 = {}
+L1_1 = 201501
+L2_1 = 201502
+L3_1 = 201503
+L4_1 = 201504
+L5_1 = 201505
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["201501"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12072
+L3_1.alias = "Npc12072"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q201407Zheping"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["201502"] = L1_1
+L1_1 = {}
+L0_1["201503"] = L1_1
+L1_1 = {}
+L0_1["201504"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12296
+L3_1.alias = "Npc12296"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q201504_letter"
+L3_1.scene_id = 20113
+L3_1.room_id = 1
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 71700323
+L3_1.alias = "Gadget71700323"
+L3_1.pos = "Q201504_letter"
+L3_1.scene_id = 20113
+L3_1.room_id = 1
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["201505"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1037
+L3_1.alias = "Npc1037"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q201501Xinhai"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 12072
+L4_1.alias = "Npc12072"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q201407Zheping"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3146
+L5_1.alias = "Npc3146"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q201501Xinhai"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1039
+L6_1.alias = "Npc1039"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q201501Wulang"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["201501"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3146
+L3_1.alias = "Npc3146"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q201501Xinhai"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["201502"] = L1_1
+L1_1 = {}
+L0_1["201503"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10013
+L3_1.alias = "Npc10013"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q201504Sanbing"
+L3_1.scene_id = 20113
+L3_1.room_id = 1
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 12296
+L4_1.alias = "Npc12296"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q201504_letter"
+L4_1.scene_id = 20113
+L4_1.room_id = 1
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 71700323
+L3_1.alias = "Gadget71700323"
+L3_1.pos = "Q201504_letter"
+L3_1.scene_id = 20113
+L3_1.room_id = 1
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["201504"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10013
+L3_1.alias = "Npc10013"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q201504Sanbing"
+L3_1.scene_id = 20113
+L3_1.room_id = 1
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["201505"] = L1_1
+quest_data = L0_1

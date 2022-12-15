@@ -185,7 +185,7 @@ end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_59008(context, evt)
-	ScriptLib.PrintLog(context, "## trigger_output="..evt.param1)
+	ScriptLib.PrintLog("## trigger_output="..evt.param1)
 	ScriptLib.SetGroupDead(context, 0)
 	return 0
 end

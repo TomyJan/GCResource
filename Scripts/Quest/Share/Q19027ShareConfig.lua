@@ -1,3 +1,303 @@
--- 任务配置数据开始-----------------------------
-
-main_id = 19027sub_ids = {	1902702,	1902703,	1902704,	1902705,	1902706,	1902707,	1902708,	1902701,}-- 任务配置数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 父任务执行项数据开始-----------------------------finish_action = {	CLIENT = { },	SERVER = { },}fail_action = {	CLIENT = { },	SERVER = { },}cancel_action = {	CLIENT = { },	SERVER = { },}-- 父任务执行项数据结束------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- Actor模块数据开始---------------------------------- 空-- Actor模块数据结束---------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 文本模块数据开始----------------------------------- 空-- 文本模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 路点模块数据开始----------------------------------- 空-- 路点模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 断线重连生成内容 开始------------------------------ 和questdata配的存档点对应rewind_data = {	["1902702"] = { },	["1902704"] = { },	["1902706"] = { },	["1902707"] = 	{		npcs = 		{			{				id = 12325,				alias = "Npc12325",				script = "Actor/Npc/TempNPC",				pos = "C1902703_N12061_321000175",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},}-- 断线重连生成内容 结束------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 校验数据 开始------------------------------------ 和任务lua中生成NPC/Monster/Gadget/Item等对应quest_data = {	["1902701"] = { },	["1902702"] = 	{		npcs = 		{			{				id = 505,				alias = "Coop_Gorou",				script = "Actor/Npc/TempNPC",				pos = "Q19027_Wulang2",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 1039,				alias = "Npc1039",				script = "Actor/Npc/TempNPC",				pos = "Q19027_Wulang2",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["1902703"] = 	{		npcs = 		{			{				id = 505,				alias = "Coop_Gorou",				script = "Actor/Npc/TempNPC",				pos = "Q19027_Wulang2",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 1039,				alias = "Npc1039",				script = "Actor/Npc/TempNPC",				pos = "Q19027_Wulang2",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["1902704"] = 	{		npcs = 		{			{				id = 505,				alias = "Coop_Gorou",				script = "Actor/Npc/TempNPC",				pos = "Q19027_Wulang3",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 12097,				alias = "Npc12097",				script = "Actor/Npc/TempNPC",				pos = "C1902702_N12095_321000174",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 12204,				alias = "Npc12204",				script = "Actor/Npc/TempNPC",				pos = "C1902702_N12059_321000172",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 12095,				alias = "Npc12095",				script = "Actor/Npc/TempNPC",				pos = "C1902702_N12060_321000173",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 1039,				alias = "Npc1039",				script = "Actor/Npc/TempNPC",				pos = "Q19027_Wulang3",				scene_id = 3,				room_id = 0,				data_index = 5,			},		},	},	["1902705"] = 	{		npcs = 		{			{				id = 505,				alias = "Coop_Gorou",				script = "Actor/Npc/TempNPC",				pos = "Q19027_Wulang3",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 12097,				alias = "Npc12097",				script = "Actor/Npc/TempNPC",				pos = "C1902702_N12095_321000174",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 12204,				alias = "Npc12204",				script = "Actor/Npc/TempNPC",				pos = "C1902702_N12059_321000172",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 12095,				alias = "Npc12095",				script = "Actor/Npc/TempNPC",				pos = "C1902702_N12060_321000173",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 1039,				alias = "Npc1039",				script = "Actor/Npc/TempNPC",				pos = "Q19027_Wulang3",				scene_id = 3,				room_id = 0,				data_index = 5,			},		},	},	["1902706"] = 	{		npcs = 		{			{				id = 505,				alias = "Coop_Gorou",				script = "Actor/Npc/TempNPC",				pos = "Q19027_Wulang3",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 12325,				alias = "Npc12325",				script = "Actor/Npc/TempNPC",				pos = "C1902703_N12061_321000175",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 1039,				alias = "Npc1039",				script = "Actor/Npc/TempNPC",				pos = "Q19027_Wulang3",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["1902707"] = 	{		npcs = 		{			{				id = 505,				alias = "Coop_Gorou",				script = "Actor/Npc/TempNPC",				pos = "Q19027_Wulang4",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 1039,				alias = "Npc1039",				script = "Actor/Npc/TempNPC",				pos = "Q19027_Wulang4",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},		transmit_points = 		{			{				point_id = 1,				scene_id = 3,				pos = "C1902704_N10000005",			},		},	},	["1902708"] = 	{		npcs = 		{			{				id = 505,				alias = "Coop_Gorou",				script = "Actor/Npc/TempNPC",				pos = "C1902704_N505",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 12325,				alias = "Npc12325",				script = "Actor/Npc/TempNPC",				pos = "C1902704_N12325",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 1039,				alias = "Npc1039",				script = "Actor/Npc/TempNPC",				pos = "C1902704_N505",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},		transmit_points = 		{			{				point_id = 1,				scene_id = 3,				pos = "C1902704_N10000005",			},		},	},}-- 校验数据 结束------------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1
+main_id = 19027
+L0_1 = {}
+L1_1 = 1902702
+L2_1 = 1902703
+L3_1 = 1902704
+L4_1 = 1902705
+L5_1 = 1902706
+L6_1 = 1902707
+L7_1 = 1902708
+L8_1 = 1902701
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["1902702"] = L1_1
+L1_1 = {}
+L0_1["1902704"] = L1_1
+L1_1 = {}
+L0_1["1902706"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12325
+L3_1.alias = "Npc12325"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "C1902703_N12061_321000175"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1902707"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["1902701"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 505
+L3_1.alias = "Coop_Gorou"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q19027_Wulang2"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1039
+L4_1.alias = "Npc1039"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q19027_Wulang2"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["1902702"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 505
+L3_1.alias = "Coop_Gorou"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q19027_Wulang2"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1039
+L4_1.alias = "Npc1039"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q19027_Wulang2"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["1902703"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 505
+L3_1.alias = "Coop_Gorou"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q19027_Wulang3"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 12097
+L4_1.alias = "Npc12097"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "C1902702_N12095_321000174"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 12204
+L5_1.alias = "Npc12204"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "C1902702_N12059_321000172"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 12095
+L6_1.alias = "Npc12095"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "C1902702_N12060_321000173"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 1039
+L7_1.alias = "Npc1039"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q19027_Wulang3"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L1_1.npcs = L2_1
+L0_1["1902704"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 505
+L3_1.alias = "Coop_Gorou"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q19027_Wulang3"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 12097
+L4_1.alias = "Npc12097"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "C1902702_N12095_321000174"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 12204
+L5_1.alias = "Npc12204"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "C1902702_N12059_321000172"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 12095
+L6_1.alias = "Npc12095"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "C1902702_N12060_321000173"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 1039
+L7_1.alias = "Npc1039"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q19027_Wulang3"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L1_1.npcs = L2_1
+L0_1["1902705"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 505
+L3_1.alias = "Coop_Gorou"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q19027_Wulang3"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 12325
+L4_1.alias = "Npc12325"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "C1902703_N12061_321000175"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1039
+L5_1.alias = "Npc1039"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q19027_Wulang3"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["1902706"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 505
+L3_1.alias = "Coop_Gorou"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q19027_Wulang4"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1039
+L4_1.alias = "Npc1039"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q19027_Wulang4"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "C1902704_N10000005"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["1902707"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 505
+L3_1.alias = "Coop_Gorou"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "C1902704_N505"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 12325
+L4_1.alias = "Npc12325"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "C1902704_N12325"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1039
+L5_1.alias = "Npc1039"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "C1902704_N505"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "C1902704_N10000005"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["1902708"] = L1_1
+quest_data = L0_1

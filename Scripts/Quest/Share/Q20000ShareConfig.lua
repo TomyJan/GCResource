@@ -1,383 +1,208 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1
 main_id = 20000
-
-sub_ids =
-{
-    2000001,
-    2000002,
-    2000003,
-    2000004,
-    2000005,
-    2000006,
-    2000007,
-    2000008,
-}
-
-rewind_data = {}
-
-rewind_data["2000001"] = 
-{
-}
-
-rewind_data["2000002"] = 
-{
-}
-
-rewind_data["2000003"] = 
-{
-}
-
-rewind_data["2000004"] = 
-{
-}
-
-rewind_data["2000005"] = 
-{
-}
-
-rewind_data["2000006"] = 
-{
-}
-
-rewind_data["2000007"] = 
-{
-}
-
-rewind_data["2000008"] = 
-{
-}
-
-quest_data = {}
-
-quest_data["2000002"] = 
-{
-    trial_actors = {
-
-    },
-    transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 3,
-            pos = "DUMMY_POS 3102001"
-        }
-    },
-    actors = {
-        
-    },
-    items = {
-        -- {
-        --     id = 100004,
-        --     pos = "Q404Pos2",
-        --     alias = "Ball",
-        -- },
-    },
-    monsters = {
-        -- {
-        --     id = 20010801,
-        --     pos = "Q404Pos2",
-        -- },
-        -- {
-        --     id = 20010801,
-        --     pos = "Q404Pos2",
-        -- }
-    },
-    gadgets = {
-        -- {
-        --     id = 70300004,
-        --     pos = "Q404Pos2",
-        --     alias = "GoalMarker404",
-        -- }
-    }
-}
-
-quest_data["2000004"] = 
-{
-    trial_actors = {
-
-    },
-    transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 3,
-            pos = "DUMMY_POS 3102001"
-        }
-    },
-    actors = {
-        
-    },
-    items = {
-        -- {
-        --     id = 100004,
-        --     pos = "Q404Pos2",
-        --     alias = "Ball",
-        -- },
-    },
-    monsters = {
-        -- {
-        --     id = 20010801,
-        --     pos = "Q404Pos2",
-        -- },
-        -- {
-        --     id = 20010801,
-        --     pos = "Q404Pos2",
-        -- }
-    },
-    gadgets = {
-        -- {
-        --     id = 70300004,
-        --     pos = "Q404Pos2",
-        --     alias = "GoalMarker404",
-        -- }
-    }
-}
-
-quest_data["2000006"] = 
-{
-    trial_actors = {
-
-    },
-    transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 3,
-            pos = "DUMMY_POS 3102001"
-        }
-    },
-    actors = {
-        
-    },
-    items = {
-        -- {
-        --     id = 100004,
-        --     pos = "Q404Pos2",
-        --     alias = "Ball",
-        -- },
-    },
-    monsters = {
-        -- {
-        --     id = 20010801,
-        --     pos = "Q404Pos2",
-        -- },
-        -- {
-        --     id = 20010801,
-        --     pos = "Q404Pos2",
-        -- }
-    },
-    gadgets = {
-        -- {
-        --     id = 70300004,
-        --     pos = "Q404Pos2",
-        --     alias = "GoalMarker404",
-        -- }
-    }
-}
-
-quest_data["2000008"] = 
-{
-    trial_actors = {
-
-    },
-    transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 3,
-            pos = "DUMMY_POS 3102001"
-        }
-    },
-    actors = {
-        
-    },
-    items = {
-        -- {
-        --     id = 100004,
-        --     pos = "Q404Pos2",
-        --     alias = "Ball",
-        -- },
-    },
-    monsters = {
-        -- {
-        --     id = 20010801,
-        --     pos = "Q404Pos2",
-        -- },
-        -- {
-        --     id = 20010801,
-        --     pos = "Q404Pos2",
-        -- }
-    },
-    gadgets = {
-        -- {
-        --     id = 70300004,
-        --     pos = "Q404Pos2",
-        --     alias = "GoalMarker404",
-        -- }
-    }
-}
-
-quest_data["2000009"] = 
-{
-    trial_actors = {
-
-    },
-    transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 3,
-            pos = "DUMMY_POS 3102001"
-        }
-    },
-    actors = {
-        
-    },
-    items = {
-        -- {
-        --     id = 100004,
-        --     pos = "Q404Pos2",
-        --     alias = "Ball",
-        -- },
-    },
-    monsters = {
-        -- {
-        --     id = 20010801,
-        --     pos = "Q404Pos2",
-        -- },
-        -- {
-        --     id = 20010801,
-        --     pos = "Q404Pos2",
-        -- }
-    },
-    gadgets = {
-        -- {
-        --     id = 70300004,
-        --     pos = "Q404Pos2",
-        --     alias = "GoalMarker404",
-        -- }
-    }
-}
-
-quest_data["2000010"] = 
-{
-    trial_actors = {
-
-    },
-    transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 3,
-            pos = "DUMMY_POS 3102001"
-        }
-    },
-    actors = {
-        
-    },
-    items = {
-        -- {
-        --     id = 100004,
-        --     pos = "Q404Pos2",
-        --     alias = "Ball",
-        -- },
-    },
-    monsters = {
-        -- {
-        --     id = 20010801,
-        --     pos = "Q404Pos2",
-        -- },
-        -- {
-        --     id = 20010801,
-        --     pos = "Q404Pos2",
-        -- }
-    },
-    gadgets = {
-        -- {
-        --     id = 70300004,
-        --     pos = "Q404Pos2",
-        --     alias = "GoalMarker404",
-        -- }
-    }
-}
-
-quest_data["2000011"] = 
-{
-    trial_actors = {
-
-    },
-    transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 3,
-            pos = "DUMMY_POS 3102001"
-        }
-    },
-    actors = {
-        
-    },
-    items = {
-        -- {
-        --     id = 100004,
-        --     pos = "Q404Pos2",
-        --     alias = "Ball",
-        -- },
-    },
-    monsters = {
-        -- {
-        --     id = 20010801,
-        --     pos = "Q404Pos2",
-        -- },
-        -- {
-        --     id = 20010801,
-        --     pos = "Q404Pos2",
-        -- }
-    },
-    gadgets = {
-        -- {
-        --     id = 70300004,
-        --     pos = "Q404Pos2",
-        --     alias = "GoalMarker404",
-        -- }
-    }
-}
-
-quest_data["2000012"] = 
-{
-    trial_actors = {
-
-    },
-    transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 3,
-            pos = "DUMMY_POS 3102001"
-        }
-    },
-    actors = {
-        
-    },
-    items = {
-        -- {
-        --     id = 100004,
-        --     pos = "Q404Pos2",
-        --     alias = "Ball",
-        -- },
-    },
-    monsters = {
-        -- {
-        --     id = 20010801,
-        --     pos = "Q404Pos2",
-        -- },
-        -- {
-        --     id = 20010801,
-        --     pos = "Q404Pos2",
-        -- }
-    },
-    gadgets = {
-        -- {
-        --     id = 70300004,
-        --     pos = "Q404Pos2",
-        --     alias = "GoalMarker404",
-        -- }
-    }
-}
-
-
+L0_1 = {}
+L1_1 = 2000001
+L2_1 = 2000002
+L3_1 = 2000003
+L4_1 = 2000004
+L5_1 = 2000005
+L6_1 = 2000006
+L7_1 = 2000007
+L8_1 = 2000008
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["2000001"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["2000002"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["2000003"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["2000004"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["2000005"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["2000006"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["2000007"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["2000008"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L1_1.trial_actors = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "DUMMY_POS 3102001"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L2_1 = {}
+L1_1.actors = L2_1
+L2_1 = {}
+L1_1.items = L2_1
+L2_1 = {}
+L1_1.monsters = L2_1
+L2_1 = {}
+L1_1.gadgets = L2_1
+L0_1["2000002"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L1_1.trial_actors = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "DUMMY_POS 3102001"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L2_1 = {}
+L1_1.actors = L2_1
+L2_1 = {}
+L1_1.items = L2_1
+L2_1 = {}
+L1_1.monsters = L2_1
+L2_1 = {}
+L1_1.gadgets = L2_1
+L0_1["2000004"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L1_1.trial_actors = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "DUMMY_POS 3102001"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L2_1 = {}
+L1_1.actors = L2_1
+L2_1 = {}
+L1_1.items = L2_1
+L2_1 = {}
+L1_1.monsters = L2_1
+L2_1 = {}
+L1_1.gadgets = L2_1
+L0_1["2000006"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L1_1.trial_actors = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "DUMMY_POS 3102001"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L2_1 = {}
+L1_1.actors = L2_1
+L2_1 = {}
+L1_1.items = L2_1
+L2_1 = {}
+L1_1.monsters = L2_1
+L2_1 = {}
+L1_1.gadgets = L2_1
+L0_1["2000008"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L1_1.trial_actors = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "DUMMY_POS 3102001"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L2_1 = {}
+L1_1.actors = L2_1
+L2_1 = {}
+L1_1.items = L2_1
+L2_1 = {}
+L1_1.monsters = L2_1
+L2_1 = {}
+L1_1.gadgets = L2_1
+L0_1["2000009"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L1_1.trial_actors = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "DUMMY_POS 3102001"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L2_1 = {}
+L1_1.actors = L2_1
+L2_1 = {}
+L1_1.items = L2_1
+L2_1 = {}
+L1_1.monsters = L2_1
+L2_1 = {}
+L1_1.gadgets = L2_1
+L0_1["2000010"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L1_1.trial_actors = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "DUMMY_POS 3102001"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L2_1 = {}
+L1_1.actors = L2_1
+L2_1 = {}
+L1_1.items = L2_1
+L2_1 = {}
+L1_1.monsters = L2_1
+L2_1 = {}
+L1_1.gadgets = L2_1
+L0_1["2000011"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L1_1.trial_actors = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "DUMMY_POS 3102001"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L2_1 = {}
+L1_1.actors = L2_1
+L2_1 = {}
+L1_1.items = L2_1
+L2_1 = {}
+L1_1.monsters = L2_1
+L2_1 = {}
+L1_1.gadgets = L2_1
+L0_1["2000012"] = L1_1

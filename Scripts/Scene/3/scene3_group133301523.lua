@@ -252,7 +252,7 @@ end
 
 -- 触发操作
 function action_EVENT_VARIABLE_CHANGE_523009(context, evt)
-	ScriptLib.PrintLog(context, "## trigger_output="..evt.param1)
+	ScriptLib.PrintLog("## trigger_output="..evt.param1)
 	return 0
 end
 

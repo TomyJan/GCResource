@@ -1,60 +1,35 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1
 main_id = 421
-
-sub_ids =
-{
-    42101,
-    42102,
-    42103,
-    42104,
-}
-
-rewind_data = {}
-
-rewind_data["42101"] = 
-{
-}
-
-rewind_data["42104"] = 
-{
-}
-
-
-quest_data = {}
-
-quest_data["42101"] = 
-{
-    trial_actors = {
-
-    },
-    actors = {
-        
-    },
-    items = {
-        -- {
-        --     id = 100004,
-        --     pos = "Q404Pos2",
-        --     alias = "Ball",
-        -- },
-    },
-    monsters = {
-        -- {
-        --     id = 20010801,
-        --     pos = "Q404Pos2",
-        -- },
-        -- {
-        --     id = 20010801,
-        --     pos = "Q404Pos2",
-        -- }
-    },
-    gadgets = {
-        -- {
-        --     id = 70300004,
-        --     pos = "Q404Pos2",
-        --     alias = "GoalMarker404",
-        -- }
-    }
-}
+L0_1 = {}
+L1_1 = 42101
+L2_1 = 42102
+L3_1 = 42103
+L4_1 = 42104
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["42101"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["42104"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L1_1.trial_actors = L2_1
+L2_1 = {}
+L1_1.actors = L2_1
+L2_1 = {}
+L1_1.items = L2_1
+L2_1 = {}
+L1_1.monsters = L2_1
+L2_1 = {}
+L1_1.gadgets = L2_1
+L0_1["42101"] = L1_1

@@ -14,7 +14,7 @@ local defs = {
 
 -- DEFS_MISCS
 function MovePlatform(context)
-	ScriptLib.PrintLog(context, "platform to move")
+	ScriptLib.PrintLog("platform to move")
 	local pathnodeindex = ScriptLib.GetGroupVariableValue(context, "currentPathNode") + 1
 
 	if pathnodeindex > defs.maxPathNode then 
@@ -22,7 +22,7 @@ function MovePlatform(context)
 	end
 
 	ScriptLib.SetPlatformPointArray(context, defs.gadget_bubble, defs.pointarray_route, {pathnodeindex}, { route_type = 0 })
-	ScriptLib.PrintLog(context, "platform to move : start platform")
+	ScriptLib.PrintLog("platform to move : start platform")
 	return 0
 end
 

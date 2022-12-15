@@ -1,3 +1,275 @@
--- 任务配置数据开始-----------------------------
-
-main_id = 72113sub_ids = {	7211301,	7211302,	7211303,	7211304,	7211305,	7211306,	7211315,	7211307,	7211312,	7211308,	7211314,	7211319,	7211309,	7211313,	7211316,	7211318,	7211310,	7211317,	7211311,}-- 任务配置数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 父任务执行项数据开始-----------------------------finish_action = {	CLIENT = { },	SERVER = { },}fail_action = {	CLIENT = { },	SERVER = { },}cancel_action = {	CLIENT = { },	SERVER = { },}-- 父任务执行项数据结束------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- Actor模块数据开始---------------------------------- 空-- Actor模块数据结束---------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 文本模块数据开始----------------------------------- 空-- 文本模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 路点模块数据开始----------------------------------- 空-- 路点模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 断线重连生成内容 开始------------------------------ 和questdata配的存档点对应rewind_data = {	["7211301"] = { },	["7211302"] = { },	["7211303"] = { },	["7211304"] = { },	["7211305"] = { },	["7211306"] = { },	["7211307"] = { },	["7211308"] = { },	["7211309"] = { },	["7211310"] = { },	["7211311"] = { },	["7211312"] = { },	["7211313"] = { },	["7211314"] = 	{		npcs = 		{			{				id = 1005,				alias = "Paimon",				script = "Actor/Quest/Q352/Paimon",				pos = "Q3_72113_First_Paimon",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7211315"] = { },	["7211317"] = { },	["7211318"] = { },	["7211319"] = { },}-- 断线重连生成内容 结束------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 校验数据 开始------------------------------------ 和任务lua中生成NPC/Monster/Gadget/Item等对应quest_data = {	["7211301"] = { },	["7211302"] = 	{		npcs = 		{			{				id = 1005,				alias = "Paimon",				script = "Actor/Quest/Q352/Paimon",				pos = "Q3_72113_First_Paimon",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7211303"] = 	{		npcs = 		{			{				id = 1005,				alias = "Paimon",				script = "Actor/Quest/Q352/Paimon",				pos = "Q3_72113_First_Paimon",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7211304"] = 	{		npcs = 		{			{				id = 1005,				alias = "Paimon",				script = "Actor/Quest/Q352/Paimon",				pos = "Q3_72113_First_Paimon",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7211305"] = 	{		npcs = 		{			{				id = 1005,				alias = "Paimon",				script = "Actor/Quest/Q352/Paimon",				pos = "Q3_72113_First_Paimon",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7211306"] = { },	["7211307"] = 	{		npcs = 		{			{				id = 1005,				alias = "Paimon",				script = "Actor/Quest/Q352/Paimon",				pos = "Q3_72113_First_Paimon",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7211308"] = { },	["7211309"] = 	{		npcs = 		{			{				id = 1005,				alias = "Paimon",				script = "Actor/Quest/Q352/Paimon",				pos = "Q3_72113_First_Paimon",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7211310"] = 	{		npcs = 		{			{				id = 1005,				alias = "Paimon",				script = "Actor/Quest/Q352/Paimon",				pos = "Q3_72113_BrokenBridge_Paimon",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20317,				alias = "Npc20317",				script = "Actor/Npc/TempNPC",				pos = "Q3_72113_Cage_GentouRingo",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["7211311"] = 	{		npcs = 		{			{				id = 20317,				alias = "Npc20317",				script = "Actor/Npc/TempNPC",				pos = "Q3_72113_Cage_GentouRingo",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7211312"] = { },	["7211313"] = 	{		npcs = 		{			{				id = 1005,				alias = "Paimon",				script = "Actor/Quest/Q352/Paimon",				pos = "Q3_72113_BrokenBridge_Paimon",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7211314"] = 	{		npcs = 		{			{				id = 1005,				alias = "Paimon",				script = "Actor/Quest/Q352/Paimon",				pos = "Q3_72113_First_Paimon",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7211315"] = { },	["7211316"] = { },	["7211317"] = 	{		transmit_points = 		{			{				point_id = 1,				scene_id = 3,				pos = "Q3_72113_Cage_Player",			},		},	},	["7211318"] = { },	["7211319"] = { },}-- 校验数据 结束------------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1, L11_1, L12_1, L13_1, L14_1, L15_1, L16_1, L17_1, L18_1, L19_1
+main_id = 72113
+L0_1 = {}
+L1_1 = 7211301
+L2_1 = 7211302
+L3_1 = 7211303
+L4_1 = 7211304
+L5_1 = 7211305
+L6_1 = 7211306
+L7_1 = 7211315
+L8_1 = 7211307
+L9_1 = 7211312
+L10_1 = 7211308
+L11_1 = 7211314
+L12_1 = 7211319
+L13_1 = 7211309
+L14_1 = 7211313
+L15_1 = 7211316
+L16_1 = 7211318
+L17_1 = 7211310
+L18_1 = 7211317
+L19_1 = 7211311
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+L0_1[11] = L11_1
+L0_1[12] = L12_1
+L0_1[13] = L13_1
+L0_1[14] = L14_1
+L0_1[15] = L15_1
+L0_1[16] = L16_1
+L0_1[17] = L17_1
+L0_1[18] = L18_1
+L0_1[19] = L19_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["7211301"] = L1_1
+L1_1 = {}
+L0_1["7211302"] = L1_1
+L1_1 = {}
+L0_1["7211303"] = L1_1
+L1_1 = {}
+L0_1["7211304"] = L1_1
+L1_1 = {}
+L0_1["7211305"] = L1_1
+L1_1 = {}
+L0_1["7211306"] = L1_1
+L1_1 = {}
+L0_1["7211307"] = L1_1
+L1_1 = {}
+L0_1["7211308"] = L1_1
+L1_1 = {}
+L0_1["7211309"] = L1_1
+L1_1 = {}
+L0_1["7211310"] = L1_1
+L1_1 = {}
+L0_1["7211311"] = L1_1
+L1_1 = {}
+L0_1["7211312"] = L1_1
+L1_1 = {}
+L0_1["7211313"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q3_72113_First_Paimon"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7211314"] = L1_1
+L1_1 = {}
+L0_1["7211315"] = L1_1
+L1_1 = {}
+L0_1["7211317"] = L1_1
+L1_1 = {}
+L0_1["7211318"] = L1_1
+L1_1 = {}
+L0_1["7211319"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["7211301"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q3_72113_First_Paimon"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7211302"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q3_72113_First_Paimon"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7211303"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q3_72113_First_Paimon"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7211304"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q3_72113_First_Paimon"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7211305"] = L1_1
+L1_1 = {}
+L0_1["7211306"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q3_72113_First_Paimon"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7211307"] = L1_1
+L1_1 = {}
+L0_1["7211308"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q3_72113_First_Paimon"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7211309"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q3_72113_BrokenBridge_Paimon"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20317
+L4_1.alias = "Npc20317"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q3_72113_Cage_GentouRingo"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["7211310"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20317
+L3_1.alias = "Npc20317"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q3_72113_Cage_GentouRingo"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7211311"] = L1_1
+L1_1 = {}
+L0_1["7211312"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q3_72113_BrokenBridge_Paimon"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7211313"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q3_72113_First_Paimon"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7211314"] = L1_1
+L1_1 = {}
+L0_1["7211315"] = L1_1
+L1_1 = {}
+L0_1["7211316"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q3_72113_Cage_Player"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["7211317"] = L1_1
+L1_1 = {}
+L0_1["7211318"] = L1_1
+L1_1 = {}
+L0_1["7211319"] = L1_1
+quest_data = L0_1

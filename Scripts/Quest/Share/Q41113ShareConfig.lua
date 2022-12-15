@@ -1,3 +1,1189 @@
--- 任务配置数据开始-----------------------------
-
-main_id = 41113sub_ids = {	4111301,	4111318,	4111302,	4111303,	4111304,	4111305,	4111306,	4111310,	4111312,	4111313,	4111314,	4111320,	4111311,	4111315,	4111307,	4111316,	4111308,	4111319,	4111317,	4111309,}-- 任务配置数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 父任务执行项数据开始-----------------------------finish_action = {	CLIENT = { },	SERVER = { },}fail_action = {	CLIENT = { },	SERVER = { },}cancel_action = {	CLIENT = { },	SERVER = { },}-- 父任务执行项数据结束------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- Actor模块数据开始---------------------------------- 空-- Actor模块数据结束---------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 文本模块数据开始----------------------------------- 空-- 文本模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 路点模块数据开始----------------------------------- 空-- 路点模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 断线重连生成内容 开始------------------------------ 和questdata配的存档点对应rewind_data = {	["4111301"] = { },	["4111302"] = { },	["4111303"] = { },	["4111304"] = { },	["4111305"] = { },	["4111306"] = { },	["4111307"] = { },	["4111308"] = 	{		avatar = 		{			offline_dungeon_id = 0,			scene_id = 3,			pos = "Q4111308Player",		},		npcs = 		{			{				id = 10095,				alias = "Npc10095",				script = "Actor/Npc/TempNPC",				pos = "Q4111308Mona",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["4111309"] = { },	["4111310"] = { },	["4111311"] = 	{		npcs = 		{			{				id = 30026,				alias = "Npc30026",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q4111314GaoSix",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["4111312"] = { },	["4111313"] = { },	["4111314"] = { },	["4111315"] = 	{		npcs = 		{			{				id = 30026,				alias = "Npc30026",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q4111311GaoSix",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["4111316"] = { },	["4111317"] = { },	["4111318"] = { },	["4111320"] = 	{		npcs = 		{			{				id = 30026,				alias = "Npc30026",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q4111314GaoSix",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},}-- 断线重连生成内容 结束------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 校验数据 开始------------------------------------ 和任务lua中生成NPC/Monster/Gadget/Item等对应quest_data = {	["4111301"] = 	{		npcs = 		{			{				id = 10095,				alias = "Npc10095",				script = "Actor/Npc/TempNPC",				pos = "Q4111213Mona",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 30007,				alias = "Npc30007",				script = "Actor/Npc/TempNPC",				pos = "Q4111302NPC",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 30008,				alias = "Npc30008",				script = "Actor/Npc/TempNPC",				pos = "Q4111303NPC",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 30009,				alias = "Npc30009",				script = "Actor/Npc/TempNPC",				pos = "Q4111304NPC",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},		gadgets = 		{			{				id = 70710041,				alias = "Q4111303Meteorite1",				pos = "Q4111303Target1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 70710041,				alias = "Q4111303Meteorite2",				pos = "Q4111303Target2",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 70710042,				alias = "Q4111304Meteorite1",				pos = "Q4111304Target2",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 70710042,				alias = "Q4111304Meteorite2",				pos = "Q4111304Target3",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},	},	["4111302"] = 	{		npcs = 		{			{				id = 10095,				alias = "Npc10095",				script = "Actor/Npc/TempNPC",				pos = "Q4111213Mona",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 30007,				alias = "Npc30007",				script = "Actor/Npc/TempNPC",				pos = "Q4111302NPC",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 30008,				alias = "Npc30008",				script = "Actor/Npc/TempNPC",				pos = "Q4111303NPC",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 30009,				alias = "Npc30009",				script = "Actor/Npc/TempNPC",				pos = "Q4111304NPC",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},		gadgets = 		{			{				id = 70710041,				alias = "Q4111303Meteorite1",				pos = "Q4111303Target1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 70710041,				alias = "Q4111303Meteorite2",				pos = "Q4111303Target2",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 70710042,				alias = "Q4111304Meteorite1",				pos = "Q4111304Target2",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 70710042,				alias = "Q4111304Meteorite2",				pos = "Q4111304Target3",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},	},	["4111303"] = 	{		npcs = 		{			{				id = 10095,				alias = "Npc10095",				script = "Actor/Npc/TempNPC",				pos = "Q4111213Mona",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 30007,				alias = "Npc30007",				script = "Actor/Npc/TempNPC",				pos = "Q4111302NPC",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 30008,				alias = "Npc30008",				script = "Actor/Npc/TempNPC",				pos = "Q4111303NPC",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 30009,				alias = "Npc30009",				script = "Actor/Npc/TempNPC",				pos = "Q4111304NPC",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},		gadgets = 		{			{				id = 70300118,				alias = "Q4111303Target",				pos = "Q4111303Target",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["4111304"] = 	{		npcs = 		{			{				id = 10095,				alias = "Npc10095",				script = "Actor/Npc/TempNPC",				pos = "Q4111213Mona",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 30007,				alias = "Npc30007",				script = "Actor/Npc/TempNPC",				pos = "Q4111302NPC",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 30008,				alias = "Npc30008",				script = "Actor/Npc/TempNPC",				pos = "Q4111303NPC",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 30009,				alias = "Npc30009",				script = "Actor/Npc/TempNPC",				pos = "Q4111304NPC",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},		gadgets = 		{			{				id = 70300118,				alias = "Q4111304Target",				pos = "Q4111304Target",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["4111305"] = 	{		npcs = 		{			{				id = 10095,				alias = "Npc10095",				script = "Actor/Npc/TempNPC",				pos = "Q4111213Mona",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 30007,				alias = "Npc30007",				script = "Actor/Npc/TempNPC",				pos = "Q4111302NPC",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 30008,				alias = "Npc30008",				script = "Actor/Npc/TempNPC",				pos = "Q4111303NPC",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 30009,				alias = "Npc30009",				script = "Actor/Npc/TempNPC",				pos = "Q4111304NPC",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},		gadgets = 		{			{				id = 70710041,				alias = "Q4111303Meteorite1",				pos = "Q4111303Target1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 70710041,				alias = "Q4111303Meteorite2",				pos = "Q4111303Target2",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 70710042,				alias = "Q4111304Meteorite1",				pos = "Q4111304Target2",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 70710042,				alias = "Q4111304Meteorite2",				pos = "Q4111304Target3",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},	},	["4111306"] = 	{		npcs = 		{			{				id = 10095,				alias = "Npc10095",				script = "Actor/Npc/TempNPC",				pos = "Q4111213Mona",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 30007,				alias = "Npc30007",				script = "Actor/Npc/TempNPC",				pos = "Q4111302NPC",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 30008,				alias = "Npc30008",				script = "Actor/Npc/TempNPC",				pos = "Q4111303NPC",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 30009,				alias = "Npc30009",				script = "Actor/Npc/TempNPC",				pos = "Q4111304NPC",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},		gadgets = 		{			{				id = 70710041,				alias = "Q4111303Meteorite1",				pos = "Q4111303Target1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 70710041,				alias = "Q4111303Meteorite2",				pos = "Q4111303Target2",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 70710042,				alias = "Q4111304Meteorite1",				pos = "Q4111304Target2",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 70710042,				alias = "Q4111304Meteorite2",				pos = "Q4111304Target3",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},	},	["4111307"] = 	{		npcs = 		{			{				id = 10095,				alias = "Npc10095",				script = "Actor/Npc/TempNPC",				pos = "Q4111307Mona",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},		gadgets = 		{			{				id = 70710041,				alias = "Q4111303Meteorite1",				pos = "Q4111303Target1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 70710041,				alias = "Q4111303Meteorite2",				pos = "Q4111303Target2",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 70710042,				alias = "Q4111304Meteorite1",				pos = "Q4111304Target2",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 70710042,				alias = "Q4111304Meteorite2",				pos = "Q4111304Target3",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},	},	["4111308"] = 	{		npcs = 		{			{				id = 10095,				alias = "Npc10095",				script = "Actor/Npc/TempNPC",				pos = "Q4111308Mona",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},		gadgets = { },		transmit_points = 		{			{				point_id = 1,				scene_id = 3,				pos = "Q4111308Player",			},		},	},	["4111309"] = 	{		npcs = 		{			{				id = 10095,				alias = "Npc10095",				script = "Actor/Npc/TempNPC",				pos = "Q4111213Mona",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 30007,				alias = "Npc30007",				script = "Actor/Npc/TempNPC",				pos = "Q4111302NPC",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 30008,				alias = "Npc30008",				script = "Actor/Npc/TempNPC",				pos = "Q4111303NPC",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 30009,				alias = "Npc30009",				script = "Actor/Npc/TempNPC",				pos = "Q4111304NPC",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 10011,				alias = "Npc10011",				script = "Actor/Npc/TempNPC",				pos = "Q4111309Fischl",				scene_id = 3,				room_id = 0,				data_index = 5,			},		},		gadgets = 		{			{				id = 70710041,				alias = "Q4111303Meteorite1",				pos = "Q4111303Target1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 70710041,				alias = "Q4111303Meteorite2",				pos = "Q4111303Target2",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 70710042,				alias = "Q4111304Meteorite1",				pos = "Q4111304Target2",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 70710042,				alias = "Q4111304Meteorite2",				pos = "Q4111304Target3",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},	},	["4111310"] = 	{		npcs = 		{			{				id = 10095,				alias = "Npc10095",				script = "Actor/Npc/TempNPC",				pos = "Q4111213Mona",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 30007,				alias = "Npc30007",				script = "Actor/Npc/TempNPC",				pos = "Q4111302NPC",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 30008,				alias = "Npc30008",				script = "Actor/Npc/TempNPC",				pos = "Q4111303NPC",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 30009,				alias = "Npc30009",				script = "Actor/Npc/TempNPC",				pos = "Q4111304NPC",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},		gadgets = 		{			{				id = 70710041,				alias = "Q4111303Meteorite1",				pos = "Q4111303Target1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 70710041,				alias = "Q4111303Meteorite2",				pos = "Q4111303Target2",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 70710042,				alias = "Q4111304Meteorite1",				pos = "Q4111304Target2",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 70710042,				alias = "Q4111304Meteorite2",				pos = "Q4111304Target3",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},	},	["4111311"] = 	{		npcs = 		{			{				id = 10095,				alias = "Npc10095",				script = "Actor/Npc/TempNPC",				pos = "Q4111213Mona",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 30007,				alias = "Npc30007",				script = "Actor/Npc/TempNPC",				pos = "Q4111302NPC",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 30008,				alias = "Npc30008",				script = "Actor/Npc/TempNPC",				pos = "Q4111303NPC",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 30009,				alias = "Npc30009",				script = "Actor/Npc/TempNPC",				pos = "Q4111304NPC",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},		gadgets = 		{			{				id = 70710041,				alias = "Q4111303Meteorite1",				pos = "Q4111303Target1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 70710041,				alias = "Q4111303Meteorite2",				pos = "Q4111303Target2",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 70710042,				alias = "Q4111304Meteorite1",				pos = "Q4111304Target2",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 70710042,				alias = "Q4111304Meteorite2",				pos = "Q4111304Target3",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},	},	["4111312"] = 	{		npcs = 		{			{				id = 10095,				alias = "Npc10095",				script = "Actor/Npc/TempNPC",				pos = "Q4111213Mona",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 30007,				alias = "Npc30007",				script = "Actor/Npc/TempNPC",				pos = "Q4111302NPC",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 30008,				alias = "Npc30008",				script = "Actor/Npc/TempNPC",				pos = "Q4111303NPC",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 30009,				alias = "Npc30009",				script = "Actor/Npc/TempNPC",				pos = "Q4111304NPC",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},		gadgets = 		{			{				id = 70710041,				alias = "Q4111303Meteorite1",				pos = "Q4111303Target1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 70710041,				alias = "Q4111303Meteorite2",				pos = "Q4111303Target2",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 70710042,				alias = "Q4111304Meteorite1",				pos = "Q4111304Target2",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 70710042,				alias = "Q4111304Meteorite2",				pos = "Q4111304Target3",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},	},	["4111313"] = 	{		npcs = 		{			{				id = 10095,				alias = "Npc10095",				script = "Actor/Npc/TempNPC",				pos = "Q4111213Mona",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 30007,				alias = "Npc30007",				script = "Actor/Npc/TempNPC",				pos = "Q4111302NPC",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 30008,				alias = "Npc30008",				script = "Actor/Npc/TempNPC",				pos = "Q4111303NPC",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 30009,				alias = "Npc30009",				script = "Actor/Npc/TempNPC",				pos = "Q4111304NPC",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},		gadgets = 		{			{				id = 70710041,				alias = "Q4111303Meteorite1",				pos = "Q4111303Target1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 70710041,				alias = "Q4111303Meteorite2",				pos = "Q4111303Target2",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 70710042,				alias = "Q4111304Meteorite1",				pos = "Q4111304Target2",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 70710042,				alias = "Q4111304Meteorite2",				pos = "Q4111304Target3",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},	},	["4111314"] = 	{		npcs = 		{			{				id = 10095,				alias = "Npc10095",				script = "Actor/Npc/TempNPC",				pos = "Q4111213Mona",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 30026,				alias = "Npc30026",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q4111314GaoSix",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},		gadgets = 		{			{				id = 70710041,				alias = "Q4111303Meteorite1",				pos = "Q4111303Target1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 70710041,				alias = "Q4111303Meteorite2",				pos = "Q4111303Target2",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 70710042,				alias = "Q4111304Meteorite1",				pos = "Q4111304Target2",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 70710042,				alias = "Q4111304Meteorite2",				pos = "Q4111304Target3",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},	},	["4111315"] = 	{		npcs = 		{			{				id = 10095,				alias = "Npc10095",				script = "Actor/Npc/TempNPC",				pos = "Q4111213Mona",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 30007,				alias = "Npc30007",				script = "Actor/Npc/TempNPC",				pos = "Q4111302NPC",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 30008,				alias = "Npc30008",				script = "Actor/Npc/TempNPC",				pos = "Q4111303NPC",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 30009,				alias = "Npc30009",				script = "Actor/Npc/TempNPC",				pos = "Q4111304NPC",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},		gadgets = 		{			{				id = 70710041,				alias = "Q4111303Meteorite1",				pos = "Q4111303Target1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 70710041,				alias = "Q4111303Meteorite2",				pos = "Q4111303Target2",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 70710042,				alias = "Q4111304Meteorite1",				pos = "Q4111304Target2",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 70710042,				alias = "Q4111304Meteorite2",				pos = "Q4111304Target3",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},	},	["4111316"] = 	{		npcs = 		{			{				id = 10095,				alias = "Npc10095",				script = "Actor/Npc/TempNPC",				pos = "Q4111308Mona",				scene_id = 3,				room_id = 0,				data_index = 5,			},		},		gadgets = 		{			{				id = 70710041,				alias = "Q4111303Meteorite1",				pos = "Q4111303Target1",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 70710041,				alias = "Q4111303Meteorite2",				pos = "Q4111303Target2",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 70710042,				alias = "Q4111304Meteorite1",				pos = "Q4111304Target2",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 70710042,				alias = "Q4111304Meteorite2",				pos = "Q4111304Target3",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},		transmit_points = 		{			{				point_id = 1,				scene_id = 3,				pos = "Q4111308Player",			},		},	},	["4111317"] = { },	["4111318"] = { },	["4111319"] = { },	["4111320"] = { },}-- 校验数据 结束------------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1, L11_1, L12_1, L13_1, L14_1, L15_1, L16_1, L17_1, L18_1, L19_1, L20_1
+main_id = 41113
+L0_1 = {}
+L1_1 = 4111301
+L2_1 = 4111318
+L3_1 = 4111302
+L4_1 = 4111303
+L5_1 = 4111304
+L6_1 = 4111305
+L7_1 = 4111306
+L8_1 = 4111310
+L9_1 = 4111312
+L10_1 = 4111313
+L11_1 = 4111314
+L12_1 = 4111320
+L13_1 = 4111311
+L14_1 = 4111315
+L15_1 = 4111307
+L16_1 = 4111316
+L17_1 = 4111308
+L18_1 = 4111319
+L19_1 = 4111317
+L20_1 = 4111309
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+L0_1[11] = L11_1
+L0_1[12] = L12_1
+L0_1[13] = L13_1
+L0_1[14] = L14_1
+L0_1[15] = L15_1
+L0_1[16] = L16_1
+L0_1[17] = L17_1
+L0_1[18] = L18_1
+L0_1[19] = L19_1
+L0_1[20] = L20_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["4111301"] = L1_1
+L1_1 = {}
+L0_1["4111302"] = L1_1
+L1_1 = {}
+L0_1["4111303"] = L1_1
+L1_1 = {}
+L0_1["4111304"] = L1_1
+L1_1 = {}
+L0_1["4111305"] = L1_1
+L1_1 = {}
+L0_1["4111306"] = L1_1
+L1_1 = {}
+L0_1["4111307"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L2_1.offline_dungeon_id = 0
+L2_1.scene_id = 3
+L2_1.pos = "Q4111308Player"
+L1_1.avatar = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10095
+L3_1.alias = "Npc10095"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4111308Mona"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["4111308"] = L1_1
+L1_1 = {}
+L0_1["4111309"] = L1_1
+L1_1 = {}
+L0_1["4111310"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 30026
+L3_1.alias = "Npc30026"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q4111314GaoSix"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["4111311"] = L1_1
+L1_1 = {}
+L0_1["4111312"] = L1_1
+L1_1 = {}
+L0_1["4111313"] = L1_1
+L1_1 = {}
+L0_1["4111314"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 30026
+L3_1.alias = "Npc30026"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q4111311GaoSix"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["4111315"] = L1_1
+L1_1 = {}
+L0_1["4111316"] = L1_1
+L1_1 = {}
+L0_1["4111317"] = L1_1
+L1_1 = {}
+L0_1["4111318"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 30026
+L3_1.alias = "Npc30026"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q4111314GaoSix"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["4111320"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10095
+L3_1.alias = "Npc10095"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4111213Mona"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 30007
+L4_1.alias = "Npc30007"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q4111302NPC"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 30008
+L5_1.alias = "Npc30008"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q4111303NPC"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 30009
+L6_1.alias = "Npc30009"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q4111304NPC"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710041
+L3_1.alias = "Q4111303Meteorite1"
+L3_1.pos = "Q4111303Target1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 70710041
+L4_1.alias = "Q4111303Meteorite2"
+L4_1.pos = "Q4111303Target2"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 70710042
+L5_1.alias = "Q4111304Meteorite1"
+L5_1.pos = "Q4111304Target2"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 70710042
+L6_1.alias = "Q4111304Meteorite2"
+L6_1.pos = "Q4111304Target3"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.gadgets = L2_1
+L0_1["4111301"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10095
+L3_1.alias = "Npc10095"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4111213Mona"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 30007
+L4_1.alias = "Npc30007"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q4111302NPC"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 30008
+L5_1.alias = "Npc30008"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q4111303NPC"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 30009
+L6_1.alias = "Npc30009"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q4111304NPC"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710041
+L3_1.alias = "Q4111303Meteorite1"
+L3_1.pos = "Q4111303Target1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 70710041
+L4_1.alias = "Q4111303Meteorite2"
+L4_1.pos = "Q4111303Target2"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 70710042
+L5_1.alias = "Q4111304Meteorite1"
+L5_1.pos = "Q4111304Target2"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 70710042
+L6_1.alias = "Q4111304Meteorite2"
+L6_1.pos = "Q4111304Target3"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.gadgets = L2_1
+L0_1["4111302"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10095
+L3_1.alias = "Npc10095"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4111213Mona"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 30007
+L4_1.alias = "Npc30007"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q4111302NPC"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 30008
+L5_1.alias = "Npc30008"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q4111303NPC"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 30009
+L6_1.alias = "Npc30009"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q4111304NPC"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70300118
+L3_1.alias = "Q4111303Target"
+L3_1.pos = "Q4111303Target"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["4111303"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10095
+L3_1.alias = "Npc10095"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4111213Mona"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 30007
+L4_1.alias = "Npc30007"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q4111302NPC"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 30008
+L5_1.alias = "Npc30008"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q4111303NPC"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 30009
+L6_1.alias = "Npc30009"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q4111304NPC"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70300118
+L3_1.alias = "Q4111304Target"
+L3_1.pos = "Q4111304Target"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["4111304"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10095
+L3_1.alias = "Npc10095"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4111213Mona"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 30007
+L4_1.alias = "Npc30007"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q4111302NPC"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 30008
+L5_1.alias = "Npc30008"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q4111303NPC"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 30009
+L6_1.alias = "Npc30009"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q4111304NPC"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710041
+L3_1.alias = "Q4111303Meteorite1"
+L3_1.pos = "Q4111303Target1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 70710041
+L4_1.alias = "Q4111303Meteorite2"
+L4_1.pos = "Q4111303Target2"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 70710042
+L5_1.alias = "Q4111304Meteorite1"
+L5_1.pos = "Q4111304Target2"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 70710042
+L6_1.alias = "Q4111304Meteorite2"
+L6_1.pos = "Q4111304Target3"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.gadgets = L2_1
+L0_1["4111305"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10095
+L3_1.alias = "Npc10095"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4111213Mona"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 30007
+L4_1.alias = "Npc30007"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q4111302NPC"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 30008
+L5_1.alias = "Npc30008"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q4111303NPC"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 30009
+L6_1.alias = "Npc30009"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q4111304NPC"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710041
+L3_1.alias = "Q4111303Meteorite1"
+L3_1.pos = "Q4111303Target1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 70710041
+L4_1.alias = "Q4111303Meteorite2"
+L4_1.pos = "Q4111303Target2"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 70710042
+L5_1.alias = "Q4111304Meteorite1"
+L5_1.pos = "Q4111304Target2"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 70710042
+L6_1.alias = "Q4111304Meteorite2"
+L6_1.pos = "Q4111304Target3"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.gadgets = L2_1
+L0_1["4111306"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10095
+L3_1.alias = "Npc10095"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4111307Mona"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 4
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710041
+L3_1.alias = "Q4111303Meteorite1"
+L3_1.pos = "Q4111303Target1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 70710041
+L4_1.alias = "Q4111303Meteorite2"
+L4_1.pos = "Q4111303Target2"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 70710042
+L5_1.alias = "Q4111304Meteorite1"
+L5_1.pos = "Q4111304Target2"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 70710042
+L6_1.alias = "Q4111304Meteorite2"
+L6_1.pos = "Q4111304Target3"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.gadgets = L2_1
+L0_1["4111307"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10095
+L3_1.alias = "Npc10095"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4111308Mona"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L1_1.gadgets = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q4111308Player"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["4111308"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10095
+L3_1.alias = "Npc10095"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4111213Mona"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 30007
+L4_1.alias = "Npc30007"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q4111302NPC"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 30008
+L5_1.alias = "Npc30008"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q4111303NPC"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 30009
+L6_1.alias = "Npc30009"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q4111304NPC"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 10011
+L7_1.alias = "Npc10011"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q4111309Fischl"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710041
+L3_1.alias = "Q4111303Meteorite1"
+L3_1.pos = "Q4111303Target1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 70710041
+L4_1.alias = "Q4111303Meteorite2"
+L4_1.pos = "Q4111303Target2"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 70710042
+L5_1.alias = "Q4111304Meteorite1"
+L5_1.pos = "Q4111304Target2"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 70710042
+L6_1.alias = "Q4111304Meteorite2"
+L6_1.pos = "Q4111304Target3"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.gadgets = L2_1
+L0_1["4111309"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10095
+L3_1.alias = "Npc10095"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4111213Mona"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 30007
+L4_1.alias = "Npc30007"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q4111302NPC"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 30008
+L5_1.alias = "Npc30008"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q4111303NPC"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 30009
+L6_1.alias = "Npc30009"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q4111304NPC"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710041
+L3_1.alias = "Q4111303Meteorite1"
+L3_1.pos = "Q4111303Target1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 70710041
+L4_1.alias = "Q4111303Meteorite2"
+L4_1.pos = "Q4111303Target2"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 70710042
+L5_1.alias = "Q4111304Meteorite1"
+L5_1.pos = "Q4111304Target2"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 70710042
+L6_1.alias = "Q4111304Meteorite2"
+L6_1.pos = "Q4111304Target3"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.gadgets = L2_1
+L0_1["4111310"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10095
+L3_1.alias = "Npc10095"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4111213Mona"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 30007
+L4_1.alias = "Npc30007"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q4111302NPC"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 30008
+L5_1.alias = "Npc30008"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q4111303NPC"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 30009
+L6_1.alias = "Npc30009"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q4111304NPC"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710041
+L3_1.alias = "Q4111303Meteorite1"
+L3_1.pos = "Q4111303Target1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 70710041
+L4_1.alias = "Q4111303Meteorite2"
+L4_1.pos = "Q4111303Target2"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 70710042
+L5_1.alias = "Q4111304Meteorite1"
+L5_1.pos = "Q4111304Target2"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 70710042
+L6_1.alias = "Q4111304Meteorite2"
+L6_1.pos = "Q4111304Target3"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.gadgets = L2_1
+L0_1["4111311"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10095
+L3_1.alias = "Npc10095"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4111213Mona"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 30007
+L4_1.alias = "Npc30007"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q4111302NPC"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 30008
+L5_1.alias = "Npc30008"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q4111303NPC"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 30009
+L6_1.alias = "Npc30009"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q4111304NPC"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710041
+L3_1.alias = "Q4111303Meteorite1"
+L3_1.pos = "Q4111303Target1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 70710041
+L4_1.alias = "Q4111303Meteorite2"
+L4_1.pos = "Q4111303Target2"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 70710042
+L5_1.alias = "Q4111304Meteorite1"
+L5_1.pos = "Q4111304Target2"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 70710042
+L6_1.alias = "Q4111304Meteorite2"
+L6_1.pos = "Q4111304Target3"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.gadgets = L2_1
+L0_1["4111312"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10095
+L3_1.alias = "Npc10095"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4111213Mona"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 30007
+L4_1.alias = "Npc30007"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q4111302NPC"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 30008
+L5_1.alias = "Npc30008"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q4111303NPC"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 30009
+L6_1.alias = "Npc30009"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q4111304NPC"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710041
+L3_1.alias = "Q4111303Meteorite1"
+L3_1.pos = "Q4111303Target1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 70710041
+L4_1.alias = "Q4111303Meteorite2"
+L4_1.pos = "Q4111303Target2"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 70710042
+L5_1.alias = "Q4111304Meteorite1"
+L5_1.pos = "Q4111304Target2"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 70710042
+L6_1.alias = "Q4111304Meteorite2"
+L6_1.pos = "Q4111304Target3"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.gadgets = L2_1
+L0_1["4111313"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10095
+L3_1.alias = "Npc10095"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4111213Mona"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 30026
+L4_1.alias = "Npc30026"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q4111314GaoSix"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710041
+L3_1.alias = "Q4111303Meteorite1"
+L3_1.pos = "Q4111303Target1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 70710041
+L4_1.alias = "Q4111303Meteorite2"
+L4_1.pos = "Q4111303Target2"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 70710042
+L5_1.alias = "Q4111304Meteorite1"
+L5_1.pos = "Q4111304Target2"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 70710042
+L6_1.alias = "Q4111304Meteorite2"
+L6_1.pos = "Q4111304Target3"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.gadgets = L2_1
+L0_1["4111314"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10095
+L3_1.alias = "Npc10095"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4111213Mona"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 30007
+L4_1.alias = "Npc30007"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q4111302NPC"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 30008
+L5_1.alias = "Npc30008"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q4111303NPC"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 30009
+L6_1.alias = "Npc30009"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q4111304NPC"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710041
+L3_1.alias = "Q4111303Meteorite1"
+L3_1.pos = "Q4111303Target1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 70710041
+L4_1.alias = "Q4111303Meteorite2"
+L4_1.pos = "Q4111303Target2"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 70710042
+L5_1.alias = "Q4111304Meteorite1"
+L5_1.pos = "Q4111304Target2"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 70710042
+L6_1.alias = "Q4111304Meteorite2"
+L6_1.pos = "Q4111304Target3"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.gadgets = L2_1
+L0_1["4111315"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10095
+L3_1.alias = "Npc10095"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4111308Mona"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 5
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710041
+L3_1.alias = "Q4111303Meteorite1"
+L3_1.pos = "Q4111303Target1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 70710041
+L4_1.alias = "Q4111303Meteorite2"
+L4_1.pos = "Q4111303Target2"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 70710042
+L5_1.alias = "Q4111304Meteorite1"
+L5_1.pos = "Q4111304Target2"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 70710042
+L6_1.alias = "Q4111304Meteorite2"
+L6_1.pos = "Q4111304Target3"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.gadgets = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q4111308Player"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["4111316"] = L1_1
+L1_1 = {}
+L0_1["4111317"] = L1_1
+L1_1 = {}
+L0_1["4111318"] = L1_1
+L1_1 = {}
+L0_1["4111319"] = L1_1
+L1_1 = {}
+L0_1["4111320"] = L1_1
+quest_data = L0_1

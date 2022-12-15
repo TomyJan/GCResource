@@ -1,3 +1,3568 @@
--- 任务配置数据开始-----------------------------
-
-main_id = 12008sub_ids = {	1200801,	1200802,	1200809,	1200806,	1200810,	1200807,	1200811,	1200808,	1200812,	1200803,	1200816,	1200804,	1200813,	1200814,	1200815,	1200817,	1200818,	1200819,	1200805,}-- 任务配置数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 父任务执行项数据开始-----------------------------finish_action = {	CLIENT = { },	SERVER = { },}fail_action = {	CLIENT = { },	SERVER = { },}cancel_action = {	CLIENT = { },	SERVER = { },}-- 父任务执行项数据结束------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- Actor模块数据开始---------------------------------- 空-- Actor模块数据结束---------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 文本模块数据开始----------------------------------- 空-- 文本模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 路点模块数据开始----------------------------------- 空-- 路点模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 断线重连生成内容 开始------------------------------ 和questdata配的存档点对应rewind_data = {	["1200801"] = { },	["1200803"] = 	{		npcs = 		{			{				id = 3171,				alias = "Npc3171",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200903FesSouvenir3",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 3172,				alias = "Npc3172",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200905FesFood",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 12038,				alias = "Npc12038",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesDraw",				scene_id = 3,				room_id = 0,				data_index = 10,			},			{				id = 12039,				alias = "Npc12039",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesEma",				scene_id = 3,				room_id = 0,				data_index = 11,			},			{				id = 12111,				alias = "Npc12111",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male1",				scene_id = 3,				room_id = 0,				data_index = 12,			},			{				id = 12112,				alias = "Npc12112",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male2",				scene_id = 3,				room_id = 0,				data_index = 13,			},			{				id = 12113,				alias = "Npc12113",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male3",				scene_id = 3,				room_id = 0,				data_index = 14,			},			{				id = 12114,				alias = "Npc12114",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female1",				scene_id = 3,				room_id = 0,				data_index = 15,			},			{				id = 12115,				alias = "Npc12115",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 16,			},			{				id = 12116,				alias = "Npc12116",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 17,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200909FesRoute35",				scene_id = 3,				room_id = 0,				data_index = 11,			},		},	},	["1200804"] = 	{		npcs = 		{			{				id = 3171,				alias = "Npc3171",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200903FesSouvenir3",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 3172,				alias = "Npc3172",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200905FesFood",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 12038,				alias = "Npc12038",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesDraw",				scene_id = 3,				room_id = 0,				data_index = 10,			},			{				id = 12039,				alias = "Npc12039",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesEma",				scene_id = 3,				room_id = 0,				data_index = 11,			},			{				id = 12111,				alias = "Npc12111",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male1",				scene_id = 3,				room_id = 0,				data_index = 12,			},			{				id = 12112,				alias = "Npc12112",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male2",				scene_id = 3,				room_id = 0,				data_index = 13,			},			{				id = 12113,				alias = "Npc12113",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male3",				scene_id = 3,				room_id = 0,				data_index = 14,			},			{				id = 12114,				alias = "Npc12114",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female1",				scene_id = 3,				room_id = 0,				data_index = 15,			},			{				id = 12115,				alias = "Npc12115",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 16,			},			{				id = 12116,				alias = "Npc12116",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 17,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSPos",				scene_id = 3,				room_id = 0,				data_index = 11,			},		},		avatar = 		{			offline_dungeon_id = 0,			scene_id = 3,			pos = "Q12008ExtraAddedTrans",		},	},	["1200806"] = 	{		npcs = 		{			{				id = 3171,				alias = "Npc3171",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200903FesSouvenir3",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 3172,				alias = "Npc3172",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200905FesFood",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 12038,				alias = "Npc12038",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesDraw",				scene_id = 3,				room_id = 0,				data_index = 10,			},			{				id = 12039,				alias = "Npc12039",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesEma",				scene_id = 3,				room_id = 0,				data_index = 11,			},			{				id = 12111,				alias = "Npc12111",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male1",				scene_id = 3,				room_id = 0,				data_index = 12,			},			{				id = 12112,				alias = "Npc12112",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male2",				scene_id = 3,				room_id = 0,				data_index = 13,			},			{				id = 12113,				alias = "Npc12113",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male3",				scene_id = 3,				room_id = 0,				data_index = 14,			},			{				id = 12114,				alias = "Npc12114",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female1",				scene_id = 3,				room_id = 0,				data_index = 15,			},			{				id = 12115,				alias = "Npc12115",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 16,			},			{				id = 12116,				alias = "Npc12116",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 17,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200903FesRoute03",				scene_id = 3,				room_id = 0,				data_index = 11,			},		},	},	["1200807"] = 	{		npcs = 		{			{				id = 3171,				alias = "Npc3171",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200903FesSouvenir3",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 3172,				alias = "Npc3172",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200905FesFood",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 12038,				alias = "Npc12038",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesDraw",				scene_id = 3,				room_id = 0,				data_index = 10,			},			{				id = 12039,				alias = "Npc12039",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesEma",				scene_id = 3,				room_id = 0,				data_index = 11,			},			{				id = 12111,				alias = "Npc12111",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male1",				scene_id = 3,				room_id = 0,				data_index = 12,			},			{				id = 12112,				alias = "Npc12112",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male2",				scene_id = 3,				room_id = 0,				data_index = 13,			},			{				id = 12113,				alias = "Npc12113",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male3",				scene_id = 3,				room_id = 0,				data_index = 14,			},			{				id = 12114,				alias = "Npc12114",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female1",				scene_id = 3,				room_id = 0,				data_index = 15,			},			{				id = 12115,				alias = "Npc12115",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 16,			},			{				id = 12116,				alias = "Npc12116",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 17,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200905FesRoute13",				scene_id = 3,				room_id = 0,				data_index = 11,			},		},	},	["1200808"] = 	{		npcs = 		{			{				id = 3171,				alias = "Npc3171",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200903FesSouvenir3",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 3172,				alias = "Npc3172",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200905FesFood",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 12038,				alias = "Npc12038",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesDraw",				scene_id = 3,				room_id = 0,				data_index = 10,			},			{				id = 12039,				alias = "Npc12039",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesEma",				scene_id = 3,				room_id = 0,				data_index = 11,			},			{				id = 12111,				alias = "Npc12111",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male1",				scene_id = 3,				room_id = 0,				data_index = 12,			},			{				id = 12112,				alias = "Npc12112",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male2",				scene_id = 3,				room_id = 0,				data_index = 13,			},			{				id = 12113,				alias = "Npc12113",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male3",				scene_id = 3,				room_id = 0,				data_index = 14,			},			{				id = 12114,				alias = "Npc12114",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female1",				scene_id = 3,				room_id = 0,				data_index = 15,			},			{				id = 12115,				alias = "Npc12115",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 16,			},			{				id = 12116,				alias = "Npc12116",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 17,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200907FesRoute22",				scene_id = 3,				room_id = 0,				data_index = 11,			},		},	},}-- 断线重连生成内容 结束------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 校验数据 开始------------------------------------ 和任务lua中生成NPC/Monster/Gadget/Item等对应quest_data = {	["1200801"] = 	{		npcs = 		{			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200801AyakaMask",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200909FesRoute35",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSPos",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSAfter1",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200903FesRoute03",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200905FesRoute13",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200907FesRoute22",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 3171,				alias = "Npc3171",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200903FesSouvenir3",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 3172,				alias = "Npc3172",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200905FesFood",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 12038,				alias = "Npc12038",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesDraw",				scene_id = 3,				room_id = 0,				data_index = 10,			},			{				id = 12039,				alias = "Npc12039",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesEma",				scene_id = 3,				room_id = 0,				data_index = 11,			},			{				id = 12111,				alias = "Npc12111",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male1",				scene_id = 3,				room_id = 0,				data_index = 12,			},			{				id = 12112,				alias = "Npc12112",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male2",				scene_id = 3,				room_id = 0,				data_index = 13,			},			{				id = 12113,				alias = "Npc12113",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male3",				scene_id = 3,				room_id = 0,				data_index = 14,			},			{				id = 12114,				alias = "Npc12114",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female1",				scene_id = 3,				room_id = 0,				data_index = 15,			},			{				id = 12115,				alias = "Npc12115",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 16,			},			{				id = 12116,				alias = "Npc12116",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 17,			},			{				id = 3149,				alias = "Npc3149",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 18,			},			{				id = 3150,				alias = "Npc3150",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 19,			},		},	},	["1200802"] = 	{		npcs = 		{			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200801AyakaMask",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200909FesRoute35",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSPos",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSAfter1",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200903FesRoute03",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200905FesRoute13",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200907FesRoute22",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 3171,				alias = "Npc3171",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200903FesSouvenir3",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 3172,				alias = "Npc3172",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200905FesFood",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 12038,				alias = "Npc12038",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesDraw",				scene_id = 3,				room_id = 0,				data_index = 10,			},			{				id = 12039,				alias = "Npc12039",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesEma",				scene_id = 3,				room_id = 0,				data_index = 11,			},			{				id = 12111,				alias = "Npc12111",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male1",				scene_id = 3,				room_id = 0,				data_index = 12,			},			{				id = 12112,				alias = "Npc12112",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male2",				scene_id = 3,				room_id = 0,				data_index = 13,			},			{				id = 12113,				alias = "Npc12113",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male3",				scene_id = 3,				room_id = 0,				data_index = 14,			},			{				id = 12114,				alias = "Npc12114",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female1",				scene_id = 3,				room_id = 0,				data_index = 15,			},			{				id = 12115,				alias = "Npc12115",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 16,			},			{				id = 12116,				alias = "Npc12116",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 17,			},			{				id = 3149,				alias = "Npc3149",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 18,			},			{				id = 3150,				alias = "Npc3150",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 19,			},		},	},	["1200803"] = 	{		npcs = 		{			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200801AyakaMask",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200909FesRoute35",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSPos",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSAfter1",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200903FesRoute03",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200905FesRoute13",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200907FesRoute22",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 3171,				alias = "Npc3171",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200903FesSouvenir3",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 3172,				alias = "Npc3172",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200905FesFood",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 12038,				alias = "Npc12038",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesDraw",				scene_id = 3,				room_id = 0,				data_index = 10,			},			{				id = 12039,				alias = "Npc12039",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesEma",				scene_id = 3,				room_id = 0,				data_index = 11,			},			{				id = 12111,				alias = "Npc12111",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male1",				scene_id = 3,				room_id = 0,				data_index = 12,			},			{				id = 12112,				alias = "Npc12112",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male2",				scene_id = 3,				room_id = 0,				data_index = 13,			},			{				id = 12113,				alias = "Npc12113",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male3",				scene_id = 3,				room_id = 0,				data_index = 14,			},			{				id = 12114,				alias = "Npc12114",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female1",				scene_id = 3,				room_id = 0,				data_index = 15,			},			{				id = 12115,				alias = "Npc12115",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 16,			},			{				id = 12116,				alias = "Npc12116",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 17,			},			{				id = 3149,				alias = "Npc3149",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 18,			},			{				id = 3150,				alias = "Npc3150",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 19,			},		},		transmit_points = 		{			{				point_id = 1,				scene_id = 3,				pos = "Q12008ExtraAddedTrans",			},		},	},	["1200804"] = 	{		npcs = 		{			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200801AyakaMask",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200909FesRoute35",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSPos",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSAfter1",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200903FesRoute03",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200905FesRoute13",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200907FesRoute22",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 3171,				alias = "Npc3171",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200903FesSouvenir3",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 3172,				alias = "Npc3172",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200905FesFood",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 12038,				alias = "Npc12038",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesDraw",				scene_id = 3,				room_id = 0,				data_index = 10,			},			{				id = 12039,				alias = "Npc12039",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesEma",				scene_id = 3,				room_id = 0,				data_index = 11,			},			{				id = 12111,				alias = "Npc12111",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male1",				scene_id = 3,				room_id = 0,				data_index = 12,			},			{				id = 12112,				alias = "Npc12112",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male2",				scene_id = 3,				room_id = 0,				data_index = 13,			},			{				id = 12113,				alias = "Npc12113",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male3",				scene_id = 3,				room_id = 0,				data_index = 14,			},			{				id = 12114,				alias = "Npc12114",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female1",				scene_id = 3,				room_id = 0,				data_index = 15,			},			{				id = 12115,				alias = "Npc12115",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 16,			},			{				id = 12116,				alias = "Npc12116",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 17,			},			{				id = 3149,				alias = "Npc3149",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 18,			},			{				id = 3150,				alias = "Npc3150",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 19,			},		},	},	["1200805"] = 	{		npcs = 		{			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200801AyakaMask",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200909FesRoute35",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSPos",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSAfter1",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200903FesRoute03",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200905FesRoute13",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200907FesRoute22",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 3171,				alias = "Npc3171",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200903FesSouvenir3",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 3172,				alias = "Npc3172",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200905FesFood",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 12038,				alias = "Npc12038",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesDraw",				scene_id = 3,				room_id = 0,				data_index = 10,			},			{				id = 12039,				alias = "Npc12039",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesEma",				scene_id = 3,				room_id = 0,				data_index = 11,			},			{				id = 12111,				alias = "Npc12111",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male1",				scene_id = 3,				room_id = 0,				data_index = 12,			},			{				id = 12112,				alias = "Npc12112",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male2",				scene_id = 3,				room_id = 0,				data_index = 13,			},			{				id = 12113,				alias = "Npc12113",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male3",				scene_id = 3,				room_id = 0,				data_index = 14,			},			{				id = 12114,				alias = "Npc12114",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female1",				scene_id = 3,				room_id = 0,				data_index = 15,			},			{				id = 12115,				alias = "Npc12115",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 16,			},			{				id = 12116,				alias = "Npc12116",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 17,			},			{				id = 3149,				alias = "Npc3149",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 18,			},			{				id = 3150,				alias = "Npc3150",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 19,			},		},	},	["1200806"] = 	{		npcs = 		{			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200801AyakaMask",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200909FesRoute35",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSPos",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSAfter1",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200903FesRoute03",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200905FesRoute13",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200907FesRoute22",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 3171,				alias = "Npc3171",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200903FesSouvenir3",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 3172,				alias = "Npc3172",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200905FesFood",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 12038,				alias = "Npc12038",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesDraw",				scene_id = 3,				room_id = 0,				data_index = 10,			},			{				id = 12039,				alias = "Npc12039",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesEma",				scene_id = 3,				room_id = 0,				data_index = 11,			},			{				id = 12111,				alias = "Npc12111",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male1",				scene_id = 3,				room_id = 0,				data_index = 12,			},			{				id = 12112,				alias = "Npc12112",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male2",				scene_id = 3,				room_id = 0,				data_index = 13,			},			{				id = 12113,				alias = "Npc12113",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male3",				scene_id = 3,				room_id = 0,				data_index = 14,			},			{				id = 12114,				alias = "Npc12114",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female1",				scene_id = 3,				room_id = 0,				data_index = 15,			},			{				id = 12115,				alias = "Npc12115",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 16,			},			{				id = 12116,				alias = "Npc12116",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 17,			},			{				id = 3149,				alias = "Npc3149",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 18,			},			{				id = 3150,				alias = "Npc3150",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 19,			},		},	},	["1200807"] = 	{		npcs = 		{			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200801AyakaMask",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200909FesRoute35",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSPos",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSAfter1",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200903FesRoute03",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200905FesRoute13",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200907FesRoute22",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 3171,				alias = "Npc3171",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200903FesSouvenir3",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 3172,				alias = "Npc3172",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200905FesFood",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 12038,				alias = "Npc12038",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesDraw",				scene_id = 3,				room_id = 0,				data_index = 10,			},			{				id = 12039,				alias = "Npc12039",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesEma",				scene_id = 3,				room_id = 0,				data_index = 11,			},			{				id = 12111,				alias = "Npc12111",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male1",				scene_id = 3,				room_id = 0,				data_index = 12,			},			{				id = 12112,				alias = "Npc12112",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male2",				scene_id = 3,				room_id = 0,				data_index = 13,			},			{				id = 12113,				alias = "Npc12113",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male3",				scene_id = 3,				room_id = 0,				data_index = 14,			},			{				id = 12114,				alias = "Npc12114",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female1",				scene_id = 3,				room_id = 0,				data_index = 15,			},			{				id = 12115,				alias = "Npc12115",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 16,			},			{				id = 12116,				alias = "Npc12116",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 17,			},			{				id = 3149,				alias = "Npc3149",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 18,			},			{				id = 3150,				alias = "Npc3150",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 19,			},		},	},	["1200808"] = 	{		npcs = 		{			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200801AyakaMask",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200909FesRoute35",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSPos",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSAfter1",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200903FesRoute03",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200905FesRoute13",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200907FesRoute22",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 3171,				alias = "Npc3171",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200903FesSouvenir3",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 3172,				alias = "Npc3172",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200905FesFood",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 12038,				alias = "Npc12038",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesDraw",				scene_id = 3,				room_id = 0,				data_index = 10,			},			{				id = 12039,				alias = "Npc12039",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesEma",				scene_id = 3,				room_id = 0,				data_index = 11,			},			{				id = 12111,				alias = "Npc12111",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male1",				scene_id = 3,				room_id = 0,				data_index = 12,			},			{				id = 12112,				alias = "Npc12112",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male2",				scene_id = 3,				room_id = 0,				data_index = 13,			},			{				id = 12113,				alias = "Npc12113",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male3",				scene_id = 3,				room_id = 0,				data_index = 14,			},			{				id = 12114,				alias = "Npc12114",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female1",				scene_id = 3,				room_id = 0,				data_index = 15,			},			{				id = 12115,				alias = "Npc12115",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 16,			},			{				id = 12116,				alias = "Npc12116",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 17,			},			{				id = 3149,				alias = "Npc3149",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 18,			},			{				id = 3150,				alias = "Npc3150",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 19,			},		},	},	["1200809"] = 	{		npcs = 		{			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200801AyakaMask",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200909FesRoute35",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSPos",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSAfter1",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200903FesRoute03",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200905FesRoute13",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200907FesRoute22",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 3171,				alias = "Npc3171",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200903FesSouvenir3",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 3172,				alias = "Npc3172",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200905FesFood",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 12038,				alias = "Npc12038",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesDraw",				scene_id = 3,				room_id = 0,				data_index = 10,			},			{				id = 12039,				alias = "Npc12039",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesEma",				scene_id = 3,				room_id = 0,				data_index = 11,			},			{				id = 12111,				alias = "Npc12111",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male1",				scene_id = 3,				room_id = 0,				data_index = 12,			},			{				id = 12112,				alias = "Npc12112",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male2",				scene_id = 3,				room_id = 0,				data_index = 13,			},			{				id = 12113,				alias = "Npc12113",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male3",				scene_id = 3,				room_id = 0,				data_index = 14,			},			{				id = 12114,				alias = "Npc12114",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female1",				scene_id = 3,				room_id = 0,				data_index = 15,			},			{				id = 12115,				alias = "Npc12115",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 16,			},			{				id = 12116,				alias = "Npc12116",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 17,			},			{				id = 3149,				alias = "Npc3149",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 18,			},			{				id = 3150,				alias = "Npc3150",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 19,			},		},	},	["1200810"] = 	{		npcs = 		{			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200801AyakaMask",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200909FesRoute35",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSPos",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSAfter1",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200903FesRoute03",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200905FesRoute13",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200907FesRoute22",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 3171,				alias = "Npc3171",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200903FesSouvenir3",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 3172,				alias = "Npc3172",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200905FesFood",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 12038,				alias = "Npc12038",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesDraw",				scene_id = 3,				room_id = 0,				data_index = 10,			},			{				id = 12039,				alias = "Npc12039",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesEma",				scene_id = 3,				room_id = 0,				data_index = 11,			},			{				id = 12111,				alias = "Npc12111",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male1",				scene_id = 3,				room_id = 0,				data_index = 12,			},			{				id = 12112,				alias = "Npc12112",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male2",				scene_id = 3,				room_id = 0,				data_index = 13,			},			{				id = 12113,				alias = "Npc12113",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male3",				scene_id = 3,				room_id = 0,				data_index = 14,			},			{				id = 12114,				alias = "Npc12114",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female1",				scene_id = 3,				room_id = 0,				data_index = 15,			},			{				id = 12115,				alias = "Npc12115",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 16,			},			{				id = 12116,				alias = "Npc12116",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 17,			},			{				id = 3149,				alias = "Npc3149",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 18,			},			{				id = 3150,				alias = "Npc3150",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 19,			},		},	},	["1200811"] = 	{		npcs = 		{			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200801AyakaMask",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200909FesRoute35",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSPos",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSAfter1",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200903FesRoute03",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200905FesRoute13",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200907FesRoute22",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 3171,				alias = "Npc3171",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200903FesSouvenir3",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 3172,				alias = "Npc3172",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200905FesFood",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 12038,				alias = "Npc12038",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesDraw",				scene_id = 3,				room_id = 0,				data_index = 10,			},			{				id = 12039,				alias = "Npc12039",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesEma",				scene_id = 3,				room_id = 0,				data_index = 11,			},			{				id = 12111,				alias = "Npc12111",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male1",				scene_id = 3,				room_id = 0,				data_index = 12,			},			{				id = 12112,				alias = "Npc12112",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male2",				scene_id = 3,				room_id = 0,				data_index = 13,			},			{				id = 12113,				alias = "Npc12113",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male3",				scene_id = 3,				room_id = 0,				data_index = 14,			},			{				id = 12114,				alias = "Npc12114",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female1",				scene_id = 3,				room_id = 0,				data_index = 15,			},			{				id = 12115,				alias = "Npc12115",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 16,			},			{				id = 12116,				alias = "Npc12116",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 17,			},			{				id = 3149,				alias = "Npc3149",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 18,			},			{				id = 3150,				alias = "Npc3150",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 19,			},		},	},	["1200812"] = 	{		npcs = 		{			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200801AyakaMask",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200909FesRoute35",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSPos",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSAfter1",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200903FesRoute03",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200905FesRoute13",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200907FesRoute22",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 3171,				alias = "Npc3171",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200903FesSouvenir3",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 3172,				alias = "Npc3172",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200905FesFood",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 12038,				alias = "Npc12038",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesDraw",				scene_id = 3,				room_id = 0,				data_index = 10,			},			{				id = 12039,				alias = "Npc12039",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesEma",				scene_id = 3,				room_id = 0,				data_index = 11,			},			{				id = 12111,				alias = "Npc12111",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male1",				scene_id = 3,				room_id = 0,				data_index = 12,			},			{				id = 12112,				alias = "Npc12112",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male2",				scene_id = 3,				room_id = 0,				data_index = 13,			},			{				id = 12113,				alias = "Npc12113",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male3",				scene_id = 3,				room_id = 0,				data_index = 14,			},			{				id = 12114,				alias = "Npc12114",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female1",				scene_id = 3,				room_id = 0,				data_index = 15,			},			{				id = 12115,				alias = "Npc12115",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 16,			},			{				id = 12116,				alias = "Npc12116",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 17,			},			{				id = 3149,				alias = "Npc3149",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 18,			},			{				id = 3150,				alias = "Npc3150",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 19,			},		},	},	["1200813"] = 	{		npcs = 		{			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200801AyakaMask",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200909FesRoute35",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSPos",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSAfter1",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200903FesRoute03",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200905FesRoute13",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200907FesRoute22",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 3171,				alias = "Npc3171",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200903FesSouvenir3",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 3172,				alias = "Npc3172",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200905FesFood",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 12038,				alias = "Npc12038",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesDraw",				scene_id = 3,				room_id = 0,				data_index = 10,			},			{				id = 12039,				alias = "Npc12039",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesEma",				scene_id = 3,				room_id = 0,				data_index = 11,			},			{				id = 12111,				alias = "Npc12111",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male1",				scene_id = 3,				room_id = 0,				data_index = 12,			},			{				id = 12112,				alias = "Npc12112",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male2",				scene_id = 3,				room_id = 0,				data_index = 13,			},			{				id = 12113,				alias = "Npc12113",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male3",				scene_id = 3,				room_id = 0,				data_index = 14,			},			{				id = 12114,				alias = "Npc12114",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female1",				scene_id = 3,				room_id = 0,				data_index = 15,			},			{				id = 12115,				alias = "Npc12115",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 16,			},			{				id = 12116,				alias = "Npc12116",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 17,			},			{				id = 3149,				alias = "Npc3149",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 18,			},			{				id = 3150,				alias = "Npc3150",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 19,			},		},	},	["1200814"] = 	{		npcs = 		{			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200801AyakaMask",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200909FesRoute35",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSPos",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSAfter1",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200903FesRoute03",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200905FesRoute13",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200907FesRoute22",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 3171,				alias = "Npc3171",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200903FesSouvenir3",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 3172,				alias = "Npc3172",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200905FesFood",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 12038,				alias = "Npc12038",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesDraw",				scene_id = 3,				room_id = 0,				data_index = 10,			},			{				id = 12039,				alias = "Npc12039",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesEma",				scene_id = 3,				room_id = 0,				data_index = 11,			},			{				id = 12111,				alias = "Npc12111",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male1",				scene_id = 3,				room_id = 0,				data_index = 12,			},			{				id = 12112,				alias = "Npc12112",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male2",				scene_id = 3,				room_id = 0,				data_index = 13,			},			{				id = 12113,				alias = "Npc12113",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male3",				scene_id = 3,				room_id = 0,				data_index = 14,			},			{				id = 12114,				alias = "Npc12114",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female1",				scene_id = 3,				room_id = 0,				data_index = 15,			},			{				id = 12115,				alias = "Npc12115",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 16,			},			{				id = 12116,				alias = "Npc12116",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 17,			},			{				id = 3149,				alias = "Npc3149",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 18,			},			{				id = 3150,				alias = "Npc3150",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 19,			},		},	},	["1200815"] = 	{		npcs = 		{			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200801AyakaMask",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200909FesRoute35",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSPos",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSAfter1",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200903FesRoute03",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200905FesRoute13",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200907FesRoute22",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 3171,				alias = "Npc3171",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200903FesSouvenir3",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 3172,				alias = "Npc3172",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200905FesFood",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 12038,				alias = "Npc12038",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesDraw",				scene_id = 3,				room_id = 0,				data_index = 10,			},			{				id = 12039,				alias = "Npc12039",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesEma",				scene_id = 3,				room_id = 0,				data_index = 11,			},			{				id = 12111,				alias = "Npc12111",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male1",				scene_id = 3,				room_id = 0,				data_index = 12,			},			{				id = 12112,				alias = "Npc12112",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male2",				scene_id = 3,				room_id = 0,				data_index = 13,			},			{				id = 12113,				alias = "Npc12113",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male3",				scene_id = 3,				room_id = 0,				data_index = 14,			},			{				id = 12114,				alias = "Npc12114",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female1",				scene_id = 3,				room_id = 0,				data_index = 15,			},			{				id = 12115,				alias = "Npc12115",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 16,			},			{				id = 12116,				alias = "Npc12116",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 17,			},			{				id = 3149,				alias = "Npc3149",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 18,			},			{				id = 3150,				alias = "Npc3150",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 19,			},		},	},	["1200816"] = 	{		npcs = 		{			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200801AyakaMask",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200909FesRoute35",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSPos",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSAfter1",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200903FesRoute03",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200905FesRoute13",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200907FesRoute22",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 3171,				alias = "Npc3171",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200903FesSouvenir3",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 3172,				alias = "Npc3172",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200905FesFood",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 12038,				alias = "Npc12038",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesDraw",				scene_id = 3,				room_id = 0,				data_index = 10,			},			{				id = 12039,				alias = "Npc12039",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesEma",				scene_id = 3,				room_id = 0,				data_index = 11,			},			{				id = 12111,				alias = "Npc12111",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male1",				scene_id = 3,				room_id = 0,				data_index = 12,			},			{				id = 12112,				alias = "Npc12112",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male2",				scene_id = 3,				room_id = 0,				data_index = 13,			},			{				id = 12113,				alias = "Npc12113",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male3",				scene_id = 3,				room_id = 0,				data_index = 14,			},			{				id = 12114,				alias = "Npc12114",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female1",				scene_id = 3,				room_id = 0,				data_index = 15,			},			{				id = 12115,				alias = "Npc12115",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 16,			},			{				id = 12116,				alias = "Npc12116",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 17,			},			{				id = 3149,				alias = "Npc3149",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 18,			},			{				id = 3150,				alias = "Npc3150",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 19,			},		},	},	["1200817"] = 	{		npcs = 		{			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200801AyakaMask",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200909FesRoute35",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSPos",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q12008AyakaCSAfter1",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200903FesRoute03",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200905FesRoute13",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 1013,				alias = "Npc1013",				script = "Actor/Npc/TempNPC",				pos = "Q1200907FesRoute22",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 3171,				alias = "Npc3171",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200903FesSouvenir3",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 3172,				alias = "Npc3172",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1200905FesFood",				scene_id = 3,				room_id = 0,				data_index = 9,			},			{				id = 12038,				alias = "Npc12038",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesDraw",				scene_id = 3,				room_id = 0,				data_index = 10,			},			{				id = 12039,				alias = "Npc12039",				script = "Actor/Npc/TempNPC",				pos = "Q12008FesEma",				scene_id = 3,				room_id = 0,				data_index = 11,			},			{				id = 12111,				alias = "Npc12111",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male1",				scene_id = 3,				room_id = 0,				data_index = 12,			},			{				id = 12112,				alias = "Npc12112",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male2",				scene_id = 3,				room_id = 0,				data_index = 13,			},			{				id = 12113,				alias = "Npc12113",				script = "Actor/Npc/TempNPC",				pos = "Q12008Male3",				scene_id = 3,				room_id = 0,				data_index = 14,			},			{				id = 12114,				alias = "Npc12114",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female1",				scene_id = 3,				room_id = 0,				data_index = 15,			},			{				id = 12115,				alias = "Npc12115",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 16,			},			{				id = 12116,				alias = "Npc12116",				script = "Actor/Npc/TempNPC",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 17,			},			{				id = 3149,				alias = "Npc3149",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female3",				scene_id = 3,				room_id = 0,				data_index = 18,			},			{				id = 3150,				alias = "Npc3150",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12008Female2",				scene_id = 3,				room_id = 0,				data_index = 19,			},		},	},}-- 校验数据 结束------------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1, L11_1, L12_1, L13_1, L14_1, L15_1, L16_1, L17_1, L18_1, L19_1, L20_1, L21_1
+main_id = 12008
+L0_1 = {}
+L1_1 = 1200801
+L2_1 = 1200802
+L3_1 = 1200809
+L4_1 = 1200806
+L5_1 = 1200810
+L6_1 = 1200807
+L7_1 = 1200811
+L8_1 = 1200808
+L9_1 = 1200812
+L10_1 = 1200803
+L11_1 = 1200816
+L12_1 = 1200804
+L13_1 = 1200813
+L14_1 = 1200814
+L15_1 = 1200815
+L16_1 = 1200817
+L17_1 = 1200818
+L18_1 = 1200819
+L19_1 = 1200805
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+L0_1[11] = L11_1
+L0_1[12] = L12_1
+L0_1[13] = L13_1
+L0_1[14] = L14_1
+L0_1[15] = L15_1
+L0_1[16] = L16_1
+L0_1[17] = L17_1
+L0_1[18] = L18_1
+L0_1[19] = L19_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["1200801"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3171
+L3_1.alias = "Npc3171"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q1200903FesSouvenir3"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 8
+L4_1 = {}
+L4_1.id = 3172
+L4_1.alias = "Npc3172"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q1200905FesFood"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 9
+L5_1 = {}
+L5_1.id = 12038
+L5_1.alias = "Npc12038"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q12008FesDraw"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 10
+L6_1 = {}
+L6_1.id = 12039
+L6_1.alias = "Npc12039"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q12008FesEma"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 11
+L7_1 = {}
+L7_1.id = 12111
+L7_1.alias = "Npc12111"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q12008Male1"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 12
+L8_1 = {}
+L8_1.id = 12112
+L8_1.alias = "Npc12112"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q12008Male2"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 13
+L9_1 = {}
+L9_1.id = 12113
+L9_1.alias = "Npc12113"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q12008Male3"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 14
+L10_1 = {}
+L10_1.id = 12114
+L10_1.alias = "Npc12114"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q12008Female1"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 15
+L11_1 = {}
+L11_1.id = 12115
+L11_1.alias = "Npc12115"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q12008Female2"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 16
+L12_1 = {}
+L12_1.id = 12116
+L12_1.alias = "Npc12116"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q12008Female3"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 17
+L13_1 = {}
+L13_1.id = 1013
+L13_1.alias = "Npc1013"
+L13_1.script = "Actor/Npc/TempNPC"
+L13_1.pos = "Q1200909FesRoute35"
+L13_1.scene_id = 3
+L13_1.room_id = 0
+L13_1.data_index = 11
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L2_1[11] = L13_1
+L1_1.npcs = L2_1
+L0_1["1200803"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3171
+L3_1.alias = "Npc3171"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q1200903FesSouvenir3"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 8
+L4_1 = {}
+L4_1.id = 3172
+L4_1.alias = "Npc3172"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q1200905FesFood"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 9
+L5_1 = {}
+L5_1.id = 12038
+L5_1.alias = "Npc12038"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q12008FesDraw"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 10
+L6_1 = {}
+L6_1.id = 12039
+L6_1.alias = "Npc12039"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q12008FesEma"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 11
+L7_1 = {}
+L7_1.id = 12111
+L7_1.alias = "Npc12111"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q12008Male1"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 12
+L8_1 = {}
+L8_1.id = 12112
+L8_1.alias = "Npc12112"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q12008Male2"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 13
+L9_1 = {}
+L9_1.id = 12113
+L9_1.alias = "Npc12113"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q12008Male3"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 14
+L10_1 = {}
+L10_1.id = 12114
+L10_1.alias = "Npc12114"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q12008Female1"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 15
+L11_1 = {}
+L11_1.id = 12115
+L11_1.alias = "Npc12115"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q12008Female2"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 16
+L12_1 = {}
+L12_1.id = 12116
+L12_1.alias = "Npc12116"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q12008Female3"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 17
+L13_1 = {}
+L13_1.id = 1013
+L13_1.alias = "Npc1013"
+L13_1.script = "Actor/Npc/TempNPC"
+L13_1.pos = "Q12008AyakaCSPos"
+L13_1.scene_id = 3
+L13_1.room_id = 0
+L13_1.data_index = 11
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L2_1[11] = L13_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L2_1.offline_dungeon_id = 0
+L2_1.scene_id = 3
+L2_1.pos = "Q12008ExtraAddedTrans"
+L1_1.avatar = L2_1
+L0_1["1200804"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3171
+L3_1.alias = "Npc3171"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q1200903FesSouvenir3"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 8
+L4_1 = {}
+L4_1.id = 3172
+L4_1.alias = "Npc3172"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q1200905FesFood"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 9
+L5_1 = {}
+L5_1.id = 12038
+L5_1.alias = "Npc12038"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q12008FesDraw"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 10
+L6_1 = {}
+L6_1.id = 12039
+L6_1.alias = "Npc12039"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q12008FesEma"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 11
+L7_1 = {}
+L7_1.id = 12111
+L7_1.alias = "Npc12111"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q12008Male1"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 12
+L8_1 = {}
+L8_1.id = 12112
+L8_1.alias = "Npc12112"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q12008Male2"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 13
+L9_1 = {}
+L9_1.id = 12113
+L9_1.alias = "Npc12113"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q12008Male3"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 14
+L10_1 = {}
+L10_1.id = 12114
+L10_1.alias = "Npc12114"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q12008Female1"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 15
+L11_1 = {}
+L11_1.id = 12115
+L11_1.alias = "Npc12115"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q12008Female2"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 16
+L12_1 = {}
+L12_1.id = 12116
+L12_1.alias = "Npc12116"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q12008Female3"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 17
+L13_1 = {}
+L13_1.id = 1013
+L13_1.alias = "Npc1013"
+L13_1.script = "Actor/Npc/TempNPC"
+L13_1.pos = "Q1200903FesRoute03"
+L13_1.scene_id = 3
+L13_1.room_id = 0
+L13_1.data_index = 11
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L2_1[11] = L13_1
+L1_1.npcs = L2_1
+L0_1["1200806"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3171
+L3_1.alias = "Npc3171"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q1200903FesSouvenir3"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 8
+L4_1 = {}
+L4_1.id = 3172
+L4_1.alias = "Npc3172"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q1200905FesFood"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 9
+L5_1 = {}
+L5_1.id = 12038
+L5_1.alias = "Npc12038"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q12008FesDraw"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 10
+L6_1 = {}
+L6_1.id = 12039
+L6_1.alias = "Npc12039"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q12008FesEma"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 11
+L7_1 = {}
+L7_1.id = 12111
+L7_1.alias = "Npc12111"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q12008Male1"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 12
+L8_1 = {}
+L8_1.id = 12112
+L8_1.alias = "Npc12112"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q12008Male2"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 13
+L9_1 = {}
+L9_1.id = 12113
+L9_1.alias = "Npc12113"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q12008Male3"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 14
+L10_1 = {}
+L10_1.id = 12114
+L10_1.alias = "Npc12114"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q12008Female1"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 15
+L11_1 = {}
+L11_1.id = 12115
+L11_1.alias = "Npc12115"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q12008Female2"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 16
+L12_1 = {}
+L12_1.id = 12116
+L12_1.alias = "Npc12116"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q12008Female3"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 17
+L13_1 = {}
+L13_1.id = 1013
+L13_1.alias = "Npc1013"
+L13_1.script = "Actor/Npc/TempNPC"
+L13_1.pos = "Q1200905FesRoute13"
+L13_1.scene_id = 3
+L13_1.room_id = 0
+L13_1.data_index = 11
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L2_1[11] = L13_1
+L1_1.npcs = L2_1
+L0_1["1200807"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3171
+L3_1.alias = "Npc3171"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q1200903FesSouvenir3"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 8
+L4_1 = {}
+L4_1.id = 3172
+L4_1.alias = "Npc3172"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q1200905FesFood"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 9
+L5_1 = {}
+L5_1.id = 12038
+L5_1.alias = "Npc12038"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q12008FesDraw"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 10
+L6_1 = {}
+L6_1.id = 12039
+L6_1.alias = "Npc12039"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q12008FesEma"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 11
+L7_1 = {}
+L7_1.id = 12111
+L7_1.alias = "Npc12111"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q12008Male1"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 12
+L8_1 = {}
+L8_1.id = 12112
+L8_1.alias = "Npc12112"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q12008Male2"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 13
+L9_1 = {}
+L9_1.id = 12113
+L9_1.alias = "Npc12113"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q12008Male3"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 14
+L10_1 = {}
+L10_1.id = 12114
+L10_1.alias = "Npc12114"
+L10_1.script = "Actor/Npc/TempNPC"
+L10_1.pos = "Q12008Female1"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 15
+L11_1 = {}
+L11_1.id = 12115
+L11_1.alias = "Npc12115"
+L11_1.script = "Actor/Npc/TempNPC"
+L11_1.pos = "Q12008Female2"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 16
+L12_1 = {}
+L12_1.id = 12116
+L12_1.alias = "Npc12116"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q12008Female3"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 17
+L13_1 = {}
+L13_1.id = 1013
+L13_1.alias = "Npc1013"
+L13_1.script = "Actor/Npc/TempNPC"
+L13_1.pos = "Q1200907FesRoute22"
+L13_1.scene_id = 3
+L13_1.room_id = 0
+L13_1.data_index = 11
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L2_1[11] = L13_1
+L1_1.npcs = L2_1
+L0_1["1200808"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1013
+L3_1.alias = "Npc1013"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q1200801AyakaMask"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1013
+L4_1.alias = "Npc1013"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q1200909FesRoute35"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1013
+L5_1.alias = "Npc1013"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q12008AyakaCSPos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1013
+L6_1.alias = "Npc1013"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q12008AyakaCSAfter1"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 1013
+L7_1.alias = "Npc1013"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q1200903FesRoute03"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 1013
+L8_1.alias = "Npc1013"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q1200905FesRoute13"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 1013
+L9_1.alias = "Npc1013"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q1200907FesRoute22"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 3171
+L10_1.alias = "Npc3171"
+L10_1.script = "Actor/Npc/NpcFSMBehaviour"
+L10_1.pos = "Q1200903FesSouvenir3"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 3172
+L11_1.alias = "Npc3172"
+L11_1.script = "Actor/Npc/NpcFSMBehaviour"
+L11_1.pos = "Q1200905FesFood"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 12038
+L12_1.alias = "Npc12038"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q12008FesDraw"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L13_1 = {}
+L13_1.id = 12039
+L13_1.alias = "Npc12039"
+L13_1.script = "Actor/Npc/TempNPC"
+L13_1.pos = "Q12008FesEma"
+L13_1.scene_id = 3
+L13_1.room_id = 0
+L13_1.data_index = 11
+L14_1 = {}
+L14_1.id = 12111
+L14_1.alias = "Npc12111"
+L14_1.script = "Actor/Npc/TempNPC"
+L14_1.pos = "Q12008Male1"
+L14_1.scene_id = 3
+L14_1.room_id = 0
+L14_1.data_index = 12
+L15_1 = {}
+L15_1.id = 12112
+L15_1.alias = "Npc12112"
+L15_1.script = "Actor/Npc/TempNPC"
+L15_1.pos = "Q12008Male2"
+L15_1.scene_id = 3
+L15_1.room_id = 0
+L15_1.data_index = 13
+L16_1 = {}
+L16_1.id = 12113
+L16_1.alias = "Npc12113"
+L16_1.script = "Actor/Npc/TempNPC"
+L16_1.pos = "Q12008Male3"
+L16_1.scene_id = 3
+L16_1.room_id = 0
+L16_1.data_index = 14
+L17_1 = {}
+L17_1.id = 12114
+L17_1.alias = "Npc12114"
+L17_1.script = "Actor/Npc/TempNPC"
+L17_1.pos = "Q12008Female1"
+L17_1.scene_id = 3
+L17_1.room_id = 0
+L17_1.data_index = 15
+L18_1 = {}
+L18_1.id = 12115
+L18_1.alias = "Npc12115"
+L18_1.script = "Actor/Npc/TempNPC"
+L18_1.pos = "Q12008Female2"
+L18_1.scene_id = 3
+L18_1.room_id = 0
+L18_1.data_index = 16
+L19_1 = {}
+L19_1.id = 12116
+L19_1.alias = "Npc12116"
+L19_1.script = "Actor/Npc/TempNPC"
+L19_1.pos = "Q12008Female3"
+L19_1.scene_id = 3
+L19_1.room_id = 0
+L19_1.data_index = 17
+L20_1 = {}
+L20_1.id = 3149
+L20_1.alias = "Npc3149"
+L20_1.script = "Actor/Npc/NpcFSMBehaviour"
+L20_1.pos = "Q12008Female3"
+L20_1.scene_id = 3
+L20_1.room_id = 0
+L20_1.data_index = 18
+L21_1 = {}
+L21_1.id = 3150
+L21_1.alias = "Npc3150"
+L21_1.script = "Actor/Npc/NpcFSMBehaviour"
+L21_1.pos = "Q12008Female2"
+L21_1.scene_id = 3
+L21_1.room_id = 0
+L21_1.data_index = 19
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L2_1[11] = L13_1
+L2_1[12] = L14_1
+L2_1[13] = L15_1
+L2_1[14] = L16_1
+L2_1[15] = L17_1
+L2_1[16] = L18_1
+L2_1[17] = L19_1
+L2_1[18] = L20_1
+L2_1[19] = L21_1
+L1_1.npcs = L2_1
+L0_1["1200801"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1013
+L3_1.alias = "Npc1013"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q1200801AyakaMask"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1013
+L4_1.alias = "Npc1013"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q1200909FesRoute35"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1013
+L5_1.alias = "Npc1013"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q12008AyakaCSPos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1013
+L6_1.alias = "Npc1013"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q12008AyakaCSAfter1"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 1013
+L7_1.alias = "Npc1013"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q1200903FesRoute03"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 1013
+L8_1.alias = "Npc1013"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q1200905FesRoute13"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 1013
+L9_1.alias = "Npc1013"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q1200907FesRoute22"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 3171
+L10_1.alias = "Npc3171"
+L10_1.script = "Actor/Npc/NpcFSMBehaviour"
+L10_1.pos = "Q1200903FesSouvenir3"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 3172
+L11_1.alias = "Npc3172"
+L11_1.script = "Actor/Npc/NpcFSMBehaviour"
+L11_1.pos = "Q1200905FesFood"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 12038
+L12_1.alias = "Npc12038"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q12008FesDraw"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L13_1 = {}
+L13_1.id = 12039
+L13_1.alias = "Npc12039"
+L13_1.script = "Actor/Npc/TempNPC"
+L13_1.pos = "Q12008FesEma"
+L13_1.scene_id = 3
+L13_1.room_id = 0
+L13_1.data_index = 11
+L14_1 = {}
+L14_1.id = 12111
+L14_1.alias = "Npc12111"
+L14_1.script = "Actor/Npc/TempNPC"
+L14_1.pos = "Q12008Male1"
+L14_1.scene_id = 3
+L14_1.room_id = 0
+L14_1.data_index = 12
+L15_1 = {}
+L15_1.id = 12112
+L15_1.alias = "Npc12112"
+L15_1.script = "Actor/Npc/TempNPC"
+L15_1.pos = "Q12008Male2"
+L15_1.scene_id = 3
+L15_1.room_id = 0
+L15_1.data_index = 13
+L16_1 = {}
+L16_1.id = 12113
+L16_1.alias = "Npc12113"
+L16_1.script = "Actor/Npc/TempNPC"
+L16_1.pos = "Q12008Male3"
+L16_1.scene_id = 3
+L16_1.room_id = 0
+L16_1.data_index = 14
+L17_1 = {}
+L17_1.id = 12114
+L17_1.alias = "Npc12114"
+L17_1.script = "Actor/Npc/TempNPC"
+L17_1.pos = "Q12008Female1"
+L17_1.scene_id = 3
+L17_1.room_id = 0
+L17_1.data_index = 15
+L18_1 = {}
+L18_1.id = 12115
+L18_1.alias = "Npc12115"
+L18_1.script = "Actor/Npc/TempNPC"
+L18_1.pos = "Q12008Female2"
+L18_1.scene_id = 3
+L18_1.room_id = 0
+L18_1.data_index = 16
+L19_1 = {}
+L19_1.id = 12116
+L19_1.alias = "Npc12116"
+L19_1.script = "Actor/Npc/TempNPC"
+L19_1.pos = "Q12008Female3"
+L19_1.scene_id = 3
+L19_1.room_id = 0
+L19_1.data_index = 17
+L20_1 = {}
+L20_1.id = 3149
+L20_1.alias = "Npc3149"
+L20_1.script = "Actor/Npc/NpcFSMBehaviour"
+L20_1.pos = "Q12008Female3"
+L20_1.scene_id = 3
+L20_1.room_id = 0
+L20_1.data_index = 18
+L21_1 = {}
+L21_1.id = 3150
+L21_1.alias = "Npc3150"
+L21_1.script = "Actor/Npc/NpcFSMBehaviour"
+L21_1.pos = "Q12008Female2"
+L21_1.scene_id = 3
+L21_1.room_id = 0
+L21_1.data_index = 19
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L2_1[11] = L13_1
+L2_1[12] = L14_1
+L2_1[13] = L15_1
+L2_1[14] = L16_1
+L2_1[15] = L17_1
+L2_1[16] = L18_1
+L2_1[17] = L19_1
+L2_1[18] = L20_1
+L2_1[19] = L21_1
+L1_1.npcs = L2_1
+L0_1["1200802"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1013
+L3_1.alias = "Npc1013"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q1200801AyakaMask"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1013
+L4_1.alias = "Npc1013"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q1200909FesRoute35"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1013
+L5_1.alias = "Npc1013"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q12008AyakaCSPos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1013
+L6_1.alias = "Npc1013"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q12008AyakaCSAfter1"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 1013
+L7_1.alias = "Npc1013"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q1200903FesRoute03"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 1013
+L8_1.alias = "Npc1013"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q1200905FesRoute13"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 1013
+L9_1.alias = "Npc1013"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q1200907FesRoute22"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 3171
+L10_1.alias = "Npc3171"
+L10_1.script = "Actor/Npc/NpcFSMBehaviour"
+L10_1.pos = "Q1200903FesSouvenir3"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 3172
+L11_1.alias = "Npc3172"
+L11_1.script = "Actor/Npc/NpcFSMBehaviour"
+L11_1.pos = "Q1200905FesFood"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 12038
+L12_1.alias = "Npc12038"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q12008FesDraw"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L13_1 = {}
+L13_1.id = 12039
+L13_1.alias = "Npc12039"
+L13_1.script = "Actor/Npc/TempNPC"
+L13_1.pos = "Q12008FesEma"
+L13_1.scene_id = 3
+L13_1.room_id = 0
+L13_1.data_index = 11
+L14_1 = {}
+L14_1.id = 12111
+L14_1.alias = "Npc12111"
+L14_1.script = "Actor/Npc/TempNPC"
+L14_1.pos = "Q12008Male1"
+L14_1.scene_id = 3
+L14_1.room_id = 0
+L14_1.data_index = 12
+L15_1 = {}
+L15_1.id = 12112
+L15_1.alias = "Npc12112"
+L15_1.script = "Actor/Npc/TempNPC"
+L15_1.pos = "Q12008Male2"
+L15_1.scene_id = 3
+L15_1.room_id = 0
+L15_1.data_index = 13
+L16_1 = {}
+L16_1.id = 12113
+L16_1.alias = "Npc12113"
+L16_1.script = "Actor/Npc/TempNPC"
+L16_1.pos = "Q12008Male3"
+L16_1.scene_id = 3
+L16_1.room_id = 0
+L16_1.data_index = 14
+L17_1 = {}
+L17_1.id = 12114
+L17_1.alias = "Npc12114"
+L17_1.script = "Actor/Npc/TempNPC"
+L17_1.pos = "Q12008Female1"
+L17_1.scene_id = 3
+L17_1.room_id = 0
+L17_1.data_index = 15
+L18_1 = {}
+L18_1.id = 12115
+L18_1.alias = "Npc12115"
+L18_1.script = "Actor/Npc/TempNPC"
+L18_1.pos = "Q12008Female2"
+L18_1.scene_id = 3
+L18_1.room_id = 0
+L18_1.data_index = 16
+L19_1 = {}
+L19_1.id = 12116
+L19_1.alias = "Npc12116"
+L19_1.script = "Actor/Npc/TempNPC"
+L19_1.pos = "Q12008Female3"
+L19_1.scene_id = 3
+L19_1.room_id = 0
+L19_1.data_index = 17
+L20_1 = {}
+L20_1.id = 3149
+L20_1.alias = "Npc3149"
+L20_1.script = "Actor/Npc/NpcFSMBehaviour"
+L20_1.pos = "Q12008Female3"
+L20_1.scene_id = 3
+L20_1.room_id = 0
+L20_1.data_index = 18
+L21_1 = {}
+L21_1.id = 3150
+L21_1.alias = "Npc3150"
+L21_1.script = "Actor/Npc/NpcFSMBehaviour"
+L21_1.pos = "Q12008Female2"
+L21_1.scene_id = 3
+L21_1.room_id = 0
+L21_1.data_index = 19
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L2_1[11] = L13_1
+L2_1[12] = L14_1
+L2_1[13] = L15_1
+L2_1[14] = L16_1
+L2_1[15] = L17_1
+L2_1[16] = L18_1
+L2_1[17] = L19_1
+L2_1[18] = L20_1
+L2_1[19] = L21_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q12008ExtraAddedTrans"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["1200803"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1013
+L3_1.alias = "Npc1013"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q1200801AyakaMask"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1013
+L4_1.alias = "Npc1013"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q1200909FesRoute35"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1013
+L5_1.alias = "Npc1013"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q12008AyakaCSPos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1013
+L6_1.alias = "Npc1013"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q12008AyakaCSAfter1"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 1013
+L7_1.alias = "Npc1013"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q1200903FesRoute03"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 1013
+L8_1.alias = "Npc1013"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q1200905FesRoute13"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 1013
+L9_1.alias = "Npc1013"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q1200907FesRoute22"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 3171
+L10_1.alias = "Npc3171"
+L10_1.script = "Actor/Npc/NpcFSMBehaviour"
+L10_1.pos = "Q1200903FesSouvenir3"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 3172
+L11_1.alias = "Npc3172"
+L11_1.script = "Actor/Npc/NpcFSMBehaviour"
+L11_1.pos = "Q1200905FesFood"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 12038
+L12_1.alias = "Npc12038"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q12008FesDraw"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L13_1 = {}
+L13_1.id = 12039
+L13_1.alias = "Npc12039"
+L13_1.script = "Actor/Npc/TempNPC"
+L13_1.pos = "Q12008FesEma"
+L13_1.scene_id = 3
+L13_1.room_id = 0
+L13_1.data_index = 11
+L14_1 = {}
+L14_1.id = 12111
+L14_1.alias = "Npc12111"
+L14_1.script = "Actor/Npc/TempNPC"
+L14_1.pos = "Q12008Male1"
+L14_1.scene_id = 3
+L14_1.room_id = 0
+L14_1.data_index = 12
+L15_1 = {}
+L15_1.id = 12112
+L15_1.alias = "Npc12112"
+L15_1.script = "Actor/Npc/TempNPC"
+L15_1.pos = "Q12008Male2"
+L15_1.scene_id = 3
+L15_1.room_id = 0
+L15_1.data_index = 13
+L16_1 = {}
+L16_1.id = 12113
+L16_1.alias = "Npc12113"
+L16_1.script = "Actor/Npc/TempNPC"
+L16_1.pos = "Q12008Male3"
+L16_1.scene_id = 3
+L16_1.room_id = 0
+L16_1.data_index = 14
+L17_1 = {}
+L17_1.id = 12114
+L17_1.alias = "Npc12114"
+L17_1.script = "Actor/Npc/TempNPC"
+L17_1.pos = "Q12008Female1"
+L17_1.scene_id = 3
+L17_1.room_id = 0
+L17_1.data_index = 15
+L18_1 = {}
+L18_1.id = 12115
+L18_1.alias = "Npc12115"
+L18_1.script = "Actor/Npc/TempNPC"
+L18_1.pos = "Q12008Female2"
+L18_1.scene_id = 3
+L18_1.room_id = 0
+L18_1.data_index = 16
+L19_1 = {}
+L19_1.id = 12116
+L19_1.alias = "Npc12116"
+L19_1.script = "Actor/Npc/TempNPC"
+L19_1.pos = "Q12008Female3"
+L19_1.scene_id = 3
+L19_1.room_id = 0
+L19_1.data_index = 17
+L20_1 = {}
+L20_1.id = 3149
+L20_1.alias = "Npc3149"
+L20_1.script = "Actor/Npc/NpcFSMBehaviour"
+L20_1.pos = "Q12008Female3"
+L20_1.scene_id = 3
+L20_1.room_id = 0
+L20_1.data_index = 18
+L21_1 = {}
+L21_1.id = 3150
+L21_1.alias = "Npc3150"
+L21_1.script = "Actor/Npc/NpcFSMBehaviour"
+L21_1.pos = "Q12008Female2"
+L21_1.scene_id = 3
+L21_1.room_id = 0
+L21_1.data_index = 19
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L2_1[11] = L13_1
+L2_1[12] = L14_1
+L2_1[13] = L15_1
+L2_1[14] = L16_1
+L2_1[15] = L17_1
+L2_1[16] = L18_1
+L2_1[17] = L19_1
+L2_1[18] = L20_1
+L2_1[19] = L21_1
+L1_1.npcs = L2_1
+L0_1["1200804"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1013
+L3_1.alias = "Npc1013"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q1200801AyakaMask"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1013
+L4_1.alias = "Npc1013"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q1200909FesRoute35"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1013
+L5_1.alias = "Npc1013"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q12008AyakaCSPos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1013
+L6_1.alias = "Npc1013"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q12008AyakaCSAfter1"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 1013
+L7_1.alias = "Npc1013"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q1200903FesRoute03"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 1013
+L8_1.alias = "Npc1013"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q1200905FesRoute13"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 1013
+L9_1.alias = "Npc1013"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q1200907FesRoute22"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 3171
+L10_1.alias = "Npc3171"
+L10_1.script = "Actor/Npc/NpcFSMBehaviour"
+L10_1.pos = "Q1200903FesSouvenir3"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 3172
+L11_1.alias = "Npc3172"
+L11_1.script = "Actor/Npc/NpcFSMBehaviour"
+L11_1.pos = "Q1200905FesFood"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 12038
+L12_1.alias = "Npc12038"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q12008FesDraw"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L13_1 = {}
+L13_1.id = 12039
+L13_1.alias = "Npc12039"
+L13_1.script = "Actor/Npc/TempNPC"
+L13_1.pos = "Q12008FesEma"
+L13_1.scene_id = 3
+L13_1.room_id = 0
+L13_1.data_index = 11
+L14_1 = {}
+L14_1.id = 12111
+L14_1.alias = "Npc12111"
+L14_1.script = "Actor/Npc/TempNPC"
+L14_1.pos = "Q12008Male1"
+L14_1.scene_id = 3
+L14_1.room_id = 0
+L14_1.data_index = 12
+L15_1 = {}
+L15_1.id = 12112
+L15_1.alias = "Npc12112"
+L15_1.script = "Actor/Npc/TempNPC"
+L15_1.pos = "Q12008Male2"
+L15_1.scene_id = 3
+L15_1.room_id = 0
+L15_1.data_index = 13
+L16_1 = {}
+L16_1.id = 12113
+L16_1.alias = "Npc12113"
+L16_1.script = "Actor/Npc/TempNPC"
+L16_1.pos = "Q12008Male3"
+L16_1.scene_id = 3
+L16_1.room_id = 0
+L16_1.data_index = 14
+L17_1 = {}
+L17_1.id = 12114
+L17_1.alias = "Npc12114"
+L17_1.script = "Actor/Npc/TempNPC"
+L17_1.pos = "Q12008Female1"
+L17_1.scene_id = 3
+L17_1.room_id = 0
+L17_1.data_index = 15
+L18_1 = {}
+L18_1.id = 12115
+L18_1.alias = "Npc12115"
+L18_1.script = "Actor/Npc/TempNPC"
+L18_1.pos = "Q12008Female2"
+L18_1.scene_id = 3
+L18_1.room_id = 0
+L18_1.data_index = 16
+L19_1 = {}
+L19_1.id = 12116
+L19_1.alias = "Npc12116"
+L19_1.script = "Actor/Npc/TempNPC"
+L19_1.pos = "Q12008Female3"
+L19_1.scene_id = 3
+L19_1.room_id = 0
+L19_1.data_index = 17
+L20_1 = {}
+L20_1.id = 3149
+L20_1.alias = "Npc3149"
+L20_1.script = "Actor/Npc/NpcFSMBehaviour"
+L20_1.pos = "Q12008Female3"
+L20_1.scene_id = 3
+L20_1.room_id = 0
+L20_1.data_index = 18
+L21_1 = {}
+L21_1.id = 3150
+L21_1.alias = "Npc3150"
+L21_1.script = "Actor/Npc/NpcFSMBehaviour"
+L21_1.pos = "Q12008Female2"
+L21_1.scene_id = 3
+L21_1.room_id = 0
+L21_1.data_index = 19
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L2_1[11] = L13_1
+L2_1[12] = L14_1
+L2_1[13] = L15_1
+L2_1[14] = L16_1
+L2_1[15] = L17_1
+L2_1[16] = L18_1
+L2_1[17] = L19_1
+L2_1[18] = L20_1
+L2_1[19] = L21_1
+L1_1.npcs = L2_1
+L0_1["1200805"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1013
+L3_1.alias = "Npc1013"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q1200801AyakaMask"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1013
+L4_1.alias = "Npc1013"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q1200909FesRoute35"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1013
+L5_1.alias = "Npc1013"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q12008AyakaCSPos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1013
+L6_1.alias = "Npc1013"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q12008AyakaCSAfter1"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 1013
+L7_1.alias = "Npc1013"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q1200903FesRoute03"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 1013
+L8_1.alias = "Npc1013"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q1200905FesRoute13"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 1013
+L9_1.alias = "Npc1013"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q1200907FesRoute22"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 3171
+L10_1.alias = "Npc3171"
+L10_1.script = "Actor/Npc/NpcFSMBehaviour"
+L10_1.pos = "Q1200903FesSouvenir3"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 3172
+L11_1.alias = "Npc3172"
+L11_1.script = "Actor/Npc/NpcFSMBehaviour"
+L11_1.pos = "Q1200905FesFood"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 12038
+L12_1.alias = "Npc12038"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q12008FesDraw"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L13_1 = {}
+L13_1.id = 12039
+L13_1.alias = "Npc12039"
+L13_1.script = "Actor/Npc/TempNPC"
+L13_1.pos = "Q12008FesEma"
+L13_1.scene_id = 3
+L13_1.room_id = 0
+L13_1.data_index = 11
+L14_1 = {}
+L14_1.id = 12111
+L14_1.alias = "Npc12111"
+L14_1.script = "Actor/Npc/TempNPC"
+L14_1.pos = "Q12008Male1"
+L14_1.scene_id = 3
+L14_1.room_id = 0
+L14_1.data_index = 12
+L15_1 = {}
+L15_1.id = 12112
+L15_1.alias = "Npc12112"
+L15_1.script = "Actor/Npc/TempNPC"
+L15_1.pos = "Q12008Male2"
+L15_1.scene_id = 3
+L15_1.room_id = 0
+L15_1.data_index = 13
+L16_1 = {}
+L16_1.id = 12113
+L16_1.alias = "Npc12113"
+L16_1.script = "Actor/Npc/TempNPC"
+L16_1.pos = "Q12008Male3"
+L16_1.scene_id = 3
+L16_1.room_id = 0
+L16_1.data_index = 14
+L17_1 = {}
+L17_1.id = 12114
+L17_1.alias = "Npc12114"
+L17_1.script = "Actor/Npc/TempNPC"
+L17_1.pos = "Q12008Female1"
+L17_1.scene_id = 3
+L17_1.room_id = 0
+L17_1.data_index = 15
+L18_1 = {}
+L18_1.id = 12115
+L18_1.alias = "Npc12115"
+L18_1.script = "Actor/Npc/TempNPC"
+L18_1.pos = "Q12008Female2"
+L18_1.scene_id = 3
+L18_1.room_id = 0
+L18_1.data_index = 16
+L19_1 = {}
+L19_1.id = 12116
+L19_1.alias = "Npc12116"
+L19_1.script = "Actor/Npc/TempNPC"
+L19_1.pos = "Q12008Female3"
+L19_1.scene_id = 3
+L19_1.room_id = 0
+L19_1.data_index = 17
+L20_1 = {}
+L20_1.id = 3149
+L20_1.alias = "Npc3149"
+L20_1.script = "Actor/Npc/NpcFSMBehaviour"
+L20_1.pos = "Q12008Female3"
+L20_1.scene_id = 3
+L20_1.room_id = 0
+L20_1.data_index = 18
+L21_1 = {}
+L21_1.id = 3150
+L21_1.alias = "Npc3150"
+L21_1.script = "Actor/Npc/NpcFSMBehaviour"
+L21_1.pos = "Q12008Female2"
+L21_1.scene_id = 3
+L21_1.room_id = 0
+L21_1.data_index = 19
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L2_1[11] = L13_1
+L2_1[12] = L14_1
+L2_1[13] = L15_1
+L2_1[14] = L16_1
+L2_1[15] = L17_1
+L2_1[16] = L18_1
+L2_1[17] = L19_1
+L2_1[18] = L20_1
+L2_1[19] = L21_1
+L1_1.npcs = L2_1
+L0_1["1200806"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1013
+L3_1.alias = "Npc1013"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q1200801AyakaMask"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1013
+L4_1.alias = "Npc1013"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q1200909FesRoute35"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1013
+L5_1.alias = "Npc1013"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q12008AyakaCSPos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1013
+L6_1.alias = "Npc1013"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q12008AyakaCSAfter1"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 1013
+L7_1.alias = "Npc1013"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q1200903FesRoute03"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 1013
+L8_1.alias = "Npc1013"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q1200905FesRoute13"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 1013
+L9_1.alias = "Npc1013"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q1200907FesRoute22"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 3171
+L10_1.alias = "Npc3171"
+L10_1.script = "Actor/Npc/NpcFSMBehaviour"
+L10_1.pos = "Q1200903FesSouvenir3"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 3172
+L11_1.alias = "Npc3172"
+L11_1.script = "Actor/Npc/NpcFSMBehaviour"
+L11_1.pos = "Q1200905FesFood"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 12038
+L12_1.alias = "Npc12038"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q12008FesDraw"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L13_1 = {}
+L13_1.id = 12039
+L13_1.alias = "Npc12039"
+L13_1.script = "Actor/Npc/TempNPC"
+L13_1.pos = "Q12008FesEma"
+L13_1.scene_id = 3
+L13_1.room_id = 0
+L13_1.data_index = 11
+L14_1 = {}
+L14_1.id = 12111
+L14_1.alias = "Npc12111"
+L14_1.script = "Actor/Npc/TempNPC"
+L14_1.pos = "Q12008Male1"
+L14_1.scene_id = 3
+L14_1.room_id = 0
+L14_1.data_index = 12
+L15_1 = {}
+L15_1.id = 12112
+L15_1.alias = "Npc12112"
+L15_1.script = "Actor/Npc/TempNPC"
+L15_1.pos = "Q12008Male2"
+L15_1.scene_id = 3
+L15_1.room_id = 0
+L15_1.data_index = 13
+L16_1 = {}
+L16_1.id = 12113
+L16_1.alias = "Npc12113"
+L16_1.script = "Actor/Npc/TempNPC"
+L16_1.pos = "Q12008Male3"
+L16_1.scene_id = 3
+L16_1.room_id = 0
+L16_1.data_index = 14
+L17_1 = {}
+L17_1.id = 12114
+L17_1.alias = "Npc12114"
+L17_1.script = "Actor/Npc/TempNPC"
+L17_1.pos = "Q12008Female1"
+L17_1.scene_id = 3
+L17_1.room_id = 0
+L17_1.data_index = 15
+L18_1 = {}
+L18_1.id = 12115
+L18_1.alias = "Npc12115"
+L18_1.script = "Actor/Npc/TempNPC"
+L18_1.pos = "Q12008Female2"
+L18_1.scene_id = 3
+L18_1.room_id = 0
+L18_1.data_index = 16
+L19_1 = {}
+L19_1.id = 12116
+L19_1.alias = "Npc12116"
+L19_1.script = "Actor/Npc/TempNPC"
+L19_1.pos = "Q12008Female3"
+L19_1.scene_id = 3
+L19_1.room_id = 0
+L19_1.data_index = 17
+L20_1 = {}
+L20_1.id = 3149
+L20_1.alias = "Npc3149"
+L20_1.script = "Actor/Npc/NpcFSMBehaviour"
+L20_1.pos = "Q12008Female3"
+L20_1.scene_id = 3
+L20_1.room_id = 0
+L20_1.data_index = 18
+L21_1 = {}
+L21_1.id = 3150
+L21_1.alias = "Npc3150"
+L21_1.script = "Actor/Npc/NpcFSMBehaviour"
+L21_1.pos = "Q12008Female2"
+L21_1.scene_id = 3
+L21_1.room_id = 0
+L21_1.data_index = 19
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L2_1[11] = L13_1
+L2_1[12] = L14_1
+L2_1[13] = L15_1
+L2_1[14] = L16_1
+L2_1[15] = L17_1
+L2_1[16] = L18_1
+L2_1[17] = L19_1
+L2_1[18] = L20_1
+L2_1[19] = L21_1
+L1_1.npcs = L2_1
+L0_1["1200807"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1013
+L3_1.alias = "Npc1013"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q1200801AyakaMask"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1013
+L4_1.alias = "Npc1013"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q1200909FesRoute35"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1013
+L5_1.alias = "Npc1013"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q12008AyakaCSPos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1013
+L6_1.alias = "Npc1013"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q12008AyakaCSAfter1"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 1013
+L7_1.alias = "Npc1013"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q1200903FesRoute03"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 1013
+L8_1.alias = "Npc1013"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q1200905FesRoute13"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 1013
+L9_1.alias = "Npc1013"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q1200907FesRoute22"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 3171
+L10_1.alias = "Npc3171"
+L10_1.script = "Actor/Npc/NpcFSMBehaviour"
+L10_1.pos = "Q1200903FesSouvenir3"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 3172
+L11_1.alias = "Npc3172"
+L11_1.script = "Actor/Npc/NpcFSMBehaviour"
+L11_1.pos = "Q1200905FesFood"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 12038
+L12_1.alias = "Npc12038"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q12008FesDraw"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L13_1 = {}
+L13_1.id = 12039
+L13_1.alias = "Npc12039"
+L13_1.script = "Actor/Npc/TempNPC"
+L13_1.pos = "Q12008FesEma"
+L13_1.scene_id = 3
+L13_1.room_id = 0
+L13_1.data_index = 11
+L14_1 = {}
+L14_1.id = 12111
+L14_1.alias = "Npc12111"
+L14_1.script = "Actor/Npc/TempNPC"
+L14_1.pos = "Q12008Male1"
+L14_1.scene_id = 3
+L14_1.room_id = 0
+L14_1.data_index = 12
+L15_1 = {}
+L15_1.id = 12112
+L15_1.alias = "Npc12112"
+L15_1.script = "Actor/Npc/TempNPC"
+L15_1.pos = "Q12008Male2"
+L15_1.scene_id = 3
+L15_1.room_id = 0
+L15_1.data_index = 13
+L16_1 = {}
+L16_1.id = 12113
+L16_1.alias = "Npc12113"
+L16_1.script = "Actor/Npc/TempNPC"
+L16_1.pos = "Q12008Male3"
+L16_1.scene_id = 3
+L16_1.room_id = 0
+L16_1.data_index = 14
+L17_1 = {}
+L17_1.id = 12114
+L17_1.alias = "Npc12114"
+L17_1.script = "Actor/Npc/TempNPC"
+L17_1.pos = "Q12008Female1"
+L17_1.scene_id = 3
+L17_1.room_id = 0
+L17_1.data_index = 15
+L18_1 = {}
+L18_1.id = 12115
+L18_1.alias = "Npc12115"
+L18_1.script = "Actor/Npc/TempNPC"
+L18_1.pos = "Q12008Female2"
+L18_1.scene_id = 3
+L18_1.room_id = 0
+L18_1.data_index = 16
+L19_1 = {}
+L19_1.id = 12116
+L19_1.alias = "Npc12116"
+L19_1.script = "Actor/Npc/TempNPC"
+L19_1.pos = "Q12008Female3"
+L19_1.scene_id = 3
+L19_1.room_id = 0
+L19_1.data_index = 17
+L20_1 = {}
+L20_1.id = 3149
+L20_1.alias = "Npc3149"
+L20_1.script = "Actor/Npc/NpcFSMBehaviour"
+L20_1.pos = "Q12008Female3"
+L20_1.scene_id = 3
+L20_1.room_id = 0
+L20_1.data_index = 18
+L21_1 = {}
+L21_1.id = 3150
+L21_1.alias = "Npc3150"
+L21_1.script = "Actor/Npc/NpcFSMBehaviour"
+L21_1.pos = "Q12008Female2"
+L21_1.scene_id = 3
+L21_1.room_id = 0
+L21_1.data_index = 19
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L2_1[11] = L13_1
+L2_1[12] = L14_1
+L2_1[13] = L15_1
+L2_1[14] = L16_1
+L2_1[15] = L17_1
+L2_1[16] = L18_1
+L2_1[17] = L19_1
+L2_1[18] = L20_1
+L2_1[19] = L21_1
+L1_1.npcs = L2_1
+L0_1["1200808"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1013
+L3_1.alias = "Npc1013"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q1200801AyakaMask"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1013
+L4_1.alias = "Npc1013"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q1200909FesRoute35"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1013
+L5_1.alias = "Npc1013"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q12008AyakaCSPos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1013
+L6_1.alias = "Npc1013"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q12008AyakaCSAfter1"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 1013
+L7_1.alias = "Npc1013"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q1200903FesRoute03"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 1013
+L8_1.alias = "Npc1013"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q1200905FesRoute13"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 1013
+L9_1.alias = "Npc1013"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q1200907FesRoute22"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 3171
+L10_1.alias = "Npc3171"
+L10_1.script = "Actor/Npc/NpcFSMBehaviour"
+L10_1.pos = "Q1200903FesSouvenir3"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 3172
+L11_1.alias = "Npc3172"
+L11_1.script = "Actor/Npc/NpcFSMBehaviour"
+L11_1.pos = "Q1200905FesFood"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 12038
+L12_1.alias = "Npc12038"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q12008FesDraw"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L13_1 = {}
+L13_1.id = 12039
+L13_1.alias = "Npc12039"
+L13_1.script = "Actor/Npc/TempNPC"
+L13_1.pos = "Q12008FesEma"
+L13_1.scene_id = 3
+L13_1.room_id = 0
+L13_1.data_index = 11
+L14_1 = {}
+L14_1.id = 12111
+L14_1.alias = "Npc12111"
+L14_1.script = "Actor/Npc/TempNPC"
+L14_1.pos = "Q12008Male1"
+L14_1.scene_id = 3
+L14_1.room_id = 0
+L14_1.data_index = 12
+L15_1 = {}
+L15_1.id = 12112
+L15_1.alias = "Npc12112"
+L15_1.script = "Actor/Npc/TempNPC"
+L15_1.pos = "Q12008Male2"
+L15_1.scene_id = 3
+L15_1.room_id = 0
+L15_1.data_index = 13
+L16_1 = {}
+L16_1.id = 12113
+L16_1.alias = "Npc12113"
+L16_1.script = "Actor/Npc/TempNPC"
+L16_1.pos = "Q12008Male3"
+L16_1.scene_id = 3
+L16_1.room_id = 0
+L16_1.data_index = 14
+L17_1 = {}
+L17_1.id = 12114
+L17_1.alias = "Npc12114"
+L17_1.script = "Actor/Npc/TempNPC"
+L17_1.pos = "Q12008Female1"
+L17_1.scene_id = 3
+L17_1.room_id = 0
+L17_1.data_index = 15
+L18_1 = {}
+L18_1.id = 12115
+L18_1.alias = "Npc12115"
+L18_1.script = "Actor/Npc/TempNPC"
+L18_1.pos = "Q12008Female2"
+L18_1.scene_id = 3
+L18_1.room_id = 0
+L18_1.data_index = 16
+L19_1 = {}
+L19_1.id = 12116
+L19_1.alias = "Npc12116"
+L19_1.script = "Actor/Npc/TempNPC"
+L19_1.pos = "Q12008Female3"
+L19_1.scene_id = 3
+L19_1.room_id = 0
+L19_1.data_index = 17
+L20_1 = {}
+L20_1.id = 3149
+L20_1.alias = "Npc3149"
+L20_1.script = "Actor/Npc/NpcFSMBehaviour"
+L20_1.pos = "Q12008Female3"
+L20_1.scene_id = 3
+L20_1.room_id = 0
+L20_1.data_index = 18
+L21_1 = {}
+L21_1.id = 3150
+L21_1.alias = "Npc3150"
+L21_1.script = "Actor/Npc/NpcFSMBehaviour"
+L21_1.pos = "Q12008Female2"
+L21_1.scene_id = 3
+L21_1.room_id = 0
+L21_1.data_index = 19
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L2_1[11] = L13_1
+L2_1[12] = L14_1
+L2_1[13] = L15_1
+L2_1[14] = L16_1
+L2_1[15] = L17_1
+L2_1[16] = L18_1
+L2_1[17] = L19_1
+L2_1[18] = L20_1
+L2_1[19] = L21_1
+L1_1.npcs = L2_1
+L0_1["1200809"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1013
+L3_1.alias = "Npc1013"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q1200801AyakaMask"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1013
+L4_1.alias = "Npc1013"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q1200909FesRoute35"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1013
+L5_1.alias = "Npc1013"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q12008AyakaCSPos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1013
+L6_1.alias = "Npc1013"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q12008AyakaCSAfter1"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 1013
+L7_1.alias = "Npc1013"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q1200903FesRoute03"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 1013
+L8_1.alias = "Npc1013"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q1200905FesRoute13"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 1013
+L9_1.alias = "Npc1013"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q1200907FesRoute22"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 3171
+L10_1.alias = "Npc3171"
+L10_1.script = "Actor/Npc/NpcFSMBehaviour"
+L10_1.pos = "Q1200903FesSouvenir3"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 3172
+L11_1.alias = "Npc3172"
+L11_1.script = "Actor/Npc/NpcFSMBehaviour"
+L11_1.pos = "Q1200905FesFood"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 12038
+L12_1.alias = "Npc12038"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q12008FesDraw"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L13_1 = {}
+L13_1.id = 12039
+L13_1.alias = "Npc12039"
+L13_1.script = "Actor/Npc/TempNPC"
+L13_1.pos = "Q12008FesEma"
+L13_1.scene_id = 3
+L13_1.room_id = 0
+L13_1.data_index = 11
+L14_1 = {}
+L14_1.id = 12111
+L14_1.alias = "Npc12111"
+L14_1.script = "Actor/Npc/TempNPC"
+L14_1.pos = "Q12008Male1"
+L14_1.scene_id = 3
+L14_1.room_id = 0
+L14_1.data_index = 12
+L15_1 = {}
+L15_1.id = 12112
+L15_1.alias = "Npc12112"
+L15_1.script = "Actor/Npc/TempNPC"
+L15_1.pos = "Q12008Male2"
+L15_1.scene_id = 3
+L15_1.room_id = 0
+L15_1.data_index = 13
+L16_1 = {}
+L16_1.id = 12113
+L16_1.alias = "Npc12113"
+L16_1.script = "Actor/Npc/TempNPC"
+L16_1.pos = "Q12008Male3"
+L16_1.scene_id = 3
+L16_1.room_id = 0
+L16_1.data_index = 14
+L17_1 = {}
+L17_1.id = 12114
+L17_1.alias = "Npc12114"
+L17_1.script = "Actor/Npc/TempNPC"
+L17_1.pos = "Q12008Female1"
+L17_1.scene_id = 3
+L17_1.room_id = 0
+L17_1.data_index = 15
+L18_1 = {}
+L18_1.id = 12115
+L18_1.alias = "Npc12115"
+L18_1.script = "Actor/Npc/TempNPC"
+L18_1.pos = "Q12008Female2"
+L18_1.scene_id = 3
+L18_1.room_id = 0
+L18_1.data_index = 16
+L19_1 = {}
+L19_1.id = 12116
+L19_1.alias = "Npc12116"
+L19_1.script = "Actor/Npc/TempNPC"
+L19_1.pos = "Q12008Female3"
+L19_1.scene_id = 3
+L19_1.room_id = 0
+L19_1.data_index = 17
+L20_1 = {}
+L20_1.id = 3149
+L20_1.alias = "Npc3149"
+L20_1.script = "Actor/Npc/NpcFSMBehaviour"
+L20_1.pos = "Q12008Female3"
+L20_1.scene_id = 3
+L20_1.room_id = 0
+L20_1.data_index = 18
+L21_1 = {}
+L21_1.id = 3150
+L21_1.alias = "Npc3150"
+L21_1.script = "Actor/Npc/NpcFSMBehaviour"
+L21_1.pos = "Q12008Female2"
+L21_1.scene_id = 3
+L21_1.room_id = 0
+L21_1.data_index = 19
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L2_1[11] = L13_1
+L2_1[12] = L14_1
+L2_1[13] = L15_1
+L2_1[14] = L16_1
+L2_1[15] = L17_1
+L2_1[16] = L18_1
+L2_1[17] = L19_1
+L2_1[18] = L20_1
+L2_1[19] = L21_1
+L1_1.npcs = L2_1
+L0_1["1200810"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1013
+L3_1.alias = "Npc1013"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q1200801AyakaMask"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1013
+L4_1.alias = "Npc1013"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q1200909FesRoute35"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1013
+L5_1.alias = "Npc1013"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q12008AyakaCSPos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1013
+L6_1.alias = "Npc1013"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q12008AyakaCSAfter1"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 1013
+L7_1.alias = "Npc1013"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q1200903FesRoute03"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 1013
+L8_1.alias = "Npc1013"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q1200905FesRoute13"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 1013
+L9_1.alias = "Npc1013"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q1200907FesRoute22"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 3171
+L10_1.alias = "Npc3171"
+L10_1.script = "Actor/Npc/NpcFSMBehaviour"
+L10_1.pos = "Q1200903FesSouvenir3"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 3172
+L11_1.alias = "Npc3172"
+L11_1.script = "Actor/Npc/NpcFSMBehaviour"
+L11_1.pos = "Q1200905FesFood"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 12038
+L12_1.alias = "Npc12038"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q12008FesDraw"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L13_1 = {}
+L13_1.id = 12039
+L13_1.alias = "Npc12039"
+L13_1.script = "Actor/Npc/TempNPC"
+L13_1.pos = "Q12008FesEma"
+L13_1.scene_id = 3
+L13_1.room_id = 0
+L13_1.data_index = 11
+L14_1 = {}
+L14_1.id = 12111
+L14_1.alias = "Npc12111"
+L14_1.script = "Actor/Npc/TempNPC"
+L14_1.pos = "Q12008Male1"
+L14_1.scene_id = 3
+L14_1.room_id = 0
+L14_1.data_index = 12
+L15_1 = {}
+L15_1.id = 12112
+L15_1.alias = "Npc12112"
+L15_1.script = "Actor/Npc/TempNPC"
+L15_1.pos = "Q12008Male2"
+L15_1.scene_id = 3
+L15_1.room_id = 0
+L15_1.data_index = 13
+L16_1 = {}
+L16_1.id = 12113
+L16_1.alias = "Npc12113"
+L16_1.script = "Actor/Npc/TempNPC"
+L16_1.pos = "Q12008Male3"
+L16_1.scene_id = 3
+L16_1.room_id = 0
+L16_1.data_index = 14
+L17_1 = {}
+L17_1.id = 12114
+L17_1.alias = "Npc12114"
+L17_1.script = "Actor/Npc/TempNPC"
+L17_1.pos = "Q12008Female1"
+L17_1.scene_id = 3
+L17_1.room_id = 0
+L17_1.data_index = 15
+L18_1 = {}
+L18_1.id = 12115
+L18_1.alias = "Npc12115"
+L18_1.script = "Actor/Npc/TempNPC"
+L18_1.pos = "Q12008Female2"
+L18_1.scene_id = 3
+L18_1.room_id = 0
+L18_1.data_index = 16
+L19_1 = {}
+L19_1.id = 12116
+L19_1.alias = "Npc12116"
+L19_1.script = "Actor/Npc/TempNPC"
+L19_1.pos = "Q12008Female3"
+L19_1.scene_id = 3
+L19_1.room_id = 0
+L19_1.data_index = 17
+L20_1 = {}
+L20_1.id = 3149
+L20_1.alias = "Npc3149"
+L20_1.script = "Actor/Npc/NpcFSMBehaviour"
+L20_1.pos = "Q12008Female3"
+L20_1.scene_id = 3
+L20_1.room_id = 0
+L20_1.data_index = 18
+L21_1 = {}
+L21_1.id = 3150
+L21_1.alias = "Npc3150"
+L21_1.script = "Actor/Npc/NpcFSMBehaviour"
+L21_1.pos = "Q12008Female2"
+L21_1.scene_id = 3
+L21_1.room_id = 0
+L21_1.data_index = 19
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L2_1[11] = L13_1
+L2_1[12] = L14_1
+L2_1[13] = L15_1
+L2_1[14] = L16_1
+L2_1[15] = L17_1
+L2_1[16] = L18_1
+L2_1[17] = L19_1
+L2_1[18] = L20_1
+L2_1[19] = L21_1
+L1_1.npcs = L2_1
+L0_1["1200811"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1013
+L3_1.alias = "Npc1013"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q1200801AyakaMask"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1013
+L4_1.alias = "Npc1013"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q1200909FesRoute35"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1013
+L5_1.alias = "Npc1013"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q12008AyakaCSPos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1013
+L6_1.alias = "Npc1013"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q12008AyakaCSAfter1"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 1013
+L7_1.alias = "Npc1013"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q1200903FesRoute03"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 1013
+L8_1.alias = "Npc1013"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q1200905FesRoute13"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 1013
+L9_1.alias = "Npc1013"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q1200907FesRoute22"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 3171
+L10_1.alias = "Npc3171"
+L10_1.script = "Actor/Npc/NpcFSMBehaviour"
+L10_1.pos = "Q1200903FesSouvenir3"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 3172
+L11_1.alias = "Npc3172"
+L11_1.script = "Actor/Npc/NpcFSMBehaviour"
+L11_1.pos = "Q1200905FesFood"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 12038
+L12_1.alias = "Npc12038"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q12008FesDraw"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L13_1 = {}
+L13_1.id = 12039
+L13_1.alias = "Npc12039"
+L13_1.script = "Actor/Npc/TempNPC"
+L13_1.pos = "Q12008FesEma"
+L13_1.scene_id = 3
+L13_1.room_id = 0
+L13_1.data_index = 11
+L14_1 = {}
+L14_1.id = 12111
+L14_1.alias = "Npc12111"
+L14_1.script = "Actor/Npc/TempNPC"
+L14_1.pos = "Q12008Male1"
+L14_1.scene_id = 3
+L14_1.room_id = 0
+L14_1.data_index = 12
+L15_1 = {}
+L15_1.id = 12112
+L15_1.alias = "Npc12112"
+L15_1.script = "Actor/Npc/TempNPC"
+L15_1.pos = "Q12008Male2"
+L15_1.scene_id = 3
+L15_1.room_id = 0
+L15_1.data_index = 13
+L16_1 = {}
+L16_1.id = 12113
+L16_1.alias = "Npc12113"
+L16_1.script = "Actor/Npc/TempNPC"
+L16_1.pos = "Q12008Male3"
+L16_1.scene_id = 3
+L16_1.room_id = 0
+L16_1.data_index = 14
+L17_1 = {}
+L17_1.id = 12114
+L17_1.alias = "Npc12114"
+L17_1.script = "Actor/Npc/TempNPC"
+L17_1.pos = "Q12008Female1"
+L17_1.scene_id = 3
+L17_1.room_id = 0
+L17_1.data_index = 15
+L18_1 = {}
+L18_1.id = 12115
+L18_1.alias = "Npc12115"
+L18_1.script = "Actor/Npc/TempNPC"
+L18_1.pos = "Q12008Female2"
+L18_1.scene_id = 3
+L18_1.room_id = 0
+L18_1.data_index = 16
+L19_1 = {}
+L19_1.id = 12116
+L19_1.alias = "Npc12116"
+L19_1.script = "Actor/Npc/TempNPC"
+L19_1.pos = "Q12008Female3"
+L19_1.scene_id = 3
+L19_1.room_id = 0
+L19_1.data_index = 17
+L20_1 = {}
+L20_1.id = 3149
+L20_1.alias = "Npc3149"
+L20_1.script = "Actor/Npc/NpcFSMBehaviour"
+L20_1.pos = "Q12008Female3"
+L20_1.scene_id = 3
+L20_1.room_id = 0
+L20_1.data_index = 18
+L21_1 = {}
+L21_1.id = 3150
+L21_1.alias = "Npc3150"
+L21_1.script = "Actor/Npc/NpcFSMBehaviour"
+L21_1.pos = "Q12008Female2"
+L21_1.scene_id = 3
+L21_1.room_id = 0
+L21_1.data_index = 19
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L2_1[11] = L13_1
+L2_1[12] = L14_1
+L2_1[13] = L15_1
+L2_1[14] = L16_1
+L2_1[15] = L17_1
+L2_1[16] = L18_1
+L2_1[17] = L19_1
+L2_1[18] = L20_1
+L2_1[19] = L21_1
+L1_1.npcs = L2_1
+L0_1["1200812"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1013
+L3_1.alias = "Npc1013"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q1200801AyakaMask"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1013
+L4_1.alias = "Npc1013"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q1200909FesRoute35"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1013
+L5_1.alias = "Npc1013"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q12008AyakaCSPos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1013
+L6_1.alias = "Npc1013"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q12008AyakaCSAfter1"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 1013
+L7_1.alias = "Npc1013"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q1200903FesRoute03"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 1013
+L8_1.alias = "Npc1013"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q1200905FesRoute13"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 1013
+L9_1.alias = "Npc1013"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q1200907FesRoute22"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 3171
+L10_1.alias = "Npc3171"
+L10_1.script = "Actor/Npc/NpcFSMBehaviour"
+L10_1.pos = "Q1200903FesSouvenir3"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 3172
+L11_1.alias = "Npc3172"
+L11_1.script = "Actor/Npc/NpcFSMBehaviour"
+L11_1.pos = "Q1200905FesFood"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 12038
+L12_1.alias = "Npc12038"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q12008FesDraw"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L13_1 = {}
+L13_1.id = 12039
+L13_1.alias = "Npc12039"
+L13_1.script = "Actor/Npc/TempNPC"
+L13_1.pos = "Q12008FesEma"
+L13_1.scene_id = 3
+L13_1.room_id = 0
+L13_1.data_index = 11
+L14_1 = {}
+L14_1.id = 12111
+L14_1.alias = "Npc12111"
+L14_1.script = "Actor/Npc/TempNPC"
+L14_1.pos = "Q12008Male1"
+L14_1.scene_id = 3
+L14_1.room_id = 0
+L14_1.data_index = 12
+L15_1 = {}
+L15_1.id = 12112
+L15_1.alias = "Npc12112"
+L15_1.script = "Actor/Npc/TempNPC"
+L15_1.pos = "Q12008Male2"
+L15_1.scene_id = 3
+L15_1.room_id = 0
+L15_1.data_index = 13
+L16_1 = {}
+L16_1.id = 12113
+L16_1.alias = "Npc12113"
+L16_1.script = "Actor/Npc/TempNPC"
+L16_1.pos = "Q12008Male3"
+L16_1.scene_id = 3
+L16_1.room_id = 0
+L16_1.data_index = 14
+L17_1 = {}
+L17_1.id = 12114
+L17_1.alias = "Npc12114"
+L17_1.script = "Actor/Npc/TempNPC"
+L17_1.pos = "Q12008Female1"
+L17_1.scene_id = 3
+L17_1.room_id = 0
+L17_1.data_index = 15
+L18_1 = {}
+L18_1.id = 12115
+L18_1.alias = "Npc12115"
+L18_1.script = "Actor/Npc/TempNPC"
+L18_1.pos = "Q12008Female2"
+L18_1.scene_id = 3
+L18_1.room_id = 0
+L18_1.data_index = 16
+L19_1 = {}
+L19_1.id = 12116
+L19_1.alias = "Npc12116"
+L19_1.script = "Actor/Npc/TempNPC"
+L19_1.pos = "Q12008Female3"
+L19_1.scene_id = 3
+L19_1.room_id = 0
+L19_1.data_index = 17
+L20_1 = {}
+L20_1.id = 3149
+L20_1.alias = "Npc3149"
+L20_1.script = "Actor/Npc/NpcFSMBehaviour"
+L20_1.pos = "Q12008Female3"
+L20_1.scene_id = 3
+L20_1.room_id = 0
+L20_1.data_index = 18
+L21_1 = {}
+L21_1.id = 3150
+L21_1.alias = "Npc3150"
+L21_1.script = "Actor/Npc/NpcFSMBehaviour"
+L21_1.pos = "Q12008Female2"
+L21_1.scene_id = 3
+L21_1.room_id = 0
+L21_1.data_index = 19
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L2_1[11] = L13_1
+L2_1[12] = L14_1
+L2_1[13] = L15_1
+L2_1[14] = L16_1
+L2_1[15] = L17_1
+L2_1[16] = L18_1
+L2_1[17] = L19_1
+L2_1[18] = L20_1
+L2_1[19] = L21_1
+L1_1.npcs = L2_1
+L0_1["1200813"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1013
+L3_1.alias = "Npc1013"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q1200801AyakaMask"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1013
+L4_1.alias = "Npc1013"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q1200909FesRoute35"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1013
+L5_1.alias = "Npc1013"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q12008AyakaCSPos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1013
+L6_1.alias = "Npc1013"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q12008AyakaCSAfter1"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 1013
+L7_1.alias = "Npc1013"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q1200903FesRoute03"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 1013
+L8_1.alias = "Npc1013"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q1200905FesRoute13"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 1013
+L9_1.alias = "Npc1013"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q1200907FesRoute22"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 3171
+L10_1.alias = "Npc3171"
+L10_1.script = "Actor/Npc/NpcFSMBehaviour"
+L10_1.pos = "Q1200903FesSouvenir3"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 3172
+L11_1.alias = "Npc3172"
+L11_1.script = "Actor/Npc/NpcFSMBehaviour"
+L11_1.pos = "Q1200905FesFood"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 12038
+L12_1.alias = "Npc12038"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q12008FesDraw"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L13_1 = {}
+L13_1.id = 12039
+L13_1.alias = "Npc12039"
+L13_1.script = "Actor/Npc/TempNPC"
+L13_1.pos = "Q12008FesEma"
+L13_1.scene_id = 3
+L13_1.room_id = 0
+L13_1.data_index = 11
+L14_1 = {}
+L14_1.id = 12111
+L14_1.alias = "Npc12111"
+L14_1.script = "Actor/Npc/TempNPC"
+L14_1.pos = "Q12008Male1"
+L14_1.scene_id = 3
+L14_1.room_id = 0
+L14_1.data_index = 12
+L15_1 = {}
+L15_1.id = 12112
+L15_1.alias = "Npc12112"
+L15_1.script = "Actor/Npc/TempNPC"
+L15_1.pos = "Q12008Male2"
+L15_1.scene_id = 3
+L15_1.room_id = 0
+L15_1.data_index = 13
+L16_1 = {}
+L16_1.id = 12113
+L16_1.alias = "Npc12113"
+L16_1.script = "Actor/Npc/TempNPC"
+L16_1.pos = "Q12008Male3"
+L16_1.scene_id = 3
+L16_1.room_id = 0
+L16_1.data_index = 14
+L17_1 = {}
+L17_1.id = 12114
+L17_1.alias = "Npc12114"
+L17_1.script = "Actor/Npc/TempNPC"
+L17_1.pos = "Q12008Female1"
+L17_1.scene_id = 3
+L17_1.room_id = 0
+L17_1.data_index = 15
+L18_1 = {}
+L18_1.id = 12115
+L18_1.alias = "Npc12115"
+L18_1.script = "Actor/Npc/TempNPC"
+L18_1.pos = "Q12008Female2"
+L18_1.scene_id = 3
+L18_1.room_id = 0
+L18_1.data_index = 16
+L19_1 = {}
+L19_1.id = 12116
+L19_1.alias = "Npc12116"
+L19_1.script = "Actor/Npc/TempNPC"
+L19_1.pos = "Q12008Female3"
+L19_1.scene_id = 3
+L19_1.room_id = 0
+L19_1.data_index = 17
+L20_1 = {}
+L20_1.id = 3149
+L20_1.alias = "Npc3149"
+L20_1.script = "Actor/Npc/NpcFSMBehaviour"
+L20_1.pos = "Q12008Female3"
+L20_1.scene_id = 3
+L20_1.room_id = 0
+L20_1.data_index = 18
+L21_1 = {}
+L21_1.id = 3150
+L21_1.alias = "Npc3150"
+L21_1.script = "Actor/Npc/NpcFSMBehaviour"
+L21_1.pos = "Q12008Female2"
+L21_1.scene_id = 3
+L21_1.room_id = 0
+L21_1.data_index = 19
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L2_1[11] = L13_1
+L2_1[12] = L14_1
+L2_1[13] = L15_1
+L2_1[14] = L16_1
+L2_1[15] = L17_1
+L2_1[16] = L18_1
+L2_1[17] = L19_1
+L2_1[18] = L20_1
+L2_1[19] = L21_1
+L1_1.npcs = L2_1
+L0_1["1200814"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1013
+L3_1.alias = "Npc1013"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q1200801AyakaMask"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1013
+L4_1.alias = "Npc1013"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q1200909FesRoute35"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1013
+L5_1.alias = "Npc1013"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q12008AyakaCSPos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1013
+L6_1.alias = "Npc1013"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q12008AyakaCSAfter1"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 1013
+L7_1.alias = "Npc1013"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q1200903FesRoute03"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 1013
+L8_1.alias = "Npc1013"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q1200905FesRoute13"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 1013
+L9_1.alias = "Npc1013"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q1200907FesRoute22"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 3171
+L10_1.alias = "Npc3171"
+L10_1.script = "Actor/Npc/NpcFSMBehaviour"
+L10_1.pos = "Q1200903FesSouvenir3"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 3172
+L11_1.alias = "Npc3172"
+L11_1.script = "Actor/Npc/NpcFSMBehaviour"
+L11_1.pos = "Q1200905FesFood"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 12038
+L12_1.alias = "Npc12038"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q12008FesDraw"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L13_1 = {}
+L13_1.id = 12039
+L13_1.alias = "Npc12039"
+L13_1.script = "Actor/Npc/TempNPC"
+L13_1.pos = "Q12008FesEma"
+L13_1.scene_id = 3
+L13_1.room_id = 0
+L13_1.data_index = 11
+L14_1 = {}
+L14_1.id = 12111
+L14_1.alias = "Npc12111"
+L14_1.script = "Actor/Npc/TempNPC"
+L14_1.pos = "Q12008Male1"
+L14_1.scene_id = 3
+L14_1.room_id = 0
+L14_1.data_index = 12
+L15_1 = {}
+L15_1.id = 12112
+L15_1.alias = "Npc12112"
+L15_1.script = "Actor/Npc/TempNPC"
+L15_1.pos = "Q12008Male2"
+L15_1.scene_id = 3
+L15_1.room_id = 0
+L15_1.data_index = 13
+L16_1 = {}
+L16_1.id = 12113
+L16_1.alias = "Npc12113"
+L16_1.script = "Actor/Npc/TempNPC"
+L16_1.pos = "Q12008Male3"
+L16_1.scene_id = 3
+L16_1.room_id = 0
+L16_1.data_index = 14
+L17_1 = {}
+L17_1.id = 12114
+L17_1.alias = "Npc12114"
+L17_1.script = "Actor/Npc/TempNPC"
+L17_1.pos = "Q12008Female1"
+L17_1.scene_id = 3
+L17_1.room_id = 0
+L17_1.data_index = 15
+L18_1 = {}
+L18_1.id = 12115
+L18_1.alias = "Npc12115"
+L18_1.script = "Actor/Npc/TempNPC"
+L18_1.pos = "Q12008Female2"
+L18_1.scene_id = 3
+L18_1.room_id = 0
+L18_1.data_index = 16
+L19_1 = {}
+L19_1.id = 12116
+L19_1.alias = "Npc12116"
+L19_1.script = "Actor/Npc/TempNPC"
+L19_1.pos = "Q12008Female3"
+L19_1.scene_id = 3
+L19_1.room_id = 0
+L19_1.data_index = 17
+L20_1 = {}
+L20_1.id = 3149
+L20_1.alias = "Npc3149"
+L20_1.script = "Actor/Npc/NpcFSMBehaviour"
+L20_1.pos = "Q12008Female3"
+L20_1.scene_id = 3
+L20_1.room_id = 0
+L20_1.data_index = 18
+L21_1 = {}
+L21_1.id = 3150
+L21_1.alias = "Npc3150"
+L21_1.script = "Actor/Npc/NpcFSMBehaviour"
+L21_1.pos = "Q12008Female2"
+L21_1.scene_id = 3
+L21_1.room_id = 0
+L21_1.data_index = 19
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L2_1[11] = L13_1
+L2_1[12] = L14_1
+L2_1[13] = L15_1
+L2_1[14] = L16_1
+L2_1[15] = L17_1
+L2_1[16] = L18_1
+L2_1[17] = L19_1
+L2_1[18] = L20_1
+L2_1[19] = L21_1
+L1_1.npcs = L2_1
+L0_1["1200815"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1013
+L3_1.alias = "Npc1013"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q1200801AyakaMask"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1013
+L4_1.alias = "Npc1013"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q1200909FesRoute35"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1013
+L5_1.alias = "Npc1013"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q12008AyakaCSPos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1013
+L6_1.alias = "Npc1013"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q12008AyakaCSAfter1"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 1013
+L7_1.alias = "Npc1013"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q1200903FesRoute03"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 1013
+L8_1.alias = "Npc1013"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q1200905FesRoute13"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 1013
+L9_1.alias = "Npc1013"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q1200907FesRoute22"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 3171
+L10_1.alias = "Npc3171"
+L10_1.script = "Actor/Npc/NpcFSMBehaviour"
+L10_1.pos = "Q1200903FesSouvenir3"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 3172
+L11_1.alias = "Npc3172"
+L11_1.script = "Actor/Npc/NpcFSMBehaviour"
+L11_1.pos = "Q1200905FesFood"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 12038
+L12_1.alias = "Npc12038"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q12008FesDraw"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L13_1 = {}
+L13_1.id = 12039
+L13_1.alias = "Npc12039"
+L13_1.script = "Actor/Npc/TempNPC"
+L13_1.pos = "Q12008FesEma"
+L13_1.scene_id = 3
+L13_1.room_id = 0
+L13_1.data_index = 11
+L14_1 = {}
+L14_1.id = 12111
+L14_1.alias = "Npc12111"
+L14_1.script = "Actor/Npc/TempNPC"
+L14_1.pos = "Q12008Male1"
+L14_1.scene_id = 3
+L14_1.room_id = 0
+L14_1.data_index = 12
+L15_1 = {}
+L15_1.id = 12112
+L15_1.alias = "Npc12112"
+L15_1.script = "Actor/Npc/TempNPC"
+L15_1.pos = "Q12008Male2"
+L15_1.scene_id = 3
+L15_1.room_id = 0
+L15_1.data_index = 13
+L16_1 = {}
+L16_1.id = 12113
+L16_1.alias = "Npc12113"
+L16_1.script = "Actor/Npc/TempNPC"
+L16_1.pos = "Q12008Male3"
+L16_1.scene_id = 3
+L16_1.room_id = 0
+L16_1.data_index = 14
+L17_1 = {}
+L17_1.id = 12114
+L17_1.alias = "Npc12114"
+L17_1.script = "Actor/Npc/TempNPC"
+L17_1.pos = "Q12008Female1"
+L17_1.scene_id = 3
+L17_1.room_id = 0
+L17_1.data_index = 15
+L18_1 = {}
+L18_1.id = 12115
+L18_1.alias = "Npc12115"
+L18_1.script = "Actor/Npc/TempNPC"
+L18_1.pos = "Q12008Female2"
+L18_1.scene_id = 3
+L18_1.room_id = 0
+L18_1.data_index = 16
+L19_1 = {}
+L19_1.id = 12116
+L19_1.alias = "Npc12116"
+L19_1.script = "Actor/Npc/TempNPC"
+L19_1.pos = "Q12008Female3"
+L19_1.scene_id = 3
+L19_1.room_id = 0
+L19_1.data_index = 17
+L20_1 = {}
+L20_1.id = 3149
+L20_1.alias = "Npc3149"
+L20_1.script = "Actor/Npc/NpcFSMBehaviour"
+L20_1.pos = "Q12008Female3"
+L20_1.scene_id = 3
+L20_1.room_id = 0
+L20_1.data_index = 18
+L21_1 = {}
+L21_1.id = 3150
+L21_1.alias = "Npc3150"
+L21_1.script = "Actor/Npc/NpcFSMBehaviour"
+L21_1.pos = "Q12008Female2"
+L21_1.scene_id = 3
+L21_1.room_id = 0
+L21_1.data_index = 19
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L2_1[11] = L13_1
+L2_1[12] = L14_1
+L2_1[13] = L15_1
+L2_1[14] = L16_1
+L2_1[15] = L17_1
+L2_1[16] = L18_1
+L2_1[17] = L19_1
+L2_1[18] = L20_1
+L2_1[19] = L21_1
+L1_1.npcs = L2_1
+L0_1["1200816"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1013
+L3_1.alias = "Npc1013"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q1200801AyakaMask"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1013
+L4_1.alias = "Npc1013"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q1200909FesRoute35"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1013
+L5_1.alias = "Npc1013"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q12008AyakaCSPos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1013
+L6_1.alias = "Npc1013"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q12008AyakaCSAfter1"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 1013
+L7_1.alias = "Npc1013"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q1200903FesRoute03"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 1013
+L8_1.alias = "Npc1013"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q1200905FesRoute13"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 1013
+L9_1.alias = "Npc1013"
+L9_1.script = "Actor/Npc/TempNPC"
+L9_1.pos = "Q1200907FesRoute22"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 3171
+L10_1.alias = "Npc3171"
+L10_1.script = "Actor/Npc/NpcFSMBehaviour"
+L10_1.pos = "Q1200903FesSouvenir3"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 3172
+L11_1.alias = "Npc3172"
+L11_1.script = "Actor/Npc/NpcFSMBehaviour"
+L11_1.pos = "Q1200905FesFood"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L12_1 = {}
+L12_1.id = 12038
+L12_1.alias = "Npc12038"
+L12_1.script = "Actor/Npc/TempNPC"
+L12_1.pos = "Q12008FesDraw"
+L12_1.scene_id = 3
+L12_1.room_id = 0
+L12_1.data_index = 10
+L13_1 = {}
+L13_1.id = 12039
+L13_1.alias = "Npc12039"
+L13_1.script = "Actor/Npc/TempNPC"
+L13_1.pos = "Q12008FesEma"
+L13_1.scene_id = 3
+L13_1.room_id = 0
+L13_1.data_index = 11
+L14_1 = {}
+L14_1.id = 12111
+L14_1.alias = "Npc12111"
+L14_1.script = "Actor/Npc/TempNPC"
+L14_1.pos = "Q12008Male1"
+L14_1.scene_id = 3
+L14_1.room_id = 0
+L14_1.data_index = 12
+L15_1 = {}
+L15_1.id = 12112
+L15_1.alias = "Npc12112"
+L15_1.script = "Actor/Npc/TempNPC"
+L15_1.pos = "Q12008Male2"
+L15_1.scene_id = 3
+L15_1.room_id = 0
+L15_1.data_index = 13
+L16_1 = {}
+L16_1.id = 12113
+L16_1.alias = "Npc12113"
+L16_1.script = "Actor/Npc/TempNPC"
+L16_1.pos = "Q12008Male3"
+L16_1.scene_id = 3
+L16_1.room_id = 0
+L16_1.data_index = 14
+L17_1 = {}
+L17_1.id = 12114
+L17_1.alias = "Npc12114"
+L17_1.script = "Actor/Npc/TempNPC"
+L17_1.pos = "Q12008Female1"
+L17_1.scene_id = 3
+L17_1.room_id = 0
+L17_1.data_index = 15
+L18_1 = {}
+L18_1.id = 12115
+L18_1.alias = "Npc12115"
+L18_1.script = "Actor/Npc/TempNPC"
+L18_1.pos = "Q12008Female2"
+L18_1.scene_id = 3
+L18_1.room_id = 0
+L18_1.data_index = 16
+L19_1 = {}
+L19_1.id = 12116
+L19_1.alias = "Npc12116"
+L19_1.script = "Actor/Npc/TempNPC"
+L19_1.pos = "Q12008Female3"
+L19_1.scene_id = 3
+L19_1.room_id = 0
+L19_1.data_index = 17
+L20_1 = {}
+L20_1.id = 3149
+L20_1.alias = "Npc3149"
+L20_1.script = "Actor/Npc/NpcFSMBehaviour"
+L20_1.pos = "Q12008Female3"
+L20_1.scene_id = 3
+L20_1.room_id = 0
+L20_1.data_index = 18
+L21_1 = {}
+L21_1.id = 3150
+L21_1.alias = "Npc3150"
+L21_1.script = "Actor/Npc/NpcFSMBehaviour"
+L21_1.pos = "Q12008Female2"
+L21_1.scene_id = 3
+L21_1.room_id = 0
+L21_1.data_index = 19
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L2_1[11] = L13_1
+L2_1[12] = L14_1
+L2_1[13] = L15_1
+L2_1[14] = L16_1
+L2_1[15] = L17_1
+L2_1[16] = L18_1
+L2_1[17] = L19_1
+L2_1[18] = L20_1
+L2_1[19] = L21_1
+L1_1.npcs = L2_1
+L0_1["1200817"] = L1_1
+quest_data = L0_1

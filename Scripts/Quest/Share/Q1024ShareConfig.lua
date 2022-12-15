@@ -1,71 +1,73 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1
 main_id = 1024
-
-sub_ids =
-{
-    102401,
-    102402,
-    102403,
-    102404,
-    102405,
-    102406,
-    102407,
-    102408,
-}
-
-rewind_data = {}
-
-quest_data = {}
-quest_data["102401"] = 
-{
-    npcs = {
-        {
-            id = 1005,
-            alias = "Paimon",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q102401Paimon",
-            scene_id = 1051,
-            room_id = 0 , 
-            data_index = 0,
-        },
-    }
-}
-quest_data["102402"] = 
-{
-    npcs = {
-        {
-            id = 1005,
-            alias = "Paimon",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q102401Paimon",
-            scene_id = 1051,
-            room_id = 0 , 
-            data_index = 0,
-        },
-    },
-    transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 1051,
-            pos = "Q102404Start"
-        },
-    }
-}
-
-quest_data["102404"] = 
-{
-    npcs = {
-        {
-            id = 10211,
-            alias = "Npc10211",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q102404Ningguang",
-            scene_id = 1051,
-            room_id = 0 , 
-            data_index = 0,
-        },
-    }
-}
+L0_1 = {}
+L1_1 = 102401
+L2_1 = 102402
+L3_1 = 102403
+L4_1 = 102404
+L5_1 = 102405
+L6_1 = 102406
+L7_1 = 102407
+L8_1 = 102408
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q102401Paimon"
+L3_1.scene_id = 1051
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["102401"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q102401Paimon"
+L3_1.scene_id = 1051
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 1051
+L3_1.pos = "Q102404Start"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["102402"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10211
+L3_1.alias = "Npc10211"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q102404Ningguang"
+L3_1.scene_id = 1051
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["102404"] = L1_1

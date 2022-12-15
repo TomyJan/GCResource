@@ -1,3 +1,221 @@
--- 任务配置数据开始-----------------------------
-
-main_id = 72661sub_ids = {	7266101,	7266102,	7266103,	7266104,	7266105,	7266106,	7266107,	7266113,	7266108,	7266109,	7266110,	7266111,	7266112,}-- 任务配置数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 父任务执行项数据开始-----------------------------finish_action = {	CLIENT = { },	SERVER = { },}fail_action = {	CLIENT = { },	SERVER = { },}cancel_action = {	CLIENT = { },	SERVER = 	{		QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP = 		{			{ "133002036", "", },			{ "133002060", "", },			{ "133002037", "", },			{ "133002038", "", },		},		QUEST_EXEC_DEL_ALL_SPECIFIC_PACK_ITEM = 		{			{ "101547", },			{ "100984", },		},	},}-- 父任务执行项数据结束------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- Actor模块数据开始---------------------------------- 空-- Actor模块数据结束---------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 文本模块数据开始----------------------------------- 空-- 文本模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 路点模块数据开始----------------------------------- 空-- 路点模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 断线重连生成内容 开始------------------------------ 和questdata配的存档点对应rewind_data = {	["7266101"] = { },	["7266102"] = { },	["7266106"] = { },	["7266108"] = { },	["7266109"] = { },}-- 断线重连生成内容 结束------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 校验数据 开始------------------------------------ 和任务lua中生成NPC/Monster/Gadget/Item等对应quest_data = {	["7266101"] = 	{		npcs = 		{			{				id = 1673,				alias = "Npc1673",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q72661_Herman",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7266102"] = { },	["7266103"] = { },	["7266104"] = { },	["7266105"] = { },	["7266106"] = 	{		npcs = 		{			{				id = 1005,				alias = "Paimon",				script = "Actor/Quest/Q352/Paimon",				pos = "Q72661_Kuangchang",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 12164,				alias = "SneakAI4",				script = "Actor/Npc/FollowNPCFishing",				pos = "Q72661_daobaotuan",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["7266107"] = 	{		npcs = 		{			{				id = 12164,				alias = "SneakAI4",				script = "Actor/Npc/FollowNPCFishing",				pos = "Q72661_daobaotuan",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7266108"] = { },	["7266109"] = 	{		npcs = 		{			{				id = 3200,				alias = "Npc3200",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q72661_jingjinghua",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7266110"] = 	{		npcs = 		{			{				id = 1005,				alias = "Paimon",				script = "Actor/Quest/Q352/Paimon",				pos = "Q72661_Kuangchang",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7266111"] = 	{		npcs = 		{			{				id = 1005,				alias = "Paimon",				script = "Actor/Quest/Q352/Paimon",				pos = "Q72661_Kuangchang",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7266112"] = 	{		npcs = 		{			{				id = 1005,				alias = "Paimon",				script = "Actor/Quest/Q352/Paimon",				pos = "Q72661_Kuangchang",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7266113"] = 	{		npcs = 		{			{				id = 1005,				alias = "Paimon",				script = "Actor/Quest/Q352/Paimon",				pos = "Q72661_Kuangchang",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},}-- 校验数据 结束------------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1, L11_1, L12_1, L13_1
+main_id = 72661
+L0_1 = {}
+L1_1 = 7266101
+L2_1 = 7266102
+L3_1 = 7266103
+L4_1 = 7266104
+L5_1 = 7266105
+L6_1 = 7266106
+L7_1 = 7266107
+L8_1 = 7266113
+L9_1 = 7266108
+L10_1 = 7266109
+L11_1 = 7266110
+L12_1 = 7266111
+L13_1 = 7266112
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+L0_1[11] = L11_1
+L0_1[12] = L12_1
+L0_1[13] = L13_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L4_1 = "133002036"
+L5_1 = ""
+L3_1[1] = L4_1
+L3_1[2] = L5_1
+L4_1 = {}
+L5_1 = "133002060"
+L6_1 = ""
+L4_1[1] = L5_1
+L4_1[2] = L6_1
+L5_1 = {}
+L6_1 = "133002037"
+L7_1 = ""
+L5_1[1] = L6_1
+L5_1[2] = L7_1
+L6_1 = {}
+L7_1 = "133002038"
+L8_1 = ""
+L6_1[1] = L7_1
+L6_1[2] = L8_1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP = L2_1
+L2_1 = {}
+L3_1 = {}
+L4_1 = "101547"
+L3_1[1] = L4_1
+L4_1 = {}
+L5_1 = "100984"
+L4_1[1] = L5_1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.QUEST_EXEC_DEL_ALL_SPECIFIC_PACK_ITEM = L2_1
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["7266101"] = L1_1
+L1_1 = {}
+L0_1["7266102"] = L1_1
+L1_1 = {}
+L0_1["7266106"] = L1_1
+L1_1 = {}
+L0_1["7266108"] = L1_1
+L1_1 = {}
+L0_1["7266109"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1673
+L3_1.alias = "Npc1673"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q72661_Herman"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7266101"] = L1_1
+L1_1 = {}
+L0_1["7266102"] = L1_1
+L1_1 = {}
+L0_1["7266103"] = L1_1
+L1_1 = {}
+L0_1["7266104"] = L1_1
+L1_1 = {}
+L0_1["7266105"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q72661_Kuangchang"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 12164
+L4_1.alias = "SneakAI4"
+L4_1.script = "Actor/Npc/FollowNPCFishing"
+L4_1.pos = "Q72661_daobaotuan"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["7266106"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12164
+L3_1.alias = "SneakAI4"
+L3_1.script = "Actor/Npc/FollowNPCFishing"
+L3_1.pos = "Q72661_daobaotuan"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7266107"] = L1_1
+L1_1 = {}
+L0_1["7266108"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 3200
+L3_1.alias = "Npc3200"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q72661_jingjinghua"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7266109"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q72661_Kuangchang"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7266110"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q72661_Kuangchang"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7266111"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q72661_Kuangchang"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7266112"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q72661_Kuangchang"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7266113"] = L1_1
+quest_data = L0_1

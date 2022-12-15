@@ -1,200 +1,181 @@
---[[
-    luaide  模板位置位于 Template/FunTemplate/NewFileTemplate.lua 其中 Template 为配置路径 与luaide.luaTemplatesDir
-    luaide.luaTemplatesDir 配置 https://www.showdoc.cc/web/#/luaide?page_id=713062580213505
-    author:{尤志林}
-    time:2020-05-15 15:04:01
-]]
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1, L11_1, L12_1, L13_1, L14_1, L15_1
 main_id = 1009
-
-sub_ids =
-{
-    100901,
-    100915,
-    100902,
-    100903,
-    100904,
-    100905,
-    100906,
-	100907,
-	100908,
-	100909,
-	100910,
-	100911,
-	100912,
-	100913,
-	100914,
-
-}
-
-rewind_data = {}
-rewind_data["100906"] = 
-{
-	npcs = 
-	{
-        {
-            id = 10276,
-            alias = "Npc10276",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q100902Clue",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-        {
-            id = 10277,
-            alias = "Npc10277",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q100903Clue",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-        {
-            id = 10278,
-            alias = "Npc10278",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q100904Clue",
-            scene_id = 3,
-            data_index = 0,
-        },
-    }
-}
-
-
-quest_data = {}
-
-quest_data["100915"] = 
-{
-	npcs = 
-	{
-		{
-			-- Paimon
-			alias = "Paimon",
-			script = "Actor/Quest/Q352/Paimon",
-			id = 1005,
-			pos = "Q100907Tribute",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-	}
-}
-
-quest_data["100902"] =
-{
-	npcs = {
-        {
-            id = 10276,
-            alias = "Npc10276",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q100902Clue",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-    }
-
-}
-
-quest_data["100903"] =
-{
-    npcs = {
-        {
-            id = 10277,
-            alias = "Npc10277",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q100903Clue",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-    }
-}
-
-quest_data["100904"] =
-{
-    npcs = {
-        {
-            id = 10278,
-            alias = "Npc10278",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q100904Clue",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-    }
-
-}
-
-quest_data["100907"] =
-{
-	gadgets =
-	{
-		{
-			id = 70710120,
-			pos = "Q100907Tribute",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-			alias = "1009Tribute01", -- optional default : ""
-			scene_id = 3, -- optional default : sceneData.DefaultSceneID
-		}
-	}
-}
-
-quest_data["100908"] =
-{
-	gadgets =
-	{
-		{
-			id = 70710121,
-			pos = "Q100908Tribute",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-			alias = "1009Tribute02", -- optional default : ""
-			scene_id = 3, -- optional default : sceneData.DefaultSceneID
-		}
-	}
-}
-
-quest_data["100909"] =
-{
-	gadgets =
-	{
-		{
-			id = 70710122,
-			pos = "Q100909Tribute",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-			alias = "1009Tribute03", -- optional default : ""
-			scene_id = 3, -- optional default : sceneData.DefaultSceneID
-		}
-	}
-}
---地城前随便配的对话
-quest_data["100913"] =
-{
-    npcs = {
-        {
-            id = 10258,
-            alias = "Npc10258",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q100904Fei",
-            scene_id = 1052,
-            room_id = 0,
-            data_index = 0,
-        },
-
-    }
-}
-
---阿肥对话，需要移入地城
-quest_data["100914"] =
-{
-    npcs = {
-        {
-            id = 10258,
-            alias = "Npc10258",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q100904Fei",
-            scene_id = 1052,
-            room_id = 0,
-            data_index = 0,
-        },
-
-    }
-}
+L0_1 = {}
+L1_1 = 100901
+L2_1 = 100915
+L3_1 = 100902
+L4_1 = 100903
+L5_1 = 100904
+L6_1 = 100905
+L7_1 = 100906
+L8_1 = 100907
+L9_1 = 100908
+L10_1 = 100909
+L11_1 = 100910
+L12_1 = 100911
+L13_1 = 100912
+L14_1 = 100913
+L15_1 = 100914
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+L0_1[11] = L11_1
+L0_1[12] = L12_1
+L0_1[13] = L13_1
+L0_1[14] = L14_1
+L0_1[15] = L15_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10276
+L3_1.alias = "Npc10276"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q100902Clue"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.id = 10277
+L4_1.alias = "Npc10277"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q100903Clue"
+L4_1.scene_id = 3
+L4_1.data_index = 0
+L5_1 = {}
+L5_1.id = 10278
+L5_1.alias = "Npc10278"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q100904Clue"
+L5_1.scene_id = 3
+L5_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["100906"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.id = 1005
+L3_1.pos = "Q100907Tribute"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["100915"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10276
+L3_1.alias = "Npc10276"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q100902Clue"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["100902"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10277
+L3_1.alias = "Npc10277"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q100903Clue"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["100903"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10278
+L3_1.alias = "Npc10278"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q100904Clue"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["100904"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710120
+L3_1.pos = "Q100907Tribute"
+L3_1.alias = "1009Tribute01"
+L3_1.scene_id = 3
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["100907"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710121
+L3_1.pos = "Q100908Tribute"
+L3_1.alias = "1009Tribute02"
+L3_1.scene_id = 3
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["100908"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710122
+L3_1.pos = "Q100909Tribute"
+L3_1.alias = "1009Tribute03"
+L3_1.scene_id = 3
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["100909"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10258
+L3_1.alias = "Npc10258"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q100904Fei"
+L3_1.scene_id = 1052
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["100913"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10258
+L3_1.alias = "Npc10258"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q100904Fei"
+L3_1.scene_id = 1052
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["100914"] = L1_1

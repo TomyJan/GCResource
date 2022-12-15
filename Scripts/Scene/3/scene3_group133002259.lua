@@ -358,7 +358,7 @@ end
 -- 触发操作
 function action_EVENT_SELECT_OPTION_359(context, evt)
 	ScriptLib.ForceRefreshAuthorityByConfigId(context, 259009, context.uid)
-	ScriptLib.SetGroupVariableValue(context, "auth_uid_p1", math.floor(context.uid/10000))
+	ScriptLib.SetGroupVariableValue(context, "auth_uid_p1", context.uid//10000)
 	ScriptLib.SetGroupVariableValue(context, "auth_uid_p2", context.uid%10000)
 	-- 删除指定group： 133002259 ；指定config：2299；物件身上指定option：2902；
 	ScriptLib.DelWorktopOptionByGroupId(context, 133002259, 2299, 2902)

@@ -1,3 +1,377 @@
--- 任务配置数据开始-----------------------------
-
-main_id = 19102sub_ids = {	1910201,	1910202,	1910203,	1910204,	1910205,	1910206,	1910207,	1910208,	1910209,	1910210,	1910211,	1910212,	1910213,	1910214,}-- 任务配置数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 父任务执行项数据开始-----------------------------finish_action = {	CLIENT = { },	SERVER = { },}fail_action = {	CLIENT = { },	SERVER = { },}cancel_action = {	CLIENT = 	{		QUEST_EXEC_DEL_ALL_SPECIFIC_PACK_ITEM = 		{			{ "100826", },			{ "100827", },		},		QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP = 		{			{ "133004011", "", },			{ "133004017", "", },		},	},	SERVER = 	{		QUEST_EXEC_DEL_ALL_SPECIFIC_PACK_ITEM = 		{			{ "100826", },			{ "100827", },		},		QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP = 		{			{ "133004011", "", },			{ "133004017", "", },		},	},}-- 父任务执行项数据结束------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- Actor模块数据开始---------------------------------- 空-- Actor模块数据结束---------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 文本模块数据开始----------------------------------- 空-- 文本模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 路点模块数据开始----------------------------------- 空-- 路点模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 断线重连生成内容 开始------------------------------ 和questdata配的存档点对应rewind_data = {	["1910201"] = { },	["1910202"] = 	{		npcs = 		{			{				id = 502,				alias = "Coop_Diona",				script = "Actor/Npc/TempNPC",				pos = "COOP103901Diona02",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["1910203"] = 	{		npcs = 		{			{				id = 502,				alias = "Coop_Diona",				script = "Actor/Npc/TempNPC",				pos = "COOP103901Diona03",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["1910204"] = 	{		npcs = 		{			{				id = 502,				alias = "Coop_Diona",				script = "Actor/Npc/TempNPC",				pos = "COOP103901Diona03",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["1910205"] = 	{		npcs = 		{			{				id = 502,				alias = "Coop_Diona",				script = "Actor/Npc/TempNPC",				pos = "COOP103901Diona04",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["1910206"] = { },	["1910207"] = 	{		npcs = 		{			{				id = 10803,				alias = "Npc10803",				script = "Actor/Npc/FindCat",				pos = "COOP103901Diona05_01",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["1910208"] = { },	["1910209"] = 	{		npcs = 		{			{				id = 10804,				alias = "Npc10804",				script = "Actor/Npc/FindCat",				pos = "COOP103901Diona06_01",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["1910210"] = { },	["1910212"] = { },	["1910213"] = { },}-- 断线重连生成内容 结束------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 校验数据 开始------------------------------------ 和任务lua中生成NPC/Monster/Gadget/Item等对应quest_data = {	["1910201"] = 	{		npcs = 		{			{				id = 502,				alias = "Coop_Diona",				script = "Actor/Npc/TempNPC",				pos = "COOP103901Diona02",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["1910202"] = { },	["1910203"] = 	{		npcs = 		{			{				id = 1435,				alias = "Npc1435",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "NpcFemaleInsomniaStand11Born",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["1910204"] = { },	["1910205"] = 	{		npcs = 		{			{				id = 1419,				alias = "Npc1419",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q70810SaraBorn",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["1910206"] = 	{		npcs = 		{			{				id = 502,				alias = "Coop_Diona",				script = "Actor/Npc/TempNPC",				pos = "COOP103901Diona04",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 10803,				alias = "Npc10803",				script = "Actor/Npc/FindCat",				pos = "COOP103901Diona05_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["1910207"] = 	{		npcs = 		{			{				id = 502,				alias = "Coop_Diona",				script = "Actor/Npc/TempNPC",				pos = "COOP103901Diona05_02",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["1910208"] = 	{		npcs = 		{			{				id = 502,				alias = "Coop_Diona",				script = "Actor/Npc/TempNPC",				pos = "COOP103901Diona05_02",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 10804,				alias = "Npc10804",				script = "Actor/Npc/FindCat",				pos = "COOP103901Diona06_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["1910209"] = 	{		npcs = 		{			{				id = 502,				alias = "Coop_Diona",				script = "Actor/Npc/TempNPC",				pos = "COOP103901Diona06_02",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["1910210"] = 	{		npcs = 		{			{				id = 502,				alias = "Coop_Diona",				script = "Actor/Npc/TempNPC",				pos = "COOP103901Diona06_02",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 10805,				alias = "Npc10805",				script = "Actor/Npc/FindCat",				pos = "COOP103901Diona07_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["1910211"] = 	{		npcs = 		{			{				id = 502,				alias = "Coop_Diona",				script = "Actor/Npc/TempNPC",				pos = "COOP103901Diona07_02",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 10805,				alias = "Npc10805",				script = "Actor/Npc/FindCat",				pos = "COOP103901Diona07_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["1910212"] = 	{		npcs = 		{			{				id = 502,				alias = "Coop_Diona",				script = "Actor/Npc/TempNPC",				pos = "COOP103901Diona07_02",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["1910213"] = 	{		npcs = 		{			{				id = 502,				alias = "Coop_Diona",				script = "Actor/Npc/TempNPC",				pos = "COOP103901Diona01_02",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["1910214"] = { },}-- 校验数据 结束------------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1, L11_1, L12_1, L13_1, L14_1
+main_id = 19102
+L0_1 = {}
+L1_1 = 1910201
+L2_1 = 1910202
+L3_1 = 1910203
+L4_1 = 1910204
+L5_1 = 1910205
+L6_1 = 1910206
+L7_1 = 1910207
+L8_1 = 1910208
+L9_1 = 1910209
+L10_1 = 1910210
+L11_1 = 1910211
+L12_1 = 1910212
+L13_1 = 1910213
+L14_1 = 1910214
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+L0_1[11] = L11_1
+L0_1[12] = L12_1
+L0_1[13] = L13_1
+L0_1[14] = L14_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L4_1 = "100826"
+L3_1[1] = L4_1
+L4_1 = {}
+L5_1 = "100827"
+L4_1[1] = L5_1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.QUEST_EXEC_DEL_ALL_SPECIFIC_PACK_ITEM = L2_1
+L2_1 = {}
+L3_1 = {}
+L4_1 = "133004011"
+L5_1 = ""
+L3_1[1] = L4_1
+L3_1[2] = L5_1
+L4_1 = {}
+L5_1 = "133004017"
+L6_1 = ""
+L4_1[1] = L5_1
+L4_1[2] = L6_1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP = L2_1
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L4_1 = "100826"
+L3_1[1] = L4_1
+L4_1 = {}
+L5_1 = "100827"
+L4_1[1] = L5_1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.QUEST_EXEC_DEL_ALL_SPECIFIC_PACK_ITEM = L2_1
+L2_1 = {}
+L3_1 = {}
+L4_1 = "133004011"
+L5_1 = ""
+L3_1[1] = L4_1
+L3_1[2] = L5_1
+L4_1 = {}
+L5_1 = "133004017"
+L6_1 = ""
+L4_1[1] = L5_1
+L4_1[2] = L6_1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP = L2_1
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["1910201"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 502
+L3_1.alias = "Coop_Diona"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "COOP103901Diona02"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1910202"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 502
+L3_1.alias = "Coop_Diona"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "COOP103901Diona03"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1910203"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 502
+L3_1.alias = "Coop_Diona"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "COOP103901Diona03"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1910204"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 502
+L3_1.alias = "Coop_Diona"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "COOP103901Diona04"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1910205"] = L1_1
+L1_1 = {}
+L0_1["1910206"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10803
+L3_1.alias = "Npc10803"
+L3_1.script = "Actor/Npc/FindCat"
+L3_1.pos = "COOP103901Diona05_01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1910207"] = L1_1
+L1_1 = {}
+L0_1["1910208"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10804
+L3_1.alias = "Npc10804"
+L3_1.script = "Actor/Npc/FindCat"
+L3_1.pos = "COOP103901Diona06_01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1910209"] = L1_1
+L1_1 = {}
+L0_1["1910210"] = L1_1
+L1_1 = {}
+L0_1["1910212"] = L1_1
+L1_1 = {}
+L0_1["1910213"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 502
+L3_1.alias = "Coop_Diona"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "COOP103901Diona02"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1910201"] = L1_1
+L1_1 = {}
+L0_1["1910202"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1435
+L3_1.alias = "Npc1435"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "NpcFemaleInsomniaStand11Born"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1910203"] = L1_1
+L1_1 = {}
+L0_1["1910204"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1419
+L3_1.alias = "Npc1419"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q70810SaraBorn"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1910205"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 502
+L3_1.alias = "Coop_Diona"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "COOP103901Diona04"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 10803
+L4_1.alias = "Npc10803"
+L4_1.script = "Actor/Npc/FindCat"
+L4_1.pos = "COOP103901Diona05_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["1910206"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 502
+L3_1.alias = "Coop_Diona"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "COOP103901Diona05_02"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1910207"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 502
+L3_1.alias = "Coop_Diona"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "COOP103901Diona05_02"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 10804
+L4_1.alias = "Npc10804"
+L4_1.script = "Actor/Npc/FindCat"
+L4_1.pos = "COOP103901Diona06_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["1910208"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 502
+L3_1.alias = "Coop_Diona"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "COOP103901Diona06_02"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1910209"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 502
+L3_1.alias = "Coop_Diona"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "COOP103901Diona06_02"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 10805
+L4_1.alias = "Npc10805"
+L4_1.script = "Actor/Npc/FindCat"
+L4_1.pos = "COOP103901Diona07_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["1910210"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 502
+L3_1.alias = "Coop_Diona"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "COOP103901Diona07_02"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 10805
+L4_1.alias = "Npc10805"
+L4_1.script = "Actor/Npc/FindCat"
+L4_1.pos = "COOP103901Diona07_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["1910211"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 502
+L3_1.alias = "Coop_Diona"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "COOP103901Diona07_02"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1910212"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 502
+L3_1.alias = "Coop_Diona"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "COOP103901Diona01_02"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1910213"] = L1_1
+L1_1 = {}
+L0_1["1910214"] = L1_1
+quest_data = L0_1

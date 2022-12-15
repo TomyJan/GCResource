@@ -1,82 +1,70 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1
 main_id = 40005
-
-sub_ids =
-{
-    4000501,
-    4000502,
-    4000503,
-}
-
----存放断线重连生成内容，和questdata配的存档点对应
-rewind_data = {}
-rewind_data["4000502"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Npc10205",
-			script = "Actor/Npc/TempNPC",
-			id = 10205,
-			pos = "Q40005Thief",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		}
-    }
-}
-
-
----校验用，和任务lua中生成NPC/monster/gadget/item等对应
-quest_data = {}
-
-quest_data["4000501"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Npc10205",
-			script = "Actor/Npc/TempNPC",
-			id = 10205,
-			pos = "Q40005Thief",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		}
-    }
-}
-
-quest_data["4000504"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Npc10205",
-			script = "Actor/Npc/TempNPC",
-			id = 10205,
-			pos = "Q40005Thief",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		}
-    }
-}
-
-quest_data["4000505"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Xiao",
-			script = "Actor/Npc/TempNPC",
-			id = 10204,
-			pos = "Q40005Xiao",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		}
-    }
-}
+L0_1 = {}
+L1_1 = 4000501
+L2_1 = 4000502
+L3_1 = 4000503
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc10205"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 10205
+L3_1.pos = "Q40005Thief"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["4000502"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc10205"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 10205
+L3_1.pos = "Q40005Thief"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["4000501"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc10205"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 10205
+L3_1.pos = "Q40005Thief"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["4000504"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Xiao"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 10204
+L3_1.pos = "Q40005Xiao"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["4000505"] = L1_1

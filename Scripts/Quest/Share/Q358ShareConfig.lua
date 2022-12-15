@@ -1,134 +1,117 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1
 main_id = 358
-
-sub_ids =
-{
-    35801,
-    35802,
-}
-
-rewind_data = {}
-
-rewind_data["35802"] = 
-{
-    npcs = {
-        -- {
-        --     id = 1005,
-        --     alias = "Paimon",
-        --     script = "Actor/Quest/Q352/Paimon",
-        --     pos = "Q358Paimon1",
-        --     data_index = 0,
-        --     scene_id  = 1004,
-        --     room_id = 100402,
-        -- },
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q358Qin1",
-            data_index = 0,
-            scene_id  = 1004,
-            room_id = 100402,
-        },
-        {
-            id = 1002,
-            alias = "Ambor",
-            script = "Actor/Quest/Q301/Ambor301",
-            pos = "Q358Ambor1",
-            data_index = 0,
-            scene_id  = 1004,
-            room_id = 100402,
-        },
-        {
-            id = 1004,
-            alias = "Gaia",
-            script = "Actor/Quest/Q301/Gaia301",
-            pos = "Q358Gaia1",
-            data_index = 0,
-            scene_id  = 1004,
-            room_id = 100402,
-        },
-        {
-            id = 1007,
-            alias = "Lisa",
-            script = "Actor/Quest/Q411/Lisa",
-            pos = "Q358Lisa1",
-            data_index = 0,
-            scene_id  = 1004,
-            room_id = 100402,
-        },
-    }
-}
-
-quest_data = {}
-
-quest_data["35800"] = 
-{
-	npcs = 
-	{
-		{
-            alias = "Paimon",
-            script = "Actor/Quest/Q352/Paimon",
-            id = 1005,
-            pos = "Q358Paimon1",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-
-    }
-}
-
-quest_data["35801"] = 
-{
-    npcs = {
-        {
-            id = 1005,
-            alias = "Paimon",
-            script = "Actor/Quest/Q352/Paimon",
-            pos = "Q358Paimon1",
-            data_index = 0,
-            scene_id  = 1004,
-            room_id = 100402,
-        },
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q358Qin1",
-            data_index = 0,
-            scene_id  = 1004,
-            room_id = 100402,
-        },
-        {
-            id = 1002,
-            alias = "Ambor",
-            script = "Actor/Quest/Q301/Ambor301",
-            pos = "Q358Ambor1",
-            data_index = 0,
-            scene_id  = 1004,
-            room_id = 100402,
-        },
-        {
-            id = 1004,
-            alias = "Gaia",
-            script = "Actor/Quest/Q301/Gaia301",
-            pos = "Q358Gaia1",
-            data_index = 0,
-            scene_id  = 1004,
-            room_id = 100402,
-        },
-        {
-            id = 1007,
-            alias = "Lisa",
-            script = "Actor/Quest/Q411/Lisa",
-            pos = "Q358Lisa1",
-            data_index = 0,
-            scene_id  = 1004,
-            room_id = 100402,
-        },
-    }
-}
+L0_1 = {}
+L1_1 = 35801
+L2_1 = 35802
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1006
+L3_1.alias = "Qin"
+L3_1.script = "Actor/Quest/Q411/Qin"
+L3_1.pos = "Q358Qin1"
+L3_1.data_index = 0
+L3_1.scene_id = 1004
+L3_1.room_id = 100402
+L4_1 = {}
+L4_1.id = 1002
+L4_1.alias = "Ambor"
+L4_1.script = "Actor/Quest/Q301/Ambor301"
+L4_1.pos = "Q358Ambor1"
+L4_1.data_index = 0
+L4_1.scene_id = 1004
+L4_1.room_id = 100402
+L5_1 = {}
+L5_1.id = 1004
+L5_1.alias = "Gaia"
+L5_1.script = "Actor/Quest/Q301/Gaia301"
+L5_1.pos = "Q358Gaia1"
+L5_1.data_index = 0
+L5_1.scene_id = 1004
+L5_1.room_id = 100402
+L6_1 = {}
+L6_1.id = 1007
+L6_1.alias = "Lisa"
+L6_1.script = "Actor/Quest/Q411/Lisa"
+L6_1.pos = "Q358Lisa1"
+L6_1.data_index = 0
+L6_1.scene_id = 1004
+L6_1.room_id = 100402
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["35802"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.id = 1005
+L3_1.pos = "Q358Paimon1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["35800"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q358Paimon1"
+L3_1.data_index = 0
+L3_1.scene_id = 1004
+L3_1.room_id = 100402
+L4_1 = {}
+L4_1.id = 1006
+L4_1.alias = "Qin"
+L4_1.script = "Actor/Quest/Q411/Qin"
+L4_1.pos = "Q358Qin1"
+L4_1.data_index = 0
+L4_1.scene_id = 1004
+L4_1.room_id = 100402
+L5_1 = {}
+L5_1.id = 1002
+L5_1.alias = "Ambor"
+L5_1.script = "Actor/Quest/Q301/Ambor301"
+L5_1.pos = "Q358Ambor1"
+L5_1.data_index = 0
+L5_1.scene_id = 1004
+L5_1.room_id = 100402
+L6_1 = {}
+L6_1.id = 1004
+L6_1.alias = "Gaia"
+L6_1.script = "Actor/Quest/Q301/Gaia301"
+L6_1.pos = "Q358Gaia1"
+L6_1.data_index = 0
+L6_1.scene_id = 1004
+L6_1.room_id = 100402
+L7_1 = {}
+L7_1.id = 1007
+L7_1.alias = "Lisa"
+L7_1.script = "Actor/Quest/Q411/Lisa"
+L7_1.pos = "Q358Lisa1"
+L7_1.data_index = 0
+L7_1.scene_id = 1004
+L7_1.room_id = 100402
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L1_1.npcs = L2_1
+L0_1["35801"] = L1_1

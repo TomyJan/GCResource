@@ -1,129 +1,126 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1
 main_id = 390
-
-sub_ids =
-{
-    39003,
-    39004,
-    39005,
-    39006,
-    39007,
-    39008,
-    39009,
-}
-
-rewind_data = {}
-
-rewind_data["39003"] = 
-{
-    npcs = {
-        {
-            id = 1001,
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            pos = "Q389VentiPos2",
-            data_index = 0,
-        },
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q389QinPos2",
-            data_index = 0,
-        },
-        {
-            id = 1009,
-            alias = "Diluc",
-            script = "Actor/Quest/Q376/Diluc",
-            pos = "Q389DilucPos2",
-            data_index = 0,
-        }
-    }
-}
-
-rewind_data["39004"] = 
-{
-    npcs = {
-        {
-            id = 1001,
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            pos = "Q389VentiPos2",
-            data_index = 0,
-        },
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q389QinPos2",
-            data_index = 0,
-        },
-        {
-            id = 1009,
-            alias = "Diluc",
-            script = "Actor/Quest/Q376/Diluc",
-            pos = "Q389DilucPos2",
-            data_index = 0,
-        }
-    }
-}
-
-rewind_data["39008"] = 
-{
-    npcs = {
-        {
-            id = 1001,
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            pos = "Q389VentiPos2",
-            data_index = 0,
-        },
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q389QinPos2",
-            data_index = 0,
-        },
-        {
-            id = 1009,
-            alias = "Diluc",
-            script = "Actor/Quest/Q376/Diluc",
-            pos = "Q389DilucPos2",
-            data_index = 0,
-        }
-    }
-}
-
-
-quest_data = {}
-
-quest_data["39003"] = 
-{
-    npcs = {
-        {
-            id = 1001,
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            pos = "Q389VentiPos2",
-            data_index = 0,
-        },
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q389QinPos2",
-            data_index = 0,
-        },
-        {
-            id = 1009,
-            alias = "Diluc",
-            script = "Actor/Quest/Q376/Diluc",
-            pos = "Q389DilucPos2",
-            data_index = 0,
-        }
-    }
-}
+L0_1 = {}
+L1_1 = 39003
+L2_1 = 39004
+L3_1 = 39005
+L4_1 = 39006
+L5_1 = 39007
+L6_1 = 39008
+L7_1 = 39009
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1001
+L3_1.alias = "Wendy"
+L3_1.script = "Actor/Quest/Q301/Wendy301"
+L3_1.pos = "Q389VentiPos2"
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.id = 1006
+L4_1.alias = "Qin"
+L4_1.script = "Actor/Quest/Q411/Qin"
+L4_1.pos = "Q389QinPos2"
+L4_1.data_index = 0
+L5_1 = {}
+L5_1.id = 1009
+L5_1.alias = "Diluc"
+L5_1.script = "Actor/Quest/Q376/Diluc"
+L5_1.pos = "Q389DilucPos2"
+L5_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["39003"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1001
+L3_1.alias = "Wendy"
+L3_1.script = "Actor/Quest/Q301/Wendy301"
+L3_1.pos = "Q389VentiPos2"
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.id = 1006
+L4_1.alias = "Qin"
+L4_1.script = "Actor/Quest/Q411/Qin"
+L4_1.pos = "Q389QinPos2"
+L4_1.data_index = 0
+L5_1 = {}
+L5_1.id = 1009
+L5_1.alias = "Diluc"
+L5_1.script = "Actor/Quest/Q376/Diluc"
+L5_1.pos = "Q389DilucPos2"
+L5_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["39004"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1001
+L3_1.alias = "Wendy"
+L3_1.script = "Actor/Quest/Q301/Wendy301"
+L3_1.pos = "Q389VentiPos2"
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.id = 1006
+L4_1.alias = "Qin"
+L4_1.script = "Actor/Quest/Q411/Qin"
+L4_1.pos = "Q389QinPos2"
+L4_1.data_index = 0
+L5_1 = {}
+L5_1.id = 1009
+L5_1.alias = "Diluc"
+L5_1.script = "Actor/Quest/Q376/Diluc"
+L5_1.pos = "Q389DilucPos2"
+L5_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["39008"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1001
+L3_1.alias = "Wendy"
+L3_1.script = "Actor/Quest/Q301/Wendy301"
+L3_1.pos = "Q389VentiPos2"
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.id = 1006
+L4_1.alias = "Qin"
+L4_1.script = "Actor/Quest/Q411/Qin"
+L4_1.pos = "Q389QinPos2"
+L4_1.data_index = 0
+L5_1 = {}
+L5_1.id = 1009
+L5_1.alias = "Diluc"
+L5_1.script = "Actor/Quest/Q376/Diluc"
+L5_1.pos = "Q389DilucPos2"
+L5_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["39003"] = L1_1

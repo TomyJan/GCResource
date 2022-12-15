@@ -1,75 +1,54 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1
 main_id = 470
-
-sub_ids =
-{
-    47001,
-    47002,
-    47003,
-    47004,
-}
-
-
----存放断线重连生成内容，和questdata配的存档点对应
-rewind_data = {}
-
-rewind_data["47003"] = 
-{
-    npcs = {
-        -- {
-        --     id = 1479,
-        --     alias = "Lynn",
-        --     script = "Actor/Quest/Q376/Soldier",
-        --     pos = "Q470Lynn1",
-        -- }
-    }
-}
-
-rewind_data["47004"] = 
-{
-    npcs = {
-        -- {
-        --     id = 1479,
-        --     alias = "Lynn",
-        --     script = "Actor/Quest/Q376/Soldier",
-        --     pos = "Q470Lynn1",
-        -- }
-    }
-}
-
----校验用，和任务lua中生成NPC/monster/gadget/item等对应
-quest_data = {}
-
-quest_data["47002"] = 
-{
-    npcs = {
-        {
-            id = 1005,
-            alias = "Paimon",
-            script = "Actor/Quest/Q352/Paimon",
-            pos = "Q470ShopLookAt",
-            scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-    }
-}
-
-quest_data["47004"] = 
-{
-    npcs = {
-        {
-            id = 1005,
-            alias = "Paimon",
-            script = "Actor/Quest/Q352/Paimon",
-            pos = "Q470ShopLookAt",
-            scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-    }
-}
-
+L0_1 = {}
+L1_1 = 47001
+L2_1 = 47002
+L3_1 = 47003
+L4_1 = 47004
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L1_1.npcs = L2_1
+L0_1["47003"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L1_1.npcs = L2_1
+L0_1["47004"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q470ShopLookAt"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["47002"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q470ShopLookAt"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["47004"] = L1_1

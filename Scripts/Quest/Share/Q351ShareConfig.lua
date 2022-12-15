@@ -1,91 +1,78 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1
 main_id = 351
-
-sub_ids =
-{
-    35100,
-    35101,
-    35102,
-    35103,
-    35104,
-    35105,
-    35106,
-    35107,
-}
-
----存放断线重连生成内容，和questdata配的存档点对应
-rewind_data = {}
-
-rewind_data["35104"] = 
-{
-    
-}
-
-rewind_data["35100"] = 
-{
-    avatar = {
-        pos = "Q351PlayerRewind1"
-    },
-    npcs = {
-        {
-            id = 1005,
-            alias = "Paimon",
-            script = "Actor/Quest/Q352/Paimon",
-            pos = "Q351FirstQuest",
-            scene_id  = 3,
-            room_id = 0,
-			data_index = 0,
-        }
-    }
-}
-
-rewind_data["35102"] = 
-{
-    avatar = {
-        pos = "Q351PlayerRewind2"
-    },
---[[     npcs = {
-        {
-            id = 1005,
-            alias = "Paimon",
-            script = "Actor/Quest/Q352/Paimon",
-            pos = "Q351FirstClimb"
-        }
-    } ]]
-}
-
-rewind_data["35105"] = 
-{
-    npcs = {
-        {
-            id = 1005,
-            alias = "Paimon",
-            script = "Actor/Quest/Q352/Paimon",
-            pos = "Q351FirstClimb",
-            scene_id  = 3,
-            room_id = 0,
-			data_index = 0,
-        }
-    }
-}
-
----校验用，和任务lua中生成NPC/monster/gadget/item等对应
-quest_data = {}
-
-quest_data["35104"] = 
-{
-    npcs = {
-        {
-            id = 1005,
-            alias = "Paimon",
-            script = "Actor/Quest/Q352/Paimon",
-            pos = "Q351FirstQuest",
-            scene_id  = 3,
-            room_id = 0,
-			data_index = 0,
-        }
-    }
-}
+L0_1 = {}
+L1_1 = 35100
+L2_1 = 35101
+L3_1 = 35102
+L4_1 = 35103
+L5_1 = 35104
+L6_1 = 35105
+L7_1 = 35106
+L8_1 = 35107
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["35104"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L2_1.pos = "Q351PlayerRewind1"
+L1_1.avatar = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q351FirstQuest"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["35100"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L2_1.pos = "Q351PlayerRewind2"
+L1_1.avatar = L2_1
+L0_1["35102"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q351FirstClimb"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["35105"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q351FirstQuest"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["35104"] = L1_1

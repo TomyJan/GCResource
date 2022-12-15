@@ -78,7 +78,7 @@ suites = {
 function action_EVENT_CLIENT_EXECUTE_170(context, evt)
 	-- 针对groupid为 133003203 中该config对应的物件进行状态改变操作
 	local this_gadget = ScriptLib.GetGadgetConfigId(context, { gadget_eid = evt.source_eid })
-		--ScriptLib.PrintLog(context, "config_id="..this_gadget)
+		--ScriptLib.PrintLog("config_id="..this_gadget)
 	
 	 ScriptLib.SetGadgetEnableInteract(context, 133003203, this_gadget, true)
 	return 0

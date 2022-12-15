@@ -1,320 +1,314 @@
--- 任务配置数据开始-----------------------------
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1, L11_1, L12_1, L13_1, L14_1, L15_1
 main_id = 22116
-
-sub_ids = 
-{
-	2211601,
-	2211602,
-	2211603,
-	2211604,
-	2211605,
-	2211606,
-	2211609,
-	2211610,
-	2211611,
-	2211613,
-	2211607,
-	2211612,
-	2211614,
-	2211608,
-	2211615,
-}
--- 任务配置数据结束---------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
--- 父任务执行项数据开始-----------------------------
-finish_action = 
-{
-	CLIENT = { },
-	SERVER = 
-	{
-		QUEST_EXEC_REFRESH_GROUP_SUITE = 
-		{
-			{ "3", "133104913,1", },
-		},
-		QUEST_EXEC_DEL_ALL_SPECIFIC_PACK_ITEM = 
-		{
-			{ "100503,100504,100505", },
-		},
-	},
-}
-
-fail_action = 
-{
-	CLIENT = { },
-	SERVER = { },
-}
-
-cancel_action = 
-{
-	CLIENT = { },
-	SERVER = 
-	{
-		QUEST_EXEC_REFRESH_GROUP_SUITE = 
-		{
-			{ "3", "133104075,1", },
-			{ "3", "133104913,1", },
-		},
-		QUEST_EXEC_DEL_ALL_SPECIFIC_PACK_ITEM = 
-		{
-			{ "100503,100504,100505", },
-		},
-	},
-}
--- 父任务执行项数据结束-----------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
--- Actor模块数据开始--------------------------------
--- 空
--- Actor模块数据结束--------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
--- 文本模块数据开始---------------------------------
--- 空
--- 文本模块数据结束---------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
--- 路点模块数据开始---------------------------------
--- 空
--- 路点模块数据结束---------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-
--- 断线重连生成内容 开始----------------------------
--- 和questdata配的存档点对应
-rewind_data = 
-{
-	["2211601"] = { },
-	["2211602"] = { },
-	["2211603"] = { },
-	["2211604"] = { },
-	["2211605"] = { },
-	["2211606"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 162401,
-				alias = "Npc162401",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q22116Battle",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-		},
-	},
-	["2211607"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 162401,
-				alias = "Npc162401",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q22116Battle",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-		},
-	},
-	["2211608"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 162401,
-				alias = "Npc162401",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q22116Battle",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-		},
-	},
-	["2211609"] = { },
-	["2211610"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 203701,
-				alias = "Npc203701",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22116Chaoxi",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 207601,
-				alias = "Npc207601",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22116Sisi",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-		},
-	},
-	["2211611"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 2031,
-				alias = "Npc2031",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22000MengSpawn",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 2074,
-				alias = "Npc2074",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22000LuluSpawn",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-			{
-				id = 2030,
-				alias = "Npc2030",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22000FeiSpawn",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 3,
-			},
-		},
-	},
-	["2211612"] = { },
-	["2211613"] = { },
-	["2211614"] = { },
-	["2211615"] = { },
-}
--- 断线重连生成内容 结束----------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
--- 校验数据 开始----------------------------------
--- 和任务lua中生成NPC/Monster/Gadget/Item等对应
-quest_data = 
-{
-	["2211601"] = { },
-	["2211602"] = { },
-	["2211603"] = { },
-	["2211604"] = { },
-	["2211605"] = { },
-	["2211606"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 162401,
-				alias = "Npc162401",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q22116Battle",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-		},
-	},
-	["2211607"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 162401,
-				alias = "Npc162401",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q22116Battle",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-		},
-	},
-	["2211608"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 162401,
-				alias = "Npc162401",
-				script = "Actor/Npc/NpcFSMBehaviour",
-				pos = "Q22116Battle",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-		},
-	},
-	["2211609"] = { },
-	["2211610"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 203701,
-				alias = "Npc203701",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22116Chaoxi",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 207601,
-				alias = "Npc207601",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22116Sisi",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-		},
-	},
-	["2211611"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 2031,
-				alias = "Npc2031",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22000MengSpawn",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 2074,
-				alias = "Npc2074",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22000LuluSpawn",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-			{
-				id = 2030,
-				alias = "Npc2030",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22000FeiSpawn",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 3,
-			},
-		},
-	},
-	["2211612"] = { },
-	["2211613"] = { },
-	["2211614"] = { },
-	["2211615"] = { },
-}
--- 校验数据 结束----------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
+L0_1 = {}
+L1_1 = 2211601
+L2_1 = 2211602
+L3_1 = 2211603
+L4_1 = 2211604
+L5_1 = 2211605
+L6_1 = 2211606
+L7_1 = 2211609
+L8_1 = 2211610
+L9_1 = 2211611
+L10_1 = 2211613
+L11_1 = 2211607
+L12_1 = 2211612
+L13_1 = 2211614
+L14_1 = 2211608
+L15_1 = 2211615
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+L0_1[11] = L11_1
+L0_1[12] = L12_1
+L0_1[13] = L13_1
+L0_1[14] = L14_1
+L0_1[15] = L15_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L4_1 = "3"
+L5_1 = "133104913,1"
+L3_1[1] = L4_1
+L3_1[2] = L5_1
+L2_1[1] = L3_1
+L1_1.QUEST_EXEC_REFRESH_GROUP_SUITE = L2_1
+L2_1 = {}
+L3_1 = {}
+L4_1 = "100503,100504,100505"
+L3_1[1] = L4_1
+L2_1[1] = L3_1
+L1_1.QUEST_EXEC_DEL_ALL_SPECIFIC_PACK_ITEM = L2_1
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L4_1 = "3"
+L5_1 = "133104075,1"
+L3_1[1] = L4_1
+L3_1[2] = L5_1
+L4_1 = {}
+L5_1 = "3"
+L6_1 = "133104913,1"
+L4_1[1] = L5_1
+L4_1[2] = L6_1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.QUEST_EXEC_REFRESH_GROUP_SUITE = L2_1
+L2_1 = {}
+L3_1 = {}
+L4_1 = "100503,100504,100505"
+L3_1[1] = L4_1
+L2_1[1] = L3_1
+L1_1.QUEST_EXEC_DEL_ALL_SPECIFIC_PACK_ITEM = L2_1
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["2211601"] = L1_1
+L1_1 = {}
+L0_1["2211602"] = L1_1
+L1_1 = {}
+L0_1["2211603"] = L1_1
+L1_1 = {}
+L0_1["2211604"] = L1_1
+L1_1 = {}
+L0_1["2211605"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 162401
+L3_1.alias = "Npc162401"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q22116Battle"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 2
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2211606"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 162401
+L3_1.alias = "Npc162401"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q22116Battle"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 2
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2211607"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 162401
+L3_1.alias = "Npc162401"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q22116Battle"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 2
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2211608"] = L1_1
+L1_1 = {}
+L0_1["2211609"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 203701
+L3_1.alias = "Npc203701"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q22116Chaoxi"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 207601
+L4_1.alias = "Npc207601"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q22116Sisi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["2211610"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2031
+L3_1.alias = "Npc2031"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q22000MengSpawn"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2074
+L4_1.alias = "Npc2074"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q22000LuluSpawn"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 2030
+L5_1.alias = "Npc2030"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q22000FeiSpawn"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["2211611"] = L1_1
+L1_1 = {}
+L0_1["2211612"] = L1_1
+L1_1 = {}
+L0_1["2211613"] = L1_1
+L1_1 = {}
+L0_1["2211614"] = L1_1
+L1_1 = {}
+L0_1["2211615"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["2211601"] = L1_1
+L1_1 = {}
+L0_1["2211602"] = L1_1
+L1_1 = {}
+L0_1["2211603"] = L1_1
+L1_1 = {}
+L0_1["2211604"] = L1_1
+L1_1 = {}
+L0_1["2211605"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 162401
+L3_1.alias = "Npc162401"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q22116Battle"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 2
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2211606"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 162401
+L3_1.alias = "Npc162401"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q22116Battle"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 2
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2211607"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 162401
+L3_1.alias = "Npc162401"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q22116Battle"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 2
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2211608"] = L1_1
+L1_1 = {}
+L0_1["2211609"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 203701
+L3_1.alias = "Npc203701"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q22116Chaoxi"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 207601
+L4_1.alias = "Npc207601"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q22116Sisi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["2211610"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2031
+L3_1.alias = "Npc2031"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q22000MengSpawn"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 2074
+L4_1.alias = "Npc2074"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q22000LuluSpawn"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 2030
+L5_1.alias = "Npc2030"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q22000FeiSpawn"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["2211611"] = L1_1
+L1_1 = {}
+L0_1["2211612"] = L1_1
+L1_1 = {}
+L0_1["2211613"] = L1_1
+L1_1 = {}
+L0_1["2211614"] = L1_1
+L1_1 = {}
+L0_1["2211615"] = L1_1
+quest_data = L0_1

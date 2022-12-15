@@ -1,223 +1,107 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1
 main_id = 353
-
-sub_ids =
-{
-    --35300,
-    35301,
-    35302,
-    35303,
-    35304,
-    --35305,
-    --35306,
-    --35307,
-    --35308,
-    35309,
-    35310,
-    35311,
-    35312,
-}
-
----存放断线重连生成内容，和questdata配的存档点对应
-rewind_data = {}
-
-rewind_data["35301"] = 
-{
-    npcs = {
-        {
-            id = 1005,
-            alias = "Paimon",
-            script = "Actor/Quest/Q352/Paimon",
-            pos = "Q353Teach1",
-        }
-    },
-}
-
-rewind_data["35302"] = 
-{
-
-}
-rewind_data["35303"] = 
-{
-
-}
-rewind_data["35304"] = 
-{
-    -- items = {
-    --     {
-    --         id = 2025,
-    --         pos = "Q353Monster3",
-    --         alias = "Ball",
-    --         scene_id  = 3,
-    --         room_id = 0,
-	-- 		data_index = 1,
-    --     },
-    --     {
-    --         id = 2025,
-    --         pos = "Q353Monster3",
-    --         alias = "Ball",
-    --         scene_id  = 3,
-    --         room_id = 0,
-	-- 		data_index = 2,
-    --     },
-    --     {
-    --         id = 2025,
-    --         pos = "Q353Monster3",
-    --         alias = "Ball",
-    --         scene_id  = 3,
-    --         room_id = 0,
-	-- 		data_index = 3,
-    --     },
-    -- }
-
-}
-
---[[ rewind_data["35305"] = 
-{
-    npcs = {
-        {
-            id = 1005,
-            alias = "Paimon",
-            script = "Actor/Quest/Q352/Paimon",
-            pos = "Q353Monster3",
-        }
-    },
-}
-
-rewind_data["35307"] = 
-{
-    npcs = {
-        {
-            id = 1005,
-            alias = "Paimon",
-            script = "Actor/Quest/Q352/Paimon",
-            pos = "Q353Monster3",
-        }
-    },
-}
-
-rewind_data["35308"] = 
-{
-    npcs = {
-        {
-            id = 1005,
-            alias = "Paimon",
-            script = "Actor/Quest/Q352/Paimon",
-            pos = "Q353Monster3",
-        }
-    },
-} ]]
----校验用，和任务lua中生成NPC/monster/gadget/item等对应
-quest_data = {}
-
-quest_data["35301"] = 
-{
-    npcs = {
-        {
-            id = 1005,
-            alias = "Paimon",
-            script = "Actor/Quest/Q352/Paimon",
-            pos = "Q353Teach1",
-            scene_id  = 3,
-            room_id = 0,
-			data_index = 0,
-        }
-    },
-    gadgets = {
-        {
-            id = 70300051,
-            pos = "Q357Gaia1",
-            alias = "MengdeEff",
-            scene_id  = 3,
-            room_id = 0,
-			data_index = 1,
-        },
-    },
-}
-
-quest_data["35302"] = 
-{
-    transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 3,
-            pos = "Q353SetAvatar",
-        },
-    }
-}
-
-
-quest_data["35304"] = 
-{
-    gadgets = {
-        -- {
-        --     id = 2025,
-        --     pos = "Q353Monster3",
-        -- },
-        -- {
-        --     id = 2025,
-        --     pos = "Q353Monster3",
-        -- },
-        -- {
-        --     id = 2025,
-        --     pos = "Q353Monster3",
-        -- },
-    },
-    -- items = {
-    --     {
-    --         id = 2025,
-    --         pos = "Q353Monster3",
-    --         alias = "Ball",
-    --         scene_id  = 3,
-    --         room_id = 0,
-	-- 		data_index = 1,
-    --     },
-    --     {
-    --         id = 2025,
-    --         pos = "Q353Monster3",
-    --         alias = "Ball",
-    --         scene_id  = 3,
-    --         room_id = 0,
-	-- 		data_index = 2,
-    --     },
-    --     {
-    --         id = 2025,
-    --         pos = "Q353Monster3",
-    --         alias = "Ball",
-    --         scene_id  = 3,
-    --         room_id = 0,
-	-- 		data_index = 3,
-    --     },
-    -- }
-}
-
-quest_data["35309"] = 
-{
-    npcs = {
-        {
-            id = 1005,
-            alias = "Paimon",
-            script = "Actor/Quest/Q352/Paimon",
-            pos = "Q353PaimonAfterCs",
-            scene_id  = 3,
-            room_id = 0,
-			data_index = 0,
-        }
-    },
-}
-
-quest_data["35312"] = 
-{
-    transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 3,
-            pos = "Q353SetAvatar"
-        },
-    }
-}
-
----对话中生成的怪怎么校验？
+L0_1 = {}
+L1_1 = 35301
+L2_1 = 35302
+L3_1 = 35303
+L4_1 = 35304
+L5_1 = 35309
+L6_1 = 35310
+L7_1 = 35311
+L8_1 = 35312
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q353Teach1"
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["35301"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["35302"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["35303"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["35304"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q353Teach1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70300051
+L3_1.pos = "Q357Gaia1"
+L3_1.alias = "MengdeEff"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["35301"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q353SetAvatar"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["35302"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L1_1.gadgets = L2_1
+L0_1["35304"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q353PaimonAfterCs"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["35309"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q353SetAvatar"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["35312"] = L1_1

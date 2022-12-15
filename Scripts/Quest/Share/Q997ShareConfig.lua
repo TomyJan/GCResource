@@ -1,95 +1,64 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1
 main_id = 997
-
-sub_ids =
-{
-    99701,
-}
-
-rewind_data = {}
-
-rewind_data["99701"] = 
-{
-    npcs = {
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q370Qin",
-            scene_id = 1004,
-            room_id = 1,
-            data_index = 0,
-        },
-
-        {
-            id = 1002,
-            alias = "Ambor",
-            script = "Actor/Quest/Q301/Ambor301",
-            pos = "Q370Ambor",
-            data_index = 0,
-            scene_id  = 1004,
-            room_id = 1,
-        },
-
-        {
-            id = 1007,
-            alias = "Lisa",
-            script = "Actor/Quest/Q411/Lisa",
-            pos = "Q370Lisa",
-            scene_id  = 1004,
-            data_index = 0,
-            room_id = 1,
-        },
-
-        {
-            id = 1004,
-            alias = "Gaia",
-            script = "Actor/Quest/Q301/Gaia301",
-            pos = "Q370Gaia",
-            scene_id  = 1004,
-            data_index = 0,
-            room_id = 1,
-        },
-    }
-}
-
-
-
-quest_data = {}
-
-quest_data["99701"] = 
-{
-    trial_actors = {
-
-    },
-    actors = {
-        
-    },
-    items = {
-        -- {
-        --     id = 100004,
-        --     pos = "Q404Pos2",
-        --     alias = "Ball",
-        -- },
-    },
-    monsters = {
-        -- {
-        --     id = 20010801,
-        --     pos = "Q404Pos2",
-        -- },
-        -- {
-        --     id = 20010801,
-        --     pos = "Q404Pos2",
-        -- }
-    },
-    gadgets = {
-        -- {
-        --     id = 70300004,
-        --     pos = "Q404Pos2",
-        --     alias = "GoalMarker404",
-        -- }
-    }
-}
+L0_1 = {}
+L1_1 = 99701
+L0_1[1] = L1_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1006
+L3_1.alias = "Qin"
+L3_1.script = "Actor/Quest/Q411/Qin"
+L3_1.pos = "Q370Qin"
+L3_1.scene_id = 1004
+L3_1.room_id = 1
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.id = 1002
+L4_1.alias = "Ambor"
+L4_1.script = "Actor/Quest/Q301/Ambor301"
+L4_1.pos = "Q370Ambor"
+L4_1.data_index = 0
+L4_1.scene_id = 1004
+L4_1.room_id = 1
+L5_1 = {}
+L5_1.id = 1007
+L5_1.alias = "Lisa"
+L5_1.script = "Actor/Quest/Q411/Lisa"
+L5_1.pos = "Q370Lisa"
+L5_1.scene_id = 1004
+L5_1.data_index = 0
+L5_1.room_id = 1
+L6_1 = {}
+L6_1.id = 1004
+L6_1.alias = "Gaia"
+L6_1.script = "Actor/Quest/Q301/Gaia301"
+L6_1.pos = "Q370Gaia"
+L6_1.scene_id = 1004
+L6_1.data_index = 0
+L6_1.room_id = 1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["99701"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L1_1.trial_actors = L2_1
+L2_1 = {}
+L1_1.actors = L2_1
+L2_1 = {}
+L1_1.items = L2_1
+L2_1 = {}
+L1_1.monsters = L2_1
+L2_1 = {}
+L1_1.gadgets = L2_1
+L0_1["99701"] = L1_1

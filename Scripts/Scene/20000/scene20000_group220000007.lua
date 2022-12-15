@@ -83,21 +83,21 @@ suites = {
 
 -- 触发条件
 function condition_EVENT_ANY_GADGET_DIE_25(context, evt)
-	ScriptLib.PrintLog(context, "enter condition")
+	ScriptLib.PrintLog("enter condition")
 	if defs.gadget_id_2 ~= evt.param1 then
-	ScriptLib.PrintLog(context, "configid judge false")
+	ScriptLib.PrintLog("configid judge false")
 		return false
 	end
 	
-	ScriptLib.PrintLog(context, "configid judge true")
+	ScriptLib.PrintLog("configid judge true")
 	return true
 end
 
 -- 触发操作
 function action_EVENT_ANY_GADGET_DIE_25(context, evt)
-	ScriptLib.PrintLog(context, "enter action")
+	ScriptLib.PrintLog("enter action")
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = defs.gadget_id_1 }) then
-	ScriptLib.PrintLog(context, "create gadget fail")
+	ScriptLib.PrintLog("create gadget fail")
 		return -1
 	end
 	

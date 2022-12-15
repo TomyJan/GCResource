@@ -1,131 +1,114 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1
 main_id = 990
-
-sub_ids =
-{
-	99001
-}
-
-rewind_data = {}
-
-rewind_data["99006"] = 
-{
-	npcs = 
-	{
-		{
-			isMale = false,
-			alias = "Npc1025",
-			script = "Actor/Npc/TempNPC",
-			id = 1025,
-			pos = "Q990TestNpc2",
-			scene_id = 1001,
-			room_id = 1,
-			data_index = 1,
-		},
-		{
-			isMale = true,
-			alias = "Npc1026",
-			script = "Actor/Npc/TempNPC",
-			id = 1026,
-			pos = "Q990TestNpc2",
-			scene_id = 1001,
-			room_id = 1,
-			data_index = 2,
-		}
-	},
-}
-
-quest_data = {}
-
-quest_data["99001"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Paimon",
-			script = "Actor/Npc/TempNPC",
-			id = 1005,
-			pos = "TalkTestNPC1",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		}
-    }
-}
-
-quest_data["99002"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Wendy",
-			
-            script = "Actor/Quest/Q301/Wendy301",
-            id = 1001,
-            pos = "Q99004TEST3",
-            scene_id = 3,
-            room_id = 0,
-            data_index = 0,
-		}
-    }
-}
-
-quest_data["99004"] = 
-{
-	npcs = 
-	{
-		{
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            id = 1001,
-            pos = "Q990TestNpc1",
-            scene_id = 1001,
-            room_id = 1,
-            data_index = 0,
-		}
-    }
-}
-
-quest_data["99005"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Npc1025",
-			script = "Actor/Npc/TempNPC",
-			id = 1025,
-			pos = "Q990TestNpc2",
-			scene_id = 1001,
-			room_id = 1,
-			data_index = 1,
-		},
-		{
-			alias = "Npc1026",
-			script = "Actor/Npc/TempNPC",
-			id = 1026,
-			pos = "Q990TestNpc2",
-			scene_id = 1001,
-			room_id = 1,
-			data_index = 2,
-		}
-	},
-}
-
-quest_data["99007"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Barbara",
-			script = "Actor/Npc/TempNPC",
-			id = 1008,
-			pos = "Q7000701Player",
-			scene_id = 1004,
-			room_id = 100401,
-			data_index = 1,
-		}
-	},
-}
+L0_1 = {}
+L1_1 = 99001
+L0_1[1] = L1_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.isMale = false
+L3_1.alias = "Npc1025"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 1025
+L3_1.pos = "Q990TestNpc2"
+L3_1.scene_id = 1001
+L3_1.room_id = 1
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.isMale = true
+L4_1.alias = "Npc1026"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.id = 1026
+L4_1.pos = "Q990TestNpc2"
+L4_1.scene_id = 1001
+L4_1.room_id = 1
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["99006"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 1005
+L3_1.pos = "TalkTestNPC1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["99001"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Wendy"
+L3_1.script = "Actor/Quest/Q301/Wendy301"
+L3_1.id = 1001
+L3_1.pos = "Q99004TEST3"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["99002"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Wendy"
+L3_1.script = "Actor/Quest/Q301/Wendy301"
+L3_1.id = 1001
+L3_1.pos = "Q990TestNpc1"
+L3_1.scene_id = 1001
+L3_1.room_id = 1
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["99004"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc1025"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 1025
+L3_1.pos = "Q990TestNpc2"
+L3_1.scene_id = 1001
+L3_1.room_id = 1
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.alias = "Npc1026"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.id = 1026
+L4_1.pos = "Q990TestNpc2"
+L4_1.scene_id = 1001
+L4_1.room_id = 1
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["99005"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Barbara"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 1008
+L3_1.pos = "Q7000701Player"
+L3_1.scene_id = 1004
+L3_1.room_id = 100401
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["99007"] = L1_1

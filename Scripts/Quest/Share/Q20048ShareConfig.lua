@@ -1,304 +1,238 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1
 main_id = 20048
-
-sub_ids =
-{
-    2004801,
-    2004802,
-    2004803,
-    2004804,
-    2004805,
-    2004806,
-}
-
----存放断线重连生成内容，和questdata配的存档点对应
-
-rewind_data = {}
-
-rewind_data["2004801"] =
-{
-  
-}
-
-rewind_data["2004802"] =
-{
-    gadgets =
-    {
-        {
-            id = 70710009,
-            pos = "",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-            alias = "InteractionPoint", -- optional default : ""
-            scene_id = 3, -- optional default : sceneData.DefaultSceneID
-            room_id = 0, -- optional default : 0
-           
-            
-        },
-        {
-            id = 70300112,
-            pos = "",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-            alias = "InteractionPoint02", -- optional default : ""
-            scene_id = 3, -- optional default : sceneData.DefaultSceneID
-            room_id = 0, -- optional default : 0
-           
-            
-        }
-    }
- 
-}
-
-rewind_data["2004803"] =
-{
-    gadgets =
-    {
-        {
-            id = 70710009,
-            pos = "",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-            alias = "InteractionPoint", -- optional default : ""
-            scene_id = 3, -- optional default : sceneData.DefaultSceneID
-            room_id = 0, -- optional default : 0
-           
-            
-        },
-        {
-            id = 70300112,
-            pos = "",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-            alias = "InteractionPoint02", -- optional default : ""
-            scene_id = 3, -- optional default : sceneData.DefaultSceneID
-            room_id = 0, -- optional default : 0
-           
-            
-        }
-    }
-}
-
-rewind_data["2004804"] =
-{
-    gadgets =
-    {
-        {
-            id = 70710009,
-            pos = "",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-            alias = "InteractionPoint", -- optional default : ""
-            scene_id = 3, -- optional default : sceneData.DefaultSceneID
-            room_id = 0, -- optional default : 0
-           
-            
-        },
-        {
-            id = 70300112,
-            pos = "",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-            alias = "InteractionPoint02", -- optional default : ""
-            scene_id = 3, -- optional default : sceneData.DefaultSceneID
-            room_id = 0, -- optional default : 0
-           
-            
-        }
-    }
-}
-
-rewind_data["2004805"] =
-{
-    gadgets =
-    {
-        {
-            id = 70710009,
-            pos = "",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-            alias = "InteractionPoint", -- optional default : ""
-            scene_id = 3, -- optional default : sceneData.DefaultSceneID
-            room_id = 0, -- optional default : 0
-           
-            
-        },
-        {
-            id = 70300112,
-            pos = "",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-            alias = "InteractionPoint02", -- optional default : ""
-            scene_id = 3, -- optional default : sceneData.DefaultSceneID
-            room_id = 0, -- optional default : 0
-           
-            
-        }
-    }
-}
-
-rewind_data["2004806"] =
-{
-    gadgets =
-    {
-        {
-            id = 70710009,
-            pos = "",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-            alias = "InteractionPoint", -- optional default : ""
-            scene_id = 3, -- optional default : sceneData.DefaultSceneID
-            room_id = 0, -- optional default : 0
-           
-            
-        },
-        {
-            id = 70300112,
-            pos = "",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-            alias = "InteractionPoint02", -- optional default : ""
-            scene_id = 3, -- optional default : sceneData.DefaultSceneID
-            room_id = 0, -- optional default : 0
-           
-            
-        }
-    }
-  
-}
-
-quest_data = {}
-
-
-quest_data["2004801"] = 
-{
-    gadgets =
-{
-	{
-		id = 70710009,
-		pos = "",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-		alias = "InteractionPoint", -- optional default : ""
-		scene_id = 3, -- optional default : sceneData.DefaultSceneID
-		room_id = 0, -- optional default : 0
-		is_show_cutscene = false, -- 宝箱专用配置 optional default : false
-		
-	},
-    {
-        id = 70300112,
-        pos = "",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-        alias = "InteractionPoint02", -- optional default : ""
-        scene_id = 3, -- optional default : sceneData.DefaultSceneID
-        room_id = 0, -- optional default : 0
-       
-        
-    }
-}
-
-}
-quest_data["2004802"] = 
-{
-    gadgets =
-{
-	{
-		id = 70710009,
-		pos = "",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-		alias = "InteractionPoint", -- optional default : ""
-		scene_id = 3, -- optional default : sceneData.DefaultSceneID
-		room_id = 0, -- optional default : 0
-		is_show_cutscene = false, -- 宝箱专用配置 optional default : false
-		
-	},
-    {
-        id = 70300112,
-        pos = "",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-        alias = "InteractionPoint02", -- optional default : ""
-        scene_id = 3, -- optional default : sceneData.DefaultSceneID
-        room_id = 0, -- optional default : 0
-       
-        
-    }
-}
-}
-
-quest_data["2004803"] = 
-{
-    gadgets =
-{
-	{
-		id = 70710009,
-		pos = "",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-		alias = "InteractionPoint", -- optional default : ""
-		scene_id = 3, -- optional default : sceneData.DefaultSceneID
-		room_id = 0, -- optional default : 0
-		is_show_cutscene = false, -- 宝箱专用配置 optional default : false
-		
-	},
-    {
-        id = 70300112,
-        pos = "",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-        alias = "InteractionPoint02", -- optional default : ""
-        scene_id = 3, -- optional default : sceneData.DefaultSceneID
-        room_id = 0, -- optional default : 0
-       
-        
-    }
-}
-}
-
-quest_data["2004804"] = 
-{
-    gadgets =
-{
-	{
-		id = 70710009,
-		pos = "",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-		alias = "InteractionPoint", -- optional default : ""
-		scene_id = 3, -- optional default : sceneData.DefaultSceneID
-		room_id = 0, -- optional default : 0
-		is_show_cutscene = false, -- 宝箱专用配置 optional default : false
-		
-	},
-    {
-        id = 70300112,
-        pos = "",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-        alias = "InteractionPoint02", -- optional default : ""
-        scene_id = 3, -- optional default : sceneData.DefaultSceneID
-        room_id = 0, -- optional default : 0
-       
-        
-    }
-}
-}
-
-quest_data["2004805"] = 
-{
-    gadgets =
-{
-	{
-		id = 70710009,
-		pos = "",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-		alias = "InteractionPoint", -- optional default : ""
-		scene_id = 3, -- optional default : sceneData.DefaultSceneID
-		room_id = 0, -- optional default : 0
-		is_show_cutscene = false, -- 宝箱专用配置 optional default : false
-		
-	},
-    {
-        id = 70300112,
-        pos = "",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-        alias = "InteractionPoint02", -- optional default : ""
-        scene_id = 3, -- optional default : sceneData.DefaultSceneID
-        room_id = 0, -- optional default : 0
-       
-        
-    }
-}
-}
-
-quest_data["2004806"] = 
-{
-    gadgets =
-{
-	{
-		id = 70710009,
-		pos = "",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-		alias = "InteractionPoint", -- optional default : ""
-		scene_id = 3, -- optional default : sceneData.DefaultSceneID
-		room_id = 0, -- optional default : 0
-		is_show_cutscene = false, -- 宝箱专用配置 optional default : false
-		
-	},
-    {
-        id = 70300112,
-        pos = "",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-        alias = "InteractionPoint02", -- optional default : ""
-        scene_id = 3, -- optional default : sceneData.DefaultSceneID
-        room_id = 0, -- optional default : 0
-       
-        
-    }
-}
-}
+L0_1 = {}
+L1_1 = 2004801
+L2_1 = 2004802
+L3_1 = 2004803
+L4_1 = 2004804
+L5_1 = 2004805
+L6_1 = 2004806
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["2004801"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710009
+L3_1.pos = ""
+L3_1.alias = "InteractionPoint"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L4_1 = {}
+L4_1.id = 70300112
+L4_1.pos = ""
+L4_1.alias = "InteractionPoint02"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.gadgets = L2_1
+L0_1["2004802"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710009
+L3_1.pos = ""
+L3_1.alias = "InteractionPoint"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L4_1 = {}
+L4_1.id = 70300112
+L4_1.pos = ""
+L4_1.alias = "InteractionPoint02"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.gadgets = L2_1
+L0_1["2004803"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710009
+L3_1.pos = ""
+L3_1.alias = "InteractionPoint"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L4_1 = {}
+L4_1.id = 70300112
+L4_1.pos = ""
+L4_1.alias = "InteractionPoint02"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.gadgets = L2_1
+L0_1["2004804"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710009
+L3_1.pos = ""
+L3_1.alias = "InteractionPoint"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L4_1 = {}
+L4_1.id = 70300112
+L4_1.pos = ""
+L4_1.alias = "InteractionPoint02"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.gadgets = L2_1
+L0_1["2004805"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710009
+L3_1.pos = ""
+L3_1.alias = "InteractionPoint"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L4_1 = {}
+L4_1.id = 70300112
+L4_1.pos = ""
+L4_1.alias = "InteractionPoint02"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.gadgets = L2_1
+L0_1["2004806"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710009
+L3_1.pos = ""
+L3_1.alias = "InteractionPoint"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.is_show_cutscene = false
+L4_1 = {}
+L4_1.id = 70300112
+L4_1.pos = ""
+L4_1.alias = "InteractionPoint02"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.gadgets = L2_1
+L0_1["2004801"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710009
+L3_1.pos = ""
+L3_1.alias = "InteractionPoint"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.is_show_cutscene = false
+L4_1 = {}
+L4_1.id = 70300112
+L4_1.pos = ""
+L4_1.alias = "InteractionPoint02"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.gadgets = L2_1
+L0_1["2004802"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710009
+L3_1.pos = ""
+L3_1.alias = "InteractionPoint"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.is_show_cutscene = false
+L4_1 = {}
+L4_1.id = 70300112
+L4_1.pos = ""
+L4_1.alias = "InteractionPoint02"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.gadgets = L2_1
+L0_1["2004803"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710009
+L3_1.pos = ""
+L3_1.alias = "InteractionPoint"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.is_show_cutscene = false
+L4_1 = {}
+L4_1.id = 70300112
+L4_1.pos = ""
+L4_1.alias = "InteractionPoint02"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.gadgets = L2_1
+L0_1["2004804"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710009
+L3_1.pos = ""
+L3_1.alias = "InteractionPoint"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.is_show_cutscene = false
+L4_1 = {}
+L4_1.id = 70300112
+L4_1.pos = ""
+L4_1.alias = "InteractionPoint02"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.gadgets = L2_1
+L0_1["2004805"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710009
+L3_1.pos = ""
+L3_1.alias = "InteractionPoint"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.is_show_cutscene = false
+L4_1 = {}
+L4_1.id = 70300112
+L4_1.pos = ""
+L4_1.alias = "InteractionPoint02"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.gadgets = L2_1
+L0_1["2004806"] = L1_1

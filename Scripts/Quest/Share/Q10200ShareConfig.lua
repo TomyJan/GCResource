@@ -1,711 +1,685 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1, L11_1, L12_1, L13_1, L14_1, L15_1
 main_id = 10200
-
-sub_ids =
-{
-    1020001,
-    1020002,
-    1020003,
-    1020004,
-    1020005,
-    1020006,
-    1020007,
-    1020008,
-    1020009,
-    1020010,
-    1020011,
-    1020012,
-    1020013,
-    1020014,
-    1020015,
-}
-
-rewind_data = {}
-
-rewind_data["1020003"] = 
-{
-    npcs = {
-        {
-            id = 160301,
-            alias = "Npc160301",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200BruceSpawn",
-            scene_id  = 1009,
-            room_id = 1,
-			data_index = 1,
-        },
-        {
-            id = 141401,
-            alias = "Npc141401",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200JackSpawn",
-            scene_id  = 1009,
-            room_id = 1,
-			data_index = 2,
-        },
-        {
-            id = 152301,
-            alias = "Npc152301",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200JoseSpawn",
-            scene_id  = 1009,
-            room_id = 1,
-			data_index = 3,
-        }
-    }
-}
-
-rewind_data["1020016"] = 
-{
-    npcs = {
-        {
-            id = 160301,
-            alias = "Npc160301",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200BruceSpawn",
-            scene_id  = 1009,
-            room_id = 1,
-			data_index = 1,
-        },
-        {
-            id = 141401,
-            alias = "Npc141401",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200JackSpawn",
-            scene_id  = 1009,
-            room_id = 1,
-			data_index = 2,
-        },
-        {
-            id = 152301,
-            alias = "Npc152301",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200JoseSpawn",
-            scene_id  = 1009,
-            room_id = 1,
-			data_index = 3,
-        }
-    }
-}
-
-rewind_data["1020007"] = 
-{
-    npcs = {
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q10200Qin",
-            scene_id  = 1004,
-            room_id = 100402,
-			data_index = 1,
-        }
-    }
-}
-
-rewind_data["1020008"] = 
-{
-    npcs = {
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q10200Qin",
-            scene_id  = 1004,
-            room_id = 100402,
-			data_index = 1,
-        }
-    },
-    avatar = {
-        scene_id = 1004,
-        room_id = 100402,
-        pos = "Q10200AvatarBorn"
-    }
-
-}
-
--- rewind_data["1020009"] = 
--- {
---     npcs = {
---         {
---             id = 10090,
---             alias = "Npc10090",
---             script = "Actor/Npc/TempNPC",
---             pos = "Q10200KleeSpawn",
---             scene_id  = 1004,
---             room_id = 1,
--- 			data_index = 1,
---         }
---     }
--- }
-
-rewind_data["1020010"] = 
-{
-    npcs = {
-        {
-            id = 10090,
-            alias = "Npc10090",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200KleeSpawn",
-            scene_id  = 1004,
-            room_id = 1,
-			data_index = 1,
-        }
-    }
-}
-
-quest_data = {}
-
-quest_data["1020015"] = 
-{
-    npcs = {
-        {
-            id = 160301,
-            alias = "Npc160301",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200BruceSpawn",
-            scene_id  = 1009,
-            room_id = 1,
-			data_index = 1,
-        },
-        {
-            id = 141401,
-            alias = "Npc141401",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200JackSpawn",
-            scene_id  = 1009,
-            room_id = 1,
-			data_index = 2,
-        },
-        {
-            id = 152301,
-            alias = "Npc152301",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200JoseSpawn",
-            scene_id  = 1009,
-            room_id = 1,
-			data_index = 3,
-        },
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q10200Qin",
-            scene_id  = 1004,
-            room_id = 100402,
-			data_index = 4,
-        },
-        {
-            id = 10090,
-            alias = "Npc10090",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200KleeSpawn",
-            scene_id  = 1004,
-            room_id = 1,
-			data_index = 5,
-        }
-    }
-}
-
-quest_data["1020003"] = 
-{
-    npcs = {
-        {
-            id = 160301,
-            alias = "Npc160301",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200BruceSpawn",
-            scene_id  = 1009,
-            room_id = 1,
-			data_index = 1,
-        },
-        {
-            id = 141401,
-            alias = "Npc141401",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200JackSpawn",
-            scene_id  = 1009,
-            room_id = 1,
-			data_index = 2,
-        },
-        {
-            id = 152301,
-            alias = "Npc152301",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200JoseSpawn",
-            scene_id  = 1009,
-            room_id = 1,
-			data_index = 3,
-        },
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q10200Qin",
-            scene_id  = 1004,
-            room_id = 100402,
-			data_index = 4,
-        },
-        {
-            id = 10090,
-            alias = "Npc10090",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200KleeSpawn",
-            scene_id  = 1004,
-            room_id = 1,
-			data_index = 5,
-        }
-    }
-}
-
-quest_data["1020004"] = 
-{
-    npcs = {
-        {
-            id = 160301,
-            alias = "Npc160301",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200BruceSpawn",
-            scene_id  = 1009,
-            room_id = 1,
-			data_index = 1,
-        },
-        {
-            id = 141401,
-            alias = "Npc141401",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200JackSpawn",
-            scene_id  = 1009,
-            room_id = 1,
-			data_index = 2,
-        },
-        {
-            id = 152301,
-            alias = "Npc152301",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200JoseSpawn",
-            scene_id  = 1009,
-            room_id = 1,
-			data_index = 3,
-        },
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q10200Qin",
-            scene_id  = 1004,
-            room_id = 100402,
-			data_index = 4,
-        },
-        {
-            id = 10090,
-            alias = "Npc10090",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200KleeSpawn",
-            scene_id  = 1004,
-            room_id = 1,
-			data_index = 5,
-        }
-    }
-}
-
-quest_data["1020011"] = 
-{
-    npcs = {
-        {
-            id = 160301,
-            alias = "Npc160301",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200BruceSpawn",
-            scene_id  = 1009,
-            room_id = 1,
-			data_index = 1,
-        },
-        {
-            id = 141401,
-            alias = "Npc141401",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200JackSpawn",
-            scene_id  = 1009,
-            room_id = 1,
-			data_index = 2,
-        },
-        {
-            id = 152301,
-            alias = "Npc152301",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200JoseSpawn",
-            scene_id  = 1009,
-            room_id = 1,
-			data_index = 3,
-        },
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q10200Qin",
-            scene_id  = 1004,
-            room_id = 100402,
-			data_index = 4,
-        },
-        {
-            id = 10090,
-            alias = "Npc10090",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200KleeSpawn",
-            scene_id  = 1004,
-            room_id = 1,
-			data_index = 5,
-        }
-    }
-}
-
-quest_data["1020012"] = 
-{
-    npcs = {
-        {
-            id = 160301,
-            alias = "Npc160301",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200BruceSpawn",
-            scene_id  = 1009,
-            room_id = 1,
-			data_index = 1,
-        },
-        {
-            id = 141401,
-            alias = "Npc141401",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200JackSpawn",
-            scene_id  = 1009,
-            room_id = 1,
-			data_index = 2,
-        },
-        {
-            id = 152301,
-            alias = "Npc152301",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200JoseSpawn",
-            scene_id  = 1009,
-            room_id = 1,
-			data_index = 3,
-        },
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q10200Qin",
-            scene_id  = 1004,
-            room_id = 100402,
-			data_index = 4,
-        },
-        {
-            id = 10090,
-            alias = "Npc10090",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200KleeSpawn",
-            scene_id  = 1004,
-            room_id = 1,
-			data_index = 5,
-        }
-    }
-}
-
-quest_data["1020013"] = 
-{
-    npcs = {
-        {
-            id = 160301,
-            alias = "Npc160301",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200BruceSpawn",
-            scene_id  = 1009,
-            room_id = 1,
-			data_index = 1,
-        },
-        {
-            id = 141401,
-            alias = "Npc141401",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200JackSpawn",
-            scene_id  = 1009,
-            room_id = 1,
-			data_index = 2,
-        },
-        {
-            id = 152301,
-            alias = "Npc152301",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200JoseSpawn",
-            scene_id  = 1009,
-            room_id = 1,
-			data_index = 3,
-        },
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q10200Qin",
-            scene_id  = 1004,
-            room_id = 100402,
-			data_index = 4,
-        },
-        {
-            id = 10090,
-            alias = "Npc10090",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200KleeSpawn",
-            scene_id  = 1004,
-            room_id = 1,
-			data_index = 5,
-        }
-    }
-}
-
-quest_data["1020014"] = 
-{
-    npcs = {
-        {
-            id = 160301,
-            alias = "Npc160301",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200BruceSpawn",
-            scene_id  = 1009,
-            room_id = 1,
-			data_index = 1,
-        },
-        {
-            id = 141401,
-            alias = "Npc141401",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200JackSpawn",
-            scene_id  = 1009,
-            room_id = 1,
-			data_index = 2,
-        },
-        {
-            id = 152301,
-            alias = "Npc152301",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200JoseSpawn",
-            scene_id  = 1009,
-            room_id = 1,
-			data_index = 3,
-        },
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q10200Qin",
-            scene_id  = 1004,
-            room_id = 100402,
-			data_index = 4,
-        },
-        {
-            id = 10090,
-            alias = "Npc10090",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200KleeSpawn",
-            scene_id  = 1004,
-            room_id = 1,
-			data_index = 5,
-        }
-    }
-}
-
-quest_data["1020016"] = 
-{
-    npcs = {
-        {
-            id = 160301,
-            alias = "Npc160301",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200BruceSpawn",
-            scene_id  = 1009,
-            room_id = 1,
-			data_index = 1,
-        },
-        {
-            id = 141401,
-            alias = "Npc141401",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200JackSpawn",
-            scene_id  = 1009,
-            room_id = 1,
-			data_index = 2,
-        },
-        {
-            id = 152301,
-            alias = "Npc152301",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200JoseSpawn",
-            scene_id  = 1009,
-            room_id = 1,
-			data_index = 3,
-        },
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q10200Qin",
-            scene_id  = 1004,
-            room_id = 100402,
-			data_index = 4,
-        },
-        {
-            id = 10090,
-            alias = "Npc10090",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200KleeSpawn",
-            scene_id  = 1004,
-            room_id = 1,
-			data_index = 5,
-        }
-    }
-}
-
-
-quest_data["1020005"] = 
-{
-    npcs = {
-        {
-            id = 1005,
-            alias = "Paimon",
-            script = "Actor/Quest/Q352/Paimon",
-            pos = "Q10200PaimonSpawn",
-            scene_id  = 1009,
-            room_id = 1,
-			data_index = 1,
-        },
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q10200Qin",
-            scene_id  = 1004,
-            room_id = 100402,
-			data_index = 2,
-        },
-        {
-            id = 10090,
-            alias = "Npc10090",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200KleeSpawn",
-            scene_id  = 1004,
-            room_id = 1,
-			data_index = 3,
-        }    
-    },
-    transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 1009,
-            pos = "Q10200AvatarSpawn",
-        },
-    }
-}
-
-quest_data["1020006"] = 
-{
-    npcs = {
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q10200Qin",
-            scene_id  = 1004,
-            room_id = 100402,
-			data_index = 1,
-        },
-        {
-            id = 10090,
-            alias = "Npc10090",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200KleeSpawn",
-            scene_id  = 1004,
-            room_id = 1,
-			data_index = 2,
-        } 
-    }
-}
-
-quest_data["1020007"] = 
-{
-    npcs = {
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q10200Qin",
-            scene_id  = 1004,
-            room_id = 100402,
-			data_index = 1,
-        },
-        {
-            id = 10090,
-            alias = "Npc10090",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200KleeSpawn",
-            scene_id  = 1004,
-            room_id = 1,
-			data_index = 2,
-        } 
-    }
-}
-
-quest_data["1020008"] = 
-{
-    npcs = {
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q10200Qin",
-            scene_id  = 1004,
-            room_id = 100402,
-			data_index = 1,
-        },
-        {
-            id = 10090,
-            alias = "Npc10090",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200KleeSpawn",
-            scene_id  = 1004,
-            room_id = 1,
-			data_index = 2,
-        } 
-    }
-}
-
-quest_data["1020009"] = 
-{
-    npcs = {
-        {
-            id = 10090,
-            alias = "Npc10090",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200KleeSpawn",
-            scene_id  = 1004,
-            room_id = 1,
-			data_index = 1,
-        }
-    }
-}
-
-quest_data["1020010"] = 
-{
-    npcs = {
-        {
-            id = 10090,
-            alias = "Npc10090",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10200KleeSpawn",
-            scene_id  = 1004,
-            room_id = 1,
-			data_index = 1,
-        }
-    }
-}
+L0_1 = {}
+L1_1 = 1020001
+L2_1 = 1020002
+L3_1 = 1020003
+L4_1 = 1020004
+L5_1 = 1020005
+L6_1 = 1020006
+L7_1 = 1020007
+L8_1 = 1020008
+L9_1 = 1020009
+L10_1 = 1020010
+L11_1 = 1020011
+L12_1 = 1020012
+L13_1 = 1020013
+L14_1 = 1020014
+L15_1 = 1020015
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+L0_1[11] = L11_1
+L0_1[12] = L12_1
+L0_1[13] = L13_1
+L0_1[14] = L14_1
+L0_1[15] = L15_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 160301
+L3_1.alias = "Npc160301"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q10200BruceSpawn"
+L3_1.scene_id = 1009
+L3_1.room_id = 1
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 141401
+L4_1.alias = "Npc141401"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q10200JackSpawn"
+L4_1.scene_id = 1009
+L4_1.room_id = 1
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 152301
+L5_1.alias = "Npc152301"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q10200JoseSpawn"
+L5_1.scene_id = 1009
+L5_1.room_id = 1
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["1020003"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 160301
+L3_1.alias = "Npc160301"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q10200BruceSpawn"
+L3_1.scene_id = 1009
+L3_1.room_id = 1
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 141401
+L4_1.alias = "Npc141401"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q10200JackSpawn"
+L4_1.scene_id = 1009
+L4_1.room_id = 1
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 152301
+L5_1.alias = "Npc152301"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q10200JoseSpawn"
+L5_1.scene_id = 1009
+L5_1.room_id = 1
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["1020016"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1006
+L3_1.alias = "Qin"
+L3_1.script = "Actor/Quest/Q411/Qin"
+L3_1.pos = "Q10200Qin"
+L3_1.scene_id = 1004
+L3_1.room_id = 100402
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1020007"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1006
+L3_1.alias = "Qin"
+L3_1.script = "Actor/Quest/Q411/Qin"
+L3_1.pos = "Q10200Qin"
+L3_1.scene_id = 1004
+L3_1.room_id = 100402
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L2_1.scene_id = 1004
+L2_1.room_id = 100402
+L2_1.pos = "Q10200AvatarBorn"
+L1_1.avatar = L2_1
+L0_1["1020008"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10090
+L3_1.alias = "Npc10090"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q10200KleeSpawn"
+L3_1.scene_id = 1004
+L3_1.room_id = 1
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1020010"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 160301
+L3_1.alias = "Npc160301"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q10200BruceSpawn"
+L3_1.scene_id = 1009
+L3_1.room_id = 1
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 141401
+L4_1.alias = "Npc141401"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q10200JackSpawn"
+L4_1.scene_id = 1009
+L4_1.room_id = 1
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 152301
+L5_1.alias = "Npc152301"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q10200JoseSpawn"
+L5_1.scene_id = 1009
+L5_1.room_id = 1
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1006
+L6_1.alias = "Qin"
+L6_1.script = "Actor/Quest/Q411/Qin"
+L6_1.pos = "Q10200Qin"
+L6_1.scene_id = 1004
+L6_1.room_id = 100402
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 10090
+L7_1.alias = "Npc10090"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q10200KleeSpawn"
+L7_1.scene_id = 1004
+L7_1.room_id = 1
+L7_1.data_index = 5
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L1_1.npcs = L2_1
+L0_1["1020015"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 160301
+L3_1.alias = "Npc160301"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q10200BruceSpawn"
+L3_1.scene_id = 1009
+L3_1.room_id = 1
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 141401
+L4_1.alias = "Npc141401"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q10200JackSpawn"
+L4_1.scene_id = 1009
+L4_1.room_id = 1
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 152301
+L5_1.alias = "Npc152301"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q10200JoseSpawn"
+L5_1.scene_id = 1009
+L5_1.room_id = 1
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1006
+L6_1.alias = "Qin"
+L6_1.script = "Actor/Quest/Q411/Qin"
+L6_1.pos = "Q10200Qin"
+L6_1.scene_id = 1004
+L6_1.room_id = 100402
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 10090
+L7_1.alias = "Npc10090"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q10200KleeSpawn"
+L7_1.scene_id = 1004
+L7_1.room_id = 1
+L7_1.data_index = 5
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L1_1.npcs = L2_1
+L0_1["1020003"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 160301
+L3_1.alias = "Npc160301"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q10200BruceSpawn"
+L3_1.scene_id = 1009
+L3_1.room_id = 1
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 141401
+L4_1.alias = "Npc141401"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q10200JackSpawn"
+L4_1.scene_id = 1009
+L4_1.room_id = 1
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 152301
+L5_1.alias = "Npc152301"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q10200JoseSpawn"
+L5_1.scene_id = 1009
+L5_1.room_id = 1
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1006
+L6_1.alias = "Qin"
+L6_1.script = "Actor/Quest/Q411/Qin"
+L6_1.pos = "Q10200Qin"
+L6_1.scene_id = 1004
+L6_1.room_id = 100402
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 10090
+L7_1.alias = "Npc10090"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q10200KleeSpawn"
+L7_1.scene_id = 1004
+L7_1.room_id = 1
+L7_1.data_index = 5
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L1_1.npcs = L2_1
+L0_1["1020004"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 160301
+L3_1.alias = "Npc160301"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q10200BruceSpawn"
+L3_1.scene_id = 1009
+L3_1.room_id = 1
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 141401
+L4_1.alias = "Npc141401"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q10200JackSpawn"
+L4_1.scene_id = 1009
+L4_1.room_id = 1
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 152301
+L5_1.alias = "Npc152301"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q10200JoseSpawn"
+L5_1.scene_id = 1009
+L5_1.room_id = 1
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1006
+L6_1.alias = "Qin"
+L6_1.script = "Actor/Quest/Q411/Qin"
+L6_1.pos = "Q10200Qin"
+L6_1.scene_id = 1004
+L6_1.room_id = 100402
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 10090
+L7_1.alias = "Npc10090"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q10200KleeSpawn"
+L7_1.scene_id = 1004
+L7_1.room_id = 1
+L7_1.data_index = 5
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L1_1.npcs = L2_1
+L0_1["1020011"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 160301
+L3_1.alias = "Npc160301"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q10200BruceSpawn"
+L3_1.scene_id = 1009
+L3_1.room_id = 1
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 141401
+L4_1.alias = "Npc141401"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q10200JackSpawn"
+L4_1.scene_id = 1009
+L4_1.room_id = 1
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 152301
+L5_1.alias = "Npc152301"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q10200JoseSpawn"
+L5_1.scene_id = 1009
+L5_1.room_id = 1
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1006
+L6_1.alias = "Qin"
+L6_1.script = "Actor/Quest/Q411/Qin"
+L6_1.pos = "Q10200Qin"
+L6_1.scene_id = 1004
+L6_1.room_id = 100402
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 10090
+L7_1.alias = "Npc10090"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q10200KleeSpawn"
+L7_1.scene_id = 1004
+L7_1.room_id = 1
+L7_1.data_index = 5
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L1_1.npcs = L2_1
+L0_1["1020012"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 160301
+L3_1.alias = "Npc160301"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q10200BruceSpawn"
+L3_1.scene_id = 1009
+L3_1.room_id = 1
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 141401
+L4_1.alias = "Npc141401"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q10200JackSpawn"
+L4_1.scene_id = 1009
+L4_1.room_id = 1
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 152301
+L5_1.alias = "Npc152301"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q10200JoseSpawn"
+L5_1.scene_id = 1009
+L5_1.room_id = 1
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1006
+L6_1.alias = "Qin"
+L6_1.script = "Actor/Quest/Q411/Qin"
+L6_1.pos = "Q10200Qin"
+L6_1.scene_id = 1004
+L6_1.room_id = 100402
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 10090
+L7_1.alias = "Npc10090"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q10200KleeSpawn"
+L7_1.scene_id = 1004
+L7_1.room_id = 1
+L7_1.data_index = 5
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L1_1.npcs = L2_1
+L0_1["1020013"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 160301
+L3_1.alias = "Npc160301"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q10200BruceSpawn"
+L3_1.scene_id = 1009
+L3_1.room_id = 1
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 141401
+L4_1.alias = "Npc141401"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q10200JackSpawn"
+L4_1.scene_id = 1009
+L4_1.room_id = 1
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 152301
+L5_1.alias = "Npc152301"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q10200JoseSpawn"
+L5_1.scene_id = 1009
+L5_1.room_id = 1
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1006
+L6_1.alias = "Qin"
+L6_1.script = "Actor/Quest/Q411/Qin"
+L6_1.pos = "Q10200Qin"
+L6_1.scene_id = 1004
+L6_1.room_id = 100402
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 10090
+L7_1.alias = "Npc10090"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q10200KleeSpawn"
+L7_1.scene_id = 1004
+L7_1.room_id = 1
+L7_1.data_index = 5
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L1_1.npcs = L2_1
+L0_1["1020014"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 160301
+L3_1.alias = "Npc160301"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q10200BruceSpawn"
+L3_1.scene_id = 1009
+L3_1.room_id = 1
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 141401
+L4_1.alias = "Npc141401"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q10200JackSpawn"
+L4_1.scene_id = 1009
+L4_1.room_id = 1
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 152301
+L5_1.alias = "Npc152301"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q10200JoseSpawn"
+L5_1.scene_id = 1009
+L5_1.room_id = 1
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1006
+L6_1.alias = "Qin"
+L6_1.script = "Actor/Quest/Q411/Qin"
+L6_1.pos = "Q10200Qin"
+L6_1.scene_id = 1004
+L6_1.room_id = 100402
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 10090
+L7_1.alias = "Npc10090"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q10200KleeSpawn"
+L7_1.scene_id = 1004
+L7_1.room_id = 1
+L7_1.data_index = 5
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L1_1.npcs = L2_1
+L0_1["1020016"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q10200PaimonSpawn"
+L3_1.scene_id = 1009
+L3_1.room_id = 1
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1006
+L4_1.alias = "Qin"
+L4_1.script = "Actor/Quest/Q411/Qin"
+L4_1.pos = "Q10200Qin"
+L4_1.scene_id = 1004
+L4_1.room_id = 100402
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 10090
+L5_1.alias = "Npc10090"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q10200KleeSpawn"
+L5_1.scene_id = 1004
+L5_1.room_id = 1
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 1009
+L3_1.pos = "Q10200AvatarSpawn"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["1020005"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1006
+L3_1.alias = "Qin"
+L3_1.script = "Actor/Quest/Q411/Qin"
+L3_1.pos = "Q10200Qin"
+L3_1.scene_id = 1004
+L3_1.room_id = 100402
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 10090
+L4_1.alias = "Npc10090"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q10200KleeSpawn"
+L4_1.scene_id = 1004
+L4_1.room_id = 1
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["1020006"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1006
+L3_1.alias = "Qin"
+L3_1.script = "Actor/Quest/Q411/Qin"
+L3_1.pos = "Q10200Qin"
+L3_1.scene_id = 1004
+L3_1.room_id = 100402
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 10090
+L4_1.alias = "Npc10090"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q10200KleeSpawn"
+L4_1.scene_id = 1004
+L4_1.room_id = 1
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["1020007"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1006
+L3_1.alias = "Qin"
+L3_1.script = "Actor/Quest/Q411/Qin"
+L3_1.pos = "Q10200Qin"
+L3_1.scene_id = 1004
+L3_1.room_id = 100402
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 10090
+L4_1.alias = "Npc10090"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q10200KleeSpawn"
+L4_1.scene_id = 1004
+L4_1.room_id = 1
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["1020008"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10090
+L3_1.alias = "Npc10090"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q10200KleeSpawn"
+L3_1.scene_id = 1004
+L3_1.room_id = 1
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1020009"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10090
+L3_1.alias = "Npc10090"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q10200KleeSpawn"
+L3_1.scene_id = 1004
+L3_1.room_id = 1
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1020010"] = L1_1

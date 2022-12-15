@@ -1,260 +1,240 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1, L11_1, L12_1, L13_1, L14_1, L15_1
 main_id = 371
-
-sub_ids =
-{
-    37101,
-    37102,
-    37103,
-    37104,
-    37105,
-    37106,
-    37107,
-    37108,
-    37109,
-    37110,
-    37111,
-    37112,
-    37113,
-    37114,
-    37115,
-}
-
-rewind_data = {}
-
-rewind_data["37101"] = {}
-
-rewind_data["37102"] = {}
-
-
-
-quest_data = {}
-
-quest_data["37102"] = 
-{
-    npcs = {
-        {
-            id = 1243,
-            alias = "PaimonNew",
-            script = "Actor/Quest/Q352/Paimon",
-            pos = "Q371PaimonTemp",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-    }
-}
-
-quest_data["37104"] = 
-{
-    npcs = {
-        {
-            id = 1243,
-            alias = "PaimonNew",
-            script = "Actor/Quest/Q352/Paimon",
-            pos = "Q371WendyFootPrint1",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-    }
-}
-
-quest_data["37105"] = 
-{
-    gadgets = {
-        {
-            id = 70300037,
-            pos = "Q371WendyFootPrint1",
-            alias = "FootPrint", 
-            scene_id = 3, 
-            room_id = 0,  
-
-        },
-        {
-            id = 70300037,
-            pos = "Q371WendyTrigger1",
-            alias = "FootPrint2", 
-            scene_id = 3, 
-            room_id = 0,  
-
-		},
-
-    },
-
-}
-
-quest_data["37106"] = 
-{
-    gadgets = {
-        {
-            id = 70300037,
-            pos = "Q371WendyFootPrint2",
-            alias = "FootPrint", 
-            scene_id = 3, 
-            room_id = 0,  
-
-        },
-        {
-            id = 70300037,
-            pos = "Q371WendyFootPrint3x1",
-            alias = "FootPrint3", 
-            scene_id = 3, 
-            room_id = 0,  
-
-		},
-
-    },
-
-}
-
-quest_data["37107"] = 
-{
-    gadgets = {
-        {
-            id = 70300037,
-            pos = "Q371WendyFootPrint3",
-            alias = "FootPrint071", 
-            scene_id = 3, 
-            room_id = 0,  
-
-        },
-    },
-}
-
-quest_data["37108"] = 
-{
-    gadgets = {
-        {
-            id = 70300037,
-            pos = "Q371WendyFootPrint4",
-            alias = "FootPrint", 
-            scene_id = 3, 
-            room_id = 0,  
-
-        },
-        {
-            id = 70300037,
-            pos = "Q371WendyFootPrint4x1",
-            alias = "FootPrint2", 
-            scene_id = 3, 
-            room_id = 0,  
-
-        },
-        {
-            id = 70300037,
-            pos = "Q371WendyTrigger4",
-            alias = "FootPrint3", 
-            scene_id = 3, 
-            room_id = 0,  
-
-        },
-    },
-}
-
-quest_data["37109"] = 
-{
-    gadgets = {
-        {
-            id = 70300037,
-            pos = "Q371WendyFootPrint5",
-            alias = "FootPrint", 
-            scene_id = 3, 
-            room_id = 0,  
-
-        },
-        {
-            id = 70300037,
-            pos = "Q371WendyFootPrint5x1",
-            alias = "FootPrint2", 
-            scene_id = 3, 
-            room_id = 0,  
-
-        },
-    },
-}
-
-quest_data["37110"] = 
-{
-    gadgets = {
-        {
-            id = 70300037,
-            pos = "Q371WendyFootPrint6",
-            alias = "FootPrint", 
-            scene_id = 3, 
-            room_id = 0,  
-
-        },
-    },
-}
-
-quest_data["37111"] = 
-{
-    gadgets = {
-        {
-            id = 70300037,
-            pos = "Q371WendyFootPrint7",
-            alias = "FootPrint", 
-            scene_id = 3, 
-            room_id = 0,  
-        },
-        {
-            id = 70300037,
-            pos = "Q371WendyFootPrint7x1",
-            alias = "FootPrint4", 
-            scene_id = 3, 
-            room_id = 0,  
-        },
-    },
-}
-
-quest_data["37112"] = 
-{
-    gadgets = {
-        {
-            id = 70300037,
-            pos = "Q371WendyFootPrint8",
-            alias = "FootPrint", 
-            scene_id = 3, 
-            room_id = 0,  
-        },
-        {
-            id = 70300037,
-            pos = "Q371WendyFootPrint8x1",
-            alias = "FootPrint2", 
-            scene_id = 3, 
-            room_id = 0,  
-        },
-    },
-}
-
-quest_data["37113"] = 
-{
-    gadgets = {
-        {
-            id = 70300037,
-            pos = "Q371WendyFootPrint9",
-            alias = "FootPrint", 
-            scene_id = 3, 
-            room_id = 0,  
-        },
-    },
-}
-
-quest_data["37115"] = 
-{
-    npcs = {
-        {
-            id = 1243,
-            alias = "PaimonNew",
-            script = "Actor/Quest/Q352/Paimon",
-            pos = "Q371WendyFootPrint5",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-    }
-}
+L0_1 = {}
+L1_1 = 37101
+L2_1 = 37102
+L3_1 = 37103
+L4_1 = 37104
+L5_1 = 37105
+L6_1 = 37106
+L7_1 = 37107
+L8_1 = 37108
+L9_1 = 37109
+L10_1 = 37110
+L11_1 = 37111
+L12_1 = 37112
+L13_1 = 37113
+L14_1 = 37114
+L15_1 = 37115
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+L0_1[11] = L11_1
+L0_1[12] = L12_1
+L0_1[13] = L13_1
+L0_1[14] = L14_1
+L0_1[15] = L15_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["37101"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["37102"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1243
+L3_1.alias = "PaimonNew"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q371PaimonTemp"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["37102"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1243
+L3_1.alias = "PaimonNew"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q371WendyFootPrint1"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["37104"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70300037
+L3_1.pos = "Q371WendyFootPrint1"
+L3_1.alias = "FootPrint"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L4_1 = {}
+L4_1.id = 70300037
+L4_1.pos = "Q371WendyTrigger1"
+L4_1.alias = "FootPrint2"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.gadgets = L2_1
+L0_1["37105"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70300037
+L3_1.pos = "Q371WendyFootPrint2"
+L3_1.alias = "FootPrint"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L4_1 = {}
+L4_1.id = 70300037
+L4_1.pos = "Q371WendyFootPrint3x1"
+L4_1.alias = "FootPrint3"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.gadgets = L2_1
+L0_1["37106"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70300037
+L3_1.pos = "Q371WendyFootPrint3"
+L3_1.alias = "FootPrint071"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["37107"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70300037
+L3_1.pos = "Q371WendyFootPrint4"
+L3_1.alias = "FootPrint"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L4_1 = {}
+L4_1.id = 70300037
+L4_1.pos = "Q371WendyFootPrint4x1"
+L4_1.alias = "FootPrint2"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L5_1 = {}
+L5_1.id = 70300037
+L5_1.pos = "Q371WendyTrigger4"
+L5_1.alias = "FootPrint3"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.gadgets = L2_1
+L0_1["37108"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70300037
+L3_1.pos = "Q371WendyFootPrint5"
+L3_1.alias = "FootPrint"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L4_1 = {}
+L4_1.id = 70300037
+L4_1.pos = "Q371WendyFootPrint5x1"
+L4_1.alias = "FootPrint2"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.gadgets = L2_1
+L0_1["37109"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70300037
+L3_1.pos = "Q371WendyFootPrint6"
+L3_1.alias = "FootPrint"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["37110"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70300037
+L3_1.pos = "Q371WendyFootPrint7"
+L3_1.alias = "FootPrint"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L4_1 = {}
+L4_1.id = 70300037
+L4_1.pos = "Q371WendyFootPrint7x1"
+L4_1.alias = "FootPrint4"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.gadgets = L2_1
+L0_1["37111"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70300037
+L3_1.pos = "Q371WendyFootPrint8"
+L3_1.alias = "FootPrint"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L4_1 = {}
+L4_1.id = 70300037
+L4_1.pos = "Q371WendyFootPrint8x1"
+L4_1.alias = "FootPrint2"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.gadgets = L2_1
+L0_1["37112"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70300037
+L3_1.pos = "Q371WendyFootPrint9"
+L3_1.alias = "FootPrint"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["37113"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1243
+L3_1.alias = "PaimonNew"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q371WendyFootPrint5"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["37115"] = L1_1

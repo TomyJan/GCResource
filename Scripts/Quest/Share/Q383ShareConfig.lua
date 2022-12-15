@@ -1,186 +1,178 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1
 main_id = 383
-
-sub_ids =
-{
-    38301,
-    38302,
-    38303,
-    38304,
-}
-
-rewind_data = {}
-
-rewind_data["38302"] = 
-{
-    npcs = {
-        {
-            id = 1009,
-            alias = "Diluc",
-            script = "Actor/Quest/Q376/Diluc",
-            pos = "Q383DilucTemp",
-            data_index = 0,
-        },
-        {
-            id = 1001,
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            pos = "Q383WendyTemp",
-            data_index = 0,
-        },
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q383QinTemp",
-            data_index = 0,
-        },
-
-    }
-}
-
-rewind_data["38303"] = 
-{
-    npcs = {
-        {
-            id = 1009,
-            alias = "Diluc",
-            script = "Actor/Quest/Q376/Diluc",
-            pos = "Q383DilucTemp",
-            data_index = 0,
-        },
-        {
-            id = 1001,
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            pos = "Q383WendyTemp",
-            data_index = 0,
-        },
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q383QinTemp",
-            data_index = 0,
-        },
-
-    }
-}
-
-rewind_data["38304"] = 
-{
-    avatar = {
-        scene_id = 3,
-        pos = "Q38302Player"
-    },
-    npcs = {
-        {
-            id = 1009,
-            alias = "Diluc",
-            script = "Actor/Quest/Q376/Diluc",
-            pos = "Q383DilucTemp",
-            data_index = 0,
-        },
-        {
-            id = 1001,
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            pos = "Q383WendyTemp",
-            data_index = 0,
-        },
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q383QinTemp",
-            data_index = 0,
-        },
-
-    }
-}
-quest_data = {}
-
-quest_data["38302"] = 
-{
-    gadgets = {
-        {
-            id = 70300202,
-            pos = "Q383Tear102",
-            alias = "Tears1", 
-            scene_id = 3, 
-            room_id = 0 ,  
-        },
-        {
-            id = 70300202,
-            pos = "Q383Tear101",
-            alias = "Tears2", 
-            scene_id = 3, 
-            room_id = 0 ,  
-        },
-        {
-            id = 70300202,
-            pos = "Q383Tear103",
-            alias = "Tears3", 
-            scene_id = 3, 
-            room_id = 0 ,  
-        },
-        {
-            id = 70300042,
-            pos = "Q383Tear202",
-            alias = "Tears4", 
-            scene_id = 3, 
-            room_id = 0 ,  
-        },
-        {
-            id = 70300042,
-            pos = "Q383Tear201",
-            alias = "Tears5", 
-            scene_id = 3, 
-            room_id = 0 ,  
-        },
-        {
-            id = 70300042,
-            pos = "Q383Tear203",
-            alias = "Tears6", 
-            scene_id = 3, 
-            room_id = 0 ,  
-        },
-        {
-            id = 70300201,
-            pos = "Q383Harp",
-            alias = "Harp01", 
-            scene_id = 3, 
-            room_id = 0 ,  
-        },
-    },
-    npcs = {
-        {
-            id = 1009,
-            alias = "Diluc",
-            script = "Actor/Quest/Q376/Diluc",
-            pos = "Q383DilucTemp",
-            data_index = 0,
-            scene_id  = 3,
-        },
-        {
-            id = 1001,
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            pos = "Q383WendyTemp",
-            data_index = 0,
-            scene_id  = 3,
-        },
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q383QinTemp",
-            data_index = 0,
-            scene_id  = 3,
-        },
-
-    }
-}
+L0_1 = {}
+L1_1 = 38301
+L2_1 = 38302
+L3_1 = 38303
+L4_1 = 38304
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1009
+L3_1.alias = "Diluc"
+L3_1.script = "Actor/Quest/Q376/Diluc"
+L3_1.pos = "Q383DilucTemp"
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.id = 1001
+L4_1.alias = "Wendy"
+L4_1.script = "Actor/Quest/Q301/Wendy301"
+L4_1.pos = "Q383WendyTemp"
+L4_1.data_index = 0
+L5_1 = {}
+L5_1.id = 1006
+L5_1.alias = "Qin"
+L5_1.script = "Actor/Quest/Q411/Qin"
+L5_1.pos = "Q383QinTemp"
+L5_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["38302"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1009
+L3_1.alias = "Diluc"
+L3_1.script = "Actor/Quest/Q376/Diluc"
+L3_1.pos = "Q383DilucTemp"
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.id = 1001
+L4_1.alias = "Wendy"
+L4_1.script = "Actor/Quest/Q301/Wendy301"
+L4_1.pos = "Q383WendyTemp"
+L4_1.data_index = 0
+L5_1 = {}
+L5_1.id = 1006
+L5_1.alias = "Qin"
+L5_1.script = "Actor/Quest/Q411/Qin"
+L5_1.pos = "Q383QinTemp"
+L5_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["38303"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L2_1.scene_id = 3
+L2_1.pos = "Q38302Player"
+L1_1.avatar = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1009
+L3_1.alias = "Diluc"
+L3_1.script = "Actor/Quest/Q376/Diluc"
+L3_1.pos = "Q383DilucTemp"
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.id = 1001
+L4_1.alias = "Wendy"
+L4_1.script = "Actor/Quest/Q301/Wendy301"
+L4_1.pos = "Q383WendyTemp"
+L4_1.data_index = 0
+L5_1 = {}
+L5_1.id = 1006
+L5_1.alias = "Qin"
+L5_1.script = "Actor/Quest/Q411/Qin"
+L5_1.pos = "Q383QinTemp"
+L5_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["38304"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70300202
+L3_1.pos = "Q383Tear102"
+L3_1.alias = "Tears1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L4_1 = {}
+L4_1.id = 70300202
+L4_1.pos = "Q383Tear101"
+L4_1.alias = "Tears2"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L5_1 = {}
+L5_1.id = 70300202
+L5_1.pos = "Q383Tear103"
+L5_1.alias = "Tears3"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L6_1 = {}
+L6_1.id = 70300042
+L6_1.pos = "Q383Tear202"
+L6_1.alias = "Tears4"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L7_1 = {}
+L7_1.id = 70300042
+L7_1.pos = "Q383Tear201"
+L7_1.alias = "Tears5"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L8_1 = {}
+L8_1.id = 70300042
+L8_1.pos = "Q383Tear203"
+L8_1.alias = "Tears6"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L9_1 = {}
+L9_1.id = 70300201
+L9_1.pos = "Q383Harp"
+L9_1.alias = "Harp01"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L1_1.gadgets = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1009
+L3_1.alias = "Diluc"
+L3_1.script = "Actor/Quest/Q376/Diluc"
+L3_1.pos = "Q383DilucTemp"
+L3_1.data_index = 0
+L3_1.scene_id = 3
+L4_1 = {}
+L4_1.id = 1001
+L4_1.alias = "Wendy"
+L4_1.script = "Actor/Quest/Q301/Wendy301"
+L4_1.pos = "Q383WendyTemp"
+L4_1.data_index = 0
+L4_1.scene_id = 3
+L5_1 = {}
+L5_1.id = 1006
+L5_1.alias = "Qin"
+L5_1.script = "Actor/Quest/Q411/Qin"
+L5_1.pos = "Q383QinTemp"
+L5_1.data_index = 0
+L5_1.scene_id = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["38302"] = L1_1

@@ -1,394 +1,360 @@
--- 任务配置数据开始-----------------------------
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1
 main_id = 22021
-
-sub_ids = 
-{
-	2202101,
-	2202102,
-	2202103,
-	2202104,
-	2202105,
-	2202106,
-	2202107,
-	2202108,
-	2202109,
-	2202110,
-}
--- 任务配置数据结束---------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
--- 父任务执行项数据开始-----------------------------
-finish_action = 
-{
-	CLIENT = { },
-	SERVER = {
-		QUEST_EXEC_DEL_ALL_SPECIFIC_PACK_ITEM = 
-		{
-			{ "101521,101522", },
-		},
-	 },
-}
-
-fail_action = 
-{
-	CLIENT = { },
-	SERVER = { },
-}
-
-cancel_action = 
-{
-	CLIENT = { },
-	SERVER = {
-    QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP = 
-		{
-			{ "133220283", "", },
-			{ "133220284", "", },
-			{ "133220044", "", },
-		},
-		QUEST_EXEC_DEL_ALL_SPECIFIC_PACK_ITEM = 
-		{
-			{ "101521,101522", },
-		},
-
-	 },
-}
--- 父任务执行项数据结束-----------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
--- Actor模块数据开始--------------------------------
--- 空
--- Actor模块数据结束--------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
--- 文本模块数据开始---------------------------------
--- 空
--- 文本模块数据结束---------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
--- 路点模块数据开始---------------------------------
--- 空
--- 路点模块数据结束---------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-
--- 断线重连生成内容 开始----------------------------
--- 和questdata配的存档点对应
-rewind_data = 
-{
-	["2202101"] = { },
-	["2202102"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 20268,
-				alias = "Npc20268",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22021_Xudong_01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 20271,
-				alias = "Npc20271",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22021_Wushidashu_01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-		},
-	},
-	["2202103"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 20268,
-				alias = "Npc20268",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22021_Xudong_01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 20271,
-				alias = "Npc20271",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22021_Wushidashu_01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-		},
-	},
-	["2202104"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 20268,
-				alias = "Npc20268",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22021_Xudong_01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 20271,
-				alias = "Npc20271",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22021_Wushidashu_01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-		},
-	},
-	["2202105"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 20268,
-				alias = "Npc20268",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22021_Xudong_01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 20271,
-				alias = "Npc20271",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22021_Wushidashu_01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-		},
-	},
-	["2202106"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 20268,
-				alias = "Npc20268",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22021_Xudong_01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 20271,
-				alias = "Npc20271",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22021_Wushidashu_01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-		},
-	},
-	["2202107"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 20268,
-				alias = "Npc20268",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22021_Xudong_01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 20271,
-				alias = "Npc20271",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22021_Wushidashu_01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-		},
-	},
-	["2202109"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 20268,
-				alias = "Npc20268",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22021_Xudong_02",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-
-			{
-				id = 20271,
-				alias = "Npc20271",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22021_Wushidashu_02",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-
-		},
-	},
-	["2202110"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 20271,
-				alias = "Npc20271",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22021_Wushidashu_02",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-
-			{
-				id = 20268,
-				alias = "Npc20268",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22021_Xudong_02",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-
-		},
-	},
-	["2202108"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 20268,
-				alias = "Npc20268",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22021_Xudong_01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 20271,
-				alias = "Npc20271",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22021_Wushidashu_01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-		},
-	},
-}
--- 断线重连生成内容 结束----------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
--- 校验数据 开始----------------------------------
--- 和任务lua中生成NPC/Monster/Gadget/Item等对应
-quest_data = 
-{
-	["2202101"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 20268,
-				alias = "Npc20268",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22021_Xudong_01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 20271,
-				alias = "Npc20271",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22021_Wushidashu_01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-		},
-	},
-	["2202102"] = { },
-	["2202103"] = { },
-	["2202104"] = 
-	{
-		gadgets = 
-		{
-			{
-				id = 70710447,
-				alias = "Gadget70710447",
-				pos = "Q22021_Xudong_Fire01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-	},
-	["2202105"] = 
-	{
-		gadgets = 
-		{
-			{
-				id = 70710448,
-				alias = "Gadget70710448",
-				pos = "Q22021_Wushidashu_Fire01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-	},
-	["2202106"] = { },
-	["2202107"] = { },
-	["2202108"] = { },
-	["2202109"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 20268,
-				alias = "Npc20268",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22021_Xudong_01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-	},
-	["2202110"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 20271,
-				alias = "Npc20271",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q22021_Wushidashu_01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-	},
-}
--- 校验数据 结束----------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+L0_1 = {}
+L1_1 = 2202101
+L2_1 = 2202102
+L3_1 = 2202103
+L4_1 = 2202104
+L5_1 = 2202105
+L6_1 = 2202106
+L7_1 = 2202107
+L8_1 = 2202108
+L9_1 = 2202109
+L10_1 = 2202110
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L4_1 = "101521,101522"
+L3_1[1] = L4_1
+L2_1[1] = L3_1
+L1_1.QUEST_EXEC_DEL_ALL_SPECIFIC_PACK_ITEM = L2_1
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L4_1 = "133220283"
+L5_1 = ""
+L3_1[1] = L4_1
+L3_1[2] = L5_1
+L4_1 = {}
+L5_1 = "133220284"
+L6_1 = ""
+L4_1[1] = L5_1
+L4_1[2] = L6_1
+L5_1 = {}
+L6_1 = "133220044"
+L7_1 = ""
+L5_1[1] = L6_1
+L5_1[2] = L7_1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP = L2_1
+L2_1 = {}
+L3_1 = {}
+L4_1 = "101521,101522"
+L3_1[1] = L4_1
+L2_1[1] = L3_1
+L1_1.QUEST_EXEC_DEL_ALL_SPECIFIC_PACK_ITEM = L2_1
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["2202101"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20268
+L3_1.alias = "Npc20268"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q22021_Xudong_01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20271
+L4_1.alias = "Npc20271"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q22021_Wushidashu_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["2202102"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20268
+L3_1.alias = "Npc20268"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q22021_Xudong_01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20271
+L4_1.alias = "Npc20271"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q22021_Wushidashu_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["2202103"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20268
+L3_1.alias = "Npc20268"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q22021_Xudong_01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20271
+L4_1.alias = "Npc20271"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q22021_Wushidashu_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["2202104"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20268
+L3_1.alias = "Npc20268"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q22021_Xudong_01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20271
+L4_1.alias = "Npc20271"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q22021_Wushidashu_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["2202105"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20268
+L3_1.alias = "Npc20268"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q22021_Xudong_01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20271
+L4_1.alias = "Npc20271"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q22021_Wushidashu_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["2202106"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20268
+L3_1.alias = "Npc20268"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q22021_Xudong_01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20271
+L4_1.alias = "Npc20271"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q22021_Wushidashu_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["2202107"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20268
+L3_1.alias = "Npc20268"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q22021_Xudong_02"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20271
+L4_1.alias = "Npc20271"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q22021_Wushidashu_02"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["2202109"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20271
+L3_1.alias = "Npc20271"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q22021_Wushidashu_02"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20268
+L4_1.alias = "Npc20268"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q22021_Xudong_02"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["2202110"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20268
+L3_1.alias = "Npc20268"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q22021_Xudong_01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20271
+L4_1.alias = "Npc20271"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q22021_Wushidashu_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["2202108"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20268
+L3_1.alias = "Npc20268"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q22021_Xudong_01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20271
+L4_1.alias = "Npc20271"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q22021_Wushidashu_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["2202101"] = L1_1
+L1_1 = {}
+L0_1["2202102"] = L1_1
+L1_1 = {}
+L0_1["2202103"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710447
+L3_1.alias = "Gadget70710447"
+L3_1.pos = "Q22021_Xudong_Fire01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["2202104"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710448
+L3_1.alias = "Gadget70710448"
+L3_1.pos = "Q22021_Wushidashu_Fire01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["2202105"] = L1_1
+L1_1 = {}
+L0_1["2202106"] = L1_1
+L1_1 = {}
+L0_1["2202107"] = L1_1
+L1_1 = {}
+L0_1["2202108"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20268
+L3_1.alias = "Npc20268"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q22021_Xudong_01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2202109"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20271
+L3_1.alias = "Npc20271"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q22021_Wushidashu_01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2202110"] = L1_1
+quest_data = L0_1

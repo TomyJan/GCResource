@@ -107,11 +107,11 @@ suites = {
 function action_EVENT_GADGET_STATE_CHANGE_109005(context, evt)
 		
 		if evt.param1 ~= 101 and evt.param1 ~= 102 and evt.param1 ~= 103 and evt.param1 ~= 104 then
-			ScriptLib.PrintLog(context, "Block Event ".." : Gadget state = ".. evt.param1)
+			ScriptLib.PrintLog("Block Event ".." : Gadget state = ".. evt.param1)
 			return 0
 		end
 	
-		ScriptLib.PrintLog(context, "Beging Execute ".." : Gadget state = ".. evt.param1)
+		ScriptLib.PrintLog("Beging Execute ".." : Gadget state = ".. evt.param1)
 		
 		local state = {0, 0, 0}
 		local allEquale = 1
@@ -120,7 +120,7 @@ function action_EVENT_GADGET_STATE_CHANGE_109005(context, evt)
 	
 			state[v.index] = ScriptLib.GetGadgetStateByConfigId(context, defs.groupID, defs[v.name])
 		end
-		ScriptLib.PrintLog(context, "Gadget State = "..state[1].."_"..state[2].."_"..state[3])
+		ScriptLib.PrintLog("Gadget State = "..state[1].."_"..state[2].."_"..state[3])
 	
 		local haschange = {0,0,0}
 	
@@ -137,7 +137,7 @@ function action_EVENT_GADGET_STATE_CHANGE_109005(context, evt)
 				end
 			end
 		end
-		ScriptLib.PrintLog(context, "has change = "..haschange[1].."_"..haschange[2].."_"..haschange[3])
+		ScriptLib.PrintLog("has change = "..haschange[1].."_"..haschange[2].."_"..haschange[3])
 		for i = 1, #haschange, 1 do 
 			local n = state[i]
 			if haschange[i] == 1 then
@@ -154,7 +154,7 @@ function action_EVENT_GADGET_STATE_CHANGE_109005(context, evt)
 			ScriptLib.SetGadgetStateByConfigId(context, defs[gadgetInfo[i].name], n)
 		end
 	
-		ScriptLib.PrintLog(context, "Check Linked cube and change state ")
+		ScriptLib.PrintLog("Check Linked cube and change state ")
 		
 		if allEquale == 1 then
 			ScriptLib.SetGroupVariableValue(context, "isFinished", 1)
@@ -163,5 +163,5 @@ function action_EVENT_GADGET_STATE_CHANGE_109005(context, evt)
 			end
 			ScriptLib.GoToGroupSuite(context, defs.groupID, 2)
 		end
-		ScriptLib.PrintLog(context, "All equale = "..allEquale)
+		ScriptLib.PrintLog("All equale = "..allEquale)
 end

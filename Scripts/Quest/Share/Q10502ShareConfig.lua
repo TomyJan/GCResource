@@ -1,3 +1,603 @@
--- 任务配置数据开始-----------------------------
-
-main_id = 10502sub_ids = {	1050201,	1050202,	1050203,	1050204,	1050205,	1050206,	1050207,	1050212,	1050213,	1050208,	1050209,	1050210,	1050211,}-- 任务配置数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 父任务执行项数据开始-----------------------------finish_action = {	CLIENT = { },	SERVER = { },}fail_action = {	CLIENT = { },	SERVER = { },}cancel_action = {	CLIENT = { },	SERVER = { },}-- 父任务执行项数据结束------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- Actor模块数据开始---------------------------------- 空-- Actor模块数据结束---------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 文本模块数据开始----------------------------------- 空-- 文本模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 路点模块数据开始----------------------------------- 空-- 路点模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 断线重连生成内容 开始------------------------------ 和questdata配的存档点对应rewind_data = {	["1050201"] = { },	["1050202"] = { },	["1050203"] = 	{		npcs = 		{			{				id = 10095,				alias = "Npc10095",				script = "Actor/Npc/TempNPC",				pos = "Q10502MonaSpawn",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 10111,				alias = "Npc10111",				script = "Actor/Npc/TempNPC",				pos = "Q10500SlimeSpawn",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},		gadgets = 		{			{				id = 70710136,				alias = "Q10502GeneralBook",				pos = "Q10502GeneralBook",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 70710139,				alias = "Q10502Ruler",				pos = "Q10502Ruler",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 70710138,				alias = "Q10502InkBottle",				pos = "Q10502InkBottle",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 70710140,				alias = "Q10502RolledMap",				pos = "Q10502RolledMap",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 70710115,				alias = "Q10502OpenBook",				pos = "Q10502OpenBook",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 70710137,				alias = "Q10502Magnifier",				pos = "Q10502Magnifier",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["1050204"] = 	{		npcs = 		{			{				id = 10090,				alias = "Npc10090",				script = "Actor/Npc/TempNPC",				pos = "Q10502KleeSpawn",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 10111,				alias = "Npc10111",				script = "Actor/Npc/TempNPC",				pos = "Q10502Fengqidi",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["1050205"] = 	{		npcs = 		{			{				id = 10095,				alias = "Npc10095",				script = "Actor/Npc/TempNPC",				pos = "Q10502MonaSpawn2",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},		gadgets = 		{			{				id = 70710165,				alias = "Q10502Diary",				pos = "Q10502Diary",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 70710136,				alias = "Q10502GeneralBook2",				pos = "Q10502GeneralBook2",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 70710136,				alias = "Q10502GeneralBook3",				pos = "Q10502GeneralBook3",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 70710139,				alias = "Q10502Ruler2",				pos = "Q10502Ruler2",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 70710138,				alias = "Q10502InkBottle2",				pos = "Q10502InkBottle2",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 70710140,				alias = "Q10502RolledMap2",				pos = "Q10502RolledMap2",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 70710137,				alias = "Q10502Magnifier2",				pos = "Q10502Magnifier2",				scene_id = 3,				room_id = 0,				data_index = 7,			},		},	},	["1050206"] = 	{		npcs = 		{			{				id = 10095,				alias = "Npc10095",				script = "Actor/Npc/TempNPC",				pos = "Q10502MonaSpawn2",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},		gadgets = 		{			{				id = 70710165,				alias = "Q10502Diary",				pos = "Q10502Diary",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 70710136,				alias = "Q10502GeneralBook2",				pos = "Q10502GeneralBook2",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 70710136,				alias = "Q10502GeneralBook3",				pos = "Q10502GeneralBook3",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 70710139,				alias = "Q10502Ruler2",				pos = "Q10502Ruler2",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 70710138,				alias = "Q10502InkBottle2",				pos = "Q10502InkBottle2",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 70710140,				alias = "Q10502RolledMap2",				pos = "Q10502RolledMap2",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 70710137,				alias = "Q10502Magnifier2",				pos = "Q10502Magnifier2",				scene_id = 3,				room_id = 0,				data_index = 7,			},		},	},	["1050207"] = 	{		npcs = 		{			{				id = 10095,				alias = "Npc10095",				script = "Actor/Npc/TempNPC",				pos = "Q10502MonaSpawn2",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},		gadgets = 		{			{				id = 70710165,				alias = "Q10502Diary",				pos = "Q10502Diary",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 70710136,				alias = "Q10502GeneralBook2",				pos = "Q10502GeneralBook2",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 70710136,				alias = "Q10502GeneralBook3",				pos = "Q10502GeneralBook3",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 70710139,				alias = "Q10502Ruler2",				pos = "Q10502Ruler2",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 70710138,				alias = "Q10502InkBottle2",				pos = "Q10502InkBottle2",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 70710140,				alias = "Q10502RolledMap2",				pos = "Q10502RolledMap2",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 70710137,				alias = "Q10502Magnifier2",				pos = "Q10502Magnifier2",				scene_id = 3,				room_id = 0,				data_index = 7,			},		},	},	["1050208"] = { },	["1050209"] = { },	["1050211"] = { },}-- 断线重连生成内容 结束------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 校验数据 开始------------------------------------ 和任务lua中生成NPC/Monster/Gadget/Item等对应quest_data = {	["1050201"] = { },	["1050202"] = 	{		npcs = 		{			{				id = 10095,				alias = "Npc10095",				script = "Actor/Npc/TempNPC",				pos = "Q10502MonaSpawn",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},		gadgets = 		{			{				id = 70710136,				alias = "Q10502GeneralBook",				pos = "Q10502GeneralBook",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 70710139,				alias = "Q10502Ruler",				pos = "Q10502Ruler",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 70710138,				alias = "Q10502InkBottle",				pos = "Q10502InkBottle",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 70710140,				alias = "Q10502RolledMap",				pos = "Q10502RolledMap",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 70710115,				alias = "Q10502OpenBook",				pos = "Q10502OpenBook",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 70710137,				alias = "Q10502Magnifier",				pos = "Q10502Magnifier",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["1050203"] = 	{		npcs = 		{			{				id = 10090,				alias = "Npc10090",				script = "Actor/Npc/TempNPC",				pos = "Q10502KleeSpawn",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 10111,				alias = "Npc10111",				script = "Actor/Npc/TempNPC",				pos = "Q10502Fengqidi",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["1050204"] = 	{		npcs = 		{			{				id = 10095,				alias = "Npc10095",				script = "Actor/Npc/TempNPC",				pos = "Q10502MonaSpawn2",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},		gadgets = 		{			{				id = 70710165,				alias = "Q10502Diary",				pos = "Q10502Diary",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 70710136,				alias = "Q10502GeneralBook2",				pos = "Q10502GeneralBook2",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 70710136,				alias = "Q10502GeneralBook3",				pos = "Q10502GeneralBook3",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 70710139,				alias = "Q10502Ruler2",				pos = "Q10502Ruler2",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 70710138,				alias = "Q10502InkBottle2",				pos = "Q10502InkBottle2",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 70710140,				alias = "Q10502RolledMap2",				pos = "Q10502RolledMap2",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 70710137,				alias = "Q10502Magnifier2",				pos = "Q10502Magnifier2",				scene_id = 3,				room_id = 0,				data_index = 7,			},		},	},	["1050205"] = { },	["1050206"] = 	{		npcs = 		{			{				id = 10090,				alias = "Npc10090",				script = "Actor/Npc/TempNPC",				pos = "Q10502KleeSpawn",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},		gadgets = 		{			{				id = 70710114,				alias = "Q1050203Box",				pos = "Q1050203Box",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},		transmit_points = 		{			{				point_id = 1,				scene_id = 3,				pos = "Q10502AvatarSpawn2",			},		},	},	["1050207"] = 	{		gadgets = 		{			{				id = 70710114,				alias = "Q10502Box",				pos = "Q10502Box",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["1050208"] = { },	["1050209"] = { },	["1050210"] = { },	["1050211"] = 	{		npcs = 		{			{				id = 10095,				alias = "Npc10095",				script = "Actor/Npc/TempNPC",				pos = "Q10502MonaSpawn3",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 1606,				alias = "Npc1606",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q1050206Gede",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["1050212"] = { },	["1050213"] = { },}-- 校验数据 结束------------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1, L11_1, L12_1, L13_1
+main_id = 10502
+L0_1 = {}
+L1_1 = 1050201
+L2_1 = 1050202
+L3_1 = 1050203
+L4_1 = 1050204
+L5_1 = 1050205
+L6_1 = 1050206
+L7_1 = 1050207
+L8_1 = 1050212
+L9_1 = 1050213
+L10_1 = 1050208
+L11_1 = 1050209
+L12_1 = 1050210
+L13_1 = 1050211
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+L0_1[11] = L11_1
+L0_1[12] = L12_1
+L0_1[13] = L13_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["1050201"] = L1_1
+L1_1 = {}
+L0_1["1050202"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10095
+L3_1.alias = "Npc10095"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q10502MonaSpawn"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 10111
+L4_1.alias = "Npc10111"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q10500SlimeSpawn"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710136
+L3_1.alias = "Q10502GeneralBook"
+L3_1.pos = "Q10502GeneralBook"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 70710139
+L4_1.alias = "Q10502Ruler"
+L4_1.pos = "Q10502Ruler"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 70710138
+L5_1.alias = "Q10502InkBottle"
+L5_1.pos = "Q10502InkBottle"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 70710140
+L6_1.alias = "Q10502RolledMap"
+L6_1.pos = "Q10502RolledMap"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 70710115
+L7_1.alias = "Q10502OpenBook"
+L7_1.pos = "Q10502OpenBook"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 70710137
+L8_1.alias = "Q10502Magnifier"
+L8_1.pos = "Q10502Magnifier"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.gadgets = L2_1
+L0_1["1050203"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10090
+L3_1.alias = "Npc10090"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q10502KleeSpawn"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 10111
+L4_1.alias = "Npc10111"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q10502Fengqidi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["1050204"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10095
+L3_1.alias = "Npc10095"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q10502MonaSpawn2"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710165
+L3_1.alias = "Q10502Diary"
+L3_1.pos = "Q10502Diary"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 70710136
+L4_1.alias = "Q10502GeneralBook2"
+L4_1.pos = "Q10502GeneralBook2"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 70710136
+L5_1.alias = "Q10502GeneralBook3"
+L5_1.pos = "Q10502GeneralBook3"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 70710139
+L6_1.alias = "Q10502Ruler2"
+L6_1.pos = "Q10502Ruler2"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 70710138
+L7_1.alias = "Q10502InkBottle2"
+L7_1.pos = "Q10502InkBottle2"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 70710140
+L8_1.alias = "Q10502RolledMap2"
+L8_1.pos = "Q10502RolledMap2"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 70710137
+L9_1.alias = "Q10502Magnifier2"
+L9_1.pos = "Q10502Magnifier2"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L1_1.gadgets = L2_1
+L0_1["1050205"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10095
+L3_1.alias = "Npc10095"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q10502MonaSpawn2"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710165
+L3_1.alias = "Q10502Diary"
+L3_1.pos = "Q10502Diary"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 70710136
+L4_1.alias = "Q10502GeneralBook2"
+L4_1.pos = "Q10502GeneralBook2"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 70710136
+L5_1.alias = "Q10502GeneralBook3"
+L5_1.pos = "Q10502GeneralBook3"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 70710139
+L6_1.alias = "Q10502Ruler2"
+L6_1.pos = "Q10502Ruler2"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 70710138
+L7_1.alias = "Q10502InkBottle2"
+L7_1.pos = "Q10502InkBottle2"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 70710140
+L8_1.alias = "Q10502RolledMap2"
+L8_1.pos = "Q10502RolledMap2"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 70710137
+L9_1.alias = "Q10502Magnifier2"
+L9_1.pos = "Q10502Magnifier2"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L1_1.gadgets = L2_1
+L0_1["1050206"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10095
+L3_1.alias = "Npc10095"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q10502MonaSpawn2"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710165
+L3_1.alias = "Q10502Diary"
+L3_1.pos = "Q10502Diary"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 70710136
+L4_1.alias = "Q10502GeneralBook2"
+L4_1.pos = "Q10502GeneralBook2"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 70710136
+L5_1.alias = "Q10502GeneralBook3"
+L5_1.pos = "Q10502GeneralBook3"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 70710139
+L6_1.alias = "Q10502Ruler2"
+L6_1.pos = "Q10502Ruler2"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 70710138
+L7_1.alias = "Q10502InkBottle2"
+L7_1.pos = "Q10502InkBottle2"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 70710140
+L8_1.alias = "Q10502RolledMap2"
+L8_1.pos = "Q10502RolledMap2"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 70710137
+L9_1.alias = "Q10502Magnifier2"
+L9_1.pos = "Q10502Magnifier2"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L1_1.gadgets = L2_1
+L0_1["1050207"] = L1_1
+L1_1 = {}
+L0_1["1050208"] = L1_1
+L1_1 = {}
+L0_1["1050209"] = L1_1
+L1_1 = {}
+L0_1["1050211"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["1050201"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10095
+L3_1.alias = "Npc10095"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q10502MonaSpawn"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710136
+L3_1.alias = "Q10502GeneralBook"
+L3_1.pos = "Q10502GeneralBook"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 70710139
+L4_1.alias = "Q10502Ruler"
+L4_1.pos = "Q10502Ruler"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 70710138
+L5_1.alias = "Q10502InkBottle"
+L5_1.pos = "Q10502InkBottle"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 70710140
+L6_1.alias = "Q10502RolledMap"
+L6_1.pos = "Q10502RolledMap"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 70710115
+L7_1.alias = "Q10502OpenBook"
+L7_1.pos = "Q10502OpenBook"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 70710137
+L8_1.alias = "Q10502Magnifier"
+L8_1.pos = "Q10502Magnifier"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.gadgets = L2_1
+L0_1["1050202"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10090
+L3_1.alias = "Npc10090"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q10502KleeSpawn"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 10111
+L4_1.alias = "Npc10111"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q10502Fengqidi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["1050203"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10095
+L3_1.alias = "Npc10095"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q10502MonaSpawn2"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710165
+L3_1.alias = "Q10502Diary"
+L3_1.pos = "Q10502Diary"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 70710136
+L4_1.alias = "Q10502GeneralBook2"
+L4_1.pos = "Q10502GeneralBook2"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 70710136
+L5_1.alias = "Q10502GeneralBook3"
+L5_1.pos = "Q10502GeneralBook3"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 70710139
+L6_1.alias = "Q10502Ruler2"
+L6_1.pos = "Q10502Ruler2"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 70710138
+L7_1.alias = "Q10502InkBottle2"
+L7_1.pos = "Q10502InkBottle2"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 70710140
+L8_1.alias = "Q10502RolledMap2"
+L8_1.pos = "Q10502RolledMap2"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 70710137
+L9_1.alias = "Q10502Magnifier2"
+L9_1.pos = "Q10502Magnifier2"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L1_1.gadgets = L2_1
+L0_1["1050204"] = L1_1
+L1_1 = {}
+L0_1["1050205"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10090
+L3_1.alias = "Npc10090"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q10502KleeSpawn"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710114
+L3_1.alias = "Q1050203Box"
+L3_1.pos = "Q1050203Box"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q10502AvatarSpawn2"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["1050206"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710114
+L3_1.alias = "Q10502Box"
+L3_1.pos = "Q10502Box"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["1050207"] = L1_1
+L1_1 = {}
+L0_1["1050208"] = L1_1
+L1_1 = {}
+L0_1["1050209"] = L1_1
+L1_1 = {}
+L0_1["1050210"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10095
+L3_1.alias = "Npc10095"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q10502MonaSpawn3"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1606
+L4_1.alias = "Npc1606"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q1050206Gede"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["1050211"] = L1_1
+L1_1 = {}
+L0_1["1050212"] = L1_1
+L1_1 = {}
+L0_1["1050213"] = L1_1
+quest_data = L0_1

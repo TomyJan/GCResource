@@ -1,3 +1,194 @@
--- 任务配置数据开始-----------------------------
-
-main_id = 70506sub_ids = {	7050601,	7050606,	7050605,	7050602,	7050603,	7050604,}-- 任务配置数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 父任务执行项数据开始-----------------------------finish_action = {	CLIENT = { },	SERVER = { },}fail_action = {	CLIENT = { },	SERVER = { },}cancel_action = {	CLIENT = { },	SERVER = { },}-- 父任务执行项数据结束------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- Actor模块数据开始---------------------------------- 空-- Actor模块数据结束---------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 文本模块数据开始----------------------------------- 空-- 文本模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 路点模块数据开始----------------------------------- 空-- 路点模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 断线重连生成内容 开始------------------------------ 和questdata配的存档点对应rewind_data = {	["7050601"] = { },	["7050604"] = 	{		npcs = 		{			{				id = 1006,				alias = "Npc1006",				script = "Actor/Npc/TempNPC",				pos = "Q7050601_N1006",				scene_id = 1068,				room_id = 1,				data_index = 1,			},			{				id = 1007,				alias = "Lisa",				script = "Actor/Quest/Q411/Lisa",				pos = "Q7050601_N1007",				scene_id = 1068,				room_id = 1,				data_index = 2,			},		},	},	["7050606"] = { },}-- 断线重连生成内容 结束------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 校验数据 开始------------------------------------ 和任务lua中生成NPC/Monster/Gadget/Item等对应quest_data = {	["7050601"] = 	{		npcs = 		{			{				id = 1006,				alias = "Npc1006",				script = "Actor/Npc/TempNPC",				pos = "Q7050601_N1006",				scene_id = 1068,				room_id = 1,				data_index = 1,			},			{				id = 1007,				alias = "Lisa",				script = "Actor/Quest/Q411/Lisa",				pos = "Q7050601_N1007",				scene_id = 1068,				room_id = 1,				data_index = 2,			},		},	},	["7050602"] = 	{		npcs = 		{			{				id = 1006,				alias = "Npc1006",				script = "Actor/Npc/TempNPC",				pos = "Q7050601_N1006",				scene_id = 1068,				room_id = 1,				data_index = 1,			},			{				id = 1007,				alias = "Lisa",				script = "Actor/Quest/Q411/Lisa",				pos = "Q7050601_N1007",				scene_id = 1068,				room_id = 1,				data_index = 2,			},		},	},	["7050603"] = 	{		npcs = 		{			{				id = 1006,				alias = "Npc1006",				script = "Actor/Npc/TempNPC",				pos = "Q7050601_N1006",				scene_id = 1068,				room_id = 1,				data_index = 1,			},			{				id = 1007,				alias = "Lisa",				script = "Actor/Quest/Q411/Lisa",				pos = "Q7050601_N1007",				scene_id = 1068,				room_id = 1,				data_index = 2,			},		},	},	["7050604"] = 	{		gadgets = 		{			{				id = 70710666,				alias = "Gadget70710666",				pos = "Q7050604_tea_cup",				scene_id = 1068,				room_id = 1,				data_index = 1,			},			{				id = 70710667,				alias = "Gadget70710667",				pos = "Q7050604_coffee_cup",				scene_id = 1068,				room_id = 1,				data_index = 2,			},		},	},	["7050605"] = 	{		npcs = 		{			{				id = 1006,				alias = "Npc1006",				script = "Actor/Npc/TempNPC",				pos = "Q7050601_N1006",				scene_id = 1068,				room_id = 1,				data_index = 1,			},			{				id = 1007,				alias = "Lisa",				script = "Actor/Quest/Q411/Lisa",				pos = "Q7050601_N1007",				scene_id = 1068,				room_id = 1,				data_index = 2,			},		},	},	["7050606"] = 	{		npcs = 		{			{				id = 1006,				alias = "Npc1006",				script = "Actor/Npc/TempNPC",				pos = "Q7050601_N1006",				scene_id = 1068,				room_id = 1,				data_index = 1,			},			{				id = 1007,				alias = "Lisa",				script = "Actor/Quest/Q411/Lisa",				pos = "Q7050601_N1007",				scene_id = 1068,				room_id = 1,				data_index = 2,			},		},	},}-- 校验数据 结束------------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1
+main_id = 70506
+L0_1 = {}
+L1_1 = 7050601
+L2_1 = 7050606
+L3_1 = 7050605
+L4_1 = 7050602
+L5_1 = 7050603
+L6_1 = 7050604
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["7050601"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1006
+L3_1.alias = "Npc1006"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q7050601_N1006"
+L3_1.scene_id = 1068
+L3_1.room_id = 1
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1007
+L4_1.alias = "Lisa"
+L4_1.script = "Actor/Quest/Q411/Lisa"
+L4_1.pos = "Q7050601_N1007"
+L4_1.scene_id = 1068
+L4_1.room_id = 1
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["7050604"] = L1_1
+L1_1 = {}
+L0_1["7050606"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1006
+L3_1.alias = "Npc1006"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q7050601_N1006"
+L3_1.scene_id = 1068
+L3_1.room_id = 1
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1007
+L4_1.alias = "Lisa"
+L4_1.script = "Actor/Quest/Q411/Lisa"
+L4_1.pos = "Q7050601_N1007"
+L4_1.scene_id = 1068
+L4_1.room_id = 1
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["7050601"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1006
+L3_1.alias = "Npc1006"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q7050601_N1006"
+L3_1.scene_id = 1068
+L3_1.room_id = 1
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1007
+L4_1.alias = "Lisa"
+L4_1.script = "Actor/Quest/Q411/Lisa"
+L4_1.pos = "Q7050601_N1007"
+L4_1.scene_id = 1068
+L4_1.room_id = 1
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["7050602"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1006
+L3_1.alias = "Npc1006"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q7050601_N1006"
+L3_1.scene_id = 1068
+L3_1.room_id = 1
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1007
+L4_1.alias = "Lisa"
+L4_1.script = "Actor/Quest/Q411/Lisa"
+L4_1.pos = "Q7050601_N1007"
+L4_1.scene_id = 1068
+L4_1.room_id = 1
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["7050603"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710666
+L3_1.alias = "Gadget70710666"
+L3_1.pos = "Q7050604_tea_cup"
+L3_1.scene_id = 1068
+L3_1.room_id = 1
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 70710667
+L4_1.alias = "Gadget70710667"
+L4_1.pos = "Q7050604_coffee_cup"
+L4_1.scene_id = 1068
+L4_1.room_id = 1
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.gadgets = L2_1
+L0_1["7050604"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1006
+L3_1.alias = "Npc1006"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q7050601_N1006"
+L3_1.scene_id = 1068
+L3_1.room_id = 1
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1007
+L4_1.alias = "Lisa"
+L4_1.script = "Actor/Quest/Q411/Lisa"
+L4_1.pos = "Q7050601_N1007"
+L4_1.scene_id = 1068
+L4_1.room_id = 1
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["7050605"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1006
+L3_1.alias = "Npc1006"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q7050601_N1006"
+L3_1.scene_id = 1068
+L3_1.room_id = 1
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1007
+L4_1.alias = "Lisa"
+L4_1.script = "Actor/Quest/Q411/Lisa"
+L4_1.pos = "Q7050601_N1007"
+L4_1.scene_id = 1068
+L4_1.room_id = 1
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["7050606"] = L1_1
+quest_data = L0_1

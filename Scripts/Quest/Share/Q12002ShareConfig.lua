@@ -1,439 +1,413 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1, L11_1, L12_1, L13_1, L14_1, L15_1
 main_id = 12002
-
-sub_ids =
-{
-    1200201,
-    1200203,
-    1200204,
-    1200205,
-    1200206,
-    1200208,
-    1200209,
-    1200210,
-    1200211,
-    1200212,
-    1200213,
-    1200214,
-    1200215,
-    1200219,
-    1200220,
-
-}
-
-
-rewind_data = {}
-
-rewind_data["1200201"] = 
-{
-    npcs = {
-        {
-        ----行秋
-            alias = "Npc10045",
-			script = "Actor/Quest/Q301/Gaia301",
-			id = 10045,
-			pos = "Q1200108XQ",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        }
-    }
-}
-rewind_data["1200203"] = 
-{
-    npcs = {
-        {
-            ----行秋
-                alias = "Npc10045",
-                script = "Actor/Quest/Q301/Gaia301",
-                id = 10045,
-                pos = "Q1200108XQ",
-                scene_id = 3,
-                room_id = 0,
-                data_index = 0,
-        },
-        {
-                alias = "Npc162701",
-                script = "Actor/Npc/TempNPC",
-                id = 162701,
-                pos = "Q1200201AXu",
-                scene_id = 3,
-                room_id = 0,
-                data_index = 1,
-        }
-    }
-}
-rewind_data["1200204"] = 
-{
-    npcs = {
-        {
-            ----行秋
-                alias = "Npc10045",
-                script = "Actor/Quest/Q301/Gaia301",
-                id = 10045,
-                pos = "Q1200108XQ",
-                scene_id = 3,
-                room_id = 0,
-                data_index = 0,
-            }
-    }
-}
-rewind_data["1200205"] = 
-{
-    npcs = {
-        {
-            ----行秋
-                alias = "Npc10045",
-                script = "Actor/Quest/Q301/Gaia301",
-                id = 10045,
-                pos = "Q1200108XQ",
-                scene_id = 3,
-                room_id = 0,
-                data_index = 0,
-            }
-    }
-}
-rewind_data["1200206"] = 
-{
-    npcs = {
-        {
-            ----行秋
-                alias = "Npc10045",
-                script = "Actor/Quest/Q301/Gaia301",
-                id = 10045,
-                pos = "Q1200108XQ",
-                scene_id = 3,
-                room_id = 0,
-                data_index = 0,
-            }
-    }
-}
-rewind_data["1200208"] = 
-{
-    npcs = {
-        {
-            ----行秋
-                alias = "Npc10045",
-                script = "Actor/Quest/Q301/Gaia301",
-                id = 10045,
-                pos = "Q1200108XQ",
-                scene_id = 3,
-                room_id = 0,
-                data_index = 0,
-            }
-       
-    }
-}
-rewind_data["1200209"] = 
-{
-    npcs = {
-        {
-            ----行秋
-                alias = "Npc10045",
-                script = "Actor/Quest/Q301/Gaia301",
-                id = 10045,
-                pos = "Q1200108XQ",
-                scene_id = 3,
-                room_id = 0,
-                data_index = 0,
-            }
-        
-    }
-
-}
-rewind_data["1200210"] = 
-{
-    npcs = {
-        {
-            ----行秋
-                alias = "Npc10045",
-                script = "Actor/Quest/Q301/Gaia301",
-                id = 10045,
-                pos = "Q1200108XQ",
-                scene_id = 3,
-                room_id = 0,
-                data_index = 0,
-            }
-    }
-}
-rewind_data["1200211"] = 
-{
-    npcs = {
-        {
-            ----行秋
-                alias = "Npc10045",
-                script = "Actor/Quest/Q301/Gaia301",
-                id = 10045,
-                pos = "Q1200108XQ",
-                scene_id = 3,
-                room_id = 0,
-                data_index = 0,
-            }
-    }
-}
-
-
-quest_data = {}
-
-
-quest_data["1200201"] = 
-{
-    npcs = {
-        {
-        ----行秋
-            alias = "Npc10045",
-			script = "Actor/Quest/Q301/Gaia301",
-			id = 10045,
-			pos = "Q1200108XQ",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-        {
-            alias = "Npc162701",
-            script = "Actor/Npc/TempNPC",
-            id = 162701,
-            pos = "Q1200201AXu",
-            scene_id = 3,
-            room_id = 0,
-            data_index = 0,
-        }
-    }
-}
-quest_data["1200221"] = 
-{
-    npcs = {
-        {
-            alias = "Npc162701",
-            script = "Actor/Npc/TempNPC",
-            id = 162701,
-            pos = "Q1200203AXu2",
-            scene_id = 1034,
-            room_id = 1,
-            data_index = 0,
-        },
-        {
-            alias = "Paimon",
-            script = "Actor/Quest/Q352/Paimon",
-            id = 1005,
-            pos = "Q1200203Paimon2",
-            scene_id = 1034,
-            room_id = 1,
-            data_index = 1,
-        }
-    }
-}
-quest_data["1200209"] = 
-{
-    npcs = {
-        {
-        ----小车1
-
-            alias = "Npc1263",
-			script = "Actor/Npc/TempNPC",
-			id = 1263,
-			pos = "Q1200209Stone1",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        }
-    },
-    gadgets =
-    {
-        {
-            id = 71700053,
-            pos = "Q1200209Stone1",
-            alias = "WinkGagetData1", 
-            scene_id = 3 , -- optional default : sceneData.DefaultSceneID
-            room_id = 0 , -- optional default : 0
-            is_show_cutscene = false, -- 宝箱专用配置 optional default : false
-            chest_drop_id = 0 , -- 宝箱专用配置 optional default : 0
-        },
-        {
-            id = 71700047,
-            pos = "Q1200209Stone1",
-            alias = "CarGagetData1", 
-            scene_id = 3 , -- optional default : sceneData.DefaultSceneID
-            room_id = 0 , -- optional default : 0
-            is_show_cutscene = false, -- 宝箱专用配置 optional default : false
-            chest_drop_id = 0 , -- 宝箱专用配置 optional default : 0
-        },
-
-    }
-}
-quest_data["1200212"] = 
-{
-    npcs = {
-        {
-        ----小车2
-
-            alias = "Npc1264",
-			script = "Actor/Npc/TempNPC",
-			id = 1264,
-			pos = "Q1200209Stone2",
-			scene_id = 3,
-			room_ID = 0,
-			data_index = 0,
-        }
-    },
-    gadgets =
-    {
-        {
-            id = 71700053,
-            pos = "Q1200209Stone2",
-            alias = "WinkGagetData2", 
-            scene_id = 3 , -- optional default : sceneData.DefaultSceneID
-            room_id = 0 , -- optional default : 0
-            is_show_cutscene = false, -- 宝箱专用配置 optional default : false
-            chest_drop_id = 0 , -- 宝箱专用配置 optional default : 0
-        },
-        {
-            id = 71700047,
-            pos = "Q1200209Stone2",
-            alias = "CarGagetData2", 
-            scene_id = 3 , -- optional default : sceneData.DefaultSceneID
-            room_id = 0 , -- optional default : 0
-            is_show_cutscene = false, -- 宝箱专用配置 optional default : false
-            chest_drop_id = 0 , -- 宝箱专用配置 optional default : 0
-        }
-    }
-}
-quest_data["1200213"] = 
-{
-    npcs = {
-        {
-        ----小车3
-
-            alias = "Npc1265",
-			script = "Actor/Npc/TempNPC",
-			id = 1265,
-			pos = "Q1200209Stone3",
-			scene_id = 3,
-			room_ID = 0,
-			data_index = 0,
-        }
-    },
-    gadgets =
-    {
-        {
-            id = 71700053,
-            pos = "Q1200209Stone3",
-            alias = "WinkGagetData3", 
-            scene_id = 3 , -- optional default : sceneData.DefaultSceneID
-            room_id = 0 , -- optional default : 0
-            is_show_cutscene = false, -- 宝箱专用配置 optional default : false
-            chest_drop_id = 0 , -- 宝箱专用配置 optional default : 0
-        },
-        {
-            id = 71700047,
-            pos = "Q1200209Stone3",
-            alias = "CarGagetData3", 
-            scene_id = 3 , -- optional default : sceneData.DefaultSceneID
-            room_id = 0 , -- optional default : 0
-            is_show_cutscene = false, -- 宝箱专用配置 optional default : false
-            chest_drop_id = 0 , -- 宝箱专用配置 optional default : 0
-        }
-    }
-}
-quest_data["1200214"] = 
-{
-    gadgets =
-    {
-        {
-            id = 70700006,
-            pos = "Q1200209Stone2",
-            alias = "Q10101Compass", 
-            scene_id = 3 , -- optional default : sceneData.DefaultSceneID
-            room_id = 0 , -- optional default : 0
-            is_show_cutscene = false, -- 宝箱专用配置 optional default : false
-            chest_drop_id = 0 , -- 宝箱专用配置 optional default : 0
-        }
-    }
-}
-quest_data["1200202"] = 
-{
-    transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 1034,
-            pos = "Q1200203Born2"
-        },
-    }
-}
-quest_data["1200219"] = 
-{
-    npcs = {
-        {
-        ----小车4
-
-            alias = "Npc1266",
-			script = "Actor/Npc/TempNPC",
-			id = 1266,
-			pos = "Q1200209Stone4",
-			scene_id = 3,
-			room_ID = 0,
-			data_index = 0,
-        }
-    },
-    gadgets =
-    {
-        {
-            id = 71700053,
-            pos = "Q1200209Stone4",
-            alias = "WinkGagetData4", 
-            scene_id = 3 , -- optional default : sceneData.DefaultSceneID
-            room_id = 0 , -- optional default : 0
-            is_show_cutscene = false, -- 宝箱专用配置 optional default : false
-            chest_drop_id = 0 , -- 宝箱专用配置 optional default : 0
-        },
-        {
-            id = 71700047,
-            pos = "Q1200209Stone4",
-            alias = "CarGagetData4", 
-            scene_id = 3 , -- optional default : sceneData.DefaultSceneID
-            room_id = 0 , -- optional default : 0
-            is_show_cutscene = false, -- 宝箱专用配置 optional default : false
-            chest_drop_id = 0 , -- 宝箱专用配置 optional default : 0
-        }
-    }
-}
-quest_data["1200220"] = 
-{
-    npcs = {
-        {
-        ----小车5
-
-            alias = "Npc1267",
-			script = "Actor/Npc/TempNPC",
-			id = 1267,
-			pos = "Q1200209Stone5",
-			scene_id = 3,
-			room_ID = 0,
-			data_index = 0,
-        }
-    },
-    gadgets =
-    {
-        {
-            id = 71700053,
-            pos = "Q1200209Stone5",
-            alias = "WinkGagetData5", 
-            scene_id = 3 , -- optional default : sceneData.DefaultSceneID
-            room_id = 0 , -- optional default : 0
-            is_show_cutscene = false, -- 宝箱专用配置 optional default : false
-            chest_drop_id = 0 , -- 宝箱专用配置 optional default : 0
-        },
-        {
-            id = 71700047,
-            pos = "Q1200209Stone5",
-            alias = "CarGagetData5", 
-            scene_id = 3 , -- optional default : sceneData.DefaultSceneID
-            room_id = 0 , -- optional default : 0
-            is_show_cutscene = false, -- 宝箱专用配置 optional default : false
-            chest_drop_id = 0 , -- 宝箱专用配置 optional default : 0
-        }
-    }
-}
+L0_1 = {}
+L1_1 = 1200201
+L2_1 = 1200203
+L3_1 = 1200204
+L4_1 = 1200205
+L5_1 = 1200206
+L6_1 = 1200208
+L7_1 = 1200209
+L8_1 = 1200210
+L9_1 = 1200211
+L10_1 = 1200212
+L11_1 = 1200213
+L12_1 = 1200214
+L13_1 = 1200215
+L14_1 = 1200219
+L15_1 = 1200220
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+L0_1[11] = L11_1
+L0_1[12] = L12_1
+L0_1[13] = L13_1
+L0_1[14] = L14_1
+L0_1[15] = L15_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc10045"
+L3_1.script = "Actor/Quest/Q301/Gaia301"
+L3_1.id = 10045
+L3_1.pos = "Q1200108XQ"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1200201"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc10045"
+L3_1.script = "Actor/Quest/Q301/Gaia301"
+L3_1.id = 10045
+L3_1.pos = "Q1200108XQ"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Npc162701"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.id = 162701
+L4_1.pos = "Q1200201AXu"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["1200203"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc10045"
+L3_1.script = "Actor/Quest/Q301/Gaia301"
+L3_1.id = 10045
+L3_1.pos = "Q1200108XQ"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1200204"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc10045"
+L3_1.script = "Actor/Quest/Q301/Gaia301"
+L3_1.id = 10045
+L3_1.pos = "Q1200108XQ"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1200205"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc10045"
+L3_1.script = "Actor/Quest/Q301/Gaia301"
+L3_1.id = 10045
+L3_1.pos = "Q1200108XQ"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1200206"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc10045"
+L3_1.script = "Actor/Quest/Q301/Gaia301"
+L3_1.id = 10045
+L3_1.pos = "Q1200108XQ"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1200208"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc10045"
+L3_1.script = "Actor/Quest/Q301/Gaia301"
+L3_1.id = 10045
+L3_1.pos = "Q1200108XQ"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1200209"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc10045"
+L3_1.script = "Actor/Quest/Q301/Gaia301"
+L3_1.id = 10045
+L3_1.pos = "Q1200108XQ"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1200210"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc10045"
+L3_1.script = "Actor/Quest/Q301/Gaia301"
+L3_1.id = 10045
+L3_1.pos = "Q1200108XQ"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1200211"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc10045"
+L3_1.script = "Actor/Quest/Q301/Gaia301"
+L3_1.id = 10045
+L3_1.pos = "Q1200108XQ"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Npc162701"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.id = 162701
+L4_1.pos = "Q1200201AXu"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["1200201"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc162701"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 162701
+L3_1.pos = "Q1200203AXu2"
+L3_1.scene_id = 1034
+L3_1.room_id = 1
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Paimon"
+L4_1.script = "Actor/Quest/Q352/Paimon"
+L4_1.id = 1005
+L4_1.pos = "Q1200203Paimon2"
+L4_1.scene_id = 1034
+L4_1.room_id = 1
+L4_1.data_index = 1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["1200221"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc1263"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 1263
+L3_1.pos = "Q1200209Stone1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 71700053
+L3_1.pos = "Q1200209Stone1"
+L3_1.alias = "WinkGagetData1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.is_show_cutscene = false
+L3_1.chest_drop_id = 0
+L4_1 = {}
+L4_1.id = 71700047
+L4_1.pos = "Q1200209Stone1"
+L4_1.alias = "CarGagetData1"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.is_show_cutscene = false
+L4_1.chest_drop_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.gadgets = L2_1
+L0_1["1200209"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc1264"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 1264
+L3_1.pos = "Q1200209Stone2"
+L3_1.scene_id = 3
+L3_1.room_ID = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 71700053
+L3_1.pos = "Q1200209Stone2"
+L3_1.alias = "WinkGagetData2"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.is_show_cutscene = false
+L3_1.chest_drop_id = 0
+L4_1 = {}
+L4_1.id = 71700047
+L4_1.pos = "Q1200209Stone2"
+L4_1.alias = "CarGagetData2"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.is_show_cutscene = false
+L4_1.chest_drop_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.gadgets = L2_1
+L0_1["1200212"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc1265"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 1265
+L3_1.pos = "Q1200209Stone3"
+L3_1.scene_id = 3
+L3_1.room_ID = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 71700053
+L3_1.pos = "Q1200209Stone3"
+L3_1.alias = "WinkGagetData3"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.is_show_cutscene = false
+L3_1.chest_drop_id = 0
+L4_1 = {}
+L4_1.id = 71700047
+L4_1.pos = "Q1200209Stone3"
+L4_1.alias = "CarGagetData3"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.is_show_cutscene = false
+L4_1.chest_drop_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.gadgets = L2_1
+L0_1["1200213"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70700006
+L3_1.pos = "Q1200209Stone2"
+L3_1.alias = "Q10101Compass"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.is_show_cutscene = false
+L3_1.chest_drop_id = 0
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["1200214"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 1034
+L3_1.pos = "Q1200203Born2"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["1200202"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc1266"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 1266
+L3_1.pos = "Q1200209Stone4"
+L3_1.scene_id = 3
+L3_1.room_ID = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 71700053
+L3_1.pos = "Q1200209Stone4"
+L3_1.alias = "WinkGagetData4"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.is_show_cutscene = false
+L3_1.chest_drop_id = 0
+L4_1 = {}
+L4_1.id = 71700047
+L4_1.pos = "Q1200209Stone4"
+L4_1.alias = "CarGagetData4"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.is_show_cutscene = false
+L4_1.chest_drop_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.gadgets = L2_1
+L0_1["1200219"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc1267"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 1267
+L3_1.pos = "Q1200209Stone5"
+L3_1.scene_id = 3
+L3_1.room_ID = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 71700053
+L3_1.pos = "Q1200209Stone5"
+L3_1.alias = "WinkGagetData5"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.is_show_cutscene = false
+L3_1.chest_drop_id = 0
+L4_1 = {}
+L4_1.id = 71700047
+L4_1.pos = "Q1200209Stone5"
+L4_1.alias = "CarGagetData5"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.is_show_cutscene = false
+L4_1.chest_drop_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.gadgets = L2_1
+L0_1["1200220"] = L1_1

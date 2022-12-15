@@ -1,3 +1,164 @@
--- 任务配置数据开始-----------------------------
-
-main_id = 20073sub_ids = {	2007301,	2007302,	2007304,	2007307,	2007308,	2007309,	2007303,	2007305,	2007306,}-- 任务配置数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 父任务执行项数据开始-----------------------------finish_action = {	CLIENT = { },	SERVER = 	{		QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP = 		{			{ "133002931", },		},	},}fail_action = {	CLIENT = { },	SERVER = 	{		QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP = 		{			{ "133002931", },		},	},}cancel_action = {	CLIENT = { },	SERVER = 	{		QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP = 		{			{ "133002931", "", },		},		QUEST_EXEC_DEL_ALL_SPECIFIC_PACK_ITEM = 		{			{ "101909", },		},	},}-- 父任务执行项数据结束------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- Actor模块数据开始---------------------------------- 空-- Actor模块数据结束---------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 文本模块数据开始----------------------------------- 空-- 文本模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 路点模块数据开始----------------------------------- 空-- 路点模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 断线重连生成内容 开始------------------------------ 和questdata配的存档点对应rewind_data = {	["2007301"] = { },	["2007302"] = { },	["2007304"] = { },	["2007306"] = 	{		npcs = 		{			{				id = 20211,				alias = "Npc20211",				script = "Actor/Npc/TempNPC",				pos = "Q20073box3_Pos",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["2007308"] = 	{		npcs = 		{			{				id = 20211,				alias = "Npc20211",				script = "Actor/Npc/TempNPC",				pos = "Q20073box3_Pos",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},}-- 断线重连生成内容 结束------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 校验数据 开始------------------------------------ 和任务lua中生成NPC/Monster/Gadget/Item等对应quest_data = {	["2007301"] = { },	["2007302"] = { },	["2007303"] = 	{		npcs = 		{			{				id = 20211,				alias = "Npc20211",				script = "Actor/Npc/TempNPC",				pos = "Q20073box3_Pos",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["2007304"] = { },	["2007305"] = 	{		npcs = 		{			{				id = 20211,				alias = "Npc20211",				script = "Actor/Npc/TempNPC",				pos = "Q20073box3_Pos",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["2007306"] = { },	["2007307"] = 	{		npcs = 		{			{				id = 20211,				alias = "Npc20211",				script = "Actor/Npc/TempNPC",				pos = "Q20073box3_Pos",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["2007308"] = { },	["2007309"] = 	{		npcs = 		{			{				id = 20211,				alias = "Npc20211",				script = "Actor/Npc/TempNPC",				pos = "Q20073box3_Pos",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},}-- 校验数据 结束------------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1
+main_id = 20073
+L0_1 = {}
+L1_1 = 2007301
+L2_1 = 2007302
+L3_1 = 2007304
+L4_1 = 2007307
+L5_1 = 2007308
+L6_1 = 2007309
+L7_1 = 2007303
+L8_1 = 2007305
+L9_1 = 2007306
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L4_1 = "133002931"
+L3_1[1] = L4_1
+L2_1[1] = L3_1
+L1_1.QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP = L2_1
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L4_1 = "133002931"
+L3_1[1] = L4_1
+L2_1[1] = L3_1
+L1_1.QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP = L2_1
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L4_1 = "133002931"
+L5_1 = ""
+L3_1[1] = L4_1
+L3_1[2] = L5_1
+L2_1[1] = L3_1
+L1_1.QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP = L2_1
+L2_1 = {}
+L3_1 = {}
+L4_1 = "101909"
+L3_1[1] = L4_1
+L2_1[1] = L3_1
+L1_1.QUEST_EXEC_DEL_ALL_SPECIFIC_PACK_ITEM = L2_1
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["2007301"] = L1_1
+L1_1 = {}
+L0_1["2007302"] = L1_1
+L1_1 = {}
+L0_1["2007304"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20211
+L3_1.alias = "Npc20211"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q20073box3_Pos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2007306"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20211
+L3_1.alias = "Npc20211"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q20073box3_Pos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2007308"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["2007301"] = L1_1
+L1_1 = {}
+L0_1["2007302"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20211
+L3_1.alias = "Npc20211"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q20073box3_Pos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2007303"] = L1_1
+L1_1 = {}
+L0_1["2007304"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20211
+L3_1.alias = "Npc20211"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q20073box3_Pos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2007305"] = L1_1
+L1_1 = {}
+L0_1["2007306"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20211
+L3_1.alias = "Npc20211"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q20073box3_Pos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2007307"] = L1_1
+L1_1 = {}
+L0_1["2007308"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20211
+L3_1.alias = "Npc20211"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q20073box3_Pos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2007309"] = L1_1
+quest_data = L0_1

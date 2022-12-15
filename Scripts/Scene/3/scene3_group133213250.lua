@@ -17,7 +17,7 @@ function GetNextPath(context)
 	local path = {}
 	local index = ScriptLib.GetGroupVariableValue(context,"nextRouteIndex")
 	local stoppoint = defs.pointInfo[index]
-	ScriptLib.PrintLog(context, "stop point : "..stoppoint)
+	ScriptLib.PrintLog("stop point : "..stoppoint)
 	local currentNodeIndex = ScriptLib.GetGroupVariableValue(context,"currentPathNodeIndex")
 	for i=currentNodeIndex + 1,stoppoint do
 		table.insert(path,i)
@@ -27,7 +27,7 @@ end
 
 
 function MovePlatform(context)
-	ScriptLib.PrintLog(context, "platform to move")
+	ScriptLib.PrintLog("platform to move")
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isMoving", 1) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 		return -1
@@ -35,7 +35,7 @@ function MovePlatform(context)
 
 
 	ScriptLib.SetPlatformPointArray(context, defs.gadget_thunderThelfID, defs.pointarray_ID, GetNextPath(context), { route_type = 0 })
-	ScriptLib.PrintLog(context, "platform to move : start platform")
+	ScriptLib.PrintLog("platform to move : start platform")
 	return 0
 end
 
@@ -159,7 +159,7 @@ end
 
 -- 触发操作
 function action_EVENT_PLATFORM_REACH_POINT_250004(context, evt)
-	ScriptLib.PrintLog(context, "Reach Point : ".. " configID = "..evt.param1 .. ", pointarray_ID = "..evt.param2..", pointID = "..evt.param3)		
+	ScriptLib.PrintLog("Reach Point : ".. " configID = "..evt.param1 .. ", pointarray_ID = "..evt.param2..", pointID = "..evt.param3)		
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "isMoving", 0) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_groupVariable")
 		return -1
@@ -182,12 +182,12 @@ end
 
 -- 触发条件
 function condition_EVENT_AVATAR_NEAR_PLATFORM_250005(context, evt)
-			ScriptLib.PrintLog(context, "Near Platform condition : ".. evt.param1.." | RouteID = " .. evt.param2 .. " | Point = ".. evt.param3)
+			ScriptLib.PrintLog("Near Platform condition : ".. evt.param1.." | RouteID = " .. evt.param2 .. " | Point = ".. evt.param3)
 			if defs.gadget_thunderThelfID ~= evt.param1 then
 				return false
 			end
 			local state = ScriptLib.GetGadgetStateByConfigId(context, defs.group_ID, defs.gadget_thunderThelfID)
-			ScriptLib.PrintLog(context, "Near Platform condition : ".." State = "..state) 
+			ScriptLib.PrintLog("Near Platform condition : ".." State = "..state) 
 			if state == 201 then 
 				return false
 			end

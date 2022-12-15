@@ -1,269 +1,250 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1
 main_id = 487
-
-sub_ids =
-{
-    48701,
-    48702,
-    48703,
-    48704,
-    48705,
-    48706,
-    48707,
-    48708,
-}
-
-rewind_data = {}
-
-rewind_data["48701"] = 
-{
-}
-
-rewind_data["48702"] = 
-{
-}
-
-rewind_data["48703"] = 
-{
-}
-
-rewind_data["48704"] = 
-{
-}
-
-rewind_data["48705"] = 
-{
-}
-
-rewind_data["48706"] = 
-{
-}
-
-rewind_data["48707"] = 
-{
-}
-
-rewind_data["48708"] = 
-{
-}
-
-quest_data = {}
-
-quest_data["48701"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "CatNpc",
-			script = "Actor/Npc/TempNPC",
-			id = 10031,
-			pos = "Q48701NPC",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-        {
-			alias = "Venti01",
-			script = "Actor/Npc/TempNPC",
-			id = 100101,
-			pos = "Q48701Windy",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		} ,
-		{
-			alias = "Wendy",
-			script = "Actor/Quest/Q301/Wendy301",
-			id = 1001,
-			pos = "Q48701Windy",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		} 
-    }
-}
-quest_data["48702"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Wendy",
-			script = "Actor/Quest/Q301/Wendy301",
-			id = 1001,
-			pos = "Q48701Windy",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		} 
-	} 
-} 
-quest_data["48703"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "CatNpc",
-			script = "Actor/Npc/TempNPC",
-			id = 10031,
-			pos = "Q48701NPC",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-		{
-			alias = "Venti01",
-			script = "Actor/Npc/TempNPC",
-			id = 100101,
-			pos = "Q48701Windy",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-		{
-			alias = "Wendy",
-			script = "Actor/Quest/Q301/Wendy301",
-			id = 1001,
-			pos = "Q48701Windy",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		} 
-    }
-}
-
-quest_data["48705"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Paimon",
-			script = "Actor/Quest/Q352/Paimon",
-			id = 1005,
-			pos = "Q48705Paimon",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-		{
-			alias = "CatNpc",
-			script = "Actor/Npc/TempNPC",
-			id = 10031,
-			pos = "Q48701NPC",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-    }
-}
-
-quest_data["48710"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Venti01",
-			script = "Actor/Npc/TempNPC",
-			id = 100101,
-			pos = "Q48701Windy",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-		{
-			alias = "CatNpc",
-			script = "Actor/Npc/TempNPC",
-			id = 10031,
-			pos = "Q48701NPC",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-		{
-			alias = "Wendy",
-			script = "Actor/Quest/Q301/Wendy301",
-			id = 1001,
-			pos = "Q48701Windy",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		} 
-    }
-}
-
-quest_data["48711"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "CatNpc",
-			script = "Actor/Npc/TempNPC",
-			id = 10031,
-			pos = "Q48701NPC",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-        {
-			alias = "Venti01",
-			script = "Actor/Npc/TempNPC",
-			id = 100101,
-			pos = "Q48701Windy",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		} ,
-		{
-			alias = "Wendy",
-			script = "Actor/Quest/Q301/Wendy301",
-			id = 1001,
-			pos = "Q48701Windy",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		} 
-    }
-}
-
-quest_data["48712"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Paimon",
-			script = "Actor/Quest/Q352/Paimon",
-			id = 1005,
-			pos = "Q48712Paimon",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-    }
-}
-
-quest_data["48713"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Venti01",
-			script = "Actor/Npc/TempNPC",
-			id = 100101,
-			pos = "Q48701Windy",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		} ,
-		{
-			alias = "Wendy",
-			script = "Actor/Quest/Q301/Wendy301",
-			id = 1001,
-			pos = "Q48701Windy",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		} 
-    }
-}
+L0_1 = {}
+L1_1 = 48701
+L2_1 = 48702
+L3_1 = 48703
+L4_1 = 48704
+L5_1 = 48705
+L6_1 = 48706
+L7_1 = 48707
+L8_1 = 48708
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["48701"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["48702"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["48703"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["48704"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["48705"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["48706"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["48707"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["48708"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "CatNpc"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 10031
+L3_1.pos = "Q48701NPC"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Venti01"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.id = 100101
+L4_1.pos = "Q48701Windy"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 0
+L5_1 = {}
+L5_1.alias = "Wendy"
+L5_1.script = "Actor/Quest/Q301/Wendy301"
+L5_1.id = 1001
+L5_1.pos = "Q48701Windy"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["48701"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Wendy"
+L3_1.script = "Actor/Quest/Q301/Wendy301"
+L3_1.id = 1001
+L3_1.pos = "Q48701Windy"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["48702"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "CatNpc"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 10031
+L3_1.pos = "Q48701NPC"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Venti01"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.id = 100101
+L4_1.pos = "Q48701Windy"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 0
+L5_1 = {}
+L5_1.alias = "Wendy"
+L5_1.script = "Actor/Quest/Q301/Wendy301"
+L5_1.id = 1001
+L5_1.pos = "Q48701Windy"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["48703"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.id = 1005
+L3_1.pos = "Q48705Paimon"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "CatNpc"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.id = 10031
+L4_1.pos = "Q48701NPC"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["48705"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Venti01"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 100101
+L3_1.pos = "Q48701Windy"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "CatNpc"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.id = 10031
+L4_1.pos = "Q48701NPC"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 0
+L5_1 = {}
+L5_1.alias = "Wendy"
+L5_1.script = "Actor/Quest/Q301/Wendy301"
+L5_1.id = 1001
+L5_1.pos = "Q48701Windy"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["48710"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "CatNpc"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 10031
+L3_1.pos = "Q48701NPC"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Venti01"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.id = 100101
+L4_1.pos = "Q48701Windy"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 0
+L5_1 = {}
+L5_1.alias = "Wendy"
+L5_1.script = "Actor/Quest/Q301/Wendy301"
+L5_1.id = 1001
+L5_1.pos = "Q48701Windy"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["48711"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.id = 1005
+L3_1.pos = "Q48712Paimon"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["48712"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Venti01"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 100101
+L3_1.pos = "Q48701Windy"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Wendy"
+L4_1.script = "Actor/Quest/Q301/Wendy301"
+L4_1.id = 1001
+L4_1.pos = "Q48701Windy"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["48713"] = L1_1

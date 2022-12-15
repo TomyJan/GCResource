@@ -1,3 +1,5329 @@
--- 任务配置数据开始-----------------------------
-
-main_id = 71008sub_ids = {	7100801,	7100850,	7100851,	7100804,	7100805,	7100806,	7100838,	7100839,	7100840,	7100810,	7100811,	7100812,	7100841,	7100842,	7100843,	7100816,	7100817,	7100818,	7100844,	7100845,	7100846,	7100822,	7100823,	7100824,	7100847,	7100848,	7100849,	7100802,	7100852,	7100803,	7100807,	7100834,	7100808,	7100853,	7100809,	7100813,	7100835,	7100814,	7100854,	7100815,	7100819,	7100836,	7100820,	7100855,	7100821,	7100825,	7100832,	7100826,	7100827,	7100828,	7100829,	7100830,	7100831,	7100833,	7100837,}-- 任务配置数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 父任务执行项数据开始-----------------------------finish_action = {	CLIENT = { },	SERVER = { },}fail_action = {	CLIENT = { },	SERVER = { },}cancel_action = {	CLIENT = { },	SERVER = { },}-- 父任务执行项数据结束------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- Actor模块数据开始---------------------------------- 空-- Actor模块数据结束---------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 文本模块数据开始----------------------------------- 空-- 文本模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 路点模块数据开始----------------------------------- 空-- 路点模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 断线重连生成内容 开始------------------------------ 和questdata配的存档点对应rewind_data = {	["7100801"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7100802"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["7100803"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7100804"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100805"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100806"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100807"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["7100808"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7100809"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["7100810"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100811"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100812"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100813"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7100814"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},	},	["7100815"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7100816"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100817"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100818"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100819"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},	},	["7100820"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},		},	},	["7100821"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},	},	["7100822"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100823"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100824"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100825"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},		},	},	["7100826"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100827"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100828"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100829"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100830"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100831"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100832"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},		},	},	["7100833"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100834"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["7100835"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7100836"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},	},	["7100837"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100838"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100839"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100840"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100841"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100842"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100843"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100844"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100845"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100846"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100847"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100848"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100849"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100850"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7100851"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},}-- 断线重连生成内容 结束------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 校验数据 开始------------------------------------ 和任务lua中生成NPC/Monster/Gadget/Item等对应quest_data = {	["7100801"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100802"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},		transmit_points = 		{			{				point_id = 10,				scene_id = 3,				pos = "Q71008_Player_Start01",			},			{				point_id = 1,				scene_id = 3,				pos = "Q71008_Player_Begin",			},		},	},	["7100803"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},		transmit_points = 		{			{				point_id = 1,				scene_id = 3,				pos = "Q71008_Player_Begin",			},		},	},	["7100804"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100805"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100806"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},		transmit_points = 		{			{				point_id = 21,				scene_id = 3,				pos = "Q71008_Player_Start01",			},		},	},	["7100807"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100808"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},		transmit_points = 		{			{				point_id = 11,				scene_id = 3,				pos = "Q71008_Player_Start02",			},			{				point_id = 2,				scene_id = 3,				pos = "Q71008_Player_01",			},		},	},	["7100809"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},		transmit_points = 		{			{				point_id = 2,				scene_id = 3,				pos = "Q71008_Player_01",			},		},	},	["7100810"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100811"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100812"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},		transmit_points = 		{			{				point_id = 23,				scene_id = 3,				pos = "Q71008_Player_Start02",			},		},	},	["7100813"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100814"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},		transmit_points = 		{			{				point_id = 12,				scene_id = 3,				pos = "Q71008_Player_Start03",			},			{				point_id = 3,				scene_id = 3,				pos = "Q71008_Player_02",			},		},	},	["7100815"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},		transmit_points = 		{			{				point_id = 3,				scene_id = 3,				pos = "Q71008_Player_02",			},		},	},	["7100816"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100817"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100818"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},		transmit_points = 		{			{				point_id = 25,				scene_id = 3,				pos = "Q71008_Player_Start03",			},		},	},	["7100819"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100820"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},		transmit_points = 		{			{				point_id = 13,				scene_id = 3,				pos = "Q71008_Player_Start04",			},			{				point_id = 4,				scene_id = 3,				pos = "Q71008_Player_03",			},		},	},	["7100821"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},		transmit_points = 		{			{				point_id = 4,				scene_id = 3,				pos = "Q71008_Player_03",			},		},	},	["7100822"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100823"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100824"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},		transmit_points = 		{			{				point_id = 27,				scene_id = 3,				pos = "Q71008_Player_Start04",			},		},	},	["7100825"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100826"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100827"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100828"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100829"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100830"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100831"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100832"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100833"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100834"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100835"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100836"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100837"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100838"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100839"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100840"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},		transmit_points = 		{			{				point_id = 22,				scene_id = 3,				pos = "Q71008_Player_Start01",			},		},	},	["7100841"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100842"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100843"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},		transmit_points = 		{			{				point_id = 24,				scene_id = 3,				pos = "Q71008_Player_Start02",			},		},	},	["7100844"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100845"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100846"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},		transmit_points = 		{			{				point_id = 26,				scene_id = 3,				pos = "Q71008_Player_Start03",			},		},	},	["7100847"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100848"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100849"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},		transmit_points = 		{			{				point_id = 28,				scene_id = 3,				pos = "Q71008_Player_Start04",			},		},	},	["7100850"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},	["7100851"] = 	{		npcs = 		{			{				id = 20129,				alias = "Npc20129_Begin",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Begin",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20129,				alias = "Npc20129_01",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_01",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20129,				alias = "Npc20129_02",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_02",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20129,				alias = "Npc20129_03",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_03",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 20129,				alias = "Npc20129_04",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_04",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 20129,				alias = "Npc20129_05",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q71008_Afei_Route5",				scene_id = 3,				room_id = 0,				data_index = 6,			},		},	},}-- 校验数据 结束------------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1, L11_1, L12_1, L13_1, L14_1, L15_1, L16_1, L17_1, L18_1, L19_1, L20_1, L21_1, L22_1, L23_1, L24_1, L25_1, L26_1, L27_1, L28_1, L29_1, L30_1, L31_1, L32_1, L33_1, L34_1, L35_1, L36_1, L37_1, L38_1, L39_1, L40_1, L41_1, L42_1, L43_1, L44_1, L45_1, L46_1, L47_1, L48_1, L49_1, L50_1
+main_id = 71008
+L0_1 = {}
+L1_1 = 7100801
+L2_1 = 7100850
+L3_1 = 7100851
+L4_1 = 7100804
+L5_1 = 7100805
+L6_1 = 7100806
+L7_1 = 7100838
+L8_1 = 7100839
+L9_1 = 7100840
+L10_1 = 7100810
+L11_1 = 7100811
+L12_1 = 7100812
+L13_1 = 7100841
+L14_1 = 7100842
+L15_1 = 7100843
+L16_1 = 7100816
+L17_1 = 7100817
+L18_1 = 7100818
+L19_1 = 7100844
+L20_1 = 7100845
+L21_1 = 7100846
+L22_1 = 7100822
+L23_1 = 7100823
+L24_1 = 7100824
+L25_1 = 7100847
+L26_1 = 7100848
+L27_1 = 7100849
+L28_1 = 7100802
+L29_1 = 7100852
+L30_1 = 7100803
+L31_1 = 7100807
+L32_1 = 7100834
+L33_1 = 7100808
+L34_1 = 7100853
+L35_1 = 7100809
+L36_1 = 7100813
+L37_1 = 7100835
+L38_1 = 7100814
+L39_1 = 7100854
+L40_1 = 7100815
+L41_1 = 7100819
+L42_1 = 7100836
+L43_1 = 7100820
+L44_1 = 7100855
+L45_1 = 7100821
+L46_1 = 7100825
+L47_1 = 7100832
+L48_1 = 7100826
+L49_1 = 7100827
+L50_1 = 7100828
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+L0_1[11] = L11_1
+L0_1[12] = L12_1
+L0_1[13] = L13_1
+L0_1[14] = L14_1
+L0_1[15] = L15_1
+L0_1[16] = L16_1
+L0_1[17] = L17_1
+L0_1[18] = L18_1
+L0_1[19] = L19_1
+L0_1[20] = L20_1
+L0_1[21] = L21_1
+L0_1[22] = L22_1
+L0_1[23] = L23_1
+L0_1[24] = L24_1
+L0_1[25] = L25_1
+L0_1[26] = L26_1
+L0_1[27] = L27_1
+L0_1[28] = L28_1
+L0_1[29] = L29_1
+L0_1[30] = L30_1
+L0_1[31] = L31_1
+L0_1[32] = L32_1
+L0_1[33] = L33_1
+L0_1[34] = L34_1
+L0_1[35] = L35_1
+L0_1[36] = L36_1
+L0_1[37] = L37_1
+L0_1[38] = L38_1
+L0_1[39] = L39_1
+L0_1[40] = L40_1
+L0_1[41] = L41_1
+L0_1[42] = L42_1
+L0_1[43] = L43_1
+L0_1[44] = L44_1
+L0_1[45] = L45_1
+L0_1[46] = L46_1
+L0_1[47] = L47_1
+L0_1[48] = L48_1
+L0_1[49] = L49_1
+L0_1[50] = L50_1
+L1_1 = 7100829
+L2_1 = 7100830
+L3_1 = 7100831
+L4_1 = 7100833
+L5_1 = 7100837
+L0_1[51] = L1_1
+L0_1[52] = L2_1
+L0_1[53] = L3_1
+L0_1[54] = L4_1
+L0_1[55] = L5_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7100801"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_01"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 2
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7100802"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7100803"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100804"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100805"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100806"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_01"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 2
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7100807"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_02"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_02"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 3
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7100808"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_01"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 2
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7100809"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100810"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100811"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100812"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_02"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_02"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 3
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7100813"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_03"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_03"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 4
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7100814"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_02"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_02"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 3
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7100815"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100816"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100817"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100818"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_03"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_03"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 4
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7100819"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_04"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_04"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 5
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7100820"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_03"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_03"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 4
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7100821"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100822"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100823"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100824"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_04"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_04"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 5
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7100825"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100826"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100827"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100828"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100829"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100830"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100831"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_04"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_04"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 5
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7100832"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100833"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_01"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 2
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7100834"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_02"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_02"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 3
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7100835"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_03"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_03"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 4
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7100836"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100837"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100838"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100839"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100840"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100841"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100842"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100843"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100844"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100845"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100846"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100847"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100848"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100849"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7100850"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7100851"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100801"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 10
+L3_1.scene_id = 3
+L3_1.pos = "Q71008_Player_Start01"
+L4_1 = {}
+L4_1.point_id = 1
+L4_1.scene_id = 3
+L4_1.pos = "Q71008_Player_Begin"
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.transmit_points = L2_1
+L0_1["7100802"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q71008_Player_Begin"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["7100803"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100804"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100805"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 21
+L3_1.scene_id = 3
+L3_1.pos = "Q71008_Player_Start01"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["7100806"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100807"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 11
+L3_1.scene_id = 3
+L3_1.pos = "Q71008_Player_Start02"
+L4_1 = {}
+L4_1.point_id = 2
+L4_1.scene_id = 3
+L4_1.pos = "Q71008_Player_01"
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.transmit_points = L2_1
+L0_1["7100808"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 2
+L3_1.scene_id = 3
+L3_1.pos = "Q71008_Player_01"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["7100809"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100810"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100811"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 23
+L3_1.scene_id = 3
+L3_1.pos = "Q71008_Player_Start02"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["7100812"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100813"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 12
+L3_1.scene_id = 3
+L3_1.pos = "Q71008_Player_Start03"
+L4_1 = {}
+L4_1.point_id = 3
+L4_1.scene_id = 3
+L4_1.pos = "Q71008_Player_02"
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.transmit_points = L2_1
+L0_1["7100814"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 3
+L3_1.scene_id = 3
+L3_1.pos = "Q71008_Player_02"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["7100815"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100816"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100817"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 25
+L3_1.scene_id = 3
+L3_1.pos = "Q71008_Player_Start03"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["7100818"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100819"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 13
+L3_1.scene_id = 3
+L3_1.pos = "Q71008_Player_Start04"
+L4_1 = {}
+L4_1.point_id = 4
+L4_1.scene_id = 3
+L4_1.pos = "Q71008_Player_03"
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.transmit_points = L2_1
+L0_1["7100820"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 4
+L3_1.scene_id = 3
+L3_1.pos = "Q71008_Player_03"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["7100821"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100822"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100823"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 27
+L3_1.scene_id = 3
+L3_1.pos = "Q71008_Player_Start04"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["7100824"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100825"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100826"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100827"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100828"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100829"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100830"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100831"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100832"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100833"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100834"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100835"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100836"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100837"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100838"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100839"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 22
+L3_1.scene_id = 3
+L3_1.pos = "Q71008_Player_Start01"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["7100840"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100841"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100842"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 24
+L3_1.scene_id = 3
+L3_1.pos = "Q71008_Player_Start02"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["7100843"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100844"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100845"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 26
+L3_1.scene_id = 3
+L3_1.pos = "Q71008_Player_Start03"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["7100846"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100847"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100848"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 28
+L3_1.scene_id = 3
+L3_1.pos = "Q71008_Player_Start04"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["7100849"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100850"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20129
+L3_1.alias = "Npc20129_Begin"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "Q71008_Afei_Begin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20129
+L4_1.alias = "Npc20129_01"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q71008_Afei_01"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20129
+L5_1.alias = "Npc20129_02"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q71008_Afei_02"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20129
+L6_1.alias = "Npc20129_03"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q71008_Afei_03"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 20129
+L7_1.alias = "Npc20129_04"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q71008_Afei_04"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 20129
+L8_1.alias = "Npc20129_05"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q71008_Afei_Route5"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L0_1["7100851"] = L1_1
+quest_data = L0_1

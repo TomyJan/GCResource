@@ -88,7 +88,7 @@ suites = {
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_28(context, evt)
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 30607) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_1 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 30607) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_1 then
 			return true
 		end
 		return false
@@ -96,7 +96,7 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_29(context, evt)
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 30608) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_2 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 30608) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_2 then
 			return true
 		end
 		return false
@@ -104,7 +104,7 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_30(context, evt)
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 30609) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_3 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 30609) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_3 then
 			return true
 		end
 		return false
@@ -112,7 +112,7 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_56(context, evt)
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 30612) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_4 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 30612) == QuestState.UNFINISHED and evt.param1 == defs.gadget_id_4 then
 			return true
 		end
 		return false

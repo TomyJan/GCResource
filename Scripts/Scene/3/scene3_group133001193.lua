@@ -93,7 +93,7 @@ function action_EVENT_ENTER_REGION_193004(context, evt)
 	-- 在0面前， 5 到 9 范围里，30 角度内，刷{193001,193002,193003,193005}的怪物
 	
 	local ret = ScriptLib.CreateMonsterFaceAvatar(context, { entity_id = 0, monsters = {193001,193002,193003,193005}, ranges = { 5, 9 }, angle = 30 })
-	ScriptLib.PrintLog(context, tostring(ret))
+	ScriptLib.PrintLog(tostring(ret))
 	
 	return 0
 end

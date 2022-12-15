@@ -1,109 +1,93 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1
 main_id = 11000
-
-sub_ids =
-{
-	1100001,
-	1100002,
-	1100003,
-	1100004,
-	1100005,
-}
-
-XianglingData = 
-{
-	ID = 1012,
-	Alias = "Xiangling",
-}
-
-PaimonData = 
-{
-	ID = 1005,
-	Alias = "Paimon",
-}
-
-AllanData = 
-{
-	ID = 153901,
-	Alias = "Npc153901",
-}
-
-rewind_data = {}
-
-quest_data = {}
-
-quest_data["1100001"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Xiangling",
-			script = "Actor/Npc/TempNPC",
-			id = 1012,
-			pos = "Q1100001XL",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		}
-    }
-}
-
-
-quest_data["1100003"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Xiangling",
-			script = "Actor/Npc/TempNPC",
-			id = 1012,
-			pos = "Q1100003XL",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		}
-    },
-
-    transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 3,
-            pos = "Q1100003Player"
-        },
-    }
-}
-
-quest_data["1100004"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Xiangling",
-			script = "Actor/Npc/TempNPC",
-			id = 1012,
-			pos = "Q1100003XL",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		}
-    }
-}
-
-quest_data["1100005"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Xiangling",
-			script = "Actor/Npc/TempNPC",
-			id = 1012,
-			pos = "Q1100003XL",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		}
-    }
-}
+L0_1 = {}
+L1_1 = 1100001
+L2_1 = 1100002
+L3_1 = 1100003
+L4_1 = 1100004
+L5_1 = 1100005
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+sub_ids = L0_1
+L0_1 = {}
+L0_1.ID = 1012
+L0_1.Alias = "Xiangling"
+XianglingData = L0_1
+L0_1 = {}
+L0_1.ID = 1005
+L0_1.Alias = "Paimon"
+PaimonData = L0_1
+L0_1 = {}
+L0_1.ID = 153901
+L0_1.Alias = "Npc153901"
+AllanData = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Xiangling"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 1012
+L3_1.pos = "Q1100001XL"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1100001"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Xiangling"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 1012
+L3_1.pos = "Q1100003XL"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q1100003Player"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["1100003"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Xiangling"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 1012
+L3_1.pos = "Q1100003XL"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1100004"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Xiangling"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 1012
+L3_1.pos = "Q1100003XL"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1100005"] = L1_1

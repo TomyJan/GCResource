@@ -95,7 +95,7 @@ function action_EVENT_GADGET_STATE_CHANGE_86(context, evt)
 	local c_num_1 = ScriptLib.GetGroupVariableValue(context, "count")
 	local c_num = c_num_1 + 1
 	if 0 ~= ScriptLib.SetGroupVariableValue(context, "count", c_num) then
-	ScriptLib.PrintLog(context, "c_num="..c_num)
+	ScriptLib.PrintLog("c_num="..c_num)
 	    return -1
 	end
 	

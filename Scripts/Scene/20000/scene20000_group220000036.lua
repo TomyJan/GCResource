@@ -113,7 +113,7 @@ function action_EVENT_SELECT_OPTION_57(context, evt)
 	-- 激活gadget_id为91的封印战斗，战斗区域半径为10，圈内进度每秒增长1，圈外进度每秒衰减2，进度达到60时判定为战斗成功（填0则取默认值100），进度衰减到0后5秒判定为战斗失败
 	    if 24 == evt.param2 then
 	        local ret = ScriptLib.StartSealBattle(context, 91, {radius = 10, in_add = 1, out_sub = 2, fail_time = 5, max_progress = 60})
-	        --ScriptLib.PrintLog(context, "StartSealBattle ret: " ..ret)
+	        --ScriptLib.PrintLog("StartSealBattle ret: " ..ret)
 	    end
 	
 		-- 重新生成指定group，指定suite

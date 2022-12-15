@@ -76,7 +76,7 @@ suites = {
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_446(context, evt)
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid,49002) == QuestState.UNFINISHED and evt.param1 == 446 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid,49002) == QuestState.UNFINISHED and evt.param1 == 446 then
 	 return true
 	end
 	return false
@@ -84,7 +84,7 @@ end
 
 -- 触发条件
 function condition_EVENT_ENTER_REGION_502(context, evt)
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid,49004) == QuestState.UNFINISHED and evt.param1 == 502 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid,49004) == QuestState.UNFINISHED and evt.param1 == 502 then
 	 return true
 	end
 	return false

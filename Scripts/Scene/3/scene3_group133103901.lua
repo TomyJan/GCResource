@@ -93,7 +93,7 @@ suites = {
 -- 触发条件
 function condition_EVENT_ENTER_REGION_95(context, evt)
 	-- 判断任务2100104未完成
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 2100104) == QuestState.UNFINISHED and evt.param1 == 95 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 2100104) == QuestState.UNFINISHED and evt.param1 == 95 then
 		return true
 	end
 	return false
@@ -102,7 +102,7 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_901001(context, evt)
 	-- 判断任务2100103未完成
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 2100103) == QuestState.UNFINISHED and
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 2100103) == QuestState.UNFINISHED and
 	evt.param1 == 901001 then
 		return true
 	end
@@ -112,7 +112,7 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_901002(context, evt)
 	-- 判断任务2100103未完成
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 2100103) == QuestState.UNFINISHED and
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 2100103) == QuestState.UNFINISHED and
 	evt.param1 == 901002 then
 		return true
 	end
@@ -122,7 +122,7 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_901003(context, evt)
 	-- 判断任务2100103未完成
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 2100103) == QuestState.UNFINISHED and
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 2100103) == QuestState.UNFINISHED and
 	evt.param1 == 901003 then
 		return true
 	end
@@ -132,7 +132,7 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_901004(context, evt)
 	-- 判断任务1100601未完成
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 7100101) == QuestState.UNFINISHED and
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 7100101) == QuestState.UNFINISHED and
 	evt.param1 == 901004 then
 		return true
 	end
@@ -142,7 +142,7 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_901005(context, evt)
 	-- 判断任务2100106未完成
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 2100106) == QuestState.UNFINISHED and
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 2100106) == QuestState.UNFINISHED and
 	evt.param1 == 901005 then
 		return true
 	end
@@ -152,7 +152,7 @@ end
 -- 触发条件
 function condition_EVENT_ENTER_REGION_901006(context, evt)
 	-- 判断任务2100102未完成
-	if ScriptLib.GetEntityType(context, evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 2100102) == QuestState.UNFINISHED and evt.param1 == 901006 then
+	if ScriptLib.GetEntityType(evt.target_eid) == EntityType.AVATAR and ScriptLib.GetQuestState(context, evt.target_eid, 2100102) == QuestState.UNFINISHED and evt.param1 == 901006 then
 		return true
 	end
 	return false

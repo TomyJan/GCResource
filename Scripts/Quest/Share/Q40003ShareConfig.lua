@@ -1,108 +1,100 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1
 main_id = 40003
-
-sub_ids =
-{
-    4000301,
-    4000302,
-    4000303,
-    4000304,
-    4000305,
-    4000306,
-    4000307,
-    4000308,
-    4000309,
-}
-
----存放断线重连生成内容，和questdata配的存档点对应
-rewind_data = {}
-rewind_data["4000309"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Xiao",
-			script = "Actor/Npc/TempNPC",
-			id = 10204,
-			pos = "Q40003Xiao",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-	},
-	gadgets =
-	{
-		{
-			id = 70700017,
-			pos = "Q40007_ThiefRout2",
-			alias = "Q40003ThoarderIcon", 
-			scene_id = 3, 
-			room_id = 0, 
-		}
-	}
-}
-
-
----校验用，和任务lua中生成NPC/monster/gadget/item等对应
-quest_data = {}
-
-quest_data["4000304"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Npc242801",
-			script = "Actor/Npc/TempNPC",
-			id = 242801,
-			pos = "Q40003Soldier",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		}
-    }
-}
-
-quest_data["4000306"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Xiao",
-			script = "Actor/Npc/TempNPC",
-			id = 10204,
-			pos = "Q40003Xiao",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		}
-	},
-	gadgets =
-	{
-		{
-			id = 70700017,
-			pos = "Q40007_ThiefRout2",
-			alias = "Q40003ThoarderIcon", 
-			scene_id = 3, 
-			room_id = 0, 
-		}
-	}
-}
-
-quest_data["4000307"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Paimon",
-			script = "Actor/Quest/Q352/Paimon",
-			id = 1005,
-			pos = "Q4000307_Paimon",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		}
-    }
-}
+L0_1 = {}
+L1_1 = 4000301
+L2_1 = 4000302
+L3_1 = 4000303
+L4_1 = 4000304
+L5_1 = 4000305
+L6_1 = 4000306
+L7_1 = 4000307
+L8_1 = 4000308
+L9_1 = 4000309
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Xiao"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 10204
+L3_1.pos = "Q40003Xiao"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70700017
+L3_1.pos = "Q40007_ThiefRout2"
+L3_1.alias = "Q40003ThoarderIcon"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["4000309"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc242801"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 242801
+L3_1.pos = "Q40003Soldier"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["4000304"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Xiao"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 10204
+L3_1.pos = "Q40003Xiao"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70700017
+L3_1.pos = "Q40007_ThiefRout2"
+L3_1.alias = "Q40003ThoarderIcon"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["4000306"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.id = 1005
+L3_1.pos = "Q4000307_Paimon"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["4000307"] = L1_1

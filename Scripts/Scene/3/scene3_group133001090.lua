@@ -27,7 +27,7 @@ npcs = {
 
 -- 装置
 gadgets = {
-	{ config_id = 1717, gadget_id = 70900007, pos = { x = 1266.951, y = 259.361, z = -1688.478 }, rot = { x = 0.000, y = 79.834, z = 0.000 }, level = 15, state = GadgetState.GearStop, persistent = true, area_id = 2 },
+	{ config_id = 1717, gadget_id = 70900007, pos = { x = 1266.951, y = 259.361, z = -1688.478 }, rot = { x = 0.000, y = 79.834, z = 0.000 }, level = 15, state = GadgetState.GearStart, persistent = true, area_id = 2 },
 	{ config_id = 1793, gadget_id = 70211001, pos = { x = 1252.683, y = 261.857, z = -1647.305 }, rot = { x = 0.000, y = 175.934, z = 0.000 }, level = 11, drop_tag = "战斗低级蒙德", isOneoff = true, persistent = true, explore = { name = "chest", exp = 1 }, area_id = 2 },
 	{ config_id = 3038, gadget_id = 70211022, pos = { x = 1260.942, y = 258.602, z = -1683.167 }, rot = { x = 0.000, y = 268.853, z = 0.000 }, level = 11, drop_tag = "战斗高级蒙德", state = GadgetState.ChestLocked, isOneoff = true, persistent = true, explore = { name = "chest", exp = 1 }, area_id = 2 }
 }

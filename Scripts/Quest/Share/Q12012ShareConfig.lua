@@ -1,3 +1,499 @@
--- 任务配置数据开始-----------------------------
-
-main_id = 12012sub_ids = {	1201201,	1201208,	1201209,	1201202,	1201204,	1201205,	1201206,	1201207,}-- 任务配置数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 父任务执行项数据开始-----------------------------finish_action = {	CLIENT = { },	SERVER = { },}fail_action = {	CLIENT = { },	SERVER = { },}cancel_action = {	CLIENT = { },	SERVER = { },}-- 父任务执行项数据结束------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- Actor模块数据开始---------------------------------- 空-- Actor模块数据结束---------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 文本模块数据开始----------------------------------- 空-- 文本模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 路点模块数据开始----------------------------------- 空-- 路点模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 断线重连生成内容 开始------------------------------ 和questdata配的存档点对应rewind_data = {	["1201201"] = { },	["1201202"] = 	{		npcs = 		{			{				id = 12030,				alias = "Npc12030",				script = "Actor/Npc/TempNPC",				pos = "Q12012_Obachin_Home_Pos",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3094,				alias = "Npc3094",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12012_Ojichin_Home_Pos",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["1201204"] = 	{		npcs = 		{			{				id = 12030,				alias = "Npc12030",				script = "Actor/Npc/TempNPC",				pos = "Q12012_Obachin_Home_Pos",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3094,				alias = "Npc3094",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12012_Ojichin_Home_Pos",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["1201205"] = 	{		npcs = 		{			{				id = 12030,				alias = "Npc12030",				script = "Actor/Npc/TempNPC",				pos = "Q12012_Obachin_Home_Pos",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3094,				alias = "Npc3094",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12012_Ojichin_Home_Pos",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 12053,				alias = "Npc12053",				script = "Actor/Npc/TempNPC",				pos = "Q12012_Satoru_Pos",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["1201206"] = 	{		npcs = 		{			{				id = 12030,				alias = "Npc12030",				script = "Actor/Npc/TempNPC",				pos = "Q12012_Obachin_Home_Pos",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3094,				alias = "Npc3094",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12012_Ojichin_Home_Pos",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["1201208"] = { },	["1201209"] = { },}-- 断线重连生成内容 结束------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 校验数据 开始------------------------------------ 和任务lua中生成NPC/Monster/Gadget/Item等对应quest_data = {	["1201201"] = 	{		npcs = 		{			{				id = 1035,				alias = "Npc1035",				script = "Actor/Npc/TempNPC",				pos = "Q12012_Yoimiya_Home_Pos",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 12030,				alias = "Npc12030",				script = "Actor/Npc/TempNPC",				pos = "Q12012_Obachin_Home_Pos",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3094,				alias = "Npc3094",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12012_Ojichin_Home_Pos",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 3035,				alias = "Npc3035",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 3036,				alias = "Npc3036",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 3037,				alias = "Npc3037",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 3066,				alias = "Npc3066",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos",				scene_id = 3,				room_id = 0,				data_index = 7,			},		},	},	["1201202"] = 	{		npcs = 		{			{				id = 1035,				alias = "Npc1035",				script = "Actor/Npc/TempNPC",				pos = "Q12012_Yoimiya_Home_Pos",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["1201204"] = 	{		npcs = 		{			{				id = 1035,				alias = "Npc1035",				script = "Actor/Npc/TempNPC",				pos = "Q12012_Yoimiya_Satoru_Pos",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 12053,				alias = "Npc12053",				script = "Actor/Npc/TempNPC",				pos = "Q12012_Satoru_Pos",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3170,				alias = "Npc3170",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12012_Satoru_Pos",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["1201205"] = 	{		npcs = 		{			{				id = 1035,				alias = "Npc1035",				script = "Actor/Npc/TempNPC",				pos = "Q12012_Yoimiya_Home_Pos",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3170,				alias = "Npc3170",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12012_Satoru_Pos",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["1201206"] = 	{		npcs = 		{			{				id = 1035,				alias = "Npc1035",				script = "Actor/Npc/TempNPC",				pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3035,				alias = "Npc3035",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 12052,				alias = "Npc12052",				script = "Actor/Npc/TempNPC",				pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 12027,				alias = "Npc12027",				script = "Actor/Npc/TempNPC",				pos = "Q12013_Childrens_1_Pos",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 12028,				alias = "Npc12028",				script = "Actor/Npc/TempNPC",				pos = "Q12013_Childrens_2_Pos",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 12029,				alias = "Npc12029",				script = "Actor/Npc/TempNPC",				pos = "Q12013_Childrens_3_Pos",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 3036,				alias = "Npc3036",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos",				scene_id = 3,				room_id = 0,				data_index = 7,			},			{				id = 3037,				alias = "Npc3037",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos",				scene_id = 3,				room_id = 0,				data_index = 8,			},			{				id = 3066,				alias = "Npc3066",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos",				scene_id = 3,				room_id = 0,				data_index = 9,			},		},	},	["1201207"] = { },	["1201208"] = 	{		npcs = 		{			{				id = 1035,				alias = "Npc1035",				script = "Actor/Npc/TempNPC",				pos = "Q12012_Yoimiya_Home_Pos",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 12030,				alias = "Npc12030",				script = "Actor/Npc/TempNPC",				pos = "Q12012_Obachin_Home_Pos",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3094,				alias = "Npc3094",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12012_Ojichin_Home_Pos",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 3035,				alias = "Npc3035",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 3036,				alias = "Npc3036",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 3037,				alias = "Npc3037",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 3066,				alias = "Npc3066",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos",				scene_id = 3,				room_id = 0,				data_index = 7,			},		},	},	["1201209"] = 	{		npcs = 		{			{				id = 1035,				alias = "Npc1035",				script = "Actor/Npc/TempNPC",				pos = "Q12012_Yoimiya_Home_Pos",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 12030,				alias = "Npc12030",				script = "Actor/Npc/TempNPC",				pos = "Q12012_Obachin_Home_Pos",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 3094,				alias = "Npc3094",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12012_Ojichin_Home_Pos",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 3035,				alias = "Npc3035",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos",				scene_id = 3,				room_id = 0,				data_index = 4,			},			{				id = 3036,				alias = "Npc3036",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos",				scene_id = 3,				room_id = 0,				data_index = 5,			},			{				id = 3037,				alias = "Npc3037",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos",				scene_id = 3,				room_id = 0,				data_index = 6,			},			{				id = 3066,				alias = "Npc3066",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos",				scene_id = 3,				room_id = 0,				data_index = 7,			},		},	},}-- 校验数据 结束------------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1, L11_1
+main_id = 12012
+L0_1 = {}
+L1_1 = 1201201
+L2_1 = 1201208
+L3_1 = 1201209
+L4_1 = 1201202
+L5_1 = 1201204
+L6_1 = 1201205
+L7_1 = 1201206
+L8_1 = 1201207
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["1201201"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12030
+L3_1.alias = "Npc12030"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q12012_Obachin_Home_Pos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3094
+L4_1.alias = "Npc3094"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q12012_Ojichin_Home_Pos"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["1201202"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12030
+L3_1.alias = "Npc12030"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q12012_Obachin_Home_Pos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3094
+L4_1.alias = "Npc3094"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q12012_Ojichin_Home_Pos"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["1201204"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12030
+L3_1.alias = "Npc12030"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q12012_Obachin_Home_Pos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3094
+L4_1.alias = "Npc3094"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q12012_Ojichin_Home_Pos"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 12053
+L5_1.alias = "Npc12053"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q12012_Satoru_Pos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["1201205"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12030
+L3_1.alias = "Npc12030"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q12012_Obachin_Home_Pos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3094
+L4_1.alias = "Npc3094"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q12012_Ojichin_Home_Pos"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["1201206"] = L1_1
+L1_1 = {}
+L0_1["1201208"] = L1_1
+L1_1 = {}
+L0_1["1201209"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1035
+L3_1.alias = "Npc1035"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q12012_Yoimiya_Home_Pos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 12030
+L4_1.alias = "Npc12030"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q12012_Obachin_Home_Pos"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3094
+L5_1.alias = "Npc3094"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q12012_Ojichin_Home_Pos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 3035
+L6_1.alias = "Npc3035"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 3036
+L7_1.alias = "Npc3036"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 3037
+L8_1.alias = "Npc3037"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 3066
+L9_1.alias = "Npc3066"
+L9_1.script = "Actor/Npc/NpcFSMBehaviour"
+L9_1.pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L1_1.npcs = L2_1
+L0_1["1201201"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1035
+L3_1.alias = "Npc1035"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q12012_Yoimiya_Home_Pos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["1201202"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1035
+L3_1.alias = "Npc1035"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q12012_Yoimiya_Satoru_Pos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 12053
+L4_1.alias = "Npc12053"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q12012_Satoru_Pos"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3170
+L5_1.alias = "Npc3170"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q12012_Satoru_Pos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["1201204"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1035
+L3_1.alias = "Npc1035"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q12012_Yoimiya_Home_Pos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3170
+L4_1.alias = "Npc3170"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q12012_Satoru_Pos"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["1201205"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1035
+L3_1.alias = "Npc1035"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3035
+L4_1.alias = "Npc3035"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 12052
+L5_1.alias = "Npc12052"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 12027
+L6_1.alias = "Npc12027"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Q12013_Childrens_1_Pos"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 12028
+L7_1.alias = "Npc12028"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.pos = "Q12013_Childrens_2_Pos"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 12029
+L8_1.alias = "Npc12029"
+L8_1.script = "Actor/Npc/TempNPC"
+L8_1.pos = "Q12013_Childrens_3_Pos"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 3036
+L9_1.alias = "Npc3036"
+L9_1.script = "Actor/Npc/NpcFSMBehaviour"
+L9_1.pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L10_1 = {}
+L10_1.id = 3037
+L10_1.alias = "Npc3037"
+L10_1.script = "Actor/Npc/NpcFSMBehaviour"
+L10_1.pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos"
+L10_1.scene_id = 3
+L10_1.room_id = 0
+L10_1.data_index = 8
+L11_1 = {}
+L11_1.id = 3066
+L11_1.alias = "Npc3066"
+L11_1.script = "Actor/Npc/NpcFSMBehaviour"
+L11_1.pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos"
+L11_1.scene_id = 3
+L11_1.room_id = 0
+L11_1.data_index = 9
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L1_1.npcs = L2_1
+L0_1["1201206"] = L1_1
+L1_1 = {}
+L0_1["1201207"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1035
+L3_1.alias = "Npc1035"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q12012_Yoimiya_Home_Pos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 12030
+L4_1.alias = "Npc12030"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q12012_Obachin_Home_Pos"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3094
+L5_1.alias = "Npc3094"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q12012_Ojichin_Home_Pos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 3035
+L6_1.alias = "Npc3035"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 3036
+L7_1.alias = "Npc3036"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 3037
+L8_1.alias = "Npc3037"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 3066
+L9_1.alias = "Npc3066"
+L9_1.script = "Actor/Npc/NpcFSMBehaviour"
+L9_1.pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L1_1.npcs = L2_1
+L0_1["1201208"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1035
+L3_1.alias = "Npc1035"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q12012_Yoimiya_Home_Pos"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 12030
+L4_1.alias = "Npc12030"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q12012_Obachin_Home_Pos"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 3094
+L5_1.alias = "Npc3094"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "Q12012_Ojichin_Home_Pos"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 3035
+L6_1.alias = "Npc3035"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L7_1 = {}
+L7_1.id = 3036
+L7_1.alias = "Npc3036"
+L7_1.script = "Actor/Npc/NpcFSMBehaviour"
+L7_1.pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 5
+L8_1 = {}
+L8_1.id = 3037
+L8_1.alias = "Npc3037"
+L8_1.script = "Actor/Npc/NpcFSMBehaviour"
+L8_1.pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos"
+L8_1.scene_id = 3
+L8_1.room_id = 0
+L8_1.data_index = 6
+L9_1 = {}
+L9_1.id = 3066
+L9_1.alias = "Npc3066"
+L9_1.script = "Actor/Npc/NpcFSMBehaviour"
+L9_1.pos = "Q12010_Yoimiya_Father_Inazuma_1_Pos"
+L9_1.scene_id = 3
+L9_1.room_id = 0
+L9_1.data_index = 7
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L1_1.npcs = L2_1
+L0_1["1201209"] = L1_1
+quest_data = L0_1

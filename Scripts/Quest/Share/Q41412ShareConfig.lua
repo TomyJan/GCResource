@@ -1,644 +1,581 @@
--- 任务配置数据开始-----------------------------
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1, L11_1, L12_1, L13_1, L14_1
 main_id = 41412
-
-sub_ids = 
-{
-	4141201,
-	4141202,
-	4141203,
-	4141204,
-	4141205,
-	4141206,
-	4141207,
-	4141209,
-	4141208,
-	4141214,
-	4141210,
-	4141211,
-	4141212,
-	4141213,
-}
--- 任务配置数据结束---------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
--- 父任务执行项数据开始-----------------------------
-finish_action = 
-{
-	CLIENT = { },
-	SERVER = { },
-}
-
-fail_action = 
-{
-	CLIENT = { },
-	SERVER = { },
-}
-
-cancel_action = 
-{
-	CLIENT = { },
-	SERVER = {
-		QUEST_EXEC_DEL_ALL_SPECIFIC_PACK_ITEM = 
-		{
-			{ "100762", },
-		},
-		QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP = 
-		{
-			{ "133003922", },
-			{ "133003923", },
-			{ "133001926", },
-		},
-	 },
-}
--- 父任务执行项数据结束-----------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
--- Actor模块数据开始--------------------------------
--- 空
--- Actor模块数据结束--------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
--- 文本模块数据开始---------------------------------
--- 空
--- 文本模块数据结束---------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
--- 路点模块数据开始---------------------------------
--- 空
--- 路点模块数据结束---------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-
--- 断线重连生成内容 开始----------------------------
--- 和questdata配的存档点对应
-rewind_data = 
-{
-	["4141201"] = { },
-	["4141202"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 1019,
-				alias = "Npc1019",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q4141201Sucrose",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-	},
-	["4141203"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 1019,
-				alias = "Npc1019",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q4141201Sucrose",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 1018,
-				alias = "Npc1018",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q4141202Albedo",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-		},
-	},
-	["4141204"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 1019,
-				alias = "Npc1019",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q4141201Sucrose",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-	},
-	["4141205"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 1019,
-				alias = "Npc1019",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q4141201Sucrose",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-	},
-	["4141206"] = { },
-	["4141207"] = { },
-	["4141208"] = { 
-		npcs = 
-		{
-			{
-				id = 1011,
-				alias = "Razor",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q4141207Razor",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 1028,
-				alias = "Npc1028",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q4141207Bennett",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-		},
-	},
-	["4141209"] = { },
-	["4141210"] = { },
-	["4141211"] = { 
-		npcs = 
-		{
-			{
-				id = 1011,
-				alias = "Razor",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q4141211Razor",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 1028,
-				alias = "Npc1028",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q4141211Bennett",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-		},
-	},
-	["4141212"] = { },
-	["4141213"] = { },
-	["4141214"] = {	},
-}
--- 断线重连生成内容 结束----------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
--- 校验数据 开始----------------------------------
--- 和任务lua中生成NPC/Monster/Gadget/Item等对应
-quest_data = 
-{
-	["4141201"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 1019,
-				alias = "Npc1019",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q4141201Sucrose",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 1001,
-				alias = "Wendy",
-				script = "Actor/Quest/Q301/Wendy301",
-				pos = "Q4141201Venti",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-		},
-	},
-	["4141202"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 1018,
-				alias = "Npc1018",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q4141202Albedo",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 1001,
-				alias = "Wendy",
-				script = "Actor/Quest/Q301/Wendy301",
-				pos = "Q4141202Venti",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-		},
-	},
-	["4141203"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 1001,
-				alias = "Wendy",
-				script = "Actor/Quest/Q301/Wendy301",
-				pos = "Q4141202Venti",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-	},
-	["4141204"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 1018,
-				alias = "Npc1018",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q4141202Albedo",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 1001,
-				alias = "Wendy",
-				script = "Actor/Quest/Q301/Wendy301",
-				pos = "Q4141202Venti",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-		},
-
-		gadgets = 
-		{
-			{
-				id = 71700201,
-				alias = "Gadget71700201",
-				pos = "Q4141204Gadget",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-	},
-	["4141205"] =
-	{
-		npcs = 
-		{
-			{
-				id = 1001,
-				alias = "Wendy",
-				script = "Actor/Quest/Q301/Wendy301",
-				pos = "Q4141201Venti",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-		gadgets = 
-		{
-			{
-				id = 71700201,
-				alias = "Gadget71700201",
-				pos = "Q4141205Gadget",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-	},
-	["4141206"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 1008,
-				alias = "Barbara",
-				script = "Actor/Quest/Q413/Barbara",
-				pos = "Q4141206Barbara",
-				scene_id = 1008,
-				room_id = 1,
-				data_index = 1,
-			},
-			{
-				id = 1020,
-				alias = "Npc1020",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q4141206Rosaria",
-				scene_id = 1008,
-				room_id = 1,
-				data_index = 2,
-			},
-			{
-				id = 1001,
-				alias = "Wendy",
-				script = "Actor/Quest/Q301/Wendy301",
-				pos = "Q4141206Venti",
-				scene_id = 1008,
-				room_id = 1,
-				data_index = 3,
-			},
-		},
-	},
-	["4141207"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 1011,
-				alias = "Razor",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q4141207Razor",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 1028,
-				alias = "Npc1028",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q4141207Bennett",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-			{
-				id = 1001,
-				alias = "Wendy",
-				script = "Actor/Quest/Q301/Wendy301",
-				pos = "Q4141207Venti",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 3,
-			},
-		},
-	},
-	["4141208"] = {
-		npcs = 
-		{
-			{
-				id = 1001,
-				alias = "Wendy",
-				script = "Actor/Quest/Q301/Wendy301",
-				pos = "Q4141207Venti",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-	},
-	["4141209"] = {
-		npcs = 
-		{
-			{
-				id = 1011,
-				alias = "Razor",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q4141207Razor",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 1028,
-				alias = "Npc1028",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q4141207Bennett",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-			{
-				id = 1001,
-				alias = "Wendy",
-				script = "Actor/Quest/Q301/Wendy301",
-				pos = "Q4141207Venti",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 3,
-			},
-		},
-	},
-	["4141210"] = {
-		npcs = 
-		{
-			{
-				id = 1011,
-				alias = "Razor",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q4141207Razor",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 1028,
-				alias = "Npc1028",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q4141207Bennett",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-			{
-				id = 1001,
-				alias = "Wendy",
-				script = "Actor/Quest/Q301/Wendy301",
-				pos = "Q4141207Venti",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 3,
-			},
-		},
-	},
-	["4141211"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 1001,
-				alias = "Wendy",
-				script = "Actor/Quest/Q301/Wendy301",
-				pos = "Q4141207Venti",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-		-- npcs = 
-		-- {
-		-- 	{
-		-- 		id = 1011,
-		-- 		alias = "Razor",
-		-- 		script = "Actor/Npc/TempNPC",
-		-- 		pos = "Q4141211Razor",
-		-- 		scene_id = 3,
-		-- 		room_id = 0,
-		-- 		data_index = 1,
-		-- 	},
-		-- 	{
-		-- 		id = 1028,
-		-- 		alias = "Npc1028",
-		-- 		script = "Actor/Npc/TempNPC",
-		-- 		pos = "Q4141211Bennett",
-		-- 		scene_id = 3,
-		-- 		room_id = 0,
-		-- 		data_index = 2,
-		-- 	},
-		-- },
-	},
-	["4141212"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 1001,
-				alias = "Wendy",
-				script = "Actor/Quest/Q301/Wendy301",
-				pos = "Q4141213Venti",
-				scene_id = 1009,
-				room_id = 1,
-				data_index = 1,
-			},
-		},
-	},
-	["4141213"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 1004,
-				alias = "Gaia",
-				script = "Actor/Quest/Q301/Gaia301",
-				pos = "Q4141213Kaeya",
-				scene_id = 1009,
-				room_id = 1,
-				data_index = 1,
-			},
-			{
-				id = 1009,
-				alias = "Diluc",
-				script = "Actor/Quest/Q376/Diluc",
-				pos = "Q4141213Diluc",
-				scene_id = 1009,
-				room_id = 1,
-				data_index = 2,
-			},
-			{
-				id = 1020,
-				alias = "Npc1020",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q4141213Rosaria",
-				scene_id = 1009,
-				room_id = 1,
-				data_index = 3,
-			},
-			{
-				id = 1001,
-				alias = "Wendy",
-				script = "Actor/Quest/Q301/Wendy301",
-				pos = "Q4141213Venti",
-				scene_id = 1009,
-				room_id = 1,
-				data_index = 4,
-			},
-		},
-	},
-	["4141214"] = {
-		npcs = 
-		{
-			{
-				id = 1011,
-				alias = "Razor",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q4141207Razor",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-			{
-				id = 1028,
-				alias = "Npc1028",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q4141207Bennett",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 2,
-			},
-			{
-				id = 1001,
-				alias = "Wendy",
-				script = "Actor/Quest/Q301/Wendy301",
-				pos = "Q4141207Venti",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 3,
-			},
-		},
-	},
-	["4141216"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 1004,
-				alias = "Gaia",
-				script = "Actor/Quest/Q301/Gaia301",
-				pos = "Q4141213Kaeya",
-				scene_id = 1009,
-				room_id = 1,
-				data_index = 1,
-			},
-			{
-				id = 1009,
-				alias = "Diluc",
-				script = "Actor/Quest/Q376/Diluc",
-				pos = "Q4141213Diluc",
-				scene_id = 1009,
-				room_id = 1,
-				data_index = 2,
-			},
-			{
-				id = 1020,
-				alias = "Npc1020",
-				script = "Actor/Npc/TempNPC",
-				pos = "Q4141213Rosaria",
-				scene_id = 1009,
-				room_id = 1,
-				data_index = 3,
-			},
-			{
-				id = 1001,
-				alias = "Wendy",
-				script = "Actor/Quest/Q301/Wendy301",
-				pos = "Q4141213Venti",
-				scene_id = 1009,
-				room_id = 1,
-				data_index = 4,
-			},
-		},
-	},
-}
--- 校验数据 结束----------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
+L0_1 = {}
+L1_1 = 4141201
+L2_1 = 4141202
+L3_1 = 4141203
+L4_1 = 4141204
+L5_1 = 4141205
+L6_1 = 4141206
+L7_1 = 4141207
+L8_1 = 4141209
+L9_1 = 4141208
+L10_1 = 4141214
+L11_1 = 4141210
+L12_1 = 4141211
+L13_1 = 4141212
+L14_1 = 4141213
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+L0_1[11] = L11_1
+L0_1[12] = L12_1
+L0_1[13] = L13_1
+L0_1[14] = L14_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L4_1 = "100762"
+L3_1[1] = L4_1
+L2_1[1] = L3_1
+L1_1.QUEST_EXEC_DEL_ALL_SPECIFIC_PACK_ITEM = L2_1
+L2_1 = {}
+L3_1 = {}
+L4_1 = "133003922"
+L3_1[1] = L4_1
+L4_1 = {}
+L5_1 = "133003923"
+L4_1[1] = L5_1
+L5_1 = {}
+L6_1 = "133001926"
+L5_1[1] = L6_1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.QUEST_EXEC_UNREGISTER_DYNAMIC_GROUP = L2_1
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["4141201"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1019
+L3_1.alias = "Npc1019"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4141201Sucrose"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["4141202"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1019
+L3_1.alias = "Npc1019"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4141201Sucrose"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1018
+L4_1.alias = "Npc1018"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q4141202Albedo"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["4141203"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1019
+L3_1.alias = "Npc1019"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4141201Sucrose"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["4141204"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1019
+L3_1.alias = "Npc1019"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4141201Sucrose"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["4141205"] = L1_1
+L1_1 = {}
+L0_1["4141206"] = L1_1
+L1_1 = {}
+L0_1["4141207"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1011
+L3_1.alias = "Razor"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4141207Razor"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1028
+L4_1.alias = "Npc1028"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q4141207Bennett"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["4141208"] = L1_1
+L1_1 = {}
+L0_1["4141209"] = L1_1
+L1_1 = {}
+L0_1["4141210"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1011
+L3_1.alias = "Razor"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4141211Razor"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1028
+L4_1.alias = "Npc1028"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q4141211Bennett"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["4141211"] = L1_1
+L1_1 = {}
+L0_1["4141212"] = L1_1
+L1_1 = {}
+L0_1["4141213"] = L1_1
+L1_1 = {}
+L0_1["4141214"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1019
+L3_1.alias = "Npc1019"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4141201Sucrose"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1001
+L4_1.alias = "Wendy"
+L4_1.script = "Actor/Quest/Q301/Wendy301"
+L4_1.pos = "Q4141201Venti"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["4141201"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1018
+L3_1.alias = "Npc1018"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4141202Albedo"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1001
+L4_1.alias = "Wendy"
+L4_1.script = "Actor/Quest/Q301/Wendy301"
+L4_1.pos = "Q4141202Venti"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["4141202"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1001
+L3_1.alias = "Wendy"
+L3_1.script = "Actor/Quest/Q301/Wendy301"
+L3_1.pos = "Q4141202Venti"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["4141203"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1018
+L3_1.alias = "Npc1018"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4141202Albedo"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1001
+L4_1.alias = "Wendy"
+L4_1.script = "Actor/Quest/Q301/Wendy301"
+L4_1.pos = "Q4141202Venti"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 71700201
+L3_1.alias = "Gadget71700201"
+L3_1.pos = "Q4141204Gadget"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["4141204"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1001
+L3_1.alias = "Wendy"
+L3_1.script = "Actor/Quest/Q301/Wendy301"
+L3_1.pos = "Q4141201Venti"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 71700201
+L3_1.alias = "Gadget71700201"
+L3_1.pos = "Q4141205Gadget"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["4141205"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1008
+L3_1.alias = "Barbara"
+L3_1.script = "Actor/Quest/Q413/Barbara"
+L3_1.pos = "Q4141206Barbara"
+L3_1.scene_id = 1008
+L3_1.room_id = 1
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1020
+L4_1.alias = "Npc1020"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q4141206Rosaria"
+L4_1.scene_id = 1008
+L4_1.room_id = 1
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1001
+L5_1.alias = "Wendy"
+L5_1.script = "Actor/Quest/Q301/Wendy301"
+L5_1.pos = "Q4141206Venti"
+L5_1.scene_id = 1008
+L5_1.room_id = 1
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["4141206"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1011
+L3_1.alias = "Razor"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4141207Razor"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1028
+L4_1.alias = "Npc1028"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q4141207Bennett"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1001
+L5_1.alias = "Wendy"
+L5_1.script = "Actor/Quest/Q301/Wendy301"
+L5_1.pos = "Q4141207Venti"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["4141207"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1001
+L3_1.alias = "Wendy"
+L3_1.script = "Actor/Quest/Q301/Wendy301"
+L3_1.pos = "Q4141207Venti"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["4141208"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1011
+L3_1.alias = "Razor"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4141207Razor"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1028
+L4_1.alias = "Npc1028"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q4141207Bennett"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1001
+L5_1.alias = "Wendy"
+L5_1.script = "Actor/Quest/Q301/Wendy301"
+L5_1.pos = "Q4141207Venti"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["4141209"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1011
+L3_1.alias = "Razor"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4141207Razor"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1028
+L4_1.alias = "Npc1028"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q4141207Bennett"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1001
+L5_1.alias = "Wendy"
+L5_1.script = "Actor/Quest/Q301/Wendy301"
+L5_1.pos = "Q4141207Venti"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["4141210"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1001
+L3_1.alias = "Wendy"
+L3_1.script = "Actor/Quest/Q301/Wendy301"
+L3_1.pos = "Q4141207Venti"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["4141211"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1001
+L3_1.alias = "Wendy"
+L3_1.script = "Actor/Quest/Q301/Wendy301"
+L3_1.pos = "Q4141213Venti"
+L3_1.scene_id = 1009
+L3_1.room_id = 1
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["4141212"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1004
+L3_1.alias = "Gaia"
+L3_1.script = "Actor/Quest/Q301/Gaia301"
+L3_1.pos = "Q4141213Kaeya"
+L3_1.scene_id = 1009
+L3_1.room_id = 1
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1009
+L4_1.alias = "Diluc"
+L4_1.script = "Actor/Quest/Q376/Diluc"
+L4_1.pos = "Q4141213Diluc"
+L4_1.scene_id = 1009
+L4_1.room_id = 1
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1020
+L5_1.alias = "Npc1020"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q4141213Rosaria"
+L5_1.scene_id = 1009
+L5_1.room_id = 1
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1001
+L6_1.alias = "Wendy"
+L6_1.script = "Actor/Quest/Q301/Wendy301"
+L6_1.pos = "Q4141213Venti"
+L6_1.scene_id = 1009
+L6_1.room_id = 1
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["4141213"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1011
+L3_1.alias = "Razor"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q4141207Razor"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1028
+L4_1.alias = "Npc1028"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q4141207Bennett"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1001
+L5_1.alias = "Wendy"
+L5_1.script = "Actor/Quest/Q301/Wendy301"
+L5_1.pos = "Q4141207Venti"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["4141214"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1004
+L3_1.alias = "Gaia"
+L3_1.script = "Actor/Quest/Q301/Gaia301"
+L3_1.pos = "Q4141213Kaeya"
+L3_1.scene_id = 1009
+L3_1.room_id = 1
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1009
+L4_1.alias = "Diluc"
+L4_1.script = "Actor/Quest/Q376/Diluc"
+L4_1.pos = "Q4141213Diluc"
+L4_1.scene_id = 1009
+L4_1.room_id = 1
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 1020
+L5_1.alias = "Npc1020"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q4141213Rosaria"
+L5_1.scene_id = 1009
+L5_1.room_id = 1
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 1001
+L6_1.alias = "Wendy"
+L6_1.script = "Actor/Quest/Q301/Wendy301"
+L6_1.pos = "Q4141213Venti"
+L6_1.scene_id = 1009
+L6_1.room_id = 1
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["4141216"] = L1_1
+quest_data = L0_1

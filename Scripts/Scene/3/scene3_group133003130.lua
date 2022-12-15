@@ -115,19 +115,19 @@ end
 -- 触发操作
 function action_EVENT_GATHER_103(context, evt)
 	-- 创建编号为2601（该挑战的识别id),挑战内容为128的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
-	ScriptLib.PrintLog(context, "Enter Trigger 103")
+	ScriptLib.PrintLog("Enter Trigger 103")
 	if 0 ~= ScriptLib.ActiveChallenge(context, 2601, 128, 50, 20, 9, 5) then
-	ScriptLib.PrintLog(context, "Create fail")
+	ScriptLib.PrintLog("Create fail")
 		return -1
 	end
-	ScriptLib.PrintLog(context, "Create Success")
+	ScriptLib.PrintLog("Create Success")
 	
 		-- 重新生成指定group，指定suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133003130, suite = 2 }) then
-	ScriptLib.PrintLog(context, "refresh 133003130  fail")
+	ScriptLib.PrintLog("refresh 133003130  fail")
 			return -1
 		end
-	ScriptLib.PrintLog(context, "refresh 133003130 Success")
+	ScriptLib.PrintLog("refresh 133003130 Success")
 	
 	-- 变量"get1"赋值为0
 	ScriptLib.SetGroupVariableValue(context, "get1", 0)
@@ -138,7 +138,7 @@ end
 -- 触发条件
 function condition_EVENT_GATHER_119(context, evt)
 	-- 判断变量"get1"为0
-	ScriptLib.PrintLog(context, "Enter 119")
+	ScriptLib.PrintLog("Enter 119")
 	if ScriptLib.GetGroupVariableValue(context, "get1") ~= 0 then
 			return false
 	end
@@ -167,11 +167,11 @@ end
 -- 触发操作
 function action_EVENT_CHALLENGE_SUCCESS_120(context, evt)
 		-- 重新生成指定group，指定suite
-	ScriptLib.PrintLog(context, "challenge success")
+	ScriptLib.PrintLog("challenge success")
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133003130, suite = 3 }) then
 			return -1
 		end
-	ScriptLib.PrintLog(context, "refresh 133003130  to 3 suc")
+	ScriptLib.PrintLog("refresh 133003130  to 3 suc")
 	
 	-- 创建id为2609的gadget
 	if 0 ~= ScriptLib.CreateGadget(context, { config_id = defs.gadget_id_1 }) then
@@ -194,11 +194,11 @@ end
 -- 触发操作
 function action_EVENT_CHALLENGE_FAIL_121(context, evt)
 		-- 重新生成指定group，指定suite
-	ScriptLib.PrintLog(context, "Challenge fail")
+	ScriptLib.PrintLog("Challenge fail")
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 133003130, suite = 3 }) then
 			return -1
 		end
-	ScriptLib.PrintLog(context, "challenge fail cause refresh to 3")
+	ScriptLib.PrintLog("challenge fail cause refresh to 3")
 	
 	return 0
 end

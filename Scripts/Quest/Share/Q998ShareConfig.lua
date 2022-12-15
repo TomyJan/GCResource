@@ -1,133 +1,104 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1
 main_id = 998
-
-sub_ids =
-{
-    99801,
-    99802,
-    99803,
-    99804,
-    99805,
-}
-
-rewind_data = {}
-
-rewind_data["99801"] = 
-{
-    npcs = {
-        {
-            id = 1121,
-            alias = "QQ1121",
-            script = "Actor/Npc/TempNpcActor",
-            pos = "Q998Pos1",
-            data_index = 0,
-        }
-    }
-}
-
-rewind_data["99803"] = 
-{
-    npcs = {
-        {
-            id = 1121,
-            alias = "QQ1121",
-            script = "Actor/Npc/TempNpcActor",
-            pos = "Q998Pos2"
-        }
-    }
-}
-
-rewind_data["99805"] = 
-{
-    npcs = {
-        {
-            id = 1121,
-            alias = "QQ1121",
-            script = "Actor/Npc/TempNpcActor",
-            pos = "Q998Pos3"
-        }
-    }
-}
-
-rewind_data["99807"] = 
-{
-    npcs = {
-        {
-            id = 1001,
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            pos = "Q37201Player",
-            data_index = 1,
-            scene_id  = 3,
-
-        },
-    }
-}
-
-quest_data = {}
-
-quest_data["99803"] = 
-{
-    trial_actors = {
-
-    },
-    actors = {
-        
-    },
-    items = {
-        -- {
-        --     id = 100004,
-        --     pos = "Q998Pos2",
-        --     alias = "Ball",
-        -- },
-    },
-    monsters = {
-        -- {
-        --     id = 20010801,
-        --     pos = "Q998Pos2",
-        -- },
-        -- {
-        --     id = 20010801,
-        --     pos = "Q998Pos2",
-        -- }
-    },
-    gadgets = {
-        -- {
-        --     id = 70300018,
-        --     pos = "Q998Pos2",
-        --     alias = "Target",
-        -- }
-    }
-}
-
-quest_data["99806"] = 
-{
-    npcs = {
-        {
-            id = 1001,
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            pos = "Q37201Player",
-            data_index = 1,
-            scene_id  = 3,
-
-        },
-    }
-}
-
-quest_data["99807"] = 
-{
-    npcs = {
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q372WendyShow",
-            scene_id = 3,
-            data_index = 1,
-        },
-    }
-}
+L0_1 = {}
+L1_1 = 99801
+L2_1 = 99802
+L3_1 = 99803
+L4_1 = 99804
+L5_1 = 99805
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1121
+L3_1.alias = "QQ1121"
+L3_1.script = "Actor/Npc/TempNpcActor"
+L3_1.pos = "Q998Pos1"
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["99801"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1121
+L3_1.alias = "QQ1121"
+L3_1.script = "Actor/Npc/TempNpcActor"
+L3_1.pos = "Q998Pos2"
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["99803"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1121
+L3_1.alias = "QQ1121"
+L3_1.script = "Actor/Npc/TempNpcActor"
+L3_1.pos = "Q998Pos3"
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["99805"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1001
+L3_1.alias = "Wendy"
+L3_1.script = "Actor/Quest/Q301/Wendy301"
+L3_1.pos = "Q37201Player"
+L3_1.data_index = 1
+L3_1.scene_id = 3
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["99807"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L1_1.trial_actors = L2_1
+L2_1 = {}
+L1_1.actors = L2_1
+L2_1 = {}
+L1_1.items = L2_1
+L2_1 = {}
+L1_1.monsters = L2_1
+L2_1 = {}
+L1_1.gadgets = L2_1
+L0_1["99803"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1001
+L3_1.alias = "Wendy"
+L3_1.script = "Actor/Quest/Q301/Wendy301"
+L3_1.pos = "Q37201Player"
+L3_1.data_index = 1
+L3_1.scene_id = 3
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["99806"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1006
+L3_1.alias = "Qin"
+L3_1.script = "Actor/Quest/Q411/Qin"
+L3_1.pos = "Q372WendyShow"
+L3_1.scene_id = 3
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["99807"] = L1_1

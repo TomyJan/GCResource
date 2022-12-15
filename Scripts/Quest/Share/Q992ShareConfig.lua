@@ -1,70 +1,60 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1
 main_id = 992
-
-sub_ids =
-{
-	99201,
-	99202,
-	99203,
-}
-
-AmborData = 
-{
-	AmborID = 1002,
-	Ambor = "Ambor",
-} 
-
-rewind_data = {}
-
-quest_data = {}
-
-quest_data["99201"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Q991PosD",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		} 
-    }
-}
-
-quest_data["99202"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Q991PosE",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		}   
-    }
-}
-
-quest_data["99203"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Ambor",
-			script = "Actor/Quest/Q301/Ambor301",
-			id = 1002,
-			pos = "Q991PosF",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		}
-    }
-}
+L0_1 = {}
+L1_1 = 99201
+L2_1 = 99202
+L3_1 = 99203
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+sub_ids = L0_1
+L0_1 = {}
+L0_1.AmborID = 1002
+L0_1.Ambor = "Ambor"
+AmborData = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Q991PosD"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["99201"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Q991PosE"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["99202"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Q991PosF"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["99203"] = L1_1

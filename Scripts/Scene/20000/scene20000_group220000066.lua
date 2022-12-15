@@ -99,7 +99,7 @@ function action_EVENT_CLIENT_EXECUTE_128(context, evt)
 	
 												
 										if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, defs.gadget_id_3, GadgetState.Default) then
-											--ScriptLib.PrintLog(context, "Faild to change 371 state default when evt.param1 == defs.gadget_id_5")
+											--ScriptLib.PrintLog("Faild to change 371 state default when evt.param1 == defs.gadget_id_5")
 										return -1
 										end
 			

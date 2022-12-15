@@ -1,340 +1,386 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1
 main_id = 20023
-
-sub_ids =
-{
-    2002301,
-    2002302,
-    2002303,
-    2002304,
-    2002305,
-    2002306,
-    2002307,
-    2002308,
-}
-
----存放断线重连生成内容，和questdata配的存档点对应
-
-rewind_data = {}
-
-rewind_data["2002301"] =
-{   npcs = {
-        {
-            id = 147101,
-            alias = "Npc147101",
-            script = "Actor/Npc/TempNPC",
-            pos = "Event22600NPCSpawn3",
-            scene_id  = 3,
-            room_id = 0,
-        }
-    }
-
-}
-
-rewind_data["2002302"] =
-{
-    npcs = {
-        {
-            id = 146101,
-            alias = "Npc146101",
-            script = "Actor/Npc/TempNPC",
-            pos = "Event22600Spawn1",
-            scene_id  = 1009,
-            room_id = 1,
-        },
-        {
-            id = 147101,
-            alias = "Npc147101",
-            script = "Actor/Npc/TempNPC",
-            pos = "Event22600NPCSpawn3",
-            scene_id  = 3,
-            room_id = 0,
-        }
-    },
-    quest_var = {
-        -1,1,-1,-1,-1
-    }
-}
-
-
-
-
-rewind_data["2002303"] =
-{
-    npcs = {
-        {
-            id = 146101,
-            alias = "Npc146101",
-            script = "Actor/Npc/TempNPC",
-            pos = "Event22600Spawn1",
-            scene_id  = 1009,
-            room_id = 1,
-        },
-        {
-            id = 147101,
-            alias = "Npc147101",
-            script = "Actor/Npc/TempNPC",
-            pos = "Event22600NPCSpawn3",
-            scene_id  = 3,
-            room_id = 0,
-        }
-    },
-    quest_var = {
-        -1,1,-1,-1,-1
-    }
-}
-
-
-rewind_data["2002304"] =
-{
-    npcs = {
-        {
-            id = 146101,
-            alias = "Npc146101",
-            script = "Actor/Npc/TempNPC",
-            pos = "Event22600Spawn1",
-            scene_id  = 1009,
-            room_id = 1,
-        },
-        {
-            id = 147101,
-            alias = "Npc147101",
-            script = "Actor/Npc/TempNPC",
-            pos = "Event22600NPCSpawn3",
-            scene_id  = 3,
-            room_id = 0,
-        }
-    },
-    quest_var = {
-        -1,1,-1,-1,-1
-    }
-}
-
-
-rewind_data["2002305"] =
-{
-    npcs = {
-        {
-            id = 146101,
-            alias = "Npc146101",
-            script = "Actor/Npc/TempNPC",
-            pos = "Event22600Spawn1",
-            scene_id  = 1009,
-            room_id = 1,
-        },
-        {
-            id = 147101,
-            alias = "Npc147101",
-            script = "Actor/Npc/TempNPC",
-            pos = "Event22600NPCSpawn3",
-            scene_id  = 3,
-            room_id = 0,
-        }
-    },
-    quest_var = {
-        -1,1,-1,-1,-1
-    }
-}
-
-rewind_data["2002306"] =
-{
-    npcs = {
-        {
-            id = 146101,
-            alias = "Npc146101",
-            script = "Actor/Npc/TempNPC",
-            pos = "Event22600NPCSpawn2",
-            scene_id  = 3,
-            room_id = 0,
-        },
-        {
-            id = 147101,
-            alias = "Npc147101",
-            script = "Actor/Npc/TempNPC",
-            pos = "Event22600NPCSpawn3",
-            scene_id  = 3,
-            room_id = 0,
-        },
-        {
-            id = 140301,
-            alias = "Npc140301",
-            script = "Actor/Npc/TempNPC",
-            pos = "Event22600NPCSpawn1",
-            scene_id  = 3,
-            room_id = 0,
-        }
-    },
-    quest_var = {
-        -1,2,-1,-1,-1
-    }
-}
-
-rewind_data["2002307"] =
-{
-    npcs = {
-        {
-            id = 146101,
-            alias = "Npc146101",
-            script = "Actor/Npc/TempNPC",
-            pos = "Event22600NPCSpawn2",
-            scene_id  = 3,
-            room_id = 0,
-        },
-        {
-            id = 147101,
-            alias = "Npc147101",
-            script = "Actor/Npc/TempNPC",
-            pos = "Event22600NPCSpawn3",
-            scene_id  = 3,
-            room_id = 0,
-        },
-        {
-            id = 140301,
-            alias = "Npc140301",
-            script = "Actor/Npc/TempNPC",
-            pos = "Event22600NPCSpawn1",
-            scene_id  = 3,
-            room_id = 0,
-        }
-    },
-    quest_var = {
-        -1,2,-1,-1,-1
-    }
-}
-
-rewind_data["2002308"] =
-{
-    npcs = {
-        {
-            id = 146101,
-            alias = "Npc146101",
-            script = "Actor/Npc/TempNPC",
-            pos = "Event22600NPCSpawn2",
-            scene_id  = 3,
-            room_id = 0,
-        },
-        {
-            id = 147101,
-            alias = "Npc147101",
-            script = "Actor/Npc/TempNPC",
-            pos = "Event22600NPCSpawn3",
-            scene_id  = 3,
-            room_id = 0,
-        },
-        {
-            id = 140301,
-            alias = "Npc140301",
-            script = "Actor/Npc/TempNPC",
-            pos = "Event22600NPCSpawn1",
-            scene_id  = 3,
-            room_id = 0,
-        }
-    },
-    quest_var = {
-        -1,2,-1,-1,-1
-    }
-}
-
-quest_data = {}
-
-quest_data["2002301"] = 
-{
-    npcs = 
-    {
-        {
-            id = 147101,
-            alias = "Npc147101",
-            script = "Actor/Npc/TempNPC",
-            pos = "Event22600NPCSpawn3",
-            scene_id  = 3,
-            room_id = 0,
-            data_index = 1,
-        },
-        {
-            id = 146101,
-            alias = "Npc146101",
-            script = "Actor/Npc/TempNPC",
-            pos = "Event22600Spawn1",
-            scene_id  = 1009,
-            room_id = 1,
-            data_index = 2,
-        },
-        {
-            id = 146101,
-            alias = "Npc146101",
-            script = "Actor/Npc/TempNPC",
-            pos = "Event22600NPCSpawn2",
-            scene_id  = 3,
-            room_id = 0,
-            data_index = 2,
-        },
-        {
-            id = 140301,
-            alias = "Npc140301",
-            script = "Actor/Npc/TempNPC",
-            pos = "Event22600NPCSpawn1",
-            scene_id  = 3,
-            room_id = 0,
-            data_index = 4,
-        }
-    }
-}
-
-quest_data["2002302"] = 
-{
-    gadgets ={
-        {
-            id = 70710037,
-            pos = "Q20023Winebowl",
-            alias = "Q20023WinebowlShell",
-            scene_id = 1009,
-            room_id = 1,
-            is_show_cutscene = false,
-            chest_drop_id =- 0
-        }
-    }
-}
-
-quest_data["2002303"] = 
-{
-    gadgets ={
-        {
-            id = 70710037,
-            pos = "Q20023Winebowl",
-            alias = "Q20023WinebowlShell",
-            scene_id = 1009,
-            room_id = 1,
-            is_show_cutscene = false,
-            chest_drop_id =- 0
-        },
-        {
-            id = 70710028,
-            pos = "Q20023Winebowl",
-            alias = "Q20023Winebowl",
-            scene_id = 1009,
-            room_id = 1,
-            is_show_cutscene = false,
-            chest_drop_id =- 0
-        },
-    }
-}
-
-finish_action = {}
-fail_action = {}
-cancel_action = {}
-
-cancel_action = 
-{
-	CLIENT = {},
-	SERVER = {	
-		QUEST_EXEC_REFRESH_GROUP_SUITE = 
-		{
-		},
-		QUEST_EXEC_DEL_ALL_SPECIFIC_PACK_ITEM = 
-		{
-		}
-	},
-}
+L0_1 = {}
+L1_1 = 2002301
+L2_1 = 2002302
+L3_1 = 2002303
+L4_1 = 2002304
+L5_1 = 2002305
+L6_1 = 2002306
+L7_1 = 2002307
+L8_1 = 2002308
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 147101
+L3_1.alias = "Npc147101"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Event22600NPCSpawn3"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2002301"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 146101
+L3_1.alias = "Npc146101"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Event22600Spawn1"
+L3_1.scene_id = 1009
+L3_1.room_id = 1
+L4_1 = {}
+L4_1.id = 147101
+L4_1.alias = "Npc147101"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Event22600NPCSpawn3"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = -1
+L4_1 = 1
+L5_1 = -1
+L6_1 = -1
+L7_1 = -1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L1_1.quest_var = L2_1
+L0_1["2002302"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 146101
+L3_1.alias = "Npc146101"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Event22600Spawn1"
+L3_1.scene_id = 1009
+L3_1.room_id = 1
+L4_1 = {}
+L4_1.id = 147101
+L4_1.alias = "Npc147101"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Event22600NPCSpawn3"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = -1
+L4_1 = 1
+L5_1 = -1
+L6_1 = -1
+L7_1 = -1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L1_1.quest_var = L2_1
+L0_1["2002303"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 146101
+L3_1.alias = "Npc146101"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Event22600Spawn1"
+L3_1.scene_id = 1009
+L3_1.room_id = 1
+L4_1 = {}
+L4_1.id = 147101
+L4_1.alias = "Npc147101"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Event22600NPCSpawn3"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = -1
+L4_1 = 1
+L5_1 = -1
+L6_1 = -1
+L7_1 = -1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L1_1.quest_var = L2_1
+L0_1["2002304"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 146101
+L3_1.alias = "Npc146101"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Event22600Spawn1"
+L3_1.scene_id = 1009
+L3_1.room_id = 1
+L4_1 = {}
+L4_1.id = 147101
+L4_1.alias = "Npc147101"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Event22600NPCSpawn3"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = -1
+L4_1 = 1
+L5_1 = -1
+L6_1 = -1
+L7_1 = -1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L1_1.quest_var = L2_1
+L0_1["2002305"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 146101
+L3_1.alias = "Npc146101"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Event22600NPCSpawn2"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L4_1 = {}
+L4_1.id = 147101
+L4_1.alias = "Npc147101"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Event22600NPCSpawn3"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L5_1 = {}
+L5_1.id = 140301
+L5_1.alias = "Npc140301"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Event22600NPCSpawn1"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = -1
+L4_1 = 2
+L5_1 = -1
+L6_1 = -1
+L7_1 = -1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L1_1.quest_var = L2_1
+L0_1["2002306"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 146101
+L3_1.alias = "Npc146101"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Event22600NPCSpawn2"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L4_1 = {}
+L4_1.id = 147101
+L4_1.alias = "Npc147101"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Event22600NPCSpawn3"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L5_1 = {}
+L5_1.id = 140301
+L5_1.alias = "Npc140301"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Event22600NPCSpawn1"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = -1
+L4_1 = 2
+L5_1 = -1
+L6_1 = -1
+L7_1 = -1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L1_1.quest_var = L2_1
+L0_1["2002307"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 146101
+L3_1.alias = "Npc146101"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Event22600NPCSpawn2"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L4_1 = {}
+L4_1.id = 147101
+L4_1.alias = "Npc147101"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Event22600NPCSpawn3"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L5_1 = {}
+L5_1.id = 140301
+L5_1.alias = "Npc140301"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Event22600NPCSpawn1"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = -1
+L4_1 = 2
+L5_1 = -1
+L6_1 = -1
+L7_1 = -1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L1_1.quest_var = L2_1
+L0_1["2002308"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 147101
+L3_1.alias = "Npc147101"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Event22600NPCSpawn3"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 146101
+L4_1.alias = "Npc146101"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Event22600Spawn1"
+L4_1.scene_id = 1009
+L4_1.room_id = 1
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 146101
+L5_1.alias = "Npc146101"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Event22600NPCSpawn2"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 2
+L6_1 = {}
+L6_1.id = 140301
+L6_1.alias = "Npc140301"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.pos = "Event22600NPCSpawn1"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["2002301"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710037
+L3_1.pos = "Q20023Winebowl"
+L3_1.alias = "Q20023WinebowlShell"
+L3_1.scene_id = 1009
+L3_1.room_id = 1
+L3_1.is_show_cutscene = false
+L3_1.chest_drop_id = 0
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["2002302"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710037
+L3_1.pos = "Q20023Winebowl"
+L3_1.alias = "Q20023WinebowlShell"
+L3_1.scene_id = 1009
+L3_1.room_id = 1
+L3_1.is_show_cutscene = false
+L3_1.chest_drop_id = 0
+L4_1 = {}
+L4_1.id = 70710028
+L4_1.pos = "Q20023Winebowl"
+L4_1.alias = "Q20023Winebowl"
+L4_1.scene_id = 1009
+L4_1.room_id = 1
+L4_1.is_show_cutscene = false
+L4_1.chest_drop_id = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.gadgets = L2_1
+L0_1["2002303"] = L1_1
+L0_1 = {}
+finish_action = L0_1
+L0_1 = {}
+fail_action = L0_1
+L0_1 = {}
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L2_1 = {}
+L1_1.QUEST_EXEC_REFRESH_GROUP_SUITE = L2_1
+L2_1 = {}
+L1_1.QUEST_EXEC_DEL_ALL_SPECIFIC_PACK_ITEM = L2_1
+L0_1.SERVER = L1_1
+cancel_action = L0_1

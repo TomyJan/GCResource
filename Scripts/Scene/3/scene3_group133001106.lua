@@ -32,7 +32,7 @@ npcs = {
 gadgets = {
 	{ config_id = 1774, gadget_id = 70211111, pos = { x = 1397.886, y = 233.723, z = -1569.004 }, rot = { x = 0.000, y = 80.561, z = 0.000 }, level = 11, drop_tag = "解谜中级蒙德", showcutscene = true, isOneoff = true, persistent = true, explore = { name = "chest", exp = 1 }, area_id = 2 },
 	{ config_id = 1817, gadget_id = 70800012, pos = { x = 1564.011, y = 252.140, z = -1641.187 }, rot = { x = 0.000, y = 249.490, z = 0.000 }, level = 15, area_id = 2 },
-	{ config_id = 3022, gadget_id = 70900009, pos = { x = 1563.317, y = 251.986, z = -1641.356 }, rot = { x = 0.000, y = 119.312, z = 0.000 }, level = 15, state = GadgetState.GearStop, persistent = true, area_id = 2 },
+	{ config_id = 3022, gadget_id = 70900009, pos = { x = 1563.317, y = 251.986, z = -1641.356 }, rot = { x = 0.000, y = 119.312, z = 0.000 }, level = 15, state = GadgetState.GearStart, persistent = true, area_id = 2 },
 	{ config_id = 3033, gadget_id = 70211012, pos = { x = 1580.893, y = 252.178, z = -1634.032 }, rot = { x = 0.000, y = 245.729, z = 0.000 }, level = 11, drop_tag = "战斗中级蒙德", state = GadgetState.ChestLocked, isOneoff = true, persistent = true, explore = { name = "chest", exp = 1 }, area_id = 2 },
 	{ config_id = 3034, gadget_id = 70211002, pos = { x = 1559.171, y = 252.034, z = -1624.124 }, rot = { x = 0.000, y = 167.107, z = 0.000 }, level = 11, drop_tag = "战斗低级蒙德", state = GadgetState.ChestLocked, isOneoff = true, persistent = true, explore = { name = "chest", exp = 1 }, area_id = 2 },
 	{ config_id = 3035, gadget_id = 70211012, pos = { x = 1568.736, y = 252.198, z = -1659.632 }, rot = { x = 0.000, y = 348.039, z = 0.000 }, level = 11, drop_tag = "战斗中级蒙德", state = GadgetState.ChestLocked, isOneoff = true, persistent = true, explore = { name = "chest", exp = 1 }, area_id = 2 },
@@ -212,7 +212,7 @@ function action_EVENT_SELECT_OPTION_128(context, evt)
 	-- 当option_id为25时，开启封印战斗，战斗区域半径为18，圈内进度每秒增长1，圈外进度每秒衰减5，进度达到100时判定为战斗成功（填0则取默认值100），进度衰减到0后5秒判定为战斗失败
 	    if defs.gadget_id_7 == evt.param2 then
 	        local ret = ScriptLib.StartSealBattle(context, 1817, {radius = 18, kill_time = 100, monster_group_id = 133001275, max_progress = 10, battle_type = SealBattleType.KILL_MONSTER})
-	        --ScriptLib.PrintLog(context, "StartSealBattle ret: " ..ret)
+	        --ScriptLib.PrintLog("StartSealBattle ret: " ..ret)
 	    end
 	
 		-- 重新生成指定group，指定suite

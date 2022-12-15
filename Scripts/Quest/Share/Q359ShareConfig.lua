@@ -1,144 +1,127 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1
 main_id = 359
-
-sub_ids =
-{
-    35901,
-    35902,
-    35903,
-    35904,
-}
-
-rewind_data = {}
-
-rewind_data["35901"] = 
-{
-}
-
-
-quest_data = {}
-
-quest_data["35901"] = 
-{
-    npcs = {
-        {
-        ----Q359NPC1Data
-            alias = "Q357NPC1",
-			script = "Actor/Quest/Q376/Soldier",
-			id = 10001,
-			pos = "Q357NPC1",
-			scene_id = 3,
-			room_ID = 0,
-			data_index = 0,
-        },
-        {
-            ----Q359NPC2Data
-                alias = "Q357NPC2",
-                script = "Actor/Quest/Q376/Soldier",
-                id = 10002,
-                pos = "Q357NPC2",
-                scene_id = 3,
-                room_ID = 0,
-                data_index = 1,
-            },
-        {
-            ----Q359NPC3Data
-                alias = "Q357NPC3",
-                script = "Actor/Quest/Q376/Soldier",
-                id = 10003,
-                pos = "Q357NPC3",
-                scene_id = 3,
-                room_ID = 0,
-                data_index = 2,
-            },
-        {
-            ----Q359NPC4Data
-                alias = "Q357NPC4",
-                script = "Actor/Quest/Q376/Soldier",
-                id = 10004,
-                pos = "Q357NPC4",
-                scene_id = 3,
-                room_ID = 0,
-                data_index = 3,
-            }, 
-        {
-            ----Q359NPC5Data
-                alias = "Q357NPC5",
-                script = "Actor/Quest/Q376/Soldier",
-                id = 10005,
-                pos = "Q357NPC5",
-                scene_id = 3,
-                room_ID = 0,
-                data_index = 4,
-            },   
-        {
-            ----Q359NPC6Data
-                alias = "Q357NPC6",
-                script = "Actor/Quest/Q376/Soldier",
-                id = 10006,
-                pos = "Q357NPC6",
-                scene_id = 3,
-                room_ID = 0,
-                data_index = 5,
-            }      
-    },
-    gadgets =
-	{
-		{
-			id = 70700004,
-			pos = "Q359MengdeWindDragon",
-			alias = "MengdeWindDragon", 
-			scene_id = 3,
-			room_id = 0,
-			data_index = 1,
-		}
-	}
-}
-
-quest_data["35902"] =
-{
-    gadgets =
-	{
-		{
-			id = 70700003,
-			pos = "Q359AmborDung",
-			alias = "AmborDungeon", 
-			scene_id = 3,
-			room_id = 0,
-			data_index = 1,
-		}
-	} 
-} 
-
-quest_data["35903"] =
-{
-    gadgets =
-	{
-		{
-			id = 70700003,
-			pos = "Q359GaiaDung",
-			alias = "GaiaDungeon", 
-			scene_id = 3,
-			room_id = 0,
-			data_index = 1,
-		}
-	} 
-} 
-
-quest_data["35904"] =
-{
-    gadgets =
-	{
-		{
-			id = 70700003,
-			pos = "Q359LisaDung",
-			alias = "LisaDungeon", 
-			scene_id = 3,
-			room_id = 0,
-			data_index = 1,
-		}
-	} 
-} 
+L0_1 = {}
+L1_1 = 35901
+L2_1 = 35902
+L3_1 = 35903
+L4_1 = 35904
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["35901"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Q357NPC1"
+L3_1.script = "Actor/Quest/Q376/Soldier"
+L3_1.id = 10001
+L3_1.pos = "Q357NPC1"
+L3_1.scene_id = 3
+L3_1.room_ID = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Q357NPC2"
+L4_1.script = "Actor/Quest/Q376/Soldier"
+L4_1.id = 10002
+L4_1.pos = "Q357NPC2"
+L4_1.scene_id = 3
+L4_1.room_ID = 0
+L4_1.data_index = 1
+L5_1 = {}
+L5_1.alias = "Q357NPC3"
+L5_1.script = "Actor/Quest/Q376/Soldier"
+L5_1.id = 10003
+L5_1.pos = "Q357NPC3"
+L5_1.scene_id = 3
+L5_1.room_ID = 0
+L5_1.data_index = 2
+L6_1 = {}
+L6_1.alias = "Q357NPC4"
+L6_1.script = "Actor/Quest/Q376/Soldier"
+L6_1.id = 10004
+L6_1.pos = "Q357NPC4"
+L6_1.scene_id = 3
+L6_1.room_ID = 0
+L6_1.data_index = 3
+L7_1 = {}
+L7_1.alias = "Q357NPC5"
+L7_1.script = "Actor/Quest/Q376/Soldier"
+L7_1.id = 10005
+L7_1.pos = "Q357NPC5"
+L7_1.scene_id = 3
+L7_1.room_ID = 0
+L7_1.data_index = 4
+L8_1 = {}
+L8_1.alias = "Q357NPC6"
+L8_1.script = "Actor/Quest/Q376/Soldier"
+L8_1.id = 10006
+L8_1.pos = "Q357NPC6"
+L8_1.scene_id = 3
+L8_1.room_ID = 0
+L8_1.data_index = 5
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70700004
+L3_1.pos = "Q359MengdeWindDragon"
+L3_1.alias = "MengdeWindDragon"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["35901"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70700003
+L3_1.pos = "Q359AmborDung"
+L3_1.alias = "AmborDungeon"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["35902"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70700003
+L3_1.pos = "Q359GaiaDung"
+L3_1.alias = "GaiaDungeon"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["35903"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70700003
+L3_1.pos = "Q359LisaDung"
+L3_1.alias = "LisaDungeon"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["35904"] = L1_1

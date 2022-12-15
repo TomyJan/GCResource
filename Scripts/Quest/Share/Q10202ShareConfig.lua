@@ -1,123 +1,117 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1
 main_id = 10202
-
-sub_ids =
-{
-    1020201,
-    1020202,
-    1020203,
-    1020204,
-}
-
-rewind_data = {}
-rewind_data["1020203"] = 
-{
-    npcs = {
-        {
-            id = 10090,
-            alias = "Npc10090",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10202KleeSpawn",
-            scene_id  = 1004,
-            room_id = 100402,                  
-			data_index = 1,
-        },
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q10202QinSpawn",
-            scene_id  = 1004,
-            room_id = 100402,
-			data_index = 2,
-        }
-    }
-}
-
-
-
-quest_data = {}
-
-quest_data["1020201"] = 
-{
-    npcs = {
-        {
-            id = 10090,
-            alias = "Npc10090",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10202KleeSpawn",
-            scene_id  = 1004,
-            room_id = 100402,                  
-			data_index = 1,
-        },
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q10202QinSpawn",
-            scene_id  = 1004,
-            room_id = 100402,
-			data_index = 2,
-        },
-        {
-            id = 10092,
-            alias = "Npc10092",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10202DoorSpawn",
-            scene_id  = 1004,
-            room_id = 1,
-			data_index = 1,
-        }
-    }
-}
-
-quest_data["1020202"] = 
-{
-    npcs = {
-        {
-            id = 10090,
-            alias = "Npc10090",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10202KleeSpawn",
-            scene_id  = 1004,
-            room_id = 100402,                  
-			data_index = 1,
-        },
-        {
-            id = 1006,
-            alias = "Qin",
-            script = "Actor/Quest/Q411/Qin",
-            pos = "Q10202QinSpawn",
-            scene_id  = 1004,
-            room_id = 100402,
-			data_index = 2,
-        }
-    }
-}
-
-quest_data["1020204"] = 
-{
-    npcs = {
-        {
-            id = 10092,
-            alias = "Npc10092",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10202DoorSpawn",
-            scene_id  = 1004,
-            room_id = 1,
-			data_index = 1,
-        },
-        {
-            id = 10090,
-            alias = "Npc10090",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q10202KleeSpawn",
-            scene_id  = 1004,
-            room_id = 100402,                  
-			data_index = 2,
-        }
-    }
-}
+L0_1 = {}
+L1_1 = 1020201
+L2_1 = 1020202
+L3_1 = 1020203
+L4_1 = 1020204
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10090
+L3_1.alias = "Npc10090"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q10202KleeSpawn"
+L3_1.scene_id = 1004
+L3_1.room_id = 100402
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1006
+L4_1.alias = "Qin"
+L4_1.script = "Actor/Quest/Q411/Qin"
+L4_1.pos = "Q10202QinSpawn"
+L4_1.scene_id = 1004
+L4_1.room_id = 100402
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["1020203"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10090
+L3_1.alias = "Npc10090"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q10202KleeSpawn"
+L3_1.scene_id = 1004
+L3_1.room_id = 100402
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1006
+L4_1.alias = "Qin"
+L4_1.script = "Actor/Quest/Q411/Qin"
+L4_1.pos = "Q10202QinSpawn"
+L4_1.scene_id = 1004
+L4_1.room_id = 100402
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 10092
+L5_1.alias = "Npc10092"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q10202DoorSpawn"
+L5_1.scene_id = 1004
+L5_1.room_id = 1
+L5_1.data_index = 1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["1020201"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10090
+L3_1.alias = "Npc10090"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q10202KleeSpawn"
+L3_1.scene_id = 1004
+L3_1.room_id = 100402
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 1006
+L4_1.alias = "Qin"
+L4_1.script = "Actor/Quest/Q411/Qin"
+L4_1.pos = "Q10202QinSpawn"
+L4_1.scene_id = 1004
+L4_1.room_id = 100402
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["1020202"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10092
+L3_1.alias = "Npc10092"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q10202DoorSpawn"
+L3_1.scene_id = 1004
+L3_1.room_id = 1
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 10090
+L4_1.alias = "Npc10090"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q10202KleeSpawn"
+L4_1.scene_id = 1004
+L4_1.room_id = 100402
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["1020204"] = L1_1

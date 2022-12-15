@@ -1,113 +1,108 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1, L11_1, L12_1, L13_1
 main_id = 307
-
-sub_ids =
-{
-    30700,
-    30701,
-    30702,
-    30703,
-    30704,
-    30707,
-    30708,
-    30709,
-    30710,
-    30711,
-    30712,
-    30713,
-    30715
-}
-
----存放断线重连生成内容，和questdata配的存档点对应
-rewind_data = {}
-
-rewind_data["30701"] = 
-{
-    npcs = {
-        {
-            id = 1004,
-            alias = "Gaia",
-            script = "Actor/Quest/Q301/Gaia301",
-            pos = "Q307DungeonGaia",
-        }
-    }
-}
-
-rewind_data["30702"] = 
-{
-    -- avatar = {
-    --     offline_dungeon_id = 1,
-    --     scene_id = 3,
-    --     pos = "Q30701Player"
-    -- },
-    npcs = {
-        {
-            id = 1004,
-            alias = "Gaia",
-            script = "Actor/Quest/Q301/Gaia301",
-            pos = "Q307DungeonDoor",
-        }
-    }
-}
-
----校验用，和任务lua中生成NPC/monster/gadget/item等对应
-quest_data = {}
-
-quest_data["30700"] = 
-{
-    npcs = {
-        {
-            alias = "Gaia",
-            script = "Actor/Quest/Q301/Gaia301",
-            id = 1004,
-            pos = "Q307DungeonGaia",
-            scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        }
-    }
-}
-
-quest_data["30704"] = 
-{
-    transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 3,
-            pos = "Q307DungeonDoor"
-        },
-    }
-}
-
-quest_data["30710"] = 
-{
-    npcs = {
-        {
-            alias = "Gaia",
-            script = "Actor/Quest/Q301/Gaia301",
-            id = 1004,
-            pos = "Q307GaiaDungeon",
-            scene_id = 20008,
-			room_id = 0,
-			data_index = 0,
-        }
-    }
-}
-
-quest_data["30715"] = 
-{
-    npcs = {
-        {
-            alias = "Gaia",
-            script = "Actor/Quest/Q301/Gaia301",
-            id = 1004,
-            pos = "Q307Gaia",
-            scene_id = 20008,
-			room_id = 0,
-			data_index = 0,
-        }
-    }
-}
+L0_1 = {}
+L1_1 = 30700
+L2_1 = 30701
+L3_1 = 30702
+L4_1 = 30703
+L5_1 = 30704
+L6_1 = 30707
+L7_1 = 30708
+L8_1 = 30709
+L9_1 = 30710
+L10_1 = 30711
+L11_1 = 30712
+L12_1 = 30713
+L13_1 = 30715
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+L0_1[11] = L11_1
+L0_1[12] = L12_1
+L0_1[13] = L13_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1004
+L3_1.alias = "Gaia"
+L3_1.script = "Actor/Quest/Q301/Gaia301"
+L3_1.pos = "Q307DungeonGaia"
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["30701"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1004
+L3_1.alias = "Gaia"
+L3_1.script = "Actor/Quest/Q301/Gaia301"
+L3_1.pos = "Q307DungeonDoor"
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["30702"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Gaia"
+L3_1.script = "Actor/Quest/Q301/Gaia301"
+L3_1.id = 1004
+L3_1.pos = "Q307DungeonGaia"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["30700"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q307DungeonDoor"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["30704"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Gaia"
+L3_1.script = "Actor/Quest/Q301/Gaia301"
+L3_1.id = 1004
+L3_1.pos = "Q307GaiaDungeon"
+L3_1.scene_id = 20008
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["30710"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Gaia"
+L3_1.script = "Actor/Quest/Q301/Gaia301"
+L3_1.id = 1004
+L3_1.pos = "Q307Gaia"
+L3_1.scene_id = 20008
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["30715"] = L1_1

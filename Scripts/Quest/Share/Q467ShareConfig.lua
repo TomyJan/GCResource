@@ -1,64 +1,51 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1
 main_id = 467
-
-sub_ids =
-{
-    46701,
-    46703,
-    46702,
-}
-
----存放断线重连生成内容，和questdata配的存档点对应
-rewind_data = {}
-
-rewind_data["46701"] = 
-{
-
-}
-
-rewind_data["46702"] = 
-{
-
-}
-
-rewind_data["46703"] = 
-{
-
-}
-
----校验用，和任务lua中生成NPC/monster/gadget/item等对应
-quest_data = {}
-
-quest_data["46702"] = 
-{
-    npcs = {
-        {
-            id = 1005,
-            alias = "Paimon",
-            script = "Actor/Quest/Q352/Paimon",
-            pos = "Q46701Paimon",
-            scene_id  = 3,
-            room_id = 0,
-            data_index = 1,
-        }
-    }
-}
-
-quest_data["46703"] = 
-{
-    npcs = {
-        {
-            id = 1005,
-            alias = "Paimon",
-            script = "Actor/Quest/Q352/Paimon",
-            pos = "Q46701Paimon",
-            scene_id  = 3,
-            room_id = 0,
-            data_index = 1,
-        }
-    }
-}
-
+L0_1 = {}
+L1_1 = 46701
+L2_1 = 46703
+L3_1 = 46702
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["46701"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["46702"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["46703"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q46701Paimon"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["46702"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "Q46701Paimon"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["46703"] = L1_1

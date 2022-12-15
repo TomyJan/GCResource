@@ -1,71 +1,63 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1
 main_id = 1002
-
-sub_ids =
-{
-    100201,
-    100202,
-    100203,
-    100204,
-    100205,
-}
-
-rewind_data = {}
-
-rewind_data["100205"] = 
-{
-
-}
-
-
-quest_data = {}
-
-quest_data["100201"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Paimon",
-			script = "Actor/Quest/Q352/Paimon",
-			id = 1005,
-			pos = "Q1002_Paimon2",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-	},
-	transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 3,
-            pos = "Q1002_Player2"
-        },
-    }
-}
-
-quest_data["100205"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Npc2002801",
-			script = "Actor/Npc/TempNPC",
-			id = 2002801,
-			pos = "Q1002_XianRen",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-
-	},
-	transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 3,
-            pos = "Q1002_Player"
-        },
-    }
-}
+L0_1 = {}
+L1_1 = 100201
+L2_1 = 100202
+L3_1 = 100203
+L4_1 = 100204
+L5_1 = 100205
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["100205"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.id = 1005
+L3_1.pos = "Q1002_Paimon2"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q1002_Player2"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["100201"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc2002801"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 2002801
+L3_1.pos = "Q1002_XianRen"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q1002_Player"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["100205"] = L1_1

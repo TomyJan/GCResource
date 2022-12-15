@@ -1,415 +1,379 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1, L11_1, L12_1, L13_1, L14_1, L15_1, L16_1, L17_1, L18_1, L19_1, L20_1
 main_id = 1013
-
-sub_ids =
-{
-    101301,
-    101302,
-    101303,
-    101304,
-    101305,
-    101306,
-    101307,
-    101308,
-    101309,
-    101310,
-    101311,
-    101312,
-    101313,
-    101314,
-    101315,
-    101316,
-    101317,
-    101318,
-    101319,
-    101320,
-}
-
-rewind_data = {}
-
-quest_data = {}
-
---风筝的戏份
-quest_data["101301"] = 
-{
-    npcs = {
-        {
-            id = 10232,
-            alias = "Npc10232",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101301ZL",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-        {
-            id = 209201,
-            alias = "Npc209201",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101301Ashanpo",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-        {
-            id = 10200,
-            alias = "Npc10200",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101301Gongzi",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-    }
-}
-
---阿大的讲价戏份
-quest_data["101303"] = 
-{
-    npcs = {
-        {
-            id = 10232,
-            alias = "Npc10232",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101303ZL",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-        {
-            id = 10248,
-            alias = "Npc10248",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101303Ada",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-    },
-}
-
-quest_data["101304"] = 
-{
-    npcs = {
-        {
-            id = 10232,
-            alias = "Npc10232",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101303ZL",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-        {
-            id = 10248,
-            alias = "Npc10248",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101303Ada",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-    },
-}
-
-quest_data["101305"] = 
-{
-    npcs = {
-        {
-            id = 10232,
-            alias = "Npc10232",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101303ZL",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-        {
-            id = 10248,
-            alias = "Npc10248",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101303Ada",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-    },
-}
-
-quest_data["101306"] = 
-{
-    npcs = {
-        {
-            id = 10232,
-            alias = "Npc10232",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101303ZL",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-        {
-            id = 10248,
-            alias = "Npc10248",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101303Ada",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-    },
-}
-
---阿二的讲价戏份
-quest_data["101307"] = 
-{
-    npcs = {
-        {
-            id = 10232,
-            alias = "Npc10232",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101307ZL",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-        {
-            id = 10249,
-            alias = "Npc10249",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101307Aer",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-    },
-}
-
-quest_data["101308"] = 
-{
-    npcs = {
-        {
-            id = 10232,
-            alias = "Npc10232",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101307ZL",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-        {
-            id = 10249,
-            alias = "Npc10249",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101307Aer",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-    },
-}
-
-quest_data["101309"] = 
-{
-    npcs = {
-        {
-            id = 10232,
-            alias = "Npc10232",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101307ZL",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-        {
-            id = 10249,
-            alias = "Npc10249",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101307Aer",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-    },
-}
-
-quest_data["101310"] = 
-{
-    npcs = {
-        {
-            id = 10232,
-            alias = "Npc10232",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101307ZL",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-        {
-            id = 10249,
-            alias = "Npc10249",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101307Aer",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-    },
-}
---阿三的讲价戏份
-quest_data["101311"] = 
-{
-    npcs = {
-        {
-            id = 10232,
-            alias = "Npc10232",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101311ZL",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-        {
-            id = 10250,
-            alias = "Npc10250",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101311Asan",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-    },
-}
-
-quest_data["101312"] = 
-{
-    npcs = {
-        {
-            id = 10232,
-            alias = "Npc10232",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101311ZL",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-        {
-            id = 10250,
-            alias = "Npc10250",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101311Asan",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-    },
-}
-
-quest_data["101313"] = 
-{
-    npcs = {
-        {
-            id = 10232,
-            alias = "Npc10232",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101311ZL",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-        {
-            id = 10250,
-            alias = "Npc10250",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101311Asan",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-    },
-}
-
-quest_data["101314"] = 
-{
-    npcs = {
-        {
-            id = 10232,
-            alias = "Npc10232",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101311ZL",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-        {
-            id = 10250,
-            alias = "Npc10250",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101311Asan",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-    },
-}
-
-quest_data["101316"] =
-{
-    npcs = {
-        {
-            id = 10248,
-            alias = "Npc10248",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101303Ada",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-        {
-            id = 10249,
-            alias = "Npc10249",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101307Aer",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-        {
-            id = 10250,
-            alias = "Npc10250",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101311Asan",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-    },
-}
-
---20完成讲价
-quest_data["101320"] = 
-{
-    npcs = {
-        {
-            id = 10232,
-            alias = "Npc10232",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101317ZL",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-        {
-            id = 10200,
-            alias = "Npc10200",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q101317Gongzi",
-            scene_id = 3,
-            data_index = 0,
-        },
-
-    }
-}
+L0_1 = {}
+L1_1 = 101301
+L2_1 = 101302
+L3_1 = 101303
+L4_1 = 101304
+L5_1 = 101305
+L6_1 = 101306
+L7_1 = 101307
+L8_1 = 101308
+L9_1 = 101309
+L10_1 = 101310
+L11_1 = 101311
+L12_1 = 101312
+L13_1 = 101313
+L14_1 = 101314
+L15_1 = 101315
+L16_1 = 101316
+L17_1 = 101317
+L18_1 = 101318
+L19_1 = 101319
+L20_1 = 101320
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+L0_1[11] = L11_1
+L0_1[12] = L12_1
+L0_1[13] = L13_1
+L0_1[14] = L14_1
+L0_1[15] = L15_1
+L0_1[16] = L16_1
+L0_1[17] = L17_1
+L0_1[18] = L18_1
+L0_1[19] = L19_1
+L0_1[20] = L20_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10232
+L3_1.alias = "Npc10232"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q101301ZL"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.id = 209201
+L4_1.alias = "Npc209201"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q101301Ashanpo"
+L4_1.scene_id = 3
+L4_1.data_index = 0
+L5_1 = {}
+L5_1.id = 10200
+L5_1.alias = "Npc10200"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q101301Gongzi"
+L5_1.scene_id = 3
+L5_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["101301"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10232
+L3_1.alias = "Npc10232"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q101303ZL"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.id = 10248
+L4_1.alias = "Npc10248"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q101303Ada"
+L4_1.scene_id = 3
+L4_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["101303"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10232
+L3_1.alias = "Npc10232"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q101303ZL"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.id = 10248
+L4_1.alias = "Npc10248"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q101303Ada"
+L4_1.scene_id = 3
+L4_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["101304"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10232
+L3_1.alias = "Npc10232"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q101303ZL"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.id = 10248
+L4_1.alias = "Npc10248"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q101303Ada"
+L4_1.scene_id = 3
+L4_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["101305"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10232
+L3_1.alias = "Npc10232"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q101303ZL"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.id = 10248
+L4_1.alias = "Npc10248"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q101303Ada"
+L4_1.scene_id = 3
+L4_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["101306"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10232
+L3_1.alias = "Npc10232"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q101307ZL"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.id = 10249
+L4_1.alias = "Npc10249"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q101307Aer"
+L4_1.scene_id = 3
+L4_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["101307"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10232
+L3_1.alias = "Npc10232"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q101307ZL"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.id = 10249
+L4_1.alias = "Npc10249"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q101307Aer"
+L4_1.scene_id = 3
+L4_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["101308"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10232
+L3_1.alias = "Npc10232"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q101307ZL"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.id = 10249
+L4_1.alias = "Npc10249"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q101307Aer"
+L4_1.scene_id = 3
+L4_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["101309"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10232
+L3_1.alias = "Npc10232"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q101307ZL"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.id = 10249
+L4_1.alias = "Npc10249"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q101307Aer"
+L4_1.scene_id = 3
+L4_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["101310"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10232
+L3_1.alias = "Npc10232"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q101311ZL"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.id = 10250
+L4_1.alias = "Npc10250"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q101311Asan"
+L4_1.scene_id = 3
+L4_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["101311"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10232
+L3_1.alias = "Npc10232"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q101311ZL"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.id = 10250
+L4_1.alias = "Npc10250"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q101311Asan"
+L4_1.scene_id = 3
+L4_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["101312"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10232
+L3_1.alias = "Npc10232"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q101311ZL"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.id = 10250
+L4_1.alias = "Npc10250"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q101311Asan"
+L4_1.scene_id = 3
+L4_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["101313"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10232
+L3_1.alias = "Npc10232"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q101311ZL"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.id = 10250
+L4_1.alias = "Npc10250"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q101311Asan"
+L4_1.scene_id = 3
+L4_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["101314"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10248
+L3_1.alias = "Npc10248"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q101303Ada"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.id = 10249
+L4_1.alias = "Npc10249"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q101307Aer"
+L4_1.scene_id = 3
+L4_1.data_index = 0
+L5_1 = {}
+L5_1.id = 10250
+L5_1.alias = "Npc10250"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.pos = "Q101311Asan"
+L5_1.scene_id = 3
+L5_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["101316"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 10232
+L3_1.alias = "Npc10232"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q101317ZL"
+L3_1.scene_id = 3
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.id = 10200
+L4_1.alias = "Npc10200"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q101317Gongzi"
+L4_1.scene_id = 3
+L4_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["101320"] = L1_1

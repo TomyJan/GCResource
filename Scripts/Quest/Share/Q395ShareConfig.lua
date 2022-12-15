@@ -1,71 +1,45 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1
 main_id = 395
-
-sub_ids =
-{
-    39501,
-    39502,
-    39503,
-}
-
-rewind_data = {}
-
-rewind_data["39501"] = 
-{
-}
-
-rewind_data["39502"] = 
-{
-}
-
-rewind_data["39503"] = 
-{
-    npcs = {
-        {
-            id = 1008,
-            alias = "Barbara",
-            script = "Actor/Quest/Q413/Barbara",
-            pos = "Q395BBR",
-            data_index = 0,
-        },
-    }
-}
-
-quest_data = {}
-
-quest_data["39502"] = 
-{
-    trial_actors = {
-
-    },
-    actors = {
-        
-    },
-    items = {
-        -- {
-        --     id = 100004,
-        --     pos = "Q404Pos2",
-        --     alias = "Ball",
-        -- },
-    },
-    monsters = {
-        -- {
-        --     id = 20010801,
-        --     pos = "Q404Pos2",
-        -- },
-        -- {
-        --     id = 20010801,
-        --     pos = "Q404Pos2",
-        -- }
-    },
-    gadgets = {
-        -- {
-        --     id = 70300004,
-        --     pos = "Q404Pos2",
-        --     alias = "GoalMarker404",
-        -- }
-    }
-}
+L0_1 = {}
+L1_1 = 39501
+L2_1 = 39502
+L3_1 = 39503
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["39501"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["39502"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1008
+L3_1.alias = "Barbara"
+L3_1.script = "Actor/Quest/Q413/Barbara"
+L3_1.pos = "Q395BBR"
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["39503"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L1_1.trial_actors = L2_1
+L2_1 = {}
+L1_1.actors = L2_1
+L2_1 = {}
+L1_1.items = L2_1
+L2_1 = {}
+L1_1.monsters = L2_1
+L2_1 = {}
+L1_1.gadgets = L2_1
+L0_1["39502"] = L1_1

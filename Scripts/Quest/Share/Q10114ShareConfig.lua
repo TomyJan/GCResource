@@ -1,25 +1,16 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1
 main_id = 10114
-
-sub_ids =
-{
-    1011401
-}
-
-rewind_data = {}
-
-rewind_data["1011304"] = 
-{
-   
-}
-
-
-quest_data = {}
-
-quest_data["1011401"] = 
-{
-    
-}
+L0_1 = {}
+L1_1 = 1011401
+L0_1[1] = L1_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["1011304"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L0_1["1011401"] = L1_1

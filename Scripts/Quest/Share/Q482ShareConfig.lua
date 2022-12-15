@@ -1,81 +1,58 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1
 main_id = 482
-
-sub_ids =
-{
-    48201,
-    48202,
-    48203,
-    48209,
-    48207,
-    48204,
-    48208,
-    48205,
-}
-
-rewind_data = {}
-
-rewind_data["48201"] = 
-{
-}
-
-
-rewind_data["48202"] = 
-{
-    npcs = {
-        {
-            id = 1002,
-            alias = "Ambor",
-            script = "Actor/Quest/Q301/Ambor301",
-            pos = "Q48202Ambor",
-            data_index = 0,
-        },
-    }
-}
-
-rewind_data["48204"] = 
-{
-}
-
-rewind_data["48205"] = 
-{
-}
-
-quest_data = {}
-
-quest_data["48202"] = 
-{
-    trial_actors = {
-
-    },
-    actors = {
-        
-    },
-    items = {
-        -- {
-        --     id = 100004,
-        --     pos = "Q404Pos2",
-        --     alias = "Ball",
-        -- },
-    },
-    monsters = {
-        -- {
-        --     id = 20010801,
-        --     pos = "Q404Pos2",
-        -- },
-        -- {
-        --     id = 20010801,
-        --     pos = "Q404Pos2",
-        -- }
-    },
-    gadgets = {
-        -- {
-        --     id = 70300004,
-        --     pos = "Q404Pos2",
-        --     alias = "GoalMarker404",
-        -- }
-    }
-}
+L0_1 = {}
+L1_1 = 48201
+L2_1 = 48202
+L3_1 = 48203
+L4_1 = 48209
+L5_1 = 48207
+L6_1 = 48204
+L7_1 = 48208
+L8_1 = 48205
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["48201"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1002
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.pos = "Q48202Ambor"
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["48202"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["48204"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["48205"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L1_1.trial_actors = L2_1
+L2_1 = {}
+L1_1.actors = L2_1
+L2_1 = {}
+L1_1.items = L2_1
+L2_1 = {}
+L1_1.monsters = L2_1
+L2_1 = {}
+L1_1.gadgets = L2_1
+L0_1["48202"] = L1_1

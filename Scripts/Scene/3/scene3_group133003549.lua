@@ -405,8 +405,8 @@ function action_EVENT_GROUP_REFRESH_549075(context, evt)
 		ScriptLib.CreateMonster(context, { config_id = suites[su].monsters[i], delay_time = 0 })
 	end
 	if #gadgets < defs.stage_sum[st] then
-		ScriptLib.PrintLog(context, "## gadget not enough !")
-		ScriptLib.PrintLog(context, "## st:"..st.." su:"..su)
+		ScriptLib.PrintLog("## gadget not enough !")
+		ScriptLib.PrintLog("## st:"..st.." su:"..su)
 		return -1
 	end
 	math.randomseed(tostring(ScriptLib.GetServerTime(context)):reverse():sub(1,5))

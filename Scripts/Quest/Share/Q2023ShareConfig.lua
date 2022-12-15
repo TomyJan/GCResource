@@ -1,154 +1,123 @@
--- 任务配置数据开始-----------------------------
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1, L11_1, L12_1, L13_1
 main_id = 2023
-
-sub_ids = 
-{
-	202301,
-	202302,
-	202303,
-}
--- 任务配置数据结束---------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
--- 父任务执行项数据开始-----------------------------
-finish_action = 
-{
-	CLIENT = { },
-	SERVER = { },
-}
-
-fail_action = 
-{
-	CLIENT = { },
-	SERVER = { },
-}
-
-cancel_action = 
-{
-	CLIENT = { },
-	SERVER = { },
-}
--- 父任务执行项数据结束-----------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
--- Actor模块数据开始--------------------------------
--- 空
--- Actor模块数据结束--------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
--- 文本模块数据开始---------------------------------
--- 空
--- 文本模块数据结束---------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
--- 路点模块数据开始---------------------------------
--- 空
--- 路点模块数据结束---------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-
--- 断线重连生成内容 开始----------------------------
--- 和questdata配的存档点对应
-rewind_data = 
-{
-	["202301"] = { },
-	["202302"] = { },
-	["202303"] = { },
-}
--- 断线重连生成内容 结束----------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
--- 校验数据 开始----------------------------------
--- 和任务lua中生成NPC/Monster/Gadget/Item等对应
-quest_data = 
-{
-	["202301"] = { },
-	["202302"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 12163,
-				alias = "Npc12163",
-				script = "Actor/Npc/TempNPC",
-				pos = "TestLockGuard01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-		transmit_points = 
-		{
-			{
-				point_id = 1,
-				scene_id = 3,
-				pos = "TestLockPlayer01",
-			},
-			{
-				point_id = 2,
-				scene_id = 3,
-				pos = "TestLockPlayer02",
-			},
-			{
-				point_id = 3,
-				scene_id = 3,
-				pos = "TestLockPlayer03",
-			},
-			{
-				point_id = 4,
-				scene_id = 3,
-				pos = "TestLockPlayer04",
-			},
-			{
-				point_id = 5,
-				scene_id = 3,
-				pos = "TestLockPlayer05",
-			},
-			{
-				point_id = 6,
-				scene_id = 3,
-				pos = "TestLockPlayer06",
-			},
-			{
-				point_id = 7,
-				scene_id = 3,
-				pos = "TestLockPlayer07",
-			},
-			{
-				point_id = 8,
-				scene_id = 3,
-				pos = "TestLockPlayer08",
-			},
-			{
-				point_id = 9,
-				scene_id = 3,
-				pos = "TestLockPlayer09",
-			},
-			{
-				point_id = 10,
-				scene_id = 3,
-				pos = "TestLockPlayer10",
-			},
-			{
-				point_id = 11,
-				scene_id = 3,
-				pos = "TestLockPlayer11",
-			},
-		},
-	},
-	["202303"] = 
-	{
-		npcs = 
-		{
-			{
-				id = 12163,
-				alias = "Npc12163",
-				script = "Actor/Npc/TempNPC",
-				pos = "TestLockGuard01",
-				scene_id = 3,
-				room_id = 0,
-				data_index = 1,
-			},
-		},
-	},
-}
--- 校验数据 结束----------------------------------
--- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+L0_1 = {}
+L1_1 = 202301
+L2_1 = 202302
+L3_1 = 202303
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["202301"] = L1_1
+L1_1 = {}
+L0_1["202302"] = L1_1
+L1_1 = {}
+L0_1["202303"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["202301"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12163
+L3_1.alias = "Npc12163"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "TestLockGuard01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "TestLockPlayer01"
+L4_1 = {}
+L4_1.point_id = 2
+L4_1.scene_id = 3
+L4_1.pos = "TestLockPlayer02"
+L5_1 = {}
+L5_1.point_id = 3
+L5_1.scene_id = 3
+L5_1.pos = "TestLockPlayer03"
+L6_1 = {}
+L6_1.point_id = 4
+L6_1.scene_id = 3
+L6_1.pos = "TestLockPlayer04"
+L7_1 = {}
+L7_1.point_id = 5
+L7_1.scene_id = 3
+L7_1.pos = "TestLockPlayer05"
+L8_1 = {}
+L8_1.point_id = 6
+L8_1.scene_id = 3
+L8_1.pos = "TestLockPlayer06"
+L9_1 = {}
+L9_1.point_id = 7
+L9_1.scene_id = 3
+L9_1.pos = "TestLockPlayer07"
+L10_1 = {}
+L10_1.point_id = 8
+L10_1.scene_id = 3
+L10_1.pos = "TestLockPlayer08"
+L11_1 = {}
+L11_1.point_id = 9
+L11_1.scene_id = 3
+L11_1.pos = "TestLockPlayer09"
+L12_1 = {}
+L12_1.point_id = 10
+L12_1.scene_id = 3
+L12_1.pos = "TestLockPlayer10"
+L13_1 = {}
+L13_1.point_id = 11
+L13_1.scene_id = 3
+L13_1.pos = "TestLockPlayer11"
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L2_1[11] = L13_1
+L1_1.transmit_points = L2_1
+L0_1["202302"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 12163
+L3_1.alias = "Npc12163"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "TestLockGuard01"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["202303"] = L1_1
+quest_data = L0_1

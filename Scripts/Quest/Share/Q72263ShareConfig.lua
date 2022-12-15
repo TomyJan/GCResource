@@ -1,3 +1,655 @@
--- 任务配置数据开始-----------------------------
-
-main_id = 72263sub_ids = {	7226301,	7226302,	7226315,	7226303,	7226319,	7226305,	7226306,	7226307,	7226320,	7226308,	7226309,	7226310,	7226321,	7226311,	7226312,	7226313,	7226314,	7226304,	7226316,	7226317,	7226318,}-- 任务配置数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 父任务执行项数据开始-----------------------------finish_action = {	CLIENT = { },	SERVER = { },}fail_action = {	CLIENT = { },	SERVER = { },}cancel_action = {	CLIENT = { },	SERVER = { },}-- 父任务执行项数据结束------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- Actor模块数据开始---------------------------------- 空-- Actor模块数据结束---------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 文本模块数据开始----------------------------------- 空-- 文本模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 路点模块数据开始----------------------------------- 空-- 路点模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 断线重连生成内容 开始------------------------------ 和questdata配的存档点对应rewind_data = {	["7226301"] = { },	["7226302"] = 	{		npcs = 		{			{				id = 20520,				alias = "NPC20520",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226305-Talk-NPC",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20521,				alias = "NPC20521",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226308-Talk-NPC",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20522,				alias = "NPC20522",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226311-Talk-NPC ",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7226303"] = 	{		npcs = 		{			{				id = 20520,				alias = "NPC20520",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226305-Talk-NPC",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20521,				alias = "NPC20521",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226308-Talk-NPC",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20522,				alias = "NPC20522",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226311-Talk-NPC ",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20482,				alias = "Npc20482",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-72263-Baidai-BackCorner",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},	},	["7226305"] = 	{		npcs = 		{			{				id = 20521,				alias = "NPC20521",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226308-Talk-NPC",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20522,				alias = "NPC20522",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226311-Talk-NPC ",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20482,				alias = "Npc20482",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-72263-Baidai-BackCorner",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7226306"] = 	{		npcs = 		{			{				id = 20520,				alias = "NPC20520",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226305-Talk-NPC",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20521,				alias = "NPC20521",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226308-Talk-NPC",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20522,				alias = "NPC20522",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226311-Talk-NPC ",				scene_id = 3,				room_id = 0,				data_index = 3,			},			{				id = 20482,				alias = "Npc20482",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-72263-Baidai-BackCorner",				scene_id = 3,				room_id = 0,				data_index = 4,			},		},	},	["7226307"] = 	{		npcs = 		{			{				id = 20521,				alias = "NPC20521",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226308-Talk-NPC",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20522,				alias = "NPC20522",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226311-Talk-NPC ",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20482,				alias = "Npc20482",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-72263-Baidai-BackCorner",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7226308"] = 	{		npcs = 		{			{				id = 20522,				alias = "NPC20522",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226311-Talk-NPC ",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20482,				alias = "Npc20482",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-72263-Baidai-BackCorner",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["7226309"] = 	{		npcs = 		{			{				id = 20521,				alias = "NPC20521",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226308-Talk-NPC",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20522,				alias = "NPC20522",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226311-Talk-NPC ",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["7226310"] = 	{		npcs = 		{			{				id = 20522,				alias = "NPC20522",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226311-Talk-NPC ",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20482,				alias = "Npc20482",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-72263-Baidai-Face",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["7226311"] = 	{		npcs = 		{			{				id = 20482,				alias = "Npc20482",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-72263-Baidai-Face",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3061,				alias = "Npc3061",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226321-Sanhexi",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["7226312"] = 	{		npcs = 		{			{				id = 20522,				alias = "NPC20522",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226311-Talk-NPC ",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20482,				alias = "Npc20482",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-72263-Baidai-Face",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["7226313"] = 	{		npcs = 		{			{				id = 20482,				alias = "Npc20482",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-72263-Baidai-Face",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7226314"] = 	{		npcs = 		{			{				id = 20482,				alias = "Npc20482",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-72263-Baidai-Face",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7226315"] = 	{		npcs = 		{			{				id = 20520,				alias = "NPC20520",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226305-Talk-NPC",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20521,				alias = "NPC20521",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226308-Talk-NPC",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20522,				alias = "NPC20522",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226311-Talk-NPC ",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7226319"] = 	{		npcs = 		{			{				id = 20521,				alias = "NPC20521",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226308-Talk-NPC",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20522,				alias = "NPC20522",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226311-Talk-NPC ",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20482,				alias = "Npc20482",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-72263-Baidai-BackCorner",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7226320"] = 	{		npcs = 		{			{				id = 20522,				alias = "NPC20522",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226311-Talk-NPC ",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20482,				alias = "Npc20482",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-72263-Baidai-BackCorner",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["7226321"] = 	{		npcs = 		{			{				id = 20482,				alias = "Npc20482",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-72263-Baidai-Face",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},}-- 断线重连生成内容 结束------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 校验数据 开始------------------------------------ 和任务lua中生成NPC/Monster/Gadget/Item等对应quest_data = {	["7226301"] = 	{		npcs = 		{			{				id = 20520,				alias = "NPC20520",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226305-Talk-NPC",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 20521,				alias = "NPC20521",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226308-Talk-NPC",				scene_id = 3,				room_id = 0,				data_index = 2,			},			{				id = 20522,				alias = "NPC20522",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226311-Talk-NPC ",				scene_id = 3,				room_id = 0,				data_index = 3,			},		},	},	["7226302"] = 	{		npcs = 		{			{				id = 1005,				alias = "Paimon",				script = "Actor/Quest/Q352/Paimon",				pos = "WQ-7226305-Lidao-Zhiyin",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7226303"] = { },	["7226304"] = { },	["7226305"] = 	{		npcs = 		{			{				id = 20520,				alias = "NPC20520",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226305-Talk-NPC",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7226306"] = { },	["7226307"] = { },	["7226308"] = 	{		npcs = 		{			{				id = 20521,				alias = "NPC20521",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226308-Talk-NPC",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7226309"] = 	{		npcs = 		{			{				id = 20482,				alias = "Npc20482",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-72263-Baidai-Face",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7226310"] = { },	["7226311"] = 	{		npcs = 		{			{				id = 20522,				alias = "NPC20522",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226311-Talk-NPC ",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7226312"] = { },	["7226313"] = { },	["7226314"] = { },	["7226315"] = 	{		npcs = 		{			{				id = 20482,				alias = "Npc20482",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-72263-Baidai-BackCorner",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7226316"] = { },	["7226317"] = { },	["7226318"] = { },	["7226319"] = 	{		npcs = 		{			{				id = 20520,				alias = "NPC20520",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226305-Talk-NPC",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7226320"] = 	{		npcs = 		{			{				id = 20521,				alias = "NPC20521",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226308-Talk-NPC",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7226321"] = 	{		npcs = 		{			{				id = 20522,				alias = "NPC20522",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226311-Talk-NPC ",				scene_id = 3,				room_id = 0,				data_index = 1,			},			{				id = 3061,				alias = "Npc3061",				script = "Actor/Npc/NpcFSMBehaviour",				pos = "WQ-7226321-Sanhexi",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},}-- 校验数据 结束------------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1, L11_1, L12_1, L13_1, L14_1, L15_1, L16_1, L17_1, L18_1, L19_1, L20_1, L21_1
+main_id = 72263
+L0_1 = {}
+L1_1 = 7226301
+L2_1 = 7226302
+L3_1 = 7226315
+L4_1 = 7226303
+L5_1 = 7226319
+L6_1 = 7226305
+L7_1 = 7226306
+L8_1 = 7226307
+L9_1 = 7226320
+L10_1 = 7226308
+L11_1 = 7226309
+L12_1 = 7226310
+L13_1 = 7226321
+L14_1 = 7226311
+L15_1 = 7226312
+L16_1 = 7226313
+L17_1 = 7226314
+L18_1 = 7226304
+L19_1 = 7226316
+L20_1 = 7226317
+L21_1 = 7226318
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+L0_1[11] = L11_1
+L0_1[12] = L12_1
+L0_1[13] = L13_1
+L0_1[14] = L14_1
+L0_1[15] = L15_1
+L0_1[16] = L16_1
+L0_1[17] = L17_1
+L0_1[18] = L18_1
+L0_1[19] = L19_1
+L0_1[20] = L20_1
+L0_1[21] = L21_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["7226301"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20520
+L3_1.alias = "NPC20520"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "WQ-7226305-Talk-NPC"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20521
+L4_1.alias = "NPC20521"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "WQ-7226308-Talk-NPC"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20522
+L5_1.alias = "NPC20522"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "WQ-7226311-Talk-NPC "
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["7226302"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20520
+L3_1.alias = "NPC20520"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "WQ-7226305-Talk-NPC"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20521
+L4_1.alias = "NPC20521"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "WQ-7226308-Talk-NPC"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20522
+L5_1.alias = "NPC20522"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "WQ-7226311-Talk-NPC "
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20482
+L6_1.alias = "Npc20482"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "WQ-72263-Baidai-BackCorner"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["7226303"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20521
+L3_1.alias = "NPC20521"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "WQ-7226308-Talk-NPC"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20522
+L4_1.alias = "NPC20522"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "WQ-7226311-Talk-NPC "
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20482
+L5_1.alias = "Npc20482"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "WQ-72263-Baidai-BackCorner"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["7226305"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20520
+L3_1.alias = "NPC20520"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "WQ-7226305-Talk-NPC"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20521
+L4_1.alias = "NPC20521"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "WQ-7226308-Talk-NPC"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20522
+L5_1.alias = "NPC20522"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "WQ-7226311-Talk-NPC "
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L6_1 = {}
+L6_1.id = 20482
+L6_1.alias = "Npc20482"
+L6_1.script = "Actor/Npc/NpcFSMBehaviour"
+L6_1.pos = "WQ-72263-Baidai-BackCorner"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 4
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.npcs = L2_1
+L0_1["7226306"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20521
+L3_1.alias = "NPC20521"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "WQ-7226308-Talk-NPC"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20522
+L4_1.alias = "NPC20522"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "WQ-7226311-Talk-NPC "
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20482
+L5_1.alias = "Npc20482"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "WQ-72263-Baidai-BackCorner"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["7226307"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20522
+L3_1.alias = "NPC20522"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "WQ-7226311-Talk-NPC "
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20482
+L4_1.alias = "Npc20482"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "WQ-72263-Baidai-BackCorner"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["7226308"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20521
+L3_1.alias = "NPC20521"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "WQ-7226308-Talk-NPC"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20522
+L4_1.alias = "NPC20522"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "WQ-7226311-Talk-NPC "
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["7226309"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20522
+L3_1.alias = "NPC20522"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "WQ-7226311-Talk-NPC "
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20482
+L4_1.alias = "Npc20482"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "WQ-72263-Baidai-Face"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["7226310"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20482
+L3_1.alias = "Npc20482"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "WQ-72263-Baidai-Face"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3061
+L4_1.alias = "Npc3061"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "WQ-7226321-Sanhexi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["7226311"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20522
+L3_1.alias = "NPC20522"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "WQ-7226311-Talk-NPC "
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20482
+L4_1.alias = "Npc20482"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "WQ-72263-Baidai-Face"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["7226312"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20482
+L3_1.alias = "Npc20482"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "WQ-72263-Baidai-Face"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7226313"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20482
+L3_1.alias = "Npc20482"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "WQ-72263-Baidai-Face"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7226314"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20520
+L3_1.alias = "NPC20520"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "WQ-7226305-Talk-NPC"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20521
+L4_1.alias = "NPC20521"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "WQ-7226308-Talk-NPC"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20522
+L5_1.alias = "NPC20522"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "WQ-7226311-Talk-NPC "
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["7226315"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20521
+L3_1.alias = "NPC20521"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "WQ-7226308-Talk-NPC"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20522
+L4_1.alias = "NPC20522"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "WQ-7226311-Talk-NPC "
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20482
+L5_1.alias = "Npc20482"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "WQ-72263-Baidai-BackCorner"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["7226319"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20522
+L3_1.alias = "NPC20522"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "WQ-7226311-Talk-NPC "
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20482
+L4_1.alias = "Npc20482"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "WQ-72263-Baidai-BackCorner"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["7226320"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20482
+L3_1.alias = "Npc20482"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "WQ-72263-Baidai-Face"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7226321"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20520
+L3_1.alias = "NPC20520"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "WQ-7226305-Talk-NPC"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 20521
+L4_1.alias = "NPC20521"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "WQ-7226308-Talk-NPC"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L5_1 = {}
+L5_1.id = 20522
+L5_1.alias = "NPC20522"
+L5_1.script = "Actor/Npc/NpcFSMBehaviour"
+L5_1.pos = "WQ-7226311-Talk-NPC "
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["7226301"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1005
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.pos = "WQ-7226305-Lidao-Zhiyin"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7226302"] = L1_1
+L1_1 = {}
+L0_1["7226303"] = L1_1
+L1_1 = {}
+L0_1["7226304"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20520
+L3_1.alias = "NPC20520"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "WQ-7226305-Talk-NPC"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7226305"] = L1_1
+L1_1 = {}
+L0_1["7226306"] = L1_1
+L1_1 = {}
+L0_1["7226307"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20521
+L3_1.alias = "NPC20521"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "WQ-7226308-Talk-NPC"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7226308"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20482
+L3_1.alias = "Npc20482"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "WQ-72263-Baidai-Face"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7226309"] = L1_1
+L1_1 = {}
+L0_1["7226310"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20522
+L3_1.alias = "NPC20522"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "WQ-7226311-Talk-NPC "
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7226311"] = L1_1
+L1_1 = {}
+L0_1["7226312"] = L1_1
+L1_1 = {}
+L0_1["7226313"] = L1_1
+L1_1 = {}
+L0_1["7226314"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20482
+L3_1.alias = "Npc20482"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "WQ-72263-Baidai-BackCorner"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7226315"] = L1_1
+L1_1 = {}
+L0_1["7226316"] = L1_1
+L1_1 = {}
+L0_1["7226317"] = L1_1
+L1_1 = {}
+L0_1["7226318"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20520
+L3_1.alias = "NPC20520"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "WQ-7226305-Talk-NPC"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7226319"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20521
+L3_1.alias = "NPC20521"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "WQ-7226308-Talk-NPC"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7226320"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 20522
+L3_1.alias = "NPC20522"
+L3_1.script = "Actor/Npc/NpcFSMBehaviour"
+L3_1.pos = "WQ-7226311-Talk-NPC "
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 3061
+L4_1.alias = "Npc3061"
+L4_1.script = "Actor/Npc/NpcFSMBehaviour"
+L4_1.pos = "WQ-7226321-Sanhexi"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["7226321"] = L1_1
+quest_data = L0_1

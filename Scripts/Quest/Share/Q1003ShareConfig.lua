@@ -1,612 +1,549 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1, L11_1, L12_1, L13_1, L14_1, L15_1, L16_1, L17_1, L18_1, L19_1, L20_1, L21_1
 main_id = 1003
-
-sub_ids =
-{
-	100301,
-	100320,
-	100302,
-	100303,
-	100319,
-	100304,
-	100305,
-	100306,
-	100307,
-	100308,
-	100309,	
-	100310,
-	100321,
-	100311,
-	100312,
-	100313,
-	100314,
-	100315,
-	100316,
-	100317,
-	100318,
-}
-
-PaimonData = 
-{
-	ID = 1005,
-	Alias = "Paimon",
-}
-
-
-XiaoData = 
-{
-	ID = 10204,
-	Alias = "Xiao",
-}
-
-VerrGoldetData = 
-{
-	ID = 220801,
-	Alias = "Npc220801",
-}
-
-YanxiaoData = 
-{
-	ID = 220401,
-	Alias = "Npc220401",
-}
-
-XiaomingData = 
-{
-	ID = 231101,
-	Alias = "Npc231101",
-}
-
-Xiaoming02Data = 
-{
-	ID = 231102,
-	Alias = "Npc231102",
-}
-
-
-GongziData = 
-{
-	ID = 10200,
-	Alias = "Npc10200",
-}
-
-rewind_data = {}
-
-rewind_data["100315"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Npc231101",
-			script = "Actor/Npc/TempNPC",
-			id = 231101,
-			pos = "Q100315xiaomingtalk",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-
-    }
-}
-
-quest_data = {}
-
-quest_data["100301"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Xiao",
-			script = "Actor/Npc/TempNPC",
-			id = 10204,
-			pos = "Q100301Xiao",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-
-    }
-}
-
-quest_data["100302"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Xiao",
-			script = "Actor/Npc/TempNPC",
-			id = 10204,
-			pos = "Q100301Xiao",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-
-    },
-
-    transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 3,
-            pos = "Q100301PlayerPos"
-        },
-    }
-}
-
-quest_data["100303"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Npc220801",
-			script = "Actor/Npc/TempNPC",
-			id = 220801,
-			pos = "Q100303VerrGoldet",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-		
-		{
-			alias = "Xiao",
-			script = "Actor/Npc/TempNPC",
-			id = 10204,
-			pos = "Q100301Xiao",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-
-    }
-}
-
-quest_data["100304"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Npc220801",
-			script = "Actor/Npc/TempNPC",
-			id = 220801,
-			pos = "Q100303VerrGoldet",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-
-		{
-			alias = "Xiao",
-			script = "Actor/Npc/TempNPC",
-			id = 10204,
-			pos = "Q100301Xiao",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-
-    }
-}
-
-quest_data["100305"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Npc220801",
-			script = "Actor/Npc/TempNPC",
-			id = 220801,
-			pos = "Q100303VerrGoldet",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-		{
-			alias = "Xiao",
-			script = "Actor/Npc/TempNPC",
-			id = 10204,
-			pos = "Q100301Xiao",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-
-    }
-}
-
-quest_data["100306"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Npc220801",
-			script = "Actor/Npc/TempNPC",
-			id = 220801,
-			pos = "Q100303VerrGoldet",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-		{
-			alias = "Xiao",
-			script = "Actor/Npc/TempNPC",
-			id = 10204,
-			pos = "Q100301Xiao",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-		{
-			alias = "Npc220401",
-			script = "Actor/Npc/TempNPC",
-			id = 220401,
-			pos = "Q100306Yanxiao",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-
-    }
-}
-
-quest_data["100307"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Npc220801",
-			script = "Actor/Npc/TempNPC",
-			id = 220801,
-			pos = "Q100303VerrGoldet",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-		{
-			alias = "Xiao",
-			script = "Actor/Npc/TempNPC",
-			id = 10204,
-			pos = "Q100301Xiao",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-		{
-			alias = "Npc220401",
-			script = "Actor/Npc/TempNPC",
-			id = 220401,
-			pos = "Q100306Yanxiao",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-
-    }
-}
-
-quest_data["100308"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Paimon",
-			script = "Actor/Quest/Q352/Paimon",
-			id = 1005,
-			pos = "Q100307Trigger",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-		{
-			alias = "Npc220801",
-			script = "Actor/Npc/TempNPC",
-			id = 220801,
-			pos = "Q100303VerrGoldet",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-		{
-			alias = "Xiao",
-			script = "Actor/Npc/TempNPC",
-			id = 10204,
-			pos = "Q100301Xiao",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-		{
-			alias = "Npc220401",
-			script = "Actor/Npc/TempNPC",
-			id = 220401,
-			pos = "Q100306Yanxiao",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-		{
-			alias = "Npc231101",
-			script = "Actor/Npc/TempNPC",
-			id = 231101,
-			pos = "Q100308Ming",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-    }
-}
-
-quest_data["100309"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Npc220801",
-			script = "Actor/Npc/TempNPC",
-			id = 220801,
-			pos = "Q100303VerrGoldet",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-		{
-			alias = "Xiao",
-			script = "Actor/Npc/TempNPC",
-			id = 10204,
-			pos = "Q100301Xiao",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-		{
-			alias = "Npc220401",
-			script = "Actor/Npc/TempNPC",
-			id = 220401,
-			pos = "Q100306Yanxiao",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-
-    }
-}
-
-quest_data["100310"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Npc220801",
-			script = "Actor/Npc/TempNPC",
-			id = 220801,
-			pos = "Q100303VerrGoldet",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-		{
-			alias = "Xiao",
-			script = "Actor/Npc/TempNPC",
-			id = 10204,
-			pos = "Q100301Xiao",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-		{
-			alias = "Npc220401",
-			script = "Actor/Npc/TempNPC",
-			id = 220401,
-			pos = "Q100306Yanxiao",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-
-    }
-}
-
-quest_data["100321"] = 
-{
-	gadgets =
-	{
-		{
-			id = 70710056,
-			pos = "Q100321Gadget",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-			alias = "Xiangmoyin", -- optional default : ""
-			scene_id = 3, -- optional default : sceneData.DefaultSceneID
-		}
-	}
-}
-
-quest_data["100311"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Npc220801",
-			script = "Actor/Npc/TempNPC",
-			id = 220801,
-			pos = "Q100303VerrGoldet",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-		{
-			alias = "Xiao",
-			script = "Actor/Npc/TempNPC",
-			id = 10204,
-			pos = "Q100301Xiao",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-		{
-			alias = "Npc220401",
-			script = "Actor/Npc/TempNPC",
-			id = 220401,
-			pos = "Q100306Yanxiao",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-
-	},
-	
-	gadgets =
-	{
-		{
-			id = 70710051,
-			pos = "Q100311Rock01",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-			alias = "Rock100301", -- optional default : ""
-			scene_id = 3, -- optional default : sceneData.DefaultSceneID
-		},
-		{
-			id = 70710052,
-			pos = "Q100311Rock02",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-			alias = "Rock100302", -- optional default : ""
-			scene_id = 3, -- optional default : sceneData.DefaultSceneID
-		},
-		{
-			id = 70710053,
-			pos = "Q100311Rock03",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-			alias = "Rock100303", -- optional default : ""
-			scene_id = 3, -- optional default : sceneData.DefaultSceneID
-		},
-		{
-			id = 70710058,
-			pos = "Q100311JieMI",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-			alias = "Guide1003", -- optional default : ""
-			scene_id = 3, -- optional default : sceneData.DefaultSceneID
-		},
-	}
-}
-
-quest_data["100312"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Npc231102",
-			script = "Actor/Npc/TempNPC",
-			id = 231102,
-			pos = "Q100312Ming",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-
-	},
-	
-	gadgets =
-	{
-		{
-			id = 70710054,
-			pos = "Q100312Ming",-- 使用SpawnGadgeWithPos时可不配，使用SpawnGadge必须配
-			alias = "BornEff1003", -- optional default : ""
-			scene_id = 3, -- optional default : sceneData.DefaultSceneID
-		}
-	}
-}
-
-quest_data["100313"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Npc231101",
-			script = "Actor/Npc/TempNPC",
-			id = 231101,
-			pos = "Q100315Ming",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-
-    },
-	
-	transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 3,
-            pos = "Q100313Trigger"
-        },
-    }
-}
-
-quest_data["100314"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Npc231101",
-			script = "Actor/Npc/TempNPC",
-			id = 231101,
-			pos = "Q100315xiaomingtalk",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-
-	},
-
-	transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 3,
-            pos = "Q100315PlayerPos"
-        },
-    }
-}
-
-quest_data["100316"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Npc220401",
-			script = "Actor/Npc/TempNPC",
-			id = 220401,
-			pos = "Q100306Yanxiao",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-
-    }
-}
-
-
-quest_data["100317"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Xiao",
-			script = "Actor/Npc/TempNPC",
-			id = 10204,
-			pos = "Q100306Xiao",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-    }
-}
-
-quest_data["100318"] = 
-{
-	npcs = 
-	{
-		{
-			alias = "Npc10200",
-			script = "Actor/Npc/TempNPC",
-			id = 10200,
-			pos = "Q100318Gongzi",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        },
-    }
-}
+L0_1 = {}
+L1_1 = 100301
+L2_1 = 100320
+L3_1 = 100302
+L4_1 = 100303
+L5_1 = 100319
+L6_1 = 100304
+L7_1 = 100305
+L8_1 = 100306
+L9_1 = 100307
+L10_1 = 100308
+L11_1 = 100309
+L12_1 = 100310
+L13_1 = 100321
+L14_1 = 100311
+L15_1 = 100312
+L16_1 = 100313
+L17_1 = 100314
+L18_1 = 100315
+L19_1 = 100316
+L20_1 = 100317
+L21_1 = 100318
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+L0_1[11] = L11_1
+L0_1[12] = L12_1
+L0_1[13] = L13_1
+L0_1[14] = L14_1
+L0_1[15] = L15_1
+L0_1[16] = L16_1
+L0_1[17] = L17_1
+L0_1[18] = L18_1
+L0_1[19] = L19_1
+L0_1[20] = L20_1
+L0_1[21] = L21_1
+sub_ids = L0_1
+L0_1 = {}
+L0_1.ID = 1005
+L0_1.Alias = "Paimon"
+PaimonData = L0_1
+L0_1 = {}
+L0_1.ID = 10204
+L0_1.Alias = "Xiao"
+XiaoData = L0_1
+L0_1 = {}
+L0_1.ID = 220801
+L0_1.Alias = "Npc220801"
+VerrGoldetData = L0_1
+L0_1 = {}
+L0_1.ID = 220401
+L0_1.Alias = "Npc220401"
+YanxiaoData = L0_1
+L0_1 = {}
+L0_1.ID = 231101
+L0_1.Alias = "Npc231101"
+XiaomingData = L0_1
+L0_1 = {}
+L0_1.ID = 231102
+L0_1.Alias = "Npc231102"
+Xiaoming02Data = L0_1
+L0_1 = {}
+L0_1.ID = 10200
+L0_1.Alias = "Npc10200"
+GongziData = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc231101"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 231101
+L3_1.pos = "Q100315xiaomingtalk"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["100315"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Xiao"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 10204
+L3_1.pos = "Q100301Xiao"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["100301"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Xiao"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 10204
+L3_1.pos = "Q100301Xiao"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q100301PlayerPos"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["100302"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc220801"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 220801
+L3_1.pos = "Q100303VerrGoldet"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Xiao"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.id = 10204
+L4_1.pos = "Q100301Xiao"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["100303"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc220801"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 220801
+L3_1.pos = "Q100303VerrGoldet"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Xiao"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.id = 10204
+L4_1.pos = "Q100301Xiao"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["100304"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc220801"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 220801
+L3_1.pos = "Q100303VerrGoldet"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Xiao"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.id = 10204
+L4_1.pos = "Q100301Xiao"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["100305"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc220801"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 220801
+L3_1.pos = "Q100303VerrGoldet"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Xiao"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.id = 10204
+L4_1.pos = "Q100301Xiao"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 0
+L5_1 = {}
+L5_1.alias = "Npc220401"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.id = 220401
+L5_1.pos = "Q100306Yanxiao"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["100306"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc220801"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 220801
+L3_1.pos = "Q100303VerrGoldet"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Xiao"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.id = 10204
+L4_1.pos = "Q100301Xiao"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 0
+L5_1 = {}
+L5_1.alias = "Npc220401"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.id = 220401
+L5_1.pos = "Q100306Yanxiao"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["100307"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Paimon"
+L3_1.script = "Actor/Quest/Q352/Paimon"
+L3_1.id = 1005
+L3_1.pos = "Q100307Trigger"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Npc220801"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.id = 220801
+L4_1.pos = "Q100303VerrGoldet"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 0
+L5_1 = {}
+L5_1.alias = "Xiao"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.id = 10204
+L5_1.pos = "Q100301Xiao"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 0
+L6_1 = {}
+L6_1.alias = "Npc220401"
+L6_1.script = "Actor/Npc/TempNPC"
+L6_1.id = 220401
+L6_1.pos = "Q100306Yanxiao"
+L6_1.scene_id = 3
+L6_1.room_id = 0
+L6_1.data_index = 0
+L7_1 = {}
+L7_1.alias = "Npc231101"
+L7_1.script = "Actor/Npc/TempNPC"
+L7_1.id = 231101
+L7_1.pos = "Q100308Ming"
+L7_1.scene_id = 3
+L7_1.room_id = 0
+L7_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L1_1.npcs = L2_1
+L0_1["100308"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc220801"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 220801
+L3_1.pos = "Q100303VerrGoldet"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Xiao"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.id = 10204
+L4_1.pos = "Q100301Xiao"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 0
+L5_1 = {}
+L5_1.alias = "Npc220401"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.id = 220401
+L5_1.pos = "Q100306Yanxiao"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["100309"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc220801"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 220801
+L3_1.pos = "Q100303VerrGoldet"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Xiao"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.id = 10204
+L4_1.pos = "Q100301Xiao"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 0
+L5_1 = {}
+L5_1.alias = "Npc220401"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.id = 220401
+L5_1.pos = "Q100306Yanxiao"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L0_1["100310"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710056
+L3_1.pos = "Q100321Gadget"
+L3_1.alias = "Xiangmoyin"
+L3_1.scene_id = 3
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["100321"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc220801"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 220801
+L3_1.pos = "Q100303VerrGoldet"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Xiao"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.id = 10204
+L4_1.pos = "Q100301Xiao"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 0
+L5_1 = {}
+L5_1.alias = "Npc220401"
+L5_1.script = "Actor/Npc/TempNPC"
+L5_1.id = 220401
+L5_1.pos = "Q100306Yanxiao"
+L5_1.scene_id = 3
+L5_1.room_id = 0
+L5_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710051
+L3_1.pos = "Q100311Rock01"
+L3_1.alias = "Rock100301"
+L3_1.scene_id = 3
+L4_1 = {}
+L4_1.id = 70710052
+L4_1.pos = "Q100311Rock02"
+L4_1.alias = "Rock100302"
+L4_1.scene_id = 3
+L5_1 = {}
+L5_1.id = 70710053
+L5_1.pos = "Q100311Rock03"
+L5_1.alias = "Rock100303"
+L5_1.scene_id = 3
+L6_1 = {}
+L6_1.id = 70710058
+L6_1.pos = "Q100311JieMI"
+L6_1.alias = "Guide1003"
+L6_1.scene_id = 3
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L1_1.gadgets = L2_1
+L0_1["100311"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc231102"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 231102
+L3_1.pos = "Q100312Ming"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70710054
+L3_1.pos = "Q100312Ming"
+L3_1.alias = "BornEff1003"
+L3_1.scene_id = 3
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L0_1["100312"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc231101"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 231101
+L3_1.pos = "Q100315Ming"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q100313Trigger"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["100313"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc231101"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 231101
+L3_1.pos = "Q100315xiaomingtalk"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q100315PlayerPos"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["100314"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc220401"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 220401
+L3_1.pos = "Q100306Yanxiao"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["100316"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Xiao"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 10204
+L3_1.pos = "Q100306Xiao"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["100317"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc10200"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 10200
+L3_1.pos = "Q100318Gongzi"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["100318"] = L1_1

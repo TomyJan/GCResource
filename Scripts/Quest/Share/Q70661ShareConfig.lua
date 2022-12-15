@@ -1,3 +1,181 @@
--- 任务配置数据开始-----------------------------
-
-main_id = 70661sub_ids = {	7066101,	7066102,	7066103,	7066104,	7066110,	7066106,	7066109,	7066107,	7066108,	7066105,}-- 任务配置数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 父任务执行项数据开始-----------------------------finish_action = {	CLIENT = { },	SERVER = { },}fail_action = {	CLIENT = { },	SERVER = { },}cancel_action = {	CLIENT = { },	SERVER = { },}-- 父任务执行项数据结束------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- Actor模块数据开始---------------------------------- 空-- Actor模块数据结束---------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 文本模块数据开始----------------------------------- 空-- 文本模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 路点模块数据开始----------------------------------- 空-- 路点模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 断线重连生成内容 开始------------------------------ 和questdata配的存档点对应rewind_data = {	["7066101"] = { },	["7066102"] = { },	["7066103"] = { },	["7066104"] = { },	["7066106"] = { },	["7066107"] = { },	["7066108"] = 	{		npcs = 		{			{				id = 167301,				alias = "Npc167301",				script = "Actor/Npc/TempNPC",				pos = "Q70661_Nantuck_pos1",				scene_id = 3,				room_id = 0,				data_index = 2,			},		},	},	["7066109"] = { },}-- 断线重连生成内容 结束------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 校验数据 开始------------------------------------ 和任务lua中生成NPC/Monster/Gadget/Item等对应quest_data = {	["7066101"] = { },	["7066102"] = 	{		npcs = 		{			{				id = 167301,				alias = "Npc167301",				script = "Actor/Npc/TempNPC",				pos = "Q70661_Nantuck_pos1",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7066103"] = 	{		npcs = 		{			{				id = 167301,				alias = "Npc167301",				script = "Actor/Npc/TempNPC",				pos = "Q70661_Nantuck_pos1",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7066104"] = 	{		npcs = 		{			{				id = 167301,				alias = "Npc167301",				script = "Actor/Npc/TempNPC",				pos = "Q70661_Nantuck_pos1",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7066105"] = 	{		npcs = 		{			{				id = 167301,				alias = "Npc167301",				script = "Actor/Npc/TempNPC",				pos = "Q70661_Nantuck_pos1",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7066106"] = 	{		npcs = 		{			{				id = 167301,				alias = "Npc167301",				script = "Actor/Npc/TempNPC",				pos = "Q70661_Nantuck_pos1",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7066107"] = 	{		npcs = 		{			{				id = 167301,				alias = "Npc167301",				script = "Actor/Npc/TempNPC",				pos = "Q70661_Nantuck_pos1",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7066108"] = { },	["7066109"] = 	{		npcs = 		{			{				id = 167301,				alias = "Npc167301",				script = "Actor/Npc/TempNPC",				pos = "Q70661_Nantuck_pos1",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},	["7066110"] = 	{		npcs = 		{			{				id = 167301,				alias = "Npc167301",				script = "Actor/Npc/TempNPC",				pos = "Q70661_Nantuck_pos1",				scene_id = 3,				room_id = 0,				data_index = 1,			},		},	},}-- 校验数据 结束------------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1
+main_id = 70661
+L0_1 = {}
+L1_1 = 7066101
+L2_1 = 7066102
+L3_1 = 7066103
+L4_1 = 7066104
+L5_1 = 7066110
+L6_1 = 7066106
+L7_1 = 7066109
+L8_1 = 7066107
+L9_1 = 7066108
+L10_1 = 7066105
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["7066101"] = L1_1
+L1_1 = {}
+L0_1["7066102"] = L1_1
+L1_1 = {}
+L0_1["7066103"] = L1_1
+L1_1 = {}
+L0_1["7066104"] = L1_1
+L1_1 = {}
+L0_1["7066106"] = L1_1
+L1_1 = {}
+L0_1["7066107"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 167301
+L3_1.alias = "Npc167301"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q70661_Nantuck_pos1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 2
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7066108"] = L1_1
+L1_1 = {}
+L0_1["7066109"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["7066101"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 167301
+L3_1.alias = "Npc167301"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q70661_Nantuck_pos1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7066102"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 167301
+L3_1.alias = "Npc167301"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q70661_Nantuck_pos1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7066103"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 167301
+L3_1.alias = "Npc167301"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q70661_Nantuck_pos1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7066104"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 167301
+L3_1.alias = "Npc167301"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q70661_Nantuck_pos1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7066105"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 167301
+L3_1.alias = "Npc167301"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q70661_Nantuck_pos1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7066106"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 167301
+L3_1.alias = "Npc167301"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q70661_Nantuck_pos1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7066107"] = L1_1
+L1_1 = {}
+L0_1["7066108"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 167301
+L3_1.alias = "Npc167301"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q70661_Nantuck_pos1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7066109"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 167301
+L3_1.alias = "Npc167301"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q70661_Nantuck_pos1"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["7066110"] = L1_1
+quest_data = L0_1

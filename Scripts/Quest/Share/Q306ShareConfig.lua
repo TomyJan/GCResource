@@ -1,85 +1,80 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1, L11_1
 main_id = 306
-
-sub_ids =
-{
-    30600,
-    30601,
-    30602,
-    30603,
-    30604,
-    30607,
-    30608,
-    30609,
-    30610,
-    30611,
-    30612,
-}
-
----存放断线重连生成内容，和questdata配的存档点对应
-rewind_data = {}
-
-rewind_data["30601"] = 
-{
-    npcs = {
-        {
-            id = 1002,
-            alias = "Ambor",
-            script = "Actor/Quest/Q301/Ambor301",
-            pos = "Q306DungeonAmbor",
-        }
-    }
-}
-
-rewind_data["30602"] = 
-{
-    -- avatar = {
-    --     offline_dungeon_id = 1001,
-    --     scene_id = 3,
-    --     pos = "Q30601Player"
-    -- },
-    npcs = {
-        {
-            id = 1002,
-            alias = "Ambor",
-            script = "Actor/Quest/Q301/Ambor301",
-            pos = "Q306DungeonDoor",
-        }
-    }
-}
-
----校验用，和任务lua中生成NPC/monster/gadget/item等对应
-quest_data = {}
-
-quest_data["30600"] = 
-{
-    npcs = {
-        {
-            alias = "Ambor",
-            script = "Actor/Quest/Q301/Ambor301",
-            id = 1002,
-            pos = "Q306DungeonAmbor",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-        }
-    }
-}
-
-quest_data["30610"] = 
-{
-    npcs = {
-        {
-            alias = "Ambor",
-            script = "Actor/Quest/Q301/Ambor301",
-            id = 1002,
-            pos = "Q306Ambor",
-			scene_id = 20009,
-			room_id = 0,
-			data_index = 0,
-        }
-    }
-}
+L0_1 = {}
+L1_1 = 30600
+L2_1 = 30601
+L3_1 = 30602
+L4_1 = 30603
+L5_1 = 30604
+L6_1 = 30607
+L7_1 = 30608
+L8_1 = 30609
+L9_1 = 30610
+L10_1 = 30611
+L11_1 = 30612
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+L0_1[9] = L9_1
+L0_1[10] = L10_1
+L0_1[11] = L11_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1002
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.pos = "Q306DungeonAmbor"
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["30601"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1002
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.pos = "Q306DungeonDoor"
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["30602"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Q306DungeonAmbor"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["30600"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Ambor"
+L3_1.script = "Actor/Quest/Q301/Ambor301"
+L3_1.id = 1002
+L3_1.pos = "Q306Ambor"
+L3_1.scene_id = 20009
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["30610"] = L1_1

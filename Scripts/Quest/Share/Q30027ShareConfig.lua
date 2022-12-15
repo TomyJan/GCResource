@@ -1,112 +1,98 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1
 main_id = 30027
-
-sub_ids =
-{
-    3002701,
-    3002702,
-    3002703,
-}
-
-rewind_data = {}
-rewind_data["3002701"] = 
-{
-	npcs = 
-    {
-        {
-            id = "{QuestNpcID}",
-            alias = "{QuestNpcID}",
-            script = "Actor/Npc/TempNPC",
-            pos = "{QuestRescuePos1}",
-            scene_id  = 3,
-            room_id = 0,
-            data_index = 1,
-        },
-    },
-}
-
-rewind_data["3002702"] = 
-{
-	npcs = 
-    {
-        {
-            id = "{QuestNpcID}",
-            alias = "{QuestNpcID}",
-            script = "Actor/Npc/TempNPC",
-            pos = "{QuestRescuePos1}",
-            scene_id  = 3,
-            room_id = 0,
-            data_index = 1,
-        },
-    },
-}
-
-rewind_data["3002703"] = 
-{
-	npcs = 
-    {
-        {
-            id = "{QuestNpcID}",
-            alias = "{QuestNpcID}",
-            script = "Actor/Npc/TempNPC",
-            pos = "{QuestRescuePos1}",
-            scene_id  = 3,
-            room_id = 0,
-            data_index = 1,
-        },
-    },
-}
-
-
-quest_data = {}
-
-quest_data["3002701"] = 
-{
-	npcs = 
-    {
-        {
-            id = "{QuestNpcID}",
-            alias = "{QuestNpcID}",
-            script = "Actor/Npc/TempNPC",
-            pos = "{QuestRescuePos1}",
-            scene_id  = 3,
-            room_id = 0,
-            data_index = 1,
-        },
-    },
-}
-
-quest_data["3002702"] = 
-{
-	npcs = 
-    {
-        {
-            id = "{QuestNpcID}",
-            alias = "{QuestNpcID}",
-            script = "Actor/Npc/TempNPC",
-            pos = "{QuestRescuePos1}",
-            scene_id  = 3,
-            room_id = 0,
-            data_index = 1,
-        },
-    },
-}
-
-quest_data["3002703"] = 
-{
-	npcs = 
-    {
-        {
-            id = "{QuestNpcID}",
-            alias = "{QuestNpcID}",
-            script = "Actor/Npc/TempNPC",
-            pos = "{QuestRescuePos1}",
-            scene_id  = 3,
-            room_id = 0,
-            data_index = 1,
-        },
-    },
-}
+L0_1 = {}
+L1_1 = 3002701
+L2_1 = 3002702
+L3_1 = 3002703
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = "{QuestNpcID}"
+L3_1.alias = "{QuestNpcID}"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "{QuestRescuePos1}"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["3002701"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = "{QuestNpcID}"
+L3_1.alias = "{QuestNpcID}"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "{QuestRescuePos1}"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["3002702"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = "{QuestNpcID}"
+L3_1.alias = "{QuestNpcID}"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "{QuestRescuePos1}"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["3002703"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = "{QuestNpcID}"
+L3_1.alias = "{QuestNpcID}"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "{QuestRescuePos1}"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["3002701"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = "{QuestNpcID}"
+L3_1.alias = "{QuestNpcID}"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "{QuestRescuePos1}"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["3002702"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = "{QuestNpcID}"
+L3_1.alias = "{QuestNpcID}"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "{QuestRescuePos1}"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["3002703"] = L1_1

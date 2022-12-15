@@ -1,291 +1,261 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1, L9_1, L10_1, L11_1, L12_1, L13_1, L14_1, L15_1, L16_1
 main_id = 375
-
-sub_ids =
-{
-    37501,
-    37502,
-    37503,
-    37504,
-    37505,  
-    37506,  
-    37507,  
-}
-
-rewind_data = {}
-
-rewind_data["37501"] = 
-{
-    npcs = {
-        {
-            id = 1001,
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            pos = "Q374WendyTemp",
-            data_index = 0,
-            scene_id  = 1008,
-            room_id = 1,
-
-        },
-        {
-            id = 1164,
-            alias = "Guard",
-            script = "Actor/Quest/Q375/Guard",
-            pos = "Q374Guard",
-            data_index = 0,
-            scene_id  = 1008,
-            room_id = 1,
-
-        },
-
-    }
-}
-
-rewind_data["37502"] = 
-{
-    npcs = {
-        {
-            id = 1164,
-            alias = "Guard",
-            script = "Actor/Quest/Q375/Guard",
-            pos = "Q374Guard",
-            data_index = 0,
-            scene_id  = 1008,
-            room_id = 1,
-
-        },
-
-    }
-}
-
-rewind_data["37503"] = 
-{
-    avatar = {
-        scene_id = 1005,
-        pos = "PlayerPos",
-    },
-}
-
-rewind_data["37504"] = 
-{
-}
-
-rewind_data["37505"] = 
-{
-}
-
-rewind_data["37506"] = 
-{
-}
-
-rewind_data["37507"] = 
-{
-}
--- rewind_data["37502"] = 
--- {
---     npcs = {
---         {
---             id = 1001,
---             alias = "Wendy",
---             script = "Actor/Quest/Q301/Wendy301",
---             pos = "Q374WendyTemp",
---             data_index = 0,
---             scene_id  = 1008,
---         },
-
---     }
--- }
-
-quest_data = {}
-
-quest_data["37501"] = 
-{
-    npcs = {
-        {
-            id = 1001,
-            alias = "Wendy",
-            script = "Actor/Quest/Q301/Wendy301",
-            pos = "Q374WendyTemp",
-            data_index = 0,
-            scene_id  = 1008,
-            room_id = 1,
-
-        },
-        {
-            id = 1164,
-            alias = "Guard",
-            script = "Actor/Quest/Q375/Guard",
-            pos = "Q374Guard",
-            data_index = 0,
-            scene_id  = 1008,
-            room_id = 1,
-
-        },
-    }
-}
-
-quest_data["37503"] = 
-{
-    gadgets = {
-        {
-            id = 70300040,
-            pos = "Harp",
-            alias = "Harp", 
-            scene_id = 1005, 
-            room_id = 1,  
-        },
-    },
-    npcs = {
-        {
-            id = 1131,
-            alias = "SneakAI1",
-            script = "Actor/Npc/SneakAI",
-            pos = "AI1Pos1",
-            data_index = 0,
-            scene_id  = 1005,
-            room_id = 1,
-        },
-        {
-            id = 1132,
-            alias = "SneakAI2",
-            script = "Actor/Npc/SneakAI",
-            pos = "AI2Pos1",
-            data_index = 0,
-            scene_id  = 1005,
-            room_id = 1,
-        },
-        {
-            id = 1133,
-            alias = "SneakAI3",
-            script = "Actor/Npc/SneakAI",
-            pos = "AI3Pos1",
-            data_index = 0,
-            scene_id  = 1005,
-            room_id = 1,
-        },
-        {
-            id = 1134,
-            alias = "SneakAI4",
-            script = "Actor/Npc/SneakAI",
-            pos = "AI4Pos1",
-            data_index = 0,
-            scene_id  = 1005,
-            room_id = 1,
-        },
-        {
-            id = 1135,
-            alias = "SneakAI5",
-            script = "Actor/Npc/SneakAI",
-            pos = "AI5Pos1",
-            data_index = 0,
-            scene_id  = 1005,
-            room_id = 1,
-        },
-        {
-            id = 1136,
-            alias = "SneakAI6",
-            script = "Actor/Npc/SneakAI",
-            pos = "AI6Pos1",
-            data_index = 0,
-            scene_id  = 1005,
-            room_id = 1,
-        },
-        {
-            id = 1137,
-            alias = "SneakAI7",
-            script = "Actor/Npc/SneakAI",
-            pos = "AI7Pos1",
-            data_index = 0,
-            scene_id  = 1005,
-            room_id = 1,
-        },
-        {
-            id = 1138,
-            alias = "SneakAI8",
-            script = "Actor/Npc/SneakAI",
-            pos = "AI8Pos1",
-            data_index = 0,
-            scene_id  = 1005,
-            room_id = 1,
-        },
-        {
-            id = 1139,
-            alias = "SneakAI9",
-            script = "Actor/Npc/SneakAI",
-            pos = "AI9Pos1",
-            data_index = 0,
-            scene_id  = 1005,
-            room_id = 1,
-        },
-        {
-            id = 1140,
-            alias = "SneakAI10",
-            script = "Actor/Npc/SneakAI",
-            pos = "AI10Pos1",
-            data_index = 0,
-            scene_id  = 1005,
-            room_id = 1,
-        },
-        {
-            id = 1141,
-            alias = "SneakAI11",
-            script = "Actor/Npc/SneakAI",
-            pos = "AI11Pos1",
-            data_index = 0,
-            scene_id  = 1005,
-            room_id = 1,
-        },
-        {
-            id = 1142,
-            alias = "SneakAI12",
-            script = "Actor/Npc/SneakAI",
-            pos = "AI12Pos1",
-            data_index = 0,
-            scene_id  = 1005,
-            room_id = 1,
-        },
-        {
-            id = 1143,
-            alias = "SneakAI13",
-            script = "Actor/Npc/SneakAI",
-            pos = "AI13Pos1",
-            data_index = 0,
-            scene_id  = 1005,
-            room_id = 1,
-        },
-        {
-            id = 1144,
-            alias = "SneakAI14",
-            script = "Actor/Npc/SneakAI",
-            pos = "AI14Pos1",
-            data_index = 0,
-            scene_id  = 1005,
-            room_id = 1,
-        },
-    }
-}
-
-quest_data["37504"] = 
-{
-    transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 1008,
-            pos = "Q375Fail"
-        },
-    }
-}
-
-quest_data["37506"] = 
-{
-    transmit_points = {
-        {
-            point_id = 1,
-            scene_id = 3,
-            pos = "Q372Venti"
-        },
-    }
-}
+L0_1 = {}
+L1_1 = 37501
+L2_1 = 37502
+L3_1 = 37503
+L4_1 = 37504
+L5_1 = 37505
+L6_1 = 37506
+L7_1 = 37507
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1001
+L3_1.alias = "Wendy"
+L3_1.script = "Actor/Quest/Q301/Wendy301"
+L3_1.pos = "Q374WendyTemp"
+L3_1.data_index = 0
+L3_1.scene_id = 1008
+L3_1.room_id = 1
+L4_1 = {}
+L4_1.id = 1164
+L4_1.alias = "Guard"
+L4_1.script = "Actor/Quest/Q375/Guard"
+L4_1.pos = "Q374Guard"
+L4_1.data_index = 0
+L4_1.scene_id = 1008
+L4_1.room_id = 1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["37501"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1164
+L3_1.alias = "Guard"
+L3_1.script = "Actor/Quest/Q375/Guard"
+L3_1.pos = "Q374Guard"
+L3_1.data_index = 0
+L3_1.scene_id = 1008
+L3_1.room_id = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["37502"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L2_1 = {}
+L2_1.scene_id = 1005
+L2_1.pos = "PlayerPos"
+L1_1.avatar = L2_1
+L0_1["37503"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["37504"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["37505"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["37506"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["37507"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1001
+L3_1.alias = "Wendy"
+L3_1.script = "Actor/Quest/Q301/Wendy301"
+L3_1.pos = "Q374WendyTemp"
+L3_1.data_index = 0
+L3_1.scene_id = 1008
+L3_1.room_id = 1
+L4_1 = {}
+L4_1.id = 1164
+L4_1.alias = "Guard"
+L4_1.script = "Actor/Quest/Q375/Guard"
+L4_1.pos = "Q374Guard"
+L4_1.data_index = 0
+L4_1.scene_id = 1008
+L4_1.room_id = 1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["37501"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 70300040
+L3_1.pos = "Harp"
+L3_1.alias = "Harp"
+L3_1.scene_id = 1005
+L3_1.room_id = 1
+L2_1[1] = L3_1
+L1_1.gadgets = L2_1
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 1131
+L3_1.alias = "SneakAI1"
+L3_1.script = "Actor/Npc/SneakAI"
+L3_1.pos = "AI1Pos1"
+L3_1.data_index = 0
+L3_1.scene_id = 1005
+L3_1.room_id = 1
+L4_1 = {}
+L4_1.id = 1132
+L4_1.alias = "SneakAI2"
+L4_1.script = "Actor/Npc/SneakAI"
+L4_1.pos = "AI2Pos1"
+L4_1.data_index = 0
+L4_1.scene_id = 1005
+L4_1.room_id = 1
+L5_1 = {}
+L5_1.id = 1133
+L5_1.alias = "SneakAI3"
+L5_1.script = "Actor/Npc/SneakAI"
+L5_1.pos = "AI3Pos1"
+L5_1.data_index = 0
+L5_1.scene_id = 1005
+L5_1.room_id = 1
+L6_1 = {}
+L6_1.id = 1134
+L6_1.alias = "SneakAI4"
+L6_1.script = "Actor/Npc/SneakAI"
+L6_1.pos = "AI4Pos1"
+L6_1.data_index = 0
+L6_1.scene_id = 1005
+L6_1.room_id = 1
+L7_1 = {}
+L7_1.id = 1135
+L7_1.alias = "SneakAI5"
+L7_1.script = "Actor/Npc/SneakAI"
+L7_1.pos = "AI5Pos1"
+L7_1.data_index = 0
+L7_1.scene_id = 1005
+L7_1.room_id = 1
+L8_1 = {}
+L8_1.id = 1136
+L8_1.alias = "SneakAI6"
+L8_1.script = "Actor/Npc/SneakAI"
+L8_1.pos = "AI6Pos1"
+L8_1.data_index = 0
+L8_1.scene_id = 1005
+L8_1.room_id = 1
+L9_1 = {}
+L9_1.id = 1137
+L9_1.alias = "SneakAI7"
+L9_1.script = "Actor/Npc/SneakAI"
+L9_1.pos = "AI7Pos1"
+L9_1.data_index = 0
+L9_1.scene_id = 1005
+L9_1.room_id = 1
+L10_1 = {}
+L10_1.id = 1138
+L10_1.alias = "SneakAI8"
+L10_1.script = "Actor/Npc/SneakAI"
+L10_1.pos = "AI8Pos1"
+L10_1.data_index = 0
+L10_1.scene_id = 1005
+L10_1.room_id = 1
+L11_1 = {}
+L11_1.id = 1139
+L11_1.alias = "SneakAI9"
+L11_1.script = "Actor/Npc/SneakAI"
+L11_1.pos = "AI9Pos1"
+L11_1.data_index = 0
+L11_1.scene_id = 1005
+L11_1.room_id = 1
+L12_1 = {}
+L12_1.id = 1140
+L12_1.alias = "SneakAI10"
+L12_1.script = "Actor/Npc/SneakAI"
+L12_1.pos = "AI10Pos1"
+L12_1.data_index = 0
+L12_1.scene_id = 1005
+L12_1.room_id = 1
+L13_1 = {}
+L13_1.id = 1141
+L13_1.alias = "SneakAI11"
+L13_1.script = "Actor/Npc/SneakAI"
+L13_1.pos = "AI11Pos1"
+L13_1.data_index = 0
+L13_1.scene_id = 1005
+L13_1.room_id = 1
+L14_1 = {}
+L14_1.id = 1142
+L14_1.alias = "SneakAI12"
+L14_1.script = "Actor/Npc/SneakAI"
+L14_1.pos = "AI12Pos1"
+L14_1.data_index = 0
+L14_1.scene_id = 1005
+L14_1.room_id = 1
+L15_1 = {}
+L15_1.id = 1143
+L15_1.alias = "SneakAI13"
+L15_1.script = "Actor/Npc/SneakAI"
+L15_1.pos = "AI13Pos1"
+L15_1.data_index = 0
+L15_1.scene_id = 1005
+L15_1.room_id = 1
+L16_1 = {}
+L16_1.id = 1144
+L16_1.alias = "SneakAI14"
+L16_1.script = "Actor/Npc/SneakAI"
+L16_1.pos = "AI14Pos1"
+L16_1.data_index = 0
+L16_1.scene_id = 1005
+L16_1.room_id = 1
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L2_1[3] = L5_1
+L2_1[4] = L6_1
+L2_1[5] = L7_1
+L2_1[6] = L8_1
+L2_1[7] = L9_1
+L2_1[8] = L10_1
+L2_1[9] = L11_1
+L2_1[10] = L12_1
+L2_1[11] = L13_1
+L2_1[12] = L14_1
+L2_1[13] = L15_1
+L2_1[14] = L16_1
+L1_1.npcs = L2_1
+L0_1["37503"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 1008
+L3_1.pos = "Q375Fail"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["37504"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q372Venti"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["37506"] = L1_1

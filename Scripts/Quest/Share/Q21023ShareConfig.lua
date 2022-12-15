@@ -1,29 +1,28 @@
+local L0_1, L1_1, L2_1, L3_1
 main_id = 21023
-
-sub_ids = 
-{
-	2102301,
-	2102302,
-	2102303,
-}
-
-rewind_data = {}
-
-
-quest_data = {}
-
-quest_data["2102301"] = --真强
-{
-    npcs = 
-    {
-        {
-            id = 2124,
-            alias = "Npc2124",
-            script = "Actor/Npc/TempNPC",
-            pos = "Q21023_Target",
-            scene_id  = 3,
-            room_id = 0,
-            data_index = 1,
-        }
-    }
-}
+L0_1 = {}
+L1_1 = 2102301
+L2_1 = 2102302
+L3_1 = 2102303
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 2124
+L3_1.alias = "Npc2124"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q21023_Target"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 1
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["2102301"] = L1_1

@@ -1,128 +1,109 @@
--- 任务配置
-
--- 父任务id
-
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1, L6_1, L7_1, L8_1
 main_id = 488
-
-sub_ids =
-{
-    48801,
-    48802,
-    48803,
-    48804,
-    48805,
-    48806,
-    48807,
-    48808,
-}
-
-rewind_data = {}
-
-rewind_data["48801"] = 
-{
-}
-
-rewind_data["48802"] = 
-{
-}
-
-rewind_data["48803"] = 
-{
-}
-
-rewind_data["48804"] = 
-{
-	
-}
-
-rewind_data["48805"] = 
-{
-}
-
-rewind_data["48806"] = 
-{
-}
-
-rewind_data["48807"] = 
-{
-}
-
-rewind_data["48808"] = 
-{
-}
-
-quest_data = {}
-
-quest_data["48800"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "NPC10030",
-			script = "Actor/Npc/TempNPC",
-			id = 10030,
-			pos = "Q48800NPC",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		},
-		{
-			alias = "Lisa01",
-			script = "Actor/Npc/TempNPC",
-			id = 100701,
-			pos = "Q48800Lisa",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		}     
-    },		
-}
-
-quest_data["48801"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Npc153501",
-			script = "Actor/Npc/TempNPC",
-			id = 153501,
-			pos = "Q48801NPC",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		} 
-    }
-}
-
-quest_data["48803"] = 
-{
-    npcs = 
-	{
-		{
-			alias = "Npc153501",
-			script = "Actor/Npc/TempNPC",
-			id = 153501,
-			pos = "Q48803Start",
-			scene_id = 3,
-			room_id = 0,
-			data_index = 0,
-		} 
-    }
-}
-
-quest_data["48804"] = 
-{
-
-	transmit_points = {
-        {
-			point_id=1,
-			scene_id=3,
-			pos="Q48801Player",
-		},
-    }
-
-    
-}
-
-
-
+L0_1 = {}
+L1_1 = 48801
+L2_1 = 48802
+L3_1 = 48803
+L4_1 = 48804
+L5_1 = 48805
+L6_1 = 48806
+L7_1 = 48807
+L8_1 = 48808
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+L0_1[4] = L4_1
+L0_1[5] = L5_1
+L0_1[6] = L6_1
+L0_1[7] = L7_1
+L0_1[8] = L8_1
+sub_ids = L0_1
+L0_1 = {}
+rewind_data = L0_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["48801"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["48802"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["48803"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["48804"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["48805"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["48806"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["48807"] = L1_1
+L0_1 = rewind_data
+L1_1 = {}
+L0_1["48808"] = L1_1
+L0_1 = {}
+quest_data = L0_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "NPC10030"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 10030
+L3_1.pos = "Q48800NPC"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L4_1 = {}
+L4_1.alias = "Lisa01"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.id = 100701
+L4_1.pos = "Q48800Lisa"
+L4_1.scene_id = 3
+L4_1.room_id = 0
+L4_1.data_index = 0
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["48800"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc153501"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 153501
+L3_1.pos = "Q48801NPC"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["48801"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.alias = "Npc153501"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.id = 153501
+L3_1.pos = "Q48803Start"
+L3_1.scene_id = 3
+L3_1.room_id = 0
+L3_1.data_index = 0
+L2_1[1] = L3_1
+L1_1.npcs = L2_1
+L0_1["48803"] = L1_1
+L0_1 = quest_data
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.point_id = 1
+L3_1.scene_id = 3
+L3_1.pos = "Q48801Player"
+L2_1[1] = L3_1
+L1_1.transmit_points = L2_1
+L0_1["48804"] = L1_1

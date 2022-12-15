@@ -1,3 +1,124 @@
--- 任务配置数据开始-----------------------------
-
-main_id = 19138sub_ids = {	1913802,	1913803,	1913801,}-- 任务配置数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 父任务执行项数据开始-----------------------------finish_action = {	CLIENT = { },	SERVER = { },}fail_action = {	CLIENT = { },	SERVER = { },}cancel_action = {	CLIENT = { },	SERVER = 	{		QUEST_EXEC_REFRESH_GROUP_SUITE = 		{			{ "1057", "201057004,1", },		},		QUEST_EXEC_DEL_ALL_SPECIFIC_PACK_ITEM = 		{			{ "101608", },		},		QUEST_EXEC_SET_QUEST_GLOBAL_VAR = 		{			{ "1913101", "0", },		},	},}-- 父任务执行项数据结束------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- Actor模块数据开始---------------------------------- 空-- Actor模块数据结束---------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 文本模块数据开始----------------------------------- 空-- 文本模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 路点模块数据开始----------------------------------- 空-- 路点模块数据结束----------------------------------- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 断线重连生成内容 开始------------------------------ 和questdata配的存档点对应rewind_data = {	["1913802"] = { },	["1913803"] = { },}-- 断线重连生成内容 结束------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-- 校验数据 开始------------------------------------ 和任务lua中生成NPC/Monster/Gadget/Item等对应quest_data = {	["1913801"] = 	{		npcs = 		{			{				id = 507,				alias = "Coop_Ningguang",				script = "Actor/Npc/TempNPC",				pos = "Q1913201Ningguang",				scene_id = 1057,				room_id = 1,				data_index = 1,			},			{				id = 10211,				alias = "Npc10211",				script = "Actor/Npc/TempNPC",				pos = "Q1913201Ningguang",				scene_id = 1057,				room_id = 1,				data_index = 2,			},		},	},	["1913802"] = 	{		npcs = 		{			{				id = 507,				alias = "Coop_Ningguang",				script = "Actor/Npc/TempNPC",				pos = "Q1913201Ningguang",				scene_id = 1057,				room_id = 1,				data_index = 1,			},			{				id = 10211,				alias = "Npc10211",				script = "Actor/Npc/TempNPC",				pos = "Q1913201Ningguang",				scene_id = 1057,				room_id = 1,				data_index = 2,			},		},	},	["1913803"] = 	{		npcs = 		{			{				id = 507,				alias = "Coop_Ningguang",				script = "Actor/Npc/TempNPC",				pos = "Q1913201Ningguang",				scene_id = 1057,				room_id = 1,				data_index = 1,			},			{				id = 10211,				alias = "Npc10211",				script = "Actor/Npc/TempNPC",				pos = "Q1913201Ningguang",				scene_id = 1057,				room_id = 1,				data_index = 2,			},		},	},}-- 校验数据 结束------------------------------------ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+local L0_1, L1_1, L2_1, L3_1, L4_1, L5_1
+main_id = 19138
+L0_1 = {}
+L1_1 = 1913802
+L2_1 = 1913803
+L3_1 = 1913801
+L0_1[1] = L1_1
+L0_1[2] = L2_1
+L0_1[3] = L3_1
+sub_ids = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+finish_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L0_1.SERVER = L1_1
+fail_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1.CLIENT = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L4_1 = "1057"
+L5_1 = "201057004,1"
+L3_1[1] = L4_1
+L3_1[2] = L5_1
+L2_1[1] = L3_1
+L1_1.QUEST_EXEC_REFRESH_GROUP_SUITE = L2_1
+L2_1 = {}
+L3_1 = {}
+L4_1 = "101608"
+L3_1[1] = L4_1
+L2_1[1] = L3_1
+L1_1.QUEST_EXEC_DEL_ALL_SPECIFIC_PACK_ITEM = L2_1
+L2_1 = {}
+L3_1 = {}
+L4_1 = "1913101"
+L5_1 = "0"
+L3_1[1] = L4_1
+L3_1[2] = L5_1
+L2_1[1] = L3_1
+L1_1.QUEST_EXEC_SET_QUEST_GLOBAL_VAR = L2_1
+L0_1.SERVER = L1_1
+cancel_action = L0_1
+L0_1 = {}
+L1_1 = {}
+L0_1["1913802"] = L1_1
+L1_1 = {}
+L0_1["1913803"] = L1_1
+rewind_data = L0_1
+L0_1 = {}
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 507
+L3_1.alias = "Coop_Ningguang"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q1913201Ningguang"
+L3_1.scene_id = 1057
+L3_1.room_id = 1
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 10211
+L4_1.alias = "Npc10211"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q1913201Ningguang"
+L4_1.scene_id = 1057
+L4_1.room_id = 1
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["1913801"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 507
+L3_1.alias = "Coop_Ningguang"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q1913201Ningguang"
+L3_1.scene_id = 1057
+L3_1.room_id = 1
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 10211
+L4_1.alias = "Npc10211"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q1913201Ningguang"
+L4_1.scene_id = 1057
+L4_1.room_id = 1
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["1913802"] = L1_1
+L1_1 = {}
+L2_1 = {}
+L3_1 = {}
+L3_1.id = 507
+L3_1.alias = "Coop_Ningguang"
+L3_1.script = "Actor/Npc/TempNPC"
+L3_1.pos = "Q1913201Ningguang"
+L3_1.scene_id = 1057
+L3_1.room_id = 1
+L3_1.data_index = 1
+L4_1 = {}
+L4_1.id = 10211
+L4_1.alias = "Npc10211"
+L4_1.script = "Actor/Npc/TempNPC"
+L4_1.pos = "Q1913201Ningguang"
+L4_1.scene_id = 1057
+L4_1.room_id = 1
+L4_1.data_index = 2
+L2_1[1] = L3_1
+L2_1[2] = L4_1
+L1_1.npcs = L2_1
+L0_1["1913803"] = L1_1
+quest_data = L0_1
