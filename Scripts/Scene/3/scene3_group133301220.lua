@@ -35,8 +35,6 @@ regions = {
 triggers = {
 	-- 供奉升级时触发,切201的时候会触发特效
 	{ config_id = 1220003, name = "OFFERING_LEVELUP_220003", event = EventType.EVENT_OFFERING_LEVELUP, source = "", condition = "condition_EVENT_OFFERING_LEVELUP_220003", action = "action_EVENT_OFFERING_LEVELUP_220003", trigger_count = 0 },
-	-- 供奉解锁后才创生交互物件
-	{ config_id = 1220004, name = "ENTER_REGION_220004", event = EventType.EVENT_ENTER_REGION, source = "", condition = "condition_EVENT_ENTER_REGION_220004", action = "action_EVENT_ENTER_REGION_220004", trigger_count = 0 }
 }
 
 -- 变量

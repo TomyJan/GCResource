@@ -31,7 +31,7 @@ npcs = {
 
 -- 装置
 gadgets = {
-	{ config_id = 200001, gadget_id = 70290094, pos = { x = -2465.643, y = 449.196, z = -4422.203 }, rot = { x = 0.000, y = 332.221, z = 0.000 }, level = 27, offering_config = {offering_id = 2}, area_id = 11 },
+	{ config_id = 200001, gadget_id = 70290094, pos = { x = -2465.643, y = 449.196, z = -4422.203 }, rot = { x = 0.000, y = 332.221, z = 0.000 }, level = 27, area_id = 11 },
 	{ config_id = 200004, gadget_id = 70290149, pos = { x = -2463.980, y = 442.290, z = -4426.020 }, rot = { x = 0.000, y = 296.759, z = 0.000 }, level = 27, area_id = 11 }
 }
 
@@ -41,8 +41,6 @@ regions = {
 
 -- 触发器
 triggers = {
-	{ config_id = 1200002, name = "OFFERING_LEVELUP_200002", event = EventType.EVENT_OFFERING_LEVELUP, source = "", condition = "", action = "action_EVENT_OFFERING_LEVELUP_200002", trigger_count = 0 },
-	{ config_id = 1200005, name = "QUEST_FINISH_200005", event = EventType.EVENT_QUEST_FINISH, source = "201310", condition = "", action = "action_EVENT_QUEST_FINISH_200005", trigger_count = 0 }
 }
 
 -- 变量
@@ -70,24 +68,6 @@ init_config = {
 --================================================================
 
 suites = {
-	{
-		-- suite_id = 1,
-		-- description = ,
-		monsters = { },
-		gadgets = { },
-		regions = { },
-		triggers = { "QUEST_FINISH_200005" },
-		rand_weight = 100
-	},
-	{
-		-- suite_id = 2,
-		-- description = ,
-		monsters = { },
-		gadgets = { 200001, 200004 },
-		regions = { },
-		triggers = { "OFFERING_LEVELUP_200002" },
-		rand_weight = 100
-	}
 }
 
 --================================================================
@@ -97,28 +77,3 @@ suites = {
 --================================================================
 
 -- 触发操作
-function action_EVENT_OFFERING_LEVELUP_200002(context, evt)
-	-- 将在groupid为 133220200 中的 configid为 200001 的供奉物件根据stateList对应等级设置其状态
-	
-	if 2 ~= evt.param1 then
-	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_OfferingLevel")
-	  return -1
-	end
-	if 0 ~=	ScriptLib.SetGroupGadgetStateByConfigId(context, 133220200, 200004, 201) then
-		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_OfferingLevel")
-	 	return -1
-	end	
-	
-	return 0
-end
-
--- 触发操作
-function action_EVENT_QUEST_FINISH_200005(context, evt)
-	-- group调整group进度,只对非randSuite有效
-	if 0 ~= ScriptLib.GoToGroupSuite(context, 133220200, 2) then
-	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : goto_groupSuite")
-		return -1
-	end
-	
-	return 0
-end

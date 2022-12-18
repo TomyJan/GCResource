@@ -32,10 +32,10 @@ npcs = {
 
 -- 装置
 gadgets = {
-	{ config_id = 751001, gadget_id = 70330332, pos = { x = -2263.619, y = -37.211, z = 5896.980 }, rot = { x = 347.273, y = 1.245, z = 346.928 }, level = 30, persistent = true, area_id = 27 },
-	{ config_id = 751002, gadget_id = 70330332, pos = { x = -2244.612, y = -32.302, z = 5900.376 }, rot = { x = 9.234, y = 2.039, z = 9.700 }, level = 30, persistent = true, area_id = 27 },
-	{ config_id = 751003, gadget_id = 70330332, pos = { x = -2265.387, y = -26.800, z = 5880.211 }, rot = { x = 347.679, y = 358.898, z = 10.186 }, level = 30, persistent = true, area_id = 27 },
-	{ config_id = 751004, gadget_id = 70330332, pos = { x = -2245.560, y = -17.320, z = 5879.008 }, rot = { x = 347.974, y = 1.428, z = 346.506 }, level = 30, persistent = true, area_id = 27 },
+	{ config_id = 751001, gadget_id = 70330332, pos = { x = -2263.619, y = -37.211, z = 5896.980 }, rot = { x = 347.273, y = 1.245, z = 346.928 }, level = 30, persistent = false, area_id = 27 },
+	{ config_id = 751002, gadget_id = 70330332, pos = { x = -2244.612, y = -32.302, z = 5900.376 }, rot = { x = 9.234, y = 2.039, z = 9.700 }, level = 30, persistent = false, area_id = 27 },
+	{ config_id = 751003, gadget_id = 70330332, pos = { x = -2265.387, y = -26.800, z = 5880.211 }, rot = { x = 347.679, y = 358.898, z = 10.186 }, level = 30, persistent = false, area_id = 27 },
+	{ config_id = 751004, gadget_id = 70330332, pos = { x = -2245.560, y = -17.320, z = 5879.008 }, rot = { x = 347.974, y = 1.428, z = 346.506 }, level = 30, persistent = false, area_id = 27 },
 	{ config_id = 751005, gadget_id = 70211151, pos = { x = -2254.395, y = -37.523, z = 5898.391 }, rot = { x = 7.010, y = 179.999, z = 359.979 }, level = 26, chest_drop_id = 21910093, drop_count = 1, state = GadgetState.ChestLocked, isOneoff = true, persistent = true, explore = { name = "chest", exp = 10 }, area_id = 27 }
 }
 

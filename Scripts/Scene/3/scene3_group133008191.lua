@@ -19,7 +19,7 @@ npcs = {
 
 -- 装置
 gadgets = {
-	{ config_id = 191001, gadget_id = 70290032, pos = { x = 1291.000, y = 297.500, z = -1049.000 }, rot = { x = 0.000, y = 138.224, z = 0.000 }, level = 30, state = GadgetState.GearAction2, offering_config = {offering_id = 1}, area_id = 10 },
+	{ config_id = 191001, gadget_id = 70290032, pos = { x = 1291.000, y = 297.500, z = -1049.000 }, rot = { x = 0.000, y = 138.224, z = 0.000 }, level = 30, state = GadgetState.GearAction1, offering_config = {offering_id = 1}, area_id = 10 },
 	{ config_id = 191003, gadget_id = 70310023, pos = { x = 1290.454, y = 298.589, z = -1049.426 }, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 30, area_id = 10 },
 	{ config_id = 191004, gadget_id = 70290022, pos = { x = 1288.980, y = 297.610, z = -1047.790 }, rot = { x = 0.000, y = 0.000, z = 0.000 }, level = 30, area_id = 10 }
 }
@@ -31,11 +31,8 @@ regions = {
 -- 触发器
 triggers = {
 	{ config_id = 1191002, name = "OFFERING_LEVELUP_191002", event = EventType.EVENT_OFFERING_LEVELUP, source = "", condition = "", action = "action_EVENT_OFFERING_LEVELUP_191002", trigger_count = 0 },
-	{ config_id = 1191005, name = "QUEST_START_191005", event = EventType.EVENT_QUEST_START, source = "7014118", condition = "", action = "action_EVENT_QUEST_START_191005", trigger_count = 0 },
 	{ config_id = 1191006, name = "TIMER_EVENT_191006", event = EventType.EVENT_TIMER_EVENT, source = "ice_destroy_delay", condition = "", action = "action_EVENT_TIMER_EVENT_191006", trigger_count = 0 },
-	{ config_id = 1191007, name = "QUEST_FINISH_191007", event = EventType.EVENT_QUEST_FINISH, source = "7014118", condition = "", action = "action_EVENT_QUEST_FINISH_191007", trigger_count = 0 },
 	{ config_id = 1191008, name = "GROUP_LOAD_191008", event = EventType.EVENT_GROUP_LOAD, source = "", condition = "", action = "action_EVENT_GROUP_LOAD_191008", trigger_count = 0 },
-	{ config_id = 1191009, name = "QUEST_FINISH_191009", event = EventType.EVENT_QUEST_FINISH, source = "7014118", condition = "", action = "action_EVENT_QUEST_FINISH_191009", trigger_count = 0 }
 }
 
 -- 变量
