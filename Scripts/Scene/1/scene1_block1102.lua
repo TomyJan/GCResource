@@ -66,6 +66,7 @@ groups = {
 	{ id = 111102066, refresh_id = 1, pos = { x = 1309.309, y = 304.858, z = -1795.474 }, is_replaceable = { value = false, version = 0, new_bin_only = true }, vision_type = 0 },
 	{ id = 111102069, refresh_id = 1000, pos = { x = 1426.406, y = 241.791, z = -1422.986 }, is_replaceable = { value = false, version = 0, new_bin_only = true } },
 	{ id = 111102070, refresh_id = 1, pos = { x = 1216.266, y = 313.637, z = -1808.755 }, is_replaceable = { value = false, version = 0, new_bin_only = true } },
+	{ id = 111102071, refresh_id = 1, pos = { x = 1430.134, y = 266.560, z = -1110.790 }, is_replaceable = { value = false, version = 0, new_bin_only = true } },
 	{ id = 111102073, refresh_id = 1001, pos = { x = 1568.289, y = 269.393, z = -1487.653 }, is_replaceable = { value = false, version = 0, new_bin_only = true } },
 	{ id = 111102074, refresh_id = 1, pos = { x = 1234.502, y = 324.213, z = -1918.259 }, is_replaceable = { value = false, version = 0, new_bin_only = true } },
 	{ id = 111102078, refresh_id = 1, pos = { x = 2048.010, y = 219.678, z = -1685.007 }, is_replaceable = { value = false, version = 0, new_bin_only = true } },
@@ -90,6 +91,7 @@ groups = {
 	{ id = 111102103, refresh_id = 1, pos = { x = 1983.012, y = 221.055, z = -1558.376 }, is_replaceable = { value = false, version = 0, new_bin_only = true } },
 	{ id = 111102104, pos = { x = 1988.293, y = 221.971, z = -1568.193 }, is_replaceable = { value = false, version = 0, new_bin_only = true } },
 	{ id = 111102105, pos = { x = 1986.661, y = 221.862, z = -1568.671 }, is_replaceable = { value = false, version = 0, new_bin_only = true } },
+	{ id = 111102107, refresh_id = 1, pos = { x = 1503.767, y = 266.985, z = -1122.131 }, is_replaceable = { value = false, version = 0, new_bin_only = true } },
 	{ id = 111102792, refresh_id = 1002, pos = { x = 1561.548, y = 257.833, z = -1692.325 }, is_replaceable = { value = false, version = 0, new_bin_only = true } },
 	{ id = 111102793, refresh_id = 1002, pos = { x = 1513.163, y = 262.489, z = -1712.336 }, is_replaceable = { value = false, version = 0, new_bin_only = true } },
 	{ id = 111102794, refresh_id = 1002, pos = { x = 1539.570, y = 256.071, z = -1686.642 }, is_replaceable = { value = false, version = 0, new_bin_only = true } }
