@@ -1,1 +1,1 @@
-https://gitlab.com/YuukiPS/GC-Resources/-/tree/3.4
+https://gitlab.com/YuukiPS/GC-Resources/
