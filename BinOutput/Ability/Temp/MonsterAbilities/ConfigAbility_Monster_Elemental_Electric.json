@@ -1,4 +1,9 @@
 [
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Shield
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -10,15 +15,10 @@
           "modifierName": "ShieldModifier"
         }
       ],
-      "abilitySpecials": {
-        "SubHurtDelta": 0.9900000095367432
-      },
       "modifiers": {
         "ShieldModifier": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "properties": {
-            "Actor_SubHurtDelta": "SubHurtDelta"
+            "Actor_SubHurtDelta": "%SubHurtDelta"
           },
           "onAdded": [
             {
@@ -28,13 +28,15 @@
             },
             {
               "$type": "EnableHitBoxByName",
-              "hitBoxNames": ["CoreHitBox"]
+              "hitBoxNames": ["CoreHitBox"],
+              "setEnable": false
             }
           ],
           "onRemoved": [
             {
               "$type": "EnableHitBoxByName",
-              "hitBoxNames": ["ShieldHitBox"]
+              "hitBoxNames": ["ShieldHitBox"],
+              "setEnable": false
             },
             {
               "$type": "EnableHitBoxByName",
@@ -43,9 +45,17 @@
             }
           ]
         }
+      },
+      "abilitySpecials": {
+        "SubHurtDelta": 0.99
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Core
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -59,14 +69,14 @@
       ],
       "modifiers": {
         "CoreModifier": {
-          "modifierName": "",
           "elementType": "Electric",
-          "bonusCriticalHurt": 50.0,
+          "elementDurability": 50,
           "isElementDurabilityMutable": false,
           "onAdded": [
             {
               "$type": "EnableHitBoxByName",
-              "hitBoxNames": ["ShieldHitBox"]
+              "hitBoxNames": ["ShieldHitBox"],
+              "setEnable": false
             },
             {
               "$type": "EnableHitBoxByName",
@@ -82,13 +92,19 @@
             },
             {
               "$type": "EnableHitBoxByName",
-              "hitBoxNames": ["CoreHitBox"]
+              "hitBoxNames": ["CoreHitBox"],
+              "setEnable": false
             }
           ]
         }
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Reborn
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -102,17 +118,17 @@
       ],
       "modifiers": {
         "RebornModifier": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "Invincible",
           "onAdded": [
             {
               "$type": "EnableHitBoxByName",
-              "hitBoxNames": ["ShieldHitBox"]
+              "hitBoxNames": ["ShieldHitBox"],
+              "setEnable": false
             },
             {
               "$type": "EnableHitBoxByName",
-              "hitBoxNames": ["CoreHitBox"]
+              "hitBoxNames": ["CoreHitBox"],
+              "setEnable": false
             }
           ],
           "onRemoved": [
@@ -135,66 +151,68 @@
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Elemental_Electric_HpDetect",
-      "modifiers": {
-        "HpDetect": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "TriggerAbility",
-              "abilityName": "Elemental_Electric_CreateRebornPart"
-            }
-          ]
-        }
-      },
+      /*		"abilityMixins" :
+		[
+			{
+				"$type":"DoActionByEventMixin",
+				"type" : "Current",
+				"onEvent" : "HP",
+				"actions" :
+				[
+					{
+						"$type" : "ApplyModifier",
+						"modifierName":"HpDetect",
+					},
+				],
+			},
+		],*/
       "onAdded": [
         {
           "$type": "ApplyModifier",
           "modifierName": "HpDetect"
         }
-      ]
+      ],
+      "modifiers": {
+        "HpDetect": {
+          "duration": 0.1,
+          "onAdded": [
+            {
+              "$type": "TriggerAbility",
+              "abilityName": "Elemental_Electric_CreateRebornPart"
+              /*						"predicates":
+						[
+							{
+								"$type":"ByTargetHPRatio",
+								"target":"Self",
+								"HPRatio":0.2,
+								"logic":"Lesser"
+							},
+						],*/
+            }
+          ]
+        }
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Elemental_Electric_CreateRebornPart",
-      "modifiers": {
-        "RebornTimer": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 15.0,
-          "bonusCriticalHurt": 100.0,
-          "onRemoved": [
-            {
-              "$type": "TriggerAbility",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_RebornPart_Count",
-                  "ratio": 0.0,
-                  "compareType": "MoreThan"
-                }
-              ],
-              "abilityName": "Elemental_Electric_HealHp"
-            }
-          ]
-        }
-      },
       "onAdded": [
         {
           "$type": "AddGlobalValue",
-          "ratio": 3.0,
           "key": "_RebornPart_Count",
+          "value": 3,
           "useLimitRange": true,
-          "maxValue": 3.0,
-          "minValue": 0.0
+          "maxValue": 3,
+          "minValue": 0
         }
       ],
       "onAbilityStart": [
         {
           "$type": "ApplyModifier",
-          "modifierName": "RebornTimer"
+          "modifierName": "RebornTimer",
+          "target": "Self"
         },
         {
           "$type": "TriggerAbility",
@@ -202,38 +220,60 @@
         },
         {
           "$type": "TriggerAbility",
+          "abilityName": "Elemental_Electric_CreateRebornPart1",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_RebornPart_Count",
-              "ratio": 1.0
+              "value": 1,
+              "compareType": "Equal"
             }
-          ],
-          "abilityName": "Elemental_Electric_CreateRebornPart1"
+          ]
         },
         {
           "$type": "TriggerAbility",
+          "abilityName": "Elemental_Electric_CreateRebornPart2",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_RebornPart_Count",
-              "ratio": 2.0
+              "value": 2,
+              "compareType": "Equal"
             }
-          ],
-          "abilityName": "Elemental_Electric_CreateRebornPart2"
+          ]
         },
         {
           "$type": "TriggerAbility",
+          "abilityName": "Elemental_Electric_CreateRebornPart3",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_RebornPart_Count",
-              "ratio": 3.0
+              "value": 3,
+              "compareType": "Equal"
             }
-          ],
-          "abilityName": "Elemental_Electric_CreateRebornPart3"
+          ]
         }
-      ]
+      ],
+      "modifiers": {
+        "RebornTimer": {
+          "duration": 15,
+          "onRemoved": [
+            {
+              "$type": "TriggerAbility",
+              "abilityName": "Elemental_Electric_HealHp",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_RebornPart_Count",
+                  "value": 0,
+                  "compareType": "MoreThan"
+                }
+              ]
+            }
+          ]
+        }
+      }
     }
   },
   {
@@ -243,17 +283,17 @@
       "onAbilityStart": [
         {
           "$type": "CreateGadget",
+          "gadgetID": 42002101,
+          "campID": 4001,
           "born": {
             "$type": "ConfigBornBySelf",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 1.0,
-              "PJCOKIGCJOK": 2.0
+              "x": 0.0,
+              "y": 1.0,
+              "z": 2.0
             },
             "onGround": true
-          },
-          "gadgetID": 42002101,
-          "campID": 4001
+          }
         }
       ]
     }
@@ -265,31 +305,31 @@
       "onAbilityStart": [
         {
           "$type": "CreateGadget",
+          "gadgetID": 42002101,
+          "campID": 4001,
           "born": {
             "$type": "ConfigBornBySelf",
             "offset": {
-              "IBKBLDAJIMA": 2.0,
-              "LKHJADIPBFL": 1.0,
-              "PJCOKIGCJOK": 0.0
+              "x": 2.0,
+              "y": 1.0,
+              "z": 0.0
             },
             "onGround": true
-          },
-          "gadgetID": 42002101,
-          "campID": 4001
+          }
         },
         {
           "$type": "CreateGadget",
+          "gadgetID": 42002101,
+          "campID": 4001,
           "born": {
             "$type": "ConfigBornBySelf",
             "offset": {
-              "IBKBLDAJIMA": -2.0,
-              "LKHJADIPBFL": 1.0,
-              "PJCOKIGCJOK": 0.0
+              "x": -2.0,
+              "y": 1.0,
+              "z": 0.0
             },
             "onGround": true
-          },
-          "gadgetID": 42002101,
-          "campID": 4001
+          }
         }
       ]
     }
@@ -301,45 +341,45 @@
       "onAbilityStart": [
         {
           "$type": "CreateGadget",
+          "gadgetID": 42002101,
+          "campID": 4001,
           "born": {
             "$type": "ConfigBornBySelf",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 1.0,
-              "PJCOKIGCJOK": 2.0
+              "x": 0.0,
+              "y": 1.0,
+              "z": 2.0
             },
             "onGround": true
-          },
-          "gadgetID": 42002101,
-          "campID": 4001
+          }
         },
         {
           "$type": "CreateGadget",
+          "gadgetID": 42002101,
+          "campID": 4001,
           "born": {
             "$type": "ConfigBornBySelf",
             "offset": {
-              "IBKBLDAJIMA": 2.0,
-              "LKHJADIPBFL": 1.0,
-              "PJCOKIGCJOK": -2.0
+              "x": 2.0,
+              "y": 1.0,
+              "z": -2.0
             },
             "onGround": true
-          },
-          "gadgetID": 42002101,
-          "campID": 4001
+          }
         },
         {
           "$type": "CreateGadget",
+          "gadgetID": 42002101,
+          "campID": 4001,
           "born": {
             "$type": "ConfigBornBySelf",
             "offset": {
-              "IBKBLDAJIMA": -2.0,
-              "LKHJADIPBFL": 1.0,
-              "PJCOKIGCJOK": -2.0
+              "x": -2.0,
+              "y": 1.0,
+              "z": -2.0
             },
             "onGround": true
-          },
-          "gadgetID": 42002101,
-          "campID": 4001
+          }
         }
       ]
     }
@@ -351,58 +391,79 @@
       "onAbilityStart": [
         {
           "$type": "HealHP",
+          "amountByTargetMaxHPRatio": 0.3,
+          "target": "Self",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_RebornPart_Count",
-              "ratio": 1.0
+              "value": 1,
+              "compareType": "Equal"
             }
-          ],
-          "amountByCasterMaxHPRatio": 0.30000001192092896
+          ]
         },
         {
           "$type": "HealHP",
+          "amountByTargetMaxHPRatio": 0.6,
+          "target": "Self",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_RebornPart_Count",
-              "ratio": 2.0
+              "value": 2,
+              "compareType": "Equal"
             }
-          ],
-          "amountByCasterMaxHPRatio": 0.6000000238418579
+          ]
         },
         {
           "$type": "HealHP",
+          "amountByTargetMaxHPRatio": 0.9,
+          "target": "Self",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_RebornPart_Count",
-              "ratio": 3.0
+              "value": 3,
+              "compareType": "Equal"
             }
-          ],
-          "amountByCasterMaxHPRatio": 0.8999999761581421
+          ]
         },
         {
           "$type": "KillGadget",
           "gadgetInfo": {
-            "configID": 42002101
+            "$type": "SelectTargetsByChildren",
+            "configID": 42002101,
+            "sortType": "Default",
+            "predicates": [
+              {
+                "$type": "ByTargetGlobalValue",
+                "key": "_RebornPart_Count",
+                "value": 0,
+                "compareType": "MoreThan"
+              }
+            ]
           }
         },
         {
           "$type": "TriggerAbility",
+          "abilityName": "Elemental_Electric_SetNormalPose",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_RebornPart_Count",
-              "ratio": 0.0,
+              "value": 0,
               "compareType": "MoreThan"
             }
-          ],
-          "abilityName": "Elemental_Electric_SetNormalPose"
+          ]
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Die
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -410,25 +471,32 @@
       "onAbilityStart": [
         {
           "$type": "AddGlobalValue",
-          "ratio": -1.0,
           "key": "_RebornPart_Count",
+          "value": -1,
           "useLimitRange": true,
-          "maxValue": 3.0,
-          "minValue": 0.0
+          "maxValue": 3,
+          "minValue": 0
         },
         {
           "$type": "KillSelf",
+          "target": "Self",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_RebornPart_Count",
-              "ratio": 0.0
+              "value": 0,
+              "compareType": "Equal"
             }
           ]
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  SetPose
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -437,11 +505,12 @@
         {
           "$type": "SetPoseBool",
           "boolID": "WeakState",
-          "ratio": true
+          "value": true
         },
         {
           "$type": "SetPoseBool",
-          "boolID": "RebornState"
+          "boolID": "RebornState",
+          "value": false
         }
       ]
     }
@@ -453,11 +522,13 @@
       "onAbilityStart": [
         {
           "$type": "SetPoseBool",
-          "boolID": "WeakState"
+          "boolID": "WeakState",
+          "value": false
         },
         {
           "$type": "SetPoseBool",
-          "boolID": "RebornState"
+          "boolID": "RebornState",
+          "value": false
         }
       ]
     }
@@ -470,15 +541,21 @@
         {
           "$type": "SetPoseBool",
           "boolID": "RebornState",
-          "ratio": true
+          "value": true
         },
         {
           "$type": "SetPoseBool",
-          "boolID": "WeakState"
+          "boolID": "WeakState",
+          "value": false
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  ThunderRush
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -487,61 +564,68 @@
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["ThunderRush"],
-          "angularSpeed": 120.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 1.0,
+          "angularSpeed": 120,
+          "attackTrigger": "",
+          "attackDistance": 0
         }
       ],
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "AllExceptSelf",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
+              "height": 10.0,
+              "fanAngle": 360.0,
+              "radius": 3.0,
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": -5.0,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": -5.0,
+                  "z": 0.0
                 }
-              },
-              "height": 10.0,
-              "DCMPFCIBIPA": 3.0
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
               "attackProperty": {
-                "HBIOLEEGHPD": 1.0,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Wind",
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 1.0,
                 "strikeType": "Blunt",
-                "enBreak": 200.0
+                "elementType": "Wind",
+                "elementDurability": 50,
+                "enBreak": 200
               },
               "hitPattern": {
-                "onHitEffectName": "default",
-                "hitLevel": "Air",
-                "MOELECJEOEI": 800.0,
-                "hitImpulseY": 600.0,
-                "hitImpulseType": "",
+                "hitLevel": "Air", //hitlevel = 5
+                "hitImpulseX": 800, //hitlevel = 5
+                "hitImpulseY": 600, //hitlevel = 5
                 "retreatType": "ByTangent",
-                "hitHaltTimeScale": 0.05000000074505806
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.05,
+                "muteHitText": false
               },
+              "forceCameraShake": false,
               "cameraShake": {
-                "shakeRange": 0.1599999964237213,
-                "shakeTime": 0.11999999731779099,
-                "shakeDistance": 35.0
+                "shakeType": "Center",
+                "shakeRange": 0.16,
+                "shakeTime": 0.12,
+                "shakeDistance": 35
               }
             }
-          },
-          "targetType": "AllExceptSelf"
+          }
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  RandomWalk
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -550,36 +634,48 @@
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["RandomWalk"],
-          "angularSpeed": 150.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 1.0,
+          "angularSpeed": 150,
+          "attackTrigger": "",
+          "attackDistance": 0
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Elemental_ElectircRebornPart_ElementShield
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Elemental_ElectircRebornPart_ElementShield",
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_Elemental_ElectircRebornPart_ElementShield",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Elemental_ElectircRebornPart_ElementShield": {
           "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
           "elementType": "Electric",
-          "bonusCriticalHurt": 50.0,
+          "elementDurability": 50,
+          "properties": {
+            "Actor_EndureDelta": 0.0
+          },
           "modifierMixins": [
             {
               "$type": "ElementShieldMixin",
               "elementType": "Electric",
-              "showDamageText": "",
-              "DJBPNOPNHFH": 360.0,
-              "shieldHP": 1.0,
-              "damageRatio": 0.0
+              "shieldHPRatio": 1.0,
+              "damageRatio": 0
             }
           ],
-          "properties": {
-            "Actor_EndureDelta": 0.0
-          },
           "onRemoved": [
             {
               "$type": "TriggerAbility",
@@ -591,13 +687,7 @@
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Elemental_ElectircRebornPart_ElementShield"
-        }
-      ]
+      }
     }
   }
 ]

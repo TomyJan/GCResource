@@ -1,14 +1,29 @@
 [
+  ////////////////////////////////////////////////////////////////
+  //
+  //  2阶段隐藏自身
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Oceanid_02_SetVisible",
+      "onAdded": [
+        {
+          "$type": "AddGlobalValue",
+          "key": "_OCEANID_SUMMON_UNDERWATER",
+          "value": 0,
+          "useLimitRange": true,
+          "maxValue": 1
+        }
+      ],
       "abilityMixins": [
         {
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "Summon_BS",
-          "modifierName": "Monster_Oceanid_02_SetVisibleFalse",
-          "normalizeStart": 0.800000011920929
+          "normalizeStart": 0.8,
+          "normalizeEnd": 1,
+          "modifierName": "Monster_Oceanid_02_SetVisibleFalse"
         },
         {
           "$type": "AttachToStateIDMixin",
@@ -18,8 +33,7 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_OCEANID_SUMMON_UNDERWATER",
-          "defaultGlobalValueOnCreate": 0.0,
-          "valueSteps": [-1.0, 0.5, 1.5],
+          "valueSteps": [-1, 0.5, 1.5],
           "modifierNameSteps": ["Oceanid_NotUnderWater", "Oceanid_UnderWater"]
         },
         {
@@ -30,45 +44,37 @@
       ],
       "modifiers": {
         "Monster_Oceanid_02_SetVisibleFalse": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
+          "onAdded": []
         },
         "Monster_Oceanid_02_SetVisibleTrue": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
+          "onAdded": []
         },
         "Oceanid_NotUnderWater": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "SetAnimatorBool",
-              "boolID": "UnderWater"
-            }
-          ]
-        },
-        "Oceanid_UnderWater": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorBool",
               "boolID": "UnderWater",
-              "ratio": true
+              "value": false
+            }
+          ]
+        },
+        "Oceanid_UnderWater": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "boolID": "UnderWater",
+              "value": true
             }
           ]
         },
         "Monster_Oceanid_02_SetVisible": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
               "key": "_OCEANID_SUMMON_UNDERWATER",
+              "value": 1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
+              "maxValue": 1
             },
             {
               "$type": "HideUIBillBoard",
@@ -80,10 +86,12 @@
                 "PushCollider",
                 "PushColliderHand",
                 "PushColliderTail"
-              ]
+              ],
+              "setEnable": false
             },
             {
-              "$type": "TriggerSetVisible"
+              "$type": "TriggerSetVisible",
+              "visible": false
             },
             {
               "$type": "EnableHitBoxByName",
@@ -92,7 +100,8 @@
                 "HitBoxLeftHand",
                 "HitBoxRightHand",
                 "HitBoxHead"
-              ]
+              ],
+              "setEnable": false
             },
             {
               "$type": "EnableAIStealthy",
@@ -102,14 +111,14 @@
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "ratio": -2.0,
               "key": "_OCEANID_SUMMON_UNDERWATER",
+              "value": -2,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
+              "maxValue": 1
             },
             {
-              "$type": "HideUIBillBoard"
+              "$type": "HideUIBillBoard",
+              "hide": false
             },
             {
               "$type": "EnablePushColliderName",
@@ -135,31 +144,35 @@
               "setEnable": true
             },
             {
-              "$type": "EnableAIStealthy"
+              "$type": "EnableAIStealthy",
+              "enable": false
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AddGlobalValue",
-          "ratio": 0.0,
-          "key": "_OCEANID_SUMMON_UNDERWATER",
-          "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  角色间歇性增加下落攻击伤害的modifier
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Oceanid_02_AddPlayerFallAttack",
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Monster_Oceanid_02_AddPlayerFallAttack"
+        }
+      ],
+      "onKill": [],
       "abilityMixins": [
+        //对抗亡语action
         {
           "$type": "AttachModifierToHPPercentMixin",
-          "valueSteps": [0.009999999776482582],
+          "valueSteps": [0.01],
           "modifierNameSteps": [
             "Oceanid_RemoveAddPlayerFallAttackEmpty",
             "Oceanid_RemoveAddPlayerFallAttack"
@@ -168,9 +181,7 @@
       ],
       "modifiers": {
         "Monster_Oceanid_02_AddPlayerFallAttack": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 5.0,
+          "thinkInterval": 5,
           "onThinkInterval": [
             {
               "$type": "ApplyModifier",
@@ -180,32 +191,26 @@
           ]
         },
         "UNIQUE_AddPlayerFallAttack_ToOceanidCrab": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
               "attackTags": ["FallingAttack"],
-              "CCNJGLPMIEP": 5.0,
+              "damagePercentageRatio": 5,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_MONSTER_OCEANID_CRAB_FEARFALLATK",
-                  "ratio": 1.0
+                  "value": 1,
+                  "compareType": "Equal"
                 }
               ]
             }
           ]
         },
-        "Oceanid_RemoveAddPlayerFallAttackEmpty": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
+        "Oceanid_RemoveAddPlayerFallAttackEmpty": {},
         "Oceanid_RemoveAddPlayerFallAttack": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "RemoveUniqueModifier",
@@ -214,15 +219,14 @@
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Monster_Oceanid_02_AddPlayerFallAttack"
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Summon Effect
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -234,89 +238,114 @@
           "modifierName": "Monster_Oceanid_02_SummonEffectBS"
         }
       ],
-      "modifiers": {
-        "Monster_Oceanid_02_SummonEffectBS": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_SecondSummonBS",
-              "born": {
-                "$type": "ConfigBornBySelf"
-              },
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        },
-        "Monster_Oceanid_02_SummonBullet": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 5.0,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "FireEffect",
-              "otherTargets": {
-                "$type": "SelectTargetsBySelfGroup",
-                "operation": "XOR",
-                "value": 1
-              },
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_Summon_BulletAS",
-              "born": {
-                "$type": "ConfigBornByTarget"
-              },
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "FireEffect",
-              "otherTargets": {
-                "$type": "SelectTargetsBySelfGroup",
-                "operation": "XOR",
-                "value": 3
-              },
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_Summon_BulletAS",
-              "born": {
-                "$type": "ConfigBornByTarget"
-              },
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "FireEffect",
-              "otherTargets": {
-                "$type": "SelectTargetsBySelfGroup",
-                "operation": "XOR",
-                "value": 7
-              },
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_Summon_BulletAS",
-              "born": {
-                "$type": "ConfigBornByTarget"
-              },
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "FireEffect",
-              "otherTargets": {
-                "$type": "SelectTargetsBySelfGroup",
-                "operation": "XOR",
-                "value": 9
-              },
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_Summon_BulletAS",
-              "born": {
-                "$type": "ConfigBornByTarget"
-              },
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        }
-      },
       "onAbilityStart": [
         {
           "$type": "ApplyModifier",
           "modifierName": "Monster_Oceanid_02_SummonBullet"
         }
-      ]
+      ],
+      "modifiers": {
+        "Monster_Oceanid_02_SummonEffectBS": {
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Monster_Oceanid_SecondSummonBS",
+              "born": {
+                "$type": "ConfigBornBySelf"
+              }
+            }
+          ]
+        },
+        "Monster_Oceanid_02_SummonBullet": {
+          "duration": 5,
+          "onAdded": [
+            // {
+            // 	"$type": "TriggerBullet",
+            // 	"otherTargets":
+            // 	{
+            // 		"$type":"SelectTargetsBySelfGroup",
+            // 		"operation":"XOR",
+            // 		"value":1,
+            // 		"compareType":"Equal"
+            // 	},
+            // 	"bulletID": 42005008,
+            // 	"trackTarget": "Target",
+            // 	"campID": 4001,
+            // 	"born":
+            // 	{
+            // 		"$type": "ConfigBornByAttachPoint",
+            // 		"attachPointName" : "BulletAttachPoint",
+            // 		"attachPointTargetType": "Self",
+            // 		"offset" :
+            // 		{
+            // 			"x": 0.0,
+            // 			"y": 0.0,
+            // 			"z": 0.0,
+            // 		}
+            // 	},
+            // },
+            {
+              "$type": "FireEffect",
+              "otherTargets": {
+                "$type": "SelectTargetsBySelfGroup",
+                "operation": "XOR",
+                "value": 1,
+                "compareType": "Equal"
+              },
+              "effectPattern": "Eff_Monster_Oceanid_Summon_BulletAS",
+              "born": {
+                "$type": "ConfigBornByTarget"
+              }
+            },
+            {
+              "$type": "FireEffect",
+              "otherTargets": {
+                "$type": "SelectTargetsBySelfGroup",
+                "operation": "XOR",
+                "value": 3,
+                "compareType": "Equal"
+              },
+              "effectPattern": "Eff_Monster_Oceanid_Summon_BulletAS",
+              "born": {
+                "$type": "ConfigBornByTarget"
+              }
+            },
+            {
+              "$type": "FireEffect",
+              "otherTargets": {
+                "$type": "SelectTargetsBySelfGroup",
+                "operation": "XOR",
+                "value": 7,
+                "compareType": "Equal"
+              },
+              "effectPattern": "Eff_Monster_Oceanid_Summon_BulletAS",
+              "born": {
+                "$type": "ConfigBornByTarget"
+              }
+            },
+            {
+              "$type": "FireEffect",
+              "otherTargets": {
+                "$type": "SelectTargetsBySelfGroup",
+                "operation": "XOR",
+                "value": 9,
+                "compareType": "Equal"
+              },
+              "effectPattern": "Eff_Monster_Oceanid_Summon_BulletAS",
+              "born": {
+                "$type": "ConfigBornByTarget"
+              }
+            }
+          ]
+        }
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Oceanid Steer
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -325,95 +354,134 @@
         {
           "$type": "AnimatorRotationCompensateMixin",
           "animatorStateIDs": ["TurnLeftPunch"],
-          "animationRotate": -90.0,
-          "angleLimit": 180.0
+          "animationRotate": -90,
+          "angleLimit": 180
         },
         {
           "$type": "AnimatorRotationCompensateMixin",
           "animatorStateIDs": ["TurnRightPunch"],
-          "angleLimit": 180.0
+          "animationRotate": 90,
+          "angleLimit": 180
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["TailAttack"],
-          "endNormalizedTime": 0.23000000417232513,
-          "angularSpeed": 300.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 0.23,
+          "angularSpeed": 300,
+          "attackTrigger": "",
+          "attackDistance": 0
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["SmashLeft"],
-          "startNormalizedTime": 0.05000000074505806,
-          "endNormalizedTime": 0.15000000596046448,
-          "angularSpeed": 700.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.05,
+          "endNormalizedTime": 0.15,
+          "angularSpeed": 700,
+          "attackTrigger": "",
+          "attackDistance": 0
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["SmashRight"],
-          "startNormalizedTime": 0.05000000074505806,
-          "endNormalizedTime": 0.15000000596046448,
-          "angularSpeed": 700.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.05,
+          "endNormalizedTime": 0.15,
+          "angularSpeed": 700,
+          "attackTrigger": "",
+          "attackDistance": 0
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["EnergyBurstAtk_BS"],
-          "angularSpeed": 250.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 1,
+          "angularSpeed": 250,
+          "attackTrigger": "",
+          "attackDistance": 0
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["EnergyBurstAtk_ChargeAS"],
-          "startNormalizedTime": 0.3499999940395355,
-          "endNormalizedTime": 0.699999988079071,
-          "angularSpeed": 360.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.35,
+          "endNormalizedTime": 0.7,
+          "angularSpeed": 360,
+          "attackTrigger": "",
+          "attackDistance": 0
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Dodge_BS"],
-          "angularSpeed": 300.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 1,
+          "angularSpeed": 300,
+          "attackTrigger": "",
+          "attackDistance": 0
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Dodge_AS"],
-          "angularSpeed": 300.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 1,
+          "angularSpeed": 300,
+          "attackTrigger": "",
+          "attackDistance": 0
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["TraceWaterBall_StandBy"],
-          "endNormalizedTime": 0.07999999821186066,
-          "angularSpeed": 720.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 0.08,
+          "angularSpeed": 720,
+          "attackTrigger": "",
+          "attackDistance": 0
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["PowerRushAtk_Prepare"],
-          "angularSpeed": 720.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 1,
+          "angularSpeed": 720,
+          "attackTrigger": "",
+          "attackDistance": 0
         },
         {
           "$type": "SteerAttackTraceMixin",
           "steerStateIDs": ["RushAtk"],
-          "endNormalizedTime": 0.27000001072883606,
-          "angularSpeed": 300.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 0.27,
+          "angularSpeed": 300,
+          "attackTrigger": "",
+          "attackDistance": 0
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Oceanid Laser Set Target水流激光追踪子弹
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Oceanid_WaterLaser_ChasingTarget",
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Oceanid_WaterLaser_HitDelay"
+        },
+        {
+          "$type": "AddGlobalValue",
+          "key": "_WATERLASER_DIE",
+          "value": -3,
+          "useLimitRange": true,
+          "maxValue": 1
+        }
+      ],
       "abilityMixins": [
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_WATERLASER_DIE",
-          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [-0.5, 0.5, 1.5],
           "modifierNameSteps": [
             "Oceanid_WaterLaser_DieEmpty",
@@ -423,9 +491,7 @@
       ],
       "modifiers": {
         "Oceanid_WaterLaser_HitDelay": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.100000023841858,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1.1,
           "onRemoved": [
             {
               "$type": "ApplyModifier",
@@ -434,73 +500,75 @@
           ]
         },
         "Oceanid_WaterLaser_Hit": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 5.099999904632568,
-          "bonusCriticalHurt": 100.0,
+          "duration": 5.1,
           "thinkInterval": 0.5,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_WaterLaserAOE",
+              "effectPattern": "Eff_Monster_Oceanid_WaterLaserAOE",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
-                "onGround": true,
+                "attachPointName": "RootNode",
                 "direction": {
                   "$type": "ConfigDirectionByGroundNormal"
                 },
-                "attachPointName": "RootNode"
-              },
-              "EBHJMLOKDGB": -1.0
+                "onGround": true
+              }
             }
+          ],
+          "onRemoved": [
+            // {
+            // 	"$type":"FireEffect",
+            // 	"effectPattern":"Eff_Monster_Oceanid_WaterLaserAOEAS",
+            // 	"born":
+            // 	{
+            // 		"$type":"ConfigBornBySelf",
+            // 		"onGround":true
+            // 	}
+            // }w
           ],
           "onThinkInterval": [
             {
               "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
+                  "height": 5,
+                  "radius": 6,
                   "born": {
                     "$type": "ConfigBornBySelf",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": -2.0,
-                      "PJCOKIGCJOK": 0.0
+                      "x": 0,
+                      "y": -2,
+                      "z": 0
                     }
-                  },
-                  "height": 5.0,
-                  "DCMPFCIBIPA": 6.0
+                  }
                 },
                 "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
+                  // "attenuationTag": "Monster_Konungmathr_Attenuation_2",
+                  // "attenuationGroup":"Monster_Konungmathr_Attenuation_2",
+                  "canBeModifiedBy": "OriginOwner",
                   "attackProperty": {
-                    "HBIOLEEGHPD": 0.3330000042915344,
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Water",
-                    "bonusCriticalHurt": 50.0,
+                    "damagePercentage": 0.333,
                     "strikeType": "Blunt",
-                    "enBreak": 0.0
+                    "elementType": "Water",
+                    "enBreak": 0,
+                    "elementDurability": 50
                   },
                   "hitPattern": {
                     "onHitEffectName": "none",
-                    "hitImpulseType": "LV1"
-                  },
-                  "canBeModifiedBy": "OriginOwner"
+                    "hitImpulseType": "LV1",
+                    "muteHitText": false
+                  }
                 }
-              },
-              "targetType": "Enemy"
+              }
             }
           ]
         },
-        "Oceanid_WaterLaser_DieEmpty": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
+        "Oceanid_WaterLaser_DieEmpty": {},
         "Oceanid_WaterLaser_Die": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "RemoveModifier",
@@ -511,27 +579,42 @@
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Oceanid_WaterLaser_HitDelay"
-        },
-        {
-          "$type": "AddGlobalValue",
-          "ratio": -3.0,
-          "key": "_WATERLASER_DIE",
-          "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Oceanid Laser 纯水释放水流激光
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Oceanid_02_WaterLaser",
+      "onAdded": [
+        {
+          "$type": "EnablePartControl",
+          "partRootNames": ["LaserPoint"],
+          "enable": false
+        }
+      ],
+      "onKill": [
+        {
+          "$type": "AddGlobalValue",
+          "otherTargets": {
+            "$type": "SelectTargetsByChildren",
+            "configID": 42005013
+          },
+          "key": "_WATERLASER_DIE",
+          "useLimitRange": true,
+          "value": 1,
+          "maxValue": 1
+        },
+        {
+          "$type": "RemoveModifier",
+          "modifierName": "Monster_Oceanid_02_LaunchLaser"
+        }
+      ],
       "abilityMixins": [
         {
           "$type": "AttachToStateIDMixin",
@@ -570,9 +653,7 @@
       ],
       "modifiers": {
         "Monster_Oceanid_02_SetAttackTarget": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.20000000298023224,
+          "thinkInterval": 0.2,
           "onAdded": [
             {
               "$type": "ApplyModifier",
@@ -588,6 +669,7 @@
             }
           ],
           "onThinkInterval": [
+            //做个保底措施。防止子弹创生延迟之后，patcontroll错过锁定时机
             {
               "$type": "SetPartControlTarget",
               "otherTargets": {
@@ -599,30 +681,26 @@
           ]
         },
         "Monster_Oceanid_02_LaunchLaser": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_WaterLaser_Loop",
+              "effectPattern": "Eff_Monster_Oceanid_WaterLaser_Loop",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
                 "attachPointName": "LaserPoint"
-              },
-              "EBHJMLOKDGB": -1.0
+              }
             }
           ],
           "onRemoved": [
             {
               "$type": "EnablePartControl",
-              "partRootNames": ["LaserPoint"]
+              "partRootNames": ["LaserPoint"],
+              "enable": false
             }
           ]
         },
         "Monster_Oceanid_02_SetPartControlTarget": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.1,
           "onRemoved": [
             {
               "$type": "EnablePartControl",
@@ -640,19 +718,14 @@
           ]
         },
         "Monster_Oceanid_02_WaterLaserChargeEffect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_WaterLaserCharge",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Oceanid_WaterLaserCharge"
             }
           ]
         },
         "Monster_Oceanid_02_Clear_LockTarget": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "KillSelf"
@@ -660,20 +733,20 @@
           ]
         },
         "Monster_Oceanid_02_LockTarget": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
+            //在创建追踪gadget之前。先删除之前的追踪gadget
             {
               "$type": "ApplyModifier",
+              "modifierName": "Monster_Oceanid_02_Clear_LockTarget",
               "otherTargets": {
                 "$type": "SelectTargetsByChildren",
                 "configID": 42005024
-              },
-              "modifierName": "Monster_Oceanid_02_Clear_LockTarget"
+              }
             },
             {
               "$type": "TriggerBullet",
               "bulletID": 42005024,
+              "trackTarget": "SelfAttackTarget",
               "sightGroupWithOwner": true
             },
             {
@@ -684,21 +757,16 @@
           ]
         },
         "Monster_Oceanid_02_LockTargetEffect": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 7.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 7,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_02_WaterLaser_LockTarget",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Oceanid_02_WaterLaser_LockTarget"
             }
           ]
         },
         "Monster_Oceanid_02_LockTargetEffectHandler": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 7.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 7,
           "onAdded": [
             {
               "$type": "AttachModifier",
@@ -708,8 +776,6 @@
           ]
         },
         "Monster_Oceanid_02_HidePushCollider": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "EnablePushColliderName",
@@ -717,7 +783,8 @@
                 "PushCollider",
                 "PushColliderTail",
                 "PushColliderHand"
-              ]
+              ],
+              "setEnable": false
             }
           ],
           "onRemoved": [
@@ -732,33 +799,14 @@
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "EnablePartControl",
-          "partRootNames": ["LaserPoint"]
-        }
-      ],
-      "onKill": [
-        {
-          "$type": "AddGlobalValue",
-          "otherTargets": {
-            "$type": "SelectTargetsByChildren",
-            "configID": 42005013
-          },
-          "ratio": 1.0,
-          "key": "_WATERLASER_DIE",
-          "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "RemoveModifier",
-          "modifierName": "Monster_Oceanid_02_LaunchLaser"
-        }
-      ]
+      }
     }
   },
+  ///////////////////////////////////////////////////////////////////////
+  ///
+  ///Laser Damage 空锁定玩家的bullet
+  ///
+  //////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -772,23 +820,24 @@
       "onAdded": [
         {
           "$type": "AddGlobalValue",
-          "ratio": 1.0,
           "key": "_IS_WATERLASER_TARGET",
+          "value": 1,
           "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
+          "maxValue": 1,
+          "minValue": 0
         }
       ],
       "onAbilityStart": [
         {
           "$type": "SetGlobalPos",
+          "target": "Self",
           "key": "_LOCKTARGET_LASERBORN",
           "born": {
             "$type": "ConfigBornBySelf",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.5
+              "x": 0,
+              "y": 0,
+              "z": 0.5
             }
           },
           "setTarget": false
@@ -802,21 +851,25 @@
         },
         {
           "$type": "TriggerBullet",
+          "trackTarget": "Self",
           "bulletID": 42005013,
           "born": {
             "$type": "ConfigBornByGlobalValue",
-            "onGround": true,
-            "alongGround": true,
             "positionKey": "_LOCKTARGET_LASERBORN",
-            "directionKey": ""
+            "onGround": true,
+            "alongGround": true
           },
           "ownerIs": "Owner",
-          "trackTarget": "Self",
           "sightGroupWithOwner": true
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Oceanid Create Elevator Buttom And Summon 创建电梯底座和电梯平台
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -830,8 +883,6 @@
       ],
       "modifiers": {
         "Monster_Oceanid_02_CreateElevatorButtom": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
@@ -860,7 +911,8 @@
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_MONSTER_OCEANID_02_BLINKPOS_CHECKNUM",
-                  "ratio": 1.0
+                  "value": 1,
+                  "compareType": "Equal"
                 }
               ],
               "successActions": [
@@ -869,7 +921,8 @@
                   "otherTargets": {
                     "$type": "SelectTargetsBySelfGroup",
                     "operation": "XOR",
-                    "value": 4
+                    "value": 4,
+                    "compareType": "Equal"
                   },
                   "key": "_OCEANID_ELEVATOR_CREATE_POS",
                   "born": {
@@ -879,20 +932,20 @@
                 },
                 {
                   "$type": "CreateGadget",
+                  "gadgetID": 42005014,
+                  "campID": 1001,
+                  "campTargetType": "Enemy",
+                  "byServer": false,
                   "lifeByOwnerIsAlive": true,
                   "born": {
                     "$type": "ConfigBornByGlobalValue",
-                    "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 0.0
-                    },
                     "positionKey": "_OCEANID_ELEVATOR_CREATE_POS",
-                    "directionKey": ""
-                  },
-                  "gadgetID": 42005014,
-                  "campID": 1001,
-                  "campTargetType": "Enemy"
+                    "offset": {
+                      "x": 0,
+                      "y": 0,
+                      "z": 0
+                    }
+                  }
                 },
                 {
                   "$type": "ShowReminder",
@@ -905,7 +958,8 @@
                   "otherTargets": {
                     "$type": "SelectTargetsBySelfGroup",
                     "operation": "XOR",
-                    "value": 6
+                    "value": 6,
+                    "compareType": "Equal"
                   },
                   "key": "_OCEANID_ELEVATOR_CREATE_POS",
                   "born": {
@@ -915,20 +969,20 @@
                 },
                 {
                   "$type": "CreateGadget",
+                  "gadgetID": 42005014,
+                  "campID": 1001,
+                  "campTargetType": "Enemy",
+                  "byServer": false,
                   "lifeByOwnerIsAlive": true,
                   "born": {
                     "$type": "ConfigBornByGlobalValue",
-                    "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 0.0
-                    },
                     "positionKey": "_OCEANID_ELEVATOR_CREATE_POS",
-                    "directionKey": ""
-                  },
-                  "gadgetID": 42005014,
-                  "campID": 1001,
-                  "campTargetType": "Enemy"
+                    "offset": {
+                      "x": 0,
+                      "y": 0,
+                      "z": 0
+                    }
+                  }
                 },
                 {
                   "$type": "ShowReminder",
@@ -946,9 +1000,7 @@
           ]
         },
         "Monster_Oceanid_02_LaserRemovePlatformDamage": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1,
           "onAdded": [
             {
               "$type": "KillSelf"
@@ -958,321 +1010,58 @@
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Oceanid Elevator Buttom  电梯底座
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Oceanid_02_ElevatorButtomGadget",
-      "modifiers": {
-        "Monster_Oceanid_02_CreateElevatorButtomEffect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_ElevatorMask",
-              "EBHJMLOKDGB": -1.0
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_ElevatorMaskDisappear",
-              "born": {
-                "$type": "ConfigBornBySelf"
-              },
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        },
-        "Monster_Oceanid_02_ElevatorDieTimer": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 11.0,
-          "bonusCriticalHurt": 100.0,
-          "onRemoved": [
-            {
-              "$type": "RemoveModifier",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_MONSTER_OCEANID_02_TRIGGERELEVATOR",
-                  "ratio": 0.0
-                }
-              ],
-              "modifierName": "Monster_Oceanid_02_CreateElevatorButtomEffect"
-            },
-            {
-              "$type": "KillSelf",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_MONSTER_OCEANID_02_TRIGGERELEVATOR",
-                  "ratio": 0.0
-                }
-              ]
-            }
-          ]
-        },
-        "UNIQUE_Monster_Oceanid_02_CreateElevatorButtom": {
-          "modifierName": "",
-          "isUnique": true,
-          "HCJLIGBLGJA": 2.0,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "CreateMovingPlatform",
-              "born": {
-                "$type": "ConfigBornBySelf"
-              },
-              "gadgetID": 42005015,
-              "campID": 1001,
-              "campTargetType": "Enemy",
-              "byServer": true
-            }
-          ]
-        },
-        "Monster_Oceanid_02_ElevatorEffect": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 10.5,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_ElevatorUp",
-              "EBHJMLOKDGB": -1.0
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_ElevatorDie",
-              "born": {
-                "$type": "ConfigBornBySelf"
-              },
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "RemoveModifier",
-              "modifierName": "Monster_Oceanid_02_CreateElevatorButtomEffect"
-            }
-          ]
-        },
-        "Oceanid_02_ElevatorTriggerDelay": {
-          "stacking": "Unique",
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.4000000059604645,
-          "bonusCriticalHurt": 100.0,
-          "onRemoved": [
-            {
-              "$type": "TryTriggerPlatformStartMove",
-              "predicates": [
-                {
-                  "$type": "ByNot",
-                  "predicates": [
-                    {
-                      "$type": "ByTargetGlobalValue",
-                      "key": "_MONSTER_OCEANID_02_TRIGGERELEVATOR",
-                      "ratio": 1.0
-                    }
-                  ]
-                }
-              ],
-              "forceTrigger": true
-            },
-            {
-              "$type": "ApplyModifier",
-              "predicates": [
-                {
-                  "$type": "ByNot",
-                  "predicates": [
-                    {
-                      "$type": "ByTargetGlobalValue",
-                      "key": "_MONSTER_OCEANID_02_TRIGGERELEVATOR",
-                      "ratio": 1.0
-                    }
-                  ]
-                }
-              ],
-              "modifierName": "Monster_Oceanid_02_ElevatorEffect"
-            },
-            {
-              "$type": "Summon",
-              "predicates": [
-                {
-                  "$type": "ByNot",
-                  "predicates": [
-                    {
-                      "$type": "ByTargetGlobalValue",
-                      "key": "_MONSTER_OCEANID_02_TRIGGERELEVATOR",
-                      "ratio": 1.0
-                    }
-                  ]
-                }
-              ],
-              "monsterID": 20050402,
-              "born": {
-                "$type": "ConfigBornBySelf",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 5.0
-                }
-              },
-              "summonTag": 20050402,
-              "aliveByOwner": true
-            },
-            {
-              "$type": "AddGlobalValue",
-              "ratio": 1.0,
-              "key": "_MONSTER_OCEANID_02_TRIGGERELEVATOR",
-              "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
-            }
-          ]
-        },
-        "Monster_Oceanid_02_ElevatorWatcherOne": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 3.0,
-          "bonusCriticalHurt": 100.0
-        },
-        "Monster_Oceanid_02_CreateElevatorButtomEffectDelay": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.6000000238418579,
-          "bonusCriticalHurt": 100.0,
-          "onRemoved": [
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "Monster_Oceanid_02_CreateElevatorButtomEffect"
-            }
-          ]
-        },
-        "Monster_Affix_DeathExplode_Delay_Animal": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 2.0,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.20000000298023224,
-          "onThinkInterval": [
-            {
-              "$type": "Predicated",
-              "targetPredicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_MONSTERAFFIX_OCEANID_02_ANIMAL_DEATHEXPLODE",
-                  "ratio": 1.0
-                }
-              ],
-              "successActions": [
-                {
-                  "$type": "SetGlobalValue",
-                  "otherTargets": {
-                    "$type": "SelectTargetsByShape",
-                    "shapeName": "CircleR50",
-                    "campTargetType": "AllExceptSelf",
-                    "sizeRatio": 1.0
-                  },
-                  "predicates": [
-                    {
-                      "$type": "ByEntityTypes",
-                      "entityTypes": ["Monster"]
-                    }
-                  ],
-                  "ratio": 1.0,
-                  "key": "_MONSTERAFFIX_OCEANID_02_ANIMAL_DEATHEXPLODE",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
-                }
-              ]
-            }
-          ]
-        },
-        "Monster_Affix_HealUp_Delay_Animal": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 2.0,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.20000000298023224,
-          "onThinkInterval": [
-            {
-              "$type": "Predicated",
-              "targetPredicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_MONSTERAFFIX_OCEANID_02_ANIMALHEAL_UP",
-                  "ratio": 1.0
-                }
-              ],
-              "successActions": [
-                {
-                  "$type": "SetGlobalValue",
-                  "otherTargets": {
-                    "$type": "SelectTargetsByShape",
-                    "shapeName": "CircleR50",
-                    "campTargetType": "AllExceptSelf",
-                    "sizeRatio": 1.0
-                  },
-                  "predicates": [
-                    {
-                      "$type": "ByEntityTypes",
-                      "entityTypes": ["Monster"]
-                    }
-                  ],
-                  "ratio": 1.0,
-                  "key": "_MONSTERAFFIX_OCEANID_02_ANIMALHEAL_UP",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
-                }
-              ]
-            }
-          ]
-        }
-      },
       "onAdded": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "All",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackBox",
-              "triggerType": "TriggerNoRepeat",
               "checkHitLayerType": "OnlyHitScene",
+              "triggerType": "TriggerNoRepeat",
+              "size": {
+                "x": 4,
+                "y": 4,
+                "z": 4
+              },
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0,
+                  "y": 0,
+                  "z": 0
                 }
-              },
-              "size": {
-                "IBKBLDAJIMA": 4.0,
-                "LKHJADIPBFL": 4.0,
-                "PJCOKIGCJOK": 4.0
               }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
               "attackProperty": {
-                "HBIOLEEGHPD": 0.0,
-                "CCNJGLPMIEP": 0.0,
-                "bonusCriticalHurt": 100.0,
+                "damagePercentage": 0,
                 "strikeType": "Blunt",
-                "enBreak": 5000.0
+                "enBreak": 5000
               },
               "hitPattern": {
                 "onHitEffectName": "default",
                 "hitImpulseType": "LV4"
               }
             }
-          },
-          "targetType": "All"
+          }
         },
         {
           "$type": "AddGlobalValue",
-          "ratio": 0.0,
+          "target": "Self",
           "key": "_MONSTER_OCEANID_02_TRIGGERELEVATOR",
+          "value": 0,
           "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
+          "maxValue": 1
         },
         {
           "$type": "ApplyModifier",
@@ -1324,25 +1113,279 @@
             }
           ]
         }
-      ]
+      ],
+      "onKill": [],
+      "modifiers": {
+        "Monster_Oceanid_02_CreateElevatorButtomEffect": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Oceanid_ElevatorMask"
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Monster_Oceanid_ElevatorMaskDisappear",
+              "born": {
+                "$type": "ConfigBornBySelf"
+              }
+            }
+          ]
+        },
+        "Monster_Oceanid_02_ElevatorDieTimer": {
+          "duration": 11,
+          "onRemoved": [
+            {
+              "$type": "RemoveModifier",
+              "modifierName": "Monster_Oceanid_02_CreateElevatorButtomEffect",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_MONSTER_OCEANID_02_TRIGGERELEVATOR",
+                  "value": 0,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "KillSelf",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_MONSTER_OCEANID_02_TRIGGERELEVATOR",
+                  "value": 0,
+                  "compareType": "Equal"
+                }
+              ]
+            }
+          ]
+        },
+        "UNIQUE_Monster_Oceanid_02_CreateElevatorButtom": {
+          "isUnique": true,
+          "duration": 2,
+          "onAdded": [
+            {
+              "$type": "CreateMovingPlatform",
+              "gadgetID": 42005015,
+              "campID": 1001,
+              "campTargetType": "Enemy",
+              "born": {
+                "$type": "ConfigBornBySelf"
+              },
+              "byServer": true, //平台需要服务器创建
+              "lifeByOwnerIsAlive": false
+            }
+          ]
+        },
+        "Monster_Oceanid_02_ElevatorEffect": {
+          "duration": 10.5,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Oceanid_ElevatorUp"
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Monster_Oceanid_ElevatorDie",
+              "born": {
+                "$type": "ConfigBornBySelf"
+              }
+            },
+            {
+              "$type": "RemoveModifier",
+              "modifierName": "Monster_Oceanid_02_CreateElevatorButtomEffect"
+            }
+          ]
+        },
+        //电梯延迟升起
+        "Oceanid_02_ElevatorTriggerDelay": {
+          "duration": 0.4,
+          "stacking": "Unique",
+          "onRemoved": [
+            {
+              "$type": "TryTriggerPlatformStartMove",
+              "forceTrigger": true,
+              //"detectHeight": 6,	//安全区域检测
+              //"detectWidth": 1.5,	//安全区域检测
+              //不安全时，播放特效
+              "failActions": [],
+              "predicates": [
+                {
+                  "$type": "ByNot",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "_MONSTER_OCEANID_02_TRIGGERELEVATOR",
+                      "value": 1,
+                      "compareType": "Equal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "Monster_Oceanid_02_ElevatorEffect",
+              "predicates": [
+                {
+                  "$type": "ByNot",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "_MONSTER_OCEANID_02_TRIGGERELEVATOR",
+                      "value": 1,
+                      "compareType": "Equal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "$type": "Summon",
+              "monsterID": 20050402,
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "offset": {
+                  "x": 0,
+                  "y": 0,
+                  "z": 5
+                }
+              },
+              "summonTag": 20050402,
+              "aliveByOwner": true,
+              "hasDrop": false,
+              "hasExperience": false,
+              "sightGroupWithOwner": false,
+              "predicates": [
+                {
+                  "$type": "ByNot",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "_MONSTER_OCEANID_02_TRIGGERELEVATOR",
+                      "value": 1,
+                      "compareType": "Equal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "$type": "AddGlobalValue",
+              "target": "Self",
+              "key": "_MONSTER_OCEANID_02_TRIGGERELEVATOR",
+              "value": 1,
+              "useLimitRange": true,
+              "maxValue": 1
+            }
+          ]
+        },
+        "Monster_Oceanid_02_ElevatorWatcherOne": {
+          "duration": 3,
+          "onAdded": [
+            // {
+            // 	"$type":"ServerLuaCall",
+            // 	"luaCallType":"SpecificGroup",
+            // 	"CallParamList":[133102112],
+            // 	"funcName":"SLC_Use_Lift",
+            // }
+          ]
+        },
+        "Monster_Oceanid_02_CreateElevatorButtomEffectDelay": {
+          "duration": 0.6,
+          "onRemoved": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "Monster_Oceanid_02_CreateElevatorButtomEffect"
+            }
+          ]
+        },
+        "Monster_Affix_DeathExplode_Delay_Animal": {
+          "duration": 2,
+          "thinkInterval": 0.2,
+          //对抗怪物创建延迟。tick挂vale
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_MONSTERAFFIX_OCEANID_02_ANIMAL_DEATHEXPLODE",
+                  "value": 1,
+                  "compareType": "Equal"
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "SetGlobalValue",
+                  "otherTargets": {
+                    "$type": "SelectTargetsByShape",
+                    "shapeName": "CircleR50",
+                    "centerBasedOn": "Self",
+                    "campTargetType": "AllExceptSelf",
+                    "campBasedOn": "Self"
+                  },
+                  "key": "_MONSTERAFFIX_OCEANID_02_ANIMAL_DEATHEXPLODE",
+                  "value": 1,
+                  "predicates": [
+                    {
+                      "$type": "ByEntityTypes",
+                      "entityTypes": ["Monster"]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "Monster_Affix_HealUp_Delay_Animal": {
+          "duration": 2,
+          "thinkInterval": 0.2,
+          //对抗怪物创建延迟。tick挂vale
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_MONSTERAFFIX_OCEANID_02_ANIMALHEAL_UP",
+                  "value": 1,
+                  "compareType": "Equal"
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "SetGlobalValue",
+                  "otherTargets": {
+                    "$type": "SelectTargetsByShape",
+                    "shapeName": "CircleR50",
+                    "centerBasedOn": "Self",
+                    "campTargetType": "AllExceptSelf",
+                    "campBasedOn": "Self"
+                  },
+                  "key": "_MONSTERAFFIX_OCEANID_02_ANIMALHEAL_UP",
+                  "value": 1,
+                  "predicates": [
+                    {
+                      "$type": "ByEntityTypes",
+                      "entityTypes": ["Monster"]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Oceanid_02_ResetElevator",
-      "modifiers": {
-        "Oceanid_ElevatorButtom_KillSelfDelay": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
-          "onRemoved": [
-            {
-              "$type": "KillSelf"
-            }
-          ]
-        }
-      },
       "onAbilityStart": [
         {
           "$type": "TryTriggerPlatformStartMove",
@@ -1352,19 +1395,55 @@
           "$type": "ApplyModifier",
           "modifierName": "Oceanid_ElevatorButtom_KillSelfDelay"
         }
-      ]
+      ],
+      "modifiers": {
+        "Oceanid_ElevatorButtom_KillSelfDelay": {
+          "duration": 0.2,
+          "onRemoved": [
+            {
+              "$type": "KillSelf"
+            }
+          ]
+        }
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Oceanid Elevator Platform 电梯本体
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Oceanid_02_Elevator",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "key": "_COMMON_MOVING_PLATFORM_ACTIVE",
+          "value": 0
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Monster_Oceanid_02_ElevatorLifeTime"
+        },
+        //出生设置生命周期trigger，移动平台lifetime无效，需要手动killself
+        {
+          "$type": "AddGlobalValue",
+          "target": "Self",
+          "key": "_MONSTER_OCEANID_02_ELEVATOLIFETRIGGER",
+          "value": 0,
+          "useLimitRange": true,
+          "maxValue": 1
+        }
+      ],
       "abilityMixins": [
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
-          "globalValueKey": "_COMMON_MOVING_PLATFORM_ACTIVE",
-          "defaultGlobalValueOnCreate": 0.0,
+          "globalValueKey": "_COMMON_MOVING_PLATFORM_ACTIVE", //这个值是技能移动平台写死的，激活状态为1，非激活为0
           "valueSteps": [-0.5, 0.5, 1.5],
+          "removeAppliedModifier": true,
+          "defaultGlobalValueOnCreate": 0,
           "modifierNameSteps": [
             "Oceanid_Elevator_OnGround",
             "UNIQUE_Oceanid_ElevatorUpGround"
@@ -1372,42 +1451,36 @@
         }
       ],
       "modifiers": {
-        "Oceanid_Elevator_OnGround": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
+        "Oceanid_Elevator_OnGround": {},
         "UNIQUE_Oceanid_ElevatorUpGround": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": 10.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 10,
+          "stacking": "Unique",
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
+              "target": "Self",
               "key": "_MONSTER_OCEANID_02_ELEVATOLIFETRIGGER",
+              "value": 1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
+              "maxValue": 1
             }
           ],
           "onRemoved": [
             {
               "$type": "TriggerAbility",
-              "target": "Owner",
-              "abilityName": "Monster_Oceanid_02_ResetElevator"
+              "abilityName": "Monster_Oceanid_02_ResetElevator",
+              "target": "Owner"
             },
             {
               "$type": "KillSelf",
-              "duration": 0.15000000596046448
+              "duration": 0.15
             }
           ]
         },
+        //如果没触发电梯，时间到了移动平台killself
         "Monster_Oceanid_02_ElevatorLifeTime": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 11.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 11,
           "onRemoved": [
             {
               "$type": "KillSelf",
@@ -1415,44 +1488,33 @@
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_MONSTER_OCEANID_02_ELEVATOLIFETRIGGER",
-                  "ratio": 0.0
+                  "value": 0,
+                  "compareType": "Equal"
                 }
               ]
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "_COMMON_MOVING_PLATFORM_ACTIVE",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Monster_Oceanid_02_ElevatorLifeTime"
-        },
-        {
-          "$type": "AddGlobalValue",
-          "ratio": 0.0,
-          "key": "_MONSTER_OCEANID_02_ELEVATOLIFETRIGGER",
-          "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Oceanid Being Hit
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Oceanid_02_BeingHit",
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Monster_Oceanid_02_BeingHit"
+        }
+      ],
       "modifiers": {
         "Monster_Oceanid_02_BeingHit": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onBeingHit": [
             {
               "$type": "Predicated",
@@ -1494,27 +1556,25 @@
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_02_BeHit",
+              "effectPattern": "Eff_Monster_Oceanid_02_BeHit",
               "born": {
                 "$type": "ConfigBornByHitPoint",
                 "direction": {
                   "$type": "ConfigDirectionByGlobalValue",
                   "directionKey": "_OCEANID_BEINGHIT_DIR_"
                 }
-              },
-              "EBHJMLOKDGB": -1.0
+              }
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Monster_Oceanid_02_BeingHit"
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Oceanid Rush Atk
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1523,70 +1583,76 @@
         {
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "RushAtk",
-          "modifierName": "Monster_Oceanid_02_RushAtk",
-          "normalizeStart": 0.33000001311302185,
-          "normalizeEnd": 0.4399999976158142
+          "normalizeStart": 0.33,
+          "normalizeEnd": 0.44,
+          "modifierName": "Monster_Oceanid_02_RushAtk"
         },
         {
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "PowerRushAtk_Loop",
+          "normalizeStart": 0,
+          "normalizeEnd": 1,
           "modifierName": "Monster_Oceanid_02_RushAtk"
         }
       ],
       "modifiers": {
         "Monster_Oceanid_02_RushAtk": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.20000000298023224,
+          "thinkInterval": 0.2,
           "onThinkInterval": [
             {
               "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackBox",
+                  "targetType": "Enemy",
                   "triggerType": "TriggerNoRepeat",
+                  "size": {
+                    "x": 3,
+                    "y": 3,
+                    "z": 5
+                  },
                   "born": {
                     "$type": "ConfigBornBySelf",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": -0.5,
-                      "PJCOKIGCJOK": 0.5
+                      "x": 0.0,
+                      "y": -0.5,
+                      "z": 0.5
                     }
-                  },
-                  "size": {
-                    "IBKBLDAJIMA": 3.0,
-                    "LKHJADIPBFL": 3.0,
-                    "PJCOKIGCJOK": 5.0
                   }
                 },
                 "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
                   "attenuationGroup": "Regisvine_Common",
                   "attackProperty": {
-                    "HBIOLEEGHPD": 0.3330000042915344,
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Water",
-                    "bonusCriticalHurt": 50.0,
+                    "damagePercentage": 0.333,
                     "strikeType": "Blunt",
-                    "enBreak": 100.0,
-                    "attackType": "Melee"
+                    "overrideByWeapon": false,
+                    "attackType": "Melee",
+                    "elementType": "Water",
+                    "enBreak": 100,
+                    "elementDurability": 50
                   },
                   "hitPattern": {
                     "onHitEffectName": "default",
                     "hitImpulseType": "LV5",
-                    "retreatType": "ByTangent",
-                    "canBeDefenceHalt": true
+                    "reboundRatio": 0,
+                    "canBeDefenceHalt": true,
+                    "muteHitText": false,
+                    "retreatType": "ByTangent"
                   }
                 }
-              },
-              "targetType": "Enemy"
+              }
             }
           ]
         }
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Oceanid Smash Additional Attack
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1594,16 +1660,16 @@
       "onAbilityStart": [
         {
           "$type": "CreateGadget",
+          "gadgetID": 42005016,
+          "campID": 4001,
           "born": {
             "$type": "ConfigBornBySelf",
             "offset": {
-              "IBKBLDAJIMA": -1.2000000476837158,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 4.0
+              "x": -1.2,
+              "y": 0,
+              "z": 4
             }
-          },
-          "gadgetID": 42005016,
-          "campID": 4001
+          }
         }
       ]
     }
@@ -1615,16 +1681,16 @@
       "onAbilityStart": [
         {
           "$type": "CreateGadget",
+          "gadgetID": 42005016,
+          "campID": 4001,
           "born": {
             "$type": "ConfigBornBySelf",
             "offset": {
-              "IBKBLDAJIMA": 1.2000000476837158,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 4.0
+              "x": 1.2,
+              "y": 0,
+              "z": 4
             }
-          },
-          "gadgetID": 42005016,
-          "campID": 4001
+          }
         }
       ]
     }
@@ -1633,178 +1699,131 @@
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Oceanid_02_SmashAddAttackGadget",
-      "modifiers": {
-        "Monster_Oceanid_SmashAddAttackDamage": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
-          "onRemoved": [
-            {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_SmashAddAttack",
-              "born": {
-                "$type": "ConfigBornBySelf"
-              },
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "TriggerAttackEvent",
-              "attackEvent": {
-                "attackPattern": {
-                  "$type": "ConfigAttackCircle",
-                  "triggerType": "TriggerNoRepeat",
-                  "born": {
-                    "$type": "ConfigBornBySelf",
-                    "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": -2.0,
-                      "PJCOKIGCJOK": 0.0
-                    }
-                  },
-                  "height": 5.0,
-                  "DCMPFCIBIPA": 1.2999999523162842
-                },
-                "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
-                  "attackProperty": {
-                    "HBIOLEEGHPD": 0.6660000085830688,
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Water",
-                    "bonusCriticalHurt": 50.0,
-                    "strikeType": "Blunt",
-                    "enBreak": 1000.0,
-                    "attackType": "Melee"
-                  },
-                  "hitPattern": {
-                    "onHitEffectName": "default",
-                    "hitImpulseType": "LV7",
-                    "canBeDefenceHalt": true
-                  },
-                  "canBeModifiedBy": "OriginOwner"
-                }
-              },
-              "targetType": "Enemy"
-            }
-          ]
-        }
-      },
       "onAdded": [
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_SmashAddAttackWarning",
+          "effectPattern": "Eff_Monster_Oceanid_SmashAddAttackWarning",
           "born": {
             "$type": "ConfigBornBySelf"
-          },
-          "EBHJMLOKDGB": -1.0
+          }
         },
         {
           "$type": "ApplyModifier",
           "modifierName": "Monster_Oceanid_SmashAddAttackDamage"
         }
-      ]
+      ],
+      "modifiers": {
+        "Monster_Oceanid_SmashAddAttackDamage": {
+          "duration": 1,
+          "onRemoved": [
+            {
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Monster_Oceanid_SmashAddAttack",
+              "born": {
+                "$type": "ConfigBornBySelf"
+              }
+            },
+            {
+              "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
+              "attackEvent": {
+                "attackPattern": {
+                  "$type": "ConfigAttackCircle",
+                  "triggerType": "TriggerNoRepeat",
+                  "radius": 1.3,
+                  "height": 5,
+                  "born": {
+                    "$type": "ConfigBornBySelf",
+                    "offset": {
+                      "x": 0,
+                      "y": -2,
+                      "z": 0
+                    }
+                  }
+                },
+                "attackInfo": {
+                  "canBeModifiedBy": "OriginOwner",
+                  "attackProperty": {
+                    "damagePercentage": 0.666,
+                    "strikeType": "Blunt",
+                    "attackType": "Melee",
+                    "elementDurability": 50,
+                    "elementType": "Water",
+                    "enBreak": 1000
+                  },
+                  "hitPattern": {
+                    "onHitEffectName": "default",
+                    "hitImpulseType": "LV7",
+                    "reboundRatio": 0,
+                    "canBeDefenceHalt": true,
+                    "muteHitText": false,
+                    "retreatType": "ByAttacker"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Oceanid Tail Attack Additional Attack
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Oceanid_02_TailAttackAddAttack",
-      "modifiers": {
-        "Monster_Oceanid_02_TailAdd_Challenge": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
-          "onRemoved": [
-            {
-              "$type": "CreateGadget",
-              "born": {
-                "$type": "ConfigBornBySelf",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 15.0
-                }
-              },
-              "gadgetID": 42005016,
-              "campID": 4001
-            },
-            {
-              "$type": "CreateGadget",
-              "born": {
-                "$type": "ConfigBornBySelf",
-                "offset": {
-                  "IBKBLDAJIMA": 7.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 12.0
-                }
-              },
-              "gadgetID": 42005016,
-              "campID": 4001
-            },
-            {
-              "$type": "CreateGadget",
-              "born": {
-                "$type": "ConfigBornBySelf",
-                "offset": {
-                  "IBKBLDAJIMA": -7.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 12.0
-                }
-              },
-              "gadgetID": 42005016,
-              "campID": 4001
-            }
-          ]
-        }
-      },
       "onAbilityStart": [
         {
           "$type": "CreateGadget",
+          "gadgetID": 42005016,
+          "campID": 4001,
           "born": {
             "$type": "ConfigBornBySelf",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 9.0
+              "x": 0,
+              "y": 0,
+              "z": 9
             }
-          },
-          "gadgetID": 42005016,
-          "campID": 4001
+          }
         },
         {
           "$type": "CreateGadget",
+          "gadgetID": 42005016,
+          "campID": 4001,
           "born": {
             "$type": "ConfigBornBySelf",
             "offset": {
-              "IBKBLDAJIMA": 3.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 8.0
+              "x": 3,
+              "y": 0,
+              "z": 8
             }
-          },
-          "gadgetID": 42005016,
-          "campID": 4001
+          }
         },
         {
           "$type": "CreateGadget",
+          "gadgetID": 42005016,
+          "campID": 4001,
           "born": {
             "$type": "ConfigBornBySelf",
             "offset": {
-              "IBKBLDAJIMA": -3.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 8.0
+              "x": -3,
+              "y": 0,
+              "z": 8
             }
-          },
-          "gadgetID": 42005016,
-          "campID": 4001
+          }
         },
+        //挑战活动1级词缀
         {
           "$type": "Predicated",
           "targetPredicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_MONSTERAFFIX_OCEANID_02_SKILLUP",
-              "ratio": 1.0,
+              "value": 1,
               "compareType": "MoreThanAndEqual"
             }
           ],
@@ -1813,199 +1832,86 @@
               "$type": "ApplyModifier",
               "modifierName": "Monster_Oceanid_02_TailAdd_Challenge"
             }
+          ],
+          "failActions": []
+        }
+      ],
+      "modifiers": {
+        "Monster_Oceanid_02_TailAdd_Challenge": {
+          "duration": 0.5,
+          "onRemoved": [
+            {
+              "$type": "CreateGadget",
+              "gadgetID": 42005016,
+              "campID": 4001,
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "offset": {
+                  "x": 0,
+                  "y": 0,
+                  "z": 15
+                }
+              }
+            },
+            {
+              "$type": "CreateGadget",
+              "gadgetID": 42005016,
+              "campID": 4001,
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "offset": {
+                  "x": 7,
+                  "y": 0,
+                  "z": 12
+                }
+              }
+            },
+            {
+              "$type": "CreateGadget",
+              "gadgetID": 42005016,
+              "campID": 4001,
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "offset": {
+                  "x": -7,
+                  "y": 0,
+                  "z": 12
+                }
+              }
+            }
           ]
         }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Oceanid RushAtk Times
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Oceanid_02_RushAtkSetTimes",
-      "abilityMixins": [
-        {
-          "$type": "AttachToStateIDMixin",
-          "stateIDs": ["PowerRushAtk_Loop"],
-          "modifierName": "Monster_Oceanid_AddRushTimes"
-        },
-        {
-          "$type": "AttachToNormalizedTimeMixin",
-          "stateID": "RushAtk",
-          "modifierName": "Monster_Oceanid_02_RushEffect",
-          "normalizeStart": 0.33000001311302185,
-          "normalizeEnd": 0.4300000071525574
-        },
-        {
-          "$type": "AttachToStateIDMixin",
-          "stateIDs": ["PowerRushAtk_ASStandBy"],
-          "modifierName": "Monster_Oceanid_ResetValue"
-        }
-      ],
       "abilitySpecials": {
-        "RushTimesPlus": 0.0
-      },
-      "modifiers": {
-        "Monster_Oceanid_02_RushAtk_WatchTimes": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "modifierMixins": [
-            {
-              "$type": "AttachModifierToSelfGlobalValueMixin",
-              "globalValueKey": "_MONSTER_OCEANID_02_RUSHTIMES",
-              "defaultGlobalValueOnCreate": 0.0,
-              "valueSteps": [-1.0, 4.900000095367432, 11.0],
-              "modifierNameSteps": ["Oceanid_Empty", "Oceanid_RushTimesOver"]
-            }
-          ]
-        },
-        "Monster_Oceanid_02_RushAtk_WatchTimes_Challenge": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "modifierMixins": [
-            {
-              "$type": "AttachModifierToSelfGlobalValueMixin",
-              "globalValueKey": "_MONSTER_OCEANID_02_RUSHTIMES",
-              "defaultGlobalValueOnCreate": 0.0,
-              "valueSteps": [-1.0, 6.900000095367432, 11.0],
-              "modifierNameSteps": ["Oceanid_Empty", "Oceanid_RushTimesOver"]
-            }
-          ]
-        },
-        "Oceanid_Empty": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "SetAnimatorBool",
-              "boolID": "PowerRushAtkOver"
-            }
-          ]
-        },
-        "Oceanid_RushTimesOver": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "SetAnimatorBool",
-              "boolID": "PowerRushAtkOver",
-              "ratio": true
-            }
-          ]
-        },
-        "Monster_Oceanid_AddRushTimes": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AddGlobalValue",
-              "ratio": 0.0,
-              "key": "_MONSTER_OCEANID_02_RUSHADD",
-              "useLimitRange": true,
-              "randomInRange": true,
-              "maxValue": 3.0,
-              "minValue": 1.0
-            },
-            {
-              "$type": "SetGlobalValueToOverrideMap",
-              "globalValueKey": "_MONSTER_OCEANID_02_RUSHADD",
-              "overrideMapKey": "RushTimesPlus"
-            },
-            {
-              "$type": "Predicated",
-              "targetPredicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_MONSTERAFFIX_OCEANID_02_SKILLUP",
-                  "ratio": 3.0,
-                  "compareType": "MoreThanAndEqual"
-                }
-              ],
-              "successActions": [
-                {
-                  "$type": "AddGlobalValue",
-                  "ratio": "RushTimesPlus",
-                  "key": "_MONSTER_OCEANID_02_RUSHTIMES",
-                  "useLimitRange": true,
-                  "maxValue": 7.0,
-                  "minValue": 0.0
-                }
-              ],
-              "failActions": [
-                {
-                  "$type": "AddGlobalValue",
-                  "ratio": "RushTimesPlus",
-                  "key": "_MONSTER_OCEANID_02_RUSHTIMES",
-                  "useLimitRange": true,
-                  "maxValue": 5.0,
-                  "minValue": 0.0
-                }
-              ]
-            },
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_RushAtk",
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        },
-        "Monster_Oceanid_ResetValue": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AddGlobalValue",
-              "ratio": -10.0,
-              "key": "_MONSTER_OCEANID_02_RUSHTIMES",
-              "useLimitRange": true,
-              "maxValue": 5.0,
-              "minValue": 0.0
-            }
-          ]
-        },
-        "Monster_Oceanid_02_RushEffect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_RushAtk",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "Monster_Oceanid_02_RushBodyEffect"
-            }
-          ]
-        },
-        "Monster_Oceanid_02_RushBodyEffect": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_RushAtkBody",
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        }
+        "RushTimesPlus": 0
       },
       "onAdded": [
         {
           "$type": "AddGlobalValue",
-          "ratio": 0.0,
           "key": "_MONSTER_OCEANID_02_RUSHTIMES",
+          "value": 0,
           "useLimitRange": true,
-          "maxValue": 5.0,
-          "minValue": 0.0
+          "maxValue": 5
         },
+        //根据挑战3级词缀挂不同的冲刺次数检测modifier
         {
           "$type": "Predicated",
           "targetPredicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_MONSTERAFFIX_OCEANID_02_SKILLUP",
-              "ratio": 3.0,
+              "value": 3,
               "compareType": "MoreThanAndEqual"
             }
           ],
@@ -2022,60 +1928,165 @@
             }
           ]
         }
-      ]
+      ],
+      "abilityMixins": [
+        {
+          "$type": "AttachToStateIDMixin",
+          "stateIDs": ["PowerRushAtk_Loop"],
+          "modifierName": "Monster_Oceanid_AddRushTimes"
+        },
+        {
+          "$type": "AttachToNormalizedTimeMixin",
+          "stateID": "RushAtk",
+          "normalizeStart": 0.33,
+          "normalizeEnd": 0.43,
+          "modifierName": "Monster_Oceanid_02_RushEffect"
+        },
+        {
+          "$type": "AttachToStateIDMixin",
+          "stateIDs": ["PowerRushAtk_ASStandBy"],
+          "modifierName": "Monster_Oceanid_ResetValue"
+        }
+      ],
+      "modifiers": {
+        "Monster_Oceanid_02_RushAtk_WatchTimes": {
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_MONSTER_OCEANID_02_RUSHTIMES",
+              "valueSteps": [-1, 4.9, 11],
+              "modifierNameSteps": ["Oceanid_Empty", "Oceanid_RushTimesOver"]
+            }
+          ]
+        },
+        "Monster_Oceanid_02_RushAtk_WatchTimes_Challenge": {
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_MONSTER_OCEANID_02_RUSHTIMES",
+              "valueSteps": [-1, 6.9, 11],
+              "modifierNameSteps": ["Oceanid_Empty", "Oceanid_RushTimesOver"]
+            }
+          ]
+        },
+        "Oceanid_Empty": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "boolID": "PowerRushAtkOver",
+              "value": false
+            }
+          ]
+        },
+        "Oceanid_RushTimesOver": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "boolID": "PowerRushAtkOver",
+              "value": true
+            }
+          ]
+        },
+        "Monster_Oceanid_AddRushTimes": {
+          "onAdded": [
+            {
+              "$type": "AddGlobalValue",
+              "key": "_MONSTER_OCEANID_02_RUSHADD",
+              "useLimitRange": true,
+              "randomInRange": true,
+              "minValue": 1,
+              "maxValue": 3
+            },
+            {
+              "$type": "SetGlobalValueToOverrideMap",
+              "globalValueKey": "_MONSTER_OCEANID_02_RUSHADD",
+              "overrideMapKey": "RushTimesPlus"
+            },
+            //挑战活动3级词缀
+            {
+              "$type": "Predicated",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_MONSTERAFFIX_OCEANID_02_SKILLUP",
+                  "value": 3,
+                  "compareType": "MoreThanAndEqual"
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "AddGlobalValue",
+                  "key": "_MONSTER_OCEANID_02_RUSHTIMES",
+                  "value": "%RushTimesPlus",
+                  "useLimitRange": true,
+                  "maxValue": 7
+                }
+              ],
+              "failActions": [
+                {
+                  "$type": "AddGlobalValue",
+                  "key": "_MONSTER_OCEANID_02_RUSHTIMES",
+                  "value": "%RushTimesPlus",
+                  "useLimitRange": true,
+                  "maxValue": 5
+                }
+              ]
+            },
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Oceanid_RushAtk"
+            }
+          ]
+        },
+        "Monster_Oceanid_ResetValue": {
+          "onAdded": [
+            {
+              "$type": "AddGlobalValue",
+              "key": "_MONSTER_OCEANID_02_RUSHTIMES",
+              "value": -10,
+              "useLimitRange": true,
+              "maxValue": 5
+            }
+          ]
+        },
+        "Monster_Oceanid_02_RushEffect": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Oceanid_RushAtk"
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "Monster_Oceanid_02_RushBodyEffect"
+            }
+          ]
+        },
+        "Monster_Oceanid_02_RushBodyEffect": {
+          "duration": 1,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Oceanid_RushAtkBody"
+            }
+          ]
+        }
+      }
     }
   },
+  ///////////////////////////////////////////////////////////////////////
+  //
+  //Trace WaterBall Explode
+  //
+  //////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Oceanid_TraceWaterBall_Explode",
-      "modifiers": {
-        "Oceanid_TraceWaterBall_Explode_Tail": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_TraceWaterBall",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_TraceWaterBallTail",
-              "EBHJMLOKDGB": -1.0
-            }
-          ],
-          "onBeingHit": [
-            {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_TraceWaterBallExplode",
-              "born": {
-                "$type": "ConfigBornBySelf",
-                "alongGround": true
-              },
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "KillSelf"
-            }
-          ]
-        },
-        "Oceanid_TraceWaterBall_Explode_OpenColliderDelay": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
-          "onRemoved": [
-            {
-              "$type": "EnableBulletCollisionPluginTrigger",
-              "setEnable": true
-            }
-          ]
-        }
-      },
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "modifierName": "Oceanid_TraceWaterBall_Explode_Tail"
+          "modifierName": "Oceanid_TraceWaterBall_Explode_Tail",
+          "target": "Self"
         },
         {
           "$type": "AttachModifier",
@@ -2089,101 +2100,108 @@
         },
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "radius": 3,
               "born": {
                 "$type": "ConfigBornBySelf"
-              },
-              "DCMPFCIBIPA": 3.0
+              }
             },
             "attackInfo": {
+              "canBeModifiedBy": "OriginOwner",
               "attackTag": "SnowBallAttack",
               "attenuationTag": "SnowBall_Damage",
               "attenuationGroup": "Skirmisher_Fat_SprayGun_Ice",
               "attackProperty": {
-                "HBIOLEEGHPD": 0.800000011920929,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Water",
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 0.8,
                 "strikeType": "Blunt",
+                "attackType": "Default",
+                "elementType": "Water",
+                "elementDurability": 50,
                 "enBreak": 50.0
               },
               "hitPattern": {
-                "onHitEffectName": "default",
                 "hitImpulseType": "LV4",
-                "retreatType": "ByHitDirection",
-                "hitHaltTimeScale": 0.05000000074505806
-              },
-              "canBeModifiedBy": "OriginOwner"
+                "reboundRatio": 0,
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.05,
+                "muteHitText": false,
+                "retreatType": "ByHitDirection"
+              }
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_TraceWaterBallExplode",
+          "effectPattern": "Eff_Monster_Oceanid_TraceWaterBallExplode",
           "born": {
             "$type": "ConfigBornBySelf",
             "alongGround": true
           },
-          "EBHJMLOKDGB": -1.0
+          "direction": {
+            "$type": "ConfigDirectionByEntity"
+          }
         }
-      ]
-    }
-  },
-  {
-    "Default": {
-      "$type": "ConfigAbility",
-      "abilityName": "Oceanid_DelayWaterBall_Explode",
+      ],
       "modifiers": {
-        "Oceanid_DelayWaterBall_Explode_Tail": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+        "Oceanid_TraceWaterBall_Explode_Tail": {
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_DelayWaterBall",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Oceanid_TraceWaterBall"
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_DelayWaterBallTail",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Oceanid_TraceWaterBallTail"
             }
           ],
           "onBeingHit": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_DelayWaterBallExplode",
+              "effectPattern": "Eff_Monster_Oceanid_TraceWaterBallExplode",
               "born": {
                 "$type": "ConfigBornBySelf",
                 "alongGround": true
               },
-              "EBHJMLOKDGB": -1.0
+              "direction": {
+                "$type": "ConfigDirectionByEntity"
+              }
             },
             {
               "$type": "KillSelf"
             }
           ]
         },
-        "Oceanid_DelayWaterBall_Explode_OpenColliderDelay": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+        "Oceanid_TraceWaterBall_Explode_OpenColliderDelay": {
+          "duration": 0.1,
           "onRemoved": [
             {
               "$type": "EnableBulletCollisionPluginTrigger",
+              "target": "Self",
               "setEnable": true
             }
           ]
         }
-      },
+      }
+    }
+  },
+  ///////////////////////////////////////////////////////////////////////
+  //
+  //Delay WaterBall Explode
+  //
+  //////////////////////////////////////////////////////////////////////
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Oceanid_DelayWaterBall_Explode",
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "modifierName": "Oceanid_DelayWaterBall_Explode_Tail"
+          "modifierName": "Oceanid_DelayWaterBall_Explode_Tail",
+          "target": "Self"
         },
         {
           "$type": "AttachModifier",
@@ -2197,50 +2215,99 @@
         },
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "radius": 1.8,
               "born": {
                 "$type": "ConfigBornBySelf"
-              },
-              "DCMPFCIBIPA": 1.7999999523162842
+              }
             },
             "attackInfo": {
+              "canBeModifiedBy": "OriginOwner",
               "attackTag": "SnowBallAttack",
               "attenuationTag": "SnowBall_Damage",
               "attenuationGroup": "Skirmisher_Fat_SprayGun_Ice",
               "attackProperty": {
-                "HBIOLEEGHPD": 0.6660000085830688,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Water",
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 0.666,
                 "strikeType": "Blunt",
+                "attackType": "Default",
+                "elementType": "Water",
+                "elementDurability": 50,
                 "enBreak": 50.0
               },
               "hitPattern": {
-                "onHitEffectName": "default",
                 "hitImpulseType": "LV4",
-                "retreatType": "ByHitDirection",
-                "hitHaltTimeScale": 0.05000000074505806
-              },
-              "canBeModifiedBy": "OriginOwner"
+                "reboundRatio": 0,
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.05,
+                "muteHitText": false,
+                "retreatType": "ByHitDirection"
+              }
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_DelayWaterBallExplode",
+          "effectPattern": "Eff_Monster_Oceanid_DelayWaterBallExplode",
           "born": {
             "$type": "ConfigBornBySelf",
             "alongGround": true
           },
-          "EBHJMLOKDGB": -1.0
+          "direction": {
+            "$type": "ConfigDirectionByEntity"
+          }
         }
-      ]
+      ],
+      "modifiers": {
+        "Oceanid_DelayWaterBall_Explode_Tail": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Oceanid_DelayWaterBall"
+            },
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Oceanid_DelayWaterBallTail"
+            }
+          ],
+          "onBeingHit": [
+            {
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Monster_Oceanid_DelayWaterBallExplode",
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "alongGround": true
+              },
+              "direction": {
+                "$type": "ConfigDirectionByEntity"
+              }
+            },
+            {
+              "$type": "KillSelf"
+            }
+          ]
+        },
+        "Oceanid_DelayWaterBall_Explode_OpenColliderDelay": {
+          "duration": 0.1,
+          "onRemoved": [
+            {
+              "$type": "EnableBulletCollisionPluginTrigger",
+              "target": "Self",
+              "setEnable": true
+            }
+          ]
+        }
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Dodge Back
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -2249,8 +2316,8 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_MONSTER_OCEANID_02_DODGESTATE",
-          "defaultGlobalValueOnCreate": 0.0,
-          "valueSteps": [-1.0, 0.5, 1.5],
+          "valueSteps": [-1, 0.5, 1.5],
+          "defaultGlobalValueOnCreate": 0,
           "modifierNameSteps": ["Oceanid_DodgeEmpty", "Oceanid_DodgeOver"]
         },
         {
@@ -2271,39 +2338,38 @@
         {
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "EnergyBurstAtk_BlinkBS",
+          "normalizeStart": 0,
+          "normalizeEnd": 1,
           "modifierName": "Monster_Oceanid_SetBlinkPos"
         },
         {
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "MustKillAtk_BlinkBS",
+          "normalizeStart": 0,
+          "normalizeEnd": 1,
           "modifierName": "Monster_Oceanid_MustKillSetBlinkPos"
         }
       ],
       "modifiers": {
         "Oceanid_DodgeEmpty": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "SetAnimatorBool",
-              "boolID": "DodgeIsOver"
-            }
-          ]
-        },
-        "Oceanid_DodgeOver": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorBool",
               "boolID": "DodgeIsOver",
-              "ratio": true
+              "value": false
+            }
+          ]
+        },
+        "Oceanid_DodgeOver": {
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "boolID": "DodgeIsOver",
+              "value": true
             }
           ]
         },
         "Monster_Oceanid_02_DodgeBackHandler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
@@ -2316,9 +2382,7 @@
           ]
         },
         "Monster_Oceanid_02_DodgeBackDuring": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 2.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 2,
           "onAdded": [
             {
               "$type": "EnablePushColliderName",
@@ -2326,17 +2390,18 @@
                 "PushCollider",
                 "PushColliderHand",
                 "PushColliderTail"
-              ]
+              ],
+              "setEnable": false
             }
           ],
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
+              "value": 1,
               "key": "_MONSTER_OCEANID_02_DODGESTATE",
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
+              "maxValue": 1,
+              "minValue": 0
             },
             {
               "$type": "EnablePushColliderName",
@@ -2350,9 +2415,7 @@
           ]
         },
         "Monster_Oceanid_02_DodgeBackMoving": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.2999999523162842,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1.3,
           "onRemoved": [
             {
               "$type": "Predicated",
@@ -2360,7 +2423,8 @@
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_MONSTER_OCEANID_02_SPDODGE",
-                  "ratio": 1.0
+                  "value": 1,
+                  "compareType": "Equal"
                 }
               ],
               "successActions": [
@@ -2368,16 +2432,14 @@
                   "$type": "FixedMonsterRushMove",
                   "toPos": {
                     "$type": "ConfigBornByGlobalValue",
-                    "positionKey": "_MONSTER_OCEANID_02_BLINKPOS",
-                    "directionKey": ""
+                    "positionKey": "_MONSTER_OCEANID_02_BLINKPOS"
                   },
-                  "timeRange": 1.0,
-                  "maxRange": 100.0,
+                  "timeRange": 1,
+                  "maxRange": 100,
                   "animatorStateIDs": [
                     "EnergyBurstAtk_BlinkBS",
                     "DelayWaterBallAtk_BlinkBS"
                   ],
-                  "overrideMoveCollider": "",
                   "isInAir": true
                 }
               ],
@@ -2388,7 +2450,8 @@
                     {
                       "$type": "ByTargetGlobalValue",
                       "key": "_MONSTER_OCEANID_02_SPDODGE",
-                      "ratio": 2.0
+                      "value": 2,
+                      "compareType": "Equal"
                     }
                   ],
                   "successActions": [
@@ -2396,13 +2459,11 @@
                       "$type": "FixedMonsterRushMove",
                       "toPos": {
                         "$type": "ConfigBornByGlobalValue",
-                        "positionKey": "_MONSTER_OCEANID_02_BLINKPOS",
-                        "directionKey": ""
+                        "positionKey": "_MONSTER_OCEANID_02_BLINKPOS"
                       },
-                      "timeRange": 1.0,
-                      "maxRange": 100.0,
+                      "timeRange": 1,
+                      "maxRange": 100,
                       "animatorStateIDs": ["MustKillAtk_BlinkBS"],
-                      "overrideMoveCollider": "",
                       "isInAir": true
                     }
                   ],
@@ -2412,18 +2473,17 @@
                       "toPos": {
                         "$type": "ConfigBornBySelf",
                         "offset": {
-                          "IBKBLDAJIMA": 0.0,
-                          "LKHJADIPBFL": 0.0,
-                          "PJCOKIGCJOK": -15.0
+                          "x": 0,
+                          "y": 0,
+                          "z": -15
                         }
                       },
-                      "timeRange": 1.0,
-                      "maxRange": 15.0,
+                      "timeRange": 1,
+                      "maxRange": 15,
                       "animatorStateIDs": [
                         "EnergyBurstAtk_BlinkBS",
                         "DelayWaterBallAtk_BlinkBS"
                       ],
-                      "overrideMoveCollider": "",
                       "isInAir": true
                     }
                   ]
@@ -2437,63 +2497,56 @@
           ]
         },
         "Monster_Oceanid_02_DodgeResetValue": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": -2.0,
+              "value": -2,
               "key": "_MONSTER_OCEANID_02_DODGESTATE",
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
+              "maxValue": 1,
+              "minValue": 0
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": -2.0,
+              "value": -2,
               "key": "_MONSTER_OCEANID_02_SPDODGE",
               "useLimitRange": true,
-              "maxValue": 2.0,
-              "minValue": 0.0
+              "maxValue": 2,
+              "minValue": 0
             }
           ]
         },
         "Monster_Oceanid_DodgeEffectLoop": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_DodgeLoop",
+              "effectPattern": "Eff_Monster_Oceanid_DodgeLoop",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
-                "onGround": true,
-                "attachPointName": "RootNode"
-              },
-              "EBHJMLOKDGB": -1.0
+                "attachPointName": "RootNode",
+                "onGround": true
+              }
             }
           ]
         },
         "Monster_Oceanid_SetBlinkPos": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": -2.0,
+              "value": -2,
               "key": "_MONSTER_OCEANID_02_BLINKPOS_CHECKNUM",
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
+              "maxValue": 1,
+              "minValue": 0
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
+              "value": 1,
               "key": "_MONSTER_OCEANID_02_SPDODGE",
               "useLimitRange": true,
-              "maxValue": 2.0,
-              "minValue": 0.0
+              "maxValue": 2,
+              "minValue": 0
             },
             {
               "$type": "Randomed",
@@ -2504,7 +2557,8 @@
                   "otherTargets": {
                     "$type": "SelectTargetsBySelfGroup",
                     "operation": "XOR",
-                    "value": 6
+                    "value": 6,
+                    "compareType": "Equal"
                   },
                   "key": "_MONSTER_OCEANID_02_BLINKPOS",
                   "born": {
@@ -2514,11 +2568,11 @@
                 },
                 {
                   "$type": "AddGlobalValue",
-                  "ratio": 1.0,
+                  "value": 1,
                   "key": "_MONSTER_OCEANID_02_BLINKPOS_CHECKNUM",
                   "useLimitRange": true,
-                  "maxValue": 1.0,
-                  "minValue": 0.0
+                  "maxValue": 1,
+                  "minValue": 0
                 }
               ],
               "failActions": [
@@ -2527,7 +2581,8 @@
                   "otherTargets": {
                     "$type": "SelectTargetsBySelfGroup",
                     "operation": "XOR",
-                    "value": 4
+                    "value": 4,
+                    "compareType": "Equal"
                   },
                   "key": "_MONSTER_OCEANID_02_BLINKPOS",
                   "born": {
@@ -2540,23 +2595,22 @@
           ]
         },
         "Monster_Oceanid_MustKillSetBlinkPos": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 2.0,
+              "value": 2,
               "key": "_MONSTER_OCEANID_02_SPDODGE",
               "useLimitRange": true,
-              "maxValue": 2.0,
-              "minValue": 0.0
+              "maxValue": 2,
+              "minValue": 0
             },
             {
               "$type": "SetGlobalPos",
               "otherTargets": {
                 "$type": "SelectTargetsBySelfGroup",
                 "operation": "XOR",
-                "value": 5
+                "value": 5,
+                "compareType": "Equal"
               },
               "key": "_MONSTER_OCEANID_02_BLINKPOS",
               "born": {
@@ -2569,79 +2623,36 @@
       }
     }
   },
+  ///////////////////////////////////////////////////////////////
+  ///
+  /// DelayWaterBall Trigger
+  ///
+  ///////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Oceanid_02_BulletTriggerDelayWaterBall",
-      "modifiers": {
-        "Monster_Oceanid_02_DelayTriggerWaterBall": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.399999976158142,
-          "bonusCriticalHurt": 100.0,
-          "onRemoved": [
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "Monster_Oceanid_02_TriggerCreateDelayWaterBall"
-            }
-          ],
-          "onBeingHit": [
-            {
-              "$type": "AddGlobalValue",
-              "ratio": 1.0,
-              "key": "_DELAYWATERBALL_TRIGGERDIE",
-              "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
-            },
-            {
-              "$type": "KillSelf"
-            }
-          ]
-        },
-        "Monster_Oceanid_02_TriggerCreateDelayWaterBall": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 5.0,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "TriggerBullet",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_DELAYWATERBALL_TRIGGERDIE",
-                  "ratio": 0.0
-                }
-              ],
-              "bulletID": 42005017,
-              "born": {
-                "$type": "ConfigBornBySelf",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 1.2999999523162842,
-                  "PJCOKIGCJOK": 0.0
-                }
-              }
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "KillSelf"
-            }
-          ]
-        }
-      },
       "onAdded": [
         {
           "$type": "ApplyModifier",
           "modifierName": "Monster_Oceanid_02_DelayTriggerWaterBall"
         },
+        // {
+        // 	"$type":"FireEffect",
+        // 	"effectPattern":"Eff_Monster_Oceanid_DelayWaterBallCharge",
+        // 	"born":
+        // 	{
+        // 		"$type":"ConfigBornBySelf"
+        // 	}
+        // },
         {
           "$type": "SetSelfAttackTarget",
           "otherTargets": {
             "$type": "SelectTargetsByShape",
             "shapeName": "CircleR50",
+            "centerBasedOn": "Self",
             "campTargetType": "Enemy",
-            "sizeRatio": 1.0
+            "campBasedOn": "Self"
           },
           "predicates": [
             {
@@ -2652,84 +2663,221 @@
         },
         {
           "$type": "AddGlobalValue",
-          "ratio": 0.0,
           "key": "_DELAYWATERBALL_TRIGGERDIE",
+          "value": 0,
           "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
+          "maxValue": 1
         }
-      ]
+      ],
+      "modifiers": {
+        "Monster_Oceanid_02_DelayTriggerWaterBall": {
+          "duration": 1.4,
+          "onRemoved": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "Monster_Oceanid_02_TriggerCreateDelayWaterBall"
+            }
+          ],
+          "onBeingHit": [
+            // {
+            // 	"$type":"FireEffect",
+            // 	"effectPattern":"Eff_Monster_Oceanid_DelayWaterBallDie",
+            // 	"born":
+            // 	{
+            // 		"$type":"ConfigBornBySelf"
+            // 	}
+            // },
+            {
+              "$type": "AddGlobalValue",
+              "key": "_DELAYWATERBALL_TRIGGERDIE",
+              "value": 1,
+              "useLimitRange": true,
+              "maxValue": 1
+            },
+            {
+              "$type": "KillSelf"
+            }
+          ]
+        },
+        "Monster_Oceanid_02_TriggerCreateDelayWaterBall": {
+          "duration": 5,
+          "onAdded": [
+            {
+              "$type": "TriggerBullet",
+              "target": "Self",
+              "bulletID": 42005017,
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "offset": {
+                  "x": 0,
+                  "y": 1.3,
+                  "z": 0
+                }
+              },
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_DELAYWATERBALL_TRIGGERDIE",
+                  "value": 0,
+                  "compareType": "Equal"
+                }
+              ]
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "KillSelf"
+            }
+          ]
+        }
+      }
     }
   },
+  //发射延迟水球
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Oceanid_02_CreateDelayWaterBall",
-      "modifiers": {
-        "Monster_Oceanid_02_CreateDelayWaterBall_Delay": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.399999976158142,
-          "bonusCriticalHurt": 100.0,
-          "onRemoved": [
-            {
-              "$type": "TriggerBullet",
-              "bulletID": 42005017,
-              "born": {
-                "$type": "ConfigBornBySelf",
-                "offset": {
-                  "IBKBLDAJIMA": 2.559999942779541,
-                  "LKHJADIPBFL": 3.1700000762939453,
-                  "PJCOKIGCJOK": 1.6100000143051147
-                }
-              }
-            },
-            {
-              "$type": "TriggerBullet",
-              "bulletID": 42005017,
-              "born": {
-                "$type": "ConfigBornBySelf",
-                "offset": {
-                  "IBKBLDAJIMA": -4.610000133514404,
-                  "LKHJADIPBFL": 5.460000038146973,
-                  "PJCOKIGCJOK": -1.1399999856948853
-                }
-              }
-            }
-          ]
-        }
-      },
       "onAbilityStart": [
         {
           "$type": "SetGlobalPos",
           "key": "_MONSTER_OCEANID_02_DELAYWATERBALL_BORNPOS",
+          "target": "Self",
+          "Born": {
+            "$type": "ConfigBornByTarget"
+          },
           "setTarget": false
         },
         {
           "$type": "ApplyModifier",
           "modifierName": "Monster_Oceanid_02_CreateDelayWaterBall_Delay"
         }
-      ]
+      ],
+      "modifiers": {
+        "Monster_Oceanid_02_CreateDelayWaterBall_Delay": {
+          "duration": 1.4,
+          "onRemoved": [
+            {
+              "$type": "TriggerBullet",
+              "target": "Self",
+              "bulletID": 42005017,
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "offset": {
+                  "x": 2.56,
+                  "y": 3.17,
+                  "z": 1.61
+                }
+              }
+            },
+            {
+              "$type": "TriggerBullet",
+              "target": "Self",
+              "bulletID": 42005017,
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "offset": {
+                  "x": -4.61,
+                  "y": 5.46,
+                  "z": -1.14
+                }
+              }
+            }
+          ]
+        }
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Oceanid_02_CreateDelayWaterBallPower",
+      "onAbilityStart": [
+        {
+          "$type": "SetGlobalPos",
+          "key": "_MONSTER_OCEANID_02_DELAYWATERBALL_BORNPOS",
+          "target": "Self",
+          "Born": {
+            "$type": "ConfigBornByTarget"
+          },
+          "setTarget": false
+        },
+        // {
+        // 	"$type":"FireEffect",
+        // 	"effectPattern":"Eff_Monster_Oceanid_DelayWaterBallBorn",
+        // 	"born":
+        // 	{
+        // 		"$type":"ConfigBornByGlobalValue",
+        // 		"positionKey":"_MONSTER_OCEANID_02_DELAYWATERBALL_BORNPOS",
+        // 		"direction":
+        // 		{
+        // 			"$type":"ConfigDirectionByEntity",
+        // 			"angleOffset":
+        // 			{
+        // 				"x":0,
+        // 				"y":-60,
+        // 				"z":0
+        // 			}
+        // 		}
+        // 	}
+        // },
+        // {
+        // 	"$type":"FireEffect",
+        // 	"effectPattern":"Eff_Monster_Oceanid_DelayWaterBallBorn",
+        // 	"born":
+        // 	{
+        // 		"$type":"ConfigBornByGlobalValue",
+        // 		"positionKey":"_MONSTER_OCEANID_02_DELAYWATERBALL_BORNPOS",
+        // 		"direction":
+        // 		{
+        // 			"$type":"ConfigDirectionByEntity",
+        // 			"angleOffset":
+        // 			{
+        // 				"x":0,
+        // 				"y":0,
+        // 				"z":0
+        // 			}
+        // 		}
+        // 	}
+        // },
+        // {
+        // 	"$type":"FireEffect",
+        // 	"effectPattern":"Eff_Monster_Oceanid_DelayWaterBallBorn",
+        // 	"born":
+        // 	{
+        // 		"$type":"ConfigBornByGlobalValue",
+        // 		"positionKey":"_MONSTER_OCEANID_02_DELAYWATERBALL_BORNPOS",
+        // 		"direction":
+        // 		{
+        // 			"$type":"ConfigDirectionByEntity",
+        // 			"angleOffset":
+        // 			{
+        // 				"x":0,
+        // 				"y":60,
+        // 				"z":0
+        // 			}
+        // 		}
+        // 	}
+        // },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Monster_Oceanid_02_CreateDelayWaterBallPower_Delay"
+        }
+      ],
       "modifiers": {
         "Monster_Oceanid_02_CreateDelayWaterBallPower_Delay": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.2999999523162842,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1.3,
           "onRemoved": [
             {
               "$type": "TriggerBullet",
+              "target": "Self",
               "bulletID": 42005017,
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 2.559999942779541,
-                  "LKHJADIPBFL": 3.1700000762939453,
-                  "PJCOKIGCJOK": 1.6100000143051147
+                  "x": 2.56,
+                  "y": 3.17,
+                  "z": 1.61
                 }
               }
             },
@@ -2740,19 +2888,18 @@
           ]
         },
         "Monster_Oceanid_02_CreateDelayWaterBallPower_Delay2": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.1,
           "onRemoved": [
             {
               "$type": "TriggerBullet",
+              "target": "Self",
               "bulletID": 42005017,
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.36000001430511475,
-                  "LKHJADIPBFL": 6.920000076293945,
-                  "PJCOKIGCJOK": 3.6700000762939453
+                  "x": 0.36,
+                  "y": 6.92,
+                  "z": 3.67
                 }
               }
             },
@@ -2763,19 +2910,18 @@
           ]
         },
         "Monster_Oceanid_02_CreateDelayWaterBallPower_Delay3": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.05000000074505806,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.05,
           "onRemoved": [
             {
               "$type": "TriggerBullet",
+              "target": "Self",
               "bulletID": 42005017,
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": -0.9200000166893005,
-                  "LKHJADIPBFL": 6.659999847412109,
-                  "PJCOKIGCJOK": -1.3200000524520874
+                  "x": -0.92,
+                  "y": 6.66,
+                  "z": -1.32
                 }
               }
             },
@@ -2786,38 +2932,31 @@
           ]
         },
         "Monster_Oceanid_02_CreateDelayWaterBallPower_Delay4": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.1,
           "onRemoved": [
             {
               "$type": "TriggerBullet",
+              "target": "Self",
               "bulletID": 42005017,
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": -4.610000133514404,
-                  "LKHJADIPBFL": 5.460000038146973,
-                  "PJCOKIGCJOK": -1.1399999856948853
+                  "x": -4.61,
+                  "y": 5.46,
+                  "z": -1.14
                 }
               }
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "SetGlobalPos",
-          "key": "_MONSTER_OCEANID_02_DELAYWATERBALL_BORNPOS",
-          "setTarget": false
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Monster_Oceanid_02_CreateDelayWaterBallPower_Delay"
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Create TraceWater Ball
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -2829,9 +2968,9 @@
           "born": {
             "$type": "ConfigBornBySelf",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 2.0,
-              "PJCOKIGCJOK": 2.0
+              "x": 0,
+              "y": 2,
+              "z": 2
             }
           }
         }
@@ -2842,11 +2981,15 @@
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Oceanid_02_CreateTraceWaterBallPower",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Monster_Oceanid_02_CreateTraceWaterBallDelayTwo"
+        }
+      ],
       "modifiers": {
         "Monster_Oceanid_02_CreateTraceWaterBallDelayTwo": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1,
           "onAdded": [
             {
               "$type": "TriggerBullet",
@@ -2854,21 +2997,22 @@
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 2.0,
-                  "PJCOKIGCJOK": 2.0
+                  "x": 0,
+                  "y": 2,
+                  "z": 2
                 }
               }
             }
           ],
           "onRemoved": [
+            //挑战活动2级词缀
             {
               "$type": "Predicated",
               "targetPredicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_MONSTERAFFIX_OCEANID_02_SKILLUP",
-                  "ratio": 2.0,
+                  "value": 2,
                   "compareType": "MoreThanAndEqual"
                 }
               ],
@@ -2879,9 +3023,9 @@
                   "born": {
                     "$type": "ConfigBornBySelf",
                     "offset": {
-                      "IBKBLDAJIMA": 3.0,
-                      "LKHJADIPBFL": 2.0,
-                      "PJCOKIGCJOK": 2.0
+                      "x": 3,
+                      "y": 2,
+                      "z": 2
                     }
                   }
                 },
@@ -2891,9 +3035,9 @@
                   "born": {
                     "$type": "ConfigBornBySelf",
                     "offset": {
-                      "IBKBLDAJIMA": -3.0,
-                      "LKHJADIPBFL": 2.0,
-                      "PJCOKIGCJOK": 2.0
+                      "x": -3,
+                      "y": 2,
+                      "z": 2
                     }
                   }
                 }
@@ -2905,9 +3049,9 @@
                   "born": {
                     "$type": "ConfigBornBySelf",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 2.0,
-                      "PJCOKIGCJOK": 2.0
+                      "x": 0,
+                      "y": 2,
+                      "z": 2
                     }
                   }
                 }
@@ -2915,44 +3059,85 @@
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Monster_Oceanid_02_CreateTraceWaterBallDelayTwo"
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Oceanid MustKill Attack必杀伤害
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Oceanid_02_MustKillHandler",
+      "onAdded": [
+        //延迟一些设置4个角落点，防止点创建延迟
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Monster_Oceanid_02_MustKillSetPosDelay"
+        },
+        //必杀场中间特效位置
+        {
+          "$type": "SetGlobalPos",
+          "otherTargets": {
+            "$type": "SelectTargetsBySelfGroup",
+            "operation": "XOR",
+            "value": 5,
+            "compareType": "Equal"
+          },
+          "key": "_OCEANID_MUSTKILL_EFFECTPOS",
+          "born": {
+            "$type": "ConfigBornByTarget"
+          },
+          "setTarget": false
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Monster_Oceanid_02_MustKillHandler"
+        }
+      ],
+      "onKill": [
+        {
+          "$type": "AddGlobalValue",
+          "otherTargets": {
+            "$type": "SelectTargetsByChildren",
+            "configID": 42005019
+          },
+          "key": "_PLATFORM_DAMAGE_DIE",
+          "useLimitRange": true,
+          "value": 1,
+          "maxValue": 1
+        }
+      ],
       "abilityMixins": [
         {
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "MustKillAtk_AS",
-          "modifierName": "Monster_Oceanid_02_MustKillDamageHandler",
-          "normalizeStart": 0.1599999964237213
+          "normalizeStart": 0.16,
+          "normalizeEnd": 1,
+          "modifierName": "Monster_Oceanid_02_MustKillDamageHandler"
         },
         {
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "MustKillAtk_BS",
-          "modifierName": "Monster_Oceanid_02_MustKillEffectHandler",
-          "normalizeStart": 0.05000000074505806,
-          "normalizeEnd": 0.800000011920929
+          "normalizeStart": 0.05,
+          "normalizeEnd": 0.8,
+          "modifierName": "Monster_Oceanid_02_MustKillEffectHandler"
         },
         {
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "MustKillAtk_AS",
+          "normalizeStart": 0,
+          "normalizeEnd": 1,
           "modifierName": "Monster_Oceanid_02_MustKillDamageEffectHandler"
         }
       ],
       "modifiers": {
         "Monster_Oceanid_02_MustKillHandler": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 5.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 5,
           "onAdded": [
             {
               "$type": "ApplyModifier",
@@ -2968,37 +3153,38 @@
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_MONSTERAFFIX_OCEANID_02_MUSTKILL_ELEVATOR",
-                  "ratio": 1.0
+                  "value": 1,
+                  "compareType": "Equal"
                 }
               ],
               "successActions": [
                 {
                   "$type": "Randomed",
-                  "chance": 0.30000001192092896,
+                  "chance": 0.3,
                   "successActions": [
                     {
                       "$type": "CreateGadget",
+                      "gadgetID": 42005014,
+                      "campID": 1001,
+                      "campTargetType": "Enemy",
+                      "byServer": false,
                       "lifeByOwnerIsAlive": true,
                       "born": {
                         "$type": "ConfigBornByGlobalValue",
-                        "positionKey": "_OCEANID_MUSTKILL_POSONE",
-                        "directionKey": ""
-                      },
-                      "gadgetID": 42005014,
-                      "campID": 1001,
-                      "campTargetType": "Enemy"
+                        "positionKey": "_OCEANID_MUSTKILL_POSONE"
+                      }
                     },
                     {
                       "$type": "CreateGadget",
+                      "gadgetID": 42005014,
+                      "campID": 1001,
+                      "campTargetType": "Enemy",
+                      "byServer": false,
                       "lifeByOwnerIsAlive": true,
                       "born": {
                         "$type": "ConfigBornByGlobalValue",
-                        "positionKey": "_OCEANID_MUSTKILL_POSTHREE",
-                        "directionKey": ""
-                      },
-                      "gadgetID": 42005014,
-                      "campID": 1001,
-                      "campTargetType": "Enemy"
+                        "positionKey": "_OCEANID_MUSTKILL_POSTHREE"
+                      }
                     }
                   ],
                   "failActions": [
@@ -3008,53 +3194,53 @@
                       "successActions": [
                         {
                           "$type": "CreateGadget",
+                          "gadgetID": 42005014,
+                          "campID": 1001,
+                          "campTargetType": "Enemy",
+                          "byServer": false,
                           "lifeByOwnerIsAlive": true,
                           "born": {
                             "$type": "ConfigBornByGlobalValue",
-                            "positionKey": "_OCEANID_MUSTKILL_POSTWO",
-                            "directionKey": ""
-                          },
-                          "gadgetID": 42005014,
-                          "campID": 1001,
-                          "campTargetType": "Enemy"
+                            "positionKey": "_OCEANID_MUSTKILL_POSTWO"
+                          }
                         },
                         {
                           "$type": "CreateGadget",
+                          "gadgetID": 42005014,
+                          "campID": 1001,
+                          "campTargetType": "Enemy",
+                          "byServer": false,
                           "lifeByOwnerIsAlive": true,
                           "born": {
                             "$type": "ConfigBornByGlobalValue",
-                            "positionKey": "_OCEANID_MUSTKILL_POSFOUR",
-                            "directionKey": ""
-                          },
-                          "gadgetID": 42005014,
-                          "campID": 1001,
-                          "campTargetType": "Enemy"
+                            "positionKey": "_OCEANID_MUSTKILL_POSFOUR"
+                          }
                         }
                       ],
                       "failActions": [
                         {
                           "$type": "CreateGadget",
+                          "gadgetID": 42005014,
+                          "campID": 1001,
+                          "campTargetType": "Enemy",
+                          "byServer": false,
                           "lifeByOwnerIsAlive": true,
                           "born": {
                             "$type": "ConfigBornByGlobalValue",
-                            "positionKey": "_OCEANID_MUSTKILL_POSONE",
-                            "directionKey": ""
-                          },
-                          "gadgetID": 42005014,
-                          "campID": 1001,
-                          "campTargetType": "Enemy"
+                            "positionKey": "_OCEANID_MUSTKILL_POSONE"
+                          }
                         },
                         {
                           "$type": "CreateGadget",
+                          "gadgetID": 42005014,
+                          "campID": 1001,
+                          "campTargetType": "Enemy",
+                          "byServer": false,
                           "lifeByOwnerIsAlive": true,
                           "born": {
                             "$type": "ConfigBornByGlobalValue",
-                            "positionKey": "_OCEANID_MUSTKILL_POSFOUR",
-                            "directionKey": ""
-                          },
-                          "gadgetID": 42005014,
-                          "campID": 1001,
-                          "campTargetType": "Enemy"
+                            "positionKey": "_OCEANID_MUSTKILL_POSFOUR"
+                          }
                         }
                       ]
                     }
@@ -3064,51 +3250,51 @@
               "failActions": [
                 {
                   "$type": "CreateGadget",
+                  "gadgetID": 42005014,
+                  "campID": 1001,
+                  "campTargetType": "Enemy",
+                  "byServer": false,
                   "lifeByOwnerIsAlive": true,
                   "born": {
                     "$type": "ConfigBornByGlobalValue",
-                    "positionKey": "_OCEANID_MUSTKILL_POSONE",
-                    "directionKey": ""
-                  },
-                  "gadgetID": 42005014,
-                  "campID": 1001,
-                  "campTargetType": "Enemy"
+                    "positionKey": "_OCEANID_MUSTKILL_POSONE"
+                  }
                 },
                 {
                   "$type": "CreateGadget",
+                  "gadgetID": 42005014,
+                  "campID": 1001,
+                  "campTargetType": "Enemy",
+                  "byServer": false,
                   "lifeByOwnerIsAlive": true,
                   "born": {
                     "$type": "ConfigBornByGlobalValue",
-                    "positionKey": "_OCEANID_MUSTKILL_POSTWO",
-                    "directionKey": ""
-                  },
-                  "gadgetID": 42005014,
-                  "campID": 1001,
-                  "campTargetType": "Enemy"
+                    "positionKey": "_OCEANID_MUSTKILL_POSTWO"
+                  }
                 },
                 {
                   "$type": "CreateGadget",
+                  "gadgetID": 42005014,
+                  "campID": 1001,
+                  "campTargetType": "Enemy",
+                  "byServer": false,
                   "lifeByOwnerIsAlive": true,
                   "born": {
                     "$type": "ConfigBornByGlobalValue",
-                    "positionKey": "_OCEANID_MUSTKILL_POSTHREE",
-                    "directionKey": ""
-                  },
-                  "gadgetID": 42005014,
-                  "campID": 1001,
-                  "campTargetType": "Enemy"
+                    "positionKey": "_OCEANID_MUSTKILL_POSTHREE"
+                  }
                 },
                 {
                   "$type": "CreateGadget",
+                  "gadgetID": 42005014,
+                  "campID": 1001,
+                  "campTargetType": "Enemy",
+                  "byServer": false,
                   "lifeByOwnerIsAlive": true,
                   "born": {
                     "$type": "ConfigBornByGlobalValue",
-                    "positionKey": "_OCEANID_MUSTKILL_POSFOUR",
-                    "directionKey": ""
-                  },
-                  "gadgetID": 42005014,
-                  "campID": 1001,
-                  "campTargetType": "Enemy"
+                    "positionKey": "_OCEANID_MUSTKILL_POSFOUR"
+                  }
                 }
               ]
             },
@@ -3119,8 +3305,6 @@
           ]
         },
         "Monster_Oceanid_02_MustKillDamageHandler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
@@ -3135,9 +3319,7 @@
           ]
         },
         "Monster_Oceanid_02_MustKillDamage": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.100000023841858,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1.1,
           "thinkInterval": 0.5,
           "onThinkInterval": [
             {
@@ -3145,40 +3327,38 @@
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR60H3",
+                "centerBasedOn": "Self",
                 "campTargetType": "Enemy",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
               "attackInfo": {
                 "attackTag": "Oceanid_02_MustKill",
-                "attenuationTag": "",
-                "attenuationGroup": "default",
                 "attackProperty": {
-                  "HBIOLEEGHPD": 1.3329999446868896,
-                  "CCNJGLPMIEP": 0.0,
-                  "elementType": "Water",
-                  "bonusCriticalHurt": 100.0,
+                  "damagePercentage": 1.333,
                   "strikeType": "Blunt",
-                  "enBreak": 101.0
+                  "elementType": "Water",
+                  "enBreak": 101,
+                  "elementDurability": 100
                 },
                 "hitPattern": {
                   "onHitEffectName": "default",
-                  "hitImpulseType": "LV4"
+                  "hitImpulseType": "LV4",
+                  "retreatType": "ByAttacker"
                 }
               }
             }
           ]
         },
         "Monster_Oceanid_02_MustKillSetPosDelay": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1,
           "onRemoved": [
             {
               "$type": "SetGlobalPos",
               "otherTargets": {
                 "$type": "SelectTargetsBySelfGroup",
                 "operation": "XOR",
-                "value": 1
+                "value": 1,
+                "compareType": "Equal"
               },
               "key": "_OCEANID_MUSTKILL_POSONE",
               "born": {
@@ -3191,7 +3371,8 @@
               "otherTargets": {
                 "$type": "SelectTargetsBySelfGroup",
                 "operation": "XOR",
-                "value": 3
+                "value": 3,
+                "compareType": "Equal"
               },
               "key": "_OCEANID_MUSTKILL_POSTWO",
               "born": {
@@ -3204,7 +3385,8 @@
               "otherTargets": {
                 "$type": "SelectTargetsBySelfGroup",
                 "operation": "XOR",
-                "value": 7
+                "value": 7,
+                "compareType": "Equal"
               },
               "key": "_OCEANID_MUSTKILL_POSTHREE",
               "born": {
@@ -3217,7 +3399,8 @@
               "otherTargets": {
                 "$type": "SelectTargetsBySelfGroup",
                 "operation": "XOR",
-                "value": 9
+                "value": 9,
+                "compareType": "Equal"
               },
               "key": "_OCEANID_MUSTKILL_POSFOUR",
               "born": {
@@ -3228,8 +3411,6 @@
           ]
         },
         "Monster_Oceanid_02_MustKillEffectHandler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
@@ -3238,35 +3419,27 @@
           ]
         },
         "Monster_Oceanid_02_MustKillEffect": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 6.699999809265137,
-          "bonusCriticalHurt": 100.0,
+          "duration": 6.7,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_MustKillAtkCoreLoop",
+              "effectPattern": "Eff_Monster_Oceanid_MustKillAtkCoreLoop",
               "born": {
                 "$type": "ConfigBornByGlobalValue",
-                "positionKey": "_OCEANID_MUSTKILL_EFFECTPOS",
-                "directionKey": ""
-              },
-              "EBHJMLOKDGB": -1.0
+                "positionKey": "_OCEANID_MUSTKILL_EFFECTPOS"
+              }
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_MustKillAtkCoreEarthLoop",
+              "effectPattern": "Eff_Monster_Oceanid_MustKillAtkCoreEarthLoop",
               "born": {
                 "$type": "ConfigBornByGlobalValue",
-                "positionKey": "_OCEANID_MUSTKILL_EFFECTPOS",
-                "directionKey": ""
-              },
-              "EBHJMLOKDGB": -1.0
+                "positionKey": "_OCEANID_MUSTKILL_EFFECTPOS"
+              }
             }
           ]
         },
         "Monster_Oceanid_02_RemovePlatformDamage": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "KillSelf"
@@ -3274,26 +3447,27 @@
           ]
         },
         "Monster_Oceanid_02_MustKillWatcher": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 3.0,
-          "bonusCriticalHurt": 100.0
+          "duration": 3,
+          "onAdded": [
+            // {
+            // 	"$type":"ServerLuaCall",
+            // 	"luaCallType":"FromGroup",
+            // 	"CallParamList":[133102112],
+            // 	"funcName":"SLC_Endure_Boss_EX_Skill",
+            // }
+          ]
         },
         "Monster_Oceanid_MustKillEffectController": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.3,
           "onRemoved": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "MustKillAttack",
-              "attachPoint": "",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_MustKillAtkCoreLoop"
+              "effectPattern": "Eff_Monster_Oceanid_MustKillAtkCoreLoop"
             }
           ]
         },
         "Monster_Oceanid_02_MustKillDamageEffectHandler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
@@ -3306,26 +3480,20 @@
           ]
         },
         "Monster_Oceanid_MustKillDamageEffect": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.800000011920929,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.8,
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_MustKillAtkCoreAS",
+              "effectPattern": "Eff_Monster_Oceanid_MustKillAtkCoreAS",
               "born": {
                 "$type": "ConfigBornByGlobalValue",
-                "positionKey": "_OCEANID_MUSTKILL_EFFECTPOS",
-                "directionKey": ""
-              },
-              "EBHJMLOKDGB": -1.0
+                "positionKey": "_OCEANID_MUSTKILL_EFFECTPOS"
+              }
             }
           ]
         },
         "Monster_Oceanid_02_MustKillDamageDuring": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 2.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 2.5,
           "onAdded": [
             {
               "$type": "ApplyModifier",
@@ -3354,58 +3522,32 @@
                 },
                 {
                   "$type": "ServerMonsterLog",
+                  "target": "Self",
                   "paramList": [3, 0, 1]
                 }
               ]
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Monster_Oceanid_02_MustKillSetPosDelay"
-        },
-        {
-          "$type": "SetGlobalPos",
-          "otherTargets": {
-            "$type": "SelectTargetsBySelfGroup",
-            "operation": "XOR",
-            "value": 5
-          },
-          "key": "_OCEANID_MUSTKILL_EFFECTPOS",
-          "born": {
-            "$type": "ConfigBornByTarget"
-          },
-          "setTarget": false
-        }
-      ],
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Monster_Oceanid_02_MustKillHandler"
-        }
-      ],
-      "onKill": [
-        {
-          "$type": "AddGlobalValue",
-          "otherTargets": {
-            "$type": "SelectTargetsByChildren",
-            "configID": 42005019
-          },
-          "ratio": 1.0,
-          "key": "_PLATFORM_DAMAGE_DIE",
-          "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Platform damage平台伤害
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Oceanid_02_CreatePlatFormAOE",
+      "onAdded": [
+        {
+          "$type": "AddGlobalValue",
+          "key": "_MONSTERAFFIX_OCEANID_02_PLATFORMDAMAGE_SUM_UP",
+          "value": 0
+        }
+      ],
       "abilityMixins": [
         {
           "$type": "AttachToStateIDMixin",
@@ -3418,44 +3560,19 @@
           "modifierName": "Monster_Oceanid_02_CreatePlatFormAOE_Effect"
         }
       ],
-      "modifiers": {
-        "Monster_Oceanid_02_CreatePlatFormAOE_Effect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_WalkLoop_Trail_Bone_L_Finger_02",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_WalkLoop_Trail_Bone_R_Finger_02",
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        }
-      },
-      "onAdded": [
-        {
-          "$type": "AddGlobalValue",
-          "ratio": 0.0,
-          "key": "_MONSTERAFFIX_OCEANID_02_PLATFORMDAMAGE_SUM_UP",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        }
-      ],
       "onAbilityStart": [
         {
           "$type": "Predicated",
           "otherTargets": {
             "$type": "SelectTargetsBySelfGroup",
             "operation": "XOR",
+            "value": 0,
             "compareType": "Greater"
           },
           "targetPredicates": [
             {
               "$type": "ByTargetGadgetState",
+              "target": "Target",
               "gadgetState": 201
             }
           ],
@@ -3478,9 +3595,9 @@
                 "direction": {
                   "$type": "ConfigDirectionByEntity",
                   "angleOffset": {
-                    "IBKBLDAJIMA": 0.0,
-                    "LKHJADIPBFL": 60.0,
-                    "PJCOKIGCJOK": 0.0
+                    "x": 0,
+                    "y": 60,
+                    "z": 0
                   }
                 }
               },
@@ -3488,30 +3605,62 @@
             },
             {
               "$type": "CreateGadget",
+              "target": "Self",
+              "gadgetID": 42005019,
+              "campID": 4001,
+              "byServer": true,
+              "sightGroupWithOwner": true,
               "born": {
                 "$type": "ConfigBornByGlobalValue",
                 "positionKey": "_MONSTER_OCEANID_02_PLATFORMDAMAGEPOS",
                 "directionKey": "_MONSTER_OCEANID_02_PLATFORMDAMAGEDIR"
-              },
-              "sightGroupWithOwner": true,
-              "gadgetID": 42005019,
-              "campID": 4001,
-              "byServer": true
+              }
             }
           ]
         }
-      ]
+      ],
+      "modifiers": {
+        "Monster_Oceanid_02_CreatePlatFormAOE_Effect": {
+          "onAdded": [
+            // {
+            // 	"$type": "AttachEffect",
+            // 	"effectPattern": "Eff_Monster_Oceanid_WalkLoop",
+            // },
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Oceanid_WalkLoop_Trail_Bone_L_Finger_02"
+            },
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Oceanid_WalkLoop_Trail_Bone_R_Finger_02"
+            }
+          ]
+        }
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Oceanid_02_PlatformDamage",
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Monster_Oceanid_02_PlatformDamage"
+        },
+        {
+          "$type": "AddGlobalValue",
+          "key": "_PLATFORM_DAMAGE_DIE",
+          "value": -2,
+          "useLimitRange": true,
+          "maxValue": 1
+        }
+      ],
       "abilityMixins": [
+        //对抗亡语，给gadget上value，监控销毁
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_PLATFORM_DAMAGE_DIE",
-          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [-0.5, 0.5, 1.5],
           "modifierNameSteps": [
             "Oceanid_PlatformDamageDieEmpty",
@@ -3521,22 +3670,28 @@
       ],
       "modifiers": {
         "Monster_Oceanid_02_PlatformDamage": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 30.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 30,
           "thinkInterval": 0.5,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_PlatformDamageLoop",
+              "effectPattern": "Eff_Monster_Oceanid_PlatformDamageLoop",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
                 "attachPointName": "RootNode"
-              },
-              "EBHJMLOKDGB": -1.0
+              }
             }
           ],
           "onRemoved": [
+            // {
+            // 	"$type":"FireEffect",
+            // 	"effectPattern":"Eff_Monster_Oceanid_PlatformDamageAS",
+            // 	"born":
+            // 	{
+            // 		"$type":"ConfigBornByAttachPoint",
+            // 		"attachPointName":"RootNode",
+            // 	}
+            // },
             {
               "$type": "KillSelf"
             }
@@ -3544,52 +3699,44 @@
           "onThinkInterval": [
             {
               "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
+                  "radius": 7.5,
+                  "height": 2.5,
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
+                    "attachPointName": "RootNode",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": -0.20000000298023224,
-                      "PJCOKIGCJOK": 0.0
-                    },
-                    "attachPointName": "RootNode"
-                  },
-                  "height": 2.5,
-                  "DCMPFCIBIPA": 7.5
+                      "x": 0,
+                      "y": -0.2,
+                      "z": 0
+                    }
+                  }
                 },
                 "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
+                  "canBeModifiedBy": "OriginOwner",
                   "attackProperty": {
-                    "HBIOLEEGHPD": 0.13300000131130219,
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Water",
-                    "bonusCriticalHurt": 100.0,
+                    "damagePercentage": 0.133,
                     "strikeType": "Blunt",
-                    "enBreak": 0.0
+                    "elementType": "Water",
+                    "enBreak": 0,
+                    "elementDurability": 100
                   },
                   "hitPattern": {
                     "onHitEffectName": "default",
-                    "hitImpulseType": "LV0"
-                  },
-                  "canBeModifiedBy": "OriginOwner"
+                    "hitImpulseType": "LV0",
+                    "retreatType": "ByAttacker"
+                  }
                 }
-              },
-              "targetType": "Enemy"
+              }
             }
           ]
         },
-        "Oceanid_PlatformDamageDieEmpty": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
+        "Oceanid_PlatformDamageDieEmpty": {},
         "Oceanid_PlatformDamageDie": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "RemoveModifier",
@@ -3600,33 +3747,43 @@
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Monster_Oceanid_02_PlatformDamage"
-        },
-        {
-          "$type": "AddGlobalValue",
-          "ratio": -2.0,
-          "key": "_PLATFORM_DAMAGE_DIE",
-          "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Oceanid Change Pose
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Oceanid_02_ChangePoses",
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Monster_Oceanid_02_Pose1Limbo"
+        },
+        {
+          "$type": "AddGlobalValue",
+          "key": "_SERVERLUACALL_TIMES",
+          "value": 0,
+          "useLimitRange": true,
+          "maxValue": 99
+        },
+        {
+          "$type": "AddGlobalValue",
+          "key": "_SERVERLUACALL_SUMMON_TIMES",
+          "value": -3,
+          "useLimitRange": true,
+          "maxValue": 2
+        }
+      ],
       "abilityMixins": [
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "SGV_Oceanid_State",
-          "defaultGlobalValueOnCreate": 0.0,
-          "valueSteps": [-1.0, 0.5, 1.5, 2.5, 3.5],
+          "valueSteps": [-1, 0.5, 1.5, 2.5, 3.5],
           "modifierNameSteps": [
             "Oceanid_02_ServerStateEmpty",
             "Oceanid_02_ServerStateOne",
@@ -3637,8 +3794,7 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "SGV_Oceanid_HP",
-          "defaultGlobalValueOnCreate": 0.0,
-          "valueSteps": [-1.0, 39.0, 49.0, 59.0, 69.0, 79.0, 81.0],
+          "valueSteps": [-1, 39, 49, 59, 69, 79, 81],
           "modifierNameSteps": [
             "Oceanid_02_StateTwoHP0",
             "Oceanid_02_StateTwoHP1",
@@ -3650,7 +3806,7 @@
         },
         {
           "$type": "AttachModifierToHPPercentMixin",
-          "valueSteps": [0.8100000023841858],
+          "valueSteps": [0.81],
           "modifierNameSteps": [
             "Oceanid_02_StateOneEmpty",
             "Oceanid_02_StateOneExit"
@@ -3659,8 +3815,9 @@
         {
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "Summon_Standby",
-          "modifierName": "Monster_Oceanid_02_StateStartSummon",
-          "normalizeStart": 0.5
+          "normalizeStart": 0.5,
+          "normalizeEnd": 1,
+          "modifierName": "Monster_Oceanid_02_StateStartSummon"
         },
         {
           "$type": "AttachToPoseIDMixin",
@@ -3670,55 +3827,40 @@
       ],
       "modifiers": {
         "Monster_Oceanid_02_Pose1Limbo": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 120.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 120,
+          "state": "Limbo",
           "properties": {
-            "Actor_HpThresholdRatio": 0.800000011920929
-          },
-          "state": "Limbo"
+            "Actor_HpThresholdRatio": 0.8
+          }
         },
-        "Oceanid_02_StateOneEmpty": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
+        "Oceanid_02_StateOneEmpty": {},
         "Oceanid_02_StateOneExit": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ServerLuaCall",
+              "luaCallType": "FromGroup",
+              "CallParamList": [133102112],
+              "funcName": "SLC_Stage_To_2",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_SERVERLUACALL_TIMES",
-                  "ratio": 0.0
+                  "value": 0,
+                  "compareType": "Equal"
                 }
-              ],
-              "luaCallType": "FromGroup",
-              "CallParamList": [133102112],
-              "funcName": "SLC_Stage_To_2",
-              "ODAOGCJFIHC": 0.0,
-              "GCCFLBLEHDB": 0.0,
-              "DJODIFOBEJG": 0.0
+              ]
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
               "key": "_SERVERLUACALL_TIMES",
+              "value": 1,
               "useLimitRange": true,
-              "maxValue": 99.0,
-              "minValue": 0.0
+              "maxValue": 99
             }
           ]
         },
-        "Oceanid_02_ServerStateEmpty": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
+        "Oceanid_02_ServerStateEmpty": {},
         "Oceanid_02_ServerStateOne": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ServerMonsterLog",
@@ -3727,17 +3869,14 @@
           ]
         },
         "Oceanid_02_ServerStateTwo": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "LockHP",
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
               "key": "_SERVERLUACALL_TIMES",
+              "value": 1,
               "useLimitRange": true,
-              "maxValue": 99.0,
-              "minValue": 0.0
+              "maxValue": 99
             },
             {
               "$type": "SetPoseInt",
@@ -3759,8 +3898,6 @@
           ]
         },
         "Oceanid_02_ServerStateThree": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetPoseInt",
@@ -3781,145 +3918,98 @@
             }
           ]
         },
-        "Oceanid_02_StateTwoHP0": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
+        "Oceanid_02_StateTwoHP0": {},
         "Oceanid_02_StateTwoHP1": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "LoseHP",
-              "amountByCasterMaxHPRatio": 0.05000000074505806
+              "target": "Self",
+              "amountByTargetMaxHPRatio": 0.05,
+              "lethal": true
             }
           ]
         },
         "Oceanid_02_StateTwoHP2": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "LoseHP",
-              "amountByCasterMaxHPRatio": 0.05000000074505806
+              "target": "Self",
+              "amountByTargetMaxHPRatio": 0.05,
+              "lethal": true
             }
           ]
         },
         "Oceanid_02_StateTwoHP3": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "LoseHP",
-              "amountByCasterMaxHPRatio": 0.05000000074505806
+              "target": "Self",
+              "amountByTargetMaxHPRatio": 0.05,
+              "lethal": true
             }
           ]
         },
         "Oceanid_02_StateTwoHP4": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "LoseHP",
-              "amountByCasterMaxHPRatio": 0.05000000074505806
+              "target": "Self",
+              "amountByTargetMaxHPRatio": 0.05,
+              "lethal": true
             }
           ]
         },
-        "Oceanid_02_StateTwoHP5": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
+        "Oceanid_02_StateTwoHP5": {},
         "Monster_Oceanid_02_StateStartSummon": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ServerLuaCall",
+              "luaCallType": "FromGroup",
+              "CallParamList": [133102112],
+              "funcName": "SLC_Summon_Start",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_SERVERLUACALL_SUMMON_TIMES",
-                  "ratio": 0.0
+                  "value": 0,
+                  "compareType": "Equal"
                 }
-              ],
-              "luaCallType": "FromGroup",
-              "CallParamList": [133102112],
-              "funcName": "SLC_Summon_Start",
-              "ODAOGCJFIHC": 0.0,
-              "GCCFLBLEHDB": 0.0,
-              "DJODIFOBEJG": 0.0
+              ]
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
               "key": "_SERVERLUACALL_SUMMON_TIMES",
+              "value": 1,
               "useLimitRange": true,
-              "maxValue": 2.0,
-              "minValue": 0.0
+              "maxValue": 2
             }
           ]
         },
         "Monster_Oceanid_02_Pose2Denylockon": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "DenyLockOn"
         },
         "Monster_Oceanid_02_Escape": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ServerLuaCall",
               "luaCallType": "FromGroup",
               "CallParamList": [133102112],
-              "funcName": "SLC_Boss_Escape",
-              "ODAOGCJFIHC": 0.0,
-              "GCCFLBLEHDB": 0.0,
-              "DJODIFOBEJG": 0.0
+              "funcName": "SLC_Boss_Escape"
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Monster_Oceanid_02_Pose1Limbo"
-        },
-        {
-          "$type": "AddGlobalValue",
-          "ratio": 0.0,
-          "key": "_SERVERLUACALL_TIMES",
-          "useLimitRange": true,
-          "maxValue": 99.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "AddGlobalValue",
-          "ratio": -3.0,
-          "key": "_SERVERLUACALL_SUMMON_TIMES",
-          "useLimitRange": true,
-          "maxValue": 2.0,
-          "minValue": 0.0
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Oceanid Element
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Oceanid_02_Element",
-      "modifiers": {
-        "UNIQUE_ElementState": {
-          "modifierName": "",
-          "isUnique": true,
-          "elementType": "Water",
-          "bonusCriticalHurt": 100.0,
-          "isElementDurabilityMutable": false,
-          "properties": {
-            "Actor_EndureDelta": 0.0
-          }
-        }
-      },
       "onAdded": [
         {
           "$type": "ApplyModifier",
@@ -3936,21 +4026,30 @@
         },
         {
           "$type": "AddGlobalValue",
-          "ratio": 0.0,
           "key": "_MONSTERAFFIX_OCEANID_02_ANIMALSELECT",
+          "value": 0,
           "useLimitRange": true,
-          "maxValue": 3.0,
-          "minValue": 0.0
+          "maxValue": 3
         },
         {
           "$type": "AddGlobalValue",
-          "ratio": 0.0,
           "key": "_MONSTERAFFIX_OCEANID_02_ANIMALHEAL_UP",
+          "value": 0,
           "useLimitRange": true,
-          "maxValue": 3.0,
-          "minValue": 0.0
+          "maxValue": 3
         }
-      ]
+      ],
+      "modifiers": {
+        "UNIQUE_ElementState": {
+          "isUnique": true,
+          "elementType": "Water",
+          "elementDurability": 100,
+          "isElementDurabilityMutable": false,
+          "properties": {
+            "Actor_EndureDelta": 0
+          }
+        }
+      }
     }
   }
 ]

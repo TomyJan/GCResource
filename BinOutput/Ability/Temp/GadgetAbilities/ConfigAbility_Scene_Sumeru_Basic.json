@@ -1,50 +1,23 @@
 [
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  // Create By Mazijun
+  //	该文件收纳须弥物件的通用ability
+  //
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  //	注目用通用Ability，搭配70310226食用//CameraSceneLookGroup_Bellwort
+  //
+  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "EnterSceneLook_TeamAbility",
-      "modifiers": {
-        "DelayEnter": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
-          "onRemoved": [
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "UNIQUE_CameraSceneLookGroup_Bellwort"
-            }
-          ]
-        },
-        "UNIQUE_CameraSceneLookGroup_Bellwort": {
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "modifierMixins": [
-            {
-              "$type": "EnterSceneLookMixin",
-              "CEIILBJKONF": "SceneLook",
-              "OILAFEINHDK": {
-                "x": 1.690000057220459,
-                "y": 0.41999998688697815,
-                "z": -2.5
-              },
-              "fov": 50.0,
-              "PINJMEPLALH": 0.04500000178813934,
-              "CPJOOAMJHLC": 0.07999999821186066,
-              "LCEJOANPHFL": 0.18000000715255737,
-              "CPCGOIJGDHB": 0.3199999928474426
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "AvatarExitFocus",
-              "keepRotation": true
-            }
-          ]
-        }
-      },
+      "isDynamicAbility": true,
       "onAdded": [
         {
+          //改变发生反应时元素消耗的比例
           "$type": "ApplyModifier",
           "modifierName": "DelayEnter"
         }
@@ -55,15 +28,56 @@
           "modifierName": "UNIQUE_CameraSceneLookGroup_Bellwort"
         }
       ],
-      "isDynamicAbility": true
+      "modifiers": {
+        "DelayEnter": {
+          "duration": 0.1,
+          "onRemoved": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "UNIQUE_CameraSceneLookGroup_Bellwort"
+            }
+          ]
+        },
+        "UNIQUE_CameraSceneLookGroup_Bellwort": {
+          "isUnique": true,
+          "modifierMixins": [
+            {
+              "$type": "EnterSceneLookMixin",
+              "lookAtTag": "SceneLook",
+              "followOffset": {
+                "x": 1.69,
+                "y": 0.42,
+                "z": -2.5
+              },
+              "fov": 50,
+              "deadZoneWidth": 0.045,
+              "deadZoneHeight": 0.08,
+              "softZoneWidth": 0.18,
+              "softZoneHeight": 0.32
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "AvatarExitFocus",
+              "keepRotation": true
+            }
+          ]
+        }
+      }
     }
   },
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  //	通用注目物件 70310226
+  //
+  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_Area_Xm_Property_Prop_EnterSceneLook_01_Ability",
       "onAdded": [
         {
+          //ControlPageContext 关联该Tag
           "$type": "ChangeTag",
           "isAdd": true,
           "tag": "SceneLook"
@@ -71,20 +85,53 @@
       ]
     }
   },
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  //	草神地城识别gadget
+  //
+  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "NahidaDungeonQuest_TeamAbility",
+      /*
+		"abilityMixins":
+		[
+			{
+				"$type":"CurLocalAvatarMixinV2",
+				"modifierName":"NahidaDungeonQuest",
+			},		    
+		],
+		*/
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "NahidaOverrideSkill",
+          "doOffStage": true
+        }
+      ],
       "modifiers": {
+        /*
+			"NahidaDungeonQuest":
+			{
+				"onAdded": 
+				[
+					{
+						"$type": "AttachModifier",
+						"modifierName": "NahidaOverrideSkill",
+					},
+				]
+			},
+			*/
         "NahidaOverrideSkill": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachToNormalizedTimeMixin",
               "stateID": "Nahida_ElementalArt_Click",
               "modifierName": "NahidaDungeonQuest_Click_Strike",
-              "normalizeStart": 0.4000000059604645
+              "normalizeStart": 0.4,
+              "normalizeEnd": 1.0
             },
             {
               "$type": "AttachToStateIDMixin",
@@ -98,27 +145,24 @@
           ]
         },
         "Avatar_Nahida_RayCast_Quest_Gadget_Call": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
+              "target": "Self",
               "modifierName": "CallQuest"
             }
           ]
         },
         "NahidaDungeonQuest_RayCast_Handler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "DoActionByAimMixin",
               "entityTypes": ["Gadget"],
-              "GIOLDCOLJLC": "PRIVATE_RayCast",
-              "KDDELDHCMHA": -1.0,
+              "colliderNodeName": "PRIVATE_RayCast",
               "actionQueue": [
                 {
                   "$type": "AttachModifier",
+                  "modifierName": "Lock_Eff",
                   "target": "Other",
                   "predicates": [
                     {
@@ -128,15 +172,16 @@
                     {
                       "$type": "ByTargetGlobalValue",
                       "key": "IS_NAHIDA_QUEST_CALL_GADGET",
-                      "ratio": 1.0
+                      "value": 1,
+                      "compareType": "Equal"
                     }
-                  ],
-                  "modifierName": "Lock_Eff"
+                  ]
                 }
               ],
-              "PGAOLEPMAEO": [
+              "onLeaveScopeActionQueue": [
                 {
                   "$type": "RemoveModifier",
+                  "modifierName": "Lock_Eff",
                   "target": "Other",
                   "predicates": [
                     {
@@ -146,15 +191,16 @@
                     {
                       "$type": "ByTargetGlobalValue",
                       "key": "IS_NAHIDA_QUEST_CALL_GADGET",
-                      "ratio": 1.0
+                      "value": 1,
+                      "compareType": "Equal"
                     }
-                  ],
-                  "modifierName": "Lock_Eff"
+                  ]
                 }
               ],
-              "JEBLBGKEKJD": [
+              "onRemoveActionQueue": [
                 {
                   "$type": "RemoveModifier",
+                  "modifierName": "Lock_Eff",
                   "target": "Other",
                   "predicates": [
                     {
@@ -164,13 +210,14 @@
                     {
                       "$type": "ByTargetGlobalValue",
                       "key": "IS_NAHIDA_QUEST_CALL_GADGET",
-                      "ratio": 1.0
+                      "value": 1,
+                      "compareType": "Equal"
                     }
-                  ],
-                  "modifierName": "Lock_Eff"
+                  ]
                 },
                 {
                   "$type": "AttachModifier",
+                  "modifierName": "Avatar_Nahida_RayCast_Quest_Gadget_Call",
                   "target": "Other",
                   "predicates": [
                     {
@@ -180,39 +227,36 @@
                     {
                       "$type": "ByTargetGlobalValue",
                       "key": "IS_NAHIDA_QUEST_CALL_GADGET",
-                      "ratio": 1.0
+                      "value": 1,
+                      "compareType": "Equal"
                     }
-                  ],
-                  "modifierName": "Avatar_Nahida_RayCast_Quest_Gadget_Call"
+                  ]
                 }
               ]
             }
           ]
         },
         "Lock_Eff": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Loli_Catalyst_Nahida_ElementalArt_Ray_Tag_Npc",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Avatar_Loli_Catalyst_Nahida_ElementalArt_Ray_Tag_Npc"
             }
           ]
         },
         "NahidaDungeonQuest_Click_Strike": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
+              "modifierName": "CallQuest",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
-                "topLimit": 1,
-                "sortType": "Nearest",
                 "shapeName": "SectorR4D120H4",
+                "centerBasedOn": "Self",
                 "campTargetType": "All",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self",
+                "sortType": "Nearest",
+                "topLimit": 1
               },
               "predicates": [
                 {
@@ -222,40 +266,36 @@
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "IS_NAHIDA_QUEST_CALL_GADGET",
-                  "ratio": 1.0
+                  "value": 1,
+                  "compareType": "Equal"
                 }
-              ],
-              "modifierName": "CallQuest"
+              ]
             }
           ]
         },
         "CallQuest": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "GV_Quest_Call",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "RotationDampTime": true,
-          "modifierName": "NahidaOverrideSkill"
-        }
-      ]
+      }
     }
   },
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  //	虚空探索状态
+  //
+  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "VoidSearching_TeamAbility",
+      "onAdded": [],
       "abilityMixins": [
         {
           "$type": "CurLocalAvatarMixinV2",
@@ -264,88 +304,81 @@
       ],
       "modifiers": {
         "VoidSearchingTick": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachModifier",
+              "modifierName": "VoidSearchingTickBoy",
               "predicates": [
                 {
                   "$type": "ByAvatarBodyType",
                   "bodyType": "BODY_BOY"
                 }
-              ],
-              "modifierName": "VoidSearchingTickBoy"
+              ]
             },
             {
               "$type": "AttachModifier",
+              "modifierName": "VoidSearchingTickGirl",
               "predicates": [
                 {
                   "$type": "ByAvatarBodyType",
                   "bodyType": "BODY_GIRL"
                 }
-              ],
-              "modifierName": "VoidSearchingTickGirl"
+              ]
             }
           ]
         },
         "VoidSearchingTickBoy": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "thinkInterval": 0.5,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Quest_VoidSearching",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Quest_VoidSearching"
             }
           ],
           "onThinkInterval": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "GV_Setted",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             },
             {
               "$type": "Predicated",
               "otherTargets": {
                 "$type": "SelectTargetsByTag",
+                "tag": "IS_VOID_SEARCHING_TARGET",
                 "topLimit": 1,
-                "sortType": "Nearest",
-                "tag": "IS_VOID_SEARCHING_TARGET"
+                "sortType": "Nearest" //从近开始选
               },
               "predicatesForeach": [
                 {
                   "$type": "ByTargetPositionToSelfPosition",
-                  "logic": "LesserOrEqual",
+                  "target": "Target",
                   "compareType": "XYZ",
-                  "ratio": 10.0
+                  "value": 10,
+                  "logic": "LesserOrEqual"
                 },
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "GV_Setted",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 1.0,
+                  "target": "Self",
                   "key": "GV_Setted",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 1
                 },
                 {
                   "$type": "SendEffectTrigger",
+                  "target": "Self",
                   "parameter": "State",
-                  "attachPoint": "",
                   "type": "Int",
                   "value": 202,
-                  "healLimitedByCasterMaxHPRatio": "Eff_Quest_VoidSearching"
+                  "effectPattern": "Eff_Quest_VoidSearching"
                 }
               ]
             },
@@ -353,118 +386,113 @@
               "$type": "Predicated",
               "otherTargets": {
                 "$type": "SelectTargetsByTag",
+                "tag": "IS_VOID_SEARCHING_TARGET",
                 "topLimit": 1,
-                "sortType": "Nearest",
-                "tag": "IS_VOID_SEARCHING_TARGET"
+                "sortType": "Nearest" //从近开始选
               },
               "predicatesForeach": [
                 {
                   "$type": "ByTargetPositionToSelfPosition",
-                  "logic": "LesserOrEqual",
+                  "target": "Target",
                   "compareType": "XYZ",
-                  "ratio": 20.0
+                  "value": 20,
+                  "logic": "LesserOrEqual"
                 },
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "GV_Setted",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 1.0,
+                  "target": "Self",
                   "key": "GV_Setted",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 1
                 },
                 {
                   "$type": "SendEffectTrigger",
+                  "target": "Self",
                   "parameter": "State",
-                  "attachPoint": "",
                   "type": "Int",
                   "value": 201,
-                  "healLimitedByCasterMaxHPRatio": "Eff_Quest_VoidSearching"
+                  "effectPattern": "Eff_Quest_VoidSearching"
                 }
               ]
             },
             {
               "$type": "SendEffectTrigger",
+              "parameter": "State",
+              "type": "Int",
+              "value": 0,
+              "effectPattern": "Eff_Quest_VoidSearching",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "GV_Setted",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
-              ],
-              "parameter": "State",
-              "attachPoint": "",
-              "type": "Int",
-              "healLimitedByCasterMaxHPRatio": "Eff_Quest_VoidSearching"
+              ]
             }
           ]
         },
         "VoidSearchingTickGirl": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "thinkInterval": 0.5,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Quest_VoidSearching_PlayGirl",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Quest_VoidSearching_PlayGirl"
             }
           ],
           "onThinkInterval": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "GV_Setted",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             },
             {
               "$type": "Predicated",
               "otherTargets": {
                 "$type": "SelectTargetsByTag",
+                "tag": "IS_VOID_SEARCHING_TARGET",
                 "topLimit": 1,
-                "sortType": "Nearest",
-                "tag": "IS_VOID_SEARCHING_TARGET"
+                "sortType": "Nearest" //从近开始选
               },
               "predicatesForeach": [
                 {
                   "$type": "ByTargetPositionToSelfPosition",
-                  "logic": "LesserOrEqual",
+                  "target": "Target",
                   "compareType": "XYZ",
-                  "ratio": 10.0
+                  "value": 10,
+                  "logic": "LesserOrEqual"
                 },
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "GV_Setted",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 1.0,
+                  "target": "Self",
                   "key": "GV_Setted",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 1
                 },
                 {
                   "$type": "SendEffectTrigger",
+                  "target": "Self",
                   "parameter": "State",
-                  "attachPoint": "",
                   "type": "Int",
                   "value": 202,
-                  "healLimitedByCasterMaxHPRatio": "Eff_Quest_VoidSearching_PlayGirl"
+                  "effectPattern": "Eff_Quest_VoidSearching_PlayGirl"
                 }
               ]
             },
@@ -472,71 +500,133 @@
               "$type": "Predicated",
               "otherTargets": {
                 "$type": "SelectTargetsByTag",
+                "tag": "IS_VOID_SEARCHING_TARGET",
                 "topLimit": 1,
-                "sortType": "Nearest",
-                "tag": "IS_VOID_SEARCHING_TARGET"
+                "sortType": "Nearest" //从近开始选
               },
               "predicatesForeach": [
                 {
                   "$type": "ByTargetPositionToSelfPosition",
-                  "logic": "LesserOrEqual",
+                  "target": "Target",
                   "compareType": "XYZ",
-                  "ratio": 20.0
+                  "value": 20,
+                  "logic": "LesserOrEqual"
                 },
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "GV_Setted",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 1.0,
+                  "target": "Self",
                   "key": "GV_Setted",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 1
                 },
                 {
                   "$type": "SendEffectTrigger",
+                  "target": "Self",
                   "parameter": "State",
-                  "attachPoint": "",
                   "type": "Int",
                   "value": 201,
-                  "healLimitedByCasterMaxHPRatio": "Eff_Quest_VoidSearching_PlayGirl"
+                  "effectPattern": "Eff_Quest_VoidSearching_PlayGirl"
                 }
               ]
             },
             {
               "$type": "SendEffectTrigger",
+              "parameter": "State",
+              "type": "Int",
+              "value": 0,
+              "effectPattern": "Eff_Quest_VoidSearching_PlayGirl",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "GV_Setted",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
-              ],
-              "parameter": "State",
-              "attachPoint": "",
-              "type": "Int",
-              "healLimitedByCasterMaxHPRatio": "Eff_Quest_VoidSearching_PlayGirl"
+              ]
             }
           ]
         }
       }
     }
   },
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  //	三态物件基础效果
+  //  TODO:增加阻断配置（ ExcitedToNormal
+  //
+  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "GrassGadget_ThreeState",
+      "abilitySpecials": {
+        "ExcitedDuration": 1.0 //激活态转正常态的时间，可以根据GV值复写
+      },
+      "onAdded": [
+        {
+          //防冰冻
+          "$type": "AttachAbilityStateResistance",
+          "resistanceListID": 14005
+        },
+        {
+          //防冻结
+          "$type": "AttachAbilityStateResistance",
+          "resistanceListID": 14002
+        },
+        {
+          //改变发生反应时元素消耗的比例
+          "$type": "AttachModifier",
+          "modifierName": "GrassStateManage"
+        },
+        {
+          "$type": "SetGlobalValue",
+          "key": "GV_ExcitedDuration",
+          "value": 1.0
+        },
+        {
+          //根据AbilitySpecial修改ExcitedDuration（激化态时间）
+          "$type": "ApplyModifier",
+          "modifierName": "ChangeExcitedDuration"
+        },
+        {
+          //初始GadgetState切换用，可以非死域环境中使物件以消亡态的方式创生
+          "$type": "ApplyModifier",
+          "modifierName": "GoToDestoryState",
+          "predicates": [
+            {
+              //GadgetState == 202
+              "$type": "ByTargetGadgetState",
+              "gadgetState": 202
+            },
+            {
+              //不能在死域中
+              "$type": "ByTargetGlobalValue",
+              "key": "SGV_DeathZoneState",
+              "value": 0,
+              "compareType": "NoneOrEqual"
+            }
+          ]
+        },
+        {
+          //避开大世界落雨影响
+          "$type": "DisableAffectedByWorld",
+          "disableWeatherEffect": true
+        }
+      ],
       "abilityMixins": [
         {
           "$type": "AttachToGadgetStateMixin",
+          "gadgetState": 0,
           "modifierName": "Normal"
         },
         {
@@ -555,64 +645,61 @@
           "modifierName": "DeathDestory"
         },
         {
+          //次数逻辑放在模板上
           "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
           "globalValueKey": "GrassState",
-          "valueSteps": [-10.0, 10.0, 210.0, 310.0],
+          "defaultGlobalValueOnCreate": 1,
+          "valueSteps": [-10, 10, 210, 310],
           "modifierNameSteps": ["NormalShow", "ExcitedShow", "DestoryShow"]
         },
         {
+          //三态物件处于死域时的逻辑
           "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
           "globalValueKey": "SGV_DeathZoneState",
           "valueSteps": [0.5, 1.5],
           "modifierNameSteps": ["EnterDeathZone"]
         }
       ],
-      "abilitySpecials": {
-        "ExcitedDuration": 1.0
-      },
       "modifiers": {
+        //LD布设的时候如果需要默认消亡态可用
         "GoToDestoryState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
+              //表现层立刻处理
               "$type": "SetGlobalValue",
-              "ratio": 300.0,
               "key": "GrassState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 300
             },
             {
               "$type": "ChangeGadgetState",
-              "CMFMJHJLIPP": 300
+              "state": 300
             }
           ]
         },
         "EnterDeathZone": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          //如果SGV为1，则立刻进入死域态。
           "onAdded": [
             {
+              //表现层立刻处理
               "$type": "SetGlobalValue",
-              "ratio": 300.0,
               "key": "GrassState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 300
             },
             {
+              //切死域状态
               "$type": "ChangeGadgetState",
-              "CMFMJHJLIPP": 301
+              "state": 301
             }
           ],
           "onRemoved": [
+            //移除时将三态物件逻辑切换为正常态。派蒙退后使逻辑正常。
             {
-              "$type": "ChangeGadgetState"
+              "$type": "ChangeGadgetState",
+              "state": 0
             }
           ]
         },
         "GrassStateManage": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyElementDecrateMixin",
@@ -621,54 +708,23 @@
           ]
         },
         "ChangeExcitedDuration": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.1,
           "onRemoved": [
             {
               "$type": "SetGlobalValueToOverrideMap",
+              "target": "Self",
               "globalValueKey": "GV_ExcitedDuration",
               "overrideMapKey": "ExcitedDuration"
             }
           ]
         },
+        //负责值传递和表现，GadgetState=0
         "Normal": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "modifierMixins": [
-            {
-              "$type": "DoActionBySelfElementReactionMixin",
-              "reactionTypes": ["Overdose"],
-              "actionQueue": [
-                {
-                  "$type": "SetGlobalValue",
-                  "ratio": 200.0,
-                  "key": "GrassState",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
-                },
-                {
-                  "$type": "ChangeGadgetState",
-                  "CMFMJHJLIPP": 200
-                }
-              ]
-            },
-            {
-              "$type": "DeathZoneMixin",
-              "JODPEBHBAOD": [
-                {
-                  "$type": "SetGlobalValue",
-                  "ratio": 0.0,
-                  "key": "GrassState",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
-                }
-              ]
-            }
-          ],
           "onAdded": [
             {
+              //当三态物件从死域态进入正常态时，GrassState不立刻切换。
               "$type": "Predicated",
+              "target": "Self",
               "targetPredicates": [
                 {
                   "$type": "ByNot",
@@ -676,7 +732,8 @@
                     {
                       "$type": "ByTargetGlobalValue",
                       "key": "GrassState",
-                      "ratio": 301.0
+                      "value": 301,
+                      "compareType": "Equal"
                     }
                   ]
                 }
@@ -684,10 +741,36 @@
               "successActions": [
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 0.0,
                   "key": "GrassState",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 0
+                }
+              ]
+            }
+          ],
+          "modifierMixins": [
+            {
+              "$type": "DoActionBySelfElementReactionMixin",
+              "reactionTypes": ["Overdose"],
+              "actionQueue": [
+                {
+                  //表现层立刻处理
+                  "$type": "SetGlobalValue",
+                  "key": "GrassState",
+                  "value": 200
+                },
+                {
+                  "$type": "ChangeGadgetState",
+                  "state": 200
+                }
+              ]
+            },
+            {
+              "$type": "DeathZoneMixin",
+              "disactiveHaloTrigger": [
+                {
+                  "$type": "SetGlobalValue",
+                  "key": "GrassState",
+                  "value": 0
                 }
               ]
             }
@@ -695,57 +778,57 @@
           "onBeingHit": [
             {
               "$type": "Predicated",
+              "target": "Self",
               "targetPredicates": [
                 {
                   "$type": "ByHitElementDurability",
                   "element": "Fire",
+                  "durability": 0,
                   "compareType": "MoreThan"
                 }
               ],
               "successActions": [
                 {
+                  //表现层立刻处理
                   "$type": "SetGlobalValue",
-                  "ratio": 300.0,
                   "key": "GrassState",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 300
                 },
                 {
                   "$type": "ChangeGadgetState",
-                  "CMFMJHJLIPP": 300
+                  "state": 300
                 }
               ]
             }
           ]
         },
+        //负责值传递和表现，GadgetState=200
         "Excited": {
-          "modifierName": "",
-          "HCJLIGBLGJA": "ExcitedDuration",
-          "bonusCriticalHurt": 100.0,
+          "duration": "%ExcitedDuration",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 200.0,
               "key": "GrassState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 200
             }
           ],
           "onRemoved": [
             {
+              //重置指挥冲击波的触发
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "EnableWisdomImpact",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             },
             {
+              //通过GadgetState==200保证其是因为自身Duration结束后切换的
               "$type": "Predicated",
+              "target": "Self",
               "targetPredicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "GrassState",
-                  "ratio": 200.0
+                  "value": 200,
+                  "compareType": "Equal"
                 },
                 {
                   "$type": "ByTargetGadgetState",
@@ -754,99 +837,96 @@
               ],
               "successActions": [
                 {
+                  //表现层立刻处理
                   "$type": "SetGlobalValue",
-                  "ratio": 0.0,
                   "key": "GrassState",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 0
                 },
                 {
-                  "$type": "ChangeGadgetState"
+                  "$type": "ChangeGadgetState",
+                  "state": 0
                 }
               ]
             }
           ]
         },
+        //负责值传递和表现，GadgetState=300
         "Destory": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 300.0,
               "key": "GrassState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 300
             }
           ],
           "onBeingHit": [
             {
               "$type": "Predicated",
+              "target": "Self",
               "targetPredicates": [
                 {
                   "$type": "ByHitElementDurability",
                   "element": "Grass",
-                  "durability": 10.0,
+                  "durability": 10,
                   "compareType": "MoreThan"
                 }
               ],
               "successActions": [
                 {
+                  //表现层立刻处理
                   "$type": "SetGlobalValue",
-                  "ratio": 0.0,
                   "key": "GrassState",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 0
                 },
                 {
-                  "$type": "ChangeGadgetState"
+                  "$type": "ChangeGadgetState",
+                  "state": 0
                 }
               ]
             }
           ]
         },
+        //负责值传递和表现，GadgetState=301
         "DeathDestory": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 301.0,
               "key": "GrassState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 301
             },
             {
+              //若不在死域中保底切回正常态
               "$type": "SetGlobalValue",
+              "key": "GrassState",
+              "value": 0,
               "predicates": [
                 {
+                  //不在死域中
                   "$type": "ByTargetGlobalValue",
                   "key": "SGV_DeathZoneState",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
-              ],
-              "ratio": 0.0,
-              "key": "GrassState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              ]
             },
             {
+              //若不在死域中保底切回正常态
               "$type": "ChangeGadgetState",
+              "state": 0,
               "predicates": [
                 {
+                  //不在死域中
                   "$type": "ByTargetGlobalValue",
                   "key": "SGV_DeathZoneState",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
               ]
             }
           ]
         },
+        //正常态通用表现。绑草；调整附着物表现；
         "NormalShow": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachModifier",
@@ -854,123 +934,107 @@
             },
             {
               "$type": "SetMaterialParamFloatByTransform",
+              "matName": "Gadget",
+              "patternName": "_ConversionStateChange",
+              "value": 0,
               "canBeHandledOnRecover": true,
-              "FBIDGOMNBLJ": "Gadget",
-              "HFGGHONFMMJ": "_ConversionStateChange",
-              "ratio": 0.0,
-              "JNFAMBPFJFM": true,
-              "HCALGEOPEGJ": 2.0
+              "useCurve": true,
+              "lerpTime": 2,
+              "lerpCurveIndex": 0
             }
           ]
         },
+        //激化态通用表现。绑雷；调整附着物表现；
         "ExcitedShow": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
+              //如何处理激化态的元素视野
               "$type": "AttachModifier",
               "modifierName": "InitGrass"
             },
             {
               "$type": "SetMaterialParamFloatByTransform",
+              "matName": "Gadget",
+              "patternName": "_ConversionStateChange",
+              "value": 2,
               "canBeHandledOnRecover": true,
-              "FBIDGOMNBLJ": "Gadget",
-              "HFGGHONFMMJ": "_ConversionStateChange",
-              "ratio": 2.0,
-              "JNFAMBPFJFM": true,
-              "HCALGEOPEGJ": 2.0
+              "useCurve": true,
+              "lerpTime": 2,
+              "lerpCurveIndex": 0
             }
           ]
         },
+        //消亡态通用表现。调整附着物表现；
         "DestoryShow": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetMaterialParamFloatByTransform",
+              "matName": "Gadget",
+              "patternName": "_ConversionStateChange",
+              "value": -2,
               "canBeHandledOnRecover": true,
-              "FBIDGOMNBLJ": "Gadget",
-              "HFGGHONFMMJ": "_ConversionStateChange",
-              "ratio": -2.0,
-              "JNFAMBPFJFM": true,
-              "HCALGEOPEGJ": 2.0
+              "useCurve": true,
+              "lerpTime": 2,
+              "lerpCurveIndex": 0
             }
           ]
         },
+        //三态物件显示的草附着
         "InitGrass": {
-          "modifierName": "",
+          "stacking": "Refresh",
           "elementType": "Grass",
-          "bonusCriticalHurt": 50.0,
+          "elementDurability": 50,
+          "retainWhenDurabilityIsZero": true,
           "modifierMixins": [
             {
               "$type": "SelfAddDurabilityMixin",
-              "ratio": 10.0,
+              "value": 10,
               "useLimitRange": true,
               "maxValue": 50.0,
               "thinkInterval": 0.5
             }
-          ],
-          "NIOAHFGHHAD": true
+          ]
         },
-        "Blank": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachAbilityStateResistance",
-          "resistanceListID": 14005
-        },
-        {
-          "$type": "AttachAbilityStateResistance",
-          "resistanceListID": 14002
-        },
-        {
-          "$type": "AttachModifier",
-          "modifierName": "GrassStateManage"
-        },
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 1.0,
-          "key": "GV_ExcitedDuration",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "ChangeExcitedDuration"
-        },
-        {
-          "$type": "ApplyModifier",
-          "predicates": [
-            {
-              "$type": "ByTargetGadgetState",
-              "gadgetState": 202
-            },
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "SGV_DeathZoneState",
-              "ratio": 0.0,
-              "compareType": "NoneOrEqual"
-            }
-          ],
-          "modifierName": "GoToDestoryState"
-        },
-        {
-          "$type": "DisableAffectedByWorld",
-          "KLFEECAHAOJ": true
-        }
-      ]
+        "Blank": {}
+      }
     }
   },
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  //	须弥透明物件通用Ability
+  //
+  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "TransparentGadget_Ability",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "key": "ShowState",
+          "value": 1,
+          "predicates": [
+            {
+              "$type": "ByNot",
+              "predicates": [
+                {
+                  "$type": "ByTargetGadgetState",
+                  "gadgetState": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "$type": "ChangeTag",
+          "isAdd": true,
+          "tag": "TransparentGadget"
+        }
+      ],
       "abilityMixins": [
         {
           "$type": "AttachToGadgetStateMixin",
+          "gadgetState": 0,
           "modifierName": "TransparentState"
         },
         {
@@ -979,32 +1043,28 @@
           "modifierName": "ToShowState"
         },
         {
+          //特效相关
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "ShowState",
-          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [0.5, 1.5],
           "modifierNameSteps": ["ShowState"]
         }
       ],
       "modifiers": {
         "TransparentState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "DenyLockOn",
           "onAdded": [
             {
               "$type": "SetMaterialParamFloatByTransform",
-              "canBeHandledOnRecover": true,
-              "FBIDGOMNBLJ": "InvisibleMat",
-              "HFGGHONFMMJ": "_DissoveThreshold",
-              "ratio": 0.0
+              "matName": "InvisibleMat",
+              "patternName": "_DissoveThreshold",
+              "value": 0,
+              "canBeHandledOnRecover": true
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "ShowState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ],
           "onBeingHit": [
@@ -1013,18 +1073,22 @@
               "target": "Target",
               "targetPredicates": [
                 {
+                  //被智慧冲击波攻击
                   "$type": "ByAny",
                   "predicates": [
                     {
                       "$type": "ByAttackTags",
+                      "target": "Target",
                       "attackTags": ["WisdomImpact01"]
                     },
                     {
                       "$type": "ByAttackTags",
+                      "target": "Target",
                       "attackTags": ["WisdomImpact02"]
                     },
                     {
                       "$type": "ByAttackTags",
+                      "target": "Target",
                       "attackTags": ["WisdomImpact03"]
                     }
                   ]
@@ -1033,14 +1097,13 @@
               "successActions": [
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 1.0,
                   "key": "ShowState",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 1
                 },
                 {
+                  //切到200是为了使其切走
                   "$type": "ChangeGadgetState",
-                  "CMFMJHJLIPP": 200
+                  "state": 200
                 },
                 {
                   "$type": "DoWatcherSystemAction",
@@ -1057,110 +1120,103 @@
           ]
         },
         "ToShowState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "ShowState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             }
           ]
         },
         "ShowState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetMaterialParamFloatByTransform",
-              "FBIDGOMNBLJ": "InvisibleMat",
-              "HFGGHONFMMJ": "_DissoveThreshold",
-              "ratio": 1.0,
-              "JNFAMBPFJFM": true,
-              "MHLDAJLMJIL": 1,
-              "HCALGEOPEGJ": 1.0
+              "matName": "InvisibleMat",
+              "patternName": "_DissoveThreshold",
+              "useCurve": true,
+              "lerpTime": 1,
+              "lerpCurveIndex": 1,
+              "value": 1
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "predicates": [
-            {
-              "$type": "ByNot",
-              "predicates": [
-                {
-                  "$type": "ByTargetGadgetState"
-                }
-              ]
-            }
-          ],
-          "ratio": 1.0,
-          "key": "ShowState",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "ChangeTag",
-          "isAdd": true,
-          "tag": "TransparentGadget"
-        }
-      ]
+      }
     }
   },
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  //	须弥钩爪物件
+  //
+  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_GrapplingHookPoint_01_Ability",
-      "abilityMixins": [
-        {
-          "$type": "GrapplingHookPointMixin"
-        }
-      ],
       "onAdded": [
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_GrappleHook_01_Appear",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_SceneObj_GrappleHook_01_Appear"
         },
         {
           "$type": "ChangeTag",
           "isAdd": true,
           "tag": "GrapplingHookPoint"
         }
+      ],
+      "abilityMixins": [
+        {
+          "$type": "GrapplingHookPointMixin"
+        }
       ]
     }
   },
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  //	须弥钩爪激活管理，挂在Avatar上
+  //
+  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
-      "abilityName": "GrapplingHookSkill_Ability",
+      "abilityName": "GrapplingHookSkill_Ability", //Level_GrapplingHook
+      "isDynamicAbility": true,
       "abilityMixins": [
         {
+          //钩爪检测Mixin
           "$type": "CheckGrapplingHookMixin",
-          "EJBFCABFFOE": [
+          "activateSkillKey": "AVATAR_GrapplingHookSkill",
+          "checkParams": {
+            "hookAreaRadius": 40.0,
+            "minDistToAvatar": 5.0,
+            "screenEllipseRatioX": 0.7,
+            "screenEllipseRatioY": 0.8,
+            "ui": {
+              "SelectableIcon": "UI_MarkQuest_GrapplingHook_01",
+              "SelectedIcon": "UI_MarkQuest_GrapplingHook_02",
+              "UnselectableIcon": "UI_MarkQuest_GrapplingHook_03"
+            }
+          },
+          "onEnterHookArea": [
             {
               "$type": "AddAvatarSkillInfo",
-              "RotationDampTime": true,
-              "skillID": 20043
+              "skillID": 20043,
+              "doOffStage": true
             },
             {
               "$type": "AddAvatarSkillInfo",
-              "RotationDampTime": true,
-              "skillID": 20044
+              "skillID": 20044,
+              "doOffStage": true
             },
             {
               "$type": "ShowExtraAbility",
-              "RotationDampTime": true,
-              "skillID": 20014
+              "skillID": 20014,
+              "doOffStage": true
             },
             {
               "$type": "ApplyModifier",
-              "RotationDampTime": true,
-              "modifierName": "Hook_SwitchAirSkill"
+              "modifierName": "Hook_SwitchAirSkill",
+              "doOffStage": true
             },
             {
               "$type": "DoWatcherSystemAction",
@@ -1168,741 +1224,44 @@
               "authorityOnly": true
             }
           ],
-          "MNHHNPIEGBE": [
+          "onExitHookArea": [
             {
               "$type": "RemoveAvatarSkillInfo",
-              "RotationDampTime": true,
-              "skillID": 20043
+              "skillID": 20043,
+              "doOffStage": true
             },
             {
               "$type": "RemoveAvatarSkillInfo",
-              "RotationDampTime": true,
-              "skillID": 20044
+              "skillID": 20044,
+              "doOffStage": true
             },
             {
               "$type": "ShowExtraAbility",
-              "RotationDampTime": true
+              "skillID": 0,
+              "doOffStage": true
             },
             {
               "$type": "RemoveModifier",
-              "RotationDampTime": true,
-              "modifierName": "Hook_SwitchAirSkill"
+              "modifierName": "Hook_SwitchAirSkill",
+              "doOffStage": true
             }
-          ],
-          "PHBEMPLDLEL": "AVATAR_GrapplingHookSkill",
-          "NOGBINHNBPA": {
-            "AECPKHAJBEL": 40.0,
-            "LHHFBDLNCMI": 5.0,
-            "LIFDDGBGHBD": 0.699999988079071,
-            "JIPKLEEAMFD": 0.800000011920929,
-            "ui": {
-              "BFGDKOBNNMO": "UI_MarkQuest_GrapplingHook_01",
-              "ABPLCBHAMBJ": "UI_MarkQuest_GrapplingHook_02",
-              "FNFKGPENDFA": "UI_MarkQuest_GrapplingHook_03"
-            }
-          }
+          ]
         },
         {
+          //当Step>0时，始终保留浮空。必须有个滞空Modifier
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_ABILITY_GrapplingHookSkill_Step",
-          "defaultGlobalValueOnCreate": 0.0,
-          "valueSteps": [-0.5, 0.5, 3.9000000953674316],
+          "valueSteps": [-0.5, 0.5, 3.9],
           "modifierNameSteps": [
             "Blank",
             "UNIQUE_GrapplingHookSkill_GrassCoreEffect"
           ]
         },
         {
+          //绑定在animator上管理技能释放间状态
           "$type": "AttachToStateIDMixin",
           "stateIDs": ["ActivitySkill_GrapplingHook"],
           "modifierName": "UNIQUE_GrapplingHookSkill_SkillHandler"
-        }
-      ],
-      "modifiers": {
-        "Blank": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
-        "UNIQUE_GrapplingHookSkill_RecoverHandler": {
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "LLJDPEONHMA": [
-            {
-              "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
-              "key": "_ABILITY_GrapplingHookSkill_Step",
-              "maxValue": 0.0,
-              "minValue": 0.0
-            }
-          ]
-        },
-        "UNIQUE_GrapplingHookSkill_SkillHandler": {
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "modifierMixins": [
-            {
-              "$type": "AttachModifierToSelfGlobalValueMixin",
-              "globalValueKey": "_ABILITY_GrapplingHookSkill_Step",
-              "defaultGlobalValueOnCreate": 0.0,
-              "valueSteps": [0.5, 1.5, 3.5],
-              "modifierNameSteps": [
-                "UNIQUE_GrapplingHookSkill_PreSkill",
-                "UNIQUE_GrapplingHookSkill_ThrowHook"
-              ]
-            },
-            {
-              "$type": "AttachModifierToSelfGlobalValueMixin",
-              "globalValueKey": "_ABILITY_GrapplingHookSkill_Step",
-              "defaultGlobalValueOnCreate": 0.0,
-              "valueSteps": [2.5, 4.5],
-              "modifierNameSteps": ["UNIQUE_GrapplingHookSkill_SkillStart"]
-            }
-          ],
-          "onAdded": [
-            {
-              "$type": "SetGlobalValue",
-              "ratio": 1.0,
-              "key": "_ABILITY_GrapplingHookSkill_Step",
-              "maxValue": 0.0,
-              "minValue": 0.0
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_ABILITY_GrapplingHookSkill_Step",
-                  "ratio": 3.0,
-                  "compareType": "LessAndEqual"
-                }
-              ],
-              "ratio": 0.0,
-              "key": "_ABILITY_GrapplingHookSkill_Step",
-              "maxValue": 0.0,
-              "minValue": 0.0
-            }
-          ]
-        },
-        "Hook_SwitchAirSkill": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "modifierMixins": [
-            {
-              "$type": "AvatarChangeSkillMixin",
-              "index": -1,
-              "priority": "Playmode",
-              "jumpSkillID": 20044,
-              "flySkillID": 20044
-            },
-            {
-              "$type": "AttachToStateIDMixin",
-              "stateIDs": ["Fly", "Fall"],
-              "modifierName": "ChangePlayMode_FlyMark",
-              "isCheckOnAttach": true
-            },
-            {
-              "$type": "AttachToStateIDMixin",
-              "stateIDs": ["Jump"],
-              "modifierName": "ChangePlayMode_JumpMark_Handler",
-              "isCheckOnAttach": true
-            },
-            {
-              "$type": "AttachModifierToSelfGlobalValueMixin",
-              "globalValueKey": "_ABILITY_GrapplingHookSkill_JoypadAirSkill_Mark",
-              "defaultGlobalValueOnCreate": 0.0,
-              "valueSteps": [-0.5, 0.5, 5.5],
-              "modifierNameSteps": ["Blank", "ChangePlayModeForJoypad"]
-            }
-          ]
-        },
-        "ChangePlayModeForJoypad": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "ChangePlayMode",
-              "RotationDampTime": true,
-              "muteRemoteAction": true,
-              "toPlayMode": "GrapplingHook"
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "ChangePlayMode",
-              "RotationDampTime": true,
-              "muteRemoteAction": true
-            }
-          ]
-        },
-        "ChangePlayMode_FlyMark": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AddGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 1.0,
-              "key": "_ABILITY_GrapplingHookSkill_JoypadAirSkill_Mark",
-              "useLimitRange": true,
-              "maxValue": 5.0,
-              "minValue": 0.0
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "AddGlobalValue",
-              "RotationDampTime": true,
-              "ratio": -1.0,
-              "key": "_ABILITY_GrapplingHookSkill_JoypadAirSkill_Mark",
-              "useLimitRange": true,
-              "maxValue": 5.0,
-              "minValue": 0.0
-            }
-          ]
-        },
-        "ChangePlayMode_JumpMark_Handler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.699999988079071,
-          "onThinkInterval": [
-            {
-              "$type": "AttachModifier",
-              "modifierName": "ChangePlayMode_JumpMark"
-            }
-          ]
-        },
-        "ChangePlayMode_JumpMark": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AddGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 1.0,
-              "key": "_ABILITY_GrapplingHookSkill_JoypadAirSkill_Mark",
-              "useLimitRange": true,
-              "maxValue": 5.0,
-              "minValue": 0.0
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "AddGlobalValue",
-              "RotationDampTime": true,
-              "ratio": -1.0,
-              "key": "_ABILITY_GrapplingHookSkill_JoypadAirSkill_Mark",
-              "useLimitRange": true,
-              "maxValue": 5.0,
-              "minValue": 0.0
-            }
-          ]
-        },
-        "UNIQUE_GrapplingHookSkill_PreSkill": {
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_EndureDelta": 0.0
-          },
-          "onAdded": [
-            {
-              "$type": "AttachModifier",
-              "modifierName": "RushMoveOnGround"
-            },
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "UNIQUE_StreamingOptimization"
-            },
-            {
-              "$type": "DoWatcherSystemAction",
-              "watcherId": 81260,
-              "authorityOnly": true
-            }
-          ]
-        },
-        "RushMoveOnGround": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.05999999865889549,
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_EndureDelta": 0.0
-          },
-          "onAdded": [
-            {
-              "$type": "Predicated",
-              "targetPredicates": [
-                {
-                  "$type": "ByTargetAltitude",
-                  "logic": "LesserOrEqual",
-                  "ratio": 0.5
-                }
-              ],
-              "successActions": [
-                {
-                  "$type": "RemoveVelocityForce",
-                  "forces": ["RushMoveType", "InertiaType"]
-                },
-                {
-                  "$type": "FixedAvatarRushMove",
-                  "toPos": {
-                    "$type": "ConfigBornBySelf",
-                    "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.5,
-                      "PJCOKIGCJOK": 0.0
-                    }
-                  },
-                  "timeRange": 0.05000000074505806,
-                  "maxRange": 2.0,
-                  "animatorStateIDs": ["ActivitySkill_GrapplingHook"],
-                  "overrideMoveCollider": "",
-                  "isInAir": true
-                }
-              ]
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "RemoveVelocityForce",
-              "forces": ["RushMoveType", "InertiaType"]
-            },
-            {
-              "$type": "AddGlobalValue",
-              "ratio": 1.0,
-              "key": "Avatar_HookVisible",
-              "maxValue": 0.0,
-              "minValue": 0.0
-            },
-            {
-              "$type": "SetGlobalValue",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_ABILITY_GrapplingHookSkill_Step",
-                  "ratio": 1.0
-                }
-              ],
-              "ratio": 2.0,
-              "key": "_ABILITY_GrapplingHookSkill_Step",
-              "maxValue": 0.0,
-              "minValue": 0.0
-            }
-          ]
-        },
-        "UNIQUE_GrapplingHookSkill_ThrowHook": {
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "modifierMixins": [
-            {
-              "$type": "ThrowGrapplingHookMixin",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Grapple_01_Line",
-              "positionKey": "_GrapplingHook_TargetPos",
-              "IBCBGMALMIB": [
-                {
-                  "$type": "SetGlobalValue",
-                  "predicates": [
-                    {
-                      "$type": "ByTargetGlobalValue",
-                      "key": "_ABILITY_GrapplingHookSkill_Step",
-                      "ratio": 2.0
-                    }
-                  ],
-                  "ratio": 3.0,
-                  "key": "_ABILITY_GrapplingHookSkill_Step",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
-                },
-                {
-                  "$type": "AttachModifier",
-                  "modifierName": "HookEffectTrigger"
-                }
-              ]
-            },
-            {
-              "$type": "GrapplingHookMoveStayInPlaceMixin"
-            }
-          ],
-          "properties": {
-            "Actor_EndureDelta": 0.0
-          }
-        },
-        "UNIQUE_GrapplingHookSkill_SkillStart": {
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "modifierMixins": [
-            {
-              "$type": "GrapplingHookMoveMixin",
-              "HFGKPLCJFDM": [
-                {
-                  "$type": "SetGlobalValue",
-                  "predicates": [
-                    {
-                      "$type": "ByTargetGlobalValue",
-                      "key": "_ABILITY_GrapplingHookSkill_Step",
-                      "ratio": 3.0
-                    }
-                  ],
-                  "ratio": 4.0,
-                  "key": "_ABILITY_GrapplingHookSkill_Step",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
-                },
-                {
-                  "$type": "ApplyModifier",
-                  "modifierName": "GrapplingHook_ArrivedRushMove"
-                }
-              ],
-              "HIPJNCKIJGG": 5.0,
-              "ALMPDGDECHI": 1.0,
-              "KFLKDEAIKGI": 0.5
-            },
-            {
-              "$type": "ModifyCameraMaxDistanceMixin",
-              "ILNMINGEELA": 10.0,
-              "DOFJHKFGEDO": true,
-              "GMCIOCBLNBC": 0.20000000298023224,
-              "FBBJMFOJDLN": 0.699999988079071
-            },
-            {
-              "$type": "TriggerPostProcessEffectMixin",
-              "postEffectAssetName": "PostEffect_Skiff_Sprint",
-              "duration": 0.0
-            }
-          ],
-          "onAdded": [
-            {
-              "$type": "GrapplingHookRushMove",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_ABILITY_GrapplingHookSkill_Step",
-                  "ratio": 3.0
-                }
-              ],
-              "toPos": {
-                "$type": "ConfigBornByGlobalValue",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": -0.5,
-                  "PJCOKIGCJOK": 0.0
-                },
-                "direction": {
-                  "$type": "ConfigDirectionByGlobalValue",
-                  "directionKey": "_GrapplingHook_TargetDir"
-                },
-                "positionKey": "_GrapplingHook_TargetPos",
-                "directionKey": ""
-              },
-              "LJMNIGCLKNG": 15.0,
-              "NCAKHOCIHIB": 10.0,
-              "AKPPCDKKOMN": 20.0,
-              "animatorStateIDs": [
-                "ActivitySkill_GrapplingHook",
-                "Fly",
-                "Standby",
-                "Run"
-              ],
-              "isInAir": true
-            },
-            {
-              "$type": "AttachModifier",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_ABILITY_GrapplingHookSkill_Step",
-                  "ratio": 3.0
-                }
-              ],
-              "modifierName": "Camera_Blur"
-            },
-            {
-              "$type": "DebugLog",
-              "content": "!!!!!!!!!!!Camera_Blur!!!!!!!!!!"
-            }
-          ]
-        },
-        "UNIQUE_GrapplingHookSkill_HookHideHanlde": {
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "modifierMixins": [
-            {
-              "$type": "DoActionOnGlobalValueChangeMixin",
-              "globalValueKey": "Avatar_HookVisible",
-              "actions": [
-                {
-                  "$type": "TriggerSetVisible",
-                  "predicates": [
-                    {
-                      "$type": "ByTargetGlobalValue",
-                      "key": "Avatar_HookVisible",
-                      "ratio": 1.0,
-                      "compareType": "MoreThanAndEqual"
-                    }
-                  ]
-                }
-              ]
-            }
-          ],
-          "onAdded": [
-            {
-              "$type": "TriggerSetVisible"
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
-              "key": "Avatar_HookVisible",
-              "maxValue": 0.0,
-              "minValue": 0.0
-            },
-            {
-              "$type": "TriggerSetVisible",
-              "RotationDampTime": true,
-              "canBeHandledOnRecover": true,
-              "visible": true
-            }
-          ]
-        },
-        "UNIQUE_GrapplingHookSkill_GrassCoreEffect": {
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_AddGravityScale": -2.0
-          },
-          "onAdded": [
-            {
-              "$type": "SetVelocityIgnoreAirGY",
-              "ignoreAirGY": true
-            },
-            {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Grapple_01_MoveIn",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Grapple_01_Moving",
-              "born": {
-                "$type": "ConfigBornBySelf",
-                "direction": {
-                  "$type": "ConfigDirectionByGlobalValue",
-                  "directionKey": "_GrapplingHook_TargetDir"
-                }
-              },
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "RemoveUniqueModifier",
-              "modifierName": "UNIQUE_GrapplingHookSkill_HookHideHanlde"
-            },
-            {
-              "$type": "AttachModifier",
-              "RotationDampTime": true,
-              "modifierName": "UNIQUE_GrapplingHookSkill_HookHideHanlde"
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "SetVelocityIgnoreAirGY",
-              "RotationDampTime": true
-            },
-            {
-              "$type": "RemoveVelocityForce",
-              "RotationDampTime": true,
-              "forces": ["RushMoveType", "InertiaType"]
-            },
-            {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Grapple_01_MoveOut",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "ApplyModifier",
-              "RotationDampTime": true,
-              "modifierName": "GrapplingHook_SkillCharge"
-            }
-          ]
-        },
-        "GrapplingHook_SkillCharge": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
-          "onRemoved": [
-            {
-              "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 100.0,
-              "key": "AVATAR_GrapplingHookSkill",
-              "useLimitRange": true,
-              "maxValue": 100.0,
-              "minValue": 0.0
-            }
-          ]
-        },
-        "GrapplingHook_ArrivedRushMove": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_AddGravityScale": -2.0
-          },
-          "onAdded": [
-            {
-              "$type": "AvatarExitCameraShot",
-              "RotationDampTime": true
-            },
-            {
-              "$type": "SetVelocityIgnoreAirGY",
-              "ignoreAirGY": true
-            },
-            {
-              "$type": "RemoveVelocityForce",
-              "forces": ["InertiaType", "GrapplingHookMoveType"]
-            },
-            {
-              "$type": "FixedAvatarRushMove",
-              "target": "CurLocalAvatar",
-              "toPos": {
-                "$type": "ConfigBornBySelf",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 1.0,
-                  "PJCOKIGCJOK": 0.0
-                }
-              },
-              "timeRange": 0.05000000074505806,
-              "maxRange": 0.5,
-              "animatorStateIDs": ["ActivitySkill_GrapplingHook", "DropDown"],
-              "overrideMoveCollider": "",
-              "isInAir": true
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "SetVelocityIgnoreAirGY"
-            },
-            {
-              "$type": "SetAnimatorTrigger",
-              "triggerID": "GrapplingHook_Drop"
-            },
-            {
-              "$type": "SetGlobalValue",
-              "ratio": 0.0,
-              "key": "_ABILITY_GrapplingHookSkill_Step",
-              "maxValue": 0.0,
-              "minValue": 0.0
-            }
-          ]
-        },
-        "Camera_Blur": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
-          "modifierMixins": [
-            {
-              "$type": "CameraBlurMixin",
-              "cameraRadialBlur": {
-                "power": 1.0,
-                "fadeTime": 0.10000000149011612
-              }
-            }
-          ]
-        },
-        "UNIQUE_StreamingOptimization": {
-          "modifierName": "",
-          "isUnique": true,
-          "HCJLIGBLGJA": 4.0,
-          "bonusCriticalHurt": 100.0,
-          "modifierMixins": [
-            {
-              "$type": "StreamingModifierMixin"
-            }
-          ]
-        },
-        "GrapplingHook_Init": {
-          "stacking": "MultipleRefresh",
-          "stackingOption": {
-            "abilitySpecialName": "",
-            "maxModifierNumForMultipleType": 1.0
-          },
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "SetGlobalValue",
-              "ratio": 0.0,
-              "key": "_ABILITY_GrapplingHookSkill_Step",
-              "maxValue": 0.0,
-              "minValue": 0.0
-            },
-            {
-              "$type": "SetAnimatorTrigger",
-              "triggerID": "GrapplingHook_Drop"
-            },
-            {
-              "$type": "SetVelocityIgnoreAirGY",
-              "RotationDampTime": true
-            },
-            {
-              "$type": "RemoveVelocityForce",
-              "forces": [
-                "RushMoveType",
-                "InertiaType",
-                "FixedRushMoveType",
-                "SpeedupType",
-                "GrapplingHookMoveType"
-              ]
-            }
-          ]
-        },
-        "HookEffectTrigger": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "muteRemoteAction": true,
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_GrappleHook_01_Active",
-              "born": {
-                "$type": "ConfigBornByGlobalValue",
-                "positionKey": "_GrapplingHook_TargetPos",
-                "directionKey": ""
-              },
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "parameter": "Get",
-              "attachPoint": "",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Grapple_01_Line"
-            }
-          ]
-        }
-      },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "RotationDampTime": true,
-          "ratio": 0.0,
-          "key": "_ABILITY_GrapplingHookSkill_Step",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "UNIQUE_GrapplingHookSkill_RecoverHandler"
         }
       ],
       "onAbilityStart": [
@@ -1911,6 +1270,7 @@
           "key": "_GrapplingHook_TargetPos"
         },
         {
+          //标记定点和定向
           "$type": "Predicated",
           "otherTargets": {
             "$type": "SelectTargetsByGrapplingHook",
@@ -1922,6 +1282,7 @@
               "content": "TD:Hook AbilityStart!!!"
             },
             {
+              //存储目标点位置
               "$type": "SetGlobalPos",
               "target": "Target",
               "key": "_GrapplingHook_TargetPos",
@@ -1944,18 +1305,32 @@
             },
             {
               "$type": "SetSelfAttackTarget",
-              "target": "Target",
-              "turnToTargetImmediately": true
+              "turnToTargetImmediately": true,
+              "target": "Target"
             },
             {
+              //触发空中钩爪技能=>角色的动作立刻切换为ActivitySkill_ElectricCoreFly
               "$type": "EntityDoSkill",
               "skillID": 20044
             },
             {
+              //触发地面钩爪技能
               "$type": "EntityDoSkill",
               "skillID": 20043
             }
           ]
+        }
+      ],
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "key": "_ABILITY_GrapplingHookSkill_Step",
+          "doOffStage": true,
+          "value": 0
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_GrapplingHookSkill_RecoverHandler"
         }
       ],
       "onKill": [
@@ -1964,28 +1339,751 @@
           "modifierName": "GrapplingHook_Init"
         }
       ],
-      "isDynamicAbility": true
+      "modifiers": {
+        "Blank": {},
+        "UNIQUE_GrapplingHookSkill_RecoverHandler": {
+          "isUnique": true,
+          //断线重连的modifier必须是Apply的
+          "onReconnect": [
+            //doOffStage这个非常重要，因为可能非主角在这个时候处于后台
+            {
+              "$type": "SetGlobalValue",
+              "key": "_ABILITY_GrapplingHookSkill_Step",
+              "doOffStage": true,
+              "value": 0
+            }
+          ]
+        },
+        "UNIQUE_GrapplingHookSkill_SkillHandler": {
+          "isUnique": true,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_ABILITY_GrapplingHookSkill_Step",
+              "valueSteps": [0.5, 1.5, 3.5],
+              "modifierNameSteps": [
+                "UNIQUE_GrapplingHookSkill_PreSkill",
+                "UNIQUE_GrapplingHookSkill_ThrowHook"
+              ]
+            },
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_ABILITY_GrapplingHookSkill_Step",
+              "valueSteps": [2.5, 4.5],
+              "modifierNameSteps": ["UNIQUE_GrapplingHookSkill_SkillStart"]
+            }
+          ],
+          "onAdded": [
+            {
+              //技能第一步（0=>1)
+              "$type": "SetGlobalValue",
+              "key": "_ABILITY_GrapplingHookSkill_Step",
+              "value": 1
+            }
+          ],
+          "onRemoved": [
+            {
+              //抵达后Step=4，服务于意外打断
+              "$type": "SetGlobalValue",
+              "key": "_ABILITY_GrapplingHookSkill_Step",
+              "value": 0,
+              "doOffStage": true,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ABILITY_GrapplingHookSkill_Step",
+                  "value": 3,
+                  "compareType": "LessAndEqual"
+                }
+              ]
+            }
+          ]
+        },
+        //切换空中技能
+        "Hook_SwitchAirSkill": {
+          "modifierMixins": [
+            {
+              "$type": "AvatarChangeSkillMixin",
+              "priority": "Playmode",
+              "index": -1, //不希望替换槽但也想让它有飞行技能
+              "flySkillID": 20044,
+              "jumpSkillID": 20044
+            },
+            {
+              "$type": "AttachToStateIDMixin",
+              "stateIDs": ["Fly", "Fall"],
+              "modifierName": "ChangePlayMode_FlyMark",
+              "isCheckOnAttach": true
+            },
+            {
+              "$type": "AttachToStateIDMixin",
+              "stateIDs": ["Jump"],
+              "modifierName": "ChangePlayMode_JumpMark_Handler",
+              "isCheckOnAttach": true
+            },
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_ABILITY_GrapplingHookSkill_JoypadAirSkill_Mark",
+              "valueSteps": [-0.5, 0.5, 5.5],
+              "removeAppliedModifier": true,
+              "modifierNameSteps": ["Blank", "ChangePlayModeForJoypad"]
+            }
+          ]
+        },
+        "ChangePlayModeForJoypad": {
+          "onAdded": [
+            {
+              "$type": "ChangePlayMode",
+              "toPlayMode": "GrapplingHook",
+              "muteRemoteAction": true,
+              "doOffStage": true
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "ChangePlayMode",
+              "toPlayMode": "Normal",
+              "muteRemoteAction": true,
+              "doOffStage": true
+            }
+          ]
+        },
+        "ChangePlayMode_FlyMark": {
+          "onAdded": [
+            {
+              "$type": "AddGlobalValue",
+              "key": "_ABILITY_GrapplingHookSkill_JoypadAirSkill_Mark",
+              "value": 1,
+              "useLimitRange": true,
+              "maxValue": 5,
+              "minValue": 0,
+              "doOffStage": true
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "AddGlobalValue",
+              "key": "_ABILITY_GrapplingHookSkill_JoypadAirSkill_Mark",
+              "value": -1,
+              "useLimitRange": true,
+              "maxValue": 5,
+              "minValue": 0,
+              "doOffStage": true
+            }
+          ]
+        },
+        "ChangePlayMode_JumpMark_Handler": {
+          "thinkInterval": 0.7,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "modifierName": "ChangePlayMode_JumpMark"
+            }
+          ]
+        },
+        "ChangePlayMode_JumpMark": {
+          "onAdded": [
+            {
+              "$type": "AddGlobalValue",
+              "key": "_ABILITY_GrapplingHookSkill_JoypadAirSkill_Mark",
+              "value": 1,
+              "useLimitRange": true,
+              "maxValue": 5,
+              "minValue": 0,
+              "doOffStage": true
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "AddGlobalValue",
+              "key": "_ABILITY_GrapplingHookSkill_JoypadAirSkill_Mark",
+              "value": -1,
+              "useLimitRange": true,
+              "maxValue": 5,
+              "minValue": 0,
+              "doOffStage": true
+            }
+          ]
+        },
+        "UNIQUE_GrapplingHookSkill_PreSkill": {
+          //Step=1
+          "isUnique": true,
+          //霸体
+          "properties": {
+            "Actor_EndureDelta": 0.0
+          },
+          "onAdded": [
+            {
+              //尝试浮空
+              "$type": "AttachModifier",
+              "modifierName": "RushMoveOnGround"
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "UNIQUE_StreamingOptimization"
+            },
+            {
+              "$type": "DoWatcherSystemAction",
+              "watcherId": 81260,
+              "authorityOnly": true
+            }
+          ]
+        },
+        "RushMoveOnGround": {
+          //Step=1，悬空判定
+          "duration": 0.06,
+          "properties": {
+            "Actor_EndureDelta": 0
+          },
+          "onAdded": [
+            {
+              "$type": "Predicated",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetAltitude",
+                  "value": 0.5,
+                  "logic": "LesserOrEqual"
+                }
+              ],
+              "successActions": [
+                {
+                  //移除全身力
+                  "$type": "RemoveVelocityForce",
+                  "forces": ["RushMoveType", "InertiaType"]
+                },
+                {
+                  //角色向上的RushMove
+                  "$type": "FixedAvatarRushMove",
+                  "target": "Self",
+                  "toPos": {
+                    "$type": "ConfigBornBySelf",
+                    "offset": {
+                      "x": 0,
+                      "y": 0.5,
+                      "z": 0
+                    }
+                  },
+                  "maxRange": 2,
+                  "timeRange": 0.05, //曾经0.16
+                  "animatorStateIDs": ["ActivitySkill_GrapplingHook"],
+                  "isInAir": true
+                }
+              ]
+            }
+          ],
+          "onRemoved": [
+            {
+              //移除全身力
+              "$type": "RemoveVelocityForce",
+              "forces": ["RushMoveType", "InertiaType"]
+            },
+            {
+              //尝试再次Trigger隐形
+              "$type": "AddGlobalValue",
+              "key": "Avatar_HookVisible",
+              "value": 1
+            },
+            {
+              //进入抛绳
+              "$type": "SetGlobalValue",
+              "key": "_ABILITY_GrapplingHookSkill_Step",
+              "value": 2,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ABILITY_GrapplingHookSkill_Step",
+                  "value": 1,
+                  "compareType": "Equal"
+                }
+              ]
+            }
+          ]
+        },
+        "UNIQUE_GrapplingHookSkill_ThrowHook": {
+          //Step=2 & 3
+          "isUnique": true,
+          "properties": {
+            "Actor_EndureDelta": 0
+          },
+          "modifierMixins": [
+            {
+              "$type": "ThrowGrapplingHookMixin",
+              "effectPattern": "Eff_SceneObj_Grapple_01_Line",
+              "positionKey": "_GrapplingHook_TargetPos",
+              "onHookReached": [
+                {
+                  //步进
+                  "$type": "SetGlobalValue",
+                  "key": "_ABILITY_GrapplingHookSkill_Step",
+                  "value": 3,
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "_ABILITY_GrapplingHookSkill_Step",
+                      "value": 2,
+                      "compareType": "Equal"
+                    }
+                  ]
+                },
+                {
+                  "$type": "AttachModifier",
+                  "modifierName": "HookEffectTrigger"
+                }
+              ]
+            },
+            {
+              "$type": "GrapplingHookMoveStayInPlaceMixin"
+            }
+          ],
+          "onAdded": []
+        },
+        "UNIQUE_GrapplingHookSkill_SkillStart": {
+          //Step=3 & 4
+          "isUnique": true,
+          "modifierMixins": [
+            {
+              "$type": "GrapplingHookMoveMixin",
+              "onArrived": [
+                //钩爪Move抵达后触发
+                {
+                  //推进到脱离
+                  "$type": "SetGlobalValue",
+                  "key": "_ABILITY_GrapplingHookSkill_Step",
+                  "value": 4,
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "_ABILITY_GrapplingHookSkill_Step",
+                      "value": 3,
+                      "compareType": "Equal"
+                    }
+                  ]
+                },
+                {
+                  "$type": "ApplyModifier",
+                  "modifierName": "GrapplingHook_ArrivedRushMove"
+                }
+              ],
+              "upForceValue": 5.0,
+              "upForceTime": 1.0,
+              "arriveDistance": 0.5
+            },
+            {
+              //拉远镜头
+              "$type": "ModifyCameraMaxDistanceMixin",
+              "MaxDistance": 10,
+              "ResetToMaxOnStart": true,
+              "LerpInDuration": 0.2,
+              "LerpOutDuration": 0.7
+            },
+            {
+              "$type": "TriggerPostProcessEffectMixin",
+              "postEffectAssetName": "PostEffect_Skiff_Sprint",
+              "duration": 0
+            }
+          ],
+          "onAdded": [
+            {
+              "$type": "GrapplingHookRushMove",
+              "toPos": {
+                "$type": "ConfigBornByGlobalValue",
+                "positionKey": "_GrapplingHook_TargetPos",
+                "offset": {
+                  "x": 0,
+                  "y": -0.5,
+                  "z": 0
+                },
+                "direction": {
+                  "$type": "ConfigDirectionByGlobalValue",
+                  "directionKey": "_GrapplingHook_TargetDir"
+                }
+              },
+              "speed": 15,
+              "accSpeed": 10,
+              "maxSpeed": 20,
+              "animatorStateIDs": [
+                "ActivitySkill_GrapplingHook",
+                "Fly",
+                "Standby",
+                "Run"
+              ],
+              "isInAir": true,
+              "predicates": [
+                {
+                  //防止4串进来
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ABILITY_GrapplingHookSkill_Step",
+                  "value": 3,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "AttachModifier",
+              "modifierName": "Camera_Blur",
+              "predicates": [
+                {
+                  //防止4串进来
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ABILITY_GrapplingHookSkill_Step",
+                  "value": 3,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "DebugLog",
+              "content": "!!!!!!!!!!!Camera_Blur!!!!!!!!!!"
+            }
+          ]
+        },
+        "UNIQUE_GrapplingHookSkill_HookHideHanlde": {
+          "isUnique": true,
+          "modifierMixins": [
+            {
+              "$type": "DoActionOnGlobalValueChangeMixin",
+              "globalValueKey": "Avatar_HookVisible",
+              "actions": [
+                {
+                  //角色隐形
+                  "$type": "TriggerSetVisible",
+                  "visible": false,
+                  "predicates": [
+                    {
+                      //是否符合隐身需求
+                      "$type": "ByTargetGlobalValue",
+                      "key": "Avatar_HookVisible",
+                      "value": 1,
+                      "compareType": "MoreThanAndEqual"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "onAdded": [
+            {
+              //角色隐形
+              "$type": "TriggerSetVisible",
+              "visible": false
+            }
+          ],
+          "onRemoved": [
+            {
+              //结束隐形
+              "doOffStage": true,
+              "$type": "SetGlobalValue",
+              "key": "Avatar_HookVisible",
+              "value": 0
+            },
+            {
+              //角色显形
+              "$type": "TriggerSetVisible",
+              "visible": true,
+              "canBeHandledOnRecover": true,
+              "doOffStage": true
+            }
+          ]
+        },
+        //球特效
+        "UNIQUE_GrapplingHookSkill_GrassCoreEffect": {
+          //包含球、失重、特效
+          "isUnique": true,
+          "properties": {
+            "Actor_AddGravityScale": -2
+          },
+          "onAdded": [
+            {
+              //角色失重
+              "$type": "SetVelocityIgnoreAirGY",
+              "ignoreAirGY": true
+            },
+            {
+              "$type": "FireEffect",
+              "effectPattern": "Eff_SceneObj_Grapple_01_MoveIn"
+            },
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_SceneObj_Grapple_01_Moving",
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "direction": {
+                  "$type": "ConfigDirectionByGlobalValue",
+                  "directionKey": "_GrapplingHook_TargetDir"
+                }
+              }
+            },
+            {
+              //使用钩爪时保底移除隐身，反对应Modifier残留
+              "$type": "RemoveUniqueModifier",
+              "target": "Self",
+              "modifierName": "UNIQUE_GrapplingHookSkill_HookHideHanlde"
+            },
+            {
+              "doOffStage": true,
+              "$type": "AttachModifier",
+              "modifierName": "UNIQUE_GrapplingHookSkill_HookHideHanlde"
+            }
+          ],
+          "onRemoved": [
+            {
+              "doOffStage": true,
+              "$type": "SetVelocityIgnoreAirGY",
+              "ignoreAirGY": false
+            },
+            {
+              "doOffStage": true,
+              "$type": "RemoveVelocityForce",
+              "forces": ["RushMoveType", "InertiaType"]
+            },
+            {
+              "$type": "FireEffect",
+              "effectPattern": "Eff_SceneObj_Grapple_01_MoveOut"
+            },
+            {
+              "doOffStage": true,
+              "$type": "ApplyModifier",
+              "modifierName": "GrapplingHook_SkillCharge"
+            }
+          ]
+        },
+        "GrapplingHook_SkillCharge": {
+          "duration": 1.0,
+          "onRemoved": [
+            {
+              //充能
+              "doOffStage": true,
+              "$type": "SetGlobalValue",
+              "key": "AVATAR_GrapplingHookSkill",
+              "value": 100,
+              "useLimitRange": true,
+              "maxValue": 100,
+              "minValue": 0
+            }
+          ]
+        },
+        "GrapplingHook_ArrivedRushMove": {
+          //角色落地前的RushMove
+          "duration": 0.2,
+          "properties": {
+            "Actor_AddGravityScale": -2
+          },
+          "onAdded": [
+            {
+              //摄像头解除
+              "doOffStage": true,
+              "$type": "AvatarExitCameraShot"
+            },
+            {
+              //角色失重
+              "$type": "SetVelocityIgnoreAirGY",
+              "ignoreAirGY": true
+            },
+            {
+              //移除全身力
+              "$type": "RemoveVelocityForce",
+              "forces": ["InertiaType", "GrapplingHookMoveType"]
+            },
+            {
+              //角色向上的RushMove
+              "$type": "FixedAvatarRushMove",
+              "target": "CurLocalAvatar",
+              "toPos": {
+                "$type": "ConfigBornBySelf",
+                "offset": {
+                  "x": 0,
+                  "y": 1.0,
+                  "z": 0
+                }
+              },
+              "maxRange": 0.5,
+              "timeRange": 0.05, //曾经0.16
+              "animatorStateIDs": ["ActivitySkill_GrapplingHook", "DropDown"],
+              "isInAir": true
+            }
+          ],
+          "onRemoved": [
+            {
+              //角色失重
+              "$type": "SetVelocityIgnoreAirGY",
+              "ignoreAirGY": false
+            },
+            {
+              //直接落地 解除 => GrapplingHook_SkillHandler
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "GrapplingHook_Drop"
+            },
+            {
+              //技能结束 解除=>UNIQUE_GrapplingHookSkill_GrassCoreEffect ，解除失重、变人等
+              "$type": "SetGlobalValue",
+              "key": "_ABILITY_GrapplingHookSkill_Step",
+              "value": 0
+            }
+          ]
+        },
+        //镜头模糊
+        "Camera_Blur": {
+          "duration": 0.2,
+          "modifierMixins": [
+            {
+              "$type": "CameraBlurMixin",
+              "cameraRadialBlur": {
+                "power": 1.0,
+                "fadeTime": 0.1
+              }
+            }
+          ]
+        },
+        //streaming优化
+        "UNIQUE_StreamingOptimization": {
+          "duration": 4.0,
+          "isUnique": true,
+          "modifierMixins": [
+            {
+              "$type": "StreamingModifierMixin"
+            }
+          ]
+        },
+        "GrapplingHook_Init": {
+          "stacking": "MultipleRefresh",
+          "stackingOption": {
+            "maxModifierNumForMultipleType": 1
+          },
+          "onAdded": [
+            {
+              //推进到脱离
+              "$type": "SetGlobalValue",
+              "key": "_ABILITY_GrapplingHookSkill_Step",
+              "value": 0
+            },
+            {
+              //直接落地 解除 => GrapplingHook_SkillHandler
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "GrapplingHook_Drop"
+            },
+            {
+              "doOffStage": true,
+              "$type": "SetVelocityIgnoreAirGY",
+              "ignoreAirGY": false
+            },
+            {
+              "$type": "RemoveVelocityForce",
+              "forces": [
+                "RushMoveType",
+                "InertiaType",
+                "FixedRushMoveType",
+                "SpeedupType",
+                "GrapplingHookMoveType"
+              ]
+            }
+          ]
+        },
+        "HookEffectTrigger": {
+          "onAdded": [
+            {
+              //角色在钩爪位置Attach一个Effect（这个Action就本地玩家看看吧）
+              "$type": "AttachEffect",
+              "muteRemoteAction": true,
+              "effectPattern": "Eff_SceneObj_GrappleHook_01_Active",
+              "born": {
+                "$type": "ConfigBornByGlobalValue",
+                "positionKey": "_GrapplingHook_TargetPos"
+              }
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_SceneObj_Grapple_01_Line",
+              "parameter": "Get"
+            }
+          ]
+        }
+      }
     }
   },
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  //	须弥钩爪角色技能变化
+  //
+  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "GrapplingHookSkill_AvatarAbility_Dummy",
-      "isDynamicAbility": true
+      "isDynamicAbility": true,
+      "onAdded": []
     }
   },
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  //	须弥钩爪物件白盒
+  //
+  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "GrapplingHookSkill_Ability_Dummy",
-      "isDynamicAbility": true
+      "isDynamicAbility": true,
+      "onAdded": [],
+      "onAbilityStart": []
     }
   },
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  //	死域AbilityGroup（参考DynamicAbility_MichiaeMatsuri_Pressure）
+  //
+  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "DynamicAbility_DeathZone",
+      "isDynamicAbility": true,
+      "abilitySpecials": {
+        "DeathZoneMaxHPRarioEachLevel": 0.095,
+        "DeathZoneSubHurRate": 0.04,
+        "DeathZoneLevelNum": 1,
+        "DeathZoneExtraAttackCD": 3 //死域重击CD
+      },
+      "onAdded": [
+        //进入死域后上AbilityGroup
+        {
+          //初始化
+          "$type": "SetGlobalValue",
+          "key": "DeathZoneGV_ExtraAttack",
+          "value": 0
+        },
+        {
+          //初始化
+          "$type": "SetGlobalValue",
+          "key": "DeathZoneGV_ExtraHeal",
+          "value": 0
+        },
+        {
+          //加载LoseHP的控制器
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_DeathZoneController"
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "RefreshLevelNumAndModifier"
+        },
+        {
+          "$type": "DoWatcherSystemAction",
+          "watcherId": 10010,
+          "authorityOnly": true
+        }
+      ],
+      "onRemoved": [
+        //离开死域时的逻辑处理
+        {
+          //所有Avatars移除Debuff
+          "$type": "RemoveModifier",
+          "target": "CurTeamAvatars",
+          "doOffStage": true,
+          "modifierName": "UNIQUE_DynamicAbility_DeathZone_Debuff_Avatar"
+        }
+      ],
       "abilityMixins": [
+        //检测死域等级变化时的响应
         {
           "$type": "DoActionOnGlobalValueChangeMixin",
           "globalValueKey": "SGV_DeathZone_ErosionLevel",
@@ -2005,22 +2103,14 @@
           "modifierName": "UNIQUE_FirstRefreshLevelNumAndModifier"
         }
       ],
-      "abilitySpecials": {
-        "DeathZoneMaxHPRarioEachLevel": 0.0949999988079071,
-        "DeathZoneSubHurRate": 0.03999999910593033,
-        "DeathZoneLevelNum": 1.0,
-        "DeathZoneExtraAttackCD": 3.0
-      },
       "modifiers": {
         "RefreshLevelNumAndModifier": {
+          //刷新等级数和DebuffModifier
+          "duration": 0.1,
           "stacking": "MultipleRefresh",
           "stackingOption": {
-            "abilitySpecialName": "",
-            "maxModifierNumForMultipleType": 1.0
+            "maxModifierNumForMultipleType": 1
           },
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValueToOverrideMap",
@@ -2028,40 +2118,40 @@
               "overrideMapKey": "DeathZoneLevelNum"
             },
             {
+              //所有Avatars获得Debuff
               "$type": "ApplyModifier",
               "target": "CurTeamAvatars",
-              "RotationDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_DynamicAbility_DeathZone_Debuff_Avatar"
             }
           ]
         },
         "UNIQUE_FirstRefreshLevelNumAndModifier": {
-          "modifierName": "",
+          //初始化时刷新等级数和DebuffModifier
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValueToOverrideMap",
-              "target": "Team",
               "globalValueKey": "SGV_DeathZone_ErosionLevel",
-              "overrideMapKey": "DeathZoneLevelNum"
+              "overrideMapKey": "DeathZoneLevelNum",
+              "target": "Team"
             },
             {
+              //所有Avatars获得Debuff
               "$type": "ApplyModifier",
-              "RotationDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_DynamicAbility_DeathZone_Debuff_Avatar"
             }
           ]
         },
         "UNIQUE_DeathZoneController": {
-          "modifierName": "",
+          //1：当层数>=10时，玩家开始扣血逻辑。2：当受到死域重击时，处理的逻辑。
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
               "globalValueKey": "SGV_DeathZone_ErosionLevel",
-              "valueSteps": [9.5, 11.0],
+              "valueSteps": [9.5, 11],
               "modifierNameSteps": [
                 "UNIQUE_DynamicAbility_DeathZone_LoseHp_Logic"
               ]
@@ -2069,108 +2159,24 @@
             {
               "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
               "globalValueKey": "DeathZoneGV_ExtraAttack",
-              "valueSteps": [0.5, 10.0],
+              "valueSteps": [0.5, 10],
               "modifierNameSteps": ["UNIQUE_DeathZone_ExtraAttack"]
             },
             {
               "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
               "globalValueKey": "DeathZoneGV_ExtraHeal",
-              "valueSteps": [0.5, 10.0],
+              "valueSteps": [0.5, 10],
               "modifierNameSteps": ["UNIQUE_DeathZone_ExtraHeal"]
             }
           ]
         },
         "UNIQUE_DynamicAbility_DeathZone_Debuff_Avatar": {
+          //死域与层数关联的效果
+          "isUnique": true,
+          "isLimitedProperties": true,
           "stacking": "MultipleRefresh",
           "stackingOption": {
-            "abilitySpecialName": "",
-            "maxModifierNumForMultipleType": 1.0
-          },
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_MaxHPRatio": [
-              0.0,
-              1.0,
-              "DeathZoneMaxHPRarioEachLevel",
-              "MUL",
-              "DeathZoneLevelNum",
-              "MUL",
-              "SUB"
-            ],
-            "Actor_FireSubHurtDelta": [
-              0.0,
-              1.0,
-              "DeathZoneSubHurRate",
-              "MUL",
-              "DeathZoneLevelNum",
-              "MUL",
-              "SUB"
-            ],
-            "Actor_ElecSubHurtDelta": [
-              0.0,
-              1.0,
-              "DeathZoneSubHurRate",
-              "MUL",
-              "DeathZoneLevelNum",
-              "MUL",
-              "SUB"
-            ],
-            "Actor_WaterSubHurtDelta": [
-              0.0,
-              1.0,
-              "DeathZoneSubHurRate",
-              "MUL",
-              "DeathZoneLevelNum",
-              "MUL",
-              "SUB"
-            ],
-            "Actor_GrassSubHurtDelta": [
-              0.0,
-              1.0,
-              "DeathZoneSubHurRate",
-              "MUL",
-              "DeathZoneLevelNum",
-              "MUL",
-              "SUB"
-            ],
-            "Actor_WindSubHurtDelta": [
-              0.0,
-              1.0,
-              "DeathZoneSubHurRate",
-              "MUL",
-              "DeathZoneLevelNum",
-              "MUL",
-              "SUB"
-            ],
-            "Actor_IceSubHurtDelta": [
-              0.0,
-              1.0,
-              "DeathZoneSubHurRate",
-              "MUL",
-              "DeathZoneLevelNum",
-              "MUL",
-              "SUB"
-            ],
-            "Actor_RockSubHurtDelta": [
-              0.0,
-              1.0,
-              "DeathZoneSubHurRate",
-              "MUL",
-              "DeathZoneLevelNum",
-              "MUL",
-              "SUB"
-            ],
-            "Actor_PhysicalSubHurtDelta": [
-              0.0,
-              1.0,
-              "DeathZoneSubHurRate",
-              "MUL",
-              "DeathZoneLevelNum",
-              "MUL",
-              "SUB"
-            ]
+            "maxModifierNumForMultipleType": 1
           },
           "onAdded": [
             {
@@ -2178,44 +2184,62 @@
               "content": "TDAbility_DynamicAbility_DeathZone: 角色在死域内综合效果"
             }
           ],
-          "isLimitedProperties": true
+          "properties": {
+            //MaxHPRatio
+            "Actor_MaxHPRatio": "-1*%DeathZoneMaxHPRarioEachLevel*%DeathZoneLevelNum",
+            //所有抗性下降
+            "Actor_FireSubHurtDelta": "-1*%DeathZoneSubHurRate*%DeathZoneLevelNum",
+            "Actor_ElecSubHurtDelta": "-1*%DeathZoneSubHurRate*%DeathZoneLevelNum",
+            "Actor_WaterSubHurtDelta": "-1*%DeathZoneSubHurRate*%DeathZoneLevelNum",
+            "Actor_GrassSubHurtDelta": "-1*%DeathZoneSubHurRate*%DeathZoneLevelNum",
+            "Actor_WindSubHurtDelta": "-1*%DeathZoneSubHurRate*%DeathZoneLevelNum",
+            "Actor_IceSubHurtDelta": "-1*%DeathZoneSubHurRate*%DeathZoneLevelNum",
+            "Actor_RockSubHurtDelta": "-1*%DeathZoneSubHurRate*%DeathZoneLevelNum",
+            "Actor_PhysicalSubHurtDelta": "-1*%DeathZoneSubHurRate*%DeathZoneLevelNum"
+          }
         },
         "UNIQUE_DynamicAbility_DeathZone_LoseHp_Logic": {
-          "modifierName": "",
+          //特定层数下定时LoseHp
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 10.0,
+          "thinkInterval": 10,
+          "onThinkIntervalIsFixedUpdate": true,
           "state": "UnlockFrequencyLimit",
+          "onThinkInterval": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "UNIQUE_DynamicAbility_DeathZone_LoseHp",
+              "predicates": [
+                {
+                  "$type": "ByGameTimeIsLocked",
+                  "isLocked": false
+                }
+              ]
+            }
+          ],
           "onRemoved": [
             {
               "$type": "RemoveModifier",
               "modifierName": "UNIQUE_DynamicAbility_DeathZone_LoseHp"
             }
-          ],
-          "onThinkInterval": [
-            {
-              "$type": "ApplyModifier",
-              "predicates": [
-                {
-                  "$type": "ByGameTimeIsLocked"
-                }
-              ],
-              "modifierName": "UNIQUE_DynamicAbility_DeathZone_LoseHp"
-            }
-          ],
-          "APPLHAOALHF": true
+          ]
         },
         "UNIQUE_DynamicAbility_DeathZone_LoseHp": {
-          "modifierName": "",
+          //扣除HP逻辑封装
           "isUnique": true,
-          "HCJLIGBLGJA": 9.0,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 2.0,
+          "duration": 9,
+          "thinkInterval": 2,
           "onAdded": [
             {
+              //台后扣血
               "$type": "LoseHP",
               "target": "CurTeamAvatars",
-              "RotationDampTime": true,
+              "amountByTargetMaxHPRatio": 1,
+              "enableInvincible": true, //无敌可以抵挡这个扣血行为
+              "enableLockHP": false, //锁血可以抵挡这个扣血行为
+              "lethal": true,
+              "doOffStage": true,
+              "disableWhenLoading": true,
+              "useMeta": true,
               "predicates": [
                 {
                   "$type": "ByNot",
@@ -2226,37 +2250,45 @@
                   ]
                 },
                 {
-                  "$type": "ByGameTimeIsLocked"
+                  "$type": "ByGameTimeIsLocked",
+                  "isLocked": false
                 }
-              ],
-              "amountByCasterMaxHPRatio": 1.0,
-              "enableInvincible": true,
-              "disableWhenLoading": true,
-              "amount": true
+              ]
             },
             {
+              //台前扣血
               "$type": "LoseHP",
               "target": "CurLocalAvatar",
-              "RotationDampTime": true,
+              "amountByTargetMaxHPRatio": 1,
+              "enableInvincible": true, //无敌可以抵挡这个扣血行为
+              "enableLockHP": false, //锁血可以抵挡这个扣血行为
+              "lethal": true,
+              "doOffStage": true,
+              "disableWhenLoading": true,
+              "useMeta": true,
               "predicates": [
                 {
                   "$type": "ByIsLocalAvatar"
                 },
                 {
-                  "$type": "ByGameTimeIsLocked"
+                  "$type": "ByGameTimeIsLocked",
+                  "isLocked": false
                 }
-              ],
-              "amountByCasterMaxHPRatio": 1.0,
-              "enableInvincible": true,
-              "disableWhenLoading": true,
-              "amount": true
+              ]
             }
           ],
           "onThinkInterval": [
             {
+              //台后扣血
               "$type": "LoseHP",
               "target": "CurTeamAvatars",
-              "RotationDampTime": true,
+              "amountByTargetMaxHPRatio": 1,
+              "enableInvincible": true, //无敌可以抵挡这个扣血行为
+              "enableLockHP": false, //锁血可以抵挡这个扣血行为
+              "lethal": true,
+              "doOffStage": true,
+              "disableWhenLoading": true,
+              "useMeta": true,
               "predicates": [
                 {
                   "$type": "ByNot",
@@ -2267,53 +2299,55 @@
                   ]
                 },
                 {
-                  "$type": "ByGameTimeIsLocked"
+                  "$type": "ByGameTimeIsLocked",
+                  "isLocked": false
                 }
-              ],
-              "amountByCasterMaxHPRatio": 1.0,
-              "enableInvincible": true,
-              "disableWhenLoading": true,
-              "amount": true
+              ]
             },
             {
+              //台前扣血
               "$type": "LoseHP",
               "target": "CurLocalAvatar",
-              "RotationDampTime": true,
+              "amountByTargetMaxHPRatio": 1,
+              "enableInvincible": true, //无敌可以抵挡这个扣血行为
+              "enableLockHP": false, //锁血可以抵挡这个扣血行为
+              "lethal": true,
+              "doOffStage": true,
+              "disableWhenLoading": true,
+              "useMeta": true,
               "predicates": [
                 {
                   "$type": "ByIsLocalAvatar"
                 },
                 {
-                  "$type": "ByGameTimeIsLocked"
+                  "$type": "ByGameTimeIsLocked",
+                  "isLocked": false
                 }
-              ],
-              "amountByCasterMaxHPRatio": 1.0,
-              "enableInvincible": true,
-              "disableWhenLoading": true,
-              "amount": true
+              ]
             }
           ]
         },
         "UNIQUE_DeathZone_ExtraAttack": {
-          "modifierName": "",
+          //死域重击效果
           "isUnique": true,
-          "HCJLIGBLGJA": "DeathZoneExtraAttackCD",
-          "bonusCriticalHurt": 100.0,
+          "duration": "%DeathZoneExtraAttackCD",
           "onAdded": [
             {
+              //死域值+10
               "$type": "AddRegionalPlayVarValue",
-              "GBNJKAHMHBB": "DeathZoneExtraErosion",
-              "EHHEIMLLONF": 10.0
+              "varType": "DeathZoneExtraErosion",
+              "addValue": 10.0
             },
             {
+              //通用死域重击表现
               "$type": "FireEffect",
-              "target": "CurLocalAvatar",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_MaranaNexus_Skill_Hit",
+              "effectPattern": "Eff_SceneObj_MaranaNexus_Skill_Hit",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
+                "attachPointTargetType": "Target",
                 "attachPointName": "RootNode"
               },
-              "EBHJMLOKDGB": -1.0
+              "target": "CurLocalAvatar"
             },
             {
               "$type": "DoWatcherSystemAction",
@@ -2323,62 +2357,60 @@
           ],
           "onRemoved": [
             {
+              //角色身上特殊特效表现
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "DeathZoneGV_ExtraAttack",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         },
         "UNIQUE_DeathZone_ExtraHeal": {
-          "modifierName": "",
+          //死域重击效果
           "isUnique": true,
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1,
+          "onAdded": [
+            {
+              //死域值-10
+              "$type": "AddRegionalPlayVarValue",
+              "varType": "DeathZoneExtraErosion",
+              "addValue": -10.0
+            }
+          ],
           "modifierMixins": [
             {
               "$type": "DeathZoneRegionalPlayMixin"
             }
           ],
-          "onAdded": [
-            {
-              "$type": "AddRegionalPlayVarValue",
-              "GBNJKAHMHBB": "DeathZoneExtraErosion",
-              "EHHEIMLLONF": -10.0
-            }
-          ],
           "onRemoved": [
             {
+              //角色身上特殊特效表现
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "DeathZoneGV_ExtraHeal",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         },
         "UNIQUE_Life_Point_Search": {
-          "stacking": "Unique",
-          "modifierName": "",
+          //生命源质搜索器
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
           "thinkInterval": 0.5,
           "onThinkInterval": [
             {
               "$type": "Predicated",
               "otherTargets": {
                 "$type": "SelectTargetsByTag",
+                "tag": "IS_Life_Point",
                 "topLimit": 1,
-                "sortType": "Nearest",
-                "tag": "IS_Life_Point"
+                "sortType": "Nearest" //从近开始选
               },
               "predicates": [
                 {
                   "$type": "ByTargetPositionToSelfPosition",
-                  "logic": "LesserOrEqual",
+                  "target": "Target",
                   "compareType": "XYZ",
-                  "ratio": 6.5
+                  "value": 6.5,
+                  "logic": "LesserOrEqual"
                 }
               ],
               "successActions": [
@@ -2392,10 +2424,10 @@
           ]
         },
         "UNIQUE_LifePointBuff": {
-          "modifierName": "",
+          //生命源质效果
+          "duration": 2.0,
           "isUnique": true,
-          "HCJLIGBLGJA": 2.0,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Refresh",
           "thinkInterval": 0.5,
           "modifierMixins": [
             {
@@ -2404,53 +2436,21 @@
           ],
           "onThinkInterval": [
             {
+              //死域值-10
               "$type": "AddRegionalPlayVarValue",
-              "GBNJKAHMHBB": "DeathZoneExtraErosion",
-              "EHHEIMLLONF": -10.0
+              "varType": "DeathZoneExtraErosion",
+              "addValue": -10.0
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "DeathZoneGV_ExtraAttack",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "DeathZoneGV_ExtraHeal",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_DeathZoneController"
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "RefreshLevelNumAndModifier"
-        },
-        {
-          "$type": "DoWatcherSystemAction",
-          "watcherId": 10010,
-          "authorityOnly": true
-        }
-      ],
-      "onRemoved": [
-        {
-          "$type": "RemoveModifier",
-          "target": "CurTeamAvatars",
-          "RotationDampTime": true,
-          "modifierName": "UNIQUE_DynamicAbility_DeathZone_Debuff_Avatar"
-        }
-      ],
-      "isDynamicAbility": true
+      }
     }
   },
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  // 小型草种子枝条（Buff效果)
+  //
+  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -2458,55 +2458,63 @@
       "abilityMixins": [
         {
           "$type": "WidgetMpSupportMixin",
-          "OCKBEGOIGDB": [
+          "succActions": [
             {
               "$type": "ApplyModifier",
               "target": "Other",
               "modifierName": "AddGrassSeed"
             },
             {
+              //被使用
               "$type": "SetGlobalValue",
-              "ratio": 2.0,
               "key": "_EnableInteract",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 2
             },
             {
+              //运营埋点用
               "$type": "ExecuteGadgetLua",
-              "param1": 70310198,
-              "param2": 1
+              "param1": 70310198, //GadgetID
+              "param2": 1 //区分序号，小草种子为1
             }
           ]
         }
       ],
       "modifiers": {
-        "Blank": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
+        "Blank": {},
         "AddGrassSeed": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
+          //avatar层，传递草种子变化
+          "duration": 1,
           "onAdded": [
             {
+              //G引导
               "$type": "DoWatcherSystemAction",
               "watcherId": 10009,
               "authorityOnly": true
             },
             {
+              //若其拥有大型草种子则将其移除
               "$type": "RemoveUniqueModifier",
               "target": "Team",
-              "modifierName": "UNIQUE_GrassSeedCreate_Team_Handle_Big"
+              "modifierName": "UNIQUE_GrassSeedCreate_Team_Handle_Big",
+              "predicate": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Team",
+                  "key": "_GrassSeedCreate_Big_Count",
+                  "value": 1,
+                  "compareType": "MoreThanAndEqual"
+                }
+              ]
             },
             {
+              //草种子计数加满(根据思傲反馈直接塞满)
               "$type": "AddGlobalValue",
               "target": "Team",
-              "ratio": 3.0,
               "key": "_GrassSeedCreate_Count",
+              "value": 3,
               "useLimitRange": true,
-              "maxValue": 3.0,
-              "minValue": 0.0
+              "maxValue": 3,
+              "minValue": 0
             },
             {
               "$type": "ApplyModifier",
@@ -2516,16 +2524,16 @@
           ]
         },
         "UNIQUE_GrassSeedCreate_Team_Handle": {
-          "modifierName": "",
+          //该modifier最多有3个，与大种子互斥，时限统一，当其duration结束时，会将草种子清空
           "isUnique": true,
-          "HCJLIGBLGJA": 30.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 30, //草种子总持续时间
+          "stacking": "Refresh",
           "modifierMixins": [
             {
+              //特效相关
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_GrassSeedCreate_Count",
-              "defaultGlobalValueOnCreate": 0.0,
-              "valueSteps": [-10.0, 0.5, 1.5, 2.5, 3.5],
+              "valueSteps": [-10, 0.5, 1.5, 2.5, 3.5],
               "modifierNameSteps": [
                 "Blank",
                 "GrassSeedCreate_Effect_Lv1_Team",
@@ -2534,10 +2542,10 @@
               ]
             },
             {
+              //效果相关
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_GrassSeedCreate_Count",
-              "defaultGlobalValueOnCreate": 0.0,
-              "valueSteps": [-10.0, 0.5, 3.5],
+              "valueSteps": [-10, 0.5, 3.5],
               "modifierNameSteps": ["Blank", "GrassSeedCreate_Team_ExtraAttack"]
             }
           ],
@@ -2547,25 +2555,25 @@
               "content": "草种子Buff遭到卸载"
             },
             {
+              //草种子计数-1
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_GrassSeedCreate_Count",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0,
+              "target": "Self"
             }
           ]
         },
         "UNIQUE_GrassSeedCreate_ExtraAttack": {
-          "modifierName": "",
+          //entity被重击击中时，消耗草种子一枚，并产生一次草范围攻击，CD见AttackCD
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Other",
-              "RotationDampTime": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
+                  //该次攻击为重击
                   "$type": "ByAttackTags",
                   "attackTags": ["ExtraAttack"]
                 },
@@ -2574,202 +2582,215 @@
                   "entityTypes": ["Gadget", "Monster", "Gear", "Platform"]
                 },
                 {
+                  //草种子CD攻击结束
                   "$type": "ByTargetGlobalValue",
                   "target": "Team",
                   "key": "_GrassSeedCreate_AttackCD",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 },
                 {
+                  //身上草种子>=1
                   "$type": "ByTargetGlobalValue",
                   "target": "Team",
                   "key": "_GrassSeedCreate_Count",
-                  "ratio": 1.0,
+                  "value": 1,
                   "compareType": "MoreThanAndEqual"
                 }
               ],
               "successActions": [
                 {
+                  //_GrassSeedDummy_BornPos存储在Team上
                   "$type": "SetGlobalPos",
-                  "target": "Team",
-                  "RotationDampTime": true,
                   "key": "_GrassSeedDummy_BornPos",
+                  "target": "Team",
                   "born": {
                     "$type": "ConfigBornByHitPoint",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 0.0
+                      "x": 0,
+                      "y": 0,
+                      "z": 0
                     }
-                  }
+                  },
+                  "setTarget": true,
+                  "doOffStage": true
                 },
                 {
-                  "$type": "CreateGadget",
+                  //受击点附近创造Dummy点
+                  "$type": "CreateGadget", //Ningguang_ElementalBurst_Bullet_Dummy 41027018
                   "target": "Team",
-                  "RotationDampTime": true,
+                  "gadgetID": 70310208,
+                  "campID": 5001,
+                  "campTargetType": "All",
+                  "ownerIs": "Self",
                   "born": {
                     "$type": "ConfigBornByGlobalValue",
                     "positionKey": "_GrassSeedDummy_BornPos",
-                    "directionKey": ""
+                    "onGround": false
                   },
-                  "gadgetID": 70310208,
-                  "campID": 5001,
-                  "campTargetType": "All"
+                  "doOffStage": true
                 },
                 {
                   "$type": "ApplyModifier",
-                  "RotationDampTime": true,
-                  "modifierName": "GrassSeedCreate_CreateSeed"
+                  "modifierName": "GrassSeedCreate_CreateSeed",
+                  "doOffStage": true
                 }
               ]
             }
           ]
         },
         "GrassSeedCreate_CreateSeed": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.1,
           "onRemoved": [
             {
               "$type": "Predicated",
+              "doOffStage": true,
               "otherTargets": {
                 "$type": "SelectTargetsByChildren",
-                "topLimit": 1,
-                "configID": 70310208
+                "configID": 70310208,
+                "sortType": "Default",
+                "topLimit": 1
               },
-              "RotationDampTime": true,
               "targetPredicates": [
                 {
+                  //草种子CD攻击结束
                   "$type": "ByTargetGlobalValue",
                   "target": "Team",
                   "key": "_GrassSeedCreate_AttackCD",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
+                  //根据不同距离射出不同轨迹的草种子
                   "$type": "Predicated",
                   "target": "Other",
                   "targetPredicates": [
                     {
                       "$type": "ByTargetPositionToSelfPosition",
-                      "logic": "LesserOrEqual",
-                      "ratio": 5.0
+                      "compareType": "XZ",
+                      "value": 5,
+                      "logic": "LesserOrEqual"
                     }
                   ],
                   "successActions": [
                     {
+                      //近距离导弹
                       "$type": "TriggerBullet",
-                      "target": "Other",
-                      "RotationDampTime": true,
+                      "doOffStage": true,
                       "bulletID": 70310207,
+                      "target": "Other",
+                      "trackTarget": "Other",
                       "born": {
                         "$type": "ConfigBornByAttachPoint",
+                        "attachPointTargetType": "Self",
+                        "attachPointName": "Neck",
                         "offset": {
-                          "IBKBLDAJIMA": 0.0,
-                          "LKHJADIPBFL": -1.0,
-                          "PJCOKIGCJOK": 0.0
+                          "x": 0,
+                          "y": -1,
+                          "z": 0
                         },
                         "direction": {
-                          "$type": "ConfigDirectionByLookAtEntity",
+                          "$type": "ConfigDirectionByLookAtEntity", //这个朝向是角色正前方为{0,0,0}
+                          "useCorrectDir": true,
+                          "useRotation": true, //使用右手坐标系，y是朝向
                           "angleOffsetCorrect": {
-                            "IBKBLDAJIMA": -90.0,
-                            "LKHJADIPBFL": 0.0,
-                            "PJCOKIGCJOK": 45.0
-                          },
-                          "MIIJFBDNIEK": true
-                        },
-                        "attachPointName": "Neck",
-                        "attachPointTargetType": "Self"
-                      },
-                      "trackTarget": "Other"
+                            "x": -90, //拇指
+                            "y": 0, //食指
+                            "z": 45 //中指
+                          }
+                        }
+                      }
                     },
                     {
+                      //草种子计数-1,计数器最后执行
                       "$type": "AddGlobalValue",
+                      "doOffStage": true,
                       "target": "Team",
-                      "RotationDampTime": true,
-                      "ratio": -1.0,
                       "key": "_GrassSeedCreate_Count",
+                      "value": -1,
                       "useLimitRange": true,
-                      "maxValue": 3.0,
-                      "minValue": 0.0
+                      "maxValue": 3,
+                      "minValue": 0
                     }
                   ],
                   "failActions": [
+                    //远距离斜上角抛射
                     {
+                      //发射子弹
                       "$type": "TriggerBullet",
-                      "target": "Other",
-                      "RotationDampTime": true,
+                      "doOffStage": true,
                       "bulletID": 70310207,
+                      "target": "Other",
+                      "trackTarget": "Other",
                       "born": {
                         "$type": "ConfigBornBySelf",
                         "offset": {
-                          "IBKBLDAJIMA": 1.0,
-                          "LKHJADIPBFL": 1.5,
-                          "PJCOKIGCJOK": 0.0
+                          "x": 1.0,
+                          "y": 1.5,
+                          "z": 0.0
                         },
                         "direction": {
                           "$type": "ConfigDirectionByLookAtEntity",
+                          "useCorrectDir": true,
+                          "useRotation": true, //使用右手坐标系，y是朝向
                           "angleOffsetCorrect": {
-                            "IBKBLDAJIMA": -45.0,
-                            "LKHJADIPBFL": 90.0,
-                            "PJCOKIGCJOK": 0.0
-                          },
-                          "MIIJFBDNIEK": true
+                            "x": -45,
+                            "y": 90,
+                            "z": 0
+                          }
                         }
-                      },
-                      "trackTarget": "Other"
+                      }
                     },
                     {
+                      //草种子计数-1,计数器最后执行
                       "$type": "AddGlobalValue",
+                      "doOffStage": true,
                       "target": "Team",
-                      "RotationDampTime": true,
-                      "ratio": -1.0,
                       "key": "_GrassSeedCreate_Count",
+                      "value": -1,
                       "useLimitRange": true,
-                      "maxValue": 3.0,
-                      "minValue": 0.0
+                      "maxValue": 3,
+                      "minValue": 0
                     }
                   ]
                 },
                 {
+                  //CD计时
                   "$type": "ApplyModifier",
+                  "modifierName": "GrassSeedCreate_AreaGrassDamage_Timer",
                   "target": "Team",
-                  "RotationDampTime": true,
-                  "modifierName": "GrassSeedCreate_AreaGrassDamage_Timer"
+                  "doOffStage": true
                 }
               ]
             }
           ]
         },
+        //AttachMixin用
         "GrassSeedCreate_AreaGrassDamage_Timer": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
+          //每次攻击时，给Team挂计时器
+          "duration": 1,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "_GrassSeedCreate_AttackCD",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_GrassSeedCreate_AttackCD",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         },
+        //一些传递用于的Modifier
         "GrassSeedCreate_Team_ExtraAttack": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          //GV>0时，赋予角色特殊攻击Buff。
           "modifierMixins": [
+            //始终保证队伍角色均有该能力
             {
               "$type": "LocalAvatarsMixin",
               "modifierName": "UNIQUE_GrassSeedCreate_ExtraAttack"
@@ -2777,8 +2798,7 @@
           ]
         },
         "GrassSeedCreate_Effect_Lv1_Team": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          //特效Lv1
           "modifierMixins": [
             {
               "$type": "CurLocalAvatarMixinV2",
@@ -2787,8 +2807,7 @@
           ]
         },
         "GrassSeedCreate_Effect_Lv2_Team": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          //特效Lv2
           "modifierMixins": [
             {
               "$type": "CurLocalAvatarMixinV2",
@@ -2797,8 +2816,7 @@
           ]
         },
         "GrassSeedCreate_Effect_Lv3_Team": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          //特效Lv3
           "modifierMixins": [
             {
               "$type": "CurLocalAvatarMixinV2",
@@ -2807,41 +2825,40 @@
           ]
         },
         "GrassSeedCreate_Effect_Lv1": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          //Eff_SceneObj_IceSeed_Around_01
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_GrassSeed_01_Idle01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_GrassSeed_01_Idle01"
             }
           ]
         },
         "GrassSeedCreate_Effect_Lv2": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          //Eff_SceneObj_IceSeed_Around_02
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_GrassSeed_01_Idle02",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_GrassSeed_01_Idle02"
             }
           ]
         },
         "GrassSeedCreate_Effect_Lv3": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          //Eff_SceneObj_IceSeed_Around_03
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_GrassSeed_01_Idle03",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_GrassSeed_01_Idle03"
             }
           ]
         }
       }
     }
   },
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  // 大型草种子枝条（Buff效果)
+  //
+  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -2849,49 +2866,54 @@
       "abilityMixins": [
         {
           "$type": "WidgetMpSupportMixin",
-          "OCKBEGOIGDB": [
+          "succActions": [
             {
               "$type": "ApplyModifier",
               "target": "Other",
               "modifierName": "AddGrassSeed"
             },
             {
+              //被使用
               "$type": "SetGlobalValue",
-              "ratio": 2.0,
               "key": "_EnableInteract",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 2
             },
             {
+              //运营埋点用
               "$type": "ExecuteGadgetLua",
-              "param1": 70310198,
-              "param2": 2
+              "param1": 70310198, //GadgetID
+              "param2": 2 //区分序号，大草种子为2
             }
           ]
         }
       ],
       "modifiers": {
-        "Blank": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
+        "Blank": {},
         "AddGrassSeed": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
+          //avatar层，传递草种子变化
+          "duration": 1,
           "onAdded": [
             {
+              //若其拥有小型草种子则将其移除
               "$type": "RemoveUniqueModifier",
               "target": "Team",
-              "modifierName": "UNIQUE_GrassSeedCreate_Team_Handle"
+              "modifierName": "UNIQUE_GrassSeedCreate_Team_Handle",
+              "predicate": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Team",
+                  "key": "_GrassSeedCreate_Count",
+                  "value": 1,
+                  "compareType": "MoreThanAndEqual"
+                }
+              ]
             },
             {
+              //设大型草种子为1
               "$type": "SetGlobalValue",
               "target": "Team",
-              "ratio": 1.0,
               "key": "_GrassSeedCreate_Count_Big",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             },
             {
               "$type": "ApplyModifier",
@@ -2901,23 +2923,23 @@
           ]
         },
         "UNIQUE_GrassSeedCreate_Team_Handle_Big": {
-          "modifierName": "",
+          //该modifier最多有1个，与小种子互斥，时限统一，当其duration结束时，会将草种子清空
           "isUnique": true,
-          "HCJLIGBLGJA": 30.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 30, //草种子总持续时间
+          "stacking": "Refresh",
           "modifierMixins": [
             {
+              //特效相关
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_GrassSeedCreate_Count_Big",
-              "defaultGlobalValueOnCreate": 0.0,
-              "valueSteps": [-10.0, 0.5, 1.5],
+              "valueSteps": [-10, 0.5, 1.5],
               "modifierNameSteps": ["Blank", "GrassSeedCreate_Effect_Big_Team"]
             },
             {
+              //效果相关
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_GrassSeedCreate_Count_Big",
-              "defaultGlobalValueOnCreate": 0.0,
-              "valueSteps": [-10.0, 0.5, 3.5],
+              "valueSteps": [-10, 0.5, 3.5],
               "modifierNameSteps": [
                 "Blank",
                 "GrassSeedCreate_Team_ExtraAttack_Big"
@@ -2930,35 +2952,35 @@
               "content": "大型草种子Buff遭到卸载"
             },
             {
+              //草种子计数-1
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_GrassSeedCreate_Count_Big",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0,
+              "target": "Self"
             }
           ]
         },
         "GrassSeedCreate_Team_ExtraAttack_Big": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "modifierMixins": [
+          //GV>0时，赋予角色特殊攻击Buff。
+          "onAdded": [
             {
-              "$type": "LocalAvatarsMixin",
+              "$type": "AttachModifier",
+              "target": "CurTeamAvatars",
               "modifierName": "UNIQUE_GrassSeedCreate_ExtraAttack_Big"
             }
           ]
         },
         "UNIQUE_GrassSeedCreate_ExtraAttack_Big": {
-          "modifierName": "",
+          //entity被重击击中时，消耗草种子一枚，并产生一次草范围攻击，CD见AttackCD
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Other",
-              "RotationDampTime": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
+                  //该次攻击为重击
                   "$type": "ByAttackTags",
                   "attackTags": ["ExtraAttack"]
                 },
@@ -2967,142 +2989,149 @@
                   "entityTypes": ["Gadget", "Monster", "Gear", "Platform"]
                 },
                 {
+                  //身上草种子>=1
                   "$type": "ByTargetGlobalValue",
                   "target": "Team",
                   "key": "_GrassSeedCreate_Count_Big",
-                  "ratio": 1.0,
+                  "value": 1,
                   "compareType": "MoreThanAndEqual"
                 }
               ],
               "successActions": [
                 {
+                  //_GrassSeedDummy_BornPos是存储在草种子上的
                   "$type": "SetGlobalPos",
-                  "target": "Team",
-                  "RotationDampTime": true,
                   "key": "_GrassSeedDummy_BornPos",
+                  "target": "Team",
                   "born": {
                     "$type": "ConfigBornByHitPoint",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 0.0
+                      "x": 0,
+                      "y": 0,
+                      "z": 0
                     }
-                  }
+                  },
+                  "setTarget": true,
+                  "doOffStage": true
                 },
                 {
-                  "$type": "CreateGadget",
+                  //受击点附近创造Dummy点
+                  "$type": "CreateGadget", //Ningguang_ElementalBurst_Bullet_Dummy 41027018
+                  "doOffStage": true,
                   "target": "Team",
-                  "RotationDampTime": true,
+                  "gadgetID": 70310208,
+                  "campID": 1001,
+                  "campTargetType": "All",
+                  "ownerIs": "Self",
                   "born": {
                     "$type": "ConfigBornByGlobalValue",
                     "positionKey": "_GrassSeedDummy_BornPos",
-                    "directionKey": ""
-                  },
-                  "gadgetID": 70310208,
-                  "campID": 1001,
-                  "campTargetType": "All"
+                    "onGround": false
+                  }
                 },
                 {
                   "$type": "ApplyModifier",
-                  "RotationDampTime": true,
-                  "modifierName": "GrassSeedCreate_CreateSeed"
+                  "modifierName": "GrassSeedCreate_CreateSeed",
+                  "doOffStage": true
                 }
               ]
             }
           ]
         },
         "GrassSeedCreate_CreateSeed": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.15000000596046448,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.10000000149011612,
+          "duration": 0.15, //错开时间让Dummy点创建成功
+          "thinkInterval": 0.1,
           "onRemoved": [
             {
               "$type": "Predicated",
+              "doOffStage": true,
               "otherTargets": {
                 "$type": "SelectTargetsByChildren",
-                "topLimit": 1,
-                "configID": 70310208
+                "configID": 70310208,
+                "sortType": "Default",
+                "topLimit": 1
               },
-              "RotationDampTime": true,
               "successActions": [
                 {
+                  //根据不同距离射出不同轨迹的草种子
                   "$type": "Predicated",
                   "target": "Other",
                   "targetPredicates": [
                     {
                       "$type": "ByTargetPositionToSelfPosition",
-                      "logic": "LesserOrEqual",
-                      "ratio": 5.0
+                      "compareType": "XZ",
+                      "value": 5,
+                      "logic": "LesserOrEqual"
                     }
                   ],
                   "successActions": [
                     {
+                      //近距离导弹
                       "$type": "TriggerBullet",
+                      "doOffStage": true,
                       "target": "Other",
-                      "RotationDampTime": true,
                       "bulletID": 70310209,
+                      "trackTarget": "Other",
                       "born": {
                         "$type": "ConfigBornByAttachPoint",
+                        "attachPointTargetType": "Self",
+                        "attachPointName": "Neck",
                         "offset": {
-                          "IBKBLDAJIMA": 0.0,
-                          "LKHJADIPBFL": -1.0,
-                          "PJCOKIGCJOK": 0.0
+                          "x": 0,
+                          "y": -1,
+                          "z": 0
                         },
                         "direction": {
-                          "$type": "ConfigDirectionByLookAtEntity",
+                          "$type": "ConfigDirectionByLookAtEntity", //这个朝向是角色正前方为{0,0,0}
+                          "useCorrectDir": true,
+                          "useRotation": true, //使用右手坐标系，y是朝向
                           "angleOffsetCorrect": {
-                            "IBKBLDAJIMA": -90.0,
-                            "LKHJADIPBFL": 0.0,
-                            "PJCOKIGCJOK": 45.0
-                          },
-                          "MIIJFBDNIEK": true
-                        },
-                        "attachPointName": "Neck",
-                        "attachPointTargetType": "Self"
-                      },
-                      "trackTarget": "Other"
+                            "x": -90, //拇指
+                            "y": 0, //食指
+                            "z": 45 //中指
+                          }
+                        }
+                      }
                     },
                     {
+                      //草种子计数为0
                       "$type": "SetGlobalValue",
-                      "target": "Team",
-                      "ratio": 0.0,
                       "key": "_GrassSeedCreate_Count_Big",
-                      "maxValue": 0.0,
-                      "minValue": 0.0
+                      "value": 0,
+                      "target": "Team"
                     }
                   ],
                   "failActions": [
                     {
+                      //发射子弹
                       "$type": "TriggerBullet",
+                      "doOffStage": true,
                       "target": "Other",
-                      "RotationDampTime": true,
                       "bulletID": 70310209,
+                      "trackTarget": "Other",
                       "born": {
                         "$type": "ConfigBornBySelf",
                         "offset": {
-                          "IBKBLDAJIMA": 1.0,
-                          "LKHJADIPBFL": 1.5,
-                          "PJCOKIGCJOK": 0.0
+                          "x": 1.0,
+                          "y": 1.5,
+                          "z": 0.0
                         },
                         "direction": {
                           "$type": "ConfigDirectionByAttackTarget",
                           "angleOffsetCorrect": {
-                            "IBKBLDAJIMA": -45.0,
-                            "LKHJADIPBFL": 90.0,
-                            "PJCOKIGCJOK": 0.0
+                            "x": -45,
+                            "y": 90,
+                            "z": 0
                           }
                         }
-                      },
-                      "trackTarget": "Other"
+                      }
                     },
                     {
+                      //草种子计数为0
                       "$type": "SetGlobalValue",
-                      "target": "Team",
-                      "ratio": 0.0,
                       "key": "_GrassSeedCreate_Count_Big",
-                      "maxValue": 0.0,
-                      "minValue": 0.0
+                      "value": 0,
+                      "target": "Team"
                     }
                   ]
                 }
@@ -3110,9 +3139,8 @@
             }
           ]
         },
+        //一些传递用于的Modifier
         "GrassSeedCreate_Effect_Big_Team": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "CurLocalAvatarMixinV2",
@@ -3121,25 +3149,34 @@
           ]
         },
         "GrassSeedCreate_Effect_Big": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_GrassSeed_02_Idle01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_GrassSeed_02_Idle01"
             }
           ]
         }
       }
     }
   },
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  // 草种子枝条（状态管理)
+  //
+  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_Area_Xm_Property_Ani_Tree_GrassSeedCreate_01_State",
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "RecoverHandle"
+        }
+      ],
       "abilityMixins": [
         {
+          //0是不可用，1是草种子，2是被使用
           "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
           "globalValueKey": "_EnableInteract",
           "valueSteps": [0.5, 1.5, 2.5],
@@ -3147,9 +3184,11 @@
         },
         {
           "$type": "AttachToGadgetStateMixin",
+          "gadgetState": 0,
           "modifierName": "EnableInteract"
         },
         {
+          //202 = 禁止交互
           "$type": "AttachToGadgetStateMixin",
           "gadgetState": 202,
           "modifierName": "CannotInteract"
@@ -3157,34 +3196,30 @@
       ],
       "modifiers": {
         "RecoverHandle": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "LLJDPEONHMA": [
+          "onReconnect": [
             {
+              //GV回滚时处理
               "$type": "SetGlobalValue",
+              "key": "_EnableInteract",
+              "value": 1,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_EnableInteract",
-                  "ratio": 2.0,
+                  "value": 2,
                   "compareType": "MoreThanAndEqual"
                 }
-              ],
-              "ratio": 1.0,
-              "key": "_EnableInteract",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              ]
             }
           ]
         },
         "Active": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          //激活后的物件效果
           "onAdded": [
             {
+              //显示草种子
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_AyusTwig_01_Seed",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_AyusTwig_01_Seed"
             },
             {
               "$type": "EnableGadgetInteeMp",
@@ -3193,83 +3228,79 @@
           ]
         },
         "PickUpGrassSeed": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 5.0,
-          "bonusCriticalHurt": 100.0,
+          //草种子被采集后的效果
+          "duration": 5.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_AyusTwig_01_Gather",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_AyusTwig_01_Gather"
             },
             {
-              "$type": "EnableGadgetInteeMp"
+              "$type": "EnableGadgetInteeMp",
+              "enable": false
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
+              "key": "_EnableInteract",
+              "value": 1,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_EnableInteract",
-                  "ratio": 2.0,
+                  "value": 2,
                   "compareType": "MoreThanAndEqual"
                 }
-              ],
-              "ratio": 1.0,
-              "key": "_EnableInteract",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              ]
             }
           ]
         },
         "EnableInteract": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "_EnableInteract",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_AyusTwig_01_Active",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_AyusTwig_01_Active"
             }
           ]
         },
         "CannotInteract": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          // 202 无法交互状态
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_EnableInteract",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         }
-      },
+      }
+    }
+  },
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  // 大型草种子枝条（状态管理)
+  // TODO:特效暂无
+  //
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Tree_GrassSeedCreate_02_State",
       "onAdded": [
         {
           "$type": "AttachModifier",
           "modifierName": "RecoverHandle"
         }
-      ]
-    }
-  },
-  {
-    "Default": {
-      "$type": "ConfigAbility",
-      "abilityName": "SceneObj_Area_Xm_Property_Ani_Tree_GrassSeedCreate_02_State",
+      ],
       "abilityMixins": [
         {
+          //0是不可用，1是草种子，2是被使用
           "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
           "globalValueKey": "_EnableInteract",
           "valueSteps": [0.5, 1.5, 2.5],
@@ -3277,6 +3308,7 @@
         },
         {
           "$type": "AttachToGadgetStateMixin",
+          "gadgetState": 0,
           "modifierName": "MusicState"
         },
         {
@@ -3285,6 +3317,7 @@
           "modifierName": "EnableInteract"
         },
         {
+          //202 = 禁止交互
           "$type": "AttachToGadgetStateMixin",
           "gadgetState": 202,
           "modifierName": "CannotInteract"
@@ -3292,34 +3325,30 @@
       ],
       "modifiers": {
         "RecoverHandle": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "LLJDPEONHMA": [
+          "onReconnect": [
             {
+              //GV回滚时处理
               "$type": "SetGlobalValue",
+              "key": "_EnableInteract",
+              "value": 1,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_EnableInteract",
-                  "ratio": 2.0,
+                  "value": 2,
                   "compareType": "MoreThanAndEqual"
                 }
-              ],
-              "ratio": 1.0,
-              "key": "_EnableInteract",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              ]
             }
           ]
         },
         "Active": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          //激活后的物件效果
           "onAdded": [
             {
+              //显示草种子
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_AyusTwig_02_Seed",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_AyusTwig_02_Seed"
             },
             {
               "$type": "EnableGadgetInteeMp",
@@ -3328,49 +3357,45 @@
           ]
         },
         "PickUpGrassSeed": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 5.0,
-          "bonusCriticalHurt": 100.0,
+          //草种子被采集后的效果
+          "duration": 5.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_AyusTwig_02_Gather",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_AyusTwig_02_Gather"
             },
             {
-              "$type": "EnableGadgetInteeMp"
+              "$type": "EnableGadgetInteeMp",
+              "enable": false
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
+              "key": "_EnableInteract",
+              "value": 1,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_EnableInteract",
-                  "ratio": 2.0,
+                  "value": 2,
                   "compareType": "MoreThanAndEqual"
                 }
-              ],
-              "ratio": 1.0,
-              "key": "_EnableInteract",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              ]
             }
           ]
         },
+        //_EmissionStrength
         "MusicState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "TriggerWidgetMusicGameMixin",
-              "HPHDCGHCKAB": 7,
-              "range": 8.0,
+              "musicId": 7,
+              "range": 8,
               "onSuccess": [
                 {
                   "$type": "ChangeGadgetState",
-                  "CMFMJHJLIPP": 201
+                  "state": 201
                 }
               ]
             }
@@ -3378,167 +3403,84 @@
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_EnableInteract",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             },
             {
               "$type": "SetMaterialParamFloatByTransform",
-              "canBeHandledOnRecover": true,
-              "FBIDGOMNBLJ": "Leaf",
-              "HFGGHONFMMJ": "_EmissionStrength",
-              "ratio": 0.0
+              "matName": "Leaf",
+              "patternName": "_EmissionStrength",
+              "value": 0,
+              "canBeHandledOnRecover": true
             },
             {
+              //音乐上锁
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_AyusTwig_02_Lock",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_AyusTwig_02_Lock"
             }
           ],
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_AyusTwig_02_Unlock",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_AyusTwig_02_Unlock"
             }
           ]
         },
         "EnableInteract": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "_EnableInteract",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             },
             {
               "$type": "SetMaterialParamFloatByTransform",
-              "canBeHandledOnRecover": true,
-              "FBIDGOMNBLJ": "Leaf",
-              "HFGGHONFMMJ": "_EmissionStrength",
-              "ratio": 3.5,
-              "JNFAMBPFJFM": true,
-              "HCALGEOPEGJ": 2.0
+              "matName": "Leaf",
+              "patternName": "_EmissionStrength",
+              "useCurve": true,
+              "lerpCurveIndex": 0,
+              "lerpTime": 2,
+              "value": 3.5,
+              "canBeHandledOnRecover": true
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_AyusTwig_02_Active",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_AyusTwig_02_Active"
             }
           ]
         },
         "CannotInteract": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          // 202 无法交互状态
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_EnableInteract",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "RecoverHandle"
-        }
-      ]
+      }
     }
   },
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  // 草种子子弹伤害
+  //
+  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_GrassSeedBullet_01_Damage",
       "abilitySpecials": {
-        "RandomTimeRatio": 0.0,
-        "VelocityRatio": 19.0,
-        "ElementLevelCo": 1.0,
+        "RandomTimeRatio": 0,
+        "VelocityRatio": 19,
+        "ElementLevelCo": 1,
         "DamageRatio": 2.0
-      },
-      "modifiers": {
-        "BulletEffect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_GrassSeed_01_Attack",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "SetRandomOverrideMapValue",
-              "predicates": [
-                {
-                  "$type": "ByTargetPositionToSelfPosition",
-                  "logic": "LesserOrEqual",
-                  "ratio": 5.0
-                }
-              ],
-              "valueRangeMax": 0.4000000059604645,
-              "valueRangeMin": 0.20000000298023224,
-              "overrideMapKey": "RandomTimeRatio"
-            },
-            {
-              "$type": "SetRandomOverrideMapValue",
-              "predicates": [
-                {
-                  "$type": "ByTargetPositionToSelfPosition",
-                  "ratio": 5.0
-                }
-              ],
-              "valueRangeMax": 0.6000000238418579,
-              "valueRangeMin": 0.30000001192092896,
-              "overrideMapKey": "RandomTimeRatio"
-            }
-          ]
-        },
-        "Timer": {
-          "modifierName": "",
-          "HCJLIGBLGJA": "RandomTimeRatio",
-          "bonusCriticalHurt": 100.0,
-          "onRemoved": [
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "AngularVelocityUp"
-            }
-          ]
-        },
-        "SetVisble": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "TriggerSetVisible"
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "TriggerSetVisible",
-              "visible": true
-            }
-          ]
-        },
-        "AngularVelocityUp": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_BulletMoveAngularVelocityRatio": "VelocityRatio"
-          }
-        }
       },
       "onAdded": [
         {
           "$type": "SetSystemValueToOverrideMap",
-          "RotationDampTime": true,
+          "doOffStage": true,
           "key": "ElementLevelCo",
           "type": "ElementLevelCo"
         },
@@ -3548,7 +3490,8 @@
         },
         {
           "$type": "ApplyModifier",
-          "modifierName": "SetVisble"
+          "modifierName": "SetVisble",
+          "target": "Self"
         },
         {
           "$type": "ApplyModifier",
@@ -3558,32 +3501,31 @@
       "onAbilityStart": [
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_GrassSeed_01_Hit",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_SceneObj_GrassSeed_01_Hit"
         },
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
+              "duration": 0.0,
               "triggerType": "TriggerNoRepeat",
+              "radius": 1.0,
               "born": {
                 "$type": "ConfigBornByCollisionPoint"
-              },
-              "DCMPFCIBIPA": 1.0
+              }
             },
             "attackInfo": {
               "attackTag": "GrassSeed",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
               "attackProperty": {
-                "CCNJGLPMIEP": 0.0,
+                "damageExtra": "%ElementLevelCo*%DamageRatio",
                 "elementType": "Grass",
-                "bonusCriticalHurt": 25.0,
-                "ignoreAttackerProperty": true,
                 "strikeType": "Pierce",
                 "attackType": "Range",
-                "damageExtra": ["ElementLevelCo", "DamageRatio", "MUL"],
+                "elementDurability": 25,
+                "enBreak": 30,
+                "ignoreAttackerProperty": true,
                 "trueDamage": true
               },
               "hitPattern": {
@@ -3591,63 +3533,48 @@
                 "hitImpulseType": "LV3"
               }
             }
-          },
-          "targetType": "Enemy"
+          }
         }
-      ]
-    }
-  },
-  {
-    "Default": {
-      "$type": "ConfigAbility",
-      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_GrassSeedBullet_02_Damage",
-      "abilitySpecials": {
-        "RandomTimeRatio": 0.0,
-        "VelocityRatio": 19.0,
-        "ElementLevelCo": 1.0,
-        "DamageRatio": 5.0
-      },
+      ],
       "modifiers": {
         "BulletEffect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_GrassSeed_02_Attack",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_GrassSeed_01_Attack"
             },
             {
               "$type": "SetRandomOverrideMapValue",
+              "overrideMapKey": "RandomTimeRatio",
+              "valueRangeMin": 0.2,
+              "valueRangeMax": 0.4,
               "predicates": [
                 {
                   "$type": "ByTargetPositionToSelfPosition",
-                  "logic": "LesserOrEqual",
-                  "ratio": 5.0
+                  "compareType": "XZ",
+                  "value": 5,
+                  "logic": "LesserOrEqual"
                 }
-              ],
-              "valueRangeMax": 0.4000000059604645,
-              "valueRangeMin": 0.20000000298023224,
-              "overrideMapKey": "RandomTimeRatio"
+              ]
             },
             {
               "$type": "SetRandomOverrideMapValue",
+              "overrideMapKey": "RandomTimeRatio",
+              "valueRangeMin": 0.3,
+              "valueRangeMax": 0.6,
               "predicates": [
                 {
                   "$type": "ByTargetPositionToSelfPosition",
-                  "ratio": 5.0
+                  "compareType": "XZ",
+                  "value": 5,
+                  "logic": "Greater"
                 }
-              ],
-              "valueRangeMax": 0.6000000238418579,
-              "valueRangeMin": 0.30000001192092896,
-              "overrideMapKey": "RandomTimeRatio"
+              ]
             }
           ]
         },
         "Timer": {
-          "modifierName": "",
-          "HCJLIGBLGJA": "RandomTimeRatio",
-          "bonusCriticalHurt": 100.0,
+          "duration": "%RandomTimeRatio",
           "onRemoved": [
             {
               "$type": "ApplyModifier",
@@ -3656,12 +3583,11 @@
           ]
         },
         "SetVisble": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.1,
           "onAdded": [
             {
-              "$type": "TriggerSetVisible"
+              "$type": "TriggerSetVisible",
+              "visible": false
             }
           ],
           "onRemoved": [
@@ -3672,17 +3598,33 @@
           ]
         },
         "AngularVelocityUp": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          //修改跟踪速度
           "properties": {
-            "Actor_BulletMoveAngularVelocityRatio": "VelocityRatio"
+            "Actor_BulletMoveAngularVelocityRatio": "%VelocityRatio"
           }
         }
+      }
+    }
+  },
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  // 大型草种子子弹伤害
+  //
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_GrassSeedBullet_02_Damage",
+      "abilitySpecials": {
+        "RandomTimeRatio": 0,
+        "VelocityRatio": 19,
+        "ElementLevelCo": 1,
+        "DamageRatio": 5.0
       },
       "onAdded": [
         {
           "$type": "SetSystemValueToOverrideMap",
-          "RotationDampTime": true,
+          "doOffStage": true,
           "key": "ElementLevelCo",
           "type": "ElementLevelCo"
         },
@@ -3692,7 +3634,8 @@
         },
         {
           "$type": "ApplyModifier",
-          "modifierName": "SetVisble"
+          "modifierName": "SetVisble",
+          "target": "Self"
         },
         {
           "$type": "ApplyModifier",
@@ -3702,33 +3645,32 @@
       "onAbilityStart": [
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_GrassSeed_02_Hit",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_SceneObj_GrassSeed_02_Hit"
         },
         {
           "$type": "TriggerAttackEvent",
-          "RotationDampTime": true,
+          "targetType": "Enemy",
+          "doOffStage": true,
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
+              "duration": 0.0,
               "triggerType": "TriggerNoRepeat",
+              "radius": 6.0,
               "born": {
                 "$type": "ConfigBornByCollisionPoint"
-              },
-              "DCMPFCIBIPA": 6.0
+              }
             },
             "attackInfo": {
               "attackTag": "GrassSeedBig",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
               "attackProperty": {
-                "CCNJGLPMIEP": 0.0,
+                "damageExtra": "%ElementLevelCo*%DamageRatio",
                 "elementType": "Grass",
-                "bonusCriticalHurt": 25.0,
-                "ignoreAttackerProperty": true,
                 "strikeType": "Pierce",
                 "attackType": "Range",
-                "damageExtra": ["ElementLevelCo", "DamageRatio", "MUL"],
+                "elementDurability": 25,
+                "enBreak": 30,
+                "ignoreAttackerProperty": true,
                 "trueDamage": true
               },
               "hitPattern": {
@@ -3736,64 +3678,146 @@
                 "hitImpulseType": "LV5"
               }
             }
-          },
-          "targetType": "Enemy"
+          }
         }
-      ]
+      ],
+      "modifiers": {
+        "BulletEffect": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_SceneObj_GrassSeed_02_Attack"
+            },
+            {
+              "$type": "SetRandomOverrideMapValue",
+              "overrideMapKey": "RandomTimeRatio",
+              "valueRangeMin": 0.2,
+              "valueRangeMax": 0.4,
+              "predicates": [
+                {
+                  "$type": "ByTargetPositionToSelfPosition",
+                  "compareType": "XZ",
+                  "value": 5,
+                  "logic": "LesserOrEqual"
+                }
+              ]
+            },
+            {
+              "$type": "SetRandomOverrideMapValue",
+              "overrideMapKey": "RandomTimeRatio",
+              "valueRangeMin": 0.3,
+              "valueRangeMax": 0.6,
+              "predicates": [
+                {
+                  "$type": "ByTargetPositionToSelfPosition",
+                  "compareType": "XZ",
+                  "value": 5,
+                  "logic": "Greater"
+                }
+              ]
+            }
+          ]
+        },
+        "Timer": {
+          "duration": "%RandomTimeRatio",
+          "onRemoved": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "AngularVelocityUp"
+            }
+          ]
+        },
+        "SetVisble": {
+          "duration": 0.1,
+          "onAdded": [
+            {
+              "$type": "TriggerSetVisible",
+              "visible": false
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "TriggerSetVisible",
+              "visible": true
+            }
+          ]
+        },
+        "AngularVelocityUp": {
+          //修改跟踪速度
+          "properties": {
+            "Actor_BulletMoveAngularVelocityRatio": "%VelocityRatio"
+          }
+        }
+      }
     }
   },
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  // 草种子子弹Dummy点
+  //
+  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_Area_Xm_Property_Prop_GrassSeedDummy_01_Ability",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "key": "GrassSeed_Dummy",
+          "value": 1
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "BeHitState"
+        }
+      ],
       "modifiers": {
         "BeHitState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          //被草种子攻击
           "onBeingHit": [
             {
               "$type": "ApplyModifier",
+              "target": "Self",
+              "modifierName": "DeathCall",
               "predicates": [
                 {
+                  //被草种子或大型草种子攻击时
                   "$type": "ByAttackTags",
+                  "target": "Target",
                   "attackTags": ["GrassSeed", "GrassSeedBig"]
                 }
-              ],
-              "modifierName": "DeathCall"
+              ]
             }
           ]
         },
         "DeathCall": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "KillSelf"
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 1.0,
-          "key": "GrassSeed_Dummy",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "AttachModifier",
-          "modifierName": "BeHitState"
-        }
-      ]
+      }
     }
   },
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  // 死域共生物_共通能力
+  //
+  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "GrassSeedChecker_Destory",
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "BeHitState"
+        }
+      ],
       "abilityMixins": [
         {
+          ///死域共生物共通逻辑，当死域解除时，将自己干掉
           "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
           "globalValueKey": "SGV_DeathZoneState",
           "valueSteps": [-0.5, 0.5],
@@ -3802,19 +3826,16 @@
       ],
       "modifiers": {
         "ExitDeathZone": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 3.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 3,
           "modifierMixins": [
             {
+              //因Trigger而死
               "$type": "DeathZoneMixin",
-              "JODPEBHBAOD": [
+              "disactiveHaloTrigger": [
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 1.0,
                   "key": "SelfDestory",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 1
                 }
               ]
             }
@@ -3822,45 +3843,36 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "SelfDestory",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             }
           ]
         },
         "BeHitState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          //被草种子攻击
           "onBeingHit": [
             {
               "$type": "SetGlobalValue",
+              "key": "SelfDestory",
+              "value": 1,
               "predicates": [
                 {
+                  //被草种子或大型草种子攻击时
                   "$type": "ByAttackTags",
+                  "target": "Target",
                   "attackTags": ["GrassSeed", "GrassSeedBig"]
                 },
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "CanDestoryBySeed",
-                  "ratio": 1.0,
+                  "value": 1,
                   "compareType": "NoneOrEqual"
                 }
-              ],
-              "ratio": 1.0,
-              "key": "SelfDestory",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              ]
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "BeHitState"
-        }
-      ]
+      }
     }
   }
 ]

@@ -1,93 +1,33 @@
 [
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Shaman_Rock_Spike
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Shaman_Rock_Spike",
-      "modifiers": {
-        "Spike_Damage_Timer": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.5,
-          "bonusCriticalHurt": 100.0,
-          "onRemoved": [
-            {
-              "$type": "TriggerAttackEvent",
-              "attackEvent": {
-                "attackPattern": {
-                  "$type": "ConfigAttackBox",
-                  "triggerType": "TriggerNoRepeat",
-                  "born": {
-                    "$type": "ConfigBornByGlobalValue",
-                    "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 1.25,
-                      "PJCOKIGCJOK": -0.75
-                    },
-                    "positionKey": "_MONSTER_SHAMAN_ROCK_SPIKE_POS",
-                    "directionKey": ""
-                  },
-                  "size": {
-                    "IBKBLDAJIMA": 1.25,
-                    "LKHJADIPBFL": 2.5,
-                    "PJCOKIGCJOK": 1.25
-                  }
-                },
-                "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
-                  "attackProperty": {
-                    "HBIOLEEGHPD": 0.5,
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Rock",
-                    "bonusCriticalHurt": 50.0,
-                    "strikeType": "Default",
-                    "enBreak": 50.0
-                  },
-                  "hitPattern": {
-                    "onHitEffectName": "default",
-                    "hitImpulseType": "LV2",
-                    "hitHaltTimeScale": 0.05000000074505806
-                  },
-                  "forceCameraShake": true,
-                  "cameraShake": {
-                    "shakeType": "CustomVector",
-                    "shakeRange": 0.03999999910593033,
-                    "shakeTime": 0.09000000357627869,
-                    "shakeDistance": 7.5,
-                    "shakeDir": {
-                      "y": 1.0
-                    }
-                  },
-                  "canBeModifiedBy": "OriginOwner"
-                }
-              },
-              "targetType": "Enemy"
-            }
-          ]
-        }
-      },
       "onAbilityStart": [
         {
           "$type": "SetGlobalPos",
           "target": "SelfAttackTarget",
           "key": "_MONSTER_SHAMAN_ROCK_SPIKE_POS",
+          "setTarget": false,
           "born": {
             "$type": "ConfigBornByPredicatePoint",
             "onGround": true,
             "alongGround": true,
             "timeForPredictive": 0.75
-          },
-          "setTarget": false
+          }
         },
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Shaman_Rock_NormalAttack_Spike",
+          "effectPattern": "Eff_Monster_Shaman_Rock_NormalAttack_Spike",
           "born": {
             "$type": "ConfigBornByGlobalValue",
-            "positionKey": "_MONSTER_SHAMAN_ROCK_SPIKE_POS",
-            "directionKey": ""
-          },
-          "EBHJMLOKDGB": -1.0
+            "positionKey": "_MONSTER_SHAMAN_ROCK_SPIKE_POS"
+          }
         },
         {
           "$type": "ApplyModifier",
@@ -95,8 +35,8 @@
         },
         {
           "$type": "AddGlobalValue",
-          "ratio": 1.0,
           "key": "_MONSTER_SHAMAN_ROCK_SPIKE",
+          "value": 1.0,
           "useLimitRange": true,
           "maxValue": 3.0,
           "minValue": 0.0
@@ -107,14 +47,15 @@
             {
               "$type": "ByTargetGlobalValue",
               "key": "_MONSTER_SHAMAN_ROCK_SPIKE",
-              "ratio": 3.0
+              "value": 3.0,
+              "compareType": "Equal"
             }
           ],
           "successActions": [
             {
               "$type": "AddGlobalValue",
-              "ratio": -10.0,
               "key": "_MONSTER_SHAMAN_ROCK_SPIKE",
+              "value": -10.0,
               "useLimitRange": true,
               "maxValue": 3.0,
               "minValue": 0.0
@@ -127,9 +68,74 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiers": {
+        "Spike_Damage_Timer": {
+          "duration": 1.5,
+          "onRemoved": [
+            {
+              "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
+              "attackEvent": {
+                "attackPattern": {
+                  "$type": "ConfigAttackBox",
+                  "triggerType": "TriggerNoRepeat",
+                  "size": {
+                    "x": 1.25,
+                    "y": 2.5,
+                    "z": 1.25
+                  },
+                  "born": {
+                    "$type": "ConfigBornByGlobalValue",
+                    "positionKey": "_MONSTER_SHAMAN_ROCK_SPIKE_POS",
+                    "offset": {
+                      "x": 0.0, // + means up, - means down
+                      "y": 1.25, // + means left, - means right
+                      "z": -0.75 // + means forward, - means backward
+                    }
+                  }
+                },
+                "attackInfo": {
+                  "canBeModifiedBy": "OriginOwner",
+                  "attackProperty": {
+                    "damagePercentage": 0.5,
+                    "strikeType": "Default",
+                    "elementType": "Rock",
+                    "elementDurability": 50,
+                    "enBreak": 50.0
+                  },
+                  "hitPattern": {
+                    "hitImpulseType": "LV2",
+                    "reboundRatio": 0,
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
+                    "muteHitText": false
+                  },
+                  "forceCameraShake": true,
+                  "cameraShake": {
+                    "shakeType": "CustomVector",
+                    "shakeRange": 0.04,
+                    "shakeTime": 0.09,
+                    "shakeDistance": 7.5,
+                    "shakeDir": {
+                      "x": 0,
+                      "y": 1,
+                      "z": 0
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  CreatePillar
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -146,10 +152,72 @@
           "modifierName": "ReturnToBorn_DestoryPillar"
         }
       ],
+      "onAbilityStart": [
+        {
+          "$type": "Predicated",
+          "otherTargets": {
+            "$type": "SelectTargetsByShape",
+            "shapeName": "CircleR15",
+            "centerBasedOn": "Self",
+            "campTargetType": "SelfCamp",
+            "campBasedOn": "Self"
+          },
+          "targetPredicates": [
+            {
+              "$type": "ByEntityTypes",
+              "entityTypes": ["Monster"]
+            },
+            {
+              "$type": "ByAny",
+              "predicates": [
+                {
+                  "$type": "ByHasFeatureTag",
+                  "featureTagIDs": [4001, 4901]
+                },
+                {
+                  "$type": "ByHasFeatureTag",
+                  "featureTagIDs": [4004, 4901]
+                }
+              ]
+            },
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_MONSTER_SHAMAN_ROCK_CREATEPILLAR",
+              "value": 1.0,
+              "compareType": "Equal"
+            }
+          ],
+          "successActions": [
+            {
+              "$type": "CreateGadget",
+              "target": "Target",
+              "gadgetID": 42103011,
+              "lifeByOwnerIsAlive": true,
+              "byServer": true,
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "onGround": true
+              }
+            }
+          ]
+        },
+        {
+          "$type": "RemoveModifier",
+          "modifierName": "CreatePillar_BS"
+        }
+      ],
+      "onKill": [
+        {
+          "$type": "RemoveUniqueModifier",
+          "otherTargets": {
+            "$type": "SelectTargetsByChildren",
+            "configID": 42103011
+          },
+          "modifierName": "UNIQUE_RockPillar_Element"
+        }
+      ],
       "modifiers": {
         "ReturnToBorn_DestoryPillar": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "RemoveUniqueModifier",
@@ -166,16 +234,15 @@
           ]
         },
         "CreatePillar_BS": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "Predicated",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR10",
+                "centerBasedOn": "Self",
                 "campTargetType": "SelfCamp",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
               "targetPredicates": [
                 {
@@ -207,117 +274,60 @@
           ]
         },
         "CreatePillar_Ready": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
               "key": "_MONSTER_SHAMAN_ROCK_CREATEPILLAR",
+              "value": 1.0,
               "useLimitRange": true,
               "maxValue": 1.0,
               "minValue": 0.0
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Shaman_Rock_Pillar_CreateBS",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Shaman_Rock_Pillar_CreateBS"
             }
           ],
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "ratio": -10.0,
               "key": "_MONSTER_SHAMAN_ROCK_CREATEPILLAR",
+              "value": -10.0,
               "useLimitRange": true,
               "maxValue": 1.0,
               "minValue": 0.0
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "Predicated",
-          "otherTargets": {
-            "$type": "SelectTargetsByShape",
-            "shapeName": "CircleR15",
-            "campTargetType": "SelfCamp",
-            "sizeRatio": 1.0
-          },
-          "targetPredicates": [
-            {
-              "$type": "ByEntityTypes",
-              "entityTypes": ["Monster"]
-            },
-            {
-              "$type": "ByAny",
-              "predicates": [
-                {
-                  "$type": "ByHasFeatureTag",
-                  "featureTagIDs": [4001, 4901]
-                },
-                {
-                  "$type": "ByHasFeatureTag",
-                  "featureTagIDs": [4004, 4901]
-                }
-              ]
-            },
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_MONSTER_SHAMAN_ROCK_CREATEPILLAR",
-              "ratio": 1.0
-            }
-          ],
-          "successActions": [
-            {
-              "$type": "CreateGadget",
-              "target": "Target",
-              "lifeByOwnerIsAlive": true,
-              "born": {
-                "$type": "ConfigBornByTarget",
-                "onGround": true
-              },
-              "gadgetID": 42103011,
-              "byServer": true
-            }
-          ]
-        },
-        {
-          "$type": "RemoveModifier",
-          "modifierName": "CreatePillar_BS"
-        }
-      ],
-      "onKill": [
-        {
-          "$type": "RemoveUniqueModifier",
-          "otherTargets": {
-            "$type": "SelectTargetsByChildren",
-            "configID": 42103011
-          },
-          "modifierName": "UNIQUE_RockPillar_Element"
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  RockPillar
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Shaman_RockPillar_Element",
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_RockPillar_Element"
+        }
+      ],
       "modifiers": {
         "UNIQUE_RockPillar_Element": {
           "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
           "elementType": "Rock",
-          "bonusCriticalHurt": 300.0,
+          "elementDurability": 300,
           "modifierMixins": [
             {
               "$type": "ElementShieldMixin",
               "elementType": "Rock",
-              "showDamageText": "",
-              "DJBPNOPNHFH": 360.0,
-              "shieldHP": 1.0,
+              "shieldHPRatio": 1.0,
               "damageRatio": 0.0,
               "onShieldSuccess": [
                 {
@@ -360,15 +370,14 @@
                 },
                 {
                   "$type": "FireEffect",
-                  "healLimitedByCasterMaxHPRatio": "Eff_Monster_Shaman_Rock_Pillar_BeHitFailed",
+                  "effectPattern": "Eff_Monster_Shaman_Rock_Pillar_BeHitFailed",
                   "born": {
                     "$type": "ConfigBornByTarget",
                     "direction": {
                       "$type": "ConfigDirectionByGlobalValue",
                       "directionKey": "_MONSTER_SHAMAN_ROCK_ELEMENTSHIELD_HIT"
                     }
-                  },
-                  "EBHJMLOKDGB": -1.0
+                  }
                 }
               ],
               "onShieldFailed": [
@@ -412,15 +421,14 @@
                 },
                 {
                   "$type": "FireEffect",
-                  "healLimitedByCasterMaxHPRatio": "Eff_Monster_Shaman_Rock_Pillar_BeHitSuccess",
+                  "effectPattern": "Eff_Monster_Shaman_Rock_Pillar_BeHitSuccess",
                   "born": {
                     "$type": "ConfigBornByTarget",
                     "direction": {
                       "$type": "ConfigDirectionByGlobalValue",
                       "directionKey": "_MONSTER_SHAMAN_ROCK_ELEMENTSHIELD_HIT"
                     }
-                  },
-                  "EBHJMLOKDGB": -1.0
+                  }
                 }
               ]
             },
@@ -433,26 +441,26 @@
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Shaman_Rock_Pillar_Create",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Shaman_Rock_Pillar_Create"
             },
             {
               "$type": "SetPoseBool",
               "target": "Owner",
               "boolID": "OnPillar",
-              "ratio": true
+              "value": true
             }
           ],
           "onRemoved": [
             {
               "$type": "SetPoseBool",
               "target": "Owner",
-              "boolID": "OnPillar"
+              "boolID": "OnPillar",
+              "value": false
             },
             {
               "$type": "SetAnimatorTrigger",
-              "target": "Owner",
-              "triggerID": "StopSupportAtk"
+              "triggerID": "StopSupportAtk",
+              "target": "Owner"
             },
             {
               "$type": "Predicated",
@@ -465,61 +473,60 @@
               "successActions": [
                 {
                   "$type": "FireEffect",
-                  "healLimitedByCasterMaxHPRatio": "Eff_Monster_Shaman_Rock_Pillar_Disappear",
-                  "EBHJMLOKDGB": -1.0
+                  "effectPattern": "Eff_Monster_Shaman_Rock_Pillar_Disappear"
                 }
               ],
               "failActions": [
                 {
                   "$type": "FireEffect",
-                  "healLimitedByCasterMaxHPRatio": "Eff_Monster_Shaman_Rock_Pillar_Explosion",
-                  "EBHJMLOKDGB": -1.0
+                  "effectPattern": "Eff_Monster_Shaman_Rock_Pillar_Explosion"
                 },
                 {
                   "$type": "TriggerAttackEvent",
+                  "targetType": "Alliance",
                   "attackEvent": {
                     "attackPattern": {
                       "$type": "ConfigAttackCircle",
                       "triggerType": "TriggerNoRepeat",
+                      "fanAngle": 360.0,
+                      "radius": 1.0,
                       "born": {
                         "$type": "ConfigBornBySelf",
                         "offset": {
-                          "IBKBLDAJIMA": 0.0,
-                          "LKHJADIPBFL": 2.5,
-                          "PJCOKIGCJOK": 0.0
+                          "x": 0.0,
+                          "y": 2.5,
+                          "z": 0.0
                         }
-                      },
-                      "DCMPFCIBIPA": 1.0
+                      }
                     },
                     "attackInfo": {
-                      "attackTag": "",
-                      "attenuationTag": "",
-                      "attenuationGroup": "default",
                       "attackProperty": {
-                        "HBIOLEEGHPD": 0.0,
-                        "CCNJGLPMIEP": 0.0,
-                        "bonusCriticalHurt": 100.0,
+                        "damagePercentage": 0.0,
                         "strikeType": "Blunt",
-                        "enBreak": 200.0,
-                        "attackType": "Melee"
+                        "attackType": "Melee",
+                        "enBreak": 200.0
                       },
                       "hitPattern": {
                         "onHitEffectName": "default",
-                        "hitImpulseType": "LV7"
+                        "hitImpulseType": "LV7",
+                        "hitHaltTime": 0,
+                        "hitHaltTimeScale": 0,
+                        "muteHitText": false
                       },
                       "forceCameraShake": true,
                       "cameraShake": {
                         "shakeType": "CustomVector",
-                        "shakeRange": 0.36000001430511475,
-                        "shakeTime": 0.30000001192092896,
+                        "shakeRange": 0.36,
+                        "shakeTime": 0.3,
                         "shakeDistance": 10.0,
                         "shakeDir": {
-                          "y": -1.0
+                          "x": 0,
+                          "y": -1,
+                          "z": 0
                         }
                       }
                     }
-                  },
-                  "targetType": "Alliance"
+                  }
                 }
               ]
             },
@@ -530,64 +537,61 @@
             }
           ]
         },
-        "Empty": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
+        "Empty": {},
         "RockPillar_Stage01": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "Normal",
-              "attachPoint": "",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Shaman_Rock_Pillar_Create"
+              "effectPattern": "Eff_Monster_Shaman_Rock_Pillar_Create"
             }
           ],
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Shaman_Rock_Pillar_Damaged",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Shaman_Rock_Pillar_Damaged"
             },
             {
               "$type": "SendEffectTrigger",
               "parameter": "Damaged",
-              "attachPoint": "",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Shaman_Rock_Pillar_Create"
+              "effectPattern": "Eff_Monster_Shaman_Rock_Pillar_Create"
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "UNIQUE_RockPillar_Element"
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  EscapeState
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Shaman_Rock_EscapeState",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Shaman_Rock_EscapeState",
+          "predicates": [
+            {
+              "$type": "ByTargetPositionToSelfPosition",
+              "compareType": "XZ",
+              "value": 5,
+              "logic": "Lesser"
+            }
+          ]
+        }
+      ],
       "modifiers": {
         "Shaman_Rock_EscapeState": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.75,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1.75,
           "onAdded": [
             {
               "$type": "SetPoseBool",
               "boolID": "EscapeState",
-              "ratio": true
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "SetPoseBool",
-              "boolID": "EscapeState"
+              "value": true
             }
           ],
           "onBeingHit": [
@@ -595,24 +599,23 @@
               "$type": "RemoveModifier",
               "modifierName": "Shaman_Rock_EscapeState"
             }
+          ],
+          "onRemoved": [
+            {
+              "$type": "SetPoseBool",
+              "boolID": "EscapeState",
+              "value": false
+            }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "predicates": [
-            {
-              "$type": "ByTargetPositionToSelfPosition",
-              "logic": "Lesser",
-              "ratio": 5.0
-            }
-          ],
-          "modifierName": "Shaman_Rock_EscapeState"
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  SteerAttack
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -621,37 +624,47 @@
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["NormalAttack_BS"],
-          "angularSpeed": 180.0,
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 1.0,
+          "angularSpeed": 180,
           "attackTrigger": "",
-          "attackDistance": 12.0
+          "attackDistance": 12
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["SupportAttack_BS"],
-          "angularSpeed": 180.0,
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 1.0,
+          "angularSpeed": 180,
           "attackTrigger": "",
-          "attackDistance": 12.0
+          "attackDistance": 12
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["MeleeAttack"],
-          "endNormalizedTime": 0.15000000596046448,
-          "angularSpeed": 180.0,
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 0.15,
+          "angularSpeed": 180,
           "attackTrigger": "",
-          "attackDistance": 12.0
+          "attackDistance": 12
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Turn"],
-          "startNormalizedTime": 0.20000000298023224,
+          "startNormalizedTime": 0.2,
           "endNormalizedTime": 0.75,
-          "angularSpeed": 120.0,
+          "angularSpeed": 120,
           "attackTrigger": "",
-          "attackDistance": 12.0
+          "attackDistance": 12
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  SupportAttack
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -665,23 +678,7 @@
       ],
       "modifiers": {
         "SupportAttackState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "thinkInterval": 5.0,
-          "onAdded": [
-            {
-              "$type": "AttachModifier",
-              "modifierName": "WeaponEffect_SupportAttack"
-            },
-            {
-              "$type": "AttachModifier",
-              "otherTargets": {
-                "$type": "SelectTargetsByChildren",
-                "configID": 42103011
-              },
-              "modifierName": "Shaman_RockPillar_Resonance"
-            }
-          ],
           "onThinkInterval": [
             {
               "$type": "Predicated",
@@ -689,9 +686,9 @@
               "targetPredicates": [
                 {
                   "$type": "ByTargetPositionToSelfPosition",
-                  "logic": "Lesser",
                   "compareType": "XYZ",
-                  "ratio": 10.0
+                  "value": 10,
+                  "logic": "Lesser"
                 }
               ],
               "successActions": [
@@ -711,49 +708,52 @@
                 }
               ]
             }
+          ],
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "modifierName": "WeaponEffect_SupportAttack"
+            },
+            {
+              "$type": "AttachModifier",
+              "otherTargets": {
+                "$type": "SelectTargetsByChildren",
+                "configID": 42103011
+              },
+              "modifierName": "Shaman_RockPillar_Resonance"
+            }
           ]
         },
         "WeaponEffect_SupportAttack": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Shaman_Rock_WeaponElement_Resonance",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Shaman_Rock_WeaponElement_Resonance"
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Shaman_Rock_SupportAttack_Gather",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Shaman_Rock_SupportAttack_Gather"
             }
           ]
         },
         "Shaman_RockPillar_Resonance": {
           "stacking": "Unique",
-          "modifierName": "",
-          "HCJLIGBLGJA": 4.5,
-          "bonusCriticalHurt": 100.0,
+          "thinkIntervalIgnoreTimeScale": true,
+          "duration": 4.5,
           "thinkInterval": 4.0,
-          "onAdded": [
-            {
-              "$type": "AttachModifier",
-              "modifierName": "Shaman_RockPillar_Resonance_Effect"
-            }
-          ],
           "onThinkInterval": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Shaman_Rock_Pillar_Impulse",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Shaman_Rock_Pillar_Impulse"
             },
             {
               "$type": "ApplyModifier",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR5",
+                "centerBasedOn": "Self",
                 "campTargetType": "Enemy",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
               "modifierName": "UNIQUE_Shaman_RockPillar_Resonance_Damage"
             },
@@ -762,42 +762,42 @@
               "modifierName": "Shaman_RockPillar_Resonance_Effect"
             }
           ],
-          "thinkIntervalIgnoreTimeScale": true
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "modifierName": "Shaman_RockPillar_Resonance_Effect"
+            }
+          ]
         },
         "Shaman_RockPillar_Resonance_Effect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Shaman_Rock_Pillar_Resonance",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Shaman_Rock_Pillar_Resonance"
             }
           ]
         },
         "UNIQUE_Shaman_RockPillar_Resonance_Damage": {
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "DamageByAttackValue",
+              "attacker": "Caster",
               "attackInfo": {
-                "attackTag": "",
-                "attenuationTag": "",
-                "attenuationGroup": "default",
                 "attackProperty": {
-                  "HBIOLEEGHPD": 1.0,
-                  "CCNJGLPMIEP": 0.0,
+                  "damagePercentage": 1.0,
                   "elementType": "Rock",
-                  "bonusCriticalHurt": 50.0,
+                  "elementDurability": 50,
                   "strikeType": "Default",
                   "enBreak": 0.0
                 },
                 "hitPattern": {
                   "onHitEffectName": "default",
-                  "hitImpulseType": "LV4"
+                  "hitImpulseType": "LV4",
+                  "hitHaltTime": 0,
+                  "hitHaltTimeScale": 0,
+                  "muteHitText": false
                 }
               }
             }

@@ -1,4 +1,9 @@
 [
+  ////////////////////////////////////////////////////////////////
+  //
+  //  SetPose
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -32,21 +37,53 @@
       "onAbilityStart": [
         {
           "$type": "SetPoseInt",
-          "intID": "ActionState"
+          "intID": "ActionState",
+          "value": 0
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Reset CD
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Animal_DogPrick_AIStateInitial",
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_Invincible",
+          "target": "Self"
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "DenyLockOn",
+          "target": "Self"
+        },
+        {
+          "$type": "AttachAbilityStateResistance",
+          "resistanceListID": 11001
+        }
+      ],
+      "modifiers": {
+        "UNIQUE_Invincible": {
+          "isUnique": true,
+          "state": "Invincible"
+        },
+        "DenyLockOn": {
+          "state": "DenyLockOn"
+        }
+      },
       "abilityMixins": [
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Turn"],
-          "endNormalizedTime": 0.20000000298023224,
-          "angularSpeed": 90.0,
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 0.2,
+          "angularSpeed": 90,
           "attackTrigger": "",
           "attackDistance": 1.5
         },
@@ -120,36 +157,14 @@
             }
           ]
         }
-      ],
-      "modifiers": {
-        "UNIQUE_Invincible": {
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "state": "Invincible"
-        },
-        "DenyLockOn": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "state": "DenyLockOn"
-        }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Invincible"
-        },
-        {
-          "$type": "AttachModifier",
-          "modifierName": "DenyLockOn"
-        },
-        {
-          "$type": "AttachAbilityStateResistance",
-          "resistanceListID": 11001
-        }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  BeHit
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -168,8 +183,9 @@
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Bark"],
+          "startNormalizedTime": 0.0,
           "endNormalizedTime": 0.5,
-          "angularSpeed": 30.0,
+          "angularSpeed": 30,
           "attackTrigger": "",
           "attackDistance": 1.5
         },
@@ -184,15 +200,21 @@
           "enterActions": [
             {
               "$type": "ApplyModifier",
-              "modifierName": "FleeCountDown"
+              "modifierName": "FleeCountDown",
+              "target": "Self"
             }
           ]
         }
       ],
+      "onAbilityStart": [
+        {
+          "$type": "SetAnimatorBool",
+          "boolID": "FleeState",
+          "value": true
+        }
+      ],
       "modifiers": {
         "BeHitDetect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onBeingHit": [
             {
               "$type": "Predicated",
@@ -207,12 +229,12 @@
                 {
                   "$type": "SetPoseBool",
                   "boolID": "FleeHasTarget",
-                  "ratio": true
+                  "value": true
                 },
                 {
                   "$type": "SetPoseBool",
                   "boolID": "FleeCommon",
-                  "ratio": true
+                  "value": true
                 },
                 {
                   "$type": "SetAnimatorTrigger",
@@ -223,78 +245,74 @@
                 {
                   "$type": "SetPoseBool",
                   "boolID": "FleeNoTarget",
-                  "ratio": true
+                  "value": true
                 },
                 {
                   "$type": "SetPoseBool",
                   "boolID": "FleeCommon",
-                  "ratio": true
+                  "value": true
                 },
                 {
                   "$type": "SetAnimatorBool",
                   "boolID": "FleeState",
-                  "ratio": true
+                  "value": true
                 }
               ]
             },
             {
               "$type": "SetPoseInt",
-              "intID": "ActionState"
+              "intID": "ActionState",
+              "value": 0
             }
           ]
         },
         "Disappear": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "StartDither",
-              "duration": 3.0
+              "duration": 3
             },
             {
               "$type": "KillSelf",
-              "duration": 2.5,
               "banDrop": true,
               "banExp": true,
-              "killSelfType": "Disappear"
+              "killSelfType": "Disappear",
+              "duration": 2.5
             }
           ]
         },
         "MuteAIHitFeeling": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
-              "$type": "SetAIHitFeeling"
+              "$type": "SetAIHitFeeling",
+              "enable": false
             }
           ]
         },
         "FleeCountDown": {
           "stacking": "Unique",
-          "modifierName": "",
-          "HCJLIGBLGJA": 30.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 30.0,
           "onRemoved": [
             {
               "$type": "SetPoseBool",
-              "boolID": "FleeCommon"
+              "boolID": "FleeCommon",
+              "value": false
             },
             {
               "$type": "SetAnimatorBool",
-              "boolID": "FleeState"
+              "boolID": "FleeState",
+              "value": false
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "SetAnimatorBool",
-          "boolID": "FleeState",
-          "ratio": true
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Special State Action Point Register & Release
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -308,21 +326,19 @@
       ],
       "modifiers": {
         "DogFeedPointRegister": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "RegisterAIActionPoint",
               "pointType": "DogFeedPoint"
             }
           ],
-          "onRemoved": [
+          "onKill": [
             {
               "$type": "ReleaseAIActionPoint",
               "pointType": "DogFeedPoint"
             }
           ],
-          "onKill": [
+          "onRemoved": [
             {
               "$type": "ReleaseAIActionPoint",
               "pointType": "DogFeedPoint"

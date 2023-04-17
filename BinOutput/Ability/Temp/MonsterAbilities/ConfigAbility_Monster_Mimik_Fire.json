@@ -1,5 +1,11 @@
 [
+  ////////////////////////////////////////////////////////////////
+  //
+  //  DigOutAttack Alert
+  //
+  ////////////////////////////////////////////////////////////////
   {
+    //钻出攻击的预警特效
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Mimik_Fire_DigOut_Alert",
@@ -7,46 +13,37 @@
         {
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "DigOut_BS",
-          "modifierName": "DigOut_Alert",
-          "normalizeEnd": 0.4000000059604645
+          "target": "Self",
+          "normalizeStart": 0,
+          "normalizeEnd": 0.4,
+          "modifierName": "DigOut_Alert"
         }
       ],
       "modifiers": {
         "DigOut_Alert": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Mimik_Fire_DigOutAttack_Warning",
+              "effectPattern": "Eff_Monster_Mimik_Fire_DigOutAttack_Warning",
+              "target": "Self",
               "born": {
                 "$type": "ConfigBornBySelf"
-              },
-              "EBHJMLOKDGB": -1.0
+              }
             }
           ]
         }
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Attack02
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Mimik_Fire_Attack02_Effect",
-      "modifiers": {
-        "Attack02_Effect": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 3.0,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Mimik_Fire_Attack02_01",
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        }
-      },
       "onAbilityStart": [
         {
           "$type": "ApplyModifier",
@@ -58,9 +55,29 @@
           "$type": "RemoveModifier",
           "modifierName": "Attack02_Effect"
         }
-      ]
+      ],
+      "modifiers": {
+        "Attack02_Effect": {
+          "duration": 3.0,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Mimik_Fire_Attack02_01"
+            }
+          ]
+        }
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  FruitManagement
+  //
+  ////////////////////////////////////////////////////////////////
+  //TODO:初始化果实数量
+  //TODO:吸收果实开始，扣减果实数量
+  //TODO:按顺序隐藏果实，定义1，2，3
+  //TODO:果实数量为0，开始逃跑
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -71,6 +88,7 @@
           "attackTag": "BurningDamage"
         },
         {
+          //第1颗果实存在的状态
           "$type": "AttachToPoseIDMixin",
           "poseIDs": [
             1, 2101, 2201, 2301, 3101, 3201, 3301, 1101, 1201, 1301, 5101, 5201,
@@ -80,6 +98,7 @@
           "modifierName": "UNIQUE_Fruit01"
         },
         {
+          //第2颗果实存在的状态
           "$type": "AttachToPoseIDMixin",
           "poseIDs": [
             1, 2201, 2301, 3201, 3301, 1201, 1301, 5201, 5301, 6201, 6301, 7201,
@@ -88,268 +107,300 @@
           "modifierName": "UNIQUE_Fruit02"
         },
         {
+          //第3颗果实存在的状态
           "$type": "AttachToPoseIDMixin",
           "poseIDs": [1, 2301, 3301, 1301, 5301, 6301, 7301, 8301, 8302],
           "modifierName": "UNIQUE_Fruit03"
         }
       ],
-      "abilitySpecials": {
-        "FruitCount": 3.0
-      },
+      "onAdded": [
+        {
+          //初始化果实数量GlobalValue
+          "$type": "AddGlobalValue",
+          "key": "_MONSTER_MIMIK_FRUITCOUNT",
+          "value": 3,
+          "useLimitRange": true,
+          "maxValue": 3,
+          "minValue": 0
+        }
+      ],
       "modifiers": {
         "UNIQUE_Fruit01": {
-          "modifierName": "",
+          //第1颗果实显示与隐藏
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
+            //TODO:
+            //显示果实，播放果实特效
             {
               "$type": "TriggerSetRenderersEnable",
               "renderNames": ["Lights01"],
-              "setEnable": true
+              "setEnable": true,
+              "target": "Self"
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Mimik_Fire_Fruit01_Idle",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Mimik_Fire_Fruit01_Idle"
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Mimik_Fire_Fruit_Appear",
+              "effectPattern": "Eff_Monster_Mimik_Fire_Fruit_Appear",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
                 "attachPointName": "Fruit01"
-              },
-              "EBHJMLOKDGB": -1.0
+              }
             }
           ],
           "onRemoved": [
+            //TODO:
+            //隐藏果实，播放果实消失特效
             {
               "$type": "Predicated",
               "otherTargets": {
                 "$type": "SelectTargetsByChildren",
-                "configID": 42601005
+                "configID": 42601005,
+                "sortType": "Default"
               },
               "targetPredicates": [
                 {
                   "$type": "ByTargetGlobalValue",
+                  "target": "Target",
                   "key": "_MONSTER_MIMIK_IS_FRUITMOVETARGET",
-                  "ratio": 1.0,
+                  "value": 1,
                   "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
                   "$type": "FireEffect",
-                  "healLimitedByCasterMaxHPRatio": "Eff_Monster_Mimik_Fire_Fruit_Bullet",
+                  "effectPattern": "Eff_Monster_Mimik_Fire_Fruit_Bullet",
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
+                    "attachPointName": "Fruit01",
                     "direction": {
                       "$type": "ConfigDirectionByAttachPoint",
-                      "angleOffset": {
-                        "IBKBLDAJIMA": 0.0,
-                        "LKHJADIPBFL": 180.0,
-                        "PJCOKIGCJOK": 0.0
-                      },
                       "attachPointName": "Fruit01",
-                      "attachPointTargetType": "Self"
-                    },
-                    "attachPointName": "Fruit01"
-                  },
-                  "EBHJMLOKDGB": -1.0
+                      "attachPointTargetType": "Self",
+                      "angleOffset": {
+                        "x": 0.0,
+                        "y": 180.0,
+                        "z": 0.0
+                      },
+                      "randomAngleHor": 0,
+                      "randomAngleVer": 0
+                    }
+                  }
                 },
                 {
                   "$type": "FireEffect",
-                  "healLimitedByCasterMaxHPRatio": "Eff_Monster_Mimik_Fire_Fruit_Disappear",
+                  "effectPattern": "Eff_Monster_Mimik_Fire_Fruit_Disappear",
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
                     "attachPointName": "Fruit01"
-                  },
-                  "EBHJMLOKDGB": -1.0
+                  }
                 }
               ]
             },
             {
               "$type": "TriggerSetRenderersEnable",
-              "renderNames": ["Lights01"]
+              "renderNames": ["Lights01"],
+              "setEnable": false,
+              "target": "Self"
             }
           ]
         },
         "UNIQUE_Fruit02": {
-          "modifierName": "",
+          //第2颗果实显示与隐藏
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
+            //TODO:
+            //显示果实，播放果实特效
             {
               "$type": "TriggerSetRenderersEnable",
               "renderNames": ["Lights02"],
-              "setEnable": true
+              "setEnable": true,
+              "target": "Self"
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Mimik_Fire_Fruit02_Idle",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Mimik_Fire_Fruit02_Idle"
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Mimik_Fire_Fruit_Appear",
+              "effectPattern": "Eff_Monster_Mimik_Fire_Fruit_Appear",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
                 "attachPointName": "Fruit02"
-              },
-              "EBHJMLOKDGB": -1.0
+              }
             }
           ],
           "onRemoved": [
+            //TODO:
+            //隐藏果实，播放果实消失特效
             {
               "$type": "Predicated",
               "otherTargets": {
                 "$type": "SelectTargetsByChildren",
-                "configID": 42601005
+                "configID": 42601005,
+                "sortType": "Default"
               },
               "targetPredicates": [
                 {
                   "$type": "ByTargetGlobalValue",
+                  "target": "Target",
                   "key": "_MONSTER_MIMIK_IS_FRUITMOVETARGET",
-                  "ratio": 1.0,
+                  "value": 1,
                   "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
                   "$type": "FireEffect",
-                  "healLimitedByCasterMaxHPRatio": "Eff_Monster_Mimik_Fire_Fruit_Bullet",
+                  "effectPattern": "Eff_Monster_Mimik_Fire_Fruit_Bullet",
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
+                    "attachPointName": "Fruit02",
                     "direction": {
                       "$type": "ConfigDirectionByAttachPoint",
-                      "angleOffset": {
-                        "IBKBLDAJIMA": 0.0,
-                        "LKHJADIPBFL": 180.0,
-                        "PJCOKIGCJOK": 0.0
-                      },
                       "attachPointName": "Fruit02",
-                      "attachPointTargetType": "Self"
-                    },
-                    "attachPointName": "Fruit02"
-                  },
-                  "EBHJMLOKDGB": -1.0
+                      "attachPointTargetType": "Self",
+                      "angleOffset": {
+                        "x": 0.0,
+                        "y": 180.0,
+                        "z": 0.0
+                      },
+                      "randomAngleHor": 0,
+                      "randomAngleVer": 0
+                    }
+                  }
                 },
                 {
                   "$type": "FireEffect",
-                  "healLimitedByCasterMaxHPRatio": "Eff_Monster_Mimik_Fire_Fruit_Disappear",
+                  "effectPattern": "Eff_Monster_Mimik_Fire_Fruit_Disappear",
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
                     "attachPointName": "Fruit02"
-                  },
-                  "EBHJMLOKDGB": -1.0
+                  }
                 }
               ]
             },
             {
               "$type": "TriggerSetRenderersEnable",
-              "renderNames": ["Lights02"]
+              "renderNames": ["Lights02"],
+              "setEnable": false,
+              "target": "Self"
             }
           ]
         },
         "UNIQUE_Fruit03": {
-          "modifierName": "",
+          //第3颗果实显示与隐藏
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
+            //TODO:
+            //显示果实，播放果实特效
             {
               "$type": "TriggerSetRenderersEnable",
               "renderNames": ["Lights03"],
-              "setEnable": true
+              "setEnable": true,
+              "target": "Self"
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Mimik_Fire_Fruit03_Idle",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Mimik_Fire_Fruit03_Idle"
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Mimik_Fire_Fruit_Appear",
+              "effectPattern": "Eff_Monster_Mimik_Fire_Fruit_Appear",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
                 "attachPointName": "Fruit03"
-              },
-              "EBHJMLOKDGB": -1.0
+              }
             }
           ],
           "onRemoved": [
+            //TODO:
+            //隐藏果实，播放果实消失特效
             {
               "$type": "Predicated",
               "otherTargets": {
                 "$type": "SelectTargetsByChildren",
-                "configID": 42601005
+                "configID": 42601005,
+                "sortType": "Default"
               },
               "targetPredicates": [
                 {
                   "$type": "ByTargetGlobalValue",
+                  "target": "Target",
                   "key": "_MONSTER_MIMIK_IS_FRUITMOVETARGET",
-                  "ratio": 1.0,
+                  "value": 1,
                   "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
                   "$type": "FireEffect",
-                  "healLimitedByCasterMaxHPRatio": "Eff_Monster_Mimik_Fire_Fruit_Bullet",
+                  "effectPattern": "Eff_Monster_Mimik_Fire_Fruit_Bullet",
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
+                    "attachPointName": "Fruit03",
                     "direction": {
                       "$type": "ConfigDirectionByAttachPoint",
-                      "angleOffset": {
-                        "IBKBLDAJIMA": 0.0,
-                        "LKHJADIPBFL": 180.0,
-                        "PJCOKIGCJOK": 0.0
-                      },
                       "attachPointName": "Fruit03",
-                      "attachPointTargetType": "Self"
-                    },
-                    "attachPointName": "Fruit03"
-                  },
-                  "EBHJMLOKDGB": -1.0
+                      "attachPointTargetType": "Self",
+                      "angleOffset": {
+                        "x": 0.0,
+                        "y": 180.0,
+                        "z": 0.0
+                      },
+                      "randomAngleHor": 0,
+                      "randomAngleVer": 0
+                    }
+                  }
                 },
                 {
                   "$type": "FireEffect",
-                  "healLimitedByCasterMaxHPRatio": "Eff_Monster_Mimik_Fire_Fruit_Disappear",
+                  "effectPattern": "Eff_Monster_Mimik_Fire_Fruit_Disappear",
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
                     "attachPointName": "Fruit03"
-                  },
-                  "EBHJMLOKDGB": -1.0
+                  }
                 }
               ]
             },
             {
               "$type": "TriggerSetRenderersEnable",
-              "renderNames": ["Lights03"]
+              "renderNames": ["Lights03"],
+              "setEnable": false,
+              "target": "Self"
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "AddGlobalValue",
-          "ratio": 3.0,
-          "key": "_MONSTER_MIMIK_FRUITCOUNT",
-          "useLimitRange": true,
-          "maxValue": 3.0,
-          "minValue": 0.0
-        }
-      ]
+      "abilitySpecials": {
+        //用于记录果实数量
+        "FruitCount": 3
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  ElementState
+  //
+  ////////////////////////////////////////////////////////////////
+  //TODO:
+  //有三种情况：平时（但地下不该被看到）、充能完成、被打破
+  //平时应该是微微亮起
+  //充能完成是完全亮起
+  //被打破是暗掉
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Mimik_Fire_ElementState_On",
       "onAbilityStart": [
         {
+          //打开发光材质动画
           "$type": "SetAnimatorTrigger",
-          "target": "Caster",
           "triggerID": "NonetoStage1",
+          "target": "Caster",
           "MPTriggerOnRemote": true
         }
       ]
@@ -361,25 +412,39 @@
       "abilityName": "Monster_Mimik_Fire_ElementState_Off",
       "onAbilityStart": [
         {
+          //关闭发光材质动画
           "$type": "SetAnimatorTrigger",
-          "target": "Caster",
           "triggerID": "Stage1toNone",
+          "target": "Caster",
           "MPTriggerOnRemote": true
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  AbsorbFruit
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
+      //在吸收果实时，改变受击盒，播放相应表现
       "$type": "ConfigAbility",
       "abilityName": "Monster_Mimik_Fire_Fruit_Effect",
+      "onAbilityStart": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_Mimik_Fire_Fruit_Effect",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Mimik_Fire_Fruit_Effect": {
+          //管理平时的受击盒和充能时的受击盒
           "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
+            //打开果实受击盒，关闭其它
             {
               "$type": "EnableHitBoxByName",
               "hitBoxNames": ["HitBox_Fruit"],
@@ -387,13 +452,16 @@
             },
             {
               "$type": "EnableHitBoxByName",
-              "hitBoxNames": ["HitBox", "HeadBox"]
+              "hitBoxNames": ["HitBox", "HeadBox"],
+              "setEnable": false
             }
           ],
           "onRemoved": [
+            //关闭果实受击盒，打开其它
             {
               "$type": "EnableHitBoxByName",
-              "hitBoxNames": ["HitBox_Fruit"]
+              "hitBoxNames": ["HitBox_Fruit"],
+              "setEnable": false
             },
             {
               "$type": "EnableHitBoxByName",
@@ -402,21 +470,17 @@
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Mimik_Fire_Fruit_Effect"
-        }
-      ]
+      }
     }
   },
   {
     "Default": {
+      //技能过程中增加重量
       "$type": "ConfigAbility",
       "abilityName": "Monster_Mimik_Fire_AbsorbFruit_WeightManager",
       "abilityMixins": [
         {
+          //在吸收果实期间挂载modifier
           "$type": "AttachToStateIDMixin",
           "stateIDs": ["AbsorbFruit", "AbsorbFruit_Loop", "UpperShoot02"],
           "modifierName": "AddWeight"
@@ -424,8 +488,6 @@
       ],
       "modifiers": {
         "AddWeight": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "properties": {
             "Entity_WeightRatio": 5.0
           }
@@ -435,10 +497,14 @@
   },
   {
     "Default": {
+      //吸收果实时，给拟态草挂载元素盾
+      //元素盾挂载时，自动触发果实充能表现
+      //元素盾被击破时，触发眩晕
       "$type": "ConfigAbility",
       "abilityName": "Monster_Mimik_Fire_AbsorbFruit",
       "abilityMixins": [
         {
+          //在吸收果实期间挂载modifier
           "$type": "AttachToStateIDMixin",
           "stateIDs": ["AbsorbFruit_Loop"],
           "modifierName": "UNIQUE_Mimik_Fire_Fruit"
@@ -446,93 +512,101 @@
       ],
       "modifiers": {
         "UNIQUE_Mimik_Fire_Fruit": {
+          //实现果实相关逻辑的主要modifier
+          //带有ShieldBarMixin 在Durability被反应完时触发onShieldBroken，就是眩晕之类的效果
           "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
+          "forceSyncToRemote": true,
           "elementType": "Fire",
-          "bonusCriticalHurt": 50.0,
+          "elementDurability": 50,
           "modifierMixins": [
             {
               "$type": "ShieldBarMixin",
               "onShieldBroken": [
+                //盾被击破时：
                 {
                   "$type": "ActCameraShake",
                   "cameraShake": {
-                    "shakeRange": 0.20000000298023224,
-                    "shakeTime": 0.11999999731779099,
-                    "shakeDistance": 30.0,
+                    "shakeType": "Center",
+                    "shakeRange": 0.2,
+                    "shakeTime": 0.12,
+                    "shakeDistance": 30,
                     "extension": {
                       "baseOnCamera": true
                     }
                   }
                 },
                 {
+                  //开始击晕倒计时
                   "$type": "TriggerAbility",
-                  "target": "Caster",
-                  "abilityName": "Monster_Mimik_Fire_DownManager"
+                  "abilityName": "Monster_Mimik_Fire_DownManager",
+                  "target": "Caster"
                 },
                 {
+                  //进入击晕Pose状态
                   "$type": "SetPoseBool",
-                  "target": "Caster",
                   "boolID": "Down",
-                  "ratio": true
+                  "value": true,
+                  "target": "Caster"
                 },
                 {
+                  //进入击晕Animator状态
                   "$type": "SetAnimatorTrigger",
-                  "target": "Caster",
                   "triggerID": "DownTrigger",
+                  "target": "Caster",
                   "MPTriggerOnRemote": true
                 }
-              ],
-              "showDamageText": ""
+              ]
             }
           ],
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
               "key": "_ABILITY_MIMIK_FIRE_FRUIT",
+              "value": 1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
+              "maxValue": 1,
+              "minValue": 0
             },
             {
+              //播放充能表现
               "$type": "TriggerAbility",
-              "abilityName": "Monster_Mimik_Fire_Fruit_Effect"
+              "abilityName": "Monster_Mimik_Fire_Fruit_Effect",
+              "target": "Self"
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Mimik_Fire_AbsorbFruit_Loop_01",
-              "EBHJMLOKDGB": -1.0
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "AddGlobalValue",
-              "ratio": -1.0,
-              "key": "_ABILITY_MIMIK_FIRE_FRUIT",
-              "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
-            },
-            {
-              "$type": "RemoveUniqueModifier",
-              "modifierName": "UNIQUE_Mimik_Fire_Fruit_Effect"
+              "effectPattern": "Eff_Monster_Mimik_Fire_AbsorbFruit_Loop_01"
             }
           ],
           "onKill": [
+            //被杀时销毁自身
             {
               "$type": "RemoveUniqueModifier",
               "modifierName": "UNIQUE_Mimik_Fire_Fruit"
             }
           ],
-          "forceSyncToRemote": true
+          "onRemoved": [
+            {
+              "$type": "AddGlobalValue",
+              "key": "_ABILITY_MIMIK_FIRE_FRUIT",
+              "value": -1,
+              "useLimitRange": true,
+              "maxValue": 1,
+              "minValue": 0
+            },
+            {
+              "$type": "RemoveUniqueModifier",
+              "modifierName": "UNIQUE_Mimik_Fire_Fruit_Effect"
+            }
+          ]
         }
       }
     }
   },
   {
     "Default": {
+      //控制击晕的持续时间
       "$type": "ConfigAbility",
       "abilityName": "Monster_Mimik_Fire_DownManager",
       "abilityMixins": [
@@ -542,67 +616,70 @@
           "modifierName": "RecoverManager"
         }
       ],
+      "onAbilityStart": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_DownTimer",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "UNIQUE_DownTimer": {
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": 15.0,
-          "bonusCriticalHurt": 100.0,
+          "forceSyncToRemote": true,
+          "duration": 15.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Mimik_Fire_Down_01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Mimik_Fire_Down_01"
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Mimik_Fire_Down_02",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Mimik_Fire_Down_02"
             },
             {
               "$type": "SetPoseBool",
               "boolID": "Recover",
-              "ratio": true
+              "value": true
             }
           ],
           "onRemoved": [
             {
               "$type": "SetPoseBool",
-              "boolID": "Down"
+              "boolID": "Down",
+              "value": false
             },
             {
               "$type": "SetAnimatorTrigger",
               "triggerID": "RecoverTrigger",
               "MPTriggerOnRemote": true
             }
-          ],
-          "forceSyncToRemote": true
+          ]
         },
         "RecoverManager": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.5,
-          "bonusCriticalHurt": 100.0,
+          "forceSyncToRemote": true,
+          "duration": 1.5,
           "onRemoved": [
             {
               "$type": "SetPoseBool",
-              "boolID": "Recover"
+              "boolID": "Recover",
+              "value": false
             },
             {
               "$type": "ReTriggerAISkillInitialCD",
               "skillIDs": [301, 311, 312]
             }
-          ],
-          "forceSyncToRemote": true
+          ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_DownTimer"
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  FruitMoveEffect
+  //
+  ////////////////////////////////////////////////////////////////
+
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -616,28 +693,29 @@
       ],
       "modifiers": {
         "Effect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
+              //创建核心位置
               "$type": "CreateGadget",
+              "gadgetID": 42601005,
+              "target": "Self",
+              "campID": 4001,
+              "campTargetType": "Self",
+              "lifeByOwnerV2": true,
               "born": {
                 "$type": "ConfigBornByAttachPoint",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
-                },
                 "attachPointName": "BulletSource",
-                "attachPointTargetType": "Self"
-              },
-              "JAEOKOAACJP": true,
-              "gadgetID": 42601005,
-              "campID": 4001,
-              "campTargetType": "Self"
+                "attachPointTargetType": "Self",
+                "offset": {
+                  "x": 0,
+                  "y": 0,
+                  "z": 0
+                }
+              }
             },
             {
               "$type": "SetPartControlTarget",
+              "target": "Self",
               "partRootNames": ["Fruit01", "Fruit02", "Fruit03"]
             },
             {
@@ -650,12 +728,15 @@
             {
               "$type": "KillGadget",
               "gadgetInfo": {
-                "configID": 42601005
+                "$type": "SelectTargetsByChildren",
+                "configID": 42601005,
+                "sortType": "Default"
               }
             },
             {
               "$type": "EnablePartControl",
-              "partRootNames": ["Fruit01", "Fruit02", "Fruit03"]
+              "partRootNames": ["Fruit01", "Fruit02", "Fruit03"],
+              "enable": false
             }
           ]
         }
@@ -666,16 +747,19 @@
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Mimik_AbsorbFruit_Fire_FruitMoveEffect",
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Effect"
+        }
+      ],
       "modifiers": {
         "Effect": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.75,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.75,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Mimik_Fire_Fruit_Bullet",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Mimik_Fire_Fruit_Bullet"
             }
           ],
           "onRemoved": [
@@ -684,16 +768,17 @@
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Effect"
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  FruitReborn
+  //
+  ////////////////////////////////////////////////////////////////
   {
+    //管理连续地刺攻击在打中玩家后就不再攻击
+    //通过Controller里的Attack01Stop 参数来停止连续的地刺攻击
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Mimik_Fire_FruitReborn_Effect",
@@ -706,19 +791,23 @@
       ],
       "modifiers": {
         "FruitReborn_Effect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Mimik_Fire_FruitReborn_UnderGround",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Mimik_Fire_FruitReborn_UnderGround"
             }
           ]
         }
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  RangedAttack01
+  //
+  ////////////////////////////////////////////////////////////////
+  //TODO:
+  //向上点射
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -726,16 +815,15 @@
       "onAbilityStart": [
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Mimik_Fire_RangedAttack01_02",
+          "effectPattern": "Eff_Monster_Mimik_Fire_RangedAttack01_02",
           "born": {
             "$type": "ConfigBornBySelf",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 1.7000000476837158,
-              "PJCOKIGCJOK": 0.5
+              "x": 0.0,
+              "y": 1.7,
+              "z": 0.5
             }
-          },
-          "EBHJMLOKDGB": -1.0
+          }
         },
         {
           "$type": "TriggerBullet",
@@ -743,16 +831,16 @@
           "born": {
             "$type": "ConfigBornBySelf",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 1.7000000476837158,
-              "PJCOKIGCJOK": 0.5
+              "x": 0.0,
+              "y": 1.7,
+              "z": 0.5
             },
             "direction": {
               "$type": "ConfigDirectionByEntity",
               "angleOffset": {
-                "IBKBLDAJIMA": -45.0,
-                "LKHJADIPBFL": 0.0,
-                "PJCOKIGCJOK": 0.0
+                "x": -45.0,
+                "y": 0,
+                "z": 0
               }
             }
           }
@@ -786,6 +874,13 @@
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  UpperShoot02
+  //
+  ////////////////////////////////////////////////////////////////
+  //TODO:
+  //向上点射
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -796,41 +891,49 @@
           "bulletID": 42601009,
           "born": {
             "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "BulletSource",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             },
             "direction": {
               "$type": "ConfigDirectionByAttackTarget",
-              "maxAngleType": "Horizontal",
-              "maxAngle": 15.0
-            },
-            "attachPointName": "BulletSource"
+              "maxAngle": 15,
+              "maxAngleType": "Horizontal"
+            }
           }
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Bullets
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Mimik_Fire_Bomb_Loop",
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_Mimik_Fire_Bomb_Loop",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Mimik_Fire_Bomb_Loop": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Mimik_Fire_Bomb_Bullet_01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Mimik_Fire_Bomb_Bullet_01"
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Mimik_Fire_Bomb_Bullet_01_Trail",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Mimik_Fire_Bomb_Bullet_01_Trail"
             }
           ],
           "onRemoved": [
@@ -839,13 +942,7 @@
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Mimik_Fire_Bomb_Loop"
-        }
-      ]
+      }
     }
   },
   {
@@ -855,18 +952,17 @@
       "onAbilityStart": [
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Mimik_Fire_Bomb_Bullet_01_Hit",
+          "effectPattern": "Eff_Monster_Mimik_Fire_Bomb_Bullet_01_Hit",
           "born": {
             "$type": "ConfigBornBySelf",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             },
             "onGround": true,
             "alongGround": true
-          },
-          "EBHJMLOKDGB": -1.0
+          }
         },
         {
           "$type": "RemoveUniqueModifier",
@@ -874,45 +970,44 @@
         },
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
-              "massiveAttackRatio": 0.5,
+              "radius": 3.0,
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 },
                 "onGround": true,
                 "alongGround": true
               },
-              "DCMPFCIBIPA": 3.0
+              "massiveAttackRatio": 0.5
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
+              "canBeModifiedBy": "OriginOwner",
               "attackProperty": {
-                "HBIOLEEGHPD": 0.4000000059604645,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Fire",
-                "bonusCriticalHurt": 100.0,
+                "damagePercentage": 0.4,
                 "strikeType": "Default",
-                "enBreak": 70.0,
-                "attackType": "Range"
+                "attackType": "Range",
+                "elementType": "Fire",
+                "elementDurability": 100,
+                "enBreak": 70.0
               },
               "hitPattern": {
                 "onHitEffectName": "",
                 "hitImpulseType": "LV4",
-                "hitHaltTimeScale": 0.05000000074505806
-              },
-              "canBeModifiedBy": "OriginOwner"
+                "reboundRatio": 0,
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.05,
+                "muteHitText": false
+              }
             }
-          },
-          "targetType": "Enemy"
+          }
         }
       ]
     }
@@ -921,21 +1016,24 @@
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Mimik_Fire_WilloWisp_Loop",
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_Mimik_Fire_WilloWisp_Loop",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Mimik_Fire_WilloWisp_Loop": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Mimik_Fire_WilloWisp_Bullet",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Mimik_Fire_WilloWisp_Bullet"
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Mimik_Fire_WilloWisp_Bullet_Trail",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Mimik_Fire_WilloWisp_Bullet_Trail"
             }
           ],
           "onRemoved": [
@@ -944,13 +1042,7 @@
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Mimik_Fire_WilloWisp_Loop"
-        }
-      ]
+      }
     }
   },
   {
@@ -960,16 +1052,15 @@
       "onAbilityStart": [
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Mimik_Fire_WilloWisp_Explode",
+          "effectPattern": "Eff_Monster_Mimik_Fire_WilloWisp_Explode",
           "born": {
             "$type": "ConfigBornBySelf",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             }
-          },
-          "EBHJMLOKDGB": -1.0
+          }
         },
         {
           "$type": "RemoveUniqueModifier",
@@ -977,46 +1068,48 @@
         },
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
-              "massiveAttackRatio": 0.25,
+              "radius": 1.5,
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 }
               },
-              "DCMPFCIBIPA": 1.5
+              "massiveAttackRatio": 0.25
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
+              "canBeModifiedBy": "OriginOwner",
               "attackProperty": {
-                "HBIOLEEGHPD": 0.2199999988079071,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Fire",
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 0.22,
                 "strikeType": "Blunt",
+                "elementType": "Fire",
+                "elementDurability": 50,
                 "enBreak": 25.0
               },
               "hitPattern": {
                 "onHitEffectName": "",
                 "hitImpulseType": "LV3",
-                "hitHaltTimeScale": 0.05000000074505806
+                "reboundRatio": 0,
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.05,
+                "muteHitText": false
               },
+              "forceCameraShake": false,
               "cameraShake": {
-                "shakeRange": 0.05999999865889549,
-                "shakeTime": 0.09000000357627869
-              },
-              "canBeModifiedBy": "OriginOwner"
+                "shakeType": "Center",
+                "shakeRange": 0.06,
+                "shakeTime": 0.09,
+                "shakeDistance": 20
+              }
             }
-          },
-          "targetType": "Enemy"
+          }
         }
       ]
     }

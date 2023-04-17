@@ -1,33 +1,25 @@
 [
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Cicin_FireElectricBall
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Cicin_FireElectricBall",
-      "modifiers": {
-        "UNIQUE_MonsterEliteAffix_DefaultState": {
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "UseSkillEliteSet",
-              "skillEliteSetID": 1
-            }
-          ]
-        }
-      },
       "onAdded": [
         {
           "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_MonsterEliteAffix_DefaultState",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_ELITEAFFIX_TAG",
-              "ratio": 0.0,
+              "value": 0,
               "compareType": "NoneOrEqual"
             }
-          ],
-          "modifierName": "UNIQUE_MonsterEliteAffix_DefaultState"
+          ]
         }
       ],
       "onAbilityStart": [
@@ -37,16 +29,27 @@
           "born": {
             "$type": "ConfigBornBySelf",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.20000000298023224,
-              "PJCOKIGCJOK": 1.2000000476837158
+              "x": 0.0,
+              "y": 0.2,
+              "z": 1.2
             },
             "direction": {
               "$type": "ConfigDirectionByAttackTarget"
             }
           }
         }
-      ]
+      ],
+      "modifiers": {
+        "UNIQUE_MonsterEliteAffix_DefaultState": {
+          "isUnique": true,
+          "onAdded": [
+            {
+              "$type": "UseSkillEliteSet",
+              "skillEliteSetID": 1
+            }
+          ]
+        }
+      }
     }
   },
   {
@@ -60,42 +63,43 @@
         },
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Cicin_Thunder_ElectricBallAS",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_Monster_Cicin_Thunder_ElectricBallAS"
         },
         {
           "$type": "TriggerAttackEvent",
-          "RotationDampTime": true,
+          "targetType": "Enemy",
+          "doOffStage": true,
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
+              "duration": 0.0,
               "triggerType": "TriggerNoRepeat",
+              "radius": 0.5,
               "born": {
                 "$type": "ConfigBornByCollisionPoint"
-              },
-              "DCMPFCIBIPA": 0.5
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
+              "canBeModifiedBy": "OriginOwner",
               "attackProperty": {
-                "HBIOLEEGHPD": 1.0,
-                "CCNJGLPMIEP": 0.0,
+                "damagePercentage": 1,
                 "elementType": "Electric",
-                "bonusCriticalHurt": 50.0,
-                "strikeType": "Default",
-                "enBreak": 20.0
+                "elementDurability": 50,
+                "enBreak": 20,
+                "strikeType": "Default"
               },
               "hitPattern": {
                 "onHitEffectName": "",
                 "hitImpulseType": "LV2",
-                "hitHaltTimeScale": 0.05000000074505806
+                "reboundRatio": 0,
+                "canBeDefenceHalt": false,
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.05,
+                "muteHitText": false
               },
-              "canBeModifiedBy": "OriginOwner"
+              "forceCameraShake": false
             }
-          },
-          "targetType": "Enemy"
+          }
         }
       ]
     }
@@ -104,17 +108,22 @@
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Cicin_ElectricBall_Effect",
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_Cicin_ElectricBall_Loop",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Cicin_ElectricBall_Loop": {
-          "modifierName": "",
           "isUnique": true,
           "elementType": "Electric",
-          "bonusCriticalHurt": 25.0,
+          "elementDurability": 25,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Cicin_Thunder_ElectricBall",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Cicin_Thunder_ElectricBall"
             }
           ],
           "onRemoved": [
@@ -123,24 +132,61 @@
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "UNIQUE_Cicin_ElectricBall_Loop"
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Cicin_RushAtk
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Cicin_RushAtkTrigger",
+      "onAbilityStart": [
+        {
+          "$type": "SetAnimatorTrigger",
+          "triggerID": "RushAtkTrigger",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_SummonNumberInCicin",
+              "value": 1,
+              "compareType": "Equal"
+            }
+          ]
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "RushAtkTrigger_Delay1",
+          "target": "Self",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_SummonNumberInCicin",
+              "value": 2,
+              "compareType": "Equal"
+            }
+          ]
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "RushAtkTrigger_Delay2",
+          "target": "Self",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_SummonNumberInCicin",
+              "value": 3,
+              "compareType": "Equal"
+            }
+          ]
+        }
+      ],
       "modifiers": {
         "RushAtkTrigger_Delay1": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onRemoved": [
             {
               "$type": "SetAnimatorTrigger",
@@ -149,9 +195,7 @@
           ]
         },
         "RushAtkTrigger_Delay2": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1,
           "onRemoved": [
             {
               "$type": "SetAnimatorTrigger",
@@ -159,42 +203,7 @@
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "SetAnimatorTrigger",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_SummonNumberInCicin",
-              "ratio": 1.0
-            }
-          ],
-          "triggerID": "RushAtkTrigger"
-        },
-        {
-          "$type": "ApplyModifier",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_SummonNumberInCicin",
-              "ratio": 2.0
-            }
-          ],
-          "modifierName": "RushAtkTrigger_Delay1"
-        },
-        {
-          "$type": "ApplyModifier",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_SummonNumberInCicin",
-              "ratio": 3.0
-            }
-          ],
-          "modifierName": "RushAtkTrigger_Delay2"
-        }
-      ]
+      }
     }
   },
   {
@@ -215,82 +224,78 @@
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["NormalAtk"],
+          "startNormalizedTime": 0.0,
           "endNormalizedTime": 0.75,
-          "angularSpeed": 180.0,
+          "angularSpeed": 180,
           "attackTrigger": "",
           "attackDistance": 1.5
         }
       ],
       "modifiers": {
         "Cincin_Thunder_RushAtk": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.20000000298023224,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Cicin_Thunder_ElectricSurround",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Cicin_Thunder_ElectricSurround"
             }
           ],
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Cicin_Thunder_ElectricSurroundAS",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Cicin_Thunder_ElectricSurroundAS"
             },
             {
               "$type": "SetPoseBool",
-              "boolID": "Ordered"
+              "boolID": "Ordered",
+              "value": false
             }
           ],
+          "thinkInterval": 0.2,
           "onThinkInterval": [
             {
               "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
+                  "radius": 2,
                   "born": {
                     "$type": "ConfigBornBySelf"
-                  },
-                  "DCMPFCIBIPA": 2.0
+                  }
                 },
                 "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "HBIOLEEGHPD": 1.0,
-                    "CCNJGLPMIEP": 0.0,
+                    "damagePercentage": 1,
                     "elementType": "Electric",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25,
                     "strikeType": "Default",
-                    "enBreak": 25.0
+                    "enBreak": 25
                   },
                   "hitPattern": {
-                    "onHitEffectName": "default",
                     "hitImpulseType": "LV2",
-                    "retreatType": "ByTangent",
-                    "hitHaltTimeScale": 0.05000000074505806
+                    "reboundRatio": 0,
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
+                    "muteHitText": false,
+                    "retreatType": "ByTangent"
                   },
+                  "forceCameraShake": false,
                   "cameraShake": {}
                 }
-              },
-              "targetType": "Enemy"
+              }
             }
           ]
         },
         "Cincin_Thunder_RushAtk_EnableCollider": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "properties": {
-            "Actor_EndureDelta": 0.0
+            "Actor_EndureDelta": 0
           },
           "onAdded": [
             {
               "$type": "EnablePushColliderName",
-              "pushColliderNames": ["PushCollider"]
+              "pushColliderNames": ["PushCollider"],
+              "setEnable": false
             }
           ],
           "onRemoved": [
@@ -304,6 +309,11 @@
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Cicin_Blink
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -315,10 +325,30 @@
           "modifierName": "Blink_State"
         }
       ],
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_Cicin_Blink_Actions"
+        },
+        {
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Monster_Fatuus_Summoner_Disappear",
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "offset": {
+              "x": 0, // + means up, - means down
+              "y": 0, // + means left, - means right
+              "z": 0 // + means forward, - means backward
+            }
+          }
+        },
+        {
+          "$type": "ClearLockTarget",
+          "target": "CurLocalAvatar"
+        }
+      ],
       "modifiers": {
         "Blink_State": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "RemoveUniqueModifier",
@@ -327,36 +357,42 @@
           ]
         },
         "UNIQUE_Cicin_Blink_Actions": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachModifier",
-              "modifierName": "Blink_Invincible"
+              "modifierName": "Blink_Invincible",
+              "target": "Self"
             },
             {
               "$type": "AttachModifier",
-              "modifierName": "Blink_DenyLockOn"
+              "modifierName": "Blink_DenyLockOn",
+              "target": "Self"
             },
             {
-              "$type": "TriggerSetVisible"
+              "$type": "TriggerSetVisible",
+              "visible": false,
+              "target": "Self"
             },
             {
               "$type": "TriggerHideWeapon",
+              "visible": false,
               "partNames": ["equip01"]
             },
             {
               "$type": "HideUIBillBoard",
-              "hide": true
+              "hide": true,
+              "target": "Self"
             },
             {
               "$type": "EnableHitBoxByName",
-              "hitBoxNames": ["HitBox"]
+              "hitBoxNames": ["HitBox"],
+              "setEnable": false
             },
             {
               "$type": "EnablePushColliderName",
-              "pushColliderNames": ["PushCollider"]
+              "pushColliderNames": ["PushCollider"],
+              "setEnable": false
             }
           ],
           "onRemoved": [
@@ -372,7 +408,8 @@
             },
             {
               "$type": "TriggerSetVisible",
-              "visible": true
+              "visible": true,
+              "target": "Self"
             },
             {
               "$type": "TriggerHideWeapon",
@@ -380,44 +417,19 @@
               "partNames": ["equip01"]
             },
             {
-              "$type": "HideUIBillBoard"
+              "$type": "HideUIBillBoard",
+              "hide": false,
+              "target": "Self"
             }
           ]
         },
         "Blink_Invincible": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "Invincible"
         },
         "Blink_DenyLockOn": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "DenyLockOn"
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "UNIQUE_Cicin_Blink_Actions"
-        },
-        {
-          "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Fatuus_Summoner_Disappear",
-          "born": {
-            "$type": "ConfigBornBySelf",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            }
-          },
-          "EBHJMLOKDGB": -1.0
-        },
-        {
-          "$type": "ClearLockTarget",
-          "target": "CurLocalAvatar"
-        }
-      ]
+      }
     }
   },
   {
@@ -427,65 +439,65 @@
       "onAbilityStart": [
         {
           "$type": "TryFindBlinkPointByBorn",
+          "born": {
+            "$type": "ConfigBornBySelfOwner",
+            "offset": {
+              "x": 0,
+              "y": 1.25,
+              "z": 2
+            }
+          },
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_SummonNumberInCicin",
-              "ratio": 1.0
+              "value": 1,
+              "compareType": "Equal"
             }
-          ],
-          "born": {
-            "$type": "ConfigBornBySelfOwner",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 1.25,
-              "PJCOKIGCJOK": 2.0
-            }
-          },
-          "limitY": 2.5
+          ]
         },
         {
           "$type": "TryFindBlinkPointByBorn",
+          "born": {
+            "$type": "ConfigBornBySelfOwner",
+            "offset": {
+              "x": 2,
+              "y": 1.25,
+              "z": 2
+            }
+          },
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_SummonNumberInCicin",
-              "ratio": 2.0
+              "value": 2,
+              "compareType": "Equal"
             }
-          ],
-          "born": {
-            "$type": "ConfigBornBySelfOwner",
-            "offset": {
-              "IBKBLDAJIMA": 2.0,
-              "LKHJADIPBFL": 1.25,
-              "PJCOKIGCJOK": 2.0
-            }
-          },
-          "limitY": 2.5
+          ]
         },
         {
           "$type": "TryFindBlinkPointByBorn",
+          "born": {
+            "$type": "ConfigBornBySelfOwner",
+            "offset": {
+              "x": -2,
+              "y": 1.25,
+              "z": 2
+            }
+          },
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_SummonNumberInCicin",
-              "ratio": 3.0
+              "value": 3,
+              "compareType": "Equal"
             }
-          ],
-          "born": {
-            "$type": "ConfigBornBySelfOwner",
-            "offset": {
-              "IBKBLDAJIMA": -2.0,
-              "LKHJADIPBFL": 1.25,
-              "PJCOKIGCJOK": 2.0
-            }
-          },
-          "limitY": 2.5
+          ]
         },
         {
           "$type": "SetPoseBool",
           "boolID": "Ordered",
-          "ratio": true
+          "value": true
         }
       ]
     }
@@ -517,15 +529,19 @@
         },
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Fatuus_Summoner_Appear",
+          "effectPattern": "Eff_Monster_Fatuus_Summoner_Appear",
           "born": {
             "$type": "ConfigBornBySelf"
-          },
-          "EBHJMLOKDGB": -1.0
+          }
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Cicin_Die
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -533,23 +549,23 @@
       "onAdded": [
         {
           "$type": "AddGlobalValue",
-          "target": "Owner",
-          "ratio": 1.0,
           "key": "_Summon_Count",
+          "value": 1,
           "useLimitRange": true,
-          "maxValue": 3.0,
-          "minValue": 0.0
+          "maxValue": 3,
+          "minValue": 0,
+          "target": "Owner"
         }
       ],
       "onKill": [
         {
           "$type": "AddGlobalValue",
-          "target": "Owner",
-          "ratio": -1.0,
           "key": "_Summon_Count",
+          "value": -1,
           "useLimitRange": true,
-          "maxValue": 3.0,
-          "minValue": 0.0
+          "maxValue": 3,
+          "minValue": 0,
+          "target": "Owner"
         }
       ]
     }
@@ -561,34 +577,35 @@
       "onAbilityStart": [
         {
           "$type": "AddGlobalValue",
-          "target": "Owner",
-          "ratio": 1.0,
           "key": "_ISOwner",
+          "value": 1,
           "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
+          "maxValue": 1,
+          "minValue": 0,
+          "target": "Owner"
         },
         {
           "$type": "AddGlobalValue",
-          "target": "Owner",
-          "ratio": -1.0,
           "key": "_Summon_Count",
+          "value": -1,
           "useLimitRange": true,
-          "maxValue": 3.0,
-          "minValue": 0.0
+          "maxValue": 3,
+          "minValue": 0,
+          "target": "Owner"
         },
         {
           "$type": "TriggerBullet",
+          "trackTarget": "TargetOwner",
+          "lifeByOwnerIsAlive": false,
           "bulletID": 42606003,
           "born": {
             "$type": "ConfigBornBySelf",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             }
-          },
-          "trackTarget": "TargetOwner"
+          }
         }
       ]
     }
@@ -606,6 +623,11 @@
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Cicin_Fury
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -617,18 +639,24 @@
           "enterActions": [
             {
               "$type": "SetEntityScale",
-              "scale": 2.0
+              "scale": 2
             }
           ],
           "exitActions": [
             {
-              "$type": "SetEntityScale"
+              "$type": "SetEntityScale",
+              "scale": 1
             }
           ]
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Cicin_Pose
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -637,22 +665,29 @@
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["NormalAtk"],
+          "startNormalizedTime": 0.0,
           "endNormalizedTime": 0.75,
-          "angularSpeed": 180.0,
+          "angularSpeed": 180,
           "attackTrigger": "",
           "attackDistance": 1.5
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Fury"],
-          "endNormalizedTime": 4.0,
-          "angularSpeed": 120.0,
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 4,
+          "angularSpeed": 120,
           "attackTrigger": "",
           "attackDistance": 1.5
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  OtherConfig
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -664,14 +699,19 @@
           "modifierName": "FrozenDetect"
         }
       ],
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "CommonEffect"
+        }
+      ],
       "modifiers": {
         "FrozenDetect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "TriggerSetRenderersEnable",
-              "renderNames": ["Wing"]
+              "renderNames": ["Wing"],
+              "setEnable": false
             },
             {
               "$type": "RemoveModifier",
@@ -680,7 +720,7 @@
             {
               "$type": "SetPoseBool",
               "boolID": "Frozen",
-              "ratio": true
+              "value": true
             },
             {
               "$type": "EnablePushColliderName",
@@ -700,80 +740,70 @@
             },
             {
               "$type": "SetPoseBool",
-              "boolID": "Frozen"
+              "boolID": "Frozen",
+              "value": false
             },
             {
               "$type": "EnablePushColliderName",
-              "pushColliderNames": ["PushCollider_Frozen"]
+              "pushColliderNames": ["PushCollider_Frozen"],
+              "setEnable": false
             }
           ]
         },
         "CommonEffect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Cicin_Thunder_WingElement_L",
+              "effectPattern": "Eff_Monster_Cicin_Thunder_WingElement_L",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "WingLeft",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
-                },
-                "attachPointName": "WingLeft"
-              },
-              "EBHJMLOKDGB": -1.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                }
+              }
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Cicin_Thunder_WingElement_R",
+              "effectPattern": "Eff_Monster_Cicin_Thunder_WingElement_R",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "WingRight",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
-                },
-                "attachPointName": "WingRight"
-              },
-              "EBHJMLOKDGB": -1.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                }
+              }
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Cicin_Thunder_BodyElement",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Cicin_Thunder_BodyElement"
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "CommonEffect"
-        }
-      ]
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Cicin_Element",
-      "modifiers": {
-        "Element": {
-          "modifierName": "",
-          "elementType": "Electric",
-          "bonusCriticalHurt": 50.0,
-          "isElementDurabilityMutable": false
-        }
-      },
       "onAdded": [
         {
           "$type": "ApplyModifier",
           "modifierName": "Element"
         }
-      ]
+      ],
+      "modifiers": {
+        "Element": {
+          "elementType": "Electric",
+          "elementDurability": 50,
+          "isElementDurabilityMutable": false
+        }
+      }
     }
   },
   {
@@ -783,59 +813,44 @@
       "onAbilityStart": [
         {
           "$type": "TriggerAbility",
+          "abilityName": "Monster_Fatuus_Summoner_FindDodgePoint",
           "target": "Owner",
           "predicates": [
             {
               "$type": "ByTargetPositionToSelfPosition",
-              "logic": "GreaterOrEqual",
-              "ratio": 6.0
+              "target": "Target",
+              "compareType": "XZ",
+              "value": 6,
+              "logic": "GreaterOrEqual"
             }
-          ],
-          "abilityName": "Monster_Fatuus_Summoner_FindDodgePoint"
+          ]
         },
         {
           "$type": "TriggerAbility",
+          "abilityName": "Monster_Fatuus_Summoner_FindDodgeBackPoint",
           "target": "Owner",
           "predicates": [
             {
               "$type": "ByTargetPositionToSelfPosition",
-              "logic": "Lesser",
-              "ratio": 6.0
+              "target": "Target",
+              "compareType": "XZ",
+              "value": 6,
+              "logic": "Lesser"
             }
-          ],
-          "abilityName": "Monster_Fatuus_Summoner_FindDodgeBackPoint"
+          ]
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Cicin_ThunderEnergy
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Cicin_ThunderEnergy",
-      "modifiers": {
-        "ThunderEnergy_Effect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Cicin_Thunder_Disappear",
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "ThunderEnergy_Effect"
-        },
-        {
-          "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Cicin_Thunder_DisappearBS",
-          "EBHJMLOKDGB": -1.0
-        }
-      ],
       "onAbilityStart": [
         {
           "$type": "Predicated",
@@ -844,7 +859,8 @@
             {
               "$type": "ByTargetGlobalValue",
               "key": "_ISOwner",
-              "ratio": 1.0
+              "value": 1,
+              "compareType": "Equal"
             }
           ],
           "successActions": [
@@ -857,7 +873,27 @@
             }
           ]
         }
-      ]
+      ],
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "ThunderEnergy_Effect"
+        },
+        {
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Monster_Cicin_Thunder_DisappearBS"
+        }
+      ],
+      "modifiers": {
+        "ThunderEnergy_Effect": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Cicin_Thunder_Disappear"
+            }
+          ]
+        }
+      }
     }
   },
   {
@@ -867,8 +903,7 @@
       "onAbilityStart": [
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Cicin_Thunder_DisappearAS",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_Monster_Cicin_Thunder_DisappearAS"
         }
       ]
     }

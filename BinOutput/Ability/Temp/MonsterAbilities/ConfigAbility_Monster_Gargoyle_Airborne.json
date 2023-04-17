@@ -1,4 +1,9 @@
 [
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Pose
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -12,13 +17,16 @@
       ],
       "modifiers": {
         "Gargoyle_Airborne_AlertHandler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
+            // _GARGOYLE_AIRBORNE_POSE_
+            // 0:Initial
+            // 1:Normal
+            // 2:Element
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_GARGOYLE_AIRBORNE_POSE_",
-              "defaultGlobalValueOnCreate": 0.0,
+              "defaultGlobalValueOnCreate": 0,
+              "removeAppliedModifier": true,
               "valueSteps": [-0.5, 0.5, 1.5, 2.5],
               "modifierNameSteps": [
                 "Pose_Initial",
@@ -45,22 +53,16 @@
           ]
         },
         "Gargoyle_Airborne_AlertHandler_Delay": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.1,
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         },
         "Pose_Initial": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
@@ -69,12 +71,11 @@
           ]
         },
         "Pose_Normal": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetPoseBool",
-              "boolID": "ElementSkill"
+              "boolID": "ElementSkill",
+              "value": false
             },
             {
               "$type": "ApplyModifier",
@@ -83,13 +84,11 @@
           ]
         },
         "Pose_Element": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetPoseBool",
               "boolID": "ElementSkill",
-              "ratio": true
+              "value": true
             },
             {
               "$type": "SetAISkillCDAvailableNow",
@@ -104,32 +103,26 @@
           ]
         },
         "UNIQUE_Gargoyle_Airborne_InitialTimer": {
-          "modifierName": "",
+          // 初次使用计时
           "isUnique": true,
-          "HCJLIGBLGJA": 15.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 15.0,
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 2.0,
               "key": "_GARGOYLE_AIRBORNE_POSE_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 2
             }
           ]
         },
         "UNIQUE_Gargoyle_Airborne_OtherTimer": {
-          "modifierName": "",
+          // 后续使用计时
           "isUnique": true,
-          "HCJLIGBLGJA": 25.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 25.0,
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 2.0,
               "key": "_GARGOYLE_AIRBORNE_POSE_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 2
             }
           ]
         }
@@ -140,11 +133,27 @@
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Gargoyle_Airborne_PoseElement_Begin",
+      "onAbilityStart": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_Gargoyle_Airborne_ElementStatistic"
+        }
+      ],
       "abilityMixins": [
+        // Element Tag
+        // 0:none
+        // 1:fire
+        // 2:water
+        // 3:grass
+        // 4:electric
+        // 5:ice
+        // 6:wind
+        // 7:rock
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_GARGOYLE_AIRBORNE_ELEMENT_",
-          "defaultGlobalValueOnCreate": 0.0,
+          "defaultGlobalValueOnCreate": 0,
+          "removeAppliedModifier": true,
           "valueSteps": [-0.5, 0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5],
           "modifierNameSteps": [
             "Pose_Element_None",
@@ -160,271 +169,237 @@
       ],
       "modifiers": {
         "Pose_Element_None": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorInt",
               "intID": "ElementTag",
-              "ratio": 0.0
+              "value": 0
             }
           ]
         },
         "Pose_Element_Fire": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "properties": {
-            "Actor_FireSubHurtDelta": 0.4000000059604645
+            "Actor_FireSubHurtDelta": 0.4
           },
           "onAdded": [
             {
               "$type": "SetAnimatorInt",
               "intID": "ElementTag",
-              "ratio": 1.0
+              "value": 1
             }
           ]
         },
         "Pose_Element_Water": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "properties": {
-            "Actor_WaterSubHurtDelta": 0.4000000059604645
+            "Actor_WaterSubHurtDelta": 0.4
           },
           "onAdded": [
             {
               "$type": "SetAnimatorInt",
               "intID": "ElementTag",
-              "ratio": 2.0
+              "value": 2
             }
           ]
         },
         "Pose_Element_Grass": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "properties": {
-            "Actor_GrassSubHurtDelta": 0.4000000059604645
+            "Actor_GrassSubHurtDelta": 0.4
           },
           "onAdded": [
             {
               "$type": "SetAnimatorInt",
               "intID": "ElementTag",
-              "ratio": 3.0
+              "value": 3
             }
           ]
         },
         "Pose_Element_Electric": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "properties": {
-            "Actor_ElecSubHurtDelta": 0.4000000059604645
+            "Actor_ElecSubHurtDelta": 0.4
           },
           "onAdded": [
             {
               "$type": "SetAnimatorInt",
               "intID": "ElementTag",
-              "ratio": 4.0
+              "value": 4
             }
           ]
         },
         "Pose_Element_Ice": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "properties": {
-            "Actor_IceSubHurtDelta": 0.4000000059604645
+            "Actor_IceSubHurtDelta": 0.4
           },
           "onAdded": [
             {
               "$type": "SetAnimatorInt",
               "intID": "ElementTag",
-              "ratio": 5.0
+              "value": 5
             }
           ]
         },
         "Pose_Element_Wind": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "properties": {
-            "Actor_WindSubHurtDelta": 0.4000000059604645
+            "Actor_WindSubHurtDelta": 0.4
           },
           "onAdded": [
             {
               "$type": "SetAnimatorInt",
               "intID": "ElementTag",
-              "ratio": 6.0
+              "value": 6
             }
           ]
         },
         "Pose_Element_Rock": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "properties": {
-            "Actor_RockSubHurtDelta": 0.4000000059604645
+            "Actor_RockSubHurtDelta": 0.4
           },
           "onAdded": [
             {
               "$type": "SetAnimatorInt",
               "intID": "ElementTag",
-              "ratio": 7.0
+              "value": 7
             }
           ]
         },
         "UNIQUE_Gargoyle_Airborne_ElementStatistic": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "DamageStatisticsMixin",
-              "EAGBHKPGHAA": "_GARGOYLE_AIRBORNE_ELEMENT_STATISTICS_",
-              "CHDMMJCKMCH": "",
-              "IJDGIBAFEIO": [
+              "damageElementTypeKey": "_GARGOYLE_AIRBORNE_ELEMENT_STATISTICS_",
+              "onExitActions": [
                 {
                   "$type": "SetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 0,
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
-                      "target": "Self",
                       "key": "_GARGOYLE_AIRBORNE_ELEMENT_STATISTICS_",
-                      "ratio": 0.0,
-                      "compareType": "NoneOrEqual"
+                      "value": 0,
+                      "compareType": "NoneOrEqual",
+                      "target": "Self"
                     }
-                  ],
-                  "ratio": 0.0,
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  ]
                 },
                 {
                   "$type": "SetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 1,
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
-                      "target": "Self",
                       "key": "_GARGOYLE_AIRBORNE_ELEMENT_STATISTICS_",
-                      "ratio": 1.0
+                      "value": 1,
+                      "compareType": "Equal",
+                      "target": "Self"
                     }
-                  ],
-                  "ratio": 1.0,
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  ]
                 },
                 {
                   "$type": "SetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 2,
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
-                      "target": "Self",
                       "key": "_GARGOYLE_AIRBORNE_ELEMENT_STATISTICS_",
-                      "ratio": 2.0
+                      "value": 2,
+                      "compareType": "Equal",
+                      "target": "Self"
                     }
-                  ],
-                  "ratio": 2.0,
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  ]
                 },
                 {
                   "$type": "SetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 3,
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
-                      "target": "Self",
                       "key": "_GARGOYLE_AIRBORNE_ELEMENT_STATISTICS_",
-                      "ratio": 3.0
+                      "value": 3,
+                      "compareType": "Equal",
+                      "target": "Self"
                     }
-                  ],
-                  "ratio": 3.0,
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  ]
                 },
                 {
                   "$type": "SetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 4,
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
-                      "target": "Self",
                       "key": "_GARGOYLE_AIRBORNE_ELEMENT_STATISTICS_",
-                      "ratio": 4.0
+                      "value": 4,
+                      "compareType": "Equal",
+                      "target": "Self"
                     }
-                  ],
-                  "ratio": 4.0,
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  ]
                 },
                 {
                   "$type": "SetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 5,
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
-                      "target": "Self",
                       "key": "_GARGOYLE_AIRBORNE_ELEMENT_STATISTICS_",
-                      "ratio": 5.0
+                      "value": 5,
+                      "compareType": "Equal",
+                      "target": "Self"
                     }
-                  ],
-                  "ratio": 5.0,
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  ]
                 },
                 {
                   "$type": "SetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 6,
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
-                      "target": "Self",
                       "key": "_GARGOYLE_AIRBORNE_ELEMENT_STATISTICS_",
-                      "ratio": 7.0
+                      "value": 7,
+                      "compareType": "Equal",
+                      "target": "Self"
                     }
-                  ],
-                  "ratio": 6.0,
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  ]
                 },
                 {
                   "$type": "SetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 7,
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
-                      "target": "Self",
                       "key": "_GARGOYLE_AIRBORNE_ELEMENT_STATISTICS_",
-                      "ratio": 8.0
+                      "value": 8,
+                      "compareType": "Equal",
+                      "target": "Self"
                     }
-                  ],
-                  "ratio": 7.0,
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  ]
                 },
+                // no damage
                 {
                   "$type": "SetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 0,
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
-                      "target": "Self",
                       "key": "_GARGOYLE_AIRBORNE_ELEMENT_STATISTICS_",
-                      "ratio": -1.0
+                      "value": -1,
+                      "compareType": "Equal",
+                      "target": "Self"
                     }
-                  ],
-                  "ratio": 0.0,
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  ]
                 }
               ]
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Gargoyle_Airborne_ElementStatistic"
-        }
-      ]
+      }
     }
   },
   {
@@ -439,6 +414,11 @@
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Common
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -460,117 +440,130 @@
           "modifierName": "Gargoyle_Airborne_Alert_SpecialAlert"
         }
       ],
+      "onAbilityStart": [
+        {
+          "$type": "SendEffectTrigger",
+          "type": "Bool",
+          "value": 1,
+          "parameter": "SleepToNormal",
+          "effectPattern": "Eff_Monster_Gargoyle_Airborne_Weakness_Head"
+        },
+        {
+          "$type": "SendEffectTrigger",
+          "type": "Bool",
+          "value": 1,
+          "parameter": "SleepToNormal",
+          "effectPattern": "Eff_Monster_Gargoyle_Airborne_Weakness_Chest"
+        },
+        {
+          "$type": "SendEffectTrigger",
+          "type": "Bool",
+          "value": 1,
+          "parameter": "SleepToNormal",
+          "effectPattern": "Eff_Monster_Gargoyle_Airborne_Weakness_WingL"
+        },
+        {
+          "$type": "SendEffectTrigger",
+          "type": "Bool",
+          "value": 1,
+          "parameter": "SleepToNormal",
+          "effectPattern": "Eff_Monster_Gargoyle_Airborne_Weakness_WingR"
+        },
+        {
+          "$type": "TriggerAbility",
+          "abilityName": "Monster_Gargoyle_Airborne_Wing_EffectAdd"
+        }
+      ],
       "modifiers": {
         "Gargoyle_Airborne_Alert_GVHandler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 2.0,
               "key": "_GARGOYLE_AIRBORNE_WEAKNESS_WINGL_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 2
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 2.0,
               "key": "_GARGOYLE_AIRBORNE_WEAKNESS_WINGR_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 2
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "_GARGOYLE_AIRBORNE_WEAKNESS_HEAD_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "_GARGOYLE_AIRBORNE_WEAKNESS_CHEST_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             },
             {
               "$type": "SendEffectTrigger",
-              "parameter": "SleepToNormal",
-              "attachPoint": "",
               "type": "Bool",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_Weakness_Head"
+              "value": 0,
+              "parameter": "SleepToNormal",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_Weakness_Head"
             },
             {
               "$type": "SendEffectTrigger",
-              "parameter": "SleepToNormal",
-              "attachPoint": "",
               "type": "Bool",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_Weakness_Chest"
+              "value": 0,
+              "parameter": "SleepToNormal",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_Weakness_Chest"
             },
             {
               "$type": "SendEffectTrigger",
-              "parameter": "SleepToNormal",
-              "attachPoint": "",
               "type": "Bool",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_Weakness_WingL"
+              "value": 0,
+              "parameter": "SleepToNormal",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_Weakness_WingL"
             },
             {
               "$type": "SendEffectTrigger",
-              "parameter": "SleepToNormal",
-              "attachPoint": "",
               "type": "Bool",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_Weakness_WingR"
+              "value": 0,
+              "parameter": "SleepToNormal",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_Weakness_WingR"
             }
           ]
         },
         "Gargoyle_Airborne_TexHandler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorBool",
               "boolID": "PowerOffTag",
-              "ratio": true
+              "value": true
             }
           ],
           "onRemoved": [
             {
               "$type": "SetAnimatorBool",
-              "boolID": "PowerOffTag"
+              "boolID": "PowerOffTag",
+              "value": false
             }
           ]
         },
         "Gargoyle_Airborne_Alert_SpecialAlert": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_GARGOYLE_AIRBORNE_WEAKNESS_WINGL_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_GARGOYLE_AIRBORNE_WEAKNESS_WINGR_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_GARGOYLE_AIRBORNE_WEAKNESS_HEAD_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_GARGOYLE_AIRBORNE_WEAKNESS_CHEST_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             },
             {
               "$type": "TriggerAbility",
@@ -578,45 +571,7 @@
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "SendEffectTrigger",
-          "parameter": "SleepToNormal",
-          "attachPoint": "",
-          "type": "Bool",
-          "value": 1,
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_Weakness_Head"
-        },
-        {
-          "$type": "SendEffectTrigger",
-          "parameter": "SleepToNormal",
-          "attachPoint": "",
-          "type": "Bool",
-          "value": 1,
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_Weakness_Chest"
-        },
-        {
-          "$type": "SendEffectTrigger",
-          "parameter": "SleepToNormal",
-          "attachPoint": "",
-          "type": "Bool",
-          "value": 1,
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_Weakness_WingL"
-        },
-        {
-          "$type": "SendEffectTrigger",
-          "parameter": "SleepToNormal",
-          "attachPoint": "",
-          "type": "Bool",
-          "value": 1,
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_Weakness_WingR"
-        },
-        {
-          "$type": "TriggerAbility",
-          "abilityName": "Monster_Gargoyle_Airborne_Wing_EffectAdd"
-        }
-      ]
+      }
     }
   },
   {
@@ -632,8 +587,6 @@
       ],
       "modifiers": {
         "ExitBattle": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "RemoveUniqueModifier",
@@ -645,38 +598,28 @@
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_GARGOYLE_AIRBORNE_POSE_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 2.0,
               "key": "_GARGOYLE_AIRBORNE_WEAKNESS_WINGL_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 2
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 2.0,
               "key": "_GARGOYLE_AIRBORNE_WEAKNESS_WINGR_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 2
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "_GARGOYLE_AIRBORNE_WEAKNESS_HEAD_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "_GARGOYLE_AIRBORNE_WEAKNESS_CHEST_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             }
           ]
         }
@@ -687,25 +630,6 @@
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Gargoyle_Airborne_Wing_EffectAdd",
-      "modifiers": {
-        "UNIQUE_Gargoyle_Airborne_Wing_Effect": {
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_WingR",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_WingL",
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        }
-      },
       "onAdded": [
         {
           "$type": "ApplyModifier",
@@ -717,7 +641,22 @@
           "$type": "ApplyModifier",
           "modifierName": "UNIQUE_Gargoyle_Airborne_Wing_Effect"
         }
-      ]
+      ],
+      "modifiers": {
+        "UNIQUE_Gargoyle_Airborne_Wing_Effect": {
+          "isUnique": true,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_WingR"
+            },
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_WingL"
+            }
+          ]
+        }
+      }
     }
   },
   {
@@ -743,45 +682,61 @@
       "$type": "ConfigAbility",
       "abilityName": "Monster_Gargoyle_Airborne_Steer",
       "abilityMixins": [
+        /* {
+				"$type": "SteerAttackMixin",
+				"steerStateIDs": ["NormalMove"],
+				"startNormalizedTime" : 0.0,
+				"endNormalizedTime" : 1.0,
+				"angularSpeed" : 180,
+			},
+			{
+				"$type": "SteerAttackMixin",
+				"steerStateIDs": ["NormalFly"],
+				"startNormalizedTime" : 0.0,
+				"endNormalizedTime" : 1.0,
+				"angularSpeed" : 180,
+			}, */
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Alert"],
-          "angularSpeed": 120.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 1.0,
+          "angularSpeed": 120
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Turn_BS"],
-          "angularSpeed": 120.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 1.0,
+          "angularSpeed": 120
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Turn"],
+          "startNormalizedTime": 0.0,
           "endNormalizedTime": 9999.0,
-          "angularSpeed": 120.0,
-          "attackTrigger": ""
+          "angularSpeed": 120
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["ChestAtk"],
-          "endNormalizedTime": 0.3499999940395355,
-          "angularSpeed": 90.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 0.35,
+          "angularSpeed": 90
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["WingAtk"],
-          "endNormalizedTime": 0.17000000178813934,
-          "angularSpeed": 90.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 0.17,
+          "angularSpeed": 90
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["ElementAtk"],
-          "endNormalizedTime": 0.11999999731779099,
-          "angularSpeed": 120.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 0.12,
+          "angularSpeed": 120
         }
       ]
     }
@@ -807,12 +762,11 @@
       ],
       "modifiers": {
         "Gargoyle_Airborne_HeadControlEnable": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachToAbilityStateMixin",
               "abilityStates": ["ElementFrozen", "ElementPetrifaction"],
+              "reject": false,
               "modifierName": "Gargoyle_Airborne_HeadControlDisable_AbilityState"
             }
           ],
@@ -835,8 +789,6 @@
           ]
         },
         "Gargoyle_Airborne_HeadControlDisable": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "RemoveModifier",
@@ -844,13 +796,12 @@
             },
             {
               "$type": "EnablePartControl",
-              "partRootNames": ["Neck"]
+              "partRootNames": ["Neck"],
+              "enable": false
             }
           ]
         },
         "Gargoyle_Airborne_HeadControlDisable_AbilityState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "RemoveModifier",
@@ -858,7 +809,8 @@
             },
             {
               "$type": "EnablePartControl",
-              "partRootNames": ["Neck"]
+              "partRootNames": ["Neck"],
+              "enable": false
             }
           ],
           "onRemoved": [
@@ -869,8 +821,6 @@
           ]
         },
         "Gargoyle_Airborne_HeadControlEnable_AbilityState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "RemoveModifier",
@@ -886,6 +836,11 @@
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  PowerOff
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -898,22 +853,27 @@
           "predicates": [
             {
               "$type": "ByAnimatorFloat",
-              "logic": "Equal",
-              "ratio": 102.0,
-              "parameter": "PoseID"
+              "parameter": "PoseID",
+              "value": 102.0,
+              "logic": "Equal"
             }
           ]
         }
       ],
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_Gargoyle_Airborne_PowerOff",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Gargoyle_Airborne_PowerOff": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "properties": {
-            "Entity_MassRatio": 1000.0,
-            "Entity_WeightRatio": 5.0,
-            "Actor_EndureDelta": 0.0
+            "Entity_MassRatio": 1000,
+            "Entity_WeightRatio": 5,
+            "Actor_EndureDelta": 0
           },
           "onAdded": [
             {
@@ -939,80 +899,45 @@
             {
               "$type": "SetPoseBool",
               "boolID": "PowerOff",
-              "ratio": true
+              "value": true
             }
           ],
           "onRemoved": [
             {
-              "$type": "HideUIBillBoard"
+              "$type": "HideUIBillBoard",
+              "hide": false
             },
             {
               "$type": "SetPoseBool",
-              "boolID": "PowerOff"
+              "boolID": "PowerOff",
+              "value": false
             }
           ]
         },
         "PowerOff_Invincible": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "Invincible"
         },
         "PowerOff_IsGhostToAllied": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "IsGhostToAllied"
         },
         "PowerOff_IsGhostToEnemy": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "IsGhostToEnemy"
         },
         "PowerOff_MuteTaunt": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "MuteTaunt"
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "UNIQUE_Gargoyle_Airborne_PowerOff"
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Weakness
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Gargoyle_Airborne_Weakness_Effect",
-      "modifiers": {
-        "Gargoyle_Airborne_Weakness_Effect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_Weakness_Head",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_Weakness_Chest",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_Weakness_WingL",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_Weakness_WingR",
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        }
-      },
       "onAdded": [
         {
           "$type": "ApplyModifier",
@@ -1024,9 +949,36 @@
           "$type": "RemoveModifier",
           "modifierName": "Gargoyle_Airborne_Weakness_Effect"
         }
-      ]
+      ],
+      "modifiers": {
+        "Gargoyle_Airborne_Weakness_Effect": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_Weakness_Head"
+            },
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_Weakness_Chest"
+            },
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_Weakness_WingL"
+            },
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_Weakness_WingR"
+            }
+          ]
+        }
+      }
     }
   },
+  // Weakness Wing GV
+  // 0:Alert
+  // 1:Normal
+  // 2:Activated
+  // 3:Weak
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1035,7 +987,8 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_GARGOYLE_AIRBORNE_WEAKNESS_WINGL_",
-          "defaultGlobalValueOnCreate": 2.0,
+          "defaultGlobalValueOnCreate": 2,
+          "removeAppliedModifier": true,
           "valueSteps": [-0.5, 0.5, 1.5, 2.5, 3.5],
           "modifierNameSteps": [
             "Weakness_WingL_Alert",
@@ -1047,43 +1000,35 @@
       ],
       "modifiers": {
         "Weakness_WingL_Alert": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_Weakness_WingL",
               "parameter": "WeaknessState",
-              "attachPoint": "",
               "type": "Int",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_Weakness_WingL"
+              "value": 0
             }
           ]
         },
         "Weakness_WingL_Normal": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_Weakness_WingL",
               "parameter": "WeaknessState",
-              "attachPoint": "",
               "type": "Int",
-              "value": 1,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_Weakness_WingL"
+              "value": 1
             }
           ]
         },
         "Weakness_WingL_Activated": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_Weakness_WingL",
               "parameter": "WeaknessState",
-              "attachPoint": "",
               "type": "Int",
-              "value": 2,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_Weakness_WingL"
+              "value": 2
             },
             {
               "$type": "EnableHitBoxByName",
@@ -1098,13 +1043,12 @@
           "onRemoved": [
             {
               "$type": "EnableHitBoxByName",
-              "hitBoxNames": ["HitBox_WingLWeakness"]
+              "hitBoxNames": ["HitBox_WingLWeakness"],
+              "setEnable": false
             }
           ]
         },
         "Weakness_WingL_BeHit": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onBeingHit": [
             {
               "$type": "Predicated",
@@ -1115,18 +1059,36 @@
                 },
                 {
                   "$type": "ByHitEnBreak",
-                  "logic": "GreaterOrEqual",
-                  "enBreak": 1.0
+                  "enBreak": 1.0,
+                  "logic": "GreaterOrEqual"
                 }
+                /* {
+								"$type": "ByAny",
+								"predicates": 
+								[
+									{
+										"$type" : "ByEntityTypes",
+										"entityTypes" : ["Avatar"],
+										"target": "Target",
+									},
+									{
+										"$type" : "ByEntityTypes",
+										"entityTypes" : ["Avatar"],
+										"target": "TargetOriginOwner",
+									},
+								],
+							}, */
               ],
               "successActions": [
                 {
                   "$type": "Predicated",
+                  "target": "Self",
                   "targetPredicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "key": "_GARGOYLE_AIRBORNE_WEAKNESS_WINGR_",
-                      "ratio": 3.0
+                      "value": 3,
+                      "compareType": "Equal"
                     }
                   ],
                   "successActions": [
@@ -1146,32 +1108,32 @@
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 3.0,
                   "key": "_GARGOYLE_AIRBORNE_WEAKNESS_WINGL_",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 3
                 }
               ]
             }
           ]
         },
         "Weakness_WingL_Weak": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_Weakness_WingL",
               "parameter": "WeaknessState",
-              "attachPoint": "",
               "type": "Int",
-              "value": 4,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_Weakness_WingL"
+              "value": 4
             }
           ]
         }
       }
     }
   },
+  // Weakness Wing GV
+  // 0:Alert
+  // 1:Normal
+  // 2:Activated
+  // 3:Weak
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1180,7 +1142,8 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_GARGOYLE_AIRBORNE_WEAKNESS_WINGR_",
-          "defaultGlobalValueOnCreate": 2.0,
+          "defaultGlobalValueOnCreate": 2,
+          "removeAppliedModifier": true,
           "valueSteps": [-0.5, 0.5, 1.5, 2.5, 3.5],
           "modifierNameSteps": [
             "Weakness_WingR_Alert",
@@ -1192,43 +1155,35 @@
       ],
       "modifiers": {
         "Weakness_WingR_Alert": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_Weakness_WingR",
               "parameter": "WeaknessState",
-              "attachPoint": "",
               "type": "Int",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_Weakness_WingR"
+              "value": 0
             }
           ]
         },
         "Weakness_WingR_Normal": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_Weakness_WingR",
               "parameter": "WeaknessState",
-              "attachPoint": "",
               "type": "Int",
-              "value": 1,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_Weakness_WingR"
+              "value": 1
             }
           ]
         },
         "Weakness_WingR_Activated": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_Weakness_WingR",
               "parameter": "WeaknessState",
-              "attachPoint": "",
               "type": "Int",
-              "value": 2,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_Weakness_WingR"
+              "value": 2
             },
             {
               "$type": "EnableHitBoxByName",
@@ -1243,13 +1198,12 @@
           "onRemoved": [
             {
               "$type": "EnableHitBoxByName",
-              "hitBoxNames": ["HitBox_WingRWeakness"]
+              "hitBoxNames": ["HitBox_WingRWeakness"],
+              "setEnable": false
             }
           ]
         },
         "Weakness_WingR_BeHit": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onBeingHit": [
             {
               "$type": "Predicated",
@@ -1260,18 +1214,36 @@
                 },
                 {
                   "$type": "ByHitEnBreak",
-                  "logic": "GreaterOrEqual",
-                  "enBreak": 1.0
+                  "enBreak": 1.0,
+                  "logic": "GreaterOrEqual"
                 }
+                /* {
+								"$type": "ByAny",
+								"predicates": 
+								[
+									{
+										"$type" : "ByEntityTypes",
+										"entityTypes" : ["Avatar"],
+										"target": "Target",
+									},
+									{
+										"$type" : "ByEntityTypes",
+										"entityTypes" : ["Avatar"],
+										"target": "TargetOriginOwner",
+									},
+								],
+							}, */
               ],
               "successActions": [
                 {
                   "$type": "Predicated",
+                  "target": "Self",
                   "targetPredicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "key": "_GARGOYLE_AIRBORNE_WEAKNESS_WINGL_",
-                      "ratio": 3.0
+                      "value": 3,
+                      "compareType": "Equal"
                     }
                   ],
                   "successActions": [
@@ -1291,32 +1263,32 @@
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 3.0,
                   "key": "_GARGOYLE_AIRBORNE_WEAKNESS_WINGR_",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 3
                 }
               ]
             }
           ]
         },
         "Weakness_WingR_Weak": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_Weakness_WingR",
               "parameter": "WeaknessState",
-              "attachPoint": "",
               "type": "Int",
-              "value": 4,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_Weakness_WingR"
+              "value": 4
             }
           ]
         }
       }
     }
   },
+  // Weakness Head GV
+  // 0:Alert
+  // 1:Normal
+  // 2:Activated
+  // 3:Weak
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1325,7 +1297,8 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_GARGOYLE_AIRBORNE_WEAKNESS_HEAD_",
-          "defaultGlobalValueOnCreate": 1.0,
+          "defaultGlobalValueOnCreate": 1,
+          "removeAppliedModifier": true,
           "valueSteps": [-0.5, 0.5, 1.5, 2.5, 3.5],
           "modifierNameSteps": [
             "Weakness_Head_Alert",
@@ -1337,43 +1310,35 @@
       ],
       "modifiers": {
         "Weakness_Head_Alert": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_Weakness_Head",
               "parameter": "WeaknessState",
-              "attachPoint": "",
               "type": "Int",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_Weakness_Head"
+              "value": 0
             }
           ]
         },
         "Weakness_Head_Normal": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_Weakness_Head",
               "parameter": "WeaknessState",
-              "attachPoint": "",
               "type": "Int",
-              "value": 1,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_Weakness_Head"
+              "value": 1
             }
           ]
         },
         "Weakness_Head_Activated": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_Weakness_Head",
               "parameter": "WeaknessState",
-              "attachPoint": "",
               "type": "Int",
-              "value": 2,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_Weakness_Head"
+              "value": 2
             },
             {
               "$type": "EnableHitBoxByName",
@@ -1388,13 +1353,12 @@
           "onRemoved": [
             {
               "$type": "EnableHitBoxByName",
-              "hitBoxNames": ["HitBox_HeadWeakness"]
+              "hitBoxNames": ["HitBox_HeadWeakness"],
+              "setEnable": false
             }
           ]
         },
         "Weakness_Head_BeHit": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onBeingHit": [
             {
               "$type": "Predicated",
@@ -1405,9 +1369,25 @@
                 },
                 {
                   "$type": "ByHitEnBreak",
-                  "logic": "GreaterOrEqual",
-                  "enBreak": 1.0
+                  "enBreak": 1.0,
+                  "logic": "GreaterOrEqual"
                 }
+                /* {
+								"$type": "ByAny",
+								"predicates": 
+								[
+									{
+										"$type" : "ByEntityTypes",
+										"entityTypes" : ["Avatar"],
+										"target": "Target",
+									},
+									{
+										"$type" : "ByEntityTypes",
+										"entityTypes" : ["Avatar"],
+										"target": "TargetOriginOwner",
+									},
+								],
+							}, */
               ],
               "successActions": [
                 {
@@ -1417,39 +1397,38 @@
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 1.0,
                   "key": "_GARGOYLE_AIRBORNE_POSE_",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 1
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 3.0,
                   "key": "_GARGOYLE_AIRBORNE_WEAKNESS_HEAD_",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 3
                 }
               ]
             }
           ]
         },
         "Weakness_Head_Weak": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_Weakness_Head",
               "parameter": "WeaknessState",
-              "attachPoint": "",
               "type": "Int",
-              "value": 4,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_Weakness_Head"
+              "value": 4
             }
           ]
         }
       }
     }
   },
+  // Weakness Chest GV
+  // 0:Alert
+  // 1:Normal
+  // 2:Activated
+  // 3:Weak-1
+  // 4:Weak-2
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1458,7 +1437,8 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_GARGOYLE_AIRBORNE_WEAKNESS_CHEST_",
-          "defaultGlobalValueOnCreate": 1.0,
+          "defaultGlobalValueOnCreate": 1,
+          "removeAppliedModifier": true,
           "valueSteps": [-0.5, 0.5, 1.5, 2.5, 3.5],
           "modifierNameSteps": [
             "Weakness_Chest_Alert",
@@ -1470,43 +1450,35 @@
       ],
       "modifiers": {
         "Weakness_Chest_Alert": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_Weakness_Chest",
               "parameter": "WeaknessState",
-              "attachPoint": "",
               "type": "Int",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_Weakness_Chest"
+              "value": 0
             }
           ]
         },
         "Weakness_Chest_Normal": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_Weakness_Chest",
               "parameter": "WeaknessState",
-              "attachPoint": "",
               "type": "Int",
-              "value": 1,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_Weakness_Chest"
+              "value": 1
             }
           ]
         },
         "Weakness_Chest_Activated": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_Weakness_Chest",
               "parameter": "WeaknessState",
-              "attachPoint": "",
               "type": "Int",
-              "value": 2,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_Weakness_Chest"
+              "value": 2
             },
             {
               "$type": "EnableHitBoxByName",
@@ -1521,13 +1493,12 @@
           "onRemoved": [
             {
               "$type": "EnableHitBoxByName",
-              "hitBoxNames": ["HitBox_ChestWeakness"]
+              "hitBoxNames": ["HitBox_ChestWeakness"],
+              "setEnable": false
             }
           ]
         },
         "Weakness_Chest_BeHit": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onBeingHit": [
             {
               "$type": "Predicated",
@@ -1538,9 +1509,25 @@
                 },
                 {
                   "$type": "ByHitEnBreak",
-                  "logic": "GreaterOrEqual",
-                  "enBreak": 1.0
+                  "enBreak": 1.0,
+                  "logic": "GreaterOrEqual"
                 }
+                /* {
+								"$type": "ByAny",
+								"predicates": 
+								[
+									{
+										"$type" : "ByEntityTypes",
+										"entityTypes" : ["Avatar"],
+										"target": "Target",
+									},
+									{
+										"$type" : "ByEntityTypes",
+										"entityTypes" : ["Avatar"],
+										"target": "TargetOriginOwner",
+									},
+								],
+							}, */
               ],
               "successActions": [
                 {
@@ -1550,39 +1537,37 @@
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 1.0,
                   "key": "_GARGOYLE_AIRBORNE_POSE_",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 1
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 3.0,
                   "key": "_GARGOYLE_AIRBORNE_WEAKNESS_CHEST_",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 3
                 }
               ]
             }
           ]
         },
         "Weakness_Chest_Weak": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_Weakness_Chest",
               "parameter": "WeaknessState",
-              "attachPoint": "",
               "type": "Int",
-              "value": 4,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_Weakness_Chest"
+              "value": 4
             }
           ]
         }
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  NormalAtk
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1594,95 +1579,101 @@
           "modifierName": "Gargoyle_Airborne_NormalAtk_GearEffect"
         }
       ],
-      "modifiers": {
-        "Gargoyle_Airborne_NormalAtk_GearEffect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ChestAtk_BS_GearL",
-              "born": {
-                "$type": "ConfigBornByAttachPoint",
-                "attachPointName": "WingL"
-              },
-              "EBHJMLOKDGB": -1.0,
-              "NNJJKHIGPKC": true
-            },
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ChestAtk_BS_GearR",
-              "born": {
-                "$type": "ConfigBornByAttachPoint",
-                "attachPointName": "WingR"
-              },
-              "EBHJMLOKDGB": -1.0,
-              "NNJJKHIGPKC": true
-            }
-          ]
-        }
-      },
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
+              "fanAngle": 360.0,
+              "height": 2.5,
+              "radius": 4.0,
               "born": {
                 "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "NormalAtkPoint",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 5.400000095367432
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 5.4
                 },
-                "onGround": true,
                 "alongGround": true,
-                "attachPointName": "NormalAtkPoint"
-              },
-              "height": 2.5,
-              "DCMPFCIBIPA": 4.0
+                "onGround": true
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "Gargoyle_Airborne_Normalatk",
               "attenuationGroup": "Gargoyle_Airborne_Normalatk",
+              "attenuationTag": "Gargoyle_Airborne_Normalatk",
               "attackProperty": {
-                "HBIOLEEGHPD": 0.800000011920929,
-                "CCNJGLPMIEP": 0.0,
-                "bonusCriticalHurt": 25.0,
+                "damagePercentage": 0.8,
+                "elementType": "None",
+                "elementDurability": 25,
                 "strikeType": "Slash",
-                "enBreak": 50.0,
-                "attackType": "Melee"
+                "attackType": "Melee",
+                "enBreak": 50
               },
               "hitPattern": {
                 "onHitEffectName": "default",
                 "hitImpulseType": "LV4",
-                "hitHaltTimeScale": 0.05000000074505806
-              }
+                "retreatType": "ByAttacker",
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.05,
+                "muteHitText": false
+              },
+              "forceCameraShake": false
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_NormalAtk_Ground",
+          "effectPattern": "Eff_Monster_Gargoyle_Airborne_NormalAtk_Ground",
           "born": {
             "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "NormalAtkPoint",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 2.4000000953674316
+              "x": 0.0,
+              "y": 0.0,
+              "z": 2.4
             },
-            "onGround": true,
             "alongGround": true,
-            "attachPointName": "NormalAtkPoint"
-          },
-          "EBHJMLOKDGB": -1.0
+            "onGround": true
+          }
         }
-      ]
+      ],
+      "modifiers": {
+        "Gargoyle_Airborne_NormalAtk_GearEffect": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ChestAtk_BS_GearL",
+              "target": "Self",
+              "setSelfAsEffectPluginTarget": true,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "WingL"
+              }
+            },
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ChestAtk_BS_GearR",
+              "target": "Self",
+              "setSelfAsEffectPluginTarget": true,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "WingR"
+              }
+            }
+          ]
+        }
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  WingAtk
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1694,143 +1685,130 @@
           "modifierName": "Gargoyle_Airborne_WingAtk_GearEffect"
         }
       ],
-      "modifiers": {
-        "Gargoyle_Airborne_WingAtk_GearEffect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ChestAtk_BS_GearL",
-              "born": {
-                "$type": "ConfigBornByAttachPoint",
-                "attachPointName": "WingL"
-              },
-              "EBHJMLOKDGB": -1.0,
-              "NNJJKHIGPKC": true
-            },
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ChestAtk_BS_GearR",
-              "born": {
-                "$type": "ConfigBornByAttachPoint",
-                "attachPointName": "WingR"
-              },
-              "EBHJMLOKDGB": -1.0,
-              "NNJJKHIGPKC": true
-            }
-          ]
-        }
-      },
       "onAbilityStart": [
         {
           "$type": "TriggerBullet",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "target": "Self",
-              "key": "_GARGOYLE_ABYSSTAG_",
-              "ratio": 0.0,
-              "compareType": "NoneOrEqual"
-            }
-          ],
           "bulletID": 42403040,
           "born": {
             "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "WingL",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "attachPointName": "WingL"
-          }
-        },
-        {
-          "$type": "TriggerBullet",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
+          },
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
-              "target": "Self",
               "key": "_GARGOYLE_ABYSSTAG_",
-              "ratio": 0.0,
+              "target": "Self",
+              "value": 0,
               "compareType": "NoneOrEqual"
             }
-          ],
-          "bulletID": 42403041,
-          "born": {
-            "$type": "ConfigBornByAttachPoint",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "attachPointName": "WingR"
-          }
+          ]
         },
         {
           "$type": "TriggerBullet",
+          "bulletID": 42403041,
+          "born": {
+            "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "WingR",
+            "offset": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
+          },
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
-              "target": "Self",
               "key": "_GARGOYLE_ABYSSTAG_",
-              "ratio": 1.0
+              "target": "Self",
+              "value": 0,
+              "compareType": "NoneOrEqual"
             }
-          ],
+          ]
+        },
+        {
+          "$type": "TriggerBullet",
           "bulletID": 42403040,
+          "lifeByOwnerV2": true,
           "born": {
             "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "WingL",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "attachPointName": "WingL"
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
           },
-          "JAEOKOAACJP": true
-        },
-        {
-          "$type": "TriggerBullet",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
-              "target": "Self",
               "key": "_GARGOYLE_ABYSSTAG_",
-              "ratio": 1.0
+              "target": "Self",
+              "value": 1,
+              "compareType": "Equal"
             }
-          ],
+          ]
+        },
+        {
+          "$type": "TriggerBullet",
           "bulletID": 42403041,
+          "lifeByOwnerV2": true,
           "born": {
             "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "WingR",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "attachPointName": "WingR"
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
           },
-          "JAEOKOAACJP": true
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_GARGOYLE_ABYSSTAG_",
+              "target": "Self",
+              "value": 1,
+              "compareType": "Equal"
+            }
+          ]
         }
-      ]
+      ],
+      "modifiers": {
+        "Gargoyle_Airborne_WingAtk_GearEffect": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ChestAtk_BS_GearL",
+              "target": "Self",
+              "setSelfAsEffectPluginTarget": true,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "WingL"
+              }
+            },
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ChestAtk_BS_GearR",
+              "target": "Self",
+              "setSelfAsEffectPluginTarget": true,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "WingR"
+              }
+            }
+          ]
+        }
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Gargoyle_Airborne_WingAtk_Bullet_Hit",
-      "modifiers": {
-        "Gargoyle_Airborne_WingAtk_Bullet_Effect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_WingAtk_Bullet",
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        }
-      },
       "onAdded": [
         {
           "$type": "AttachModifier",
@@ -1840,52 +1818,62 @@
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "radius": 1.3,
               "born": {
                 "$type": "ConfigBornByCollisionPoint"
-              },
-              "DCMPFCIBIPA": 1.2999999523162842
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "Airborne_WingAtk",
+              "canBeModifiedBy": "OriginOwner",
               "attenuationGroup": "Airborne_WingAtk",
+              "attenuationTag": "Airborne_WingAtk",
               "attackProperty": {
-                "HBIOLEEGHPD": 0.6000000238418579,
-                "CCNJGLPMIEP": 0.0,
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 0.6,
                 "strikeType": "Default",
-                "enBreak": 20.0
+                "enBreak": 20.0,
+                "elementDurability": 50,
+                "elementType": "None"
               },
               "hitPattern": {
                 "onHitEffectName": "none",
                 "hitImpulseType": "LV2",
-                "hitHaltTimeScale": 0.009999999776482582
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
               },
-              "canBeModifiedBy": "OriginOwner"
+              "forceCameraShake": false
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_WingAtk_Bullet_AS",
+          "effectPattern": "Eff_Monster_Gargoyle_Airborne_WingAtk_Bullet_AS",
           "born": {
             "$type": "ConfigBornByCollisionPoint"
-          },
-          "EBHJMLOKDGB": -1.0
+          }
         },
         {
           "$type": "FireHitEffect",
-          "hitEntity": "",
           "hitScene": {
             "defaultEffect": "Eff_Monster_Gargoyle_Airborne_WingAtk_Bullet_AS"
           }
         }
-      ]
+      ],
+      "modifiers": {
+        "Gargoyle_Airborne_WingAtk_Bullet_Effect": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_WingAtk_Bullet"
+            }
+          ]
+        }
+      }
     }
   },
   {
@@ -1895,39 +1883,41 @@
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "radius": 0.8,
               "born": {
                 "$type": "ConfigBornByCollisionPoint"
-              },
-              "DCMPFCIBIPA": 0.800000011920929
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "Airborne_ChestAtk",
+              "canBeModifiedBy": "OriginOwner",
               "attenuationGroup": "Airborne_ChestAtk",
+              "attenuationTag": "Airborne_ChestAtk",
               "attackProperty": {
-                "HBIOLEEGHPD": 0.6000000238418579,
-                "CCNJGLPMIEP": 0.0,
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 0.6,
                 "strikeType": "Default",
-                "enBreak": 20.0
+                "enBreak": 20.0,
+                "elementDurability": 50,
+                "elementType": "None"
               },
               "hitPattern": {
                 "onHitEffectName": "none",
                 "hitImpulseType": "LV2",
-                "hitHaltTimeScale": 0.009999999776482582
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
               },
-              "canBeModifiedBy": "OriginOwner"
+              "forceCameraShake": false
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "FireSubEmitterEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_WingAtk_Bullet_AS",
+          "effectPattern": "Eff_Monster_Gargoyle_Airborne_WingAtk_Bullet_AS",
           "born": {
             "$type": "ConfigBornByCollisionPoint"
           }
@@ -1935,18 +1925,30 @@
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  ChestAtk
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Gargoyle_Airborne_ChestAtk_Aim",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Gargoyle_Airborne_ChestAtk_Aim_Target",
+          "target": "SelfAttackTarget"
+        }
+      ],
       "modifiers": {
         "Gargoyle_Airborne_ChestAtk_Aim_Target": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 3.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 3.0,
           "onAdded": [
+            //多套一层，因为目标不一定只有avatar
             {
               "$type": "Predicated",
+              "target": "Self",
               "targetPredicates": [
                 {
                   "$type": "ByEntityTypes",
@@ -1963,8 +1965,6 @@
           ]
         },
         "Gargoyle_Airborne_ChestAtk_Aim_Avatar": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "CurLocalAvatarMixinV2",
@@ -1973,24 +1973,14 @@
           ]
         },
         "Gargoyle_Airborne_ChestAtk_Aim_Alert": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Apparatus_Enigma_BionicDrone_AimAtk_Alert",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Apparatus_Enigma_BionicDrone_AimAtk_Alert"
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "target": "SelfAttackTarget",
-          "modifierName": "Gargoyle_Airborne_ChestAtk_Aim_Target"
-        }
-      ]
+      }
     }
   },
   {
@@ -2004,124 +1994,128 @@
           "modifierName": "Gargoyle_Airborne_ChestAtk_GearEffect"
         }
       ],
-      "modifiers": {
-        "Gargoyle_Airborne_ChestAtk_GearEffect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ChestAtk_BS_GearL",
-              "born": {
-                "$type": "ConfigBornByAttachPoint",
-                "attachPointName": "WingL"
-              },
-              "EBHJMLOKDGB": -1.0,
-              "NNJJKHIGPKC": true
-            },
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ChestAtk_BS_GearR",
-              "born": {
-                "$type": "ConfigBornByAttachPoint",
-                "attachPointName": "WingR"
-              },
-              "EBHJMLOKDGB": -1.0,
-              "NNJJKHIGPKC": true
-            }
-          ]
-        }
-      },
       "onAbilityStart": [
         {
           "$type": "TriggerBullet",
+          "bulletID": 42403021,
+          "trackTarget": "SelfAttackTarget",
+          "born": {
+            "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "WingL",
+            "offset": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
+          },
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
-              "target": "Self",
               "key": "_GARGOYLE_ABYSSTAG_",
-              "ratio": 0.0,
+              "target": "Self",
+              "value": 0,
               "compareType": "NoneOrEqual"
             }
-          ],
-          "bulletID": 42403021,
-          "born": {
-            "$type": "ConfigBornByAttachPoint",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "attachPointName": "WingL"
-          }
+          ]
         },
         {
           "$type": "TriggerBullet",
+          "bulletID": 42403022,
+          "trackTarget": "SelfAttackTarget",
+          "born": {
+            "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "WingR",
+            "offset": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
+          },
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
-              "target": "Self",
               "key": "_GARGOYLE_ABYSSTAG_",
-              "ratio": 0.0,
+              "target": "Self",
+              "value": 0,
               "compareType": "NoneOrEqual"
             }
-          ],
-          "bulletID": 42403022,
-          "born": {
-            "$type": "ConfigBornByAttachPoint",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "attachPointName": "WingR"
-          }
+          ]
         },
         {
           "$type": "TriggerBullet",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "target": "Self",
-              "key": "_GARGOYLE_ABYSSTAG_",
-              "ratio": 1.0
-            }
-          ],
           "bulletID": 42403021,
+          "trackTarget": "SelfAttackTarget",
+          "lifeByOwnerV2": true,
           "born": {
             "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "WingL",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "attachPointName": "WingL"
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
           },
-          "JAEOKOAACJP": true
-        },
-        {
-          "$type": "TriggerBullet",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
-              "target": "Self",
               "key": "_GARGOYLE_ABYSSTAG_",
-              "ratio": 1.0
+              "target": "Self",
+              "value": 1,
+              "compareType": "Equal"
             }
-          ],
+          ]
+        },
+        {
+          "$type": "TriggerBullet",
           "bulletID": 42403022,
+          "trackTarget": "SelfAttackTarget",
+          "lifeByOwnerV2": true,
           "born": {
             "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "WingR",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "attachPointName": "WingR"
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
           },
-          "JAEOKOAACJP": true
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_GARGOYLE_ABYSSTAG_",
+              "target": "Self",
+              "value": 1,
+              "compareType": "Equal"
+            }
+          ]
         }
-      ]
+      ],
+      "modifiers": {
+        "Gargoyle_Airborne_ChestAtk_GearEffect": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ChestAtk_BS_GearL",
+              "target": "Self",
+              "setSelfAsEffectPluginTarget": true,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "WingL"
+              }
+            },
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ChestAtk_BS_GearR",
+              "target": "Self",
+              "setSelfAsEffectPluginTarget": true,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "WingR"
+              }
+            }
+          ]
+        }
+      }
     }
   },
   {
@@ -2131,10 +2125,8 @@
       "onAbilityStart": [
         {
           "$type": "SetGlobalValue",
-          "ratio": 2.0,
           "key": "_GARGOYLE_AIRBORNE_WEAKNESS_CHEST_",
-          "maxValue": 0.0,
-          "minValue": 0.0
+          "value": 2
         }
       ]
     }
@@ -2146,10 +2138,8 @@
       "onAbilityStart": [
         {
           "$type": "SetGlobalValue",
-          "ratio": 1.0,
           "key": "_GARGOYLE_AIRBORNE_WEAKNESS_CHEST_",
-          "maxValue": 0.0,
-          "minValue": 0.0
+          "value": 1
         }
       ]
     }
@@ -2161,7 +2151,8 @@
       "onAbilityStart": [
         {
           "$type": "EnablePushColliderName",
-          "pushColliderNames": ["PushCollider_Bottom"]
+          "pushColliderNames": ["PushCollider_Bottom"],
+          "setEnable": false
         }
       ]
     }
@@ -2186,39 +2177,41 @@
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "radius": 1.3,
               "born": {
                 "$type": "ConfigBornByCollisionPoint"
-              },
-              "DCMPFCIBIPA": 1.2999999523162842
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "Airborne_ChestAtk",
+              "canBeModifiedBy": "OriginOwner",
               "attenuationGroup": "Airborne_ChestAtk",
+              "attenuationTag": "Airborne_ChestAtk",
               "attackProperty": {
-                "HBIOLEEGHPD": 0.6000000238418579,
-                "CCNJGLPMIEP": 0.0,
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 0.6,
                 "strikeType": "Default",
-                "enBreak": 20.0
+                "enBreak": 20.0,
+                "elementDurability": 50,
+                "elementType": "None"
               },
               "hitPattern": {
                 "onHitEffectName": "none",
                 "hitImpulseType": "LV2",
-                "hitHaltTimeScale": 0.009999999776482582
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
               },
-              "canBeModifiedBy": "OriginOwner"
+              "forceCameraShake": false
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "FireSubEmitterEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ChestAtk_Bullet_AS",
+          "effectPattern": "Eff_Monster_Gargoyle_Airborne_ChestAtk_Bullet_AS",
           "born": {
             "$type": "ConfigBornByCollisionPoint"
           }
@@ -2233,39 +2226,41 @@
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "radius": 1.3,
               "born": {
                 "$type": "ConfigBornByCollisionPoint"
-              },
-              "DCMPFCIBIPA": 1.2999999523162842
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "Airborne_ChestAtk",
+              "canBeModifiedBy": "OriginOwner",
               "attenuationGroup": "Airborne_ChestAtk",
+              "attenuationTag": "Airborne_ChestAtk",
               "attackProperty": {
-                "HBIOLEEGHPD": 0.6000000238418579,
-                "CCNJGLPMIEP": 0.0,
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 0.6,
                 "strikeType": "Default",
-                "enBreak": 20.0
+                "enBreak": 20.0,
+                "elementDurability": 50,
+                "elementType": "None"
               },
               "hitPattern": {
                 "onHitEffectName": "none",
                 "hitImpulseType": "LV2",
-                "hitHaltTimeScale": 0.009999999776482582
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
               },
-              "canBeModifiedBy": "OriginOwner"
+              "forceCameraShake": false
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "FireSubEmitterEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ChestAtk_Bullet_AS",
+          "effectPattern": "Eff_Monster_Gargoyle_Airborne_ChestAtk_Bullet_AS",
           "born": {
             "$type": "ConfigBornByCollisionPoint"
           }
@@ -2273,6 +2268,11 @@
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Weak
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -2289,6 +2289,8 @@
           ],
           "modifierName": "Gargoyler_Airborne_Weak_PoseHandler"
         },
+        // HitShake Tag
+        // HitDie Tag
         {
           "$type": "AttachToStateIDMixin",
           "stateIDs": ["Weak_Drop", "Weak_Loop"],
@@ -2326,22 +2328,25 @@
           "modifierName": "Gargoyler_Airborne_Weak_ElementSkillRecover"
         }
       ],
+      "onAbilityStart": [
+        {
+          "$type": "SetGlobalValue",
+          "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+          "value": 0
+        }
+      ],
       "modifiers": {
         "Gargoyler_Airborne_Weak_PoseHandler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "_GARGOYLE_AIRBORNE_POSE_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             },
             {
               "$type": "SetPoseBool",
               "boolID": "WeakTag",
-              "ratio": true
+              "value": true
             },
             {
               "$type": "TriggerAbility",
@@ -2351,7 +2356,8 @@
           "onRemoved": [
             {
               "$type": "SetPoseBool",
-              "boolID": "WeakTag"
+              "boolID": "WeakTag",
+              "value": false
             },
             {
               "$type": "TriggerAbility",
@@ -2360,8 +2366,6 @@
           ]
         },
         "Gargoyler_Airborne_Weak_Collider": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "EnablePushColliderName",
@@ -2372,109 +2376,89 @@
           "onRemoved": [
             {
               "$type": "EnablePushColliderName",
-              "pushColliderNames": ["PushCollider_Weak"]
+              "pushColliderNames": ["PushCollider_Weak"],
+              "setEnable": false
             }
           ]
         },
         "Gargoyler_Airborne_Weak_HitTag": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorBool",
-              "canBeHandledOnRecover": true,
               "boolID": "AirWeakTag",
-              "ratio": true
+              "value": true,
+              "canBeHandledOnRecover": true
             }
           ],
           "onRemoved": [
             {
               "$type": "ResetAnimatorTrigger",
-              "canBeHandledOnRecover": true,
-              "triggerID": "AirWeakTrigger"
+              "triggerID": "AirWeakTrigger",
+              "canBeHandledOnRecover": true
             },
             {
               "$type": "SetAnimatorBool",
-              "canBeHandledOnRecover": true,
-              "boolID": "AirWeakTag"
+              "boolID": "AirWeakTag",
+              "value": false,
+              "canBeHandledOnRecover": true
             }
           ],
           "onKill": [
             {
               "$type": "SetAnimatorBool",
-              "canBeHandledOnRecover": true,
               "boolID": "AirWeakDieTag",
-              "ratio": true
+              "value": true,
+              "canBeHandledOnRecover": true
             }
           ]
         },
         "Gargoyler_Airborne_Weak_WeaknessRecover": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_GARGOYLE_AIRBORNE_WEAKNESS_WINGR_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_GARGOYLE_AIRBORNE_WEAKNESS_WINGL_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_GARGOYLE_AIRBORNE_WEAKNESS_HEAD_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_GARGOYLE_AIRBORNE_WEAKNESS_CHEST_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "_GARGOYLE_AIRBORNE_WEAKNESS_CHEST_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "_GARGOYLE_AIRBORNE_WEAKNESS_HEAD_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 2.0,
               "key": "_GARGOYLE_AIRBORNE_WEAKNESS_WINGL_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 2
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 2.0,
               "key": "_GARGOYLE_AIRBORNE_WEAKNESS_WINGR_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 2
             }
           ]
         },
         "Gargoyler_Airborne_Weak_ElementSkillRecover": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "SetAISkillCDAvailableNow",
@@ -2483,32 +2467,43 @@
           ]
         },
         "Gargoyler_Airborne_Weak_Effect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_Weak_Loop",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_Weak_Loop"
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  ElementAtk
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Gargoyle_Airborne_ElementAtk_Settle",
+      "onAbilityStart": [
+        // 在一帧内处理统计modifier的上下和pose切换
+        // 时间点与罐子弹起同期
+        // 存在的问题是，子弹发射到罐子弹起的空档期怪物扔在使用上阶段抗性
+        {
+          "$type": "TriggerAbility",
+          "abilityName": "Monster_Gargoyle_Airborne_PoseElement_End"
+        },
+        {
+          "$type": "TriggerAbility",
+          "abilityName": "Monster_Gargoyle_Airborne_PoseElement_Begin"
+        },
+        {
+          "$type": "SetGlobalValue",
+          "key": "_GARGOYLE_AIRBORNE_POSE_",
+          "value": 1
+        }
+      ],
       "abilityMixins": [
         {
           "$type": "AttachToStateIDMixin",
@@ -2518,39 +2513,38 @@
       ],
       "modifiers": {
         "Gargoyle_Airborne_ElementAtk_Effect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorBool",
               "boolID": "TankTag",
-              "ratio": true
+              "value": true
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ChestAtk_BS_GearL",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ChestAtk_BS_GearL",
+              "target": "Self",
+              "setSelfAsEffectPluginTarget": true,
               "born": {
                 "$type": "ConfigBornByAttachPoint",
                 "attachPointName": "WingL"
-              },
-              "EBHJMLOKDGB": -1.0,
-              "NNJJKHIGPKC": true
+              }
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ChestAtk_BS_GearR",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ChestAtk_BS_GearR",
+              "target": "Self",
+              "setSelfAsEffectPluginTarget": true,
               "born": {
                 "$type": "ConfigBornByAttachPoint",
                 "attachPointName": "WingR"
-              },
-              "EBHJMLOKDGB": -1.0,
-              "NNJJKHIGPKC": true
+              }
             }
           ],
           "onRemoved": [
             {
               "$type": "SetAnimatorBool",
-              "boolID": "TankTag"
+              "boolID": "TankTag",
+              "value": false
             },
             {
               "$type": "RemoveUniqueModifier",
@@ -2566,24 +2560,7 @@
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "TriggerAbility",
-          "abilityName": "Monster_Gargoyle_Airborne_PoseElement_End"
-        },
-        {
-          "$type": "TriggerAbility",
-          "abilityName": "Monster_Gargoyle_Airborne_PoseElement_Begin"
-        },
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 1.0,
-          "key": "_GARGOYLE_AIRBORNE_POSE_",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        }
-      ]
+      }
     }
   },
   {
@@ -2593,10 +2570,8 @@
       "onAbilityStart": [
         {
           "$type": "SetGlobalValue",
-          "ratio": 2.0,
           "key": "_GARGOYLE_AIRBORNE_WEAKNESS_HEAD_",
-          "maxValue": 0.0,
-          "minValue": 0.0
+          "value": 2
         }
       ]
     }
@@ -2608,10 +2583,8 @@
       "onAbilityStart": [
         {
           "$type": "SetGlobalValue",
-          "ratio": 1.0,
           "key": "_GARGOYLE_AIRBORNE_WEAKNESS_HEAD_",
-          "maxValue": 0.0,
-          "minValue": 0.0
+          "value": 1
         }
       ]
     }
@@ -2623,435 +2596,460 @@
       "onAbilityStart": [
         {
           "$type": "TriggerBullet",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-              "ratio": 0.0
-            },
-            {
-              "$type": "ByTargetGlobalValue",
-              "target": "Self",
-              "key": "_GARGOYLE_ABYSSTAG_",
-              "ratio": 0.0,
-              "compareType": "NoneOrEqual"
-            }
-          ],
           "bulletID": 42403032,
           "born": {
             "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "ElementAtkPoint",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "attachPointName": "ElementAtkPoint"
-          }
-        },
-        {
-          "$type": "TriggerBullet",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
+          },
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-              "ratio": 1.0
+              "value": 0,
+              "compareType": "Equal"
             },
             {
               "$type": "ByTargetGlobalValue",
-              "target": "Self",
               "key": "_GARGOYLE_ABYSSTAG_",
-              "ratio": 0.0,
+              "target": "Self",
+              "value": 0,
               "compareType": "NoneOrEqual"
             }
-          ],
+          ]
+        },
+        {
+          "$type": "TriggerBullet",
           "bulletID": 42403033,
           "born": {
             "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "ElementAtkPoint",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "attachPointName": "ElementAtkPoint"
-          }
-        },
-        {
-          "$type": "TriggerBullet",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
+          },
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-              "ratio": 2.0
+              "value": 1,
+              "compareType": "Equal"
             },
             {
               "$type": "ByTargetGlobalValue",
-              "target": "Self",
               "key": "_GARGOYLE_ABYSSTAG_",
-              "ratio": 0.0,
+              "target": "Self",
+              "value": 0,
               "compareType": "NoneOrEqual"
             }
-          ],
+          ]
+        },
+        {
+          "$type": "TriggerBullet",
           "bulletID": 42403034,
           "born": {
             "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "ElementAtkPoint",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "attachPointName": "ElementAtkPoint"
-          }
-        },
-        {
-          "$type": "TriggerBullet",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
+          },
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-              "ratio": 3.0
+              "value": 2,
+              "compareType": "Equal"
             },
             {
               "$type": "ByTargetGlobalValue",
-              "target": "Self",
               "key": "_GARGOYLE_ABYSSTAG_",
-              "ratio": 0.0,
+              "target": "Self",
+              "value": 0,
               "compareType": "NoneOrEqual"
             }
-          ],
+          ]
+        },
+        {
+          "$type": "TriggerBullet",
           "bulletID": 42403035,
           "born": {
             "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "ElementAtkPoint",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "attachPointName": "ElementAtkPoint"
-          }
-        },
-        {
-          "$type": "TriggerBullet",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
+          },
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-              "ratio": 4.0
+              "value": 3,
+              "compareType": "Equal"
             },
             {
               "$type": "ByTargetGlobalValue",
-              "target": "Self",
               "key": "_GARGOYLE_ABYSSTAG_",
-              "ratio": 0.0,
+              "target": "Self",
+              "value": 0,
               "compareType": "NoneOrEqual"
             }
-          ],
+          ]
+        },
+        {
+          "$type": "TriggerBullet",
           "bulletID": 42403036,
           "born": {
             "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "ElementAtkPoint",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "attachPointName": "ElementAtkPoint"
-          }
-        },
-        {
-          "$type": "TriggerBullet",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
+          },
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-              "ratio": 5.0
+              "value": 4,
+              "compareType": "Equal"
             },
             {
               "$type": "ByTargetGlobalValue",
-              "target": "Self",
               "key": "_GARGOYLE_ABYSSTAG_",
-              "ratio": 0.0,
+              "target": "Self",
+              "value": 0,
               "compareType": "NoneOrEqual"
             }
-          ],
+          ]
+        },
+        {
+          "$type": "TriggerBullet",
           "bulletID": 42403037,
           "born": {
             "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "ElementAtkPoint",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "attachPointName": "ElementAtkPoint"
-          }
-        },
-        {
-          "$type": "TriggerBullet",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
+          },
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-              "ratio": 6.0
+              "value": 5,
+              "compareType": "Equal"
             },
             {
               "$type": "ByTargetGlobalValue",
-              "target": "Self",
               "key": "_GARGOYLE_ABYSSTAG_",
-              "ratio": 0.0,
+              "target": "Self",
+              "value": 0,
               "compareType": "NoneOrEqual"
             }
-          ],
+          ]
+        },
+        {
+          "$type": "TriggerBullet",
           "bulletID": 42403038,
           "born": {
             "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "ElementAtkPoint",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "attachPointName": "ElementAtkPoint"
-          }
-        },
-        {
-          "$type": "TriggerBullet",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
+          },
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-              "ratio": 7.0
+              "value": 6,
+              "compareType": "Equal"
             },
             {
               "$type": "ByTargetGlobalValue",
-              "target": "Self",
               "key": "_GARGOYLE_ABYSSTAG_",
-              "ratio": 0.0,
+              "target": "Self",
+              "value": 0,
               "compareType": "NoneOrEqual"
             }
-          ],
+          ]
+        },
+        {
+          "$type": "TriggerBullet",
           "bulletID": 42403039,
           "born": {
             "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "ElementAtkPoint",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "attachPointName": "ElementAtkPoint"
-          }
-        },
-        {
-          "$type": "TriggerBullet",
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
+          },
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-              "ratio": 0.0
+              "value": 7,
+              "compareType": "Equal"
             },
             {
               "$type": "ByTargetGlobalValue",
-              "target": "Self",
               "key": "_GARGOYLE_ABYSSTAG_",
-              "ratio": 1.0
+              "target": "Self",
+              "value": 0,
+              "compareType": "NoneOrEqual"
             }
-          ],
+          ]
+        },
+        // Abyss
+        {
+          "$type": "TriggerBullet",
           "bulletID": 42403032,
+          "lifeByOwnerV2": true,
           "born": {
             "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "ElementAtkPoint",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "attachPointName": "ElementAtkPoint"
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
           },
-          "JAEOKOAACJP": true
-        },
-        {
-          "$type": "TriggerBullet",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-              "ratio": 1.0
+              "value": 0,
+              "compareType": "Equal"
             },
             {
               "$type": "ByTargetGlobalValue",
-              "target": "Self",
               "key": "_GARGOYLE_ABYSSTAG_",
-              "ratio": 1.0
+              "target": "Self",
+              "value": 1,
+              "compareType": "Equal"
             }
-          ],
+          ]
+        },
+        {
+          "$type": "TriggerBullet",
           "bulletID": 42403033,
+          "lifeByOwnerV2": true,
           "born": {
             "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "ElementAtkPoint",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "attachPointName": "ElementAtkPoint"
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
           },
-          "JAEOKOAACJP": true
-        },
-        {
-          "$type": "TriggerBullet",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-              "ratio": 2.0
+              "value": 1,
+              "compareType": "Equal"
             },
             {
               "$type": "ByTargetGlobalValue",
-              "target": "Self",
               "key": "_GARGOYLE_ABYSSTAG_",
-              "ratio": 1.0
+              "target": "Self",
+              "value": 1,
+              "compareType": "Equal"
             }
-          ],
+          ]
+        },
+        {
+          "$type": "TriggerBullet",
           "bulletID": 42403034,
+          "lifeByOwnerV2": true,
           "born": {
             "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "ElementAtkPoint",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "attachPointName": "ElementAtkPoint"
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
           },
-          "JAEOKOAACJP": true
-        },
-        {
-          "$type": "TriggerBullet",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-              "ratio": 3.0
+              "value": 2,
+              "compareType": "Equal"
             },
             {
               "$type": "ByTargetGlobalValue",
-              "target": "Self",
               "key": "_GARGOYLE_ABYSSTAG_",
-              "ratio": 1.0
+              "target": "Self",
+              "value": 1,
+              "compareType": "Equal"
             }
-          ],
+          ]
+        },
+        {
+          "$type": "TriggerBullet",
           "bulletID": 42403035,
+          "lifeByOwnerV2": true,
           "born": {
             "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "ElementAtkPoint",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "attachPointName": "ElementAtkPoint"
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
           },
-          "JAEOKOAACJP": true
-        },
-        {
-          "$type": "TriggerBullet",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-              "ratio": 4.0
+              "value": 3,
+              "compareType": "Equal"
             },
             {
               "$type": "ByTargetGlobalValue",
-              "target": "Self",
               "key": "_GARGOYLE_ABYSSTAG_",
-              "ratio": 1.0
+              "target": "Self",
+              "value": 1,
+              "compareType": "Equal"
             }
-          ],
+          ]
+        },
+        {
+          "$type": "TriggerBullet",
           "bulletID": 42403036,
+          "lifeByOwnerV2": true,
           "born": {
             "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "ElementAtkPoint",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "attachPointName": "ElementAtkPoint"
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
           },
-          "JAEOKOAACJP": true
-        },
-        {
-          "$type": "TriggerBullet",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-              "ratio": 5.0
+              "value": 4,
+              "compareType": "Equal"
             },
             {
               "$type": "ByTargetGlobalValue",
-              "target": "Self",
               "key": "_GARGOYLE_ABYSSTAG_",
-              "ratio": 1.0
+              "target": "Self",
+              "value": 1,
+              "compareType": "Equal"
             }
-          ],
+          ]
+        },
+        {
+          "$type": "TriggerBullet",
           "bulletID": 42403037,
+          "lifeByOwnerV2": true,
           "born": {
             "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "ElementAtkPoint",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "attachPointName": "ElementAtkPoint"
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
           },
-          "JAEOKOAACJP": true
-        },
-        {
-          "$type": "TriggerBullet",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-              "ratio": 6.0
+              "value": 5,
+              "compareType": "Equal"
             },
             {
               "$type": "ByTargetGlobalValue",
-              "target": "Self",
               "key": "_GARGOYLE_ABYSSTAG_",
-              "ratio": 1.0
+              "target": "Self",
+              "value": 1,
+              "compareType": "Equal"
             }
-          ],
+          ]
+        },
+        {
+          "$type": "TriggerBullet",
           "bulletID": 42403038,
+          "lifeByOwnerV2": true,
           "born": {
             "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "ElementAtkPoint",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "attachPointName": "ElementAtkPoint"
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
           },
-          "JAEOKOAACJP": true
-        },
-        {
-          "$type": "TriggerBullet",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-              "ratio": 7.0
+              "value": 6,
+              "compareType": "Equal"
             },
             {
               "$type": "ByTargetGlobalValue",
-              "target": "Self",
               "key": "_GARGOYLE_ABYSSTAG_",
-              "ratio": 1.0
+              "target": "Self",
+              "value": 1,
+              "compareType": "Equal"
             }
-          ],
+          ]
+        },
+        {
+          "$type": "TriggerBullet",
           "bulletID": 42403039,
+          "lifeByOwnerV2": true,
           "born": {
             "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "ElementAtkPoint",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "attachPointName": "ElementAtkPoint"
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
           },
-          "JAEOKOAACJP": true
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+              "value": 7,
+              "compareType": "Equal"
+            },
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_GARGOYLE_ABYSSTAG_",
+              "target": "Self",
+              "value": 1,
+              "compareType": "Equal"
+            }
+          ]
         }
       ]
     }
@@ -3060,559 +3058,555 @@
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Gargoyle_Airborne_ElementAtk_Effect_BS",
-      "modifiers": {
-        "UNIQUE_Gargoyle_Airborne_ElementAtk_Effect_BS": {
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_BS",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 0.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_BS"
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 1.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "value": 1,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_BS"
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 2.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "value": 2,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_BS"
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 3.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "value": 3,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_BS"
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 4.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "value": 4,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_BS"
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 5.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "value": 5,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_BS"
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 6.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "value": 6,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_BS"
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 7.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "value": 7,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_BS"
-            }
-          ]
-        }
-      },
       "onAbilityStart": [
         {
           "$type": "ApplyModifier",
           "modifierName": "UNIQUE_Gargoyle_Airborne_ElementAtk_Effect_BS"
         }
-      ]
+      ],
+      "modifiers": {
+        "UNIQUE_Gargoyle_Airborne_ElementAtk_Effect_BS": {
+          "isUnique": true,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_BS"
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_BS",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 0,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 0,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_BS",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 1,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 1,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_BS",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 2,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 2,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_BS",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 3,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 3,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_BS",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 4,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 4,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_BS",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 5,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 5,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_BS",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 6,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 6,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_BS",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 7,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 7,
+                  "compareType": "Equal"
+                }
+              ]
+            }
+          ]
+        }
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Gargoyle_Airborne_ElementAtk_Effect_Wings",
-      "modifiers": {
-        "UNIQUE_Gargoyle_Airborne_ElementAtk_Effect_Wings": {
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingL",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingR",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 0.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingL"
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 1.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "value": 1,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingL"
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 2.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "value": 2,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingL"
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 3.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "value": 3,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingL"
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 4.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "value": 4,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingL"
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 5.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "value": 5,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingL"
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 6.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "value": 6,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingL"
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 7.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "value": 7,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingL"
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 0.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingR"
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 1.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "value": 1,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingR"
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 2.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "value": 2,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingR"
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 3.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "value": 3,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingR"
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 4.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "value": 4,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingR"
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 5.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "value": 5,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingR"
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 6.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "value": 6,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingR"
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 7.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "value": 7,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingR"
-            }
-          ]
-        }
-      },
       "onAbilityStart": [
         {
           "$type": "ApplyModifier",
           "modifierName": "UNIQUE_Gargoyle_Airborne_ElementAtk_Effect_Wings"
         }
-      ]
+      ],
+      "modifiers": {
+        "UNIQUE_Gargoyle_Airborne_ElementAtk_Effect_Wings": {
+          "isUnique": true,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingL"
+            },
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingR"
+            },
+            // WingL
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingL",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 0,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 0,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingL",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 1,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 1,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingL",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 2,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 2,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingL",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 3,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 3,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingL",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 4,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 4,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingL",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 5,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 5,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingL",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 6,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 6,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingL",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 7,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 7,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            // WingR
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingR",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 0,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 0,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingR",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 1,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 1,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingR",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 2,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 2,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingR",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 3,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 3,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingR",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 4,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 4,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingR",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 5,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 5,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingR",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 6,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 6,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_WingR",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 7,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 7,
+                  "compareType": "Equal"
+                }
+              ]
+            }
+          ]
+        }
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Gargoyle_Airborne_ElementAtk_Effect_Chest",
-      "modifiers": {
-        "UNIQUE_Gargoyle_Airborne_ElementAtk_Effect_Chest": {
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_AS_Chest",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 0.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_AS_Chest"
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 1.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "value": 1,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_AS_Chest"
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 2.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "value": 2,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_AS_Chest"
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 3.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "value": 3,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_AS_Chest"
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 4.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "value": 4,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_AS_Chest"
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 5.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "value": 5,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_AS_Chest"
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 6.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "value": 6,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_AS_Chest"
-            },
-            {
-              "$type": "SendEffectTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
-                  "ratio": 7.0
-                }
-              ],
-              "parameter": "ElementTag",
-              "attachPoint": "",
-              "type": "Int",
-              "value": 7,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_AS_Chest"
-            }
-          ]
-        }
-      },
       "onAbilityStart": [
         {
           "$type": "ApplyModifier",
           "modifierName": "UNIQUE_Gargoyle_Airborne_ElementAtk_Effect_Chest"
         }
-      ]
+      ],
+      "modifiers": {
+        "UNIQUE_Gargoyle_Airborne_ElementAtk_Effect_Chest": {
+          "isUnique": true,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_AS_Chest"
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_AS_Chest",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 0,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 0,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_AS_Chest",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 1,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 1,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_AS_Chest",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 2,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 2,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_AS_Chest",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 3,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 3,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_AS_Chest",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 4,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 4,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_AS_Chest",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 5,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 5,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_AS_Chest",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 6,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 6,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_AS_Chest",
+              "type": "Int",
+              "parameter": "ElementTag",
+              "value": 7,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_GARGOYLE_AIRBORNE_ELEMENT_",
+                  "value": 7,
+                  "compareType": "Equal"
+                }
+              ]
+            }
+          ]
+        }
+      }
     }
   },
   {
@@ -3622,39 +3616,41 @@
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "radius": 3.5,
               "born": {
                 "$type": "ConfigBornByCollisionPoint"
-              },
-              "DCMPFCIBIPA": 3.5
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "Gargoyle_ElementAtk",
+              "canBeModifiedBy": "OriginOwner",
               "attenuationGroup": "Gargoyle_ElementAtk",
+              "attenuationTag": "Gargoyle_ElementAtk",
               "attackProperty": {
-                "HBIOLEEGHPD": 1.0,
-                "CCNJGLPMIEP": 0.0,
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 1.0,
                 "strikeType": "Default",
-                "enBreak": 40.0
+                "enBreak": 40.0,
+                "elementDurability": 50,
+                "elementType": "None"
               },
               "hitPattern": {
                 "onHitEffectName": "",
                 "hitImpulseType": "LV2",
-                "hitHaltTimeScale": 0.009999999776482582
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
               },
-              "canBeModifiedBy": "OriginOwner"
+              "forceCameraShake": false
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "FireSubEmitterEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_None_Bullet_AS",
+          "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_None_Bullet_AS",
           "born": {
             "$type": "ConfigBornByCollisionPoint"
           }
@@ -3669,40 +3665,41 @@
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "radius": 3.5,
               "born": {
                 "$type": "ConfigBornByCollisionPoint"
-              },
-              "DCMPFCIBIPA": 3.5
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "Gargoyle_ElementAtk",
+              "canBeModifiedBy": "OriginOwner",
               "attenuationGroup": "Gargoyle_ElementAtk",
+              "attenuationTag": "Gargoyle_ElementAtk",
               "attackProperty": {
-                "HBIOLEEGHPD": 1.0,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Fire",
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 1.0,
                 "strikeType": "Default",
-                "enBreak": 40.0
+                "enBreak": 40.0,
+                "elementDurability": 50,
+                "elementType": "Fire"
               },
               "hitPattern": {
                 "onHitEffectName": "",
                 "hitImpulseType": "LV2",
-                "hitHaltTimeScale": 0.009999999776482582
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
               },
-              "canBeModifiedBy": "OriginOwner"
+              "forceCameraShake": false
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "FireSubEmitterEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_Fire_Bullet_AS",
+          "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_Fire_Bullet_AS",
           "born": {
             "$type": "ConfigBornByCollisionPoint"
           }
@@ -3717,40 +3714,41 @@
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "radius": 3.5,
               "born": {
                 "$type": "ConfigBornByCollisionPoint"
-              },
-              "DCMPFCIBIPA": 3.5
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "Gargoyle_ElementAtk",
+              "canBeModifiedBy": "OriginOwner",
               "attenuationGroup": "Gargoyle_ElementAtk",
+              "attenuationTag": "Gargoyle_ElementAtk",
               "attackProperty": {
-                "HBIOLEEGHPD": 1.0,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Water",
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 1.0,
                 "strikeType": "Default",
-                "enBreak": 40.0
+                "enBreak": 40.0,
+                "elementDurability": 50,
+                "elementType": "Water"
               },
               "hitPattern": {
                 "onHitEffectName": "",
                 "hitImpulseType": "LV2",
-                "hitHaltTimeScale": 0.009999999776482582
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
               },
-              "canBeModifiedBy": "OriginOwner"
+              "forceCameraShake": false
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "FireSubEmitterEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_Water_Bullet_AS",
+          "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_Water_Bullet_AS",
           "born": {
             "$type": "ConfigBornByCollisionPoint"
           }
@@ -3765,40 +3763,41 @@
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "radius": 3.5,
               "born": {
                 "$type": "ConfigBornByCollisionPoint"
-              },
-              "DCMPFCIBIPA": 3.5
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "Gargoyle_ElementAtk",
+              "canBeModifiedBy": "OriginOwner",
               "attenuationGroup": "Gargoyle_ElementAtk",
+              "attenuationTag": "Gargoyle_ElementAtk",
               "attackProperty": {
-                "HBIOLEEGHPD": 1.0,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Grass",
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 1.0,
                 "strikeType": "Default",
-                "enBreak": 40.0
+                "enBreak": 40.0,
+                "elementDurability": 50,
+                "elementType": "Grass"
               },
               "hitPattern": {
                 "onHitEffectName": "",
                 "hitImpulseType": "LV2",
-                "hitHaltTimeScale": 0.009999999776482582
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
               },
-              "canBeModifiedBy": "OriginOwner"
+              "forceCameraShake": false
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "FireSubEmitterEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_Grass_Bullet_AS",
+          "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_Grass_Bullet_AS",
           "born": {
             "$type": "ConfigBornByCollisionPoint"
           }
@@ -3813,40 +3812,41 @@
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "radius": 3.5,
               "born": {
                 "$type": "ConfigBornByCollisionPoint"
-              },
-              "DCMPFCIBIPA": 3.5
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "Gargoyle_ElementAtk",
+              "canBeModifiedBy": "OriginOwner",
               "attenuationGroup": "Gargoyle_ElementAtk",
+              "attenuationTag": "Gargoyle_ElementAtk",
               "attackProperty": {
-                "HBIOLEEGHPD": 1.0,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Electric",
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 1.0,
                 "strikeType": "Default",
-                "enBreak": 40.0
+                "enBreak": 40.0,
+                "elementDurability": 50,
+                "elementType": "Electric"
               },
               "hitPattern": {
                 "onHitEffectName": "",
                 "hitImpulseType": "LV2",
-                "hitHaltTimeScale": 0.009999999776482582
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
               },
-              "canBeModifiedBy": "OriginOwner"
+              "forceCameraShake": false
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "FireSubEmitterEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_Electric_Bullet_AS",
+          "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_Electric_Bullet_AS",
           "born": {
             "$type": "ConfigBornByCollisionPoint"
           }
@@ -3861,40 +3861,41 @@
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "radius": 3.5,
               "born": {
                 "$type": "ConfigBornByCollisionPoint"
-              },
-              "DCMPFCIBIPA": 3.5
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "Gargoyle_ElementAtk",
+              "canBeModifiedBy": "OriginOwner",
               "attenuationGroup": "Gargoyle_ElementAtk",
+              "attenuationTag": "Gargoyle_ElementAtk",
               "attackProperty": {
-                "HBIOLEEGHPD": 1.0,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Ice",
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 1.0,
                 "strikeType": "Default",
-                "enBreak": 40.0
+                "enBreak": 40.0,
+                "elementDurability": 50,
+                "elementType": "Ice"
               },
               "hitPattern": {
                 "onHitEffectName": "",
                 "hitImpulseType": "LV2",
-                "hitHaltTimeScale": 0.009999999776482582
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
               },
-              "canBeModifiedBy": "OriginOwner"
+              "forceCameraShake": false
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "FireSubEmitterEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_Ice_Bullet_AS",
+          "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_Ice_Bullet_AS",
           "born": {
             "$type": "ConfigBornByCollisionPoint"
           }
@@ -3909,40 +3910,41 @@
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "radius": 3.5,
               "born": {
                 "$type": "ConfigBornByCollisionPoint"
-              },
-              "DCMPFCIBIPA": 3.5
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "Gargoyle_ElementAtk",
+              "canBeModifiedBy": "OriginOwner",
               "attenuationGroup": "Gargoyle_ElementAtk",
+              "attenuationTag": "Gargoyle_ElementAtk",
               "attackProperty": {
-                "HBIOLEEGHPD": 1.0,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Wind",
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 1.0,
                 "strikeType": "Default",
-                "enBreak": 40.0
+                "enBreak": 40.0,
+                "elementDurability": 50,
+                "elementType": "Wind"
               },
               "hitPattern": {
                 "onHitEffectName": "",
                 "hitImpulseType": "LV2",
-                "hitHaltTimeScale": 0.009999999776482582
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
               },
-              "canBeModifiedBy": "OriginOwner"
+              "forceCameraShake": false
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "FireSubEmitterEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_Wind_Bullet_AS",
+          "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_Wind_Bullet_AS",
           "born": {
             "$type": "ConfigBornByCollisionPoint"
           }
@@ -3957,40 +3959,41 @@
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "radius": 3.5,
               "born": {
                 "$type": "ConfigBornByCollisionPoint"
-              },
-              "DCMPFCIBIPA": 3.5
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "Gargoyle_ElementAtk",
+              "canBeModifiedBy": "OriginOwner",
               "attenuationGroup": "Gargoyle_ElementAtk",
+              "attenuationTag": "Gargoyle_ElementAtk",
               "attackProperty": {
-                "HBIOLEEGHPD": 1.0,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Rock",
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 1.0,
                 "strikeType": "Default",
-                "enBreak": 40.0
+                "enBreak": 40.0,
+                "elementDurability": 50,
+                "elementType": "Rock"
               },
               "hitPattern": {
                 "onHitEffectName": "",
                 "hitImpulseType": "LV2",
-                "hitHaltTimeScale": 0.009999999776482582
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
               },
-              "canBeModifiedBy": "OriginOwner"
+              "forceCameraShake": false
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "FireSubEmitterEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_Rock_Bullet_AS",
+          "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_Rock_Bullet_AS",
           "born": {
             "$type": "ConfigBornByCollisionPoint"
           }
@@ -4005,39 +4008,41 @@
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "radius": 3.5,
               "born": {
                 "$type": "ConfigBornByCollisionPoint"
-              },
-              "DCMPFCIBIPA": 3.5
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "Gargoyle_ElementAtk",
+              "canBeModifiedBy": "OriginOwner",
               "attenuationGroup": "Gargoyle_ElementAtk",
+              "attenuationTag": "Gargoyle_ElementAtk",
               "attackProperty": {
-                "HBIOLEEGHPD": 1.0,
-                "CCNJGLPMIEP": 0.0,
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 1.0,
                 "strikeType": "Default",
-                "enBreak": 40.0
+                "enBreak": 40.0,
+                "elementDurability": 50,
+                "elementType": "None"
               },
               "hitPattern": {
                 "onHitEffectName": "",
                 "hitImpulseType": "LV2",
-                "hitHaltTimeScale": 0.009999999776482582
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
               },
-              "canBeModifiedBy": "OriginOwner"
+              "forceCameraShake": false
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "FireSubEmitterEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_None_Bullet_AS",
+          "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_None_Bullet_AS",
           "born": {
             "$type": "ConfigBornByCollisionPoint"
           }
@@ -4052,40 +4057,41 @@
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "radius": 3.5,
               "born": {
                 "$type": "ConfigBornByCollisionPoint"
-              },
-              "DCMPFCIBIPA": 3.5
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "Gargoyle_ElementAtk",
+              "canBeModifiedBy": "OriginOwner",
               "attenuationGroup": "Gargoyle_ElementAtk",
+              "attenuationTag": "Gargoyle_ElementAtk",
               "attackProperty": {
-                "HBIOLEEGHPD": 1.0,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Fire",
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 1.0,
                 "strikeType": "Default",
-                "enBreak": 40.0
+                "enBreak": 40.0,
+                "elementDurability": 50,
+                "elementType": "Fire"
               },
               "hitPattern": {
                 "onHitEffectName": "",
                 "hitImpulseType": "LV2",
-                "hitHaltTimeScale": 0.009999999776482582
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
               },
-              "canBeModifiedBy": "OriginOwner"
+              "forceCameraShake": false
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "FireSubEmitterEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_Fire_Bullet_AS",
+          "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_Fire_Bullet_AS",
           "born": {
             "$type": "ConfigBornByCollisionPoint"
           }
@@ -4100,40 +4106,41 @@
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "radius": 3.5,
               "born": {
                 "$type": "ConfigBornByCollisionPoint"
-              },
-              "DCMPFCIBIPA": 3.5
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "Gargoyle_ElementAtk",
+              "canBeModifiedBy": "OriginOwner",
               "attenuationGroup": "Gargoyle_ElementAtk",
+              "attenuationTag": "Gargoyle_ElementAtk",
               "attackProperty": {
-                "HBIOLEEGHPD": 1.0,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Water",
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 1.0,
                 "strikeType": "Default",
-                "enBreak": 40.0
+                "enBreak": 40.0,
+                "elementDurability": 50,
+                "elementType": "Water"
               },
               "hitPattern": {
                 "onHitEffectName": "",
                 "hitImpulseType": "LV2",
-                "hitHaltTimeScale": 0.009999999776482582
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
               },
-              "canBeModifiedBy": "OriginOwner"
+              "forceCameraShake": false
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "FireSubEmitterEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_Water_Bullet_AS",
+          "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_Water_Bullet_AS",
           "born": {
             "$type": "ConfigBornByCollisionPoint"
           }
@@ -4148,40 +4155,41 @@
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "radius": 3.5,
               "born": {
                 "$type": "ConfigBornByCollisionPoint"
-              },
-              "DCMPFCIBIPA": 3.5
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "Gargoyle_ElementAtk",
+              "canBeModifiedBy": "OriginOwner",
               "attenuationGroup": "Gargoyle_ElementAtk",
+              "attenuationTag": "Gargoyle_ElementAtk",
               "attackProperty": {
-                "HBIOLEEGHPD": 1.0,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Grass",
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 1.0,
                 "strikeType": "Default",
-                "enBreak": 40.0
+                "enBreak": 40.0,
+                "elementDurability": 50,
+                "elementType": "Grass"
               },
               "hitPattern": {
                 "onHitEffectName": "",
                 "hitImpulseType": "LV2",
-                "hitHaltTimeScale": 0.009999999776482582
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
               },
-              "canBeModifiedBy": "OriginOwner"
+              "forceCameraShake": false
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "FireSubEmitterEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_Grass_Bullet_AS",
+          "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_Grass_Bullet_AS",
           "born": {
             "$type": "ConfigBornByCollisionPoint"
           }
@@ -4196,40 +4204,41 @@
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "radius": 3.5,
               "born": {
                 "$type": "ConfigBornByCollisionPoint"
-              },
-              "DCMPFCIBIPA": 3.5
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "Gargoyle_ElementAtk",
+              "canBeModifiedBy": "OriginOwner",
               "attenuationGroup": "Gargoyle_ElementAtk",
+              "attenuationTag": "Gargoyle_ElementAtk",
               "attackProperty": {
-                "HBIOLEEGHPD": 1.0,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Electric",
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 1.0,
                 "strikeType": "Default",
-                "enBreak": 40.0
+                "enBreak": 40.0,
+                "elementDurability": 50,
+                "elementType": "Electric"
               },
               "hitPattern": {
                 "onHitEffectName": "",
                 "hitImpulseType": "LV2",
-                "hitHaltTimeScale": 0.009999999776482582
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
               },
-              "canBeModifiedBy": "OriginOwner"
+              "forceCameraShake": false
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "FireSubEmitterEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_Electric_Bullet_AS",
+          "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_Electric_Bullet_AS",
           "born": {
             "$type": "ConfigBornByCollisionPoint"
           }
@@ -4244,40 +4253,41 @@
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "radius": 3.5,
               "born": {
                 "$type": "ConfigBornByCollisionPoint"
-              },
-              "DCMPFCIBIPA": 3.5
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "Gargoyle_ElementAtk",
+              "canBeModifiedBy": "OriginOwner",
               "attenuationGroup": "Gargoyle_ElementAtk",
+              "attenuationTag": "Gargoyle_ElementAtk",
               "attackProperty": {
-                "HBIOLEEGHPD": 1.0,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Ice",
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 1.0,
                 "strikeType": "Default",
-                "enBreak": 40.0
+                "enBreak": 40.0,
+                "elementDurability": 50,
+                "elementType": "Ice"
               },
               "hitPattern": {
                 "onHitEffectName": "",
                 "hitImpulseType": "LV2",
-                "hitHaltTimeScale": 0.009999999776482582
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
               },
-              "canBeModifiedBy": "OriginOwner"
+              "forceCameraShake": false
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "FireSubEmitterEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_Ice_Bullet_AS",
+          "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_Ice_Bullet_AS",
           "born": {
             "$type": "ConfigBornByCollisionPoint"
           }
@@ -4292,40 +4302,41 @@
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "radius": 3.5,
               "born": {
                 "$type": "ConfigBornByCollisionPoint"
-              },
-              "DCMPFCIBIPA": 3.5
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "Gargoyle_ElementAtk",
+              "canBeModifiedBy": "OriginOwner",
               "attenuationGroup": "Gargoyle_ElementAtk",
+              "attenuationTag": "Gargoyle_ElementAtk",
               "attackProperty": {
-                "HBIOLEEGHPD": 1.0,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Wind",
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 1.0,
                 "strikeType": "Default",
-                "enBreak": 40.0
+                "enBreak": 40.0,
+                "elementDurability": 50,
+                "elementType": "Wind"
               },
               "hitPattern": {
                 "onHitEffectName": "",
                 "hitImpulseType": "LV2",
-                "hitHaltTimeScale": 0.009999999776482582
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
               },
-              "canBeModifiedBy": "OriginOwner"
+              "forceCameraShake": false
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "FireSubEmitterEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_Wind_Bullet_AS",
+          "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_Wind_Bullet_AS",
           "born": {
             "$type": "ConfigBornByCollisionPoint"
           }
@@ -4340,40 +4351,41 @@
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "radius": 3.5,
               "born": {
                 "$type": "ConfigBornByCollisionPoint"
-              },
-              "DCMPFCIBIPA": 3.5
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "Gargoyle_ElementAtk",
+              "canBeModifiedBy": "OriginOwner",
               "attenuationGroup": "Gargoyle_ElementAtk",
+              "attenuationTag": "Gargoyle_ElementAtk",
               "attackProperty": {
-                "HBIOLEEGHPD": 1.0,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Rock",
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 1.0,
                 "strikeType": "Default",
-                "enBreak": 40.0
+                "enBreak": 40.0,
+                "elementDurability": 50,
+                "elementType": "Rock"
               },
               "hitPattern": {
                 "onHitEffectName": "",
                 "hitImpulseType": "LV2",
-                "hitHaltTimeScale": 0.009999999776482582
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
               },
-              "canBeModifiedBy": "OriginOwner"
+              "forceCameraShake": false
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "FireSubEmitterEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Gargoyle_Airborne_ElementAtk_Rock_Bullet_AS",
+          "effectPattern": "Eff_Monster_Gargoyle_Airborne_ElementAtk_Rock_Bullet_AS",
           "born": {
             "$type": "ConfigBornByCollisionPoint"
           }

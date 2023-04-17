@@ -1,4 +1,9 @@
 [
+  ////////////////////////////////////////////////////////////////
+  //
+  //  重击：Xiangling_ExtraAttack
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -19,11 +24,16 @@
           "stateIDs": ["ExtraAttack"],
           "modifierName": "ExtraAttack_CloseCollider"
         },
+        /*				{
+					"$type":"AttachToStateIDMixin",
+					"stateIDs":["ExtraAttack_BS","ExtraAttack"],
+					"modifierName":"Cost"
+				},*/
         {
           "$type": "ButtonHoldChargeMixin",
           "skillID": 10231,
-          "chargeTime": 0.11999999731779099,
-          "secondChargeTime": 0.20000000298023224,
+          "chargeTime": 0.12,
+          "secondChargeTime": 0.2,
           "OnBeginUncharged": [
             {
               "$type": "SetAnimatorTrigger",
@@ -31,95 +41,107 @@
             },
             {
               "$type": "SetAnimatorInt",
+              "intID": "SkillID",
+              "value": 99,
               "predicates": [
                 {
                   "$type": "ByAny",
                   "predicates": [
                     {
                       "$type": "ByAnimatorInt",
-                      "logic": "Equal",
-                      "ratio": 0,
-                      "parameter": "ComboCount"
+                      "value": 0,
+                      "parameter": "ComboCount",
+                      "logic": "Equal"
                     },
                     {
                       "$type": "ByAnimatorInt",
-                      "logic": "Equal",
-                      "ratio": 5,
-                      "parameter": "ComboCount"
+                      "value": 5,
+                      "parameter": "ComboCount",
+                      "logic": "Equal"
                     }
                   ]
                 }
-              ],
-              "intID": "SkillID",
-              "ratio": 99.0
+              ]
             },
             {
               "$type": "SetAnimatorBool",
-              "boolID": "IsCharging"
+              "boolID": "IsCharging",
+              "value": false
             }
           ],
           "OnReleaseUncharged": [
+            /*						{
+							"$type": "SetAnimatorTrigger",
+							"triggerID": "DoSkill",
+						},*/
             {
               "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "ratio": 1.0
+              "value": 1
             }
           ],
           "OnBeginCharged": [
             {
               "$type": "SetAnimatorBool",
               "boolID": "IsCharging",
-              "ratio": true
+              "value": true
             }
           ],
           "OnReleaseCharged": [
             {
               "$type": "SetAnimatorBool",
-              "boolID": "IsCharging"
+              "boolID": "IsCharging",
+              "value": false
             },
+            /*						{
+							"$type": "SetAnimatorTrigger",
+							"triggerID": "DoSkill",
+						},*/
             {
               "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "ratio": 1.0
+              "value": 1
             }
+            /*						{
+							"$type": "ResetAnimatorTrigger",
+							"triggerID": "DoSkill",
+						},*/
           ],
           "OnBeginSecondCharged": [
             {
               "$type": "SetAnimatorTrigger",
+              "triggerID": "DoSkill",
               "predicates": [
                 {
                   "$type": "ByLocalAvatarStamina",
-                  "logic": "GreaterOrEqual",
-                  "stamina": [
-                    "ExtraAttack_Pole_Stamina_Cost",
-                    "Flexible_Stamina",
-                    "ADD"
-                  ]
+                  "stamina": "%ExtraAttack_Pole_Stamina_Cost+%Flexible_Stamina",
+                  "logic": "GreaterOrEqual"
                 }
-              ],
-              "triggerID": "DoSkill"
+              ]
             },
             {
               "$type": "SetAnimatorInt",
+              "intID": "SkillID",
+              "value": 6,
               "predicates": [
                 {
                   "$type": "ByLocalAvatarStamina",
-                  "logic": "GreaterOrEqual",
-                  "stamina": [
-                    "ExtraAttack_Pole_Stamina_Cost",
-                    "Flexible_Stamina",
-                    "ADD"
-                  ]
+                  "stamina": "%ExtraAttack_Pole_Stamina_Cost+%Flexible_Stamina",
+                  "logic": "GreaterOrEqual"
                 }
-              ],
-              "intID": "SkillID",
-              "ratio": 6.0
+              ]
             },
             {
               "$type": "SetAnimatorBool",
-              "boolID": "IsCharging"
+              "boolID": "IsCharging",
+              "value": false
             }
+            /*						{
+							"$type": "ResetAnimatorTrigger",
+							"triggerID": "DoSkill",
+						},*/
           ],
+          "OnReleaseSecondCharged": [],
           "chargeStateIDs": [
             "Attack01",
             "Attack02",
@@ -134,99 +156,99 @@
           "modifierName": "ExtraAttack_StaminaCost"
         }
       ],
-      "abilitySpecials": {
-        "ExtraAttack_Pole_Stamina_Cost": 0.0,
-        "Flexible_Stamina": -2.0
-      },
       "modifiers": {
         "ExtraAttack_StaminaCost": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          // "duration": 0.2,
           "onAdded": [
             {
               "$type": "AvatarSkillStart",
               "skillID": 10002,
-              "cdDelta": 1.0,
-              "costStaminaDelta": "ExtraAttack_Pole_Stamina_Cost"
+              "costStaminaRatio": "%ExtraAttack_Pole_Stamina_Cost"
             }
           ]
         },
         "ExtraAttack_FX": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Pole_Xiangling_ExtraAttack_Sprint",
+              "effectPattern": "Eff_Avatar_Girl_Pole_Xiangling_ExtraAttack_Sprint",
               "born": {
                 "$type": "ConfigBornByTarget",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": -0.30000001192092896,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": -0.3,
+                  "z": 0.0
                 }
-              },
-              "EBHJMLOKDGB": -1.0
+              }
             }
           ]
         },
         "ExtraAttack_BS_FX": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Pole_Xiangling_ExtraAttack",
+              "effectPattern": "Eff_Avatar_Girl_Pole_Xiangling_ExtraAttack",
               "born": {
                 "$type": "ConfigBornByTarget",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": -0.30000001192092896,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": -0.3,
+                  "z": 0.0
                 }
-              },
-              "EBHJMLOKDGB": -1.0
+              }
             }
           ]
         },
         "ExtraAttack_CloseCollider": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "TriggerSetPassThrough",
-              "RotationDampTime": true,
-              "passThrough": true
+              "passThrough": true,
+              "doOffStage": true
             },
             {
               "$type": "EnableHDMesh",
-              "CAHMNMGJBFO": "Default"
+              "enable": false,
+              "hdMeshKey": "Default"
             }
           ],
           "onRemoved": [
             {
               "$type": "TriggerSetPassThrough",
-              "RotationDampTime": true,
+              "passThrough": false,
+              "doOffStage": true,
               "canBeHandledOnRecover": true
             },
             {
               "$type": "EnableHDMesh",
-              "canBeHandledOnRecover": true,
               "enable": true,
-              "CAHMNMGJBFO": "Default"
+              "hdMeshKey": "Default",
+              "canBeHandledOnRecover": true
             },
             {
               "$type": "KillGadget",
-              "RotationDampTime": true,
               "gadgetInfo": {
-                "configID": 41023001
-              }
+                "$type": "SelectTargetsByChildren",
+                "configID": 41023001,
+                "sortType": "Default"
+              },
+              "doOffStage": true
             }
           ]
         }
+      },
+      "abilitySpecials": {
+        //故意少判了一点点体力，为了顾及一部分网络延迟
+        "ExtraAttack_Pole_Stamina_Cost": 0,
+        "Flexible_Stamina": -2
       }
     }
-  },
+  }, //Avatar_Xiangling_ExtraAttack
+  ////////////////////////////////////////////////////////////////
+  //
+  //  重击：Xiangling_ExtraAttack (Bullet Ver.)
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -234,18 +256,28 @@
       "onAbilityStart": [
         {
           "$type": "TriggerBullet",
-          "bulletID": 41023001
+          "bulletID": 41023001,
+          "campID": 1001,
+          "campTargetType": "Enemy"
+          // "born":
+          // {
+          //     "$type": "ConfigBornByAttachPoint",
+          //     "attachPointName": "RootNode",
+          //     "offset":
+          //     {
+          //         "x": 0.0,
+          //         "y": 0.0,
+          //         "z": 0.0,
+          //     },
+          // },
         }
       ]
     }
-  },
+  }, //Avatar_Xiangling_ExtraAttack_CreateBullet
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Xiangling_ExtraAttack_Bullet",
-      "abilitySpecials": {
-        "ExtraAttack": 0.0
-      },
       "onAbilityStart": [
         {
           "$type": "Predicated",
@@ -261,107 +293,138 @@
               "$type": "DamageByAttackValue",
               "target": "Target",
               "attackInfo": {
+                "canBeModifiedBy": "OriginOwner",
                 "attackTag": "ExtraAttack",
                 "attenuationTag": "ExtraAttack",
                 "attenuationGroup": "Avatar_Pole_ExtraAttack",
                 "attackProperty": {
-                  "HBIOLEEGHPD": "ExtraAttack",
-                  "CCNJGLPMIEP": 0.0,
-                  "bonusCriticalHurt": 25.0,
-                  "overrideByWeapon": true,
+                  "damagePercentage": "%ExtraAttack",
                   "strikeType": "Spear",
-                  "enBreak": 58.400001525878906,
-                  "attackType": "Melee"
+                  "elementDurability": 25,
+                  "overrideByWeapon": true,
+                  "attackType": "Melee",
+                  "enBreak": 58.4
                 },
                 "hitPattern": {
                   "onHitEffectName": "default",
                   "hitImpulseType": "LV6",
-                  "hitHaltTimeScale": 0.009999999776482582,
-                  "canBeDefenceHalt": true
+                  // "hitLevel": "Air", //hitlevel = 5
+                  // "hitImpulseX": 480, //hitlevel = 5
+                  // "hitImpulseY": 600, //hitlevel = 5
+                  "reboundRatio": 0,
+                  "canBeDefenceHalt": true,
+                  "hitHaltTime": 0.0,
+                  "hitHaltTimeScale": 0.01,
+                  "muteHitText": false
                 },
+                "forceCameraShake": false,
                 "cameraShake": {
                   "shakeType": "CustomVector",
-                  "shakeRange": 0.36000001430511475,
-                  "shakeTime": 0.11999999731779099,
-                  "shakeDistance": 30.0,
+                  "shakeRange": 0.36,
+                  "shakeTime": 0.12,
+                  "shakeDistance": 30,
                   "shakeDir": {
-                    "y": -1.0
+                    "x": 0,
+                    "y": -1,
+                    "z": 0
                   }
-                },
-                "canBeModifiedBy": "OriginOwner"
+                }
               }
             }
           ],
           "failActions": [
             {
               "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
+                  "radius": 0.8, //这个1.6米盒子太屌了。不对劲。下调2020.8.17
                   "born": {
                     "$type": "ConfigBornByCollisionPoint",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     }
-                  },
-                  "DCMPFCIBIPA": 0.800000011920929
+                  }
+                  /* "checkHitLayerType": "Both",*/
                 },
                 "attackInfo": {
+                  "canBeModifiedBy": "OriginOwner",
                   "attackTag": "ExtraAttack",
                   "attenuationTag": "ExtraAttack",
                   "attenuationGroup": "Avatar_Pole_ExtraAttack",
                   "attackProperty": {
-                    "HBIOLEEGHPD": "ExtraAttack",
-                    "CCNJGLPMIEP": 0.0,
-                    "bonusCriticalHurt": 25.0,
-                    "overrideByWeapon": true,
+                    "damagePercentage": "%ExtraAttack",
                     "strikeType": "Spear",
-                    "enBreak": 58.400001525878906,
-                    "attackType": "Melee"
+                    "elementDurability": 25,
+                    "overrideByWeapon": true,
+                    "attackType": "Melee",
+                    "enBreak": 58.4
                   },
                   "hitPattern": {
                     "onHitEffectName": "default",
                     "hitImpulseType": "LV5",
-                    "hitHaltTimeScale": 0.009999999776482582,
-                    "canBeDefenceHalt": true
+                    "reboundRatio": 0,
+                    "canBeDefenceHalt": true,
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.01,
+                    "muteHitText": false
                   },
+                  "forceCameraShake": false,
                   "cameraShake": {
                     "shakeType": "CustomVector",
-                    "shakeRange": 0.36000001430511475,
-                    "shakeTime": 0.11999999731779099,
-                    "shakeDistance": 30.0,
+                    "shakeRange": 0.36,
+                    "shakeTime": 0.12,
+                    "shakeDistance": 30,
                     "shakeDir": {
-                      "y": -1.0
+                      "x": 0,
+                      "y": -1,
+                      "z": 0
                     }
-                  },
-                  "canBeModifiedBy": "OriginOwner"
+                  }
                 }
-              },
-              "targetType": "Enemy"
+              }
             }
           ]
         }
-      ]
+      ],
+      "abilitySpecials": {
+        "ExtraAttack": 0
+      }
     }
-  },
+  }, //Avatar_Xiangling_ExtraAttack_Bullet
+
+  ////////////////////////////////////////////////////////////////
+  //  下面3个为特效相关ability
+  //
+  //  Xiangling_普攻第四段特效增加了回收。
+  //
+  //  2019.6.4注：现在有eventpattern的回收功能，也有了AttachTowizedTimeMixin，所以不用此处的方法也行。
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Xiangling_Eff_Attack_04",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Eff_Attack04"
+        }
+      ],
       "abilityMixins": [
         {
-          "$type": "AttachToStateIDMixin",
+          "$type": "AttachToStateIDMixin", //不是这个mixin加的modifier它不会进行移除。
           "stateIDs": ["Attack04"],
           "modifierName": "Eff_Attack04_Flag"
         }
       ],
       "modifiers": {
         "Eff_Attack04_Flag": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "doOffStage": true,
           "onRemoved": [
             {
               "$type": "RemoveModifier",
@@ -370,27 +433,24 @@
           ]
         },
         "Eff_Attack04": {
+          "duration": 1.2,
           "stacking": "Multiple",
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.2000000476837158,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Pole_Xiangling_Attack_04",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Avatar_Girl_Pole_Xiangling_Attack_04"
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Eff_Attack04"
-        }
-      ]
+      }
     }
   },
+
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Avatar_Xiangling_PandaBornEffect 放下熊猫特效
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -398,20 +458,31 @@
       "onAbilityStart": [
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Pole_Xiangling_PandaBorn",
+          "effectPattern": "Eff_Avatar_Girl_Pole_Xiangling_PandaBorn",
           "born": {
             "$type": "ConfigBornByTarget",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 1.2999999523162842
+              "x": 0,
+              "y": 0,
+              "z": 1.3
             }
           },
-          "EBHJMLOKDGB": -1.0
+          "checkGround": {
+            "enable": true,
+            "raycastUpHeight": 2,
+            "raycastDownHeight": 0,
+            "stickToGroundIfValid": true,
+            "dontCreateIfInvalid": false
+          }
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Avatar_Xiangling_PandaBornEffect_Run 放下熊猫特效。
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -419,20 +490,31 @@
       "onAbilityStart": [
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Pole_Xiangling_PandaBorn",
+          "effectPattern": "Eff_Avatar_Girl_Pole_Xiangling_PandaBorn",
           "born": {
             "$type": "ConfigBornByTarget",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 1.7999999523162842
+              "x": 0,
+              "y": 0,
+              "z": 1.8
             }
           },
-          "EBHJMLOKDGB": -1.0
+          "checkGround": {
+            "enable": true,
+            "raycastUpHeight": 2,
+            "raycastDownHeight": 0,
+            "stickToGroundIfValid": true,
+            "dontCreateIfInvalid": false
+          }
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  小技能：放下熊猫  Avatar_Xiangling_PandaFire
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -440,33 +522,37 @@
       "onAbilityStart": [
         {
           "$type": "AvatarSkillStart",
-          "skillID": 10232,
-          "cdDelta": 1.0,
-          "costStaminaDelta": 1.0
+          "skillID": 10232
         },
         {
           "$type": "CreateGadget",
+          "gadgetID": 41023011,
+          "campID": 1001,
+          "campTargetType": "Enemy",
           "born": {
             "$type": "ConfigBornByTarget",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 1.2999999523162842
+              "x": 0.0,
+              "y": 0.0,
+              "z": 1.3
             }
           },
           "checkGround": {
             "enable": true,
-            "raycastUpHeight": 2.0,
-            "raycastDownHeight": 0.0,
+            "raycastUpHeight": 2,
+            "raycastDownHeight": 0,
+            "stickToGroundIfValid": true,
             "dontCreateIfInvalid": false
-          },
-          "gadgetID": 41023011,
-          "campID": 1001,
-          "campTargetType": "Enemy"
+          }
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  小技能：跑动中放下熊猫 Avatar_Xiangling_PandaFire_Run
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -474,73 +560,73 @@
       "onAbilityStart": [
         {
           "$type": "AvatarSkillStart",
-          "skillID": 10232,
-          "cdDelta": 1.0,
-          "costStaminaDelta": 1.0
+          "skillID": 10232
         },
         {
           "$type": "CreateGadget",
+          "gadgetID": 41023011,
+          "campID": 1001,
+          "campTargetType": "Enemy",
           "born": {
             "$type": "ConfigBornByTarget",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 1.7000000476837158
+              "x": 0.0,
+              "y": 0.0,
+              "z": 1.7
             }
           },
           "checkGround": {
             "enable": true,
-            "raycastUpHeight": 2.0,
-            "raycastDownHeight": 0.0,
+            "raycastUpHeight": 2,
+            "raycastDownHeight": 0,
+            "stickToGroundIfValid": true,
             "dontCreateIfInvalid": false
-          },
-          "gadgetID": 41023011,
-          "campID": 1001,
-          "campTargetType": "Enemy"
+          }
         }
       ]
     }
   },
+
+  ////////////////////////////////////////////////////////////////
+  //
+  // 	 gadget技能：
+  //
+  //   Avatar_Xiangling_PandaFireAim 熊猫自主瞄准目标
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Xiangling_PandaFireAim",
-      "abilityMixins": [
+      "onAdded": [
         {
-          "$type": "AttachToStateIDMixin",
-          "stateIDs": ["Attack"],
-          "modifierName": "GenerateElemBall_PandaFire"
+          "$type": "ApplyModifier",
+          "modifierName": "FireAttack",
+          "target": "Self"
         }
       ],
-      "abilitySpecials": {
-        "DummyHp": 0.30000001192092896,
-        "GetElementRatio": 1.0,
-        "Xiangling_Talent_231_P1_FireDefDown": 0.0,
-        "Xiangling_Talent_231_P2_FireDefDownTime": 0.0
-      },
       "modifiers": {
         "FireAttack": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 1.600000023841858,
+          "thinkInterval": 1.6,
           "onThinkInterval": [
             {
-              "$type": "SetSelfAttackTarget",
+              "$type": "SetSelfAttackTarget", //这些简单的gadget无法执行turndirection行为。eventPattern中的转向也是无效的。需要配合这个action才行。
+              "turnToTargetImmediately": true,
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
-                "topLimit": 1,
-                "sortType": "HigherScore",
                 "shapeName": "CircleR8",
+                "centerBasedOn": "Self",
                 "campTargetType": "Enemy",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self",
+                "topLimit": 1,
+                "sortType": "HigherScore" //从近开始选
               },
               "predicates": [
                 {
                   "$type": "ByEntityTypes",
                   "entityTypes": ["Gadget", "Gear", "Monster"]
                 }
-              ],
-              "turnToTargetImmediately": true
+              ]
             },
             {
               "$type": "ApplyModifier",
@@ -554,14 +640,11 @@
           ]
         },
         "ElementFire": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "elementType": "Fire",
-          "bonusCriticalHurt": 20.0
+          "duration": 0.5,
+          "elementType": "Fire", //用于让男主旋风卷起来的时候判定熊猫带火。
+          "elementDurability": 20 //由于进水会把火属性清除，不能在重要modifier中写这个，而且这个modifier还需要持续上。
         },
         "GenerateElemBall_PandaFire": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
@@ -574,14 +657,15 @@
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
                   "$type": "AttachModifier",
-                  "modifierName": "Ball"
+                  "modifierName": "Ball",
+                  "target": "Self"
                 }
               ]
             },
@@ -597,218 +681,297 @@
               "successActions": [
                 {
                   "$type": "RemoveUniqueModifier",
+                  "modifierName": "UNIQUE_Xiangling_Talent_231",
                   "target": "Target",
                   "predicates": [
                     {
-                      "$type": "ByUnlockTalentParam",
+                      "$type": "ByUnlockTalentParam", //这个默认判定自己。
                       "talentParam": "Xiangling_Talent_231"
                     }
-                  ],
-                  "modifierName": "UNIQUE_Xiangling_Talent_231"
+                  ]
                 },
                 {
                   "$type": "ApplyModifier",
+                  "modifierName": "UNIQUE_Xiangling_Talent_231",
                   "target": "Target",
                   "predicates": [
                     {
                       "$type": "ByUnlockTalentParam",
                       "talentParam": "Xiangling_Talent_231"
                     }
-                  ],
-                  "modifierName": "UNIQUE_Xiangling_Talent_231"
+                  ]
                 }
               ]
             }
           ]
         },
         "Ball": {
+          "duration": 1,
           "stacking": "Unique",
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "Randomed",
-              "chance": 1.0,
+              "chance": 1,
               "successActions": [
                 {
                   "$type": "GenerateElemBall",
-                  "target": "SelfAttackTarget",
                   "configID": 2017,
+                  "baseEnergy": 3,
+                  "ratio": "%GetElementRatio",
+                  "target": "SelfAttackTarget",
                   "born": {
                     "$type": "ConfigBornByTarget",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     }
-                  },
-                  "IAAIJMOECLB": "GetElementRatio",
-                  "baseEnergy": 3.0
+                  }
                 }
               ]
             }
           ]
         },
         "UNIQUE_Xiangling_Talent_231": {
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "Xiangling_Talent_231_P2_FireDefDownTime",
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_FireSubHurtDelta": "Xiangling_Talent_231_P1_FireDefDown"
-          },
+          "isLimitedProperties": true,
           "state": "DefenseDown",
-          "isLimitedProperties": true
+          "stacking": "Refresh",
+          "duration": "%Xiangling_Talent_231_P2_FireDefDownTime",
+          "properties": {
+            "Actor_FireSubHurtDelta": "%Xiangling_Talent_231_P1_FireDefDown"
+          }
         }
       },
-      "onAdded": [
+      "abilityMixins": [
         {
-          "$type": "ApplyModifier",
-          "modifierName": "FireAttack"
+          "$type": "AttachToStateIDMixin",
+          "stateIDs": ["Attack"],
+          "modifierName": "GenerateElemBall_PandaFire",
+          "target": "Self"
         }
       ],
+      //天赋技能，生成一个可以被角色吃的gadget:辣椒
       "onKill": [
         {
           "$type": "Randomed",
+          "chance": 1,
+          "successActions": [
+            {
+              "$type": "CreateGadget",
+              "gadgetID": 41023003,
+              "campID": 1001,
+              "campTargetType": "Enemy",
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                }
+              }
+            }
+          ],
           "predicates": [
             {
               "$type": "ByUnlockTalentParam",
               "talentParam": "Xiangling_ProudSkill_24"
             }
-          ],
-          "chance": 1.0,
-          "successActions": [
-            {
-              "$type": "CreateGadget",
-              "born": {
-                "$type": "ConfigBornByTarget",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
-                }
-              },
-              "gadgetID": 41023003,
-              "campID": 1001,
-              "campTargetType": "Enemy"
-            }
           ]
         }
-      ]
+        // {
+        // 	"$type":"FireEffect",
+        // 	"effectPattern":"Eff_Avatar_Girl_Pole_Xiangling_Panda_Die"  //写到skillobj里了
+        // }
+      ],
+      "abilitySpecials": {
+        "DummyHp": 0.3,
+        "GetElementRatio": 1.0,
+        "Xiangling_Talent_231_P1_FireDefDown": 0,
+        "Xiangling_Talent_231_P2_FireDefDownTime": 0
+      }
     }
-  },
+  }, //Avatar_Xiangling_PandaFireAim
+
+  /////////////////////////////////////////
+  ///
+  ///	  gadget技能：熊猫喷火特效
+  ///
+  ///   专做成ability就是为了天赋控制，包括Effect和attack
+  ///
+  /////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Xiangling_PandaFire_Effect",
-      "abilitySpecials": {
-        "Xiangling_ProudSkill_24_Level": 0.0
-      },
       "onAbilityStart": [
+        //{
+        //  "$type": "FireEffect",
+        //  "effectPattern": "Eff_Avatar_Girl_Pole_Xiangling_PandaFire_Fire3",
+        //  "sclae": 1, //scale对此无效
+        //  "predicates": [
+        //    {
+        //      "$type": "ByTargetOverrideMapValue",
+        //      "targetKey": "Xiangling_ProudSkill_24_Level",
+        //      "targetValue": 3,
+        //      "logic": "Equal",
+        //    },
+        //  ],
+        //},
+        //{
+        //  "$type": "FireEffect",
+        //  "effectPattern": "Eff_Avatar_Girl_Pole_Xiangling_PandaFire_Fire2",
+        //  "sclae": 1,
+        //  "predicates": [
+        //    {
+        //      "$type": "ByTargetOverrideMapValue",
+        //      "targetKey": "Xiangling_ProudSkill_24_Level",
+        //      "targetValue": 2,
+        //      "logic": "Equal",
+        //    },
+        //  ],
+        //},
         {
           "$type": "FireEffect",
+          "effectPattern": "Eff_Avatar_Girl_Pole_Xiangling_PandaFire_Fire1",
+          "sclae": 1,
           "predicates": [
             {
               "$type": "ByTargetOverrideMapValue",
-              "logic": "Equal",
-              "targetAbilityName": "",
               "targetKey": "Xiangling_ProudSkill_24_Level",
-              "targetValue": 1.0
+              "targetValue": 1,
+              "logic": "Equal"
             }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Pole_Xiangling_PandaFire_Fire1",
-          "EBHJMLOKDGB": -1.0
+          ]
         },
         {
           "$type": "FireEffect",
+          "effectPattern": "Eff_Avatar_Girl_Pole_Xiangling_PandaFire_Fire",
+          "sclae": 1,
           "predicates": [
             {
               "$type": "ByTargetOverrideMapValue",
-              "logic": "Equal",
-              "targetAbilityName": "",
               "targetKey": "Xiangling_ProudSkill_24_Level",
-              "targetValue": 0.0
+              "targetValue": 0,
+              "logic": "Equal"
             }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Pole_Xiangling_PandaFire_Fire",
-          "EBHJMLOKDGB": -1.0
+          ]
         }
-      ]
+      ],
+      "abilitySpecials": {
+        "Xiangling_ProudSkill_24_Level": 0
+      }
     }
   },
+  /////////////////////////////////////////
+  ///
+  ///	  gadget技能：熊猫喷火攻击
+  ///
+  ///   专做成ability就是为了天赋控制，包括Effect和attack
+  ///
+  /////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Xiangling_PandaFire_Attack",
-      "abilitySpecials": {
-        "Xiangling_ProudSkill_23_P1_Range": 0.0,
-        "XiangLing_ProudSkill32_P1_Damage_Percentage": 0.0
-      },
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
+              "height": 2,
+              "fanAngle": 60.0,
+              "radius": "5*%Xiangling_ProudSkill_23_P1_Range+5",
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": -1.0,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": -1.0,
+                  "z": 0.0
                 }
-              },
-              "height": 2.0,
-              "fanAngle": 60.0,
-              "DCMPFCIBIPA": [
-                5.0,
-                "Xiangling_ProudSkill_23_P1_Range",
-                "MUL",
-                5.0,
-                "ADD"
-              ]
+              }
             },
             "attackInfo": {
               "attackTag": "Elemental_Art",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
+              "canBeModifiedBy": "OriginOwner",
               "attackProperty": {
-                "HBIOLEEGHPD": "XiangLing_ProudSkill32_P1_Damage_Percentage",
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Fire",
-                "bonusCriticalHurt": 25.0,
+                "damagePercentage": "%XiangLing_ProudSkill32_P1_Damage_Percentage",
                 "strikeType": "Default",
-                "enBreak": 32.0,
-                "attackType": "Range"
+                "attackType": "Range",
+                "elementType": "Fire",
+                "elementDurability": 25,
+                "elementRank": 1,
+                "enBreak": 32
               },
               "hitPattern": {
                 "onHitEffectName": "default",
                 "hitImpulseType": "LV3",
-                "hitHaltTimeScale": 0.009999999776482582
+                "reboundRatio": 0,
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
               },
-              "canBeModifiedBy": "OriginOwner"
+              "forceCameraShake": false
             }
-          },
-          "targetType": "Enemy"
+          }
+          //"predicates": [
+          //  {
+          //    "$type": "ByTargetOverrideMapValue",
+          //    "targetKey": "TalentLevel",
+          //    "targetValue": 0,
+          //    "logic": "Equal",
+          //  },
+          //],
         }
-      ]
+        // {
+        // 	"$type":"ApplyModifier",
+        // 	"modifierName":"ElementFire",
+        // },
+      ],
+      "modifiers": {
+        // "ElementFire":
+        // {
+        // 	"duration": 0.2,
+        // 	"stacking": "Refresh",
+        // 	"elementType": "Fire",
+        // 	"elementDurability": 50,
+        // },
+      },
+      "abilitySpecials": {
+        //"TalentLevel": 0,
+        "Xiangling_ProudSkill_23_P1_Range": 0,
+        "XiangLing_ProudSkill32_P1_Damage_Percentage": 0
+      }
     }
-  },
+  }, //Avatar_Xiangling_PandaFire_Attack(特殊技攻击伤害)
+  /**/
+  /////////////////////////////////////////
+  ///
+  ///   gadget技能：
+  ///
+  ///   pepper,可以被玩家吃的辣椒,应该拥有的技能
+  ///
+  /////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Xiangling_PandaPepper",
-      "abilitySpecials": {
-        "Xiangling_ProudSkill24_P1_AttackUpRate": 0.0,
-        "Xiangling_ProudSkill24_P2_AttackUpTime": 0.0
-      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Timer"
+        },
+        {
+          "$type": "AttachEffect",
+          "effectPattern": "Eff_Avatar_Girl_Pole_Xiangling_Pepper"
+        }
+      ],
       "modifiers": {
         "Timer": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onRemoved": [
             {
               "$type": "ApplyModifier",
@@ -817,17 +980,16 @@
           ]
         },
         "CheckAlliance": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.10000000149011612,
+          "thinkInterval": 0.1,
           "onThinkInterval": [
             {
               "$type": "Predicated",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR1",
+                "centerBasedOn": "Self",
                 "campTargetType": "Alliance",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
               "targetPredicates": [
                 {
@@ -838,50 +1000,63 @@
               "successActions": [
                 {
                   "$type": "RemoveUniqueModifier",
-                  "target": "Target",
-                  "modifierName": "UNIQUE_PanderPepper_Attackup"
+                  "modifierName": "UNIQUE_PanderPepper_Attackup",
+                  "target": "Target"
                 },
                 {
                   "$type": "ApplyModifier",
-                  "target": "Target",
-                  "modifierName": "UNIQUE_PanderPepper_Attackup"
+                  "modifierName": "UNIQUE_PanderPepper_Attackup",
+                  "target": "Target"
                 },
                 {
-                  "$type": "KillSelf"
+                  "$type": "KillSelf",
+                  "target": "Self"
                 }
               ]
             }
           ]
         },
+        //unique的话再吃不会refresh时间。非unique的话又会叠加。暂时没有好方案。
         "UNIQUE_PanderPepper_Attackup": {
-          "modifierName": "",
+          "isLimitedProperties": true,
           "isUnique": true,
-          "HCJLIGBLGJA": "Xiangling_ProudSkill24_P2_AttackUpTime",
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_AttackRatio": "Xiangling_ProudSkill24_P1_AttackUpRate"
-          },
+          "stacking": "Refresh",
           "state": "AttackUp",
-          "isLimitedProperties": true
+          "duration": "%Xiangling_ProudSkill24_P2_AttackUpTime",
+          "properties": {
+            "Actor_AttackRatio": "%Xiangling_ProudSkill24_P1_AttackUpRate"
+          }
         }
       },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Timer"
-        },
-        {
-          "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Pole_Xiangling_Pepper",
-          "EBHJMLOKDGB": -1.0
-        }
-      ]
+      "abilitySpecials": {
+        "Xiangling_ProudSkill24_P1_AttackUpRate": 0,
+        "Xiangling_ProudSkill24_P2_AttackUpTime": 0
+      }
     }
-  },
+  }, //Avatar_Xiangling_PandaPepper
+
+  /**/
+  ////////////////////////////////////////////////////////////////
+  //
+  //  充能技：技能开始时初始化各种东西，镜头，以及天赋加伤  Avatar_Xiangling_FireCircleSkillStart
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Xiangling_FireCircleSkillStart",
+      "onAbilityStart": [
+        //{//改成了持续期间全队了，所以起手就不加成了。
+        //  "$type": "ApplyModifier",
+        //  "modifierName": "UNIQUE_Xiangling_Talent_FireAttackUp",
+        //  "predicates": [
+        //    {
+        //      "$type": "ByUnlockTalentParam",
+        //      "talentParam": "FireAttackUp"
+        //    }
+        //  ],
+        //},
+      ],
       "abilityMixins": [
         {
           "$type": "AttachToStateIDMixin",
@@ -893,20 +1068,25 @@
           "stateIDs": ["Xiangling_FireCircle"],
           "modifierName": "isGhost"
         },
+        /*{
+                    "$type": "AttachToStateIDMixin",
+                    "stateIDs":
+                    [
+                        "Xiangling_FireCircle",
+                        "Xiangling_FireCircle_AS"
+                    ],
+                    "modifierName": "Camera_Handler",//实际上在0.85秒就结束镜头了。
+                }, */
         {
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "FireCircle",
-          "modifierName": "Camera_Handler",
-          "normalizeEnd": 0.6740000247955322
+          "normalizeStart": 0,
+          "normalizeEnd": 0.674,
+          "modifierName": "Camera_Handler" //实际上在0.85秒就结束镜头了，计时会有refresh问题，改为attach固定动画位置了。
         }
       ],
-      "abilitySpecials": {
-        "FireUp": 0.10000000149011612
-      },
       "modifiers": {
         "isGhost": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachAbilityStateResistance",
@@ -915,19 +1095,21 @@
           ]
         },
         "invincible": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "Invincible"
         },
+        //进入的播放镜头放到eventpattern了
         "Camera_Handler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          // "duration": 0.85,//在一个指定的时间结束镜头。
           "onRemoved": [
+            /* {
+                            "$type": "AvatarEnterCameraShot",
+                            "cameraMoveCfgPath": "Camera_Elemental_Burst_Out_Angle",
+                        },*/
             {
-              "$type": "AvatarCameraParam",
+              "$type": "AvatarCameraParam", //直接用这个距离回复镜头。
               "cameraParam": {
                 "forceRadius": 5.5,
-                "forceRadiusDuration": 0.6000000238418579,
+                "forceRadiusDuration": 0.6,
                 "shouldKeepForceRadius": true
               }
             },
@@ -935,113 +1117,128 @@
               "$type": "AvatarExitCameraShot"
             }
           ],
-          "NPHODJLPMAJ": [
+          //如果打断也恢复镜头。
+          "onAvatarOut": [
             {
+              "doOffStage": true,
               "$type": "AvatarCameraParam",
-              "RotationDampTime": true,
               "cameraParam": {
                 "forceRadius": 5.5,
-                "forceRadiusDuration": 0.6000000238418579,
+                "forceRadiusDuration": 0.6,
                 "shouldKeepForceRadius": true
               }
             },
             {
               "$type": "AvatarExitCameraShot",
-              "RotationDampTime": true
+              "doOffStage": true
             }
           ]
         }
+      },
+      "abilitySpecials": {
+        "FireUp": 0.1
+      }
+    }
+  }, //Avatar_Xiangling_FireCircleSkillStart
+
+  /* */
+  ////////////////////////////////////////////////////////////////
+  //
+  //  充能技：放火圈  Avatar_Xiangling_FireCircle  1\2\3分别代表BS的3次攻击。
+  //
+  ////////////////////////////////////////////////////////////////
+  {
+    //Avatar_Xiangling_FireCircle01
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Avatar_Xiangling_FireCircle01",
+      "onAbilityStart": [
+        {
+          "$type": "AvatarSkillStart",
+          "skillID": 10235
+        },
+        {
+          "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
+          "predicates": [
+            {
+              "$type": "ByNot",
+              "predicates": [
+                {
+                  "$type": "ByEntityTypes",
+                  "entityTypes": ["Grass", "Water"]
+                }
+              ]
+            }
+          ],
+          "attackEvent": {
+            "attackPattern": {
+              "$type": "ConfigAttackCircle",
+              "triggerType": "TriggerNoRepeat",
+              "fanAngle": 360.0,
+              "radius": 2.5,
+              // "innerRadius":1.5,
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                }
+              }
+            },
+            "attackInfo": {
+              "attackTag": "Elemental_Burst",
+              "attenuationTag": "Elemental_Burst",
+              "attackProperty": {
+                "damagePercentage": "%XiangLing_ProudSkill33_P2_Damage_Percentage",
+                "strikeType": "Spear",
+                "attackType": "Melee",
+                "elementType": "Fire",
+                "elementDurability": 25,
+                "elementRank": 3,
+                "enBreak": 30
+              },
+              "hitPattern": {
+                "onHitEffectName": "default",
+                "retreatType": "ByHitDirection",
+                "hitImpulseType": "LV3",
+                "reboundRatio": 0,
+                "canBeDefenceHalt": true,
+                "hitHaltTime": 0.03,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
+              },
+              "forceCameraShake": false,
+              "cameraShake": {
+                "shakeType": "CustomVector",
+                "shakeRange": 0.12,
+                "shakeTime": 0.09,
+                "shakeDistance": 30,
+                "shakeDir": {
+                  "x": -1,
+                  "y": 0,
+                  "z": 0
+                }
+              }
+            }
+          }
+        }
+      ],
+      "abilitySpecials": {
+        "XiangLing_ProudSkill33_P2_Damage_Percentage": 0
       }
     }
   },
   {
-    "Default": {
-      "$type": "ConfigAbility",
-      "abilityName": "Avatar_Xiangling_FireCircle01",
-      "abilitySpecials": {
-        "XiangLing_ProudSkill33_P2_Damage_Percentage": 0.0
-      },
-      "onAbilityStart": [
-        {
-          "$type": "AvatarSkillStart",
-          "skillID": 10235,
-          "cdDelta": 1.0,
-          "costStaminaDelta": 1.0
-        },
-        {
-          "$type": "TriggerAttackEvent",
-          "predicates": [
-            {
-              "$type": "ByNot",
-              "predicates": [
-                {
-                  "$type": "ByEntityTypes",
-                  "entityTypes": ["Grass", "Water"]
-                }
-              ]
-            }
-          ],
-          "attackEvent": {
-            "attackPattern": {
-              "$type": "ConfigAttackCircle",
-              "triggerType": "TriggerNoRepeat",
-              "born": {
-                "$type": "ConfigBornBySelf",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
-                }
-              },
-              "DCMPFCIBIPA": 2.5
-            },
-            "attackInfo": {
-              "attackTag": "Elemental_Burst",
-              "attenuationTag": "Elemental_Burst",
-              "attenuationGroup": "default",
-              "attackProperty": {
-                "HBIOLEEGHPD": "XiangLing_ProudSkill33_P2_Damage_Percentage",
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Fire",
-                "elementRank": 3.0,
-                "bonusCriticalHurt": 25.0,
-                "strikeType": "Spear",
-                "attackType": "Melee"
-              },
-              "hitPattern": {
-                "onHitEffectName": "default",
-                "hitImpulseType": "LV3",
-                "retreatType": "ByHitDirection",
-                "hitHaltTime": 0.029999999329447746,
-                "hitHaltTimeScale": 0.009999999776482582,
-                "canBeDefenceHalt": true
-              },
-              "cameraShake": {
-                "shakeType": "CustomVector",
-                "shakeRange": 0.11999999731779099,
-                "shakeTime": 0.09000000357627869,
-                "shakeDistance": 30.0,
-                "shakeDir": {
-                  "x": -1.0
-                }
-              }
-            }
-          },
-          "targetType": "Enemy"
-        }
-      ]
-    }
-  },
-  {
+    //Avatar_Xiangling_FireCircle02
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Xiangling_FireCircle02",
-      "abilitySpecials": {
-        "XiangLing_ProudSkill33_P3_Damage_Percentage": 0.0
-      },
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "predicates": [
             {
               "$type": "ByNot",
@@ -1057,113 +1254,130 @@
             "attackPattern": {
               "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
+              "fanAngle": 360.0,
+              "radius": 2.5,
+              // "innerRadius":1.5,
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 }
-              },
-              "DCMPFCIBIPA": 2.5
+              }
             },
             "attackInfo": {
               "attackTag": "Elemental_Burst",
               "attenuationTag": "Elemental_Burst",
-              "attenuationGroup": "default",
               "attackProperty": {
-                "HBIOLEEGHPD": "XiangLing_ProudSkill33_P3_Damage_Percentage",
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Fire",
-                "elementRank": 3.0,
-                "bonusCriticalHurt": 25.0,
+                "damagePercentage": "%XiangLing_ProudSkill33_P3_Damage_Percentage",
                 "strikeType": "Spear",
-                "attackType": "Melee"
+                "attackType": "Melee",
+                "elementType": "Fire",
+                "elementDurability": 25,
+                "elementRank": 3,
+                "enBreak": 30
               },
               "hitPattern": {
                 "onHitEffectName": "default",
-                "hitImpulseType": "LV3",
                 "retreatType": "ByHitDirection",
-                "hitHaltTime": 0.029999999329447746,
-                "hitHaltTimeScale": 0.009999999776482582,
-                "canBeDefenceHalt": true
+                "hitImpulseType": "LV3",
+                "reboundRatio": 0,
+                "canBeDefenceHalt": true,
+                "hitHaltTime": 0.03,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
               },
+              "forceCameraShake": false,
               "cameraShake": {
                 "shakeType": "CustomVector",
-                "shakeRange": 0.11999999731779099,
-                "shakeTime": 0.09000000357627869,
-                "shakeDistance": 30.0,
+                "shakeRange": 0.12,
+                "shakeTime": 0.09,
+                "shakeDistance": 30,
                 "shakeDir": {
-                  "x": -1.0
+                  "x": -1,
+                  "y": 0,
+                  "z": 0
                 }
               }
             }
-          },
-          "targetType": "Enemy"
+          }
         }
-      ]
+      ],
+      "abilitySpecials": {
+        "XiangLing_ProudSkill33_P3_Damage_Percentage": 0
+      }
     }
   },
   {
+    //Avatar_Xiangling_FireCircle03
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Xiangling_FireCircle03",
-      "abilitySpecials": {
-        "XiangLing_ProudSkill33_P4_Damage_Percentage": 0.0
-      },
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
+              "fanAngle": 360.0,
+              "radius": 3,
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 }
-              },
-              "DCMPFCIBIPA": 3.0
+              }
             },
             "attackInfo": {
               "attackTag": "Elemental_Burst",
               "attenuationTag": "Elemental_Burst",
-              "attenuationGroup": "default",
               "attackProperty": {
-                "HBIOLEEGHPD": "XiangLing_ProudSkill33_P4_Damage_Percentage",
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Fire",
-                "elementRank": 3.0,
-                "bonusCriticalHurt": 25.0,
+                "damagePercentage": "%XiangLing_ProudSkill33_P4_Damage_Percentage",
                 "strikeType": "Spear",
-                "attackType": "Melee"
+                "attackType": "Melee",
+                "elementType": "Fire",
+                "elementDurability": 25,
+                "elementRank": 3,
+                "enBreak": 30
               },
               "hitPattern": {
                 "onHitEffectName": "default",
-                "hitImpulseType": "LV3",
                 "retreatType": "ByHitDirection",
-                "hitHaltTime": 0.029999999329447746,
-                "hitHaltTimeScale": 0.009999999776482582,
-                "canBeDefenceHalt": true
+                "hitImpulseType": "LV3",
+                "reboundRatio": 0,
+                "canBeDefenceHalt": true,
+                "hitHaltTime": 0.03,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
               },
+              "forceCameraShake": false,
               "cameraShake": {
                 "shakeType": "CustomVector",
-                "shakeRange": 0.15000000596046448,
-                "shakeTime": 0.11999999731779099,
-                "shakeDistance": 30.0,
+                "shakeRange": 0.15,
+                "shakeTime": 0.12,
+                "shakeDistance": 30,
                 "shakeDir": {
-                  "x": -1.0,
-                  "y": -0.30000001192092896
+                  "x": -1,
+                  "y": -0.3,
+                  "z": 0
                 }
               }
             }
-          },
-          "targetType": "Enemy"
+          }
         }
-      ]
+        // {
+        // 	"$type" : "ResetAnimatorTrigger",
+        // 	"triggerID" : "DoSkill",
+        // },
+      ],
+      "abilitySpecials": {
+        "XiangLing_ProudSkill33_P4_Damage_Percentage": 0
+      }
     }
   },
   {
@@ -1174,166 +1388,42 @@
         {
           "$type": "TriggerBullet",
           "bulletID": 41023004,
+          "campID": 1001,
+          "trackTarget": "Caster",
+          "campTargetType": "Enemy",
           "born": {
             "$type": "ConfigBornByTarget",
             "offset": {
-              "IBKBLDAJIMA": -0.6000000238418579,
-              "LKHJADIPBFL": 1.0,
-              "PJCOKIGCJOK": 0.6000000238418579
+              "x": -0.6,
+              "y": 1,
+              "z": 0.6
             }
-          },
-          "trackTarget": "Caster"
+          }
         }
+        // {
+        // 	"$type":"TriggerBullet",
+        // 	"bulletID":41023004,
+        // 	"campID": 1001,
+        // 	"trackTarget": "Caster",
+        // 	"campTargetType": "Enemy",
+        // 	"born":
+        // 	{
+        // 		"$type":"ConfigBornByTarget",
+        // 		"offset":
+        // 		{
+        // 			"x":0.75,
+        // 			"y":1,
+        // 			"z":-0.4,
+        // 		},
+        // 	},
+        // },
       ]
     }
-  },
+  }, //Avatar_Xiangling_FireCircle
   {
     "Default": {
       "$type": "ConfigAbility",
-      "abilityName": "Avatar_Xiangling_FireCircle_Material",
-      "abilitySpecials": {
-        "Dua": 0.5,
-        "XiangLing_ProudSkill33_P1_Damage_Percentage": 0.0,
-        "Xiangling_Talent_236_P1_FireAddHurtDelta": 0.0,
-        "Time_Rate": 0.0,
-        "FireCircleTime": 0.0
-      },
-      "modifiers": {
-        "Effect_Modifier": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Pole_Xiangling_FireCircle_01",
-              "born": {
-                "$type": "ConfigBornBySelfOwner",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
-                },
-                "direction": {
-                  "$type": "ConfigDirectionByDefault",
-                  "angleOffset": {
-                    "IBKBLDAJIMA": 0.0,
-                    "LKHJADIPBFL": 0.0,
-                    "PJCOKIGCJOK": 0.0
-                  }
-                }
-              },
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        },
-        "Collider_Open_Timer": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.4000000059604645,
-          "bonusCriticalHurt": 100.0,
-          "onRemoved": [
-            {
-              "$type": "EnablePushColliderName",
-              "pushColliderNames": ["AttackBox"],
-              "setEnable": true
-            }
-          ]
-        },
-        "Timeline1": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.100000023841858,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.5,
-          "onThinkInterval": [
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "Change_Radius"
-            }
-          ]
-        },
-        "Xiangling_Talent_236_FireAttackUpHandler": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 15.0,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.6000000238418579,
-          "onAdded": [
-            {
-              "$type": "ApplyModifier",
-              "target": "AllPlayerAvatars",
-              "RotationDampTime": true,
-              "predicates": [
-                {
-                  "$type": "ByTargetPositionToSelfPosition",
-                  "logic": "LesserOrEqual",
-                  "ratio": 40.0
-                }
-              ],
-              "modifierName": "UNIQUE_Xiangling_Talent_236_FireAttackUp"
-            }
-          ],
-          "onThinkInterval": [
-            {
-              "$type": "ApplyModifier",
-              "target": "AllPlayerAvatars",
-              "RotationDampTime": true,
-              "predicates": [
-                {
-                  "$type": "ByTargetPositionToSelfPosition",
-                  "logic": "LesserOrEqual",
-                  "ratio": 40.0
-                }
-              ],
-              "modifierName": "UNIQUE_Xiangling_Talent_236_FireAttackUp"
-            }
-          ]
-        },
-        "UNIQUE_Xiangling_Talent_236_FireAttackUp": {
-          "modifierName": "",
-          "isUnique": true,
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_FireAddHurtDelta": "Xiangling_Talent_236_P1_FireAddHurtDelta"
-          },
-          "state": "AttackUp",
-          "isLimitedProperties": true
-        },
-        "Xiangling_ProudSkill_33": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "modifierMixins": [
-            {
-              "$type": "ModifyDamageMixin",
-              "attackTags": ["Elemental_Burst"],
-              "HBIOLEEGHPD": "XiangLing_ProudSkill33_P1_Damage_Percentage",
-              "CCNJGLPMIEP": 0.0
-            }
-          ]
-        },
-        "Change_Radius": {
-          "stacking": "Multiple",
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_BulletMoveSurroundRadiusRatio": 0.3499999940395355
-          }
-        },
-        "Xiangling_FireCircle_Time": {
-          "modifierName": "",
-          "HCJLIGBLGJA": [
-            "Time_Rate",
-            "FireCircleTime",
-            "MUL",
-            "FireCircleTime",
-            "ADD"
-          ],
-          "bonusCriticalHurt": 100.0,
-          "onRemoved": [
-            {
-              "$type": "KillSelf"
-            }
-          ]
-        }
-      },
+      "abilityName": "Avatar_Xiangling_FireCircle_Material", //伤害系数在子弹上
       "onAdded": [
         {
           "$type": "AttachModifier",
@@ -1341,7 +1431,7 @@
         },
         {
           "$type": "ApplyModifier",
-          "modifierName": "Xiangling_FireCircle_Time"
+          "modifierName": "Xiangling_FireCircle_Time" //控制子弹时长
         },
         {
           "$type": "ApplyModifier",
@@ -1353,16 +1443,17 @@
         },
         {
           "$type": "AttachModifier",
+          "modifierName": "Xiangling_Talent_236_FireAttackUpHandler",
           "predicates": [
             {
               "$type": "ByUnlockTalentParam",
               "talentParam": "Xiangling_Talent_236"
             }
-          ],
-          "modifierName": "Xiangling_Talent_236_FireAttackUpHandler"
+          ]
         },
         {
           "$type": "RemoveModifier",
+          "modifierName": "Xiangling_Talent_236_FireAttackUpHandler",
           "predicates": [
             {
               "$type": "ByNot",
@@ -1373,8 +1464,7 @@
                 }
               ]
             }
-          ],
-          "modifierName": "Xiangling_Talent_236_FireAttackUpHandler"
+          ]
         },
         {
           "$type": "ApplyModifier",
@@ -1384,9 +1474,141 @@
           "$type": "ApplyModifier",
           "modifierName": "Collider_Open_Timer"
         }
-      ]
+      ],
+      "modifiers": {
+        "Effect_Modifier": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Girl_Pole_Xiangling_FireCircle_01",
+              "born": {
+                //由于子弹生成时角度是朝向角色，所以如果瞬间角色被阿贝多电梯抬高，会导致子弹倾斜向角色，导致特效倾斜。改用角色朝向后就稳定了。
+                //另外这里的bornby是不会生效的，因为特效最终会follow这个gadget。但是direction依赖bornby，所以direcition可以获得朝向。
+                "$type": "ConfigBornBySelfOwner",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                },
+                "direction": {
+                  "$type": "ConfigDirectionByDefault",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "Collider_Open_Timer": {
+          "duration": 0.4, //延迟一点触发子弹，给第三击留出时间。 但功能没有生效，以后要用子弹配置里的delay那个做。
+          "onRemoved": [
+            {
+              "$type": "EnablePushColliderName",
+              "pushColliderNames": ["AttackBox"],
+              "setEnable": true
+            }
+          ]
+        },
+        "Timeline1": {
+          "duration": 1.1,
+          "thinkInterval": 0.5,
+          "onThinkInterval": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "Change_Radius" //扩散飞行半径，从1.6增加到3米多一些。
+            }
+          ]
+        },
+        "Xiangling_Talent_236_FireAttackUpHandler": {
+          "onAdded": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "UNIQUE_Xiangling_Talent_236_FireAttackUp",
+              "target": "AllPlayerAvatars",
+              "doOffStage": true,
+              "predicates": [
+                {
+                  "$type": "ByTargetPositionToSelfPosition",
+                  "compareType": "XZ",
+                  "value": 40,
+                  "logic": "LesserOrEqual"
+                }
+              ]
+            }
+          ],
+          "duration": 15,
+          "thinkInterval": 0.6, //由于玩家可能在持续过程中更换队员，所以只能由火圈自身去判断来给角色上buff。（其实不是很合理，以前这么写了先留着）2020.7.9
+          "onThinkInterval": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "UNIQUE_Xiangling_Talent_236_FireAttackUp",
+              "target": "AllPlayerAvatars",
+              "doOffStage": true,
+              "predicates": [
+                {
+                  "$type": "ByTargetPositionToSelfPosition",
+                  "compareType": "XZ",
+                  "value": 40,
+                  "logic": "LesserOrEqual"
+                }
+              ]
+            }
+          ]
+        },
+        "UNIQUE_Xiangling_Talent_236_FireAttackUp": {
+          "isUnique": true,
+          "duration": 1,
+          "stacking": "Refresh",
+          "state": "AttackUp",
+          "isLimitedProperties": true,
+          "properties": {
+            "Actor_FireAddHurtDelta": "%Xiangling_Talent_236_P1_FireAddHurtDelta"
+          }
+        },
+        "Xiangling_ProudSkill_33": {
+          "modifierMixins": [
+            {
+              "$type": "ModifyDamageMixin",
+              "attackTags": ["Elemental_Burst"],
+              "damagePercentage": "%XiangLing_ProudSkill33_P1_Damage_Percentage"
+            }
+          ]
+        },
+        "Change_Radius": {
+          "stacking": "Multiple",
+          "properties": {
+            "Actor_BulletMoveSurroundRadiusRatio": 0.35 //原数值0.4
+          }
+        },
+        //增加了保底的干掉自己的时间
+        "Xiangling_FireCircle_Time": {
+          "duration": "%Time_Rate*%FireCircleTime+%FireCircleTime",
+          "onRemoved": [
+            {
+              "$type": "KillSelf"
+            }
+          ]
+        }
+      },
+      //注意天赋改成延长xx秒的描述的话，观感更好。（这就是个文笔和情商的故事了
+      "abilitySpecials": {
+        "Dua": 0.5, //火焰buff时长，只要大于0.2秒的上buff间隔即可。
+        "XiangLing_ProudSkill33_P1_Damage_Percentage": 0,
+        "Xiangling_Talent_236_P1_FireAddHurtDelta": 0,
+        "Time_Rate": 0,
+        "FireCircleTime": 0
+      }
     }
-  },
+  }, //Avatar_Xiangling_FireCircle_Material
+  /* */
+  ////////////////////////////////////////////////////////////////
+  //
+  //  天赋 战斗姿态移动速度提升 (废弃)
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1398,40 +1620,38 @@
           "modifierName": "MoveSpeed"
         }
       ],
-      "abilitySpecials": {
-        "MoveSpeed": 0.019999999552965164
-      },
       "modifiers": {
         "MoveSpeed": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "properties": {
-            "Animator_OverallSpeedRatio": "MoveSpeed"
+            "Animator_OverallSpeedRatio": "%MoveSpeed"
           }
         }
+      },
+      "abilitySpecials": {
+        "MoveSpeed": 0.02
       }
     }
   },
+
+  ////////////////////////////////////////////////////////////////
+  //
+  //  香菱 第五击概率加爆弹，数量1，内置cdxx秒。
+  //
+  ////////////////////////////////////////////////////////////////
+
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Xiangling_TalentBomb",
-      "abilitySpecials": {
-        "Xiangling_Talent_232_P1_Bomb_Time": 0.0,
-        "Xiangling_Talent_232_P2_Bomb_Range": 0.0,
-        "Xiangling_Talent_232_P3_Bomb_Damage": 0.0
-      },
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "TalentBomb_Handler"
+        }
+      ],
       "modifiers": {
         "TalentBomb_Handler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onRemoved": [
-            {
-              "$type": "ApplyModifier",
-              "RotationDampTime": true,
-              "modifierName": "TalentBomb_Cd"
-            }
-          ],
           "onAttackLanded": [
             {
               "$type": "Predicated",
@@ -1452,168 +1672,199 @@
                   "target": "Target",
                   "modifierName": "Bomb"
                 },
+                /*{
+									"$type": "TriggerBullet",
+									"target":"Target",
+									// "ownerIsTarget":true,
+									"bulletID": 41023012,
+									"lifeByOwnerIsAlive":true,
+									// "born":
+									// {
+									// 	"$type": "ConfigBornByAttachPoint",
+									// 	"attachPointName" : "RootNode",
+									// 	"offset" :
+									// 	{
+									// 		"x": 0.0,
+									// 		"y": 0.0,
+									// 		"z": 0.0,
+									// 	},
+									// },
+								},*/
                 {
                   "$type": "RemoveModifier",
-                  "modifierName": "TalentBomb_Handler"
+                  "modifierName": "TalentBomb_Handler" //这个位置移除可以将结算停止在这里。也就是只会命中一个单位。
                 }
               ]
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "TalentBomb_Cd",
+              "doOffStage": true
             }
           ]
         },
         "TalentBomb_Cd": {
+          "duration": 1,
           "stacking": "Unique",
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "ApplyModifier",
-              "RotationDampTime": true,
-              "modifierName": "TalentBomb_Handler"
+              "modifierName": "TalentBomb_Handler",
+              "doOffStage": true
             }
           ]
         },
         "Bomb": {
-          "modifierName": "",
-          "HCJLIGBLGJA": ["Xiangling_Talent_232_P1_Bomb_Time", 0.5, "ADD"],
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": "Xiangling_Talent_232_P1_Bomb_Time",
+          "duration": "%Xiangling_Talent_232_P1_Bomb_Time+0.5",
+          /*"onKill":
+					[
+						{
+							"$type":"FireEffect",
+							"effectPattern":"Eff_Avatar_Girl_Pole_Xiangling_TalentBombExplode",
+						},
+					],*/
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Pole_Xiangling_TalentBomb",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Avatar_Girl_Pole_Xiangling_TalentBomb"
             }
           ],
+          "thinkInterval": "%Xiangling_Talent_232_P1_Bomb_Time",
           "onThinkInterval": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Pole_Xiangling_TalentBombExplode",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Avatar_Girl_Pole_Xiangling_TalentBombExplode"
             },
             {
               "$type": "TriggerAttackEvent",
-              "target": "Caster",
+              "target": "Caster", //由target发动event，改成caster自然就会读取caster的伤害。
+              "targetType": "Enemy", //然后攻击target的目标阵营
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
+                  "height": 2,
+                  "fanAngle": 360.0,
+                  "radius": "%Xiangling_Talent_232_P2_Bomb_Range",
                   "ignoreMassive": true,
                   "born": {
                     "$type": "ConfigBornBySelf",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": -0.20000000298023224,
-                      "PJCOKIGCJOK": 0.0
+                      "x": 0.0,
+                      "y": -0.2,
+                      "z": 0.0
                     }
-                  },
-                  "height": 2.0,
-                  "DCMPFCIBIPA": "Xiangling_Talent_232_P2_Bomb_Range"
+                  }
                 },
                 "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
+                  "canBeModifiedBy": "OriginOwner",
                   "attackProperty": {
-                    "HBIOLEEGHPD": "Xiangling_Talent_232_P3_Bomb_Damage",
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Fire",
-                    "bonusCriticalHurt": 25.0,
+                    "damagePercentage": "%Xiangling_Talent_232_P3_Bomb_Damage",
                     "strikeType": "Default",
-                    "enBreak": 8.800000190734863,
-                    "attackType": "Range"
+                    "attackType": "Range",
+                    "elementType": "Fire",
+                    "elementDurability": 25,
+                    "enBreak": 8.8
                   },
                   "hitPattern": {
                     "onHitEffectName": "default",
-                    "hitImpulseType": "LV2",
                     "retreatType": "ByHitDirection",
-                    "hitHaltTimeScale": 0.009999999776482582
+                    "hitImpulseType": "LV2",
+                    "reboundRatio": 0,
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.01,
+                    "muteHitText": false
                   },
-                  "canBeModifiedBy": "OriginOwner"
+                  "forceCameraShake": false
                 }
-              },
-              "targetType": "Enemy"
+              }
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "TalentBomb_Handler"
-        }
-      ],
-      "isDynamicAbility": true
+      "abilitySpecials": {
+        "Xiangling_Talent_232_P1_Bomb_Time": 0,
+        "Xiangling_Talent_232_P2_Bomb_Range": 0,
+        "Xiangling_Talent_232_P3_Bomb_Damage": 0
+      }
     }
-  },
+  }, //Avatar_Xiangling_TalentBomb
+
+  ///爆弹的ability
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Xiangling_TalentBombGadget",
-      "abilitySpecials": {
-        "Bomb_Damage": 0.20000000298023224,
-        "Xiangling_Talent_232_P1_Bomb_Time": 0.0,
-        "Xiangling_Talent_232_P2_Bomb_Range": 0.0,
-        "Xiangling_Talent_232_P3_Bomb_Damage": 0.0
-      },
       "onAdded": [
         {
           "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Pole_Xiangling_TalentBomb",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_Avatar_Girl_Pole_Xiangling_TalentBomb"
         }
       ],
       "onAbilityStart": [
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Pole_Xiangling_TalentBombExplode",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_Avatar_Girl_Pole_Xiangling_TalentBombExplode"
         },
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
+              "height": 2,
+              "fanAngle": 360.0,
+              "radius": 2.5,
               "ignoreMassive": true,
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": -0.20000000298023224,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": -0.2,
+                  "z": 0.0
                 }
-              },
-              "height": 2.0,
-              "DCMPFCIBIPA": 2.5
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
+              "canBeModifiedBy": "OriginOwner",
               "attackProperty": {
-                "HBIOLEEGHPD": "Xiangling_Talent_232_P3_Bomb_Damage",
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Fire",
-                "bonusCriticalHurt": 25.0,
+                "damagePercentage": "%Xiangling_Talent_232_P3_Bomb_Damage",
                 "strikeType": "Default",
-                "enBreak": 8.800000190734863,
-                "attackType": "Range"
+                "attackType": "Range",
+                "elementType": "Fire",
+                "elementDurability": 25,
+                "enBreak": 8.8
               },
               "hitPattern": {
                 "onHitEffectName": "default",
-                "hitImpulseType": "LV2",
                 "retreatType": "ByHitDirection",
-                "hitHaltTimeScale": 0.009999999776482582
+                "hitImpulseType": "LV2",
+                "reboundRatio": 0,
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
               },
-              "canBeModifiedBy": "OriginOwner"
+              "forceCameraShake": false
             }
-          },
-          "targetType": "Enemy"
+          }
         }
-      ]
+      ],
+      "abilitySpecials": {
+        "Bomb_Damage": 0.2,
+        "Xiangling_Talent_232_P1_Bomb_Time": 0,
+        "Xiangling_Talent_232_P2_Bomb_Range": 0,
+        "Xiangling_Talent_232_P3_Bomb_Damage": 0
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  固有技：普通攻击伤害变化/
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1622,43 +1873,114 @@
         {
           "$type": "ModifyDamageMixin",
           "attackTags": ["NormalAttack_01"],
-          "HBIOLEEGHPD": "Attack01",
-          "CCNJGLPMIEP": 0.0
+          "damagePercentage": "%Attack01"
         },
         {
           "$type": "ModifyDamageMixin",
           "attackTags": ["NormalAttack_02"],
-          "HBIOLEEGHPD": "Attack02",
-          "CCNJGLPMIEP": 0.0
+          "damagePercentage": "%Attack02"
         },
         {
           "$type": "ModifyDamageMixin",
           "attackTags": ["NormalAttack_03"],
-          "HBIOLEEGHPD": "Attack03",
-          "CCNJGLPMIEP": 0.0
+          "damagePercentage": "%Attack03"
         },
         {
           "$type": "ModifyDamageMixin",
           "attackTags": ["NormalAttack_04"],
-          "HBIOLEEGHPD": "Attack04",
-          "CCNJGLPMIEP": 0.0
+          "damagePercentage": "%Attack04"
         },
         {
           "$type": "ModifyDamageMixin",
           "attackTags": ["NormalAttack_05"],
-          "HBIOLEEGHPD": "Attack05",
-          "CCNJGLPMIEP": 0.0
+          "damagePercentage": "%Attack05"
         }
+        //{
+        //  "$type": "ModifyDamageMixin",
+        //  "attackTags": [ "ExtraAttack" ],
+        //  "damagePercentage": "%ExtraAttack",
+        //},//extra的方式是子弹，所以写在了另外一个地方。
       ],
       "abilitySpecials": {
-        "Attack01": 0.0,
-        "Attack02": 0.0,
-        "Attack03": 0.0,
-        "Attack04": 0.0,
-        "Attack05": 0.0
+        "Attack01": 0,
+        "Attack02": 0,
+        "Attack03": 0,
+        "Attack04": 0,
+        "Attack05": 0
       }
     }
-  },
+  }, //Avatar_XiangLing_ProudSkill_31(普攻加伤害被动)
+
+  /*{
+        "Default":
+        {
+            "$type": "ConfigAbility",
+            "abilityName": "Avatar_Xiangling_ProudSkill_22",
+            "onAdded":
+            [
+                {
+                    "$type": "ApplyModifier",
+                    "modifierName": "Avatar_Xiangling_ProudSkill_22",
+                    "target": "Self",
+                },
+            ],
+            "modifiers":
+            {
+                "Avatar_Xiangling_ProudSkill_22":
+                {
+                    "modifierMixins":
+                    [
+                        {
+                            "$type": "ModifyDamageMixin",
+                            "attackTags":
+                            [
+                                "NormalAttack_01",
+                                "NormalAttack_02",
+                                "NormalAttack_03",
+                                "NormalAttack_04",
+                                "NormalAttack_05",
+                                "ExtraAttack"
+                            ],
+                            "damagePercentageRatio": "%XiangLing_ProudSkill22_P1_Damage_Percentage",
+                            "predicates":
+                            [
+                                {
+                                    "$type": "ByAny",
+                                    "predicates":
+                                    [
+                                        {
+                                            "$type": "ByHasFeatureTag",
+                                            "featureTagIDs":
+                                            [
+                                                4001
+                                            ],
+                                        },
+                                        {
+                                            "$type": "ByHasFeatureTag",
+                                            "featureTagIDs":
+                                            [
+                                                9001
+                                            ],
+                                        },
+                                    ]
+                                },
+                            ],
+                        },
+                    ],
+                },
+            },
+            "abilitySpecials":
+            {
+                "XiangLing_ProudSkill22_P1_Damage_Percentage": 0,
+            },
+        },
+    }, */
+
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Avatar_Xiangling_Show01_RandomEffect  废弃，因为特效可以随机，音效无法随机。
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1672,8 +1994,6 @@
       ],
       "modifiers": {
         "RandomEffect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "Randomed",
@@ -1681,15 +2001,13 @@
               "successActions": [
                 {
                   "$type": "AttachEffect",
-                  "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Pole_Xiangling_Show01_00",
-                  "EBHJMLOKDGB": -1.0
+                  "effectPattern": "Eff_Avatar_Girl_Pole_Xiangling_Show01_00"
                 }
               ],
               "failActions": [
                 {
                   "$type": "AttachEffect",
-                  "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Pole_Xiangling_Show02_00",
-                  "EBHJMLOKDGB": -1.0
+                  "effectPattern": "Eff_Avatar_Girl_Pole_Xiangling_Show02_00"
                 }
               ]
             }
@@ -1698,6 +2016,12 @@
       }
     }
   },
+
+  ////////////////////////////////////////////////////////////////
+  //
+  //  空中攻击
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1705,6 +2029,7 @@
       "abilityMixins": [
         {
           "$type": "AvatarChangeSkillMixin",
+          "priority": "AvatarCommon",
           "jumpSkillID": 5023010,
           "flySkillID": 5023010
         },
@@ -1769,55 +2094,231 @@
           "modifierName": "FallingAnthem_ClearVelocityForce"
         }
       ],
-      "abilitySpecials": {
-        "FallingAnthem_Normal_Loop_Damage": 0.0,
-        "FallingAnthem_Normal_Rank_1_Damage": 0.0,
-        "FallingAnthem_Normal_Rank_2_Damage": 0.0,
-        "FallingAnthem_Altitude_Lv0": 20.0,
-        "FallingAnthem_Altitude_Lv1": 40.0,
-        "FallingAnthem_Altitude_Lv2": 60.0,
-        "FallingAnthem_Altitude_Lv3": 100.0,
-        "FallingAnthem_Altitude_Lv4": 200.0,
-        "FallingAnthem_FallingDamageRatio_Lv0": -1.0,
-        "FallingAnthem_FallingDamageRatio_Lv1": -1.0,
-        "FallingAnthem_FallingDamageRatio_Lv2": -0.8999999761581421,
-        "FallingAnthem_FallingDamageRatio_Lv3": -0.800000011920929,
-        "FallingAnthem_FallingDamageRatio_Lv4": -0.6000000238418579,
-        "FallingAnthem_FallingDamageRatio": 0.0
-      },
+      "onAdded": [],
+      "onAbilityStart": [
+        //普通状态第一段
+        {
+          "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
+          "attackEvent": {
+            "attackPattern": {
+              "$type": "ConfigAttackCircle",
+              "triggerType": "TriggerNoRepeat",
+              "scale": 1.0,
+              "height": 2.0,
+              "centerYOffset": 0.0,
+              "offsetZ": 0.0,
+              "fanAngle": 360.0,
+              "radius": 3.0,
+              "followRootNodeY": false,
+              "followTransformY": false,
+              "offsetAngle": 0.0,
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 1.0
+                }
+              }
+            },
+            "attackInfo": {
+              "attackTag": "FallingAttack",
+              "attackProperty": {
+                "damagePercentage": "%FallingAnthem_Normal_Rank_1_Damage",
+                "overrideByWeapon": true,
+                "strikeType": "Blunt",
+                "attackType": "Melee",
+                "elementType": "None",
+                "elementDurability": 25,
+                "elementRank": 1.0,
+                "enBreak": 100
+              },
+              "hitPattern": {
+                "onHitEffectName": "none",
+                "hitImpulseType": "LV4",
+                "retreatType": "ByAttacker",
+                "reboundRatio": 0,
+                "canBeDefenceHalt": false,
+                "hitHaltTime": 0,
+                "hitHaltTimeScale": 0.1,
+                "muteHitText": false
+              },
+              "forceCameraShake": true,
+              /*                          "cameraShake":
+                            {
+                                "shakeType": "CustomVector",
+                                "shakeRange": 0.3,
+                                "shakeTime": 0.12,
+                                "shakeDistance": 30,
+                                "shakeDir":
+                                {
+                                    "x": 0,
+                                    "y": 1,
+                                    "z": 0,
+                                },
+                            },*/
+              "cameraShake": {
+                "shakeType": "CustomVector",
+                "shakeRange": 0.24,
+                "shakeTime": 0.12,
+                "shakeDistance": 30,
+                "shakeDir": {
+                  "x": 0,
+                  "y": 1,
+                  "z": 0
+                },
+                "extension": {
+                  "baseCycle": 0.24,
+                  "cycleDamping": 0,
+                  "rangeAttenuation": 0.3
+                }
+              }
+            }
+          },
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_ABILITY_FallingAnthem_UseCamera",
+              "forceByCaster": true,
+              "value": 0,
+              "compareType": "NoneOrEqual"
+            }
+          ]
+        },
+        //普通状态第二段
+        {
+          "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
+          "attackEvent": {
+            "attackPattern": {
+              "$type": "ConfigAttackCircle",
+              "triggerType": "TriggerNoRepeat",
+              "scale": 1.0,
+              "height": 2.0,
+              "centerYOffset": 0.0,
+              "offsetZ": 0.0,
+              "fanAngle": 360.0,
+              "radius": 5.0,
+              "followRootNodeY": false,
+              "followTransformY": false,
+              "offsetAngle": 0.0,
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 1.0
+                }
+              }
+            },
+            "attackInfo": {
+              "attackTag": "FallingAttack",
+              "attackProperty": {
+                "damagePercentage": "%FallingAnthem_Normal_Rank_2_Damage",
+                "overrideByWeapon": true,
+                "strikeType": "Blunt",
+                "attackType": "Melee",
+                "elementType": "None",
+                "elementDurability": 25,
+                "elementRank": 1.0,
+                "enBreak": 150
+              },
+              "hitPattern": {
+                "onHitEffectName": "none",
+                "hitImpulseType": "LV7",
+                "retreatType": "ByAttacker",
+                "reboundRatio": 0,
+                "canBeDefenceHalt": false,
+                "hitHaltTime": 0,
+                "hitHaltTimeScale": 0.1,
+                "muteHitText": false
+              },
+              "forceCameraShake": true,
+              "cameraShake": {
+                "shakeType": "CustomVector",
+                "shakeRange": 0.5,
+                "shakeTime": 0.2,
+                "shakeDistance": 30,
+                "shakeDir": {
+                  "x": 0,
+                  "y": 1,
+                  "z": 1
+                },
+                "extension": {
+                  "baseCycle": 0.4,
+                  "cycleDamping": 0,
+                  "rangeAttenuation": 0.3
+                }
+              }
+            }
+          },
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_ABILITY_FallingAnthem_UseCamera",
+              "forceByCaster": true,
+              "value": 1,
+              "compareType": "Equal"
+            }
+          ]
+        },
+        //普通状态第一段
+        {
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Avatar_Pole_FallingAnthem_Strike_01_Normal",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_ABILITY_FallingAnthem_UseCamera",
+              "forceByCaster": true,
+              "value": 0,
+              "compareType": "NoneOrEqual"
+            }
+          ]
+        },
+        //普通状态第二段
+        {
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Avatar_Pole_FallingAnthem_Strike_02_Normal",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_ABILITY_FallingAnthem_UseCamera",
+              "forceByCaster": true,
+              "value": 1,
+              "compareType": "Equal"
+            }
+          ]
+        }
+      ],
       "modifiers": {
         "FallingAnthem_BS_Material": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5299999713897705,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.53,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Pole_FallingAnthem_BS_Normal",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Avatar_Pole_FallingAnthem_BS_Normal"
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Sprint_Boost",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Avatar_Sprint_Boost"
             }
           ],
           "onRemoved": [
             {
               "$type": "ActCameraRadialBlur",
               "cameraRadialBlur": {
-                "power": 0.30000001192092896,
-                "blurTime": 0.30000001192092896,
-                "fadeTime": 0.15000000596046448
+                "power": 0.3,
+                "blurTime": 0.3,
+                "fadeTime": 0.15
               }
             }
           ]
         },
         "FallingAnthem_BS_VelocityForce_Initialize": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "properties": {
-            "Actor_AddGravityScale": -2.0
+            "Actor_AddGravityScale": -2
           },
           "onAdded": [
             {
@@ -1827,93 +2328,91 @@
           ]
         },
         "FallingAnthem_LoopDamage": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.30000001192092896,
           "onAdded": [
             {
               "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
+                  "radius": 1.0,
                   "born": {
                     "$type": "ConfigBornBySelf",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 1.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 1
                     }
-                  },
-                  "DCMPFCIBIPA": 1.0
+                  }
                 },
                 "attackInfo": {
                   "attackTag": "FallingAttack",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "HBIOLEEGHPD": "FallingAnthem_Normal_Loop_Damage",
-                    "CCNJGLPMIEP": 0.0,
-                    "bonusCriticalHurt": 0.0,
-                    "overrideByWeapon": true,
+                    "damagePercentage": "%FallingAnthem_Normal_Loop_Damage",
                     "strikeType": "Slash",
-                    "enBreak": 25.0,
-                    "attackType": "Melee"
+                    "overrideByWeapon": true,
+                    "attackType": "Melee",
+                    "elementType": "None",
+                    "elementDurability": 0,
+                    "enBreak": 25
                   },
                   "hitPattern": {
                     "onHitEffectName": "default",
                     "hitImpulseType": "LV2",
-                    "hitHaltTimeScale": 0.019999999552965164
+                    "reboundRatio": 0,
+                    "canBeDefenceHalt": false,
+                    "hitHaltTime": 0,
+                    "hitHaltTimeScale": 0.02,
+                    "muteHitText": false
                   }
                 }
-              },
-              "targetType": "Enemy"
+              }
             }
           ],
+          "thinkInterval": 0.3,
           "onThinkInterval": [
             {
               "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
+                  "radius": 1.0,
                   "born": {
                     "$type": "ConfigBornBySelf",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 1.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 1
                     }
-                  },
-                  "DCMPFCIBIPA": 1.0
+                  }
                 },
                 "attackInfo": {
                   "attackTag": "FallingAttack",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "HBIOLEEGHPD": "FallingAnthem_Normal_Loop_Damage",
-                    "CCNJGLPMIEP": 0.0,
-                    "bonusCriticalHurt": 0.0,
-                    "overrideByWeapon": true,
+                    "damagePercentage": "%FallingAnthem_Normal_Loop_Damage",
                     "strikeType": "Slash",
-                    "enBreak": 25.0,
-                    "attackType": "Melee"
+                    "overrideByWeapon": true,
+                    "attackType": "Melee",
+                    "enBreak": 25
                   },
                   "hitPattern": {
                     "onHitEffectName": "default",
                     "hitImpulseType": "LV4",
-                    "hitHaltTimeScale": 0.019999999552965164
+                    "reboundRatio": 0,
+                    "canBeDefenceHalt": false,
+                    "hitHaltTime": 0,
+                    "hitHaltTimeScale": 0.02,
+                    "muteHitText": false
                   }
                 }
-              },
-              "targetType": "Enemy"
+              }
             }
           ]
         },
         "FallingAnthem_FallingDamageImmune_01": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ClearGlobalValue",
@@ -1921,90 +2420,95 @@
             },
             {
               "$type": "AddGlobalValue",
+              "key": "_ABILITY_FallingAttack_Altitude",
+              "value": "%FallingAnthem_FallingDamageRatio_Lv0",
+              "useLimitRange": true,
+              "maxValue": "%FallingAnthem_FallingDamageRatio_Lv0",
+              "minValue": "%FallingAnthem_FallingDamageRatio_Lv0",
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv0"
+                  "value": "%FallingAnthem_Altitude_Lv0",
+                  "logic": "LesserOrEqual"
                 }
-              ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv0",
-              "key": "_ABILITY_FallingAttack_Altitude",
-              "useLimitRange": true,
-              "maxValue": "FallingAnthem_FallingDamageRatio_Lv0",
-              "minValue": "FallingAnthem_FallingDamageRatio_Lv0"
-            },
+              ]
+            }, //==================================================================================
             {
               "$type": "AddGlobalValue",
+              "key": "_ABILITY_FallingAttack_Altitude",
+              "value": "%FallingAnthem_FallingDamageRatio_Lv1",
+              "useLimitRange": true,
+              "maxValue": "%FallingAnthem_FallingDamageRatio_Lv1",
+              "minValue": "%FallingAnthem_FallingDamageRatio_Lv1",
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv1"
+                  "value": "%FallingAnthem_Altitude_Lv1",
+                  "logic": "LesserOrEqual"
                 },
                 {
                   "$type": "ByTargetAltitude",
-                  "ratio": "FallingAnthem_Altitude_Lv0"
+                  "value": "%FallingAnthem_Altitude_Lv0",
+                  "logic": "Greater"
                 }
-              ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv1",
-              "key": "_ABILITY_FallingAttack_Altitude",
-              "useLimitRange": true,
-              "maxValue": "FallingAnthem_FallingDamageRatio_Lv1",
-              "minValue": "FallingAnthem_FallingDamageRatio_Lv1"
-            },
+              ]
+            }, //==================================================================================
             {
               "$type": "AddGlobalValue",
+              "key": "_ABILITY_FallingAttack_Altitude",
+              "value": "%FallingAnthem_FallingDamageRatio_Lv2",
+              "useLimitRange": true,
+              "maxValue": "%FallingAnthem_FallingDamageRatio_Lv2",
+              "minValue": "%FallingAnthem_FallingDamageRatio_Lv2",
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv2"
+                  "value": "%FallingAnthem_Altitude_Lv2",
+                  "logic": "LesserOrEqual"
                 },
                 {
                   "$type": "ByTargetAltitude",
-                  "ratio": "FallingAnthem_Altitude_Lv1"
+                  "value": "%FallingAnthem_Altitude_Lv1",
+                  "logic": "Greater"
                 }
-              ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv2",
-              "key": "_ABILITY_FallingAttack_Altitude",
-              "useLimitRange": true,
-              "maxValue": "FallingAnthem_FallingDamageRatio_Lv2",
-              "minValue": "FallingAnthem_FallingDamageRatio_Lv2"
-            },
+              ]
+            }, //==================================================================================
             {
               "$type": "AddGlobalValue",
+              "key": "_ABILITY_FallingAttack_Altitude",
+              "value": "%FallingAnthem_FallingDamageRatio_Lv3",
+              "useLimitRange": true,
+              "maxValue": "%FallingAnthem_FallingDamageRatio_Lv3",
+              "minValue": "%FallingAnthem_FallingDamageRatio_Lv3",
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv3"
+                  "value": "%FallingAnthem_Altitude_Lv3",
+                  "logic": "LesserOrEqual"
                 },
                 {
                   "$type": "ByTargetAltitude",
-                  "ratio": "FallingAnthem_Altitude_Lv2"
+                  "value": "%FallingAnthem_Altitude_Lv2",
+                  "logic": "Greater"
                 }
-              ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv3",
-              "key": "_ABILITY_FallingAttack_Altitude",
-              "useLimitRange": true,
-              "maxValue": "FallingAnthem_FallingDamageRatio_Lv3",
-              "minValue": "FallingAnthem_FallingDamageRatio_Lv3"
-            },
+              ]
+            }, //==================================================================================
             {
               "$type": "AddGlobalValue",
+              "key": "_ABILITY_FallingAttack_Altitude",
+              "value": "%FallingAnthem_FallingDamageRatio_Lv4",
+              "useLimitRange": true,
+              "maxValue": "%FallingAnthem_FallingDamageRatio_Lv4",
+              "minValue": "%FallingAnthem_FallingDamageRatio_Lv4",
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "ratio": "FallingAnthem_Altitude_Lv3"
+                  "value": "%FallingAnthem_Altitude_Lv3",
+                  "logic": "Greater"
                 }
-              ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv4",
-              "key": "_ABILITY_FallingAttack_Altitude",
-              "useLimitRange": true,
-              "maxValue": "FallingAnthem_FallingDamageRatio_Lv4",
-              "minValue": "FallingAnthem_FallingDamageRatio_Lv4"
-            },
+              ]
+            }, //==================================================================================
+
             {
               "$type": "AttachModifier",
               "modifierName": "FallingAnthem_FallingDamageImmune_02"
@@ -2012,8 +2516,6 @@
           ]
         },
         "FallingAnthem_FallingDamageImmune_02": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValueToOverrideMap",
@@ -2027,21 +2529,17 @@
           ]
         },
         "FallingAnthem_FallingDamageImmune_03": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "properties": {
-            "Actor_FallingDamageRatio": "FallingAnthem_FallingDamageRatio"
+            "Actor_FallingDamageRatio": "%FallingAnthem_FallingDamageRatio"
           }
         },
         "FallingAnthem_Loop_Normal": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_FallingAnthem_UseCamera",
-              "defaultGlobalValueOnCreate": 0.0,
-              "valueSteps": [-1.0, 0.5, 1.5],
+              "valueSteps": [-1, 0.5, 1.5],
+              "removeAppliedModifier": true,
               "modifierNameSteps": [
                 "FallingAnthem_Loop_Normal_Rank_1",
                 "FallingAnthem_Loop_Normal_Rank_2"
@@ -2050,331 +2548,206 @@
           ]
         },
         "FallingAnthem_Loop_Normal_Rank_1": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Pole_FallingAnthem_Loop_01_Normal",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Avatar_Pole_FallingAnthem_Loop_01_Normal"
             }
           ]
         },
         "FallingAnthem_Loop_Normal_Rank_2": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Pole_FallingAnthem_Loop_02_Normal",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Avatar_Pole_FallingAnthem_Loop_02_Normal"
             }
           ]
         },
+        //水平惯性继承
         "Inertia": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "ApplyInertiaVelocityMixin",
+              "damping": 0,
               "useXZ": false,
               "useY": false
             }
           ]
         },
         "FallingAnthem_Height_Detect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
+              "key": "_ABILITY_FallingAnthem_UseCamera",
+              "value": 0,
+              "useLimitRange": true,
+              "maxValue": 0,
+              "minValue": 0,
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "logic": "LesserOrEqual",
-                  "ratio": 2.4000000953674316
+                  "value": 2.4,
+                  "logic": "LesserOrEqual"
                 }
-              ],
-              "ratio": 0.0,
-              "key": "_ABILITY_FallingAnthem_UseCamera",
-              "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
+              ]
             },
             {
               "$type": "AddGlobalValue",
-              "predicates": [
-                {
-                  "$type": "ByTargetAltitude",
-                  "ratio": 2.4000000953674316
-                }
-              ],
-              "ratio": 5.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
+              "value": 5,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
-            },
-            {
-              "$type": "SetAnimatorFloat",
+              "maxValue": 1,
+              "minValue": 0,
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "logic": "LesserOrEqual",
-                  "ratio": 2.4000000953674316
+                  "value": 2.4,
+                  "logic": "Greater"
                 }
-              ],
-              "floatID": "FallingAnthem_UseCamera",
-              "ratio": 0.0
+              ]
             },
+            /*                      {
+                            "$type": "DebugLog",
+                            "content": "FallingAnthem Height Set True!",
+                            "predicates":
+                            [
+                                {
+                                    "$type": "ByTargetAltitude",
+                                    "value": 3.0,
+                                    "logic": "Greater",
+                                },
+                            ],
+                        },*/
             {
               "$type": "SetAnimatorFloat",
+              "floatID": "FallingAnthem_UseCamera",
+              "value": 0,
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "ratio": 2.4000000953674316
+                  "value": 2.4,
+                  "logic": "LesserOrEqual"
                 }
-              ],
+              ]
+            },
+            {
+              "$type": "SetAnimatorFloat",
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 1.0
+              "value": 1,
+              "predicates": [
+                {
+                  "$type": "ByTargetAltitude",
+                  "value": 2.4,
+                  "logic": "Greater"
+                }
+              ]
             }
           ],
           "onRemoved": [
             {
               "$type": "SetAnimatorFloat",
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 0.0
+              "value": 0
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 0.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
+              "value": 0,
               "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "maxValue": 0,
+              "minValue": 0
             }
+            /*                      {
+                            "$type": "DebugLog",
+                            "content": "FallingAnthem Height Reset!",
+                        },*/
           ]
         },
         "FallingAnthem_OverHead_Camera": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AvatarCameraParam",
+              "lockParam": false,
+              "cameraParam": {
+                "forceRadius": 4.5,
+                "forceRadiusDuration": 0.2,
+                "shouldKeepForceRadius": true
+              },
               "predicates": [
                 {
                   "$type": "ByAnimatorFloat",
-                  "logic": "Equal",
-                  "ratio": 1.0,
-                  "parameter": "FallingAnthem_UseCamera"
+                  "parameter": "FallingAnthem_UseCamera",
+                  "value": 1,
+                  "logic": "Equal"
                 }
-              ],
-              "cameraParam": {
-                "forceRadius": 4.5,
-                "forceRadiusDuration": 0.20000000298023224,
-                "shouldKeepForceRadius": true
-              }
+              ]
             }
           ]
         },
         "FallingAnthem_OverHead_Camera_Remover": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
-              "$type": "AvatarExitCameraShot",
-              "RotationDampTime": true
+              "doOffStage": true,
+              "$type": "AvatarExitCameraShot"
             }
           ]
         },
         "FallingAnthem_Landed_Camera": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AvatarCameraParam",
+              "lockParam": false,
+              "cameraParam": {
+                "forceRadius": 6.0,
+                "forceRadiusDuration": 0.1,
+                "shouldKeepForceRadius": true
+              },
               "predicates": [
                 {
                   "$type": "ByAnimatorFloat",
-                  "logic": "Equal",
-                  "ratio": 1.0,
-                  "parameter": "FallingAnthem_UseCamera"
+                  "parameter": "FallingAnthem_UseCamera",
+                  "value": 1,
+                  "logic": "Equal"
                 }
-              ],
-              "cameraParam": {
-                "forceRadius": 6.0,
-                "forceRadiusDuration": 0.10000000149011612,
-                "shouldKeepForceRadius": true
-              }
+              ]
             }
           ]
         },
         "FallingAnthem_ClearVelocityForce": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "RemoveVelocityForce",
               "forces": ["RushMoveType", "InertiaType"]
             }
           ]
+          /*                  "onRemoved":
+                    [
+                        {
+                            "$type": "RemoveVelocityForce",
+                            "forces": ["RushMoveType"],
+                        },
+                    ],*/
         }
       },
-      "onAbilityStart": [
-        {
-          "$type": "TriggerAttackEvent",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 0.0,
-              "forceByCaster": true,
-              "compareType": "NoneOrEqual"
-            }
-          ],
-          "attackEvent": {
-            "attackPattern": {
-              "$type": "ConfigAttackCircle",
-              "triggerType": "TriggerNoRepeat",
-              "born": {
-                "$type": "ConfigBornByTarget",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": -0.5,
-                  "PJCOKIGCJOK": 1.0
-                }
-              },
-              "height": 2.0,
-              "DCMPFCIBIPA": 3.0
-            },
-            "attackInfo": {
-              "attackTag": "FallingAttack",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
-              "attackProperty": {
-                "HBIOLEEGHPD": "FallingAnthem_Normal_Rank_1_Damage",
-                "CCNJGLPMIEP": 0.0,
-                "bonusCriticalHurt": 25.0,
-                "overrideByWeapon": true,
-                "strikeType": "Blunt",
-                "enBreak": 100.0,
-                "attackType": "Melee"
-              },
-              "hitPattern": {
-                "onHitEffectName": "none",
-                "hitImpulseType": "LV4",
-                "hitHaltTimeScale": 0.10000000149011612
-              },
-              "forceCameraShake": true,
-              "cameraShake": {
-                "shakeType": "CustomVector",
-                "shakeRange": 0.23999999463558197,
-                "shakeTime": 0.11999999731779099,
-                "shakeDistance": 30.0,
-                "shakeDir": {
-                  "y": 1.0
-                },
-                "extension": {
-                  "baseCycle": 0.23999999463558197,
-                  "cycleDamping": 0.0,
-                  "rangeAttenuation": 0.30000001192092896
-                }
-              }
-            }
-          },
-          "targetType": "Enemy"
-        },
-        {
-          "$type": "TriggerAttackEvent",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 1.0,
-              "forceByCaster": true
-            }
-          ],
-          "attackEvent": {
-            "attackPattern": {
-              "$type": "ConfigAttackCircle",
-              "triggerType": "TriggerNoRepeat",
-              "born": {
-                "$type": "ConfigBornByTarget",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": -0.5,
-                  "PJCOKIGCJOK": 1.0
-                }
-              },
-              "height": 2.0,
-              "DCMPFCIBIPA": 5.0
-            },
-            "attackInfo": {
-              "attackTag": "FallingAttack",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
-              "attackProperty": {
-                "HBIOLEEGHPD": "FallingAnthem_Normal_Rank_2_Damage",
-                "CCNJGLPMIEP": 0.0,
-                "bonusCriticalHurt": 25.0,
-                "overrideByWeapon": true,
-                "strikeType": "Blunt",
-                "enBreak": 150.0,
-                "attackType": "Melee"
-              },
-              "hitPattern": {
-                "onHitEffectName": "none",
-                "hitImpulseType": "LV7",
-                "hitHaltTimeScale": 0.10000000149011612
-              },
-              "forceCameraShake": true,
-              "cameraShake": {
-                "shakeType": "CustomVector",
-                "shakeRange": 0.5,
-                "shakeTime": 0.20000000298023224,
-                "shakeDistance": 30.0,
-                "shakeDir": {
-                  "y": 1.0,
-                  "z": 1.0
-                },
-                "extension": {
-                  "baseCycle": 0.4000000059604645,
-                  "cycleDamping": 0.0,
-                  "rangeAttenuation": 0.30000001192092896
-                }
-              }
-            }
-          },
-          "targetType": "Enemy"
-        },
-        {
-          "$type": "FireEffect",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 0.0,
-              "forceByCaster": true,
-              "compareType": "NoneOrEqual"
-            }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Pole_FallingAnthem_Strike_01_Normal",
-          "EBHJMLOKDGB": -1.0
-        },
-        {
-          "$type": "FireEffect",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 1.0,
-              "forceByCaster": true
-            }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Pole_FallingAnthem_Strike_02_Normal",
-          "EBHJMLOKDGB": -1.0
-        }
-      ]
+      "abilitySpecials": {
+        "FallingAnthem_Normal_Loop_Damage": 0,
+        "FallingAnthem_Normal_Rank_1_Damage": 0,
+        "FallingAnthem_Normal_Rank_2_Damage": 0,
+
+        "FallingAnthem_Altitude_Lv0": 20,
+        "FallingAnthem_Altitude_Lv1": 40,
+        "FallingAnthem_Altitude_Lv2": 60,
+        "FallingAnthem_Altitude_Lv3": 100,
+        "FallingAnthem_Altitude_Lv4": 200,
+
+        "FallingAnthem_FallingDamageRatio_Lv0": -1,
+        "FallingAnthem_FallingDamageRatio_Lv1": -1,
+        "FallingAnthem_FallingDamageRatio_Lv2": -0.9,
+        "FallingAnthem_FallingDamageRatio_Lv3": -0.8,
+        "FallingAnthem_FallingDamageRatio_Lv4": -0.6,
+
+        "FallingAnthem_FallingDamageRatio": 0
+      }
     }
   }
 ]

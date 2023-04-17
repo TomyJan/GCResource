@@ -1,4 +1,10 @@
 [
+  ////////////////////////////////////////////////////////////////
+  //
+  //  ExtraAttack
+  //
+  ////////////////////////////////////////////////////////////////
+
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -7,37 +13,38 @@
         {
           "$type": "ButtonHoldChargeMixin",
           "skillID": 10431,
-          "chargeTime": 0.11999999731779099,
-          "secondChargeTime": 0.11999999731779099,
+          "chargeTime": 0.12,
+          "secondChargeTime": 0.12,
           "OnBeginUncharged": [
             {
               "$type": "SetAnimatorTrigger",
+              "triggerID": "DoSkill",
               "predicates": [
                 {
                   "$type": "ByAnimatorInt",
-                  "logic": "Equal",
-                  "ratio": 0,
-                  "parameter": "ComboCount"
+                  "value": 0,
+                  "parameter": "ComboCount",
+                  "logic": "Equal"
                 }
-              ],
-              "triggerID": "DoSkill"
+              ]
             },
             {
               "$type": "SetAnimatorInt",
+              "intID": "SkillID",
+              "value": 99,
               "predicates": [
                 {
                   "$type": "ByAnimatorInt",
-                  "logic": "Equal",
-                  "ratio": 0,
-                  "parameter": "ComboCount"
+                  "value": 0,
+                  "parameter": "ComboCount",
+                  "logic": "Equal"
                 }
-              ],
-              "intID": "SkillID",
-              "ratio": 99.0
+              ]
             },
             {
               "$type": "SetAnimatorBool",
-              "boolID": "IsCharging"
+              "boolID": "IsCharging",
+              "value": false
             }
           ],
           "OnReleaseUncharged": [
@@ -48,20 +55,21 @@
             {
               "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "ratio": 1.0
+              "value": 1
             }
           ],
           "OnBeginCharged": [
             {
               "$type": "SetAnimatorBool",
               "boolID": "IsCharging",
-              "ratio": true
+              "value": true
             }
           ],
           "OnReleaseCharged": [
             {
               "$type": "SetAnimatorBool",
-              "boolID": "IsCharging"
+              "boolID": "IsCharging",
+              "value": false
             },
             {
               "$type": "SetAnimatorTrigger",
@@ -70,8 +78,12 @@
             {
               "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "ratio": 1.0
+              "value": 1
             }
+            /*            {
+							"$type": "ResetAnimatorTrigger",
+							"triggerID": "DoSkill",
+						},*/
           ],
           "OnBeginSecondCharged": [
             {
@@ -80,44 +92,37 @@
             },
             {
               "$type": "SetAnimatorInt",
+              "intID": "SkillID",
+              "value": 6,
               "predicates": [
                 {
                   "$type": "ByLocalAvatarStamina",
-                  "logic": "GreaterOrEqual",
-                  "stamina": [
-                    "ExtraAttack_Catalyst_Stamina_Cost",
-                    "Sucrose_ExtraAttack_StaminaCost",
-                    "MUL",
-                    "Flexible_Stamina",
-                    "ADD"
-                  ]
+                  "stamina": "%ExtraAttack_Catalyst_Stamina_Cost*%Sucrose_ExtraAttack_StaminaCost+%Flexible_Stamina",
+                  "logic": "GreaterOrEqual"
                 }
-              ],
-              "intID": "SkillID",
-              "ratio": 6.0
+              ]
             },
             {
               "$type": "SetAnimatorInt",
+              "intID": "SkillID",
+              "value": 1,
               "predicates": [
                 {
                   "$type": "ByLocalAvatarStamina",
-                  "logic": "Lesser",
-                  "stamina": [
-                    "ExtraAttack_Catalyst_Stamina_Cost",
-                    "Sucrose_ExtraAttack_StaminaCost",
-                    "MUL",
-                    "Flexible_Stamina",
-                    "ADD"
-                  ]
+                  "stamina": "%ExtraAttack_Catalyst_Stamina_Cost*%Sucrose_ExtraAttack_StaminaCost+%Flexible_Stamina", //留出服务器误差体力
+                  "logic": "Lesser"
                 }
-              ],
-              "intID": "SkillID",
-              "ratio": 1.0
+              ]
             },
             {
               "$type": "SetAnimatorBool",
-              "boolID": "IsCharging"
+              "boolID": "IsCharging",
+              "value": false
             }
+            /*            {
+							"$type": "ResetAnimatorTrigger",
+							"triggerID": "DoSkill",
+						},*/
           ],
           "chargeStateIDs": [
             "Attack01",
@@ -135,317 +140,278 @@
           "modifierName": "ExtraAttack_StaminaCost"
         }
       ],
-      "abilitySpecials": {
-        "Sucrose_ExtraAttack_StaminaCost": 1.0,
-        "ExtraAttack_Catalyst_Stamina_Cost": 0.0,
-        "Flexible_Stamina": -2.0
-      },
       "modifiers": {
         "ExtraAttack_StaminaCost": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          // "duration": 0.2,
           "onAdded": [
             {
               "$type": "AvatarSkillStart",
               "skillID": 10003,
-              "cdDelta": 1.0,
-              "costStaminaDelta": [
-                "Sucrose_ExtraAttack_StaminaCost",
-                "ExtraAttack_Catalyst_Stamina_Cost",
-                "MUL"
-              ]
+              "costStaminaRatio": "%Sucrose_ExtraAttack_StaminaCost*%ExtraAttack_Catalyst_Stamina_Cost"
             }
           ]
         }
+      },
+      "abilitySpecials": {
+        "Sucrose_ExtraAttack_StaminaCost": 1,
+        "ExtraAttack_Catalyst_Stamina_Cost": 0, //读表
+        "Flexible_Stamina": -2
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  NormalAttack01
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Sucrose_Attack01",
-      "abilitySpecials": {
-        "Sucrose_NormalAttack_01_Damage": 0.0
-      },
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Sucrose_Attack01_Handler",
+          "target": "SelfAttackTarget",
+          "predicates": [
+            {
+              "$type": "ByHasAttackTarget"
+            },
+            {
+              "$type": "ByEntityTypes",
+              "target": "SelfAttackTarget",
+              "entityTypes": ["EnvAnimal"],
+              "reject": true
+            }
+          ]
+        },
+        {
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Avatar_Girl_Catalyst_Sucrose_NormalAttack_01_Hit",
+          "born": {
+            "$type": "ConfigBornByTarget",
+            "offset": {
+              "x": 0.0,
+              "y": 1.3,
+              "z": 5.0
+            }
+          },
+          "predicates": [
+            {
+              "$type": "ByNot",
+              "predicates": [
+                {
+                  "$type": "ByHasAttackTarget"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "$type": "FireEffect",
+          "target": "SelfAttackTarget",
+          "effectPattern": "Eff_Avatar_Girl_Catalyst_Sucrose_NormalAttack_01_Hit",
+          "born": {
+            "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "RootNode"
+          },
+          "predicates": [
+            {
+              "$type": "ByHasAttackTarget"
+            },
+            {
+              "$type": "ByEntityTypes",
+              "target": "SelfAttackTarget",
+              "entityTypes": ["EnvAnimal"],
+              "reject": true
+            }
+          ]
+        }
+      ],
       "modifiers": {
         "Sucrose_Attack01_Handler": {
+          "duration": 0.3,
           "stacking": "Unique",
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "TriggerAttackEvent",
               "target": "Caster",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackSphere",
+                  "duration": 0.0,
                   "triggerType": "TriggerNoRepeat",
+                  "radius": 1.0,
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
-                    "attachPointName": "RootNode",
-                    "attachPointTargetType": "Self"
-                  },
-                  "DCMPFCIBIPA": 1.0
+                    "attachPointTargetType": "Self",
+                    "attachPointName": "RootNode"
+                  }
                 },
                 "attackInfo": {
                   "attackTag": "NormalAttack_01",
                   "attenuationTag": "NormalAttack",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "HBIOLEEGHPD": "Sucrose_NormalAttack_01_Damage",
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Wind",
-                    "bonusCriticalHurt": 25.0,
+                    "damagePercentage": "%Sucrose_NormalAttack_01_Damage",
                     "strikeType": "Default",
+                    "elementType": "Wind",
+                    "elementDurability": 25,
                     "enBreak": 5.5
                   },
                   "hitPattern": {
                     "onHitEffectName": "default",
                     "hitImpulseType": "LV1",
-                    "hitHaltTimeScale": 0.05000000074505806
-                  }
+                    "reboundRatio": 0,
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
+                    "muteHitText": false
+                  },
+                  "forceCameraShake": false
                 }
-              },
-              "targetType": "Enemy"
+              }
             }
           ]
         }
       },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "target": "SelfAttackTarget",
-          "predicates": [
-            {
-              "$type": "ByHasAttackTarget"
-            },
-            {
-              "$type": "ByEntityTypes",
-              "target": "SelfAttackTarget",
-              "entityTypes": ["EnvAnimal"],
-              "reject": true
-            }
-          ],
-          "modifierName": "Sucrose_Attack01_Handler"
-        },
-        {
-          "$type": "FireEffect",
-          "predicates": [
-            {
-              "$type": "ByNot",
-              "predicates": [
-                {
-                  "$type": "ByHasAttackTarget"
-                }
-              ]
-            }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Catalyst_Sucrose_NormalAttack_01_Hit",
-          "born": {
-            "$type": "ConfigBornByTarget",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 1.2999999523162842,
-              "PJCOKIGCJOK": 5.0
-            }
-          },
-          "EBHJMLOKDGB": -1.0
-        },
-        {
-          "$type": "FireEffect",
-          "target": "SelfAttackTarget",
-          "predicates": [
-            {
-              "$type": "ByHasAttackTarget"
-            },
-            {
-              "$type": "ByEntityTypes",
-              "target": "SelfAttackTarget",
-              "entityTypes": ["EnvAnimal"],
-              "reject": true
-            }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Catalyst_Sucrose_NormalAttack_01_Hit",
-          "born": {
-            "$type": "ConfigBornByAttachPoint",
-            "attachPointName": "RootNode"
-          },
-          "EBHJMLOKDGB": -1.0
-        }
-      ]
+      "abilitySpecials": {
+        "Sucrose_NormalAttack_01_Damage": 0
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  NormalAttack02
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Sucrose_Attack02",
-      "abilitySpecials": {
-        "Sucrose_NormalAttack_02_Damage": 0.0
-      },
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Sucrose_Attack02_Handler",
+          "target": "SelfAttackTarget",
+          "predicates": [
+            {
+              "$type": "ByHasAttackTarget"
+            },
+            {
+              "$type": "ByEntityTypes",
+              "target": "SelfAttackTarget",
+              "entityTypes": ["EnvAnimal"],
+              "reject": true
+            }
+          ]
+        },
+        {
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Avatar_Girl_Catalyst_Sucrose_NormalAttack_01_Hit",
+          "born": {
+            "$type": "ConfigBornByTarget",
+            "offset": {
+              "x": 0.0,
+              "y": 1.3,
+              "z": 5.0
+            }
+          },
+          "predicates": [
+            {
+              "$type": "ByNot",
+              "predicates": [
+                {
+                  "$type": "ByHasAttackTarget"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "$type": "FireEffect",
+          "target": "SelfAttackTarget",
+          "effectPattern": "Eff_Avatar_Girl_Catalyst_Sucrose_NormalAttack_01_Hit",
+          "born": {
+            "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "RootNode"
+          },
+          "predicates": [
+            {
+              "$type": "ByHasAttackTarget"
+            },
+            {
+              "$type": "ByEntityTypes",
+              "target": "SelfAttackTarget",
+              "entityTypes": ["EnvAnimal"],
+              "reject": true
+            }
+          ]
+        }
+      ],
       "modifiers": {
         "Sucrose_Attack02_Handler": {
+          "duration": 0.3,
           "stacking": "Unique",
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "TriggerAttackEvent",
               "target": "Caster",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackSphere",
+                  "duration": 0.0,
                   "triggerType": "TriggerNoRepeat",
+                  "radius": 1.0,
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
-                    "attachPointName": "RootNode",
-                    "attachPointTargetType": "Self"
-                  },
-                  "DCMPFCIBIPA": 1.0
+                    "attachPointTargetType": "Self",
+                    "attachPointName": "RootNode"
+                  }
                 },
                 "attackInfo": {
                   "attackTag": "NormalAttack_02",
                   "attenuationTag": "NormalAttack",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "HBIOLEEGHPD": "Sucrose_NormalAttack_02_Damage",
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Wind",
-                    "bonusCriticalHurt": 25.0,
+                    "damagePercentage": "%Sucrose_NormalAttack_02_Damage",
                     "strikeType": "Default",
-                    "enBreak": 7.699999809265137
+                    "elementType": "Wind",
+                    "elementDurability": 25,
+                    "enBreak": 7.7
                   },
                   "hitPattern": {
                     "onHitEffectName": "default",
                     "hitImpulseType": "LV1",
-                    "hitHaltTimeScale": 0.05000000074505806
-                  }
+                    "reboundRatio": 0,
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
+                    "muteHitText": false
+                  },
+                  "forceCameraShake": false
                 }
-              },
-              "targetType": "Enemy"
+              }
             }
           ]
         }
       },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "target": "SelfAttackTarget",
-          "predicates": [
-            {
-              "$type": "ByHasAttackTarget"
-            },
-            {
-              "$type": "ByEntityTypes",
-              "target": "SelfAttackTarget",
-              "entityTypes": ["EnvAnimal"],
-              "reject": true
-            }
-          ],
-          "modifierName": "Sucrose_Attack02_Handler"
-        },
-        {
-          "$type": "FireEffect",
-          "predicates": [
-            {
-              "$type": "ByNot",
-              "predicates": [
-                {
-                  "$type": "ByHasAttackTarget"
-                }
-              ]
-            }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Catalyst_Sucrose_NormalAttack_01_Hit",
-          "born": {
-            "$type": "ConfigBornByTarget",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 1.2999999523162842,
-              "PJCOKIGCJOK": 5.0
-            }
-          },
-          "EBHJMLOKDGB": -1.0
-        },
-        {
-          "$type": "FireEffect",
-          "target": "SelfAttackTarget",
-          "predicates": [
-            {
-              "$type": "ByHasAttackTarget"
-            },
-            {
-              "$type": "ByEntityTypes",
-              "target": "SelfAttackTarget",
-              "entityTypes": ["EnvAnimal"],
-              "reject": true
-            }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Catalyst_Sucrose_NormalAttack_01_Hit",
-          "born": {
-            "$type": "ConfigBornByAttachPoint",
-            "attachPointName": "RootNode"
-          },
-          "EBHJMLOKDGB": -1.0
-        }
-      ]
+      "abilitySpecials": {
+        "Sucrose_NormalAttack_02_Damage": 0
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  NormalAttack03
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Sucrose_Attack03",
-      "abilitySpecials": {
-        "Sucrose_NormalAttack_03_Damage": 0.0
-      },
-      "modifiers": {
-        "Sucrose_Attack03_Handler": {
-          "stacking": "Unique",
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "TriggerAttackEvent",
-              "target": "Caster",
-              "attackEvent": {
-                "attackPattern": {
-                  "$type": "ConfigAttackSphere",
-                  "triggerType": "TriggerNoRepeat",
-                  "born": {
-                    "$type": "ConfigBornByAttachPoint",
-                    "attachPointName": "RootNode",
-                    "attachPointTargetType": "Self"
-                  },
-                  "DCMPFCIBIPA": 1.0
-                },
-                "attackInfo": {
-                  "attackTag": "NormalAttack_03",
-                  "attenuationTag": "NormalAttack",
-                  "attenuationGroup": "default",
-                  "attackProperty": {
-                    "HBIOLEEGHPD": "Sucrose_NormalAttack_03_Damage",
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Wind",
-                    "bonusCriticalHurt": 25.0,
-                    "strikeType": "Default",
-                    "enBreak": 8.75
-                  },
-                  "hitPattern": {
-                    "onHitEffectName": "default",
-                    "hitImpulseType": "LV1"
-                  }
-                }
-              },
-              "targetType": "Enemy"
-            }
-          ]
-        }
-      },
       "onAbilityStart": [
         {
           "$type": "ApplyModifier",
+          "modifierName": "Sucrose_Attack03_Handler",
           "target": "SelfAttackTarget",
           "predicates": [
             {
@@ -457,11 +423,19 @@
               "entityTypes": ["EnvAnimal"],
               "reject": true
             }
-          ],
-          "modifierName": "Sucrose_Attack03_Handler"
+          ]
         },
         {
           "$type": "FireEffect",
+          "effectPattern": "Eff_Avatar_Girl_Catalyst_Sucrose_NormalAttack_01_Hit",
+          "born": {
+            "$type": "ConfigBornByTarget",
+            "offset": {
+              "x": 0.0,
+              "y": 1.3,
+              "z": 5.0
+            }
+          },
           "predicates": [
             {
               "$type": "ByNot",
@@ -471,21 +445,16 @@
                 }
               ]
             }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Catalyst_Sucrose_NormalAttack_01_Hit",
-          "born": {
-            "$type": "ConfigBornByTarget",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 1.2999999523162842,
-              "PJCOKIGCJOK": 5.0
-            }
-          },
-          "EBHJMLOKDGB": -1.0
+          ]
         },
         {
           "$type": "FireEffect",
           "target": "SelfAttackTarget",
+          "effectPattern": "Eff_Avatar_Girl_Catalyst_Sucrose_NormalAttack_01_Hit",
+          "born": {
+            "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "RootNode"
+          },
           "predicates": [
             {
               "$type": "ByHasAttackTarget"
@@ -496,50 +465,123 @@
               "entityTypes": ["EnvAnimal"],
               "reject": true
             }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Catalyst_Sucrose_NormalAttack_01_Hit",
-          "born": {
-            "$type": "ConfigBornByAttachPoint",
-            "attachPointName": "RootNode"
-          },
-          "EBHJMLOKDGB": -1.0
+          ]
         }
-      ]
+      ],
+      "modifiers": {
+        "Sucrose_Attack03_Handler": {
+          "duration": 0.1,
+          "stacking": "Unique",
+          "onAdded": [
+            {
+              "$type": "TriggerAttackEvent",
+              "target": "Caster",
+              "targetType": "Enemy",
+              "attackEvent": {
+                "attackPattern": {
+                  "$type": "ConfigAttackSphere",
+                  "triggerType": "TriggerNoRepeat",
+                  "duration": 0.0,
+                  "radius": 1.0,
+                  "born": {
+                    "$type": "ConfigBornByAttachPoint",
+                    "attachPointTargetType": "Self",
+                    "attachPointName": "RootNode"
+                  }
+                },
+                "attackInfo": {
+                  "attackTag": "NormalAttack_03",
+                  "attenuationTag": "NormalAttack",
+                  "attackProperty": {
+                    "damagePercentage": "%Sucrose_NormalAttack_03_Damage",
+                    "strikeType": "Default",
+                    "elementType": "Wind",
+                    "elementDurability": 25,
+                    "enBreak": 8.75
+                  },
+                  "hitPattern": {
+                    "onHitEffectName": "default",
+                    "hitImpulseType": "LV1",
+                    "reboundRatio": 0,
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.0,
+                    "muteHitText": false
+                  },
+                  "forceCameraShake": false
+                }
+              }
+            }
+          ]
+        }
+      },
+      "abilitySpecials": {
+        "Sucrose_NormalAttack_03_Damage": 0
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  NormalAttack04
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Sucrose_Attack04_Pre",
       "onAbilityStart": [
         {
-          "$type": "KillGadget",
+          "$type": "KillGadget", //第四击物件生命周期需要保证，手动清除一下。
           "gadgetInfo": {
-            "configID": 41043001
+            "$type": "SelectTargetsByChildren",
+            "configID": 41043001,
+            "sortType": "Default"
           }
         },
         {
           "$type": "CreateGadget",
+          "gadgetID": 41043001,
           "target": "SelfAttackTarget",
+          "campID": 1001,
+          "campTargetType": "Enemy",
+          // "born":
+          // {
+          // 	"$type": "ConfigBornByTarget",
+          // 	"offset" :
+          // 	{
+          // 		"x": 0.0,
+          // 		"y": 0.8,
+          // 		"z": 0.0,
+          // 	},
+          // },
+          "born": {
+            "$type": "ConfigBornBySelectedPoint",
+            "offset": {
+              "x": 0.0,
+              "y": 0.8,
+              "z": 0.0
+            }
+          },
           "predicates": [
             {
               "$type": "ByHasAttackTarget"
             }
-          ],
-          "born": {
-            "$type": "ConfigBornBySelectedPoint",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.800000011920929,
-              "PJCOKIGCJOK": 0.0
-            }
-          },
-          "gadgetID": 41043001,
-          "campID": 1001,
-          "campTargetType": "Enemy"
+          ]
         },
         {
           "$type": "CreateGadget",
+          "gadgetID": 41043001,
+          "target": "Self",
+          "campID": 1001,
+          "campTargetType": "Enemy",
+          "born": {
+            "$type": "ConfigBornByTarget",
+            "offset": {
+              "x": 0.0,
+              "y": 1.3,
+              "z": 5.0
+            },
+            "onGround": true
+          },
           "predicates": [
             {
               "$type": "ByNot",
@@ -549,19 +591,7 @@
                 }
               ]
             }
-          ],
-          "born": {
-            "$type": "ConfigBornByTarget",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 1.2999999523162842,
-              "PJCOKIGCJOK": 5.0
-            },
-            "onGround": true
-          },
-          "gadgetID": 41043001,
-          "campID": 1001,
-          "campTargetType": "Enemy"
+          ]
         }
       ]
     }
@@ -570,94 +600,166 @@
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Sucrose_Attack04_Gadget",
-      "abilitySpecials": {
-        "Sucrose_NormalAttack_04_Damage": 0.0
-      },
-      "onAdded": [
-        {
-          "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Catalyst_Sucrose_NormalAttack_02_Hit_Pre",
-          "EBHJMLOKDGB": -1.0
-        }
-      ],
       "onAbilityStart": [
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Catalyst_Sucrose_NormalAttack_02_Hit",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_Avatar_Girl_Catalyst_Sucrose_NormalAttack_02_Hit"
         },
         {
           "$type": "TriggerAttackEvent",
           "target": "OriginOwner",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "duration": 0.0,
+              "radius": 2.0,
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 }
-              },
-              "DCMPFCIBIPA": 2.0
+              }
             },
             "attackInfo": {
               "attackTag": "NormalAttack_04",
               "attenuationTag": "NormalAttack",
-              "attenuationGroup": "default",
               "attackProperty": {
-                "HBIOLEEGHPD": "Sucrose_NormalAttack_04_Damage",
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Wind",
-                "bonusCriticalHurt": 25.0,
+                "damagePercentage": "%Sucrose_NormalAttack_04_Damage",
                 "strikeType": "Default",
-                "enBreak": 16.899999618530273
+                "elementType": "Wind",
+                "elementDurability": 25,
+                "enBreak": 16.9
               },
               "hitPattern": {
                 "onHitEffectName": "default",
-                "hitImpulseType": "LV1"
-              }
+                "hitImpulseType": "LV1",
+                "reboundRatio": 0,
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.0,
+                "muteHitText": false
+              },
+              "forceCameraShake": false
             }
-          },
-          "targetType": "Enemy"
+          }
         }
-      ]
+      ],
+      "onAdded": [
+        {
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Avatar_Girl_Catalyst_Sucrose_NormalAttack_02_Hit_Pre"
+        }
+      ],
+      "abilitySpecials": {
+        "Sucrose_NormalAttack_04_Damage": 0
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Sucrose_Attack04",
-      "abilitySpecials": {
-        "Sucrose_NormalAttack_04_Damage": 0.0
-      },
       "onAbilityStart": [
         {
           "$type": "TriggerAbility",
+          "abilityName": "Avatar_Sucrose_Attack04_Gadget",
           "otherTargets": {
             "$type": "SelectTargetsByChildren",
             "configID": 41043001
-          },
-          "abilityName": "Avatar_Sucrose_Attack04_Gadget"
+          }
         }
-      ]
+      ],
+      "modifiers": {},
+      "abilitySpecials": {
+        "Sucrose_NormalAttack_04_Damage": 0
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  WindBlackHole
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Sucrose_WindBlackHole",
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": true,
+          "modifierName": "WindBlackHole_Gadget_ReviveEnergy_Detect",
+          "target": "Self"
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "AvatarSkillStart",
+          "skillID": 10432,
+          "doOffStage": true
+        },
+        {
+          "$type": "CreateGadget",
+          "gadgetID": 41043002,
+          "target": "SelfAttackTarget",
+          "campID": 1001,
+          "campTargetType": "Enemy",
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "offset": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 5.0
+            },
+            "onGround": true
+          },
+          "predicates": [
+            {
+              "$type": "ByHasAttackTarget"
+            }
+          ]
+        },
+        {
+          "$type": "CreateGadget",
+          "gadgetID": 41043002,
+          "campID": 1001,
+          "campTargetType": "Enemy",
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "offset": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 5.0
+            },
+            "onGround": true
+          },
+          "predicates": [
+            {
+              "$type": "ByNot",
+              "predicates": [
+                {
+                  "$type": "ByHasAttackTarget"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "WindBlackHole_Gadget_Reject_Push",
+          "target": "AllPlayerAvatars"
+        }
+      ],
       "modifiers": {
         "WindBlackHole_Gadget_ReviveEnergy_Detect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Target",
-              "RotationDampTime": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
                   "$type": "ByAttackTags",
@@ -670,48 +772,46 @@
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
                   "$type": "ApplyModifier",
-                  "RotationDampTime": true,
-                  "modifierName": "UNIQUE_WindBlackHole_Gadget_ReviveEnergy_Detect_Hanlder"
+                  "modifierName": "UNIQUE_WindBlackHole_Gadget_ReviveEnergy_Detect_Hanlder",
+                  "target": "Self",
+                  "doOffStage": true
                 }
               ]
             }
           ]
         },
         "UNIQUE_WindBlackHole_Gadget_ReviveEnergy_Detect_Hanlder": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": 0.4000000059604645,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
+          "duration": 0.4,
           "onAdded": [
             {
               "$type": "GenerateElemBall",
-              "RotationDampTime": true,
               "configID": 2021,
+              "baseEnergy": 12,
+              "ratio": 1,
+              "doOffStage": true,
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 5.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 5.0
                 }
-              },
-              "IAAIJMOECLB": 1.0,
-              "baseEnergy": 12.0
+              }
             }
           ]
         },
+        //得想办法在打击之前将范围内的队友都加上不会被hit的效果。包括吸引的时候，包括hit的时候。
         "WindBlackHole_Gadget_Reject_Push": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 2.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 2,
           "modifierMixins": [
             {
               "$type": "RejectAttackMixin",
@@ -719,110 +819,148 @@
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "RotationDampTime": true,
-          "modifierName": "WindBlackHole_Gadget_ReviveEnergy_Detect"
-        }
-      ],
-      "onAbilityStart": [
-        {
-          "$type": "AvatarSkillStart",
-          "RotationDampTime": true,
-          "skillID": 10432,
-          "cdDelta": 1.0,
-          "costStaminaDelta": 1.0
-        },
-        {
-          "$type": "CreateGadget",
-          "target": "SelfAttackTarget",
-          "predicates": [
-            {
-              "$type": "ByHasAttackTarget"
-            }
-          ],
-          "born": {
-            "$type": "ConfigBornBySelf",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 5.0
-            },
-            "onGround": true
-          },
-          "gadgetID": 41043002,
-          "campID": 1001,
-          "campTargetType": "Enemy"
-        },
-        {
-          "$type": "CreateGadget",
-          "predicates": [
-            {
-              "$type": "ByNot",
-              "predicates": [
-                {
-                  "$type": "ByHasAttackTarget"
-                }
-              ]
-            }
-          ],
-          "born": {
-            "$type": "ConfigBornBySelf",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 5.0
-            },
-            "onGround": true
-          },
-          "gadgetID": 41043002,
-          "campID": 1001,
-          "campTargetType": "Enemy"
-        },
-        {
-          "$type": "ApplyModifier",
-          "target": "AllPlayerAvatars",
-          "modifierName": "WindBlackHole_Gadget_Reject_Push"
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  WindBlackHole Gadget
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Sucrose_WindBlackHole_Gadget",
-      "abilitySpecials": {
-        "WindBlackHole_Gadget_Damage": 0.0
-      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "WindBlackHole_Gadget_Pre",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "WindBlackHole_Gadget_Pre": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.47999998927116394,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.48,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Catalyst_Sucrose_WindBlackHole_Pre",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Sucrose_WindBlackHole_Pre"
             }
           ],
           "onRemoved": [
             {
               "$type": "ApplyModifier",
-              "modifierName": "WindBlackHole_Gadget_Handler"
+              "modifierName": "WindBlackHole_Gadget_Handler",
+              "target": "Self"
             }
           ]
         },
         "WindBlackHole_Gadget_Handler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
-              "modifierName": "WindBlackHole_Gadget_WindZone"
+              "modifierName": "WindBlackHole_Gadget_WindZone",
+              "target": "Self"
             },
+            // {
+            // 	"$type" : "TriggerAttackEvent",
+            // 	"target" : "OriginOwner",
+            // 	"targetType" : "Enemy",
+            // 	"attackEvent":
+            // 	{
+            // 		"attackPattern":
+            // 		{
+            // 			"$type": "ConfigAttackCircle",
+            // 			"triggerType": "TriggerNoRepeat",
+            // 			"fanAngle": 360.0,
+            // 			"height": 6,
+            // 			"radius": 6,
+            // 			"born":
+            // 			{
+            // 				"$type": "ConfigBornBySelf",
+            // 				"offset":
+            // 				{
+            // 					"x" : 0.0,
+            // 					"y" : -3.0,
+            // 					"z" : 0.0,
+            // 				},
+            // 			},
+            // 		},
+            // 		"attackInfo":
+            // 		{
+            // 			"attackTag" : "Elemental_Art",
+            // 			"attackProperty":
+            // 			{
+            // 				"damagePercentage": "%WindBlackHole_Gadget_Damage",
+            // 				"elementType": "Wind",
+            // 				"elementDurability": 25,
+            // 				"strikeType": "Default",
+            // 				"enBreak": 150,
+            // 			},
+            // 			"hitPattern":
+            // 			{
+            // 				"onHitEffectName": "default",
+            // 				"hitImpulseType":"LV7",
+            // 				"reboundRatio": 0,
+            // 				"retreatType": "ByHitDirectionInverse",
+            // 				"canBeDefenceHalt": false,
+            // 				"hitHaltTime": 0.0,
+            // 				"hitHaltTimeScale": 0.05,
+            // 				"muteHitText": false,
+            // 			},
+            // 		}
+            // 	},
+            // },
+            // {
+            // 	"$type" : "TriggerAttackEvent",
+            // 	"target" : "OriginOwner",
+            // 	"targetType" : "Alliance",
+            // 	"attackEvent":
+            // 	{
+            // 		"attackPattern":
+            // 		{
+            // 			"$type": "ConfigAttackCircle",
+            // 			"triggerType": "TriggerNoRepeat",
+            // 			"fanAngle": 360.0,
+            // 			"height": 6,
+            // 			"radius": 6,
+            // 			"born":
+            // 			{
+            // 				"$type": "ConfigBornBySelf",
+            // 				"offset":
+            // 				{
+            // 					"x" : 0.0,
+            // 					"y" : -3.0,
+            // 					"z" : 0.0,
+            // 				},
+            // 			},
+            // 		},
+            // 		"attackInfo":
+            // 		{
+            // 			"attackTag" : "Sucrose_WindBlackHole",
+            // 			"canBeModifiedBy": "OriginOwner",
+            // 			"attackProperty":
+            // 			{
+            // 				"damagePercentage": 0,
+            // 				"elementType": "Wind",
+            // 				"elementDurability": 50,
+            // 				"strikeType": "Default",
+            // 				"enBreak": 110,
+            // 			},
+            // 			"hitPattern":
+            // 			{
+            // 				"onHitEffectName": "default",
+            // 				"hitImpulseType":"LV7",
+            // 				"reboundRatio": 0,
+            // 				"retreatType": "ByHitDirectionInverse",
+            // 				"canBeDefenceHalt": false,
+            // 				"hitHaltTime": 0.0,
+            // 				"hitHaltTimeScale": 0.05,
+            // 				"muteHitText": false,
+            // 			},
+            // 		}
+            // 	},
+            // },
             {
               "$type": "TriggerAttackTargetMapEvent",
               "target": "OriginOwner",
@@ -830,56 +968,59 @@
                 "attackPattern": {
                   "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
+                  "fanAngle": 360.0,
+                  "height": 6,
+                  "radius": 6,
                   "born": {
                     "$type": "ConfigBornBySelf",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": -3.0,
-                      "PJCOKIGCJOK": 0.0
+                      "x": 0.0,
+                      "y": -3.0,
+                      "z": 0.0
                     }
-                  },
-                  "height": 6.0,
-                  "DCMPFCIBIPA": 6.0
+                  }
                 },
                 "attackInfoMap": {
                   "Enemy": {
                     "attackTag": "Elemental_Art",
-                    "attenuationTag": "",
-                    "attenuationGroup": "default",
                     "attackProperty": {
-                      "HBIOLEEGHPD": "WindBlackHole_Gadget_Damage",
-                      "CCNJGLPMIEP": 0.0,
+                      "damagePercentage": "%WindBlackHole_Gadget_Damage",
                       "elementType": "Wind",
-                      "bonusCriticalHurt": 25.0,
+                      "elementDurability": 25,
                       "strikeType": "Default",
-                      "enBreak": 150.0
+                      "enBreak": 150
                     },
                     "hitPattern": {
                       "onHitEffectName": "default",
                       "hitImpulseType": "LV7",
+                      "reboundRatio": 0,
                       "retreatType": "ByHitDirectionInverse",
-                      "hitHaltTimeScale": 0.05000000074505806
+                      "canBeDefenceHalt": false,
+                      "hitHaltTime": 0.0,
+                      "hitHaltTimeScale": 0.05,
+                      "muteHitText": false
                     }
                   },
                   "Alliance": {
                     "attackTag": "Sucrose_WindBlackHole",
-                    "attenuationTag": "",
-                    "attenuationGroup": "default",
+                    "canBeModifiedBy": "OriginOwner",
                     "attackProperty": {
-                      "HBIOLEEGHPD": 0.0,
-                      "CCNJGLPMIEP": 0.0,
+                      "damagePercentage": 0,
                       "elementType": "Wind",
-                      "bonusCriticalHurt": 50.0,
+                      "elementDurability": 50,
                       "strikeType": "Default",
-                      "enBreak": 110.0
+                      "enBreak": 110
                     },
                     "hitPattern": {
                       "onHitEffectName": "default",
                       "hitImpulseType": "LV7",
+                      "reboundRatio": 0,
                       "retreatType": "ByHitDirectionInverse",
-                      "hitHaltTimeScale": 0.05000000074505806
-                    },
-                    "canBeModifiedBy": "OriginOwner"
+                      "canBeDefenceHalt": false,
+                      "hitHaltTime": 0.0,
+                      "hitHaltTimeScale": 0.05,
+                      "muteHitText": false
+                    }
                   }
                 }
               }
@@ -887,24 +1028,22 @@
           ]
         },
         "WindBlackHole_Gadget_WindZone": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.3,
           "modifierMixins": [
             {
               "$type": "WindZoneMixin",
               "shapeName": "CircleR6",
+              "innerRadius": 1.0,
+              "strength": 4,
+              "attenuation": 2,
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 1.0,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": 1.0,
+                  "z": 0.0
                 }
               },
-              "LFMBDMGKEFB": 4.0,
-              "innerRadius": 2.0,
-              "radius": 1.0,
               "targetType": "All",
               "predicates": [
                 {
@@ -912,20 +1051,21 @@
                   "entityTypes": ["Avatar"],
                   "reject": true
                 }
-              ],
-              "modifierName": ""
+              ]
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "WindBlackHole_Gadget_Pre"
-        }
-      ]
+      "abilitySpecials": {
+        "WindBlackHole_Gadget_Damage": 0
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  DemiHurricane
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -945,7 +1085,8 @@
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "Sucrose_DemiHurricane",
           "modifierName": "Sucrose_DemiHurricane_Flusk_Material",
-          "normalizeEnd": 0.41200000047683716
+          "normalizeStart": 0,
+          "normalizeEnd": 0.412
         },
         {
           "$type": "AttachToStateIDMixin",
@@ -953,15 +1094,32 @@
           "modifierName": "Sucrose_DemiHurricane_WeaponFade"
         }
       ],
+      "onAbilityStart": [
+        {
+          "$type": "AvatarSkillStart",
+          "skillID": 10435,
+          "doOffStage": true
+        },
+        {
+          "$type": "TriggerBullet",
+          "bulletID": 41043005,
+          "campID": 1001,
+          "campTargetType": "Enemy",
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "offset": {
+              "x": 0.02,
+              "y": 1.237,
+              "z": 0.5
+            }
+          }
+        }
+      ],
       "modifiers": {
         "Elemental_Burst_Invincible": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "Invincible"
         },
         "Elemental_Burst_IsGhostToEnemy": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachAbilityStateResistance",
@@ -970,71 +1128,86 @@
           ]
         },
         "Sucrose_DemiHurricane_Flusk_Material": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Flusk",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Flusk"
             }
           ]
         },
         "Sucrose_DemiHurricane_WeaponFade": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "TriggerHideWeapon",
-              "RotationDampTime": true,
+              "doOffStage": true,
+              "visible": false,
               "partNames": ["equip02", "sheathPoint"]
             }
           ],
           "onRemoved": [
             {
               "$type": "TriggerHideWeapon",
-              "RotationDampTime": true,
+              "doOffStage": true,
               "visible": true,
               "partNames": ["equip02", "sheathPoint"]
             }
           ]
         }
       },
-      "onAbilityStart": [
-        {
-          "$type": "AvatarSkillStart",
-          "RotationDampTime": true,
-          "skillID": 10435,
-          "cdDelta": 1.0,
-          "costStaminaDelta": 1.0
-        },
-        {
-          "$type": "TriggerBullet",
-          "bulletID": 41043005,
-          "born": {
-            "$type": "ConfigBornBySelf",
-            "offset": {
-              "IBKBLDAJIMA": 0.019999999552965164,
-              "LKHJADIPBFL": 1.2369999885559082,
-              "PJCOKIGCJOK": 0.5
-            }
-          }
-        }
-      ]
+      "abilitySpecials": {}
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  DemiHurricane Flusk
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Sucrose_DemiHurricane_Flusk",
+      "onAbilityStart": [
+        {
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Start"
+        },
+        {
+          "$type": "CreateGadget",
+          "gadgetID": 41043003,
+          "campID": 1001,
+          "campTargetType": "Enemy",
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "offset": {
+              "x": 0.0,
+              "y": 1.2,
+              "z": 0.0
+            }
+            /*						{
+							"$type": "ConfigDirectionByWorld",
+							"eularAngles":
+							{
+								"x": 0,
+								"y": 0,
+								"z": 0,
+							},
+						},*/
+          }
+        }
+      ],
+      "onAdded": [
+        {
+          "$type": "AttachEffect",
+          "effectPattern": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Flusk_Bullet"
+        }
+      ],
       "modifiers": {
         "DemiHurricane_Flusk_Trigger": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1.0,
           "onAdded": [
             {
-              "$type": "EnableBulletCollisionPluginTrigger"
+              "$type": "EnableBulletCollisionPluginTrigger",
+              "setEnable": false
             }
           ],
           "onRemoved": [
@@ -1044,49 +1217,35 @@
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Flusk_Bullet",
-          "EBHJMLOKDGB": -1.0
-        }
-      ],
-      "onAbilityStart": [
-        {
-          "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Start",
-          "EBHJMLOKDGB": -1.0
-        },
-        {
-          "$type": "CreateGadget",
-          "born": {
-            "$type": "ConfigBornBySelf",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 1.2000000476837158,
-              "PJCOKIGCJOK": 0.0
-            }
-          },
-          "gadgetID": 41043003,
-          "campID": 1001,
-          "campTargetType": "Enemy"
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  DemiHurricane Gadget
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Sucrose_DemiHurricane_Gadget",
-      "abilitySpecials": {
-        "Sucrose_DemiHurricane_Gadget_LifeTimeBonus": 0.0
-      },
+      "onAdded": [
+        {
+          "$type": "AttachEffect",
+          "effectPattern": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Main"
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "DemiHurricane_WindZone"
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "DemiHurricane_Damage_Delay"
+        }
+      ],
       "modifiers": {
         "DemiHurricane_Damage_Delay": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.800000011920929,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.8,
           "onRemoved": [
             {
               "$type": "ApplyModifier",
@@ -1095,31 +1254,29 @@
           ]
         },
         "DemiHurricane_WindZone": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 12.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 12,
           "modifierMixins": [
             {
               "$type": "WindZoneMixin",
               "shapeName": "CircleR15",
+              "strength": 4,
+              "attenuation": 2,
+              "innerRadius": 3.0,
               "born": {
                 "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "RootNode",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": -0.5,
-                  "PJCOKIGCJOK": 0.0
-                },
-                "attachPointName": "RootNode"
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 0.0
+                }
               },
-              "LFMBDMGKEFB": 4.0,
-              "innerRadius": 2.0,
-              "radius": 3.0,
               "targetType": "All",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_DemiHurricane_BeHit",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 },
                 {
@@ -1128,45 +1285,43 @@
                   "reject": true
                 },
                 {
-                  "$type": "ByTargetWeight",
-                  "logic": "LesserOrEqual",
-                  "weight": 100.0
+                  "$type": "ByTargetWeight", //WindZoneLevel = 1
+                  "logic": "LesserOrEqual", //WindZoneLevel = 1
+                  "weight": 100.0 //WindZoneLevel = 1
                 }
-              ],
-              "modifierName": ""
+              ]
             }
           ]
         },
         "DemiHurricane_Damage": {
-          "modifierName": "",
-          "HCJLIGBLGJA": [
-            4.599999904632568,
-            "Sucrose_DemiHurricane_Gadget_LifeTimeBonus",
-            "ADD"
-          ],
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 2.0,
+          "duration": "4.6+%Sucrose_DemiHurricane_Gadget_LifeTimeBonus",
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "Strike",
-              "attachPoint": "",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Main"
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Main"
             },
             {
               "$type": "ApplyModifier",
               "modifierName": "DemiHurricane_Damage_Trigger_Delay"
             }
           ],
-          "onRemoved": [
+          "thinkInterval": 2.0,
+          "onThinkInterval": [
             {
-              "$type": "TriggerAbility",
-              "abilityName": "Avatar_Sucrose_DemiHurricane_Dissipate"
+              "$type": "SendEffectTrigger",
+              "parameter": "Strike",
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Main"
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "DemiHurricane_Damage_Trigger_Delay"
             }
           ],
           "onAttackLanded": [
             {
               "$type": "AttachModifier",
+              "modifierName": "DemiHurricane_Drag",
               "target": "Target",
               "predicates": [
                 {
@@ -1180,375 +1335,362 @@
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "ByTargetWeight",
-                  "logic": "LesserOrEqual",
-                  "weight": 100.0
+                  "$type": "ByTargetWeight", //WindZoneLevel = 1
+                  "logic": "LesserOrEqual", //WindZoneLevel = 1
+                  "weight": 100.0 //WindZoneLevel = 1
                 }
-              ],
-              "modifierName": "DemiHurricane_Drag"
+              ]
             }
           ],
-          "onThinkInterval": [
+          "onRemoved": [
             {
-              "$type": "SendEffectTrigger",
-              "parameter": "Strike",
-              "attachPoint": "",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Main"
-            },
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "DemiHurricane_Damage_Trigger_Delay"
+              "$type": "TriggerAbility",
+              "target": "Self",
+              "abilityName": "Avatar_Sucrose_DemiHurricane_Dissipate"
             }
           ]
         },
         "DemiHurricane_Damage_Trigger_Delay": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.4000000059604645,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.4,
           "onRemoved": [
             {
               "$type": "TriggerAbility",
+              "target": "Self",
               "abilityName": "Avatar_Sucrose_DemiHurricane_Damage"
             }
           ]
         },
         "DemiHurricane_Drag": {
+          "duration": 1.0,
           "stacking": "Unique",
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
               "key": "_ABILITY_DemiHurricane_BeHit",
+              "value": 1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 1.0
+              "maxValue": 1,
+              "minValue": 1
             }
           ],
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "ratio": -1.0,
               "key": "_ABILITY_DemiHurricane_BeHit",
+              "value": -1,
               "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "maxValue": 0,
+              "minValue": 0
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Main",
-          "EBHJMLOKDGB": -1.0
-        },
-        {
-          "$type": "AttachModifier",
-          "modifierName": "DemiHurricane_WindZone"
-        },
-        {
-          "$type": "AttachModifier",
-          "modifierName": "DemiHurricane_Damage_Delay"
-        }
-      ]
+      "abilitySpecials": {
+        "Sucrose_DemiHurricane_Gadget_LifeTimeBonus": 0
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  DemiHurricane Damage
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Sucrose_DemiHurricane_Damage",
-      "abilitySpecials": {
-        "Sucrose_DemiHurricane_Gadget_Damage": 0.0,
-        "Sucrose_DemiHurricane_Gadget_Mix_Damage": 0.0
-      },
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
+              "height": 5.0,
+              "fanAngle": 360.0,
+              "radius": 8.0,
               "massiveAttackRatio": 0.5,
+              "detectDirection": "Clockwise",
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": -2.5,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": -2.5,
+                  "z": 0.0
                 }
-              },
-              "height": 5.0,
-              "DCMPFCIBIPA": 8.0,
-              "detectDirection": "Clockwise"
+              }
             },
             "attackInfo": {
+              "canBeModifiedBy": "OriginOwner",
               "attackTag": "Elemental_Burst",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
               "attackProperty": {
-                "HBIOLEEGHPD": "Sucrose_DemiHurricane_Gadget_Damage",
-                "CCNJGLPMIEP": 0.0,
+                "damagePercentage": "%Sucrose_DemiHurricane_Gadget_Damage",
                 "elementType": "Wind",
-                "bonusCriticalHurt": 25.0,
-                "enBreak": 150.0
+                "elementDurability": 25,
+                "enBreak": 150
               },
               "hitPattern": {
-                "onHitEffectName": "default",
                 "hitImpulseType": "LV7",
-                "hitHaltTimeScale": 0.05000000074505806
+                "reboundRatio": 0,
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.05,
+                "muteHitText": false
               },
-              "cameraShake": {},
-              "canBeModifiedBy": "OriginOwner"
+              "forceCameraShake": false,
+              "cameraShake": {}
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "TriggerAttackEvent",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "target": "Self",
-              "key": "_ABILITY_Hurricane_IsMixed_Fire",
-              "ratio": 1.0
-            }
-          ],
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
+              "height": 5.0,
+              "fanAngle": 360.0,
+              "radius": 8.0,
               "massiveAttackRatio": 0.5,
+              "detectDirection": "Clockwise",
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": -2.5,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": -2.5,
+                  "z": 0.0
                 }
-              },
-              "height": 5.0,
-              "DCMPFCIBIPA": 8.0,
-              "detectDirection": "Clockwise"
+              }
             },
             "attackInfo": {
+              "canBeModifiedBy": "OriginOwner",
               "attackTag": "Elemental_Burst",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
               "attackProperty": {
-                "HBIOLEEGHPD": "Sucrose_DemiHurricane_Gadget_Mix_Damage",
-                "CCNJGLPMIEP": 0.0,
+                "damagePercentage": "%Sucrose_DemiHurricane_Gadget_Mix_Damage",
                 "elementType": "Fire",
-                "bonusCriticalHurt": 25.0,
-                "enBreak": 0.0
-              },
-              "canBeModifiedBy": "OriginOwner"
+                "elementDurability": 25,
+                "enBreak": 0
+              }
             }
           },
-          "targetType": "Enemy"
-        },
-        {
-          "$type": "TriggerAttackEvent",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
+              "key": "_ABILITY_Hurricane_IsMixed_Fire",
               "target": "Self",
-              "key": "_ABILITY_Hurricane_IsMixed_Water",
-              "ratio": 1.0
+              "value": 1,
+              "compareType": "Equal"
             }
-          ],
+          ]
+        },
+        {
+          "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
+              "height": 5.0,
+              "fanAngle": 360.0,
+              "radius": 8.0,
               "massiveAttackRatio": 0.5,
+              "detectDirection": "Clockwise",
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": -2.5,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": -2.5,
+                  "z": 0.0
                 }
-              },
-              "height": 5.0,
-              "DCMPFCIBIPA": 8.0,
-              "detectDirection": "Clockwise"
+              }
             },
             "attackInfo": {
+              "canBeModifiedBy": "OriginOwner",
               "attackTag": "Elemental_Burst",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
               "attackProperty": {
-                "HBIOLEEGHPD": "Sucrose_DemiHurricane_Gadget_Mix_Damage",
-                "CCNJGLPMIEP": 0.0,
+                "damagePercentage": "%Sucrose_DemiHurricane_Gadget_Mix_Damage",
                 "elementType": "Water",
-                "bonusCriticalHurt": 25.0,
-                "enBreak": 0.0
-              },
-              "canBeModifiedBy": "OriginOwner"
+                "elementDurability": 25,
+                "enBreak": 0
+              }
             }
           },
-          "targetType": "Enemy"
-        },
-        {
-          "$type": "TriggerAttackEvent",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
+              "key": "_ABILITY_Hurricane_IsMixed_Water",
               "target": "Self",
-              "key": "_ABILITY_Hurricane_IsMixed_Electric",
-              "ratio": 1.0
+              "value": 1,
+              "compareType": "Equal"
             }
-          ],
+          ]
+        },
+        {
+          "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
+              "height": 5.0,
+              "fanAngle": 360.0,
+              "radius": 8.0,
               "massiveAttackRatio": 0.5,
+              "detectDirection": "Clockwise",
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": -2.5,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": -2.5,
+                  "z": 0.0
                 }
-              },
-              "height": 5.0,
-              "DCMPFCIBIPA": 8.0,
-              "detectDirection": "Clockwise"
+              }
             },
             "attackInfo": {
+              "canBeModifiedBy": "OriginOwner",
               "attackTag": "Elemental_Burst",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
               "attackProperty": {
-                "HBIOLEEGHPD": "Sucrose_DemiHurricane_Gadget_Mix_Damage",
-                "CCNJGLPMIEP": 0.0,
+                "damagePercentage": "%Sucrose_DemiHurricane_Gadget_Mix_Damage",
                 "elementType": "Electric",
-                "bonusCriticalHurt": 25.0,
-                "enBreak": 0.0
-              },
-              "canBeModifiedBy": "OriginOwner"
+                "elementDurability": 25,
+                "enBreak": 0
+              }
             }
           },
-          "targetType": "Enemy"
-        },
-        {
-          "$type": "TriggerAttackEvent",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
+              "key": "_ABILITY_Hurricane_IsMixed_Electric",
               "target": "Self",
-              "key": "_ABILITY_Hurricane_IsMixed_Ice",
-              "ratio": 1.0
+              "value": 1,
+              "compareType": "Equal"
             }
-          ],
+          ]
+        },
+        {
+          "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
+              "height": 5.0,
+              "fanAngle": 360.0,
+              "radius": 8.0,
+              "massiveAttackRatio": 1,
+              "detectDirection": "Clockwise",
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": -2.5,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": -2.5,
+                  "z": 0.0
                 }
-              },
-              "height": 5.0,
-              "DCMPFCIBIPA": 8.0,
-              "detectDirection": "Clockwise"
+              }
             },
             "attackInfo": {
+              "canBeModifiedBy": "OriginOwner",
               "attackTag": "Elemental_Burst",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
               "attackProperty": {
-                "HBIOLEEGHPD": "Sucrose_DemiHurricane_Gadget_Mix_Damage",
-                "CCNJGLPMIEP": 0.0,
+                "damagePercentage": "%Sucrose_DemiHurricane_Gadget_Mix_Damage",
                 "elementType": "Ice",
-                "bonusCriticalHurt": 25.0,
-                "enBreak": 0.0
-              },
-              "canBeModifiedBy": "OriginOwner"
+                "elementDurability": 25,
+                "enBreak": 0
+              }
             }
           },
-          "targetType": "Enemy"
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_ABILITY_Hurricane_IsMixed_Ice",
+              "target": "Self",
+              "value": 1,
+              "compareType": "Equal"
+            }
+          ]
         },
         {
           "$type": "FireEffect",
+          "effectPattern": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Strike",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Hurricane_IsMixed",
-              "ratio": 1.0,
-              "forceByCaster": true
+              "forceByCaster": true,
+              "value": 1,
+              "compareType": "Equal"
             }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Strike",
-          "EBHJMLOKDGB": -1.0
+          ]
         },
         {
           "$type": "FireEffect",
+          "effectPattern": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Strike_Fire",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
-              "target": "Self",
               "key": "_ABILITY_Hurricane_IsMixed_Fire",
-              "ratio": 1.0
+              "target": "Self",
+              "value": 1,
+              "compareType": "Equal"
             }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Strike_Fire",
-          "EBHJMLOKDGB": -1.0
+          ]
         },
         {
           "$type": "FireEffect",
+          "effectPattern": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Strike_Water",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
-              "target": "Self",
               "key": "_ABILITY_Hurricane_IsMixed_Water",
-              "ratio": 1.0
+              "target": "Self",
+              "value": 1,
+              "compareType": "Equal"
             }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Strike_Water",
-          "EBHJMLOKDGB": -1.0
+          ]
         },
         {
           "$type": "FireEffect",
+          "effectPattern": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Strike_Electric",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
-              "target": "Self",
               "key": "_ABILITY_Hurricane_IsMixed_Electric",
-              "ratio": 1.0
+              "target": "Self",
+              "value": 1,
+              "compareType": "Equal"
             }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Strike_Electric",
-          "EBHJMLOKDGB": -1.0
+          ]
         },
         {
           "$type": "FireEffect",
+          "effectPattern": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Strike_Ice",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
-              "target": "Self",
               "key": "_ABILITY_Hurricane_IsMixed_Ice",
-              "ratio": 1.0
+              "target": "Self",
+              "value": 1,
+              "compareType": "Equal"
             }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Strike_Ice",
-          "EBHJMLOKDGB": -1.0
+          ]
         }
-      ]
+      ],
+      "abilitySpecials": {
+        "Sucrose_DemiHurricane_Gadget_Damage": 0,
+        "Sucrose_DemiHurricane_Gadget_Mix_Damage": 0
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  DemiHurricane Mix
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1564,8 +1706,9 @@
             {
               "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Hurricane_IsMixed",
-              "ratio": 1.0,
-              "forceByCaster": true
+              "forceByCaster": true,
+              "value": 1,
+              "compareType": "Equal"
             }
           ],
           "elementBatchPredicateds": [
@@ -1574,23 +1717,24 @@
               "successActions": [
                 {
                   "$type": "AddGlobalValue",
-                  "ratio": 1.0,
                   "key": "_ABILITY_Hurricane_IsMixed_Fire",
+                  "value": 1,
                   "useLimitRange": true,
-                  "maxValue": 1.0,
-                  "minValue": 0.0
+                  "maxValue": 1,
+                  "minValue": 0
                 },
                 {
                   "$type": "ApplyModifier",
-                  "modifierName": "Hurricane_Mix_Fire"
+                  "modifierName": "Hurricane_Mix_Fire",
+                  "target": "Self"
                 },
                 {
                   "$type": "AddGlobalValue",
-                  "ratio": -1.0,
                   "key": "_ABILITY_Hurricane_IsMixed",
+                  "value": -1,
                   "useLimitRange": true,
-                  "maxValue": 1.0,
-                  "minValue": 0.0
+                  "maxValue": 1,
+                  "minValue": 0
                 }
               ]
             },
@@ -1599,23 +1743,24 @@
               "successActions": [
                 {
                   "$type": "AddGlobalValue",
-                  "ratio": 1.0,
                   "key": "_ABILITY_Hurricane_IsMixed_Water",
+                  "value": 1,
                   "useLimitRange": true,
-                  "maxValue": 1.0,
-                  "minValue": 0.0
+                  "maxValue": 1,
+                  "minValue": 0
                 },
                 {
                   "$type": "ApplyModifier",
-                  "modifierName": "Hurricane_Mix_Water"
+                  "modifierName": "Hurricane_Mix_Water",
+                  "target": "Self"
                 },
                 {
                   "$type": "AddGlobalValue",
-                  "ratio": -1.0,
                   "key": "_ABILITY_Hurricane_IsMixed",
+                  "value": -1,
                   "useLimitRange": true,
-                  "maxValue": 1.0,
-                  "minValue": 0.0
+                  "maxValue": 1,
+                  "minValue": 0
                 }
               ]
             },
@@ -1624,23 +1769,24 @@
               "successActions": [
                 {
                   "$type": "AddGlobalValue",
-                  "ratio": 1.0,
                   "key": "_ABILITY_Hurricane_IsMixed_Electric",
+                  "value": 1,
                   "useLimitRange": true,
-                  "maxValue": 1.0,
-                  "minValue": 0.0
+                  "maxValue": 1,
+                  "minValue": 0
                 },
                 {
                   "$type": "ApplyModifier",
-                  "modifierName": "Hurricane_Mix_Electric"
+                  "modifierName": "Hurricane_Mix_Electric",
+                  "target": "Self"
                 },
                 {
                   "$type": "AddGlobalValue",
-                  "ratio": -1.0,
                   "key": "_ABILITY_Hurricane_IsMixed",
+                  "value": -1,
                   "useLimitRange": true,
-                  "maxValue": 1.0,
-                  "minValue": 0.0
+                  "maxValue": 1,
+                  "minValue": 0
                 }
               ]
             },
@@ -1649,119 +1795,123 @@
               "successActions": [
                 {
                   "$type": "AddGlobalValue",
-                  "ratio": 1.0,
                   "key": "_ABILITY_Hurricane_IsMixed_Ice",
+                  "value": 1,
                   "useLimitRange": true,
-                  "maxValue": 1.0,
-                  "minValue": 0.0
+                  "maxValue": 1,
+                  "minValue": 0
                 },
                 {
                   "$type": "ApplyModifier",
-                  "modifierName": "Hurricane_Mix_Ice"
+                  "modifierName": "Hurricane_Mix_Ice",
+                  "target": "Self"
                 },
                 {
                   "$type": "AddGlobalValue",
-                  "ratio": -1.0,
                   "key": "_ABILITY_Hurricane_IsMixed",
+                  "value": -1,
                   "useLimitRange": true,
-                  "maxValue": 1.0,
-                  "minValue": 0.0
+                  "maxValue": 1,
+                  "minValue": 0
                 }
               ]
             }
           ]
         }
       ],
-      "abilitySpecials": {
-        "Sucrose_DemiHurricane_Gadget_Mix_AddHurtDelta": 0.0
-      },
+      "onAdded": [
+        {
+          "$type": "AddGlobalValue",
+          "key": "_ABILITY_Hurricane_IsMixed",
+          "value": 1,
+          "useLimitRange": true,
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Hurricane_Mix_Start",
+          "target": "Self"
+        }
+      ],
+      "onAbilityStart": [],
       "modifiers": {
+        //要在元素战技启动后一段时间启动这个机制，时间可以调
         "Hurricane_Mix_Start": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1.0,
           "onRemoved": [
             {
               "$type": "ApplyModifier",
-              "modifierName": "Hurricane_Mix_Handler"
+              "modifierName": "Hurricane_Mix_Handler",
+              "target": "Self"
             }
           ]
         },
         "Hurricane_Mix_Handler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "modifierMixins": [],
           "onAdded": [
             {
               "$type": "ApplyModifier",
-              "modifierName": "Hurricane_Mix_Detect_Pre"
+              "modifierName": "Hurricane_Mix_Detect_Pre",
+              "target": "Self"
             }
           ]
         },
-        "Blank": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
+        "Blank": {},
         "Hurricane_Mix_Detect_Pre": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_Hurricane_IsMixed",
-              "defaultGlobalValueOnCreate": 0.0,
-              "valueSteps": [-1.0, 0.5, 1.5],
+              "valueSteps": [-1, 0.5, 1.5],
+              "removeAppliedModifier": true,
               "modifierNameSteps": ["Blank", "Hurricane_Mix_Detect"]
             }
           ]
         },
         "Hurricane_Mix_Detect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.30000001192092896,
+          "thinkInterval": 0.3,
           "onThinkInterval": [
             {
               "$type": "TriggerAttackEvent",
+              "targetType": "All",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackBox",
                   "triggerType": "TriggerNoRepeat",
+                  "size": {
+                    "x": 2.5,
+                    "y": 5.0,
+                    "z": 2.5
+                  },
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
+                    "attachPointName": "RootNode",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": -1.0
-                    },
-                    "attachPointName": "RootNode"
-                  },
-                  "size": {
-                    "IBKBLDAJIMA": 2.5,
-                    "LKHJADIPBFL": 5.0,
-                    "PJCOKIGCJOK": 2.5
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": -1.0
+                    }
                   }
                 },
                 "attackInfo": {
                   "attackTag": "Hurricane_Mix_Detect",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "HBIOLEEGHPD": 0.0,
-                    "CCNJGLPMIEP": 0.0,
+                    "damagePercentage": 0,
                     "elementType": "AntiFire",
-                    "bonusCriticalHurt": 1.0,
-                    "enBreak": 0.0
+                    "elementDurability": 1,
+                    "elementRank": 1.0,
+                    "enBreak": 0
                   }
                 }
-              },
-              "targetType": "All"
+              }
             }
           ]
         },
+        //Fire
         "Hurricane_Mix_Fire": {
           "stacking": "Unique",
-          "modifierName": "",
-          "HCJLIGBLGJA": 16.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 16.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
@@ -1769,76 +1919,70 @@
             },
             {
               "$type": "AttachModifier",
+              "modifierName": "Hurricane_Mix_Fire_Enhancement_Handler",
               "predicates": [
                 {
                   "$type": "ByUnlockTalentParam",
                   "target": "OriginOwner",
                   "talentParam": "Avatar_Sucrose_Contellation_6"
                 }
-              ],
-              "modifierName": "Hurricane_Mix_Fire_Enhancement_Handler"
+              ]
             }
           ]
         },
         "Hurricane_Mix_Fire_Material": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "Get_Fire",
-              "attachPoint": "",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Main"
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Main"
             }
           ]
         },
         "Hurricane_Mix_Fire_Enhancement_Handler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "RemoveUniqueModifier",
+              "modifierName": "UNIQUE_Hurricane_Mix_Fire_Enhancement",
               "target": "AllPlayerAvatars",
               "predicates": [
                 {
                   "$type": "ByTargetPositionToSelfPosition",
-                  "logic": "LesserOrEqual",
-                  "ratio": 40.0
+                  "compareType": "XZ",
+                  "value": 40,
+                  "logic": "LesserOrEqual"
                 }
-              ],
-              "modifierName": "UNIQUE_Hurricane_Mix_Fire_Enhancement"
+              ]
             },
             {
               "$type": "ApplyModifier",
+              "modifierName": "UNIQUE_Hurricane_Mix_Fire_Enhancement",
               "target": "AllPlayerAvatars",
               "predicates": [
                 {
                   "$type": "ByTargetPositionToSelfPosition",
-                  "logic": "LesserOrEqual",
-                  "ratio": 40.0
+                  "compareType": "XZ",
+                  "value": 40,
+                  "logic": "LesserOrEqual"
                 }
-              ],
-              "modifierName": "UNIQUE_Hurricane_Mix_Fire_Enhancement"
+              ]
             }
           ]
         },
         "UNIQUE_Hurricane_Mix_Fire_Enhancement": {
-          "modifierName": "",
+          "duration": 10,
+          "buffID": 10001, //给一个buff提示。
           "isUnique": true,
-          "HCJLIGBLGJA": 10.0,
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_FireAddHurtDelta": "Sucrose_DemiHurricane_Gadget_Mix_AddHurtDelta"
-          },
-          "state": "AttackUp",
           "isLimitedProperties": true,
-          "buffID": 10001
+          "state": "AttackUp",
+          "properties": {
+            "Actor_FireAddHurtDelta": "%Sucrose_DemiHurricane_Gadget_Mix_AddHurtDelta"
+          }
         },
+        //Water
         "Hurricane_Mix_Water": {
           "stacking": "Unique",
-          "modifierName": "",
-          "HCJLIGBLGJA": 16.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 16.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
@@ -1846,76 +1990,70 @@
             },
             {
               "$type": "AttachModifier",
+              "modifierName": "Hurricane_Mix_Water_Enhancement_Handler",
               "predicates": [
                 {
                   "$type": "ByUnlockTalentParam",
                   "target": "OriginOwner",
                   "talentParam": "Avatar_Sucrose_Contellation_6"
                 }
-              ],
-              "modifierName": "Hurricane_Mix_Water_Enhancement_Handler"
+              ]
             }
           ]
         },
         "Hurricane_Mix_Water_Material": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "Get_Water",
-              "attachPoint": "",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Main"
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Main"
             }
           ]
         },
         "Hurricane_Mix_Water_Enhancement_Handler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "RemoveUniqueModifier",
+              "modifierName": "UNIQUE_Hurricane_Mix_Water_Enhancement",
               "target": "AllPlayerAvatars",
               "predicates": [
                 {
                   "$type": "ByTargetPositionToSelfPosition",
-                  "logic": "LesserOrEqual",
-                  "ratio": 40.0
+                  "compareType": "XZ",
+                  "value": 40,
+                  "logic": "LesserOrEqual"
                 }
-              ],
-              "modifierName": "UNIQUE_Hurricane_Mix_Water_Enhancement"
+              ]
             },
             {
               "$type": "ApplyModifier",
+              "modifierName": "UNIQUE_Hurricane_Mix_Water_Enhancement",
               "target": "AllPlayerAvatars",
               "predicates": [
                 {
                   "$type": "ByTargetPositionToSelfPosition",
-                  "logic": "LesserOrEqual",
-                  "ratio": 40.0
+                  "compareType": "XZ",
+                  "value": 40,
+                  "logic": "LesserOrEqual"
                 }
-              ],
-              "modifierName": "UNIQUE_Hurricane_Mix_Water_Enhancement"
+              ]
             }
           ]
         },
         "UNIQUE_Hurricane_Mix_Water_Enhancement": {
-          "modifierName": "",
+          "duration": 10,
+          "buffID": 10001, //给一个buff提示。
           "isUnique": true,
-          "HCJLIGBLGJA": 10.0,
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_WaterAddHurtDelta": "Sucrose_DemiHurricane_Gadget_Mix_AddHurtDelta"
-          },
-          "state": "AttackUp",
           "isLimitedProperties": true,
-          "buffID": 10001
+          "state": "AttackUp",
+          "properties": {
+            "Actor_WaterAddHurtDelta": "%Sucrose_DemiHurricane_Gadget_Mix_AddHurtDelta"
+          }
         },
+        //Electric
         "Hurricane_Mix_Electric": {
           "stacking": "Unique",
-          "modifierName": "",
-          "HCJLIGBLGJA": 16.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 16.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
@@ -1923,76 +2061,70 @@
             },
             {
               "$type": "AttachModifier",
+              "modifierName": "Hurricane_Mix_Electric_Enhancement_Handler",
               "predicates": [
                 {
                   "$type": "ByUnlockTalentParam",
                   "target": "OriginOwner",
                   "talentParam": "Avatar_Sucrose_Contellation_6"
                 }
-              ],
-              "modifierName": "Hurricane_Mix_Electric_Enhancement_Handler"
+              ]
             }
           ]
         },
         "Hurricane_Mix_Electric_Material": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "Get_Electric",
-              "attachPoint": "",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Main"
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Main"
             }
           ]
         },
         "Hurricane_Mix_Electric_Enhancement_Handler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "RemoveUniqueModifier",
+              "modifierName": "UNIQUE_Hurricane_Mix_Electric_Enhancement",
               "target": "AllPlayerAvatars",
               "predicates": [
                 {
                   "$type": "ByTargetPositionToSelfPosition",
-                  "logic": "LesserOrEqual",
-                  "ratio": 40.0
+                  "compareType": "XZ",
+                  "value": 40,
+                  "logic": "LesserOrEqual"
                 }
-              ],
-              "modifierName": "UNIQUE_Hurricane_Mix_Electric_Enhancement"
+              ]
             },
             {
               "$type": "ApplyModifier",
+              "modifierName": "UNIQUE_Hurricane_Mix_Electric_Enhancement",
               "target": "AllPlayerAvatars",
               "predicates": [
                 {
                   "$type": "ByTargetPositionToSelfPosition",
-                  "logic": "LesserOrEqual",
-                  "ratio": 40.0
+                  "compareType": "XZ",
+                  "value": 40,
+                  "logic": "LesserOrEqual"
                 }
-              ],
-              "modifierName": "UNIQUE_Hurricane_Mix_Electric_Enhancement"
+              ]
             }
           ]
         },
         "UNIQUE_Hurricane_Mix_Electric_Enhancement": {
-          "modifierName": "",
+          "duration": 10,
+          "buffID": 10001, //给一个buff提示。
           "isUnique": true,
-          "HCJLIGBLGJA": 10.0,
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_ElecAddHurtDelta": "Sucrose_DemiHurricane_Gadget_Mix_AddHurtDelta"
-          },
           "state": "AttackUp",
           "isLimitedProperties": true,
-          "buffID": 10001
+          "properties": {
+            "Actor_ElecAddHurtDelta": "%Sucrose_DemiHurricane_Gadget_Mix_AddHurtDelta"
+          }
         },
+        //Ice
         "Hurricane_Mix_Ice": {
           "stacking": "Unique",
-          "modifierName": "",
-          "HCJLIGBLGJA": 16.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 16.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
@@ -2000,86 +2132,70 @@
             },
             {
               "$type": "AttachModifier",
+              "modifierName": "Hurricane_Mix_Ice_Enhancement_Handler",
               "predicates": [
                 {
                   "$type": "ByUnlockTalentParam",
                   "target": "OriginOwner",
                   "talentParam": "Avatar_Sucrose_Contellation_6"
                 }
-              ],
-              "modifierName": "Hurricane_Mix_Ice_Enhancement_Handler"
+              ]
             }
           ]
         },
         "Hurricane_Mix_Ice_Material": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "Get_Ice",
-              "attachPoint": "",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Main"
+              "effectPattern": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Main"
             }
           ]
         },
         "Hurricane_Mix_Ice_Enhancement_Handler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "RemoveUniqueModifier",
+              "modifierName": "UNIQUE_Hurricane_Mix_Ice_Enhancement",
               "target": "AllPlayerAvatars",
               "predicates": [
                 {
                   "$type": "ByTargetPositionToSelfPosition",
-                  "logic": "LesserOrEqual",
-                  "ratio": 40.0
+                  "compareType": "XZ",
+                  "value": 40,
+                  "logic": "LesserOrEqual"
                 }
-              ],
-              "modifierName": "UNIQUE_Hurricane_Mix_Ice_Enhancement"
+              ]
             },
             {
               "$type": "ApplyModifier",
+              "modifierName": "UNIQUE_Hurricane_Mix_Ice_Enhancement",
               "target": "AllPlayerAvatars",
               "predicates": [
                 {
                   "$type": "ByTargetPositionToSelfPosition",
-                  "logic": "LesserOrEqual",
-                  "ratio": 40.0
+                  "compareType": "XZ",
+                  "value": 40,
+                  "logic": "LesserOrEqual"
                 }
-              ],
-              "modifierName": "UNIQUE_Hurricane_Mix_Ice_Enhancement"
+              ]
             }
           ]
         },
         "UNIQUE_Hurricane_Mix_Ice_Enhancement": {
-          "modifierName": "",
+          "duration": 10,
+          "buffID": 10001, //给一个buff提示。
           "isUnique": true,
-          "HCJLIGBLGJA": 10.0,
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_IceAddHurtDelta": "Sucrose_DemiHurricane_Gadget_Mix_AddHurtDelta"
-          },
           "state": "AttackUp",
           "isLimitedProperties": true,
-          "buffID": 10001
+          "properties": {
+            "Actor_IceAddHurtDelta": "%Sucrose_DemiHurricane_Gadget_Mix_AddHurtDelta"
+          }
         }
       },
-      "onAdded": [
-        {
-          "$type": "AddGlobalValue",
-          "ratio": 1.0,
-          "key": "_ABILITY_Hurricane_IsMixed",
-          "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Hurricane_Mix_Start"
-        }
-      ]
+      "abilitySpecials": {
+        "Sucrose_DemiHurricane_Gadget_Mix_AddHurtDelta": 0
+      }
     }
   },
   {
@@ -2089,87 +2205,87 @@
       "onAbilityStart": [
         {
           "$type": "FireEffect",
+          "effectPattern": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Dissipate",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Hurricane_IsMixed",
-              "ratio": 1.0
+              "value": 1,
+              "compareType": "Equal"
             }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Dissipate",
-          "EBHJMLOKDGB": -1.0
+          ]
         },
         {
           "$type": "FireEffect",
+          "effectPattern": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Dissipate_Fire",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Hurricane_IsMixed",
-              "ratio": 0.0
+              "value": 0,
+              "compareType": "Equal"
             },
             {
               "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Hurricane_IsMixed_Fire",
-              "ratio": 1.0,
+              "value": 1,
               "compareType": "MoreThanAndEqual"
             }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Dissipate_Fire",
-          "EBHJMLOKDGB": -1.0
+          ]
         },
         {
           "$type": "FireEffect",
+          "effectPattern": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Dissipate_Water",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Hurricane_IsMixed",
-              "ratio": 0.0
+              "value": 0,
+              "compareType": "Equal"
             },
             {
               "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Hurricane_IsMixed_Water",
-              "ratio": 1.0,
+              "value": 1,
               "compareType": "MoreThanAndEqual"
             }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Dissipate_Water",
-          "EBHJMLOKDGB": -1.0
+          ]
         },
         {
           "$type": "FireEffect",
+          "effectPattern": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Dissipate_Electric",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Hurricane_IsMixed",
-              "ratio": 0.0
+              "value": 0,
+              "compareType": "Equal"
             },
             {
               "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Hurricane_IsMixed_Electric",
-              "ratio": 1.0,
+              "value": 1,
               "compareType": "MoreThanAndEqual"
             }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Dissipate_Electric",
-          "EBHJMLOKDGB": -1.0
+          ]
         },
         {
           "$type": "FireEffect",
+          "effectPattern": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Dissipate_Ice",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Hurricane_IsMixed",
-              "ratio": 0.0
+              "value": 0,
+              "compareType": "Equal"
             },
             {
               "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Hurricane_IsMixed_Ice",
-              "ratio": 1.0,
+              "value": 1,
               "compareType": "MoreThanAndEqual"
             }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Catalyst_Sucrose_DemiHurricane_Dissipate_Ice",
-          "EBHJMLOKDGB": -1.0
+          ]
         },
         {
           "$type": "KillSelf"
@@ -2177,6 +2293,11 @@
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  空中攻击
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -2184,6 +2305,7 @@
       "abilityMixins": [
         {
           "$type": "AvatarChangeSkillMixin",
+          "priority": "AvatarCommon",
           "jumpSkillID": 5043010,
           "flySkillID": 5043010
         },
@@ -2276,67 +2398,237 @@
           "modifierName": "HideWeapon"
         }
       ],
-      "abilitySpecials": {
-        "FallingAnthem_Normal_Loop_Damage": 0.0,
-        "FallingAnthem_Normal_Rank_1_Damage": 0.0,
-        "FallingAnthem_Normal_Rank_2_Damage": 0.0,
-        "FallingAnthem_Altitude_Lv0": 20.0,
-        "FallingAnthem_Altitude_Lv1": 40.0,
-        "FallingAnthem_Altitude_Lv2": 60.0,
-        "FallingAnthem_Altitude_Lv3": 100.0,
-        "FallingAnthem_Altitude_Lv4": 200.0,
-        "FallingAnthem_FallingDamageRatio_Lv0": -1.0,
-        "FallingAnthem_FallingDamageRatio_Lv1": -1.0,
-        "FallingAnthem_FallingDamageRatio_Lv2": -0.8999999761581421,
-        "FallingAnthem_FallingDamageRatio_Lv3": -0.800000011920929,
-        "FallingAnthem_FallingDamageRatio_Lv4": -0.6000000238418579,
-        "FallingAnthem_FallingDamageRatio": 0.0
-      },
+      "onAbilityStart": [
+        //普通状态第一段
+        {
+          "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
+          "attackEvent": {
+            "attackPattern": {
+              "$type": "ConfigAttackCircle",
+              "triggerType": "TriggerNoRepeat",
+              "scale": 1.0,
+              "height": 2.0,
+              "centerYOffset": 0.0,
+              "offsetZ": 0.0,
+              "fanAngle": 360.0,
+              "radius": 3.0,
+              "followRootNodeY": false,
+              "followTransformY": false,
+              "offsetAngle": 0.0,
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 0.0
+                }
+              }
+            },
+            "attackInfo": {
+              "attackTag": "FallingAttack",
+              "attackProperty": {
+                "damagePercentage": "%FallingAnthem_Normal_Rank_1_Damage",
+                "strikeType": "Default",
+                "elementType": "Wind",
+                "elementDurability": 25,
+                "enBreak": 50
+              },
+              "hitPattern": {
+                "onHitEffectName": "none",
+                "hitImpulseType": "LV3",
+                "retreatType": "ByAttacker",
+                "reboundRatio": 0,
+                "canBeDefenceHalt": false,
+                "hitHaltTime": 0,
+                "hitHaltTimeScale": 0.1,
+                "muteHitText": false
+              },
+              "forceCameraShake": true,
+              /*				        	"cameraShake":
+				        	{
+				        		"shakeType": "CustomVector",
+								"shakeRange": 0.3,
+								"shakeTime": 0.12,
+								"shakeDistance": 30,
+								"shakeDir":
+								{
+									"x": 0,
+									"y": 1,
+									"z": 0,
+								},
+				        	},*/
+              "cameraShake": {
+                "shakeType": "CustomVector",
+                "shakeRange": 0.24,
+                "shakeTime": 0.12,
+                "shakeDistance": 30,
+                "shakeDir": {
+                  "x": 0,
+                  "y": 1,
+                  "z": 0
+                },
+                "extension": {
+                  "baseCycle": 0.24,
+                  "cycleDamping": 0,
+                  "rangeAttenuation": 0.3
+                }
+              }
+            }
+          },
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_ABILITY_FallingAnthem_UseCamera",
+              "forceByCaster": true,
+              "value": 0,
+              "compareType": "NoneOrEqual"
+            }
+          ]
+        },
+        //普通状态第二段
+        {
+          "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
+          "attackEvent": {
+            "attackPattern": {
+              "$type": "ConfigAttackCircle",
+              "triggerType": "TriggerNoRepeat",
+              "scale": 1.0,
+              "height": 2.0,
+              "centerYOffset": 0.0,
+              "offsetZ": 0.0,
+              "fanAngle": 360.0,
+              "radius": 3.5,
+              "followRootNodeY": false,
+              "followTransformY": false,
+              "offsetAngle": 0.0,
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 0.0
+                }
+              }
+            },
+            "attackInfo": {
+              "attackTag": "FallingAttack",
+              "attackProperty": {
+                "damagePercentage": "%FallingAnthem_Normal_Rank_2_Damage",
+                "strikeType": "Default",
+                "elementType": "Wind",
+                "elementDurability": 25,
+                "enBreak": 100
+              },
+              "hitPattern": {
+                "onHitEffectName": "none",
+                "hitImpulseType": "LV4",
+                "retreatType": "ByAttacker",
+                "reboundRatio": 0,
+                "canBeDefenceHalt": false,
+                "hitHaltTime": 0,
+                "hitHaltTimeScale": 0.1,
+                "muteHitText": false
+              },
+              "forceCameraShake": true,
+              "cameraShake": {
+                "shakeType": "CustomVector",
+                "shakeRange": 0.5,
+                "shakeTime": 0.2,
+                "shakeDistance": 30,
+                "shakeDir": {
+                  "x": 0,
+                  "y": 1,
+                  "z": 1
+                },
+                "extension": {
+                  "baseCycle": 0.4,
+                  "cycleDamping": 0,
+                  "rangeAttenuation": 0.3
+                }
+              }
+            }
+          },
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_ABILITY_FallingAnthem_UseCamera",
+              "forceByCaster": true,
+              "value": 1,
+              "compareType": "Equal"
+            }
+          ]
+        },
+        //普通状态第一段
+        {
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Avatar_Catalyst_FallAnthem_Strike_01_Wind",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_ABILITY_FallingAnthem_UseCamera",
+              "forceByCaster": true,
+              "value": 0,
+              "compareType": "NoneOrEqual"
+            }
+          ]
+        },
+        //普通状态第二段
+        {
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Avatar_Catalyst_FallAnthem_Strike_02_Wind",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_ABILITY_FallingAnthem_UseCamera",
+              "forceByCaster": true,
+              "value": 1,
+              "compareType": "Equal"
+            }
+          ]
+        }
+      ],
       "modifiers": {
         "HideWeapon": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "TriggerHideWeapon",
-              "RotationDampTime": true,
+              "doOffStage": true,
+              "visible": false,
               "partNames": ["equip01", "equip02", "sheathPoint"]
             }
           ],
           "onRemoved": [
             {
               "$type": "TriggerHideWeapon",
-              "RotationDampTime": true,
+              "doOffStage": true,
               "visible": true,
               "partNames": ["equip01", "equip02", "sheathPoint"]
             }
           ]
         },
         "FallingAnthem_SetVisible": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "TriggerSetVisible",
-              "RotationDampTime": true
+              "visible": false,
+              "doOffStage": true
             }
           ],
           "onRemoved": [
             {
               "$type": "TriggerSetVisible",
-              "RotationDampTime": true,
-              "visible": true
+              "visible": true,
+              "doOffStage": true
             }
           ]
         },
         "FallingAnthem_BS_Material": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Catalyst_FallAnthem_BS_Wind",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Avatar_Catalyst_FallAnthem_BS_Wind"
             },
             {
               "$type": "ApplyModifier",
@@ -2345,10 +2637,8 @@
           ]
         },
         "FallingAnthem_BS_VelocityForce_Initialize": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "properties": {
-            "Actor_AddGravityScale": -2.0
+            "Actor_AddGravityScale": -2
           },
           "onAdded": [
             {
@@ -2358,52 +2648,49 @@
           ]
         },
         "FallingAnthem_LoopDamage": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.30000001192092896,
+          "thinkInterval": 0.3,
           "onThinkInterval": [
             {
               "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
+                  "radius": 1.5,
                   "born": {
                     "$type": "ConfigBornBySelf",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     }
-                  },
-                  "DCMPFCIBIPA": 1.5
+                  }
                 },
                 "attackInfo": {
                   "attackTag": "FallingAttack",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "HBIOLEEGHPD": "FallingAnthem_Normal_Loop_Damage",
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Wind",
-                    "bonusCriticalHurt": 0.0,
+                    "damagePercentage": "%FallingAnthem_Normal_Loop_Damage",
                     "strikeType": "Default",
-                    "enBreak": 5.0
+                    "elementType": "Wind",
+                    "elementDurability": 0,
+                    "enBreak": 5
                   },
                   "hitPattern": {
                     "onHitEffectName": "default",
                     "hitImpulseType": "LV2",
-                    "hitHaltTimeScale": 0.019999999552965164
+                    "reboundRatio": 0,
+                    "canBeDefenceHalt": false,
+                    "hitHaltTime": 0,
+                    "hitHaltTimeScale": 0.02,
+                    "muteHitText": false
                   }
                 }
-              },
-              "targetType": "Enemy"
+              }
             }
           ]
         },
         "FallingAnthem_FallingDamageImmune_01": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ClearGlobalValue",
@@ -2411,90 +2698,95 @@
             },
             {
               "$type": "AddGlobalValue",
+              "key": "_ABILITY_FallingAttack_Altitude",
+              "value": "%FallingAnthem_FallingDamageRatio_Lv0",
+              "useLimitRange": true,
+              "maxValue": "%FallingAnthem_FallingDamageRatio_Lv0",
+              "minValue": "%FallingAnthem_FallingDamageRatio_Lv0",
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv0"
+                  "value": "%FallingAnthem_Altitude_Lv0",
+                  "logic": "LesserOrEqual"
                 }
-              ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv0",
-              "key": "_ABILITY_FallingAttack_Altitude",
-              "useLimitRange": true,
-              "maxValue": "FallingAnthem_FallingDamageRatio_Lv0",
-              "minValue": "FallingAnthem_FallingDamageRatio_Lv0"
-            },
+              ]
+            }, //==================================================================================
             {
               "$type": "AddGlobalValue",
+              "key": "_ABILITY_FallingAttack_Altitude",
+              "value": "%FallingAnthem_FallingDamageRatio_Lv1",
+              "useLimitRange": true,
+              "maxValue": "%FallingAnthem_FallingDamageRatio_Lv1",
+              "minValue": "%FallingAnthem_FallingDamageRatio_Lv1",
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv1"
+                  "value": "%FallingAnthem_Altitude_Lv1",
+                  "logic": "LesserOrEqual"
                 },
                 {
                   "$type": "ByTargetAltitude",
-                  "ratio": "FallingAnthem_Altitude_Lv0"
+                  "value": "%FallingAnthem_Altitude_Lv0",
+                  "logic": "Greater"
                 }
-              ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv1",
-              "key": "_ABILITY_FallingAttack_Altitude",
-              "useLimitRange": true,
-              "maxValue": "FallingAnthem_FallingDamageRatio_Lv1",
-              "minValue": "FallingAnthem_FallingDamageRatio_Lv1"
-            },
+              ]
+            }, //==================================================================================
             {
               "$type": "AddGlobalValue",
+              "key": "_ABILITY_FallingAttack_Altitude",
+              "value": "%FallingAnthem_FallingDamageRatio_Lv2",
+              "useLimitRange": true,
+              "maxValue": "%FallingAnthem_FallingDamageRatio_Lv2",
+              "minValue": "%FallingAnthem_FallingDamageRatio_Lv2",
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv2"
+                  "value": "%FallingAnthem_Altitude_Lv2",
+                  "logic": "LesserOrEqual"
                 },
                 {
                   "$type": "ByTargetAltitude",
-                  "ratio": "FallingAnthem_Altitude_Lv1"
+                  "value": "%FallingAnthem_Altitude_Lv1",
+                  "logic": "Greater"
                 }
-              ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv2",
-              "key": "_ABILITY_FallingAttack_Altitude",
-              "useLimitRange": true,
-              "maxValue": "FallingAnthem_FallingDamageRatio_Lv2",
-              "minValue": "FallingAnthem_FallingDamageRatio_Lv2"
-            },
+              ]
+            }, //==================================================================================
             {
               "$type": "AddGlobalValue",
+              "key": "_ABILITY_FallingAttack_Altitude",
+              "value": "%FallingAnthem_FallingDamageRatio_Lv3",
+              "useLimitRange": true,
+              "maxValue": "%FallingAnthem_FallingDamageRatio_Lv3",
+              "minValue": "%FallingAnthem_FallingDamageRatio_Lv3",
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv3"
+                  "value": "%FallingAnthem_Altitude_Lv3",
+                  "logic": "LesserOrEqual"
                 },
                 {
                   "$type": "ByTargetAltitude",
-                  "ratio": "FallingAnthem_Altitude_Lv2"
+                  "value": "%FallingAnthem_Altitude_Lv2",
+                  "logic": "Greater"
                 }
-              ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv3",
-              "key": "_ABILITY_FallingAttack_Altitude",
-              "useLimitRange": true,
-              "maxValue": "FallingAnthem_FallingDamageRatio_Lv3",
-              "minValue": "FallingAnthem_FallingDamageRatio_Lv3"
-            },
+              ]
+            }, //==================================================================================
             {
               "$type": "AddGlobalValue",
+              "key": "_ABILITY_FallingAttack_Altitude",
+              "value": "%FallingAnthem_FallingDamageRatio_Lv4",
+              "useLimitRange": true,
+              "maxValue": "%FallingAnthem_FallingDamageRatio_Lv4",
+              "minValue": "%FallingAnthem_FallingDamageRatio_Lv4",
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "ratio": "FallingAnthem_Altitude_Lv3"
+                  "value": "%FallingAnthem_Altitude_Lv3",
+                  "logic": "Greater"
                 }
-              ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv4",
-              "key": "_ABILITY_FallingAttack_Altitude",
-              "useLimitRange": true,
-              "maxValue": "FallingAnthem_FallingDamageRatio_Lv4",
-              "minValue": "FallingAnthem_FallingDamageRatio_Lv4"
-            },
+              ]
+            }, //==================================================================================
+
             {
               "$type": "AttachModifier",
               "modifierName": "FallingAnthem_FallingDamageImmune_02"
@@ -2502,8 +2794,6 @@
           ]
         },
         "FallingAnthem_FallingDamageImmune_02": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValueToOverrideMap",
@@ -2517,175 +2807,185 @@
           ]
         },
         "FallingAnthem_FallingDamageImmune_03": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "properties": {
-            "Actor_FallingDamageRatio": "FallingAnthem_FallingDamageRatio"
+            "Actor_FallingDamageRatio": "%FallingAnthem_FallingDamageRatio"
           }
         },
+        //水平惯性继承
         "Inertia": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "ApplyInertiaVelocityMixin",
+              "damping": 0,
               "useXZ": false,
               "useY": false
             }
           ]
         },
         "FallingAnthem_Height_Detect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
+              "key": "_ABILITY_FallingAnthem_UseCamera",
+              "value": 0,
+              "useLimitRange": true,
+              "maxValue": 0,
+              "minValue": 0,
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "logic": "LesserOrEqual",
-                  "ratio": 2.4000000953674316
+                  "value": 2.4,
+                  "logic": "LesserOrEqual"
                 }
-              ],
-              "ratio": 0.0,
-              "key": "_ABILITY_FallingAnthem_UseCamera",
-              "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
+              ]
             },
             {
               "$type": "AddGlobalValue",
-              "predicates": [
-                {
-                  "$type": "ByTargetAltitude",
-                  "ratio": 2.4000000953674316
-                }
-              ],
-              "ratio": 5.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
+              "value": 5,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
-            },
-            {
-              "$type": "SetAnimatorFloat",
+              "maxValue": 1,
+              "minValue": 0,
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "logic": "LesserOrEqual",
-                  "ratio": 2.4000000953674316
+                  "value": 2.4,
+                  "logic": "Greater"
                 }
-              ],
-              "floatID": "FallingAnthem_UseCamera",
-              "ratio": 0.0
+              ]
             },
+            /*						{
+							"$type": "DebugLog",
+							"content": "FallingAnthem Height Set True!",
+							"predicates":
+							[
+								{
+									"$type": "ByTargetAltitude",
+									"value": 3.0,
+									"logic": "Greater",
+								},
+							],
+						},*/
             {
               "$type": "SetAnimatorFloat",
+              "floatID": "FallingAnthem_UseCamera",
+              "value": 0,
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "ratio": 2.4000000953674316
+                  "value": 2.4,
+                  "logic": "LesserOrEqual"
                 }
-              ],
+              ]
+            },
+            {
+              "$type": "SetAnimatorFloat",
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 1.0
+              "value": 1,
+              "predicates": [
+                {
+                  "$type": "ByTargetAltitude",
+                  "value": 2.4,
+                  "logic": "Greater"
+                }
+              ]
             }
           ],
           "onRemoved": [
             {
               "$type": "SetAnimatorFloat",
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 0.0
+              "value": 0
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 0.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
+              "value": 0,
               "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "maxValue": 0,
+              "minValue": 0
             }
+            /*						{
+							"$type": "DebugLog",
+							"content": "FallingAnthem Height Reset!",
+						},*/
           ]
         },
         "FallingAnthem_OverHead_Camera": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AvatarCameraParam",
+              "lockParam": false,
+              "cameraParam": {
+                "forceRadius": 4.5,
+                "forceRadiusDuration": 0.2,
+                "shouldKeepForceRadius": true
+              },
               "predicates": [
                 {
                   "$type": "ByAnimatorFloat",
-                  "logic": "Equal",
-                  "ratio": 1.0,
-                  "parameter": "FallingAnthem_UseCamera"
+                  "parameter": "FallingAnthem_UseCamera",
+                  "value": 1,
+                  "logic": "Equal"
                 }
-              ],
-              "cameraParam": {
-                "forceRadius": 4.5,
-                "forceRadiusDuration": 0.20000000298023224,
-                "shouldKeepForceRadius": true
-              }
+              ]
             }
           ]
         },
         "FallingAnthem_OverHead_Camera_Remover": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
-              "$type": "AvatarExitCameraShot",
-              "RotationDampTime": true
+              "doOffStage": true,
+              "$type": "AvatarExitCameraShot"
             }
           ]
         },
         "FallingAnthem_Landed_Camera": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AvatarCameraParam",
+              "lockParam": false,
+              "cameraParam": {
+                "forceRadius": 6.0,
+                "forceRadiusDuration": 0.1,
+                "shouldKeepForceRadius": true
+              },
               "predicates": [
                 {
                   "$type": "ByAnimatorFloat",
-                  "logic": "Equal",
-                  "ratio": 1.0,
-                  "parameter": "FallingAnthem_UseCamera"
+                  "parameter": "FallingAnthem_UseCamera",
+                  "value": 1,
+                  "logic": "Equal"
                 }
-              ],
-              "cameraParam": {
-                "forceRadius": 6.0,
-                "forceRadiusDuration": 0.10000000149011612,
-                "shouldKeepForceRadius": true
-              }
+              ]
             }
           ]
         },
         "FallingAnthem_ClearVelocityForce": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "RemoveVelocityForce",
               "forces": ["RushMoveType", "InertiaType"]
             }
           ]
+          /*					"onRemoved":
+					[
+						{
+							"$type": "RemoveVelocityForce",
+							"forces": ["RushMoveType"],
+						},
+					],*/
         },
         "FallingAnthem_Attach_SelfEffect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Catalyst_FallAnthem_Self_Wind",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Avatar_Catalyst_FallAnthem_Self_Wind"
             }
           ]
         },
         "FallingAnthem_Remove_SelfEffect": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.1,
           "onRemoved": [
             {
               "$type": "RemoveModifier",
@@ -2694,187 +2994,59 @@
           ]
         },
         "FallingAnthem_BSCameraRadialBlur": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.3,
           "modifierMixins": [
             {
               "$type": "CameraBlurMixin",
               "cameraRadialBlur": {
-                "power": 0.30000001192092896,
-                "fadeTime": 0.15000000596046448
+                "power": 0.3,
+                "fadeTime": 0.15
               }
             }
           ]
         }
       },
-      "onAbilityStart": [
-        {
-          "$type": "TriggerAttackEvent",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 0.0,
-              "forceByCaster": true,
-              "compareType": "NoneOrEqual"
-            }
-          ],
-          "attackEvent": {
-            "attackPattern": {
-              "$type": "ConfigAttackCircle",
-              "triggerType": "TriggerNoRepeat",
-              "born": {
-                "$type": "ConfigBornByTarget",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": -0.5,
-                  "PJCOKIGCJOK": 0.0
-                }
-              },
-              "height": 2.0,
-              "DCMPFCIBIPA": 3.0
-            },
-            "attackInfo": {
-              "attackTag": "FallingAttack",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
-              "attackProperty": {
-                "HBIOLEEGHPD": "FallingAnthem_Normal_Rank_1_Damage",
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Wind",
-                "bonusCriticalHurt": 25.0,
-                "strikeType": "Default",
-                "enBreak": 50.0
-              },
-              "hitPattern": {
-                "onHitEffectName": "none",
-                "hitImpulseType": "LV3",
-                "hitHaltTimeScale": 0.10000000149011612
-              },
-              "forceCameraShake": true,
-              "cameraShake": {
-                "shakeType": "CustomVector",
-                "shakeRange": 0.23999999463558197,
-                "shakeTime": 0.11999999731779099,
-                "shakeDistance": 30.0,
-                "shakeDir": {
-                  "y": 1.0
-                },
-                "extension": {
-                  "baseCycle": 0.23999999463558197,
-                  "cycleDamping": 0.0,
-                  "rangeAttenuation": 0.30000001192092896
-                }
-              }
-            }
-          },
-          "targetType": "Enemy"
-        },
-        {
-          "$type": "TriggerAttackEvent",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 1.0,
-              "forceByCaster": true
-            }
-          ],
-          "attackEvent": {
-            "attackPattern": {
-              "$type": "ConfigAttackCircle",
-              "triggerType": "TriggerNoRepeat",
-              "born": {
-                "$type": "ConfigBornByTarget",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": -0.5,
-                  "PJCOKIGCJOK": 0.0
-                }
-              },
-              "height": 2.0,
-              "DCMPFCIBIPA": 3.5
-            },
-            "attackInfo": {
-              "attackTag": "FallingAttack",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
-              "attackProperty": {
-                "HBIOLEEGHPD": "FallingAnthem_Normal_Rank_2_Damage",
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Wind",
-                "bonusCriticalHurt": 25.0,
-                "strikeType": "Default",
-                "enBreak": 100.0
-              },
-              "hitPattern": {
-                "onHitEffectName": "none",
-                "hitImpulseType": "LV4",
-                "hitHaltTimeScale": 0.10000000149011612
-              },
-              "forceCameraShake": true,
-              "cameraShake": {
-                "shakeType": "CustomVector",
-                "shakeRange": 0.5,
-                "shakeTime": 0.20000000298023224,
-                "shakeDistance": 30.0,
-                "shakeDir": {
-                  "y": 1.0,
-                  "z": 1.0
-                },
-                "extension": {
-                  "baseCycle": 0.4000000059604645,
-                  "cycleDamping": 0.0,
-                  "rangeAttenuation": 0.30000001192092896
-                }
-              }
-            }
-          },
-          "targetType": "Enemy"
-        },
-        {
-          "$type": "FireEffect",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 0.0,
-              "forceByCaster": true,
-              "compareType": "NoneOrEqual"
-            }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Catalyst_FallAnthem_Strike_01_Wind",
-          "EBHJMLOKDGB": -1.0
-        },
-        {
-          "$type": "FireEffect",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 1.0,
-              "forceByCaster": true
-            }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Catalyst_FallAnthem_Strike_02_Wind",
-          "EBHJMLOKDGB": -1.0
-        }
-      ]
+      "abilitySpecials": {
+        "FallingAnthem_Normal_Loop_Damage": 0,
+        "FallingAnthem_Normal_Rank_1_Damage": 0,
+        "FallingAnthem_Normal_Rank_2_Damage": 0,
+
+        "FallingAnthem_Altitude_Lv0": 20,
+        "FallingAnthem_Altitude_Lv1": 40,
+        "FallingAnthem_Altitude_Lv2": 60,
+        "FallingAnthem_Altitude_Lv3": 100,
+        "FallingAnthem_Altitude_Lv4": 200,
+
+        "FallingAnthem_FallingDamageRatio_Lv0": -1,
+        "FallingAnthem_FallingDamageRatio_Lv1": -1,
+        "FallingAnthem_FallingDamageRatio_Lv2": -0.9,
+        "FallingAnthem_FallingDamageRatio_Lv3": -0.8,
+        "FallingAnthem_FallingDamageRatio_Lv4": -0.6,
+
+        "FallingAnthem_FallingDamageRatio": 0
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Permanent SKill 1
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Sucrose_PermanentSkill_Catalysa",
-      "abilitySpecials": {
-        "Sucrose_PermanentSkill_Catalysa_Duration": 0.0,
-        "Sucrose_PermanentSkill_Catalysa_ElemMasteryDelta": 0.0
-      },
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "doOffStage": true,
+          "modifierName": "Avatar_Sucrose_PermanentSkill_Catalysa_Handler",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "Avatar_Sucrose_PermanentSkill_Catalysa_Handler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "DoActionByElementReactionMixin",
@@ -2883,21 +3055,23 @@
               "actions": [
                 {
                   "$type": "RemoveUniqueModifier",
+                  "doOffStage": true,
                   "target": "AllPlayerAvatars",
-                  "RotationDampTime": true,
+                  "modifierName": "UNIQUE_Avatar_Sucrose_PermanentSkill_Catalysa_Fire",
                   "predicates": [
                     {
                       "$type": "ByTargetPositionToSelfPosition",
-                      "logic": "LesserOrEqual",
-                      "ratio": 40.0
+                      "compareType": "XZ",
+                      "value": 40,
+                      "logic": "LesserOrEqual"
                     }
-                  ],
-                  "modifierName": "UNIQUE_Avatar_Sucrose_PermanentSkill_Catalysa_Fire"
+                  ]
                 },
                 {
                   "$type": "ApplyModifier",
+                  "doOffStage": true,
                   "target": "AllPlayerAvatars",
-                  "RotationDampTime": true,
+                  "modifierName": "UNIQUE_Avatar_Sucrose_PermanentSkill_Catalysa_Fire",
                   "predicates": [
                     {
                       "$type": "ByAvatarElementType",
@@ -2905,11 +3079,11 @@
                     },
                     {
                       "$type": "ByTargetPositionToSelfPosition",
-                      "logic": "LesserOrEqual",
-                      "ratio": 40.0
+                      "compareType": "XZ",
+                      "value": 40,
+                      "logic": "LesserOrEqual"
                     }
-                  ],
-                  "modifierName": "UNIQUE_Avatar_Sucrose_PermanentSkill_Catalysa_Fire"
+                  ]
                 }
               ]
             },
@@ -2920,21 +3094,23 @@
               "actions": [
                 {
                   "$type": "RemoveUniqueModifier",
+                  "doOffStage": true,
                   "target": "AllPlayerAvatars",
-                  "RotationDampTime": true,
+                  "modifierName": "UNIQUE_Avatar_Sucrose_PermanentSkill_Catalysa_Water",
                   "predicates": [
                     {
                       "$type": "ByTargetPositionToSelfPosition",
-                      "logic": "LesserOrEqual",
-                      "ratio": 40.0
+                      "compareType": "XZ",
+                      "value": 40,
+                      "logic": "LesserOrEqual"
                     }
-                  ],
-                  "modifierName": "UNIQUE_Avatar_Sucrose_PermanentSkill_Catalysa_Water"
+                  ]
                 },
                 {
                   "$type": "ApplyModifier",
+                  "doOffStage": true,
                   "target": "AllPlayerAvatars",
-                  "RotationDampTime": true,
+                  "modifierName": "UNIQUE_Avatar_Sucrose_PermanentSkill_Catalysa_Water",
                   "predicates": [
                     {
                       "$type": "ByAvatarElementType",
@@ -2942,11 +3118,11 @@
                     },
                     {
                       "$type": "ByTargetPositionToSelfPosition",
-                      "logic": "LesserOrEqual",
-                      "ratio": 40.0
+                      "compareType": "XZ",
+                      "value": 40,
+                      "logic": "LesserOrEqual"
                     }
-                  ],
-                  "modifierName": "UNIQUE_Avatar_Sucrose_PermanentSkill_Catalysa_Water"
+                  ]
                 }
               ]
             },
@@ -2957,21 +3133,23 @@
               "actions": [
                 {
                   "$type": "RemoveUniqueModifier",
+                  "doOffStage": true,
                   "target": "AllPlayerAvatars",
-                  "RotationDampTime": true,
+                  "modifierName": "UNIQUE_Avatar_Sucrose_PermanentSkill_Catalysa_Ice",
                   "predicates": [
                     {
                       "$type": "ByTargetPositionToSelfPosition",
-                      "logic": "LesserOrEqual",
-                      "ratio": 40.0
+                      "compareType": "XZ",
+                      "value": 40,
+                      "logic": "LesserOrEqual"
                     }
-                  ],
-                  "modifierName": "UNIQUE_Avatar_Sucrose_PermanentSkill_Catalysa_Ice"
+                  ]
                 },
                 {
                   "$type": "ApplyModifier",
+                  "doOffStage": true,
                   "target": "AllPlayerAvatars",
-                  "RotationDampTime": true,
+                  "modifierName": "UNIQUE_Avatar_Sucrose_PermanentSkill_Catalysa_Ice",
                   "predicates": [
                     {
                       "$type": "ByAvatarElementType",
@@ -2979,11 +3157,11 @@
                     },
                     {
                       "$type": "ByTargetPositionToSelfPosition",
-                      "logic": "LesserOrEqual",
-                      "ratio": 40.0
+                      "compareType": "XZ",
+                      "value": 40,
+                      "logic": "LesserOrEqual"
                     }
-                  ],
-                  "modifierName": "UNIQUE_Avatar_Sucrose_PermanentSkill_Catalysa_Ice"
+                  ]
                 }
               ]
             },
@@ -2994,21 +3172,23 @@
               "actions": [
                 {
                   "$type": "RemoveUniqueModifier",
+                  "doOffStage": true,
                   "target": "AllPlayerAvatars",
-                  "RotationDampTime": true,
+                  "modifierName": "UNIQUE_Avatar_Sucrose_PermanentSkill_Catalysa_Electric",
                   "predicates": [
                     {
                       "$type": "ByTargetPositionToSelfPosition",
-                      "logic": "LesserOrEqual",
-                      "ratio": 40.0
+                      "compareType": "XZ",
+                      "value": 40,
+                      "logic": "LesserOrEqual"
                     }
-                  ],
-                  "modifierName": "UNIQUE_Avatar_Sucrose_PermanentSkill_Catalysa_Electric"
+                  ]
                 },
                 {
                   "$type": "ApplyModifier",
+                  "doOffStage": true,
                   "target": "AllPlayerAvatars",
-                  "RotationDampTime": true,
+                  "modifierName": "UNIQUE_Avatar_Sucrose_PermanentSkill_Catalysa_Electric",
                   "predicates": [
                     {
                       "$type": "ByAvatarElementType",
@@ -3016,96 +3196,91 @@
                     },
                     {
                       "$type": "ByTargetPositionToSelfPosition",
-                      "logic": "LesserOrEqual",
-                      "ratio": 40.0
+                      "compareType": "XZ",
+                      "value": 40,
+                      "logic": "LesserOrEqual"
                     }
-                  ],
-                  "modifierName": "UNIQUE_Avatar_Sucrose_PermanentSkill_Catalysa_Electric"
+                  ]
                 }
               ]
             }
           ]
         },
         "UNIQUE_Avatar_Sucrose_PermanentSkill_Catalysa_Fire": {
+          "duration": "%Sucrose_PermanentSkill_Catalysa_Duration",
           "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "Sucrose_PermanentSkill_Catalysa_Duration",
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_ElemMasteryDelta": "Sucrose_PermanentSkill_Catalysa_ElemMasteryDelta"
-          },
+          "buffID": 10001, //给一个buff提示。
           "state": "AttackUp",
           "isLimitedProperties": true,
-          "buffID": 10001
+          "properties": {
+            "Actor_ElemMasteryDelta": "%Sucrose_PermanentSkill_Catalysa_ElemMasteryDelta"
+          }
         },
         "UNIQUE_Avatar_Sucrose_PermanentSkill_Catalysa_Water": {
+          "duration": "%Sucrose_PermanentSkill_Catalysa_Duration",
           "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "Sucrose_PermanentSkill_Catalysa_Duration",
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_ElemMasteryDelta": "Sucrose_PermanentSkill_Catalysa_ElemMasteryDelta"
-          },
+          "buffID": 10001, //给一个buff提示。
           "state": "AttackUp",
           "isLimitedProperties": true,
-          "buffID": 10001
+          "properties": {
+            "Actor_ElemMasteryDelta": "%Sucrose_PermanentSkill_Catalysa_ElemMasteryDelta"
+          }
         },
         "UNIQUE_Avatar_Sucrose_PermanentSkill_Catalysa_Ice": {
+          "duration": "%Sucrose_PermanentSkill_Catalysa_Duration",
           "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "Sucrose_PermanentSkill_Catalysa_Duration",
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_ElemMasteryDelta": "Sucrose_PermanentSkill_Catalysa_ElemMasteryDelta"
-          },
+          "buffID": 10001, //给一个buff提示。
           "state": "AttackUp",
           "isLimitedProperties": true,
-          "buffID": 10001
+          "properties": {
+            "Actor_ElemMasteryDelta": "%Sucrose_PermanentSkill_Catalysa_ElemMasteryDelta"
+          }
         },
         "UNIQUE_Avatar_Sucrose_PermanentSkill_Catalysa_Electric": {
+          "duration": "%Sucrose_PermanentSkill_Catalysa_Duration",
           "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "Sucrose_PermanentSkill_Catalysa_Duration",
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_ElemMasteryDelta": "Sucrose_PermanentSkill_Catalysa_ElemMasteryDelta"
-          },
+          "buffID": 10001, //给一个buff提示。
           "state": "AttackUp",
           "isLimitedProperties": true,
-          "buffID": 10001
+          "properties": {
+            "Actor_ElemMasteryDelta": "%Sucrose_PermanentSkill_Catalysa_ElemMasteryDelta"
+          }
         }
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "RotationDampTime": true,
-          "modifierName": "Avatar_Sucrose_PermanentSkill_Catalysa_Handler"
-        }
-      ],
-      "isDynamicAbility": true
+      "abilitySpecials": {
+        "Sucrose_PermanentSkill_Catalysa_Duration": 0,
+        "Sucrose_PermanentSkill_Catalysa_ElemMasteryDelta": 0
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Permanent SKill 2
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Sucrose_PermanentSkill_NetherWind",
-      "abilitySpecials": {
-        "Sucrose_PermanentSkill_NetherWind_Duration": 0.0,
-        "Sucrose_PermanentSkill_NetherWind_Factor": 0.0
-      },
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Avatar_Sucrose_PermanentSkill_NetherWind_Handler",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "Avatar_Sucrose_PermanentSkill_NetherWind_Handler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
+              "doOffStage": true,
               "target": "Target",
-              "RotationDampTime": true,
               "targetPredicates": [
                 {
                   "$type": "ByAttackTags",
@@ -3118,72 +3293,71 @@
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
                   "$type": "RemoveUniqueModifier",
+                  "doOffStage": true,
+                  "modifierName": "UNIQUE_Avatar_Sucrose_PermanentSkill_NetherWind_Buff",
                   "target": "AllPlayerAvatars",
-                  "RotationDampTime": true,
                   "predicates": [
                     {
                       "$type": "ByTargetPositionToSelfPosition",
-                      "logic": "LesserOrEqual",
-                      "ratio": 40.0
+                      "compareType": "XZ",
+                      "value": 40,
+                      "logic": "LesserOrEqual"
                     }
-                  ],
-                  "modifierName": "UNIQUE_Avatar_Sucrose_PermanentSkill_NetherWind_Buff"
+                  ]
                 },
                 {
                   "$type": "ApplyModifier",
+                  "doOffStage": true,
+                  "modifierName": "UNIQUE_Avatar_Sucrose_PermanentSkill_NetherWind_Buff",
                   "target": "AllPlayerAvatars",
-                  "RotationDampTime": true,
                   "predicates": [
                     {
                       "$type": "ByTargetType",
+                      "targetType": "Self",
                       "isTarget": false
                     },
                     {
                       "$type": "ByTargetPositionToSelfPosition",
-                      "logic": "LesserOrEqual",
-                      "ratio": 40.0
+                      "compareType": "XZ",
+                      "value": 40,
+                      "logic": "LesserOrEqual"
                     }
-                  ],
-                  "modifierName": "UNIQUE_Avatar_Sucrose_PermanentSkill_NetherWind_Buff"
+                  ]
                 }
               ]
             }
           ]
         },
         "UNIQUE_Avatar_Sucrose_PermanentSkill_NetherWind_Buff": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "Sucrose_PermanentSkill_NetherWind_Duration",
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_ElemMasteryExtraDelta": [
-              "Sucrose_PermanentSkill_NetherWind_Factor",
-              "FIGHT_PROP_NONEXTRA_ELEMENT_MASTERY",
-              "MUL"
-            ]
-          },
-          "state": "AttackUp",
+          "duration": "%Sucrose_PermanentSkill_NetherWind_Duration",
+          "stacking": "Unique",
+          "buffID": 10001, //给一个buff提示。
           "isLimitedProperties": true,
-          "buffID": 10001
+          "state": "AttackUp",
+          "properties": {
+            "Actor_ElemMasteryExtraDelta": "%Sucrose_PermanentSkill_NetherWind_Factor*%FIGHT_PROP_NONEXTRA_ELEMENT_MASTERY"
+          }
         }
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "Avatar_Sucrose_PermanentSkill_NetherWind_Handler"
-        }
-      ],
-      "isDynamicAbility": true
+      "abilitySpecials": {
+        "Sucrose_PermanentSkill_NetherWind_Duration": 0,
+        "Sucrose_PermanentSkill_NetherWind_Factor": 0
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  NormalAttack & ExtraAttack
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -3192,52 +3366,77 @@
         {
           "$type": "ModifyDamageMixin",
           "attackTags": ["NormalAttack_01"],
-          "HBIOLEEGHPD": "Sucrose_NormalAttack_01_DamagePercentage",
-          "CCNJGLPMIEP": 0.0
+          "damagePercentage": "%Sucrose_NormalAttack_01_DamagePercentage"
         },
         {
           "$type": "ModifyDamageMixin",
           "attackTags": ["NormalAttack_02"],
-          "HBIOLEEGHPD": "Sucrose_NormalAttack_02_DamagePercentage",
-          "CCNJGLPMIEP": 0.0
+          "damagePercentage": "%Sucrose_NormalAttack_02_DamagePercentage"
         },
         {
           "$type": "ModifyDamageMixin",
           "attackTags": ["NormalAttack_03"],
-          "HBIOLEEGHPD": "Sucrose_NormalAttack_03_DamagePercentage",
-          "CCNJGLPMIEP": 0.0
+          "damagePercentage": "%Sucrose_NormalAttack_03_DamagePercentage"
         },
         {
           "$type": "ModifyDamageMixin",
           "attackTags": ["NormalAttack_04"],
-          "HBIOLEEGHPD": "Sucrose_NormalAttack_04_DamagePercentage",
-          "CCNJGLPMIEP": 0.0
+          "damagePercentage": "%Sucrose_NormalAttack_04_DamagePercentage"
         },
         {
           "$type": "ModifyDamageMixin",
           "attackTags": ["ExtraAttack"],
-          "HBIOLEEGHPD": "Sucrose_ExtraAttack_DamagePercentage",
-          "CCNJGLPMIEP": 0.0
+          "damagePercentage": "%Sucrose_ExtraAttack_DamagePercentage"
         }
       ],
-      "abilitySpecials": {
-        "Sucrose_NormalAttack_01_DamagePercentage": 0.0,
-        "Sucrose_NormalAttack_02_DamagePercentage": 0.0,
-        "Sucrose_NormalAttack_03_DamagePercentage": 0.0,
-        "Sucrose_NormalAttack_04_DamagePercentage": 0.0,
-        "Sucrose_ExtraAttack_DamagePercentage": 0.0,
-        "Sucrose_Paranoid_ReduceColdDown": 0.0
-      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "doOffStage": true,
+          "modifierName": "UNIQUE_Avatar_Sucrose_NormalAttack_DamageHandler_Paranoid",
+          "predicates": [
+            {
+              "$type": "ByUnlockTalentParam",
+              "talentParam": "Avatar_Sucrose_Contellation_4"
+            }
+          ]
+        },
+        {
+          "$type": "RemoveUniqueModifier",
+          "doOffStage": true,
+          "modifierName": "UNIQUE_Avatar_Sucrose_NormalAttack_DamageHandler_Paranoid",
+          "predicates": [
+            {
+              "$type": "ByNot",
+              "predicates": [
+                {
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "Avatar_Sucrose_Contellation_4"
+                }
+              ]
+            }
+          ]
+        }
+      ],
       "modifiers": {
         "UNIQUE_Avatar_Sucrose_NormalAttack_DamageHandler_Paranoid": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          //初始化
+          "onAdded": [
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": true,
+              "key": "_ABILITY_PARANOID_COUNT",
+              "value": 0,
+              "useLimitRange": true,
+              "maxValue": 0,
+              "minValue": 0
+            }
+          ],
           "modifierMixins": [
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_PARANOID_COUNT",
-              "defaultGlobalValueOnCreate": 0.0,
               "valueSteps": [-0.5, 6.5, 7.5],
               "modifierNameSteps": [
                 "Sucrose_Paranoid_Blank",
@@ -3245,33 +3444,11 @@
               ]
             }
           ],
-          "onAdded": [
-            {
-              "$type": "AddGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
-              "key": "_ABILITY_PARANOID_COUNT",
-              "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "AddGlobalValue",
-              "RotationDampTime": true,
-              "ratio": -10.0,
-              "key": "_ABILITY_PARANOID_COUNT",
-              "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
-            }
-          ],
           "onAttackLanded": [
             {
               "$type": "Predicated",
+              "doOffStage": true,
               "target": "Target",
-              "RotationDampTime": true,
               "targetPredicates": [
                 {
                   "$type": "ByAttackTags",
@@ -3290,7 +3467,7 @@
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
               ],
@@ -3301,31 +3478,35 @@
                 }
               ]
             }
-          ]
-        },
-        "Avatar_Sucrose_NormalAttack_DamageHandler_Paranoid_AddCount": {
-          "stacking": "Unique",
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
+          ],
+          "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
+              "doOffStage": true,
               "key": "_ABILITY_PARANOID_COUNT",
+              "value": -10,
               "useLimitRange": true,
-              "maxValue": 7.0,
-              "minValue": 0.0
+              "maxValue": 0,
+              "minValue": 0
             }
           ]
         },
-        "Sucrose_Paranoid_Blank": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
+        "Avatar_Sucrose_NormalAttack_DamageHandler_Paranoid_AddCount": {
+          "duration": 0.1,
+          "stacking": "Unique",
+          "onAdded": [
+            {
+              "$type": "AddGlobalValue",
+              "key": "_ABILITY_PARANOID_COUNT",
+              "value": 1,
+              "useLimitRange": true,
+              "maxValue": 7,
+              "minValue": 0
+            }
+          ]
         },
+        "Sucrose_Paranoid_Blank": {},
         "Sucrose_Paranoid_Handler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
@@ -3333,63 +3514,214 @@
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": -10.0,
               "key": "_ABILITY_PARANOID_COUNT",
+              "value": -10,
               "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "maxValue": 0,
+              "minValue": 0
             }
           ]
         },
         "Avatar_Sucrose_NormalAttack_DamageHandler_Paranoid_ReduceColdDown": {
+          "duration": 1.5,
           "stacking": "Unique",
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.5,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetRandomOverrideMapValue",
-              "valueRangeMax": -1.0,
-              "valueRangeMin": -7.0,
-              "overrideMapKey": "Sucrose_Paranoid_ReduceColdDown"
+              "overrideMapKey": "Sucrose_Paranoid_ReduceColdDown",
+              "valueRangeMax": -1,
+              "valueRangeMin": -7
             },
             {
               "$type": "ModifyAvatarSkillCD",
               "skillID": 10432,
-              "LLBNPMBNPDL": "Sucrose_Paranoid_ReduceColdDown"
+              "cdDelta": "%Sucrose_Paranoid_ReduceColdDown"
             }
+            /*						{
+							"$type": "SetRandomOverrideMapValue",
+							"overrideMapKey": "Sucrose_Paranoid_ReduceColdDown",
+							"valueRangeMax": -1,
+							"valueRangeMin": -7.95,
+						},
+						{
+							"$type": "ModifyAvatarSkillCD",
+							"skillID": 10432,
+							"cdDelta": -1,
+							"predicates":
+							[
+								{
+									"$type": "ByTargetOverrideMapValue",
+									"target": "Self",
+									"targetAbilityName": "Avatar_Sucrose_NormalAttack_DamageHandler",
+									"targetKey": "Sucrose_Paranoid_ReduceColdDown",
+									"targetValue": 1,
+									"logic": "GreaterOrEqual",
+								},
+								{
+									"$type": "ByTargetOverrideMapValue",
+									"target": "Self",
+									"targetAbilityName": "Avatar_Sucrose_NormalAttack_DamageHandler",
+									"targetKey": "Sucrose_Paranoid_ReduceColdDown",
+									"targetValue": 2,
+									"logic": "Lesser",
+								},
+							],
+						},
+						{
+							"$type": "ModifyAvatarSkillCD",
+							"skillID": 10432,
+							"cdDelta": -2,
+							"predicates":
+							[
+								{
+									"$type": "ByTargetOverrideMapValue",
+									"target": "Self",
+									"targetAbilityName": "Avatar_Sucrose_NormalAttack_DamageHandler",
+									"targetKey": "Sucrose_Paranoid_ReduceColdDown",
+									"targetValue": 2,
+									"logic": "GreaterOrEqual",
+								},
+								{
+									"$type": "ByTargetOverrideMapValue",
+									"target": "Self",
+									"targetAbilityName": "Avatar_Sucrose_NormalAttack_DamageHandler",
+									"targetKey": "Sucrose_Paranoid_ReduceColdDown",
+									"targetValue": 3,
+									"logic": "Lesser",
+								},
+							],
+						},
+						{
+							"$type": "ModifyAvatarSkillCD",
+							"skillID": 10432,
+							"cdDelta": -3,
+							"predicates":
+							[
+								{
+									"$type": "ByTargetOverrideMapValue",
+									"target": "Self",
+									"targetAbilityName": "Avatar_Sucrose_NormalAttack_DamageHandler",
+									"targetKey": "Sucrose_Paranoid_ReduceColdDown",
+									"targetValue": 3,
+									"logic": "GreaterOrEqual",
+								},
+								{
+									"$type": "ByTargetOverrideMapValue",
+									"target": "Self",
+									"targetAbilityName": "Avatar_Sucrose_NormalAttack_DamageHandler",
+									"targetKey": "Sucrose_Paranoid_ReduceColdDown",
+									"targetValue": 4,
+									"logic": "Lesser",
+								},
+							],
+						},
+						{
+							"$type": "ModifyAvatarSkillCD",
+							"skillID": 10432,
+							"cdDelta": -4,
+							"predicates":
+							[
+								{
+									"$type": "ByTargetOverrideMapValue",
+									"target": "Self",
+									"targetAbilityName": "Avatar_Sucrose_NormalAttack_DamageHandler",
+									"targetKey": "Sucrose_Paranoid_ReduceColdDown",
+									"targetValue": 4,
+									"logic": "GreaterOrEqual",
+								},
+								{
+									"$type": "ByTargetOverrideMapValue",
+									"target": "Self",
+									"targetAbilityName": "Avatar_Sucrose_NormalAttack_DamageHandler",
+									"targetKey": "Sucrose_Paranoid_ReduceColdDown",
+									"targetValue": 5,
+									"logic": "Lesser",
+								},
+							],
+						},
+						{
+							"$type": "ModifyAvatarSkillCD",
+							"skillID": 10432,
+							"cdDelta": -5,
+							"predicates":
+							[
+								{
+									"$type": "ByTargetOverrideMapValue",
+									"target": "Self",
+									"targetAbilityName": "Avatar_Sucrose_NormalAttack_DamageHandler",
+									"targetKey": "Sucrose_Paranoid_ReduceColdDown",
+									"targetValue": 5,
+									"logic": "GreaterOrEqual",
+								},
+								{
+									"$type": "ByTargetOverrideMapValue",
+									"target": "Self",
+									"targetAbilityName": "Avatar_Sucrose_NormalAttack_DamageHandler",
+									"targetKey": "Sucrose_Paranoid_ReduceColdDown",
+									"targetValue": 6,
+									"logic": "Lesser",
+								},
+							],
+						},
+						{
+							"$type": "ModifyAvatarSkillCD",
+							"skillID": 10432,
+							"cdDelta": -6,
+							"predicates":
+							[
+								{
+									"$type": "ByTargetOverrideMapValue",
+									"target": "Self",
+									"targetAbilityName": "Avatar_Sucrose_NormalAttack_DamageHandler",
+									"targetKey": "Sucrose_Paranoid_ReduceColdDown",
+									"targetValue": 6,
+									"logic": "GreaterOrEqual",
+								},
+								{
+									"$type": "ByTargetOverrideMapValue",
+									"target": "Self",
+									"targetAbilityName": "Avatar_Sucrose_NormalAttack_DamageHandler",
+									"targetKey": "Sucrose_Paranoid_ReduceColdDown",
+									"targetValue": 7,
+									"logic": "Lesser",
+								},
+							],
+						},
+						{
+							"$type": "ModifyAvatarSkillCD",
+							"skillID": 10432,
+							"cdDelta": -7,
+							"predicates":
+							[
+								{
+									"$type": "ByTargetOverrideMapValue",
+									"target": "Self",
+									"targetAbilityName": "Avatar_Sucrose_NormalAttack_DamageHandler",
+									"targetKey": "Sucrose_Paranoid_ReduceColdDown",
+									"targetValue": 7,
+									"logic": "GreaterOrEqual",
+								},
+								{
+									"$type": "ByTargetOverrideMapValue",
+									"target": "Self",
+									"targetAbilityName": "Avatar_Sucrose_NormalAttack_DamageHandler",
+									"targetKey": "Sucrose_Paranoid_ReduceColdDown",
+									"targetValue": 8,
+									"logic": "Lesser",
+								},
+							],
+						},*/
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "RotationDampTime": true,
-          "predicates": [
-            {
-              "$type": "ByUnlockTalentParam",
-              "talentParam": "Avatar_Sucrose_Contellation_4"
-            }
-          ],
-          "modifierName": "UNIQUE_Avatar_Sucrose_NormalAttack_DamageHandler_Paranoid"
-        },
-        {
-          "$type": "RemoveUniqueModifier",
-          "RotationDampTime": true,
-          "predicates": [
-            {
-              "$type": "ByNot",
-              "predicates": [
-                {
-                  "$type": "ByUnlockTalentParam",
-                  "talentParam": "Avatar_Sucrose_Contellation_4"
-                }
-              ]
-            }
-          ],
-          "modifierName": "UNIQUE_Avatar_Sucrose_NormalAttack_DamageHandler_Paranoid"
-        }
-      ]
+      "abilitySpecials": {
+        "Sucrose_NormalAttack_01_DamagePercentage": 0,
+        "Sucrose_NormalAttack_02_DamagePercentage": 0,
+        "Sucrose_NormalAttack_03_DamagePercentage": 0,
+        "Sucrose_NormalAttack_04_DamagePercentage": 0,
+        "Sucrose_ExtraAttack_DamagePercentage": 0,
+        "Sucrose_Paranoid_ReduceColdDown": 0
+      }
     }
   }
 ]

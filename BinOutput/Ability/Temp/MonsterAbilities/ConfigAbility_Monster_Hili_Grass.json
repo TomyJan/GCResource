@@ -1,4 +1,9 @@
 [
+  ////////////////////////////////////////////////////////////////
+  //
+  //  PlantThorns
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -9,10 +14,11 @@
           "bulletID": 42101002,
           "born": {
             "$type": "ConfigBornByTarget",
+            //"attachPointName" : "RootNode",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.30000001192092896,
-              "PJCOKIGCJOK": 0.0
+              "x": 0.0,
+              "y": 0.3,
+              "z": 0.0
             }
           }
         }
@@ -23,26 +29,30 @@
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Hili_Grass_PlantThorns_Loop",
-      "modifiers": {
-        "GrassMaterial": {
-          "modifierName": "",
-          "elementType": "Grass",
-          "bonusCriticalHurt": 100.0
-        }
-      },
       "onAdded": [
         {
           "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Undead_01_Plant_Thorns",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_Monster_Undead_01_Plant_Thorns"
         },
         {
           "$type": "AttachModifier",
-          "modifierName": "GrassMaterial"
+          "modifierName": "GrassMaterial",
+          "target": "Self"
         }
-      ]
+      ],
+      "modifiers": {
+        "GrassMaterial": {
+          "elementType": "Grass",
+          "elementDurability": 100
+        }
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  PlantGrasping
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -50,17 +60,18 @@
       "onAbilityStart": [
         {
           "$type": "CreateGadget",
-          "born": {
-            "$type": "ConfigBornByTarget",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            }
-          },
           "gadgetID": 42101008,
           "campID": 4001,
-          "campTargetType": "All"
+          "campTargetType": "All",
+          "born": {
+            "$type": "ConfigBornByTarget",
+            //"attachPointName" : "RootNode",
+            "offset": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
+          }
         }
       ]
     }
@@ -69,17 +80,22 @@
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Hili_Grass_PlantGrasping_Element",
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "PlantGraspingElement",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "PlantGraspingElement": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 8.0,
+          "duration": 8,
           "elementType": "Grass",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Undead_01_Plant_Grasping",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Undead_01_Plant_Grasping"
             }
           ],
           "onRemoved": [
@@ -88,79 +104,81 @@
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "PlantGraspingElement"
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Heal over Time
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Hili_Grass_Heal",
-      "abilitySpecials": {
-        "healHPRatio": 0.10000000149011612,
-        "healHPRatioRetain": 0.019999999552965164
-      },
-      "modifiers": {
-        "HealHPModifier": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 6.0,
-          "elementType": "Grass",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.30000001192092896,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Undead_01_Plant_Heal",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Hili_Grass_HealRetain",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "HealHP",
-              "RotationDampTime": true,
-              "amountByCasterMaxHPRatio": "healHPRatio",
-              "muteHealEffect": true
-            }
-          ],
-          "onThinkInterval": [
-            {
-              "$type": "HealHP",
-              "RotationDampTime": true,
-              "amountByCasterMaxHPRatio": "healHPRatioRetain",
-              "muteHealEffect": true
-            }
-          ]
-        }
-      },
       "onAbilityStart": [
         {
           "$type": "AttachModifier",
+          "modifierName": "HealHPModifier",
           "otherTargets": {
             "$type": "SelectTargetsByShape",
-            "topLimit": 1,
             "shapeName": "CircleR10",
+            "centerBasedOn": "Self",
             "campTargetType": "Alliance",
-            "sizeRatio": 1.0
+            "campBasedOn": "Self",
+            "topLimit": 1
           },
           "predicates": [
             {
               "$type": "ByEntityTypes",
               "entityTypes": ["Monster"]
             }
-          ],
-          "modifierName": "HealHPModifier"
+          ]
         }
-      ]
+      ],
+      "modifiers": {
+        "HealHPModifier": {
+          "duration": 6,
+          "elementType": "Grass",
+          "elementDurability": 100,
+          "thinkInterval": 0.3,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Undead_01_Plant_Heal"
+            },
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Hili_Grass_HealRetain"
+            },
+            {
+              "$type": "HealHP",
+              "doOffStage": true,
+              "amountByTargetMaxHPRatio": "%healHPRatio",
+              "muteHealEffect": true
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "HealHP",
+              "doOffStage": true,
+              "amountByTargetMaxHPRatio": "%healHPRatioRetain",
+              "muteHealEffect": true
+            }
+          ]
+        }
+      },
+      "abilitySpecials": {
+        "healHPRatio": 0.1,
+        "healHPRatioRetain": 0.02
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  // MonEquip_WoodenClub_Grass_Effect
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -168,79 +186,78 @@
       "abilityMixins": [
         {
           "$type": "AttachModifierToPredicateMixin",
+          "modifierName": "Grass_Effect",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_IS_CLUB_",
-              "ratio": 1.0
+              "value": 1.0,
+              "compareType": "Equal"
             }
-          ],
-          "modifierName": "Grass_Effect"
+          ]
         }
       ],
       "modifiers": {
         "Grass_Effect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Shaman_Grass_WeaponElement",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Shaman_Grass_WeaponElement"
             }
           ],
           "onAttackLanded": [
             {
               "$type": "ApplyModifier",
+              "modifierName": "Poison",
               "target": "Target",
               "predicates": [
                 {
                   "$type": "ByEntityTypes",
                   "entityTypes": ["Avatar"]
                 }
-              ],
-              "modifierName": "Poison"
+              ]
             }
           ]
         },
         "Poison": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 8.0,
+          "stacking": "Refresh",
+          "duration": 8.0,
           "elementType": "Grass",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 1.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Slime_Grass_Poison_Dot",
-              "EBHJMLOKDGB": -1.0
-            }
-          ],
+          "elementDurability": 100,
+          "thinkInterval": 1,
           "onThinkInterval": [
             {
               "$type": "DamageByAttackValue",
+              "target": "Self",
               "attackInfo": {
-                "attackTag": "",
-                "attenuationTag": "",
-                "attenuationGroup": "default",
                 "attackProperty": {
-                  "HBIOLEEGHPD": 0.20000000298023224,
-                  "CCNJGLPMIEP": 0.0,
+                  "damagePercentage": 0.2,
                   "elementType": "Grass",
-                  "bonusCriticalHurt": 30.0,
+                  "elementDurability": 30,
                   "strikeType": "Default"
                 },
                 "hitPattern": {
                   "onHitEffectName": "",
-                  "hitImpulseType": ""
+                  "hitLevel": "Mute"
                 }
               }
+            }
+          ],
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Slime_Grass_Poison_Dot"
             }
           ]
         }
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  OtherConfig
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -249,9 +266,11 @@
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["ThrowAttack"],
-          "angularSpeed": 180.0,
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 1.0,
+          "angularSpeed": 180,
           "attackTrigger": "",
-          "attackDistance": 12.0
+          "attackDistance": 12
         }
       ]
     }

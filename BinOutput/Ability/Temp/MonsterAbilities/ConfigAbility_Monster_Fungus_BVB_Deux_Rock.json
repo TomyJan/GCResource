@@ -1,73 +1,89 @@
 [
+  // 蕈兽BVB活动 - 伸展岩    yiming.liao
+  //
   {
     "Default": {
       "$type": "ConfigAbility",
+      /// @desc 嘲讽逻辑
       "abilityName": "Fungus_Deux_BVB_Rock_Taunt",
+      "onAbilityStart": [
+        // 嘲讽特效
+        {
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Monster_Fungus_Deux_Rock_Taunt"
+        },
+        // 自身霸体
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "RockEndure"
+        }
+      ],
       "modifiers": {
         "RockEndure": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 8.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 8,
           "properties": {
-            "Actor_EndureDelta": 0.33000001311302185
+            "Actor_EndureDelta": 0.33
           },
           "onAdded": [
             {
               "$type": "TriggerTaunt",
+              "tauntLevel": "Ability_TauntLevel_4",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR15",
+                "centerBasedOn": "Self",
                 "campTargetType": "Enemy",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
+              // 仇恨值的提升量
+              "careValue": 660,
               "predicates": [
                 {
                   "$type": "ByEntityTypes",
                   "entityTypes": ["Monster", "Partner"]
                 }
-              ],
-              "tauntLevel": "Ability_TauntLevel_4",
-              "careValue": 660.0
+              ]
             }
           ],
           "onRemoved": [
             {
               "$type": "TriggerTaunt",
+              "tauntLevel": "Ability_TauntLevel_4",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR15",
+                "centerBasedOn": "Self",
                 "campTargetType": "Enemy",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
+              // 结束时，仇恨值的减少量
+              "careValue": -410,
               "predicates": [
                 {
                   "$type": "ByEntityTypes",
                   "entityTypes": ["Monster", "Partner"]
                 }
-              ],
-              "tauntLevel": "Ability_TauntLevel_4",
-              "careValue": -410.0
+              ]
             }
           ]
+          // 这一波操作可以让岩的仇恨在20秒之后达到800，之后峰值可以维持到800左右
+          // 全力输出，伸展风和燃烧反应也需要约30秒的时间达到800
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Fungus_Deux_Rock_Taunt",
-          "EBHJMLOKDGB": -1.0
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "RockEndure"
-        }
-      ]
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
+      /// @desc 对特定Tag的攻击，大量削减岩元素
       "abilityName": "Fungus_Deux_BVB_Rock_RockConsuming",
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "RockConsuming_Moniter"
+        }
+      ],
+      // 大招的Shader管理，配合特效同学用 就不写一个新的Ability了
       "abilityMixins": [
         {
           "$type": "DoActionByStateIDMixin",
@@ -81,10 +97,14 @@
         }
       ],
       "modifiers": {
-        "RockConsuming_Monitor": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+        "RockConsuming_Moniter": {
           "onAttackLanded": [
+            // if (AttackTags == "BVB_FungusRock_UB") {
+            //		HasRockElement ? MinusRockElementDurability(-150);
+            // }
+            // else if (AttackTags == "BVB_FungusRock_Melee") {
+            //		HasRockElement ? MinusRockElementDurability(-60);
+            // }
             {
               "$type": "Predicated",
               "target": "Target",
@@ -101,15 +121,14 @@
               "successActions": [
                 {
                   "$type": "AddElementDurability",
-                  "target": "Target",
-                  "ratio": -300.0,
-                  "modifierName": "",
+                  "value": -300.0,
                   "elementType": "Rock",
                   "sortModifier": "All",
-                  "maxValue": 3.4028234663852886e38
+                  "target": "Target"
                 }
               ]
             },
+            // 小技能判据
             {
               "$type": "Predicated",
               "target": "Target",
@@ -126,118 +145,16 @@
               "successActions": [
                 {
                   "$type": "AddElementDurability",
-                  "target": "Target",
-                  "ratio": -50.0,
-                  "modifierName": "",
+                  "value": -50.0,
                   "elementType": "Rock",
                   "sortModifier": "All",
-                  "maxValue": 3.4028234663852886e38
+                  "target": "Target"
                 }
               ]
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "RockConsuming_Monitor"
-        }
-      ]
-    }
-  },
-  {
-    "Default": {
-      "$type": "ConfigAbility",
-      "abilityName": "Fungus_Deux_BVB_Rock_TeamShield",
-      "abilitySpecials": {
-        "sub_hurt_delta_positive": 0.4000000059604645
-      },
-      "modifiers": {
-        "Shield_Handler": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "RemoveModifier",
-              "modifierName": "Fungus_Rock_TeamShield"
-            },
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "Fungus_Rock_TeamShield"
-            }
-          ]
-        },
-        "Fungus_Rock_TeamShield": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 10.0,
-          "bonusCriticalHurt": 100.0,
-          "modifierMixins": [
-            {
-              "$type": "EliteShieldMixin",
-              "shieldType": "default",
-              "DJBPNOPNHFH": 360.0,
-              "shieldHP": 0.699999988079071,
-              "costShieldRatioName": "",
-              "showDamageText": ""
-            }
-          ],
-          "properties": {
-            "Actor_EndureDelta": 0.30000001192092896
-          },
-          "onAdded": [
-            {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Fungus_Deux_Rock_TeamShield_Buff",
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        },
-        "Passive_Resistance": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_PhysicalSubHurtDelta": "sub_hurt_delta_positive",
-            "Actor_FireSubHurtDelta": "sub_hurt_delta_positive",
-            "Actor_ElecSubHurtDelta": "sub_hurt_delta_positive",
-            "Actor_IceSubHurtDelta": "sub_hurt_delta_positive",
-            "Actor_WaterSubHurtDelta": "sub_hurt_delta_positive",
-            "Actor_GrassSubHurtDelta": "sub_hurt_delta_positive",
-            "Actor_WindSubHurtDelta": "sub_hurt_delta_positive",
-            "Actor_RockSubHurtDelta": "sub_hurt_delta_positive"
-          }
-        }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Passive_Resistance"
-        }
-      ],
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "otherTargets": {
-            "$type": "SelectTargetsByShape",
-            "shapeName": "CircleR30H10",
-            "campTargetType": "SelfCamp",
-            "sizeRatio": 1.0
-          },
-          "predicates": [
-            {
-              "$type": "ByEntityTypes",
-              "entityTypes": ["Partner", "Monster"]
-            }
-          ],
-          "modifierName": "Shield_Handler"
-        },
-        {
-          "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Fungus_Deux_Rock_TeamShield",
-          "EBHJMLOKDGB": -1.0
-        }
-      ]
+      }
     }
   }
 ]

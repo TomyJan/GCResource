@@ -1,80 +1,111 @@
 [
+  // 镀金旅团-弯刀    yiming.liao
+  // Index:
+  //      - Eremite_Simitar_AnimatorSteer@ 攻击动作旋转Mixin
+  //		- Eremite_Simitar_Slash_Dist_Calc@
+  //			- 触发：如果与攻击目标的距离过近，Set动画状态机的后跳Trigger
+  //		- Eremite_Simitar_Feint_Manager@ 试探攻击的连招管理
+  //			- 触发：如果满足某些特定条件，Set Feint循环的结束Trigger；以及避免网络延迟的保底距离计算
+  // 		- Eremite_Simitar_SpecialTaunt@ 彩蛋嘲讽的成就逻辑和受击逻辑
+  //
+
+  // .d8888. d888888b d88888b d88888b d8888b.
+  // 88'  YP `~~88~~' 88'     88'     88  `8D
+  // `8bo.      88    88ooooo 88ooooo 88oobY'
+  //   `Y8b.    88    88~~~~~ 88~~~~~ 88`8b
+  // db   8D    88    88.     88.     88 `88.
+  // `8888Y'    YP    Y88888P Y88888P 88   YD
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Eremite_Simitar_AnimatorSteer",
       "abilityMixins": [
+        // Slash 01
         {
           "$type": "SteerAttackTraceMixin",
           "steerStateIDs": ["Slash01", "Loop_Slash01"],
-          "startNormalizedTime": 0.08699999749660492,
-          "endNormalizedTime": 0.3370000123977661,
-          "angularSpeed": 55.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.087,
+          "endNormalizedTime": 0.337,
+          "angularSpeed": 55
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Slash01_AB"],
-          "angularSpeed": 300.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 1,
+          "angularSpeed": 300
         },
+        // Slash 02
         {
           "$type": "SteerAttackTraceMixin",
           "steerStateIDs": ["Slash02", "Loop_Slash02"],
-          "startNormalizedTime": 0.10199999809265137,
-          "endNormalizedTime": 0.3610000014305115,
-          "angularSpeed": 55.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.102,
+          "endNormalizedTime": 0.361,
+          "angularSpeed": 55
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Slash02_AB"],
-          "angularSpeed": 300.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 1,
+          "angularSpeed": 300
         },
+        // Jumpback 跳之前调整好方向
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["JumpBack"],
-          "endNormalizedTime": 0.14100000262260437,
-          "angularSpeed": 600.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 0.141,
+          "angularSpeed": 600
         },
+        // Feint
         {
           "$type": "SteerAttackTraceMixin",
           "steerStateIDs": ["Feint_Loop"],
-          "endNormalizedTime": 99.0,
-          "angularSpeed": 45.0,
-          "attackTrigger": ""
+          "endNormalizedTime": 99,
+          "angularSpeed": 45
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Feint_BS"],
-          "angularSpeed": 300.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 1.0,
+          "angularSpeed": 300
         },
+        // Taunt02
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Taunt"],
-          "angularSpeed": 300.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 1.0,
+          "angularSpeed": 300
         },
+        // Alert
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Alert"],
-          "angularSpeed": 270.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 1.0,
+          "angularSpeed": 270
         },
+        // Special Alert
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Crossleg_Alert"],
-          "startNormalizedTime": 0.13699999451637268,
-          "endNormalizedTime": 0.800000011920929,
-          "angularSpeed": 320.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.137,
+          "endNormalizedTime": 0.8,
+          "angularSpeed": 320
         }
       ]
     }
   },
+
+  // .d8888. db       .d8b.  .d8888. db   db
+  // 88'  YP 88      d8' `8b 88'  YP 88   88
+  // `8bo.   88      88ooo88 `8bo.   88ooo88
+  //   `Y8b. 88      88~~~88   `Y8b. 88~~~88
+  // db   8D 88booo. 88   88 db   8D 88   88
+  // `8888Y' Y88888P YP   YP `8888Y' YP   YP
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -82,27 +113,75 @@
       "onAbilityStart": [
         {
           "$type": "SetAnimatorTrigger",
+          "triggerID": "JumpBackTrigger",
           "predicates": [
             {
               "$type": "ByTargetPositionToSelfPosition",
               "target": "SelfAttackTarget",
+              "compareType": "XZ",
               "logic": "Lesser",
-              "ratio": 4.0
+              "value": 4
             }
-          ],
-          "triggerID": "JumpBackTrigger"
+          ]
         }
       ]
     }
   },
+
+  // d88888b d88888b d888888b d8b   db d888888b
+  // 88'     88'       `88'   888o  88 `~~88~~'
+  // 88ooo   88ooooo    88    88V8o 88    88
+  // 88~~~   88~~~~~    88    88 V8o88    88
+  // 88      88.       .88.   88  V888    88
+  // YP      Y88888P Y888888P VP   V8P    YP
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Eremite_Simitar_Feint_Manager",
+      // 有以下几种情况会结束：
+      // 		- 距离目标过远 - 使用下面的Trigger时的Action控制
+      //		- 目标角度与自身朝向角度差值过大   -  直接使用状态机参数控制
+      //      - 次数上限保险 - 直接使用动画融合Loop次数控制
+      "onAbilityStart": [
+        // 结束判定
+        {
+          "$type": "SetAnimatorTrigger",
+          "triggerID": "FeintEndTrigger",
+          "target": "Self",
+          "predicates": [
+            {
+              "$type": "ByTargetPositionToSelfPosition",
+              "target": "SelfAttackTarget",
+              "compareType": "XZ",
+              "logic": "Greater",
+              "value": 11.5
+            }
+          ]
+        },
+        // 连招判定
+        {
+          "$type": "SetAnimatorTrigger",
+          "triggerID": "FeintHitTrigger",
+          "predicates": [
+            {
+              "$type": "ByTargetPositionToSelfPosition",
+              "target": "SelfAttackTarget",
+              "compareType": "XZ",
+              "logic": "Lesser",
+              "value": 2.3
+            }
+          ]
+        }
+      ],
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Simitar_Feint_Monitor"
+        }
+      ],
       "modifiers": {
         "Simitar_Feint_Monitor": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          // 当试探攻击命中玩家时  设定Trigger用于循环结束
           "onAttackLanded": [
             {
               "$type": "Predicated",
@@ -110,7 +189,7 @@
               "targetPredicates": [
                 {
                   "$type": "ByEntityTypes",
-                  "entityTypes": ["Avatar", "Monster", "Partner"]
+                  "entityTypes": ["Avatar", "Monster", "Partner"] // 3.1 新增友方助战弯刀之后的调整
                 },
                 {
                   "$type": "ByAttackTags",
@@ -120,7 +199,8 @@
               "successActions": [
                 {
                   "$type": "SetAnimatorTrigger",
-                  "triggerID": "FeintHitTrigger"
+                  "triggerID": "FeintHitTrigger",
+                  "target": "Self"
                 },
                 {
                   "$type": "SetSelfAttackTarget",
@@ -130,40 +210,16 @@
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Simitar_Feint_Monitor"
-        }
-      ],
-      "onAbilityStart": [
-        {
-          "$type": "SetAnimatorTrigger",
-          "predicates": [
-            {
-              "$type": "ByTargetPositionToSelfPosition",
-              "target": "SelfAttackTarget",
-              "ratio": 11.5
-            }
-          ],
-          "triggerID": "FeintEndTrigger"
-        },
-        {
-          "$type": "SetAnimatorTrigger",
-          "predicates": [
-            {
-              "$type": "ByTargetPositionToSelfPosition",
-              "target": "SelfAttackTarget",
-              "logic": "Lesser",
-              "ratio": 2.299999952316284
-            }
-          ],
-          "triggerID": "FeintHitTrigger"
-        }
-      ]
+      }
     }
   },
+  // //
+  //  .d8b.   .o88b. db   db d888888b d88888b db    db d88888b .88b  d88. d88888b d8b   db d888888b
+  // d8' `8b d8P  Y8 88   88   `88'   88'     88    88 88'     88'YbdP`88 88'     888o  88 `~~88~~'
+  // 88ooo88 8P      88ooo88    88    88ooooo Y8    8P 88ooooo 88  88  88 88ooooo 88V8o 88    88
+  // 88~~~88 8b      88~~~88    88    88~~~~~ `8b  d8' 88~~~~~ 88  88  88 88~~~~~ 88 V8o88    88
+  // 88   88 Y8b  d8 88   88   .88.   88.      `8bd8'  88.     88  88  88 88.     88  V888    88
+  // YP   YP  `Y88P' YP   YP Y888888P Y88888P    YP    Y88888P YP  YP  YP Y88888P VP   V8P    YP
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -172,15 +228,14 @@
         {
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "Taunt01",
-          "modifierName": "SpecialTaunt_Monitor",
-          "normalizeStart": 0.10999999940395355,
-          "normalizeEnd": 0.8899999856948853
+          "normalizeStart": 0.11,
+          "normalizeEnd": 0.89,
+          "modifierName": "SpecialTaunt_Monitor"
         }
       ],
       "modifiers": {
         "SpecialTaunt_Monitor": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          // 当在特殊嘲讽状态下时，被箭矢、投射物命中，则解锁成就
           "onBeingHit": [
             {
               "$type": "Predicated",
@@ -195,33 +250,31 @@
                 {
                   "$type": "ApplyModifier",
                   "target": "TargetOwner",
+                  "modifierName": "Achievement_82129_Unlocker",
                   "predicates": [
                     {
                       "$type": "ByEntityTypes",
+                      "target": "Target",
                       "entityTypes": ["Avatar"]
                     }
-                  ],
-                  "modifierName": "Achievement_82129_Unlocker"
+                  ]
                 },
+                // 会有一个被击飞的额外效果
                 {
                   "$type": "DamageByAttackValue",
+                  "target": "Self",
                   "attackInfo": {
-                    "attackTag": "",
-                    "attenuationTag": "",
-                    "attenuationGroup": "default",
                     "attackProperty": {
-                      "CCNJGLPMIEP": 0.0,
-                      "bonusCriticalHurt": 100.0,
+                      "ignoreModifyDamage": true,
+                      "damageExtra": 0,
                       "strikeType": "Default",
-                      "enBreak": 200.0,
-                      "damageExtra": 0.0,
-                      "bonusCritical": true
+                      "elementType": "None",
+                      "enBreak": 200
                     },
+                    "canHitHead": true,
                     "hitPattern": {
-                      "onHitEffectName": "default",
                       "hitImpulseType": "LV5"
-                    },
-                    "canHitHead": true
+                    }
                   }
                 }
               ]
@@ -229,9 +282,7 @@
           ]
         },
         "Achievement_82129_Unlocker": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.1,
           "onAdded": [
             {
               "$type": "DoWatcherSystemAction",
@@ -246,16 +297,17 @@
   {
     "Default": {
       "$type": "ConfigAbility",
+      /// @desc 如果不希望弯刀哥使用嘲讽技能，可以加上这个词缀
       "abilityName": "Affix_Eremite_Simitar_NeverTaunt",
+      "isDynamicAbility": true,
       "onAdded": [
         {
           "$type": "SetAnimatorBool",
-          "canBeHandledOnRecover": true,
           "boolID": "DisableTaunt",
-          "ratio": true
+          "value": true,
+          "canBeHandledOnRecover": true
         }
-      ],
-      "isDynamicAbility": true
+      ]
     }
   }
 ]

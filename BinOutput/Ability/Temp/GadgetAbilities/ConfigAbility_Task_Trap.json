@@ -14,24 +14,39 @@
         },
         {
           "$type": "AddGlobalValue",
-          "ratio": 1.0,
           "key": "_Is_Hunt_Trap",
+          "value": 1,
           "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
+          "maxValue": 1,
+          "minValue": 0
         }
       ]
     }
   },
+
   {
+    //创建时陷阱能力改变怪物AI和自杀
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_Task_TrapHunter",
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Suicide180", //180秒后陷阱自杀销毁
+          "target": "Self"
+        },
+
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "HuntBuff", //让野猪逃跑的技能
+          "target": "Self"
+        }
+      ],
+
       "modifiers": {
+        //给目标怪物上buff，改变怪物AI
         "RunToEscape": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 7.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 7,
           "onAdded": [
             {
               "$type": "DebugLog",
@@ -45,128 +60,151 @@
             {
               "$type": "SetPoseBool",
               "boolID": "NearTrap",
-              "ratio": true
+              "value": true
             }
           ],
+
           "onRemoved": [
             {
               "$type": "SetPoseInt",
-              "intID": "FleeState"
+              "intID": "FleeState",
+              "value": 0
             },
             {
               "$type": "SetPoseBool",
-              "boolID": "NearTrap"
+              "boolID": "NearTrap",
+              "value": false
             }
           ]
         },
+
         "HuntBuff": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 2.0,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 1.0,
+          "duration": 2,
+          "thinkInterval": 1,
           "onThinkInterval": [
             {
               "$type": "ApplyModifier",
-              "modifierName": "HuntBuff"
+              "modifierName": "HuntBuff", //让野猪逃跑的技能
+              "target": "Self"
             },
+
             {
               "$type": "ApplyModifier",
+              "modifierName": "RunToEscape", //给目标怪物上逃跑modifier
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR50",
+                "centerBasedOn": "Self",
                 "campTargetType": "All",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_Is_Hunt_Animal",
-                  "ratio": 1.0
+                  "value": 1,
+                  "compareType": "Equal"
                 }
-              ],
-              "modifierName": "RunToEscape"
+              ]
             }
           ]
         },
+
+        //陷阱180秒自杀销毁
         "Suicide180": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 180.0,
-          "bonusCriticalHurt": 180.0,
+          "duration": 180,
+          "elementDurability": 180,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Quest_SiteInteract",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Quest_SiteInteract"
             }
           ],
+
           "onRemoved": [
             {
               "$type": "KillSelf"
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Suicide180"
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "HuntBuff"
-        }
-      ]
+      }
     }
   },
+
   {
+    //产生碰撞时，陷阱攻击
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Trap_Hunt_Attack",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "MonsterSkill", //给野猪上modifier
+
+          "otherTargets": {
+            "$type": "SelectTargetsByShape",
+            "shapeName": "CircleR3",
+            "centerBasedOn": "Self",
+            "campTargetType": "All",
+            "campBasedOn": "Self"
+          },
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_Is_Hunt_Animal",
+              "value": 1,
+              "compareType": "Equal"
+            }
+          ]
+        }
+      ],
+
       "modifiers": {
+        //野猪自杀，对周围施放技能
         "MonsterSkill": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.2,
           "onAdded": [
             {
               "$type": "ApplyModifier",
+              "modifierName": "Trap_Suicide", //陷阱自杀销毁
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR3",
+                "centerBasedOn": "Self",
                 "campTargetType": "All",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_Is_Hunt_Trap",
-                  "ratio": 1.0
+                  "value": 1,
+                  "compareType": "Equal"
                 }
-              ],
-              "modifierName": "Trap_Suicide"
+              ]
             },
+
             {
               "$type": "DamageByAttackValue",
+              "target": "Self",
               "attackInfo": {
-                "attackTag": "",
-                "attenuationTag": "",
-                "attenuationGroup": "default",
                 "attackProperty": {
-                  "HBIOLEEGHPD": 1.0,
-                  "CCNJGLPMIEP": 0.0,
-                  "bonusCriticalHurt": 20.0,
+                  "damagePercentage": 1.0,
                   "strikeType": "Blunt",
+                  "elementType": "None",
+                  "elementDurability": 20,
                   "enBreak": 500.0
                 },
                 "hitPattern": {
-                  "onHitEffectName": "default",
                   "hitImpulseType": "LV3",
                   "overrideHitImpulse": {
-                    "hitLevel": "Heavy",
-                    "MOELECJEOEI": 0.0,
-                    "hitImpulseY": 0.0
+                    "hitLevel": "Heavy", //hitlevel = 2
+                    "hitImpulseX": 0, //hitlevel = 2
+                    "hitImpulseY": 0 //hitlevel = 2
                   },
-                  "hitHaltTimeScale": 0.05000000074505806,
+                  "reboundRatio": 0,
+                  "hitHaltTime": 0.0,
+                  "hitHaltTimeScale": 0.05,
                   "muteHitText": true
                 }
               }
@@ -177,60 +215,64 @@
               "$type": "DebugLog",
               "content": "onMonster_Suicide Start!!!!!!"
             },
+
             {
               "$type": "ApplyModifier",
+              "modifierName": "Trap_Suicide", //陷阱自杀销毁
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR3",
+                "centerBasedOn": "Self",
                 "campTargetType": "All",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_Is_Hunt_Trap",
-                  "ratio": 1.0
+                  "value": 1,
+                  "compareType": "Equal"
                 }
-              ],
-              "modifierName": "Trap_Suicide"
+              ]
             },
+
             {
               "$type": "DamageByAttackValue",
+              "target": "Self",
               "attackInfo": {
-                "attackTag": "",
-                "attenuationTag": "",
-                "attenuationGroup": "default",
                 "attackProperty": {
-                  "HBIOLEEGHPD": 1.0,
-                  "CCNJGLPMIEP": 0.0,
-                  "bonusCriticalHurt": 20.0,
+                  "damagePercentage": 1.0,
                   "strikeType": "Blunt",
+                  "elementType": "None",
+                  "elementDurability": 20,
                   "enBreak": 500.0
                 },
                 "hitPattern": {
-                  "onHitEffectName": "default",
                   "hitImpulseType": "LV3",
                   "overrideHitImpulse": {
-                    "hitLevel": "Heavy",
-                    "MOELECJEOEI": 0.0,
-                    "hitImpulseY": 0.0
+                    "hitLevel": "Heavy", //hitlevel = 2
+                    "hitImpulseX": 0, //hitlevel = 2
+                    "hitImpulseY": 0 //hitlevel = 2
                   },
-                  "hitHaltTimeScale": 0.05000000074505806,
+                  "reboundRatio": 0,
+                  "hitHaltTime": 0.0,
+                  "hitHaltTimeScale": 0.05,
                   "muteHitText": true
                 }
               }
             }
           ]
         },
+
+        //陷阱自杀销毁
         "Trap_Suicide": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.800000011920929,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.8,
           "onRemoved": [
             {
               "$type": "DebugLog",
               "content": "onKILL_Trap Start!!!!!!"
             },
+
             {
               "$type": "DropSubfield",
               "subfieldName": "MonsterMeat"
@@ -240,26 +282,7 @@
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "otherTargets": {
-            "$type": "SelectTargetsByShape",
-            "shapeName": "CircleR3",
-            "campTargetType": "All",
-            "sizeRatio": 1.0
-          },
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_Is_Hunt_Animal",
-              "ratio": 1.0
-            }
-          ],
-          "modifierName": "MonsterSkill"
-        }
-      ]
+      }
     }
   }
 ]

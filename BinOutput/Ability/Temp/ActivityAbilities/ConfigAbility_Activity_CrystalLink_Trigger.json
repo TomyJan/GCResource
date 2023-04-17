@@ -1,22 +1,31 @@
 [
+  ///////////////////////////
+  //
+  //        Level1
+  //
+  ///////////////////////////
   {
+    //1、元素爆发造成伤害后
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CrystalLink_Trigger_UltimateSkillHitDamage",
-      "abilitySpecials": {
-        "TriggerCD": 0.0
-      },
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "target": "Self",
+          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_UltimateSkillHitDamage"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Activity_CrystalLink_Trigger_UltimateSkillHitDamage": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Other",
-              "RotationDampTime": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
                   "$type": "ByAttackTags",
@@ -26,34 +35,33 @@
                 {
                   "$type": "ByHitDamage",
                   "target": "Other",
-                  "damage": 0.0
+                  "damage": 0,
+                  "logic": "Greater"
                 },
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "UltimateSkillHitDamage_CDState",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
                   "$type": "TriggerCrystalLinkAbility",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
                   "id": 1
                 },
                 {
                   "$type": "ServerLuaCall",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
                   "luaCallType": "CurGalleryControlGroup",
-                  "funcName": "SLC_Add_Fever",
-                  "ODAOGCJFIHC": 0.0,
-                  "GCCFLBLEHDB": 0.0,
-                  "DJODIFOBEJG": 0.0
+                  "funcName": "SLC_Add_Fever"
                 },
                 {
                   "$type": "ApplyModifier",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
+                  "target": "Self",
                   "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_UltimateSkillHitDamage_CD"
                 }
               ]
@@ -61,329 +69,311 @@
           ]
         },
         "UNIQUE_Activity_CrystalLink_Trigger_UltimateSkillHitDamage_CD": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "TriggerCD",
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
+          "duration": "%TriggerCD",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "UltimateSkillHitDamage_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": -1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "UltimateSkillHitDamage_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_UltimateSkillHitDamage"
-        }
-      ],
-      "isDynamicAbility": true
+      "abilitySpecials": {
+        "TriggerCD": 0
+      }
     }
   },
   {
+    //2、释放元素战技后
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CrystalLink_Trigger_UseSkill",
-      "abilitySpecials": {
-        "TriggerCD": 0.0
-      },
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "target": "Self",
+          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_UseSkill"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Activity_CrystalLink_Trigger_UseSkill": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
           "modifierMixins": [
             {
               "$type": "OnAvatarUseSkillMixin",
+              "clearSkillIdDelay": 0.2,
               "onTriggerSkill": [
                 {
                   "$type": "TriggerCrystalLinkAbility",
+                  "id": 2,
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "UseSkill_CDState",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "id": 2
+                  ]
                 },
                 {
                   "$type": "ServerLuaCall",
+                  "luaCallType": "CurGalleryControlGroup",
+                  "funcName": "SLC_Add_Fever",
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "UseSkill_CDState",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "luaCallType": "CurGalleryControlGroup",
-                  "funcName": "SLC_Add_Fever",
-                  "ODAOGCJFIHC": 0.0,
-                  "GCCFLBLEHDB": 0.0,
-                  "DJODIFOBEJG": 0.0
+                  ]
                 },
                 {
                   "$type": "ApplyModifier",
+                  "target": "Self",
                   "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_UseSkill_CD"
                 }
-              ],
-              "HPNJGGABBPK": 0.20000000298023224
+              ]
             }
           ]
         },
         "UNIQUE_Activity_CrystalLink_Trigger_UseSkill_CD": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "TriggerCD",
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
+          "duration": "%TriggerCD",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "UseSkill_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": -1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "UseSkill_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_UseSkill"
-        }
-      ],
-      "isDynamicAbility": true
+      "abilitySpecials": {
+        "TriggerCD": 0
+      }
     }
   },
   {
+    //3、角色上场后
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CrystalLink_Trigger_OnAvatarIn",
-      "abilitySpecials": {
-        "TriggerCD": 0.0
-      },
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "target": "Self",
+          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_OnAvatarIn"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Activity_CrystalLink_Trigger_OnAvatarIn": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
           "onAvatarIn": [
             {
               "$type": "TriggerCrystalLinkAbility",
+              "id": 3,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "OnAvatarIn_CDState",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
-              ],
-              "id": 3
+              ]
             },
             {
               "$type": "ServerLuaCall",
+              "luaCallType": "CurGalleryControlGroup",
+              "funcName": "SLC_Add_Fever",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "OnAvatarIn_CDState",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
-              ],
-              "luaCallType": "CurGalleryControlGroup",
-              "funcName": "SLC_Add_Fever",
-              "ODAOGCJFIHC": 0.0,
-              "GCCFLBLEHDB": 0.0,
-              "DJODIFOBEJG": 0.0
+              ]
             },
             {
               "$type": "ApplyModifier",
+              "target": "Self",
               "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_OnAvatarIn_CD"
             }
           ]
         },
         "UNIQUE_Activity_CrystalLink_Trigger_OnAvatarIn_CD": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "TriggerCD",
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
+          "duration": "%TriggerCD",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "OnAvatarIn_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": -1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "OnAvatarIn_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_OnAvatarIn"
-        }
-      ],
-      "isDynamicAbility": true
+      "abilitySpecials": {
+        "TriggerCD": 0
+      }
     }
   },
+  ///////////////////////////
+  //
+  //        Level2
+  //
+  ///////////////////////////
   {
+    //4、释放元素战技后
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CrystalLink_Trigger_UseSkill_Level2",
-      "abilitySpecials": {
-        "TriggerCD": 0.0
-      },
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "target": "Self",
+          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_UseSkill_Level2"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Activity_CrystalLink_Trigger_UseSkill_Level2": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
           "modifierMixins": [
             {
               "$type": "OnAvatarUseSkillMixin",
+              "clearSkillIdDelay": 0.2,
               "onTriggerSkill": [
                 {
                   "$type": "TriggerCrystalLinkAbility",
+                  "id": 4,
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "UseSkill_CDState",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "id": 4
+                  ]
                 },
                 {
                   "$type": "ServerLuaCall",
+                  "luaCallType": "CurGalleryControlGroup",
+                  "funcName": "SLC_Add_Fever",
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "UseSkill_CDState",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "luaCallType": "CurGalleryControlGroup",
-                  "funcName": "SLC_Add_Fever",
-                  "ODAOGCJFIHC": 0.0,
-                  "GCCFLBLEHDB": 0.0,
-                  "DJODIFOBEJG": 0.0
+                  ]
                 },
                 {
                   "$type": "ApplyModifier",
+                  "target": "Self",
                   "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_UseSkill_Level2_CD"
                 }
-              ],
-              "HPNJGGABBPK": 0.20000000298023224
+              ]
             }
           ]
         },
         "UNIQUE_Activity_CrystalLink_Trigger_UseSkill_Level2_CD": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "TriggerCD",
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
+          "duration": "%TriggerCD",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "UseSkill_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": -1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "UseSkill_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_UseSkill_Level2"
-        }
-      ],
-      "isDynamicAbility": true
+      "abilitySpecials": {
+        "TriggerCD": 0
+      }
     }
   },
   {
+    //5、普攻命中x次
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CrystalLink_Trigger_NormalAttackLanded_Counter",
-      "abilitySpecials": {
-        "TriggerCD": 0.0,
-        "NormalAttack_MaxTime": 0.0
-      },
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "target": "Self",
+          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_NormalAttackLanded_Counter"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Activity_CrystalLink_Trigger_NormalAttackLanded_Counter": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
           "onAttackLanded": [
             {
               "$type": "Predicated",
@@ -405,7 +395,7 @@
                   "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "NormalAttackCounter_CDState",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
               ],
@@ -417,13 +407,11 @@
                 {
                   "$type": "ServerLuaCall",
                   "luaCallType": "CurGalleryControlGroup",
-                  "funcName": "SLC_Add_Fever",
-                  "ODAOGCJFIHC": 0.0,
-                  "GCCFLBLEHDB": 0.0,
-                  "DJODIFOBEJG": 0.0
+                  "funcName": "SLC_Add_Fever"
                 },
                 {
                   "$type": "ApplyModifier",
+                  "target": "Self",
                   "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_NormalAttackLanded_Counter_CD"
                 }
               ]
@@ -431,55 +419,52 @@
           ]
         },
         "UNIQUE_Activity_CrystalLink_Trigger_NormalAttackLanded_Counter_CD": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "TriggerCD",
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
+          "duration": "%TriggerCD",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "NormalAttackCounter_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": -1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "NormalAttackCounter_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_NormalAttackLanded_Counter"
-        }
-      ],
-      "isDynamicAbility": true
+      "abilitySpecials": {
+        "TriggerCD": 0,
+        "NormalAttack_MaxTime": 0
+      }
     }
   },
   {
+    //6、当前场上角色普攻造成元素伤害后，每①秒至多触发一次
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CrystalLink_Trigger_NormalAttackElementalDamage",
-      "abilitySpecials": {
-        "TriggerCD": 0.0
-      },
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "target": "Self",
+          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_NormalAttackElementalDamage"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Activity_CrystalLink_Trigger_NormalAttackElementalDamage": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
           "onAttackLanded": [
             {
               "$type": "Predicated",
@@ -533,13 +518,14 @@
                 {
                   "$type": "ByHitDamage",
                   "target": "Other",
-                  "damage": 0.0
+                  "damage": 0,
+                  "logic": "Greater"
                 },
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "ElementalDamage_CDState",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
               ],
@@ -551,13 +537,11 @@
                 {
                   "$type": "ServerLuaCall",
                   "luaCallType": "CurGalleryControlGroup",
-                  "funcName": "SLC_Add_Fever",
-                  "ODAOGCJFIHC": 0.0,
-                  "GCCFLBLEHDB": 0.0,
-                  "DJODIFOBEJG": 0.0
+                  "funcName": "SLC_Add_Fever"
                 },
                 {
                   "$type": "ApplyModifier",
+                  "target": "Self",
                   "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_NormalAttackElementalDamage_CD"
                 }
               ]
@@ -565,58 +549,60 @@
           ]
         },
         "UNIQUE_Activity_CrystalLink_Trigger_NormalAttackElementalDamage_CD": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "TriggerCD",
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
+          "duration": "%TriggerCD",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "ElementalDamage_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": -1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "ElementalDamage_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_NormalAttackElementalDamage"
-        }
-      ],
-      "isDynamicAbility": true
+      "abilitySpecials": {
+        "TriggerCD": 0
+      }
     }
   },
+  ///////////////////////////
+  //
+  //        Level3
+  //
+  ///////////////////////////
   {
+    //7、当前队伍角色触发感电/超载/超导/雷扩撒后，每①秒至多触发一次
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CrystalLink_Trigger_ElectricReaction",
-      "abilitySpecials": {
-        "TriggerCD": 0.0
-      },
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "target": "Self",
+          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_ElectricReaction"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Activity_CrystalLink_Trigger_ElectricReaction": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
           "modifierMixins": [
             {
               "$type": "DoActionByElementReactionMixin",
+              "range": 20,
               "entityTypes": ["Monster"],
               "reactionTypes": [
                 "Explode",
@@ -627,202 +613,190 @@
               "actions": [
                 {
                   "$type": "TriggerCrystalLinkAbility",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
+                  "id": 7,
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "ElectricReaction_CDState",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "id": 7
+                  ]
                 },
                 {
                   "$type": "ServerLuaCall",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
+                  "luaCallType": "CurGalleryControlGroup",
+                  "funcName": "SLC_Add_Fever",
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "ElectricReaction_CDState",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "luaCallType": "CurGalleryControlGroup",
-                  "funcName": "SLC_Add_Fever",
-                  "ODAOGCJFIHC": 0.0,
-                  "GCCFLBLEHDB": 0.0,
-                  "DJODIFOBEJG": 0.0
+                  ]
                 },
                 {
                   "$type": "ApplyModifier",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
+                  "target": "Self",
+                  "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_ElectricReaction_CD",
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "ElectricReaction_CDState",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_ElectricReaction_CD"
+                  ]
                 }
               ]
             }
           ]
         },
         "UNIQUE_Activity_CrystalLink_Trigger_ElectricReaction_CD": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "TriggerCD",
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
+          "duration": "%TriggerCD",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "ElectricReaction_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": -1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "ElectricReaction_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_ElectricReaction"
-        }
-      ],
-      "isDynamicAbility": true
+      "abilitySpecials": {
+        "TriggerCD": 0
+      }
     }
   },
   {
+    //8、释放元素战技后
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CrystalLink_Trigger_UseSkill_Level3",
-      "abilitySpecials": {
-        "TriggerCD": 0.0
-      },
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "target": "Self",
+          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_UseSkill_Level3"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Activity_CrystalLink_Trigger_UseSkill_Level3": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
           "modifierMixins": [
             {
               "$type": "OnAvatarUseSkillMixin",
+              "clearSkillIdDelay": 0.2,
               "onTriggerSkill": [
                 {
                   "$type": "TriggerCrystalLinkAbility",
+                  "id": 8,
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "UseSkill_CDState",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "id": 8
+                  ]
                 },
                 {
                   "$type": "ServerLuaCall",
+                  "luaCallType": "CurGalleryControlGroup",
+                  "funcName": "SLC_Add_Fever",
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "UseSkill_CDState",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "luaCallType": "CurGalleryControlGroup",
-                  "funcName": "SLC_Add_Fever",
-                  "ODAOGCJFIHC": 0.0,
-                  "GCCFLBLEHDB": 0.0,
-                  "DJODIFOBEJG": 0.0
+                  ]
                 },
                 {
                   "$type": "ApplyModifier",
+                  "target": "Self",
                   "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_UseSkill_Level3_CD"
                 }
-              ],
-              "HPNJGGABBPK": 0.20000000298023224
+              ]
             }
           ]
         },
         "UNIQUE_Activity_CrystalLink_Trigger_UseSkill_Level3_CD": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "TriggerCD",
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
+          "duration": "%TriggerCD",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "UseSkill_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": -1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "UseSkill_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_UseSkill_Level3"
-        }
-      ],
-      "isDynamicAbility": true
+      "abilitySpecials": {
+        "TriggerCD": 0
+      }
     }
   },
   {
+    //9、造成雷元素伤害后
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CrystalLink_Trigger_ElectricDamage",
-      "abilitySpecials": {
-        "TriggerCD": 0.0
-      },
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "target": "Self",
+          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_ElectricDamage"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Activity_CrystalLink_Trigger_ElectricDamage": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
           "onAttackLanded": [
             {
               "$type": "Predicated",
               "target": "Other",
-              "RotationDampTime": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
                   "$type": "ByHitElement",
@@ -831,34 +805,33 @@
                 {
                   "$type": "ByHitDamage",
                   "target": "Other",
-                  "damage": 0.0
+                  "damage": 0,
+                  "logic": "Greater"
                 },
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "ElectricDamage_CDState",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
                   "$type": "TriggerCrystalLinkAbility",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
                   "id": 9
                 },
                 {
                   "$type": "ServerLuaCall",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
                   "luaCallType": "CurGalleryControlGroup",
-                  "funcName": "SLC_Add_Fever",
-                  "ODAOGCJFIHC": 0.0,
-                  "GCCFLBLEHDB": 0.0,
-                  "DJODIFOBEJG": 0.0
+                  "funcName": "SLC_Add_Fever"
                 },
                 {
                   "$type": "ApplyModifier",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
+                  "target": "Self",
                   "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_ElectricDamage_CD"
                 }
               ]
@@ -866,60 +839,61 @@
           ]
         },
         "UNIQUE_Activity_CrystalLink_Trigger_ElectricDamage_CD": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "TriggerCD",
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
+          "duration": "%TriggerCD",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "ElectricDamage_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": -1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "ElectricDamage_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_ElectricDamage"
-        }
-      ],
-      "isDynamicAbility": true
+      "abilitySpecials": {
+        "TriggerCD": 0
+      }
     }
   },
+  ///////////////////////////
+  //
+  //        Level4
+  //
+  ///////////////////////////
   {
+    //10、角色造成岩元素伤害后，每①秒至多触发一次
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CrystalLink_Trigger_RockDamage",
-      "abilitySpecials": {
-        "TriggerCD": 0.0
-      },
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "target": "Self",
+          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_RockDamage"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Activity_CrystalLink_Trigger_RockDamage": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
           "onAttackLanded": [
             {
               "$type": "Predicated",
+              "doOffStage": true,
               "target": "Other",
-              "RotationDampTime": true,
               "targetPredicates": [
                 {
                   "$type": "ByHitElement",
@@ -928,34 +902,33 @@
                 {
                   "$type": "ByHitDamage",
                   "target": "Other",
-                  "damage": 0.0
+                  "damage": 0,
+                  "logic": "Greater"
                 },
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "RockDamage_CDState",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
                   "$type": "TriggerCrystalLinkAbility",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
                   "id": 13
                 },
                 {
                   "$type": "ServerLuaCall",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
                   "luaCallType": "CurGalleryControlGroup",
-                  "funcName": "SLC_Add_Fever",
-                  "ODAOGCJFIHC": 0.0,
-                  "GCCFLBLEHDB": 0.0,
-                  "DJODIFOBEJG": 0.0
+                  "funcName": "SLC_Add_Fever"
                 },
                 {
                   "$type": "ApplyModifier",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
+                  "target": "Self",
                   "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_RockDamage_CD"
                 }
               ]
@@ -963,166 +936,156 @@
           ]
         },
         "UNIQUE_Activity_CrystalLink_Trigger_RockDamage_CD": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "TriggerCD",
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
+          "duration": "%TriggerCD",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "RockDamage_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": -1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "RockDamage_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_RockDamage"
-        }
-      ],
-      "isDynamicAbility": true
+      "abilitySpecials": {
+        "TriggerCD": 0
+      }
     }
   },
   {
+    //11、触发结晶反应后，每{1}秒至多触发一次
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CrystalLink_Trigger_Crystallize",
-      "abilitySpecials": {
-        "TriggerCD": 0.0
-      },
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "target": "Self",
+          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_Crystallize"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Activity_CrystalLink_Trigger_Crystallize": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
           "modifierMixins": [
             {
               "$type": "DoActionByElementReactionMixin",
-              "entityTypes": ["Monster"],
               "reactionTypes": [
                 "CrystallizeElectric",
                 "CrystallizeFire",
                 "CrystallizeIce",
                 "CrystallizeWater"
               ],
+              "entityTypes": ["Monster"],
               "actions": [
                 {
                   "$type": "TriggerCrystalLinkAbility",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
+                  "id": 14,
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "Crystallize_CDState",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "id": 14
+                  ]
                 },
                 {
                   "$type": "ServerLuaCall",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
+                  "luaCallType": "CurGalleryControlGroup",
+                  "funcName": "SLC_Add_Fever",
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "Crystallize_CDState",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "luaCallType": "CurGalleryControlGroup",
-                  "funcName": "SLC_Add_Fever",
-                  "ODAOGCJFIHC": 0.0,
-                  "GCCFLBLEHDB": 0.0,
-                  "DJODIFOBEJG": 0.0
+                  ]
                 },
                 {
                   "$type": "ApplyModifier",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
+                  "target": "Self",
+                  "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_RockDamage_CD",
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "Crystallize_CDState",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_RockDamage_CD"
+                  ]
                 }
               ]
             }
           ]
         },
         "UNIQUE_Activity_CrystalLink_Trigger_RockDamage_CD": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "TriggerCD",
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
+          "duration": "%TriggerCD",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "Crystallize_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": -1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "Crystallize_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_Crystallize"
-        }
-      ],
-      "isDynamicAbility": true
+      "abilitySpecials": {
+        "TriggerCD": 0
+      }
     }
   },
   {
+    //12、自己的岩创生物被摧毁时
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CrystalLink_Trigger_RockGadgetDestroyed",
-      "abilitySpecials": {
-        "TriggerCD": 0.0
-      },
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "target": "Self",
+          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_RockGadgetDestroyed"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Activity_CrystalLink_Trigger_RockGadgetDestroyed": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
           "modifierMixins": [
             {
               "$type": "DoActionByEntityKillMixin",
@@ -1130,242 +1093,235 @@
                 {
                   "$type": "ByEntityTypes",
                   "entityTypes": ["Gadget", "Bullet", "Field"]
-                },
+                }, //判断Gadget类型
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_COMMON_GADGET_ISSUMMON",
-                  "ratio": 1.0
-                },
+                  "value": 1,
+                  "compareType": "Equal"
+                }, //判断Gadget是否为岩创物
                 {
                   "$type": "ByTargetIsSelf",
+                  "isSelf": true,
                   "target": "TargetOriginOwner"
-                }
+                } //判断岩创物的Owner
               ],
               "actionQueue": [
                 {
                   "$type": "TriggerCrystalLinkAbility",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
+                  "id": 15,
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "BreakRockGadget_CDState",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "id": 15
+                  ]
                 },
                 {
                   "$type": "ServerLuaCall",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
+                  "luaCallType": "CurGalleryControlGroup",
+                  "funcName": "SLC_Add_Fever",
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "BreakRockGadget_CDState",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "luaCallType": "CurGalleryControlGroup",
-                  "funcName": "SLC_Add_Fever",
-                  "ODAOGCJFIHC": 0.0,
-                  "GCCFLBLEHDB": 0.0,
-                  "DJODIFOBEJG": 0.0
+                  ]
                 },
                 {
                   "$type": "ApplyModifier",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
+                  "target": "Self",
+                  "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_RockGadgetDestroyed_CD",
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "BreakRockGadget_CDState",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_RockGadgetDestroyed_CD"
+                  ]
                 }
               ]
             }
           ]
         },
         "UNIQUE_Activity_CrystalLink_Trigger_RockGadgetDestroyed_CD": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "TriggerCD",
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
+          "duration": "%TriggerCD",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "BreakRockGadget_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": -1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "BreakRockGadget_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_RockGadgetDestroyed"
-        }
-      ],
-      "isDynamicAbility": true
+      "abilitySpecials": {
+        "TriggerCD": 0
+      }
     }
   },
   {
+    //12.1释放元素战技后
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CrystalLink_Trigger_UseSkill_Level4",
-      "abilitySpecials": {
-        "TriggerCD": 0.0
-      },
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "target": "Self",
+          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_UseSkill_Level4"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Activity_CrystalLink_Trigger_UseSkill_Level4": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
           "modifierMixins": [
             {
               "$type": "OnAvatarUseSkillMixin",
+              "clearSkillIdDelay": 0.2,
               "onTriggerSkill": [
                 {
                   "$type": "TriggerCrystalLinkAbility",
+                  "id": 15,
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "UseSkill_CDState",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "id": 15
+                  ]
                 },
                 {
                   "$type": "ServerLuaCall",
+                  "luaCallType": "CurGalleryControlGroup",
+                  "funcName": "SLC_Add_Fever",
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "UseSkill_CDState",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "luaCallType": "CurGalleryControlGroup",
-                  "funcName": "SLC_Add_Fever",
-                  "ODAOGCJFIHC": 0.0,
-                  "GCCFLBLEHDB": 0.0,
-                  "DJODIFOBEJG": 0.0
+                  ]
                 },
                 {
                   "$type": "ApplyModifier",
+                  "target": "Self",
                   "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_UseSkill_Level4_CD"
                 }
-              ],
-              "HPNJGGABBPK": 0.20000000298023224
+              ]
             }
           ]
         },
         "UNIQUE_Activity_CrystalLink_Trigger_UseSkill_Level4_CD": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "TriggerCD",
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
+          "duration": "%TriggerCD",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "UseSkill_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": -1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "UseSkill_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_UseSkill_Level4"
-        }
-      ],
-      "isDynamicAbility": true
+      "abilitySpecials": {
+        "TriggerCD": 0
+      }
     }
   },
+  ///////////////////////////
+  //
+  //        Level5
+  //
+  ///////////////////////////
   {
+    //13、受到治疗后
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CrystalLink_Trigger_BeingHealed",
-      "abilitySpecials": {
-        "TriggerCD": 0.0
-      },
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "target": "Self",
+          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_BeingHealed"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Activity_CrystalLink_Trigger_BeingHealed": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "CJAACMCCPNE": [
+          "stacking": "Unique",
+          "onBeingHealed": [
             {
               "$type": "Predicated",
-              "RotationDampTime": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "BeingHealed_CDState",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
                   "$type": "TriggerCrystalLinkAbility",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
                   "id": 10
                 },
                 {
                   "$type": "ServerLuaCall",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
                   "luaCallType": "CurGalleryControlGroup",
-                  "funcName": "SLC_Add_Fever",
-                  "ODAOGCJFIHC": 0.0,
-                  "GCCFLBLEHDB": 0.0,
-                  "DJODIFOBEJG": 0.0
+                  "funcName": "SLC_Add_Fever"
                 },
                 {
                   "$type": "ApplyModifier",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
+                  "target": "Self",
                   "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_BeingHealed_CD"
                 }
               ]
@@ -1373,55 +1329,51 @@
           ]
         },
         "UNIQUE_Activity_CrystalLink_Trigger_BeingHealed_CD": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "TriggerCD",
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
+          "duration": "%TriggerCD",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "BeingHealed_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": -1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "BeingHealed_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_BeingHealed"
-        }
-      ],
-      "isDynamicAbility": true
+      "abilitySpecials": {
+        "TriggerCD": 0
+      }
     }
   },
   {
+    //14、血量降低后
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CrystalLink_Trigger_HPDown",
-      "abilitySpecials": {
-        "TriggerCD": 0.0
-      },
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "target": "Self",
+          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_HPDown"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Activity_CrystalLink_Trigger_HPDown": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
           "modifierMixins": [
             {
               "$type": "DoActionByEventMixin",
@@ -1429,234 +1381,225 @@
               "actions": [
                 {
                   "$type": "TriggerCrystalLinkAbility",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
+                  "id": 11,
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "HPDown_CDState",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "id": 11
+                  ]
                 },
                 {
                   "$type": "ServerLuaCall",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
+                  "luaCallType": "CurGalleryControlGroup",
+                  "funcName": "SLC_Add_Fever",
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "HPDown_CDState",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "luaCallType": "CurGalleryControlGroup",
-                  "funcName": "SLC_Add_Fever",
-                  "ODAOGCJFIHC": 0.0,
-                  "GCCFLBLEHDB": 0.0,
-                  "DJODIFOBEJG": 0.0
+                  ]
                 },
                 {
                   "$type": "ApplyModifier",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
+                  "target": "Self",
+                  "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_HPDown_CD",
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "HPDown_CDState",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_HPDown_CD"
+                  ]
                 }
-              ],
-              "JOPEDINKMCP": ""
+              ]
             }
           ]
         },
         "UNIQUE_Activity_CrystalLink_Trigger_HPDown_CD": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "TriggerCD",
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
+          "duration": "%TriggerCD",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "HPDown_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": -1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "HPDown_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_HPDown"
-        }
-      ],
-      "isDynamicAbility": true
+      "abilitySpecials": {
+        "TriggerCD": 0
+      }
     }
   },
   {
+    //15、释放元素战技后
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CrystalLink_Trigger_UseSkill_Level5",
-      "abilitySpecials": {
-        "TriggerCD": 0.0
-      },
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "target": "Self",
+          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_UseSkill_Level5"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Activity_CrystalLink_Trigger_UseSkill_Level5": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
           "modifierMixins": [
             {
               "$type": "OnAvatarUseSkillMixin",
+              "clearSkillIdDelay": 0.2,
               "onTriggerSkill": [
                 {
                   "$type": "TriggerCrystalLinkAbility",
+                  "id": 12,
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "UseSkill_CDState",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "id": 12
+                  ]
                 },
                 {
                   "$type": "ServerLuaCall",
+                  "luaCallType": "CurGalleryControlGroup",
+                  "funcName": "SLC_Add_Fever",
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "UseSkill_CDState",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "luaCallType": "CurGalleryControlGroup",
-                  "funcName": "SLC_Add_Fever",
-                  "ODAOGCJFIHC": 0.0,
-                  "GCCFLBLEHDB": 0.0,
-                  "DJODIFOBEJG": 0.0
+                  ]
                 },
                 {
                   "$type": "ApplyModifier",
+                  "target": "Self",
                   "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_UseSkill_Level5_CD"
                 }
-              ],
-              "HPNJGGABBPK": 0.20000000298023224
+              ]
             }
           ]
         },
         "UNIQUE_Activity_CrystalLink_Trigger_UseSkill_Level5_CD": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "TriggerCD",
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
+          "duration": "%TriggerCD",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "UseSkill_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": -1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "UseSkill_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_UseSkill_Level5"
-        }
-      ],
-      "isDynamicAbility": true
+      "abilitySpecials": {
+        "TriggerCD": 0
+      }
     }
   },
+  ///////////////////////////
+  //
+  //        Level6
+  //
+  ///////////////////////////
   {
+    //16、攻击被冻结的目标后
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CrystalLink_Trigger_HitFrozenTarget",
-      "abilitySpecials": {
-        "TriggerCD": 0.0
-      },
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "target": "Self",
+          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_HitFrozenTarget"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Activity_CrystalLink_Trigger_HitFrozenTarget": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
           "onAttackLanded": [
             {
               "$type": "Predicated",
+              "doOffStage": true,
               "target": "Other",
-              "RotationDampTime": true,
               "targetPredicates": [
                 {
                   "$type": "ByHasAbilityState",
+                  "target": "Target",
                   "abilityState": "ElementFrozen"
                 },
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "HitFrozenTarget_CDState",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
                   "$type": "TriggerCrystalLinkAbility",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
                   "id": 16
                 },
                 {
                   "$type": "ServerLuaCall",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
                   "luaCallType": "CurGalleryControlGroup",
-                  "funcName": "SLC_Add_Fever",
-                  "ODAOGCJFIHC": 0.0,
-                  "GCCFLBLEHDB": 0.0,
-                  "DJODIFOBEJG": 0.0
+                  "funcName": "SLC_Add_Fever"
                 },
                 {
                   "$type": "ApplyModifier",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
+                  "target": "Self",
                   "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_HitFrozenTarget_CD"
                 }
               ]
@@ -1664,345 +1607,321 @@
           ]
         },
         "UNIQUE_Activity_CrystalLink_Trigger_HitFrozenTarget_CD": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "TriggerCD",
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
+          "duration": "%TriggerCD",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "HitFrozenTarget_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": -1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "HitFrozenTarget_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_HitFrozenTarget"
-        }
-      ],
-      "isDynamicAbility": true
+      "abilitySpecials": {
+        "TriggerCD": 0
+      }
     }
   },
   {
+    //17、触发碎冰反应后
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CrystalLink_Trigger_FrozenBroken",
-      "abilitySpecials": {
-        "TriggerCD": 0.0
-      },
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "target": "Self",
+          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_FrozenBroken"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Activity_CrystalLink_Trigger_FrozenBroken": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
           "modifierMixins": [
             {
               "$type": "DoActionByElementReactionMixin",
+              "range": 20,
               "entityTypes": ["Monster"],
               "reactionTypes": ["FrozenBroken"],
               "actions": [
                 {
                   "$type": "TriggerCrystalLinkAbility",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
+                  "id": 17,
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "FrozenBroken_CDState",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "id": 17
+                  ]
                 },
                 {
                   "$type": "ServerLuaCall",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
+                  "luaCallType": "CurGalleryControlGroup",
+                  "funcName": "SLC_Add_Fever",
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "FrozenBroken_CDState",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "luaCallType": "CurGalleryControlGroup",
-                  "funcName": "SLC_Add_Fever",
-                  "ODAOGCJFIHC": 0.0,
-                  "GCCFLBLEHDB": 0.0,
-                  "DJODIFOBEJG": 0.0
+                  ]
                 },
                 {
                   "$type": "ApplyModifier",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
+                  "target": "Self",
+                  "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_FrozenBroken_CD",
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "FrozenBroken_CDState",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_FrozenBroken_CD"
+                  ]
                 }
               ]
             }
           ]
         },
         "UNIQUE_Activity_CrystalLink_Trigger_FrozenBroken_CD": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "TriggerCD",
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
+          "duration": "%TriggerCD",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "FrozenBroken_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": -1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "FrozenBroken_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_FrozenBroken"
-        }
-      ],
-      "isDynamicAbility": true
+      "abilitySpecials": {
+        "TriggerCD": 0
+      }
     }
   },
   {
+    //17.1、释放元素战技后
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CrystalLink_Trigger_UseSkill_Level6",
-      "abilitySpecials": {
-        "TriggerCD": 0.0
-      },
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "target": "Self",
+          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_UseSkill_Level6"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Activity_CrystalLink_Trigger_UseSkill_Level6": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
           "modifierMixins": [
             {
               "$type": "OnAvatarUseSkillMixin",
+              "clearSkillIdDelay": 0.2,
               "onTriggerSkill": [
                 {
                   "$type": "TriggerCrystalLinkAbility",
+                  "id": 17,
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "UseSkill_CDState",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "id": 17
+                  ]
                 },
                 {
                   "$type": "ServerLuaCall",
+                  "luaCallType": "CurGalleryControlGroup",
+                  "funcName": "SLC_Add_Fever",
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "UseSkill_CDState",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "luaCallType": "CurGalleryControlGroup",
-                  "funcName": "SLC_Add_Fever",
-                  "ODAOGCJFIHC": 0.0,
-                  "GCCFLBLEHDB": 0.0,
-                  "DJODIFOBEJG": 0.0
+                  ]
                 },
                 {
                   "$type": "ApplyModifier",
+                  "target": "Self",
                   "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_UseSkill_Level6_CD"
                 }
-              ],
-              "HPNJGGABBPK": 0.20000000298023224
+              ]
             }
           ]
         },
         "UNIQUE_Activity_CrystalLink_Trigger_UseSkill_Level6_CD": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "TriggerCD",
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
+          "duration": "%TriggerCD",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "UseSkill_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": -1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "UseSkill_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_UseSkill_Level6"
-        }
-      ],
-      "isDynamicAbility": true
+      "abilitySpecials": {
+        "TriggerCD": 0
+      }
     }
   },
   {
+    //18、触发冻结反应后
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CrystalLink_Trigger_Frozen",
-      "abilitySpecials": {
-        "TriggerCD": 0.0
-      },
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "target": "Self",
+          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_Frozen"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Activity_CrystalLink_Trigger_Frozen": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
           "modifierMixins": [
             {
               "$type": "DoActionByElementReactionMixin",
+              "range": 20,
               "entityTypes": ["Monster"],
               "reactionTypes": ["Freeze"],
               "actions": [
                 {
                   "$type": "TriggerCrystalLinkAbility",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
+                  "id": 18,
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "Frozen_CDState",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "id": 18
+                  ]
                 },
                 {
                   "$type": "ServerLuaCall",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
+                  "luaCallType": "CurGalleryControlGroup",
+                  "funcName": "SLC_Add_Fever",
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "Frozen_CDState",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "luaCallType": "CurGalleryControlGroup",
-                  "funcName": "SLC_Add_Fever",
-                  "ODAOGCJFIHC": 0.0,
-                  "GCCFLBLEHDB": 0.0,
-                  "DJODIFOBEJG": 0.0
+                  ]
                 },
                 {
                   "$type": "ApplyModifier",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
+                  "target": "Self",
+                  "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_Frozen_CD",
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "Frozen_CDState",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_Frozen_CD"
+                  ]
                 }
               ]
             }
           ]
         },
         "UNIQUE_Activity_CrystalLink_Trigger_Frozen_CD": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "TriggerCD",
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
+          "duration": "%TriggerCD",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": -1.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "Frozen_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": -1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
+              "doOffStage": true,
+              "target": "Self",
               "key": "Frozen_CDState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Activity_CrystalLink_Trigger_Frozen"
-        }
-      ],
-      "isDynamicAbility": true
+      "abilitySpecials": {
+        "TriggerCD": 0
+      }
     }
   }
 ]

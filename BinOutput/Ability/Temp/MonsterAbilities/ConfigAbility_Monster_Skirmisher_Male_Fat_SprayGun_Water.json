@@ -1,4 +1,9 @@
 [
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Improve
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -7,12 +12,14 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_MONSTER_SKIRMISHER_IMPROVED_",
-          "defaultGlobalValueOnCreate": 0.0,
+          "defaultGlobalValueOnCreate": 0,
           "valueSteps": [-0.5, 0.5, 1.5],
+          "removeAppliedModifier": true,
           "modifierNameSteps": ["EyeEffect_Normal", "EyeEffect_Improve"]
         },
         {
           "$type": "AttachToStateIDMixin",
+          "poseIDs": ["Improve"],
           "modifierName": "ImprovedConfig"
         },
         {
@@ -34,44 +41,48 @@
           "modifierName": "ResetMonsterSkill"
         }
       ],
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_Skirmisher_Male_Fat_SprayGun_Water_ImprovedState"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Skirmisher_Male_Fat_SprayGun_Water_ImprovedState": {
-          "modifierName": "",
           "isUnique": true,
           "elementType": "Water",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100,
+          "properties": {
+            "Entity_WeightRatio": 5.0,
+            "Actor_EndureDelta": 0.0,
+            "Actor_PhysicalSubHurtDelta": 1,
+            "Actor_FireSubHurtDelta": 1,
+            "Actor_ElecSubHurtDelta": 1,
+            "Actor_WaterSubHurtDelta": 1,
+            "Actor_GrassSubHurtDelta": 1,
+            "Actor_WindSubHurtDelta": 1,
+            "Actor_IceSubHurtDelta": 1,
+            "Actor_RockSubHurtDelta": 1
+          },
           "modifierMixins": [
             {
               "$type": "ShieldBarMixin",
-              "showDamageText": ""
+              "revert": false
             },
             {
               "$type": "ModifyElementDecrateMixin",
               "group": "Monster_SingleElement_Method_Water"
             }
           ],
-          "properties": {
-            "Entity_WeightRatio": 5.0,
-            "Actor_EndureDelta": 0.0,
-            "Actor_PhysicalSubHurtDelta": 1.0,
-            "Actor_FireSubHurtDelta": 1.0,
-            "Actor_ElecSubHurtDelta": 1.0,
-            "Actor_WaterSubHurtDelta": 1.0,
-            "Actor_GrassSubHurtDelta": 1.0,
-            "Actor_WindSubHurtDelta": 1.0,
-            "Actor_IceSubHurtDelta": 1.0,
-            "Actor_RockSubHurtDelta": 1.0
-          },
           "onAdded": [
             {
               "$type": "SetPoseBool",
               "boolID": "ImprovedState",
-              "ratio": true
+              "value": true
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_ImproveBS",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_ImproveBS"
             },
             {
               "$type": "SetAISkillCDAvailableNow",
@@ -79,168 +90,155 @@
             },
             {
               "$type": "ApplyModifier",
+              "modifierName": "ImproveEffect_SprayGunEffect",
               "otherTargets": {
                 "$type": "SelectTargetsByEquipParts",
                 "equipPartNames": ["equip01"]
-              },
-              "modifierName": "ImproveEffect_SprayGunEffect"
+              }
             },
             {
               "$type": "ApplyModifier",
+              "modifierName": "ImproveEffect_BackPackEffect",
               "otherTargets": {
                 "$type": "SelectTargetsByEquipParts",
                 "equipPartNames": ["equip02"]
-              },
-              "modifierName": "ImproveEffect_BackPackEffect"
+              }
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
               "key": "_MONSTER_SKIRMISHER_IMPROVED_",
+              "value": 1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 1.0
+              "maxValue": 1,
+              "minValue": 1
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
               "key": "_MONSTER_SKIRMISHER_IMPROVED_COUNT_",
+              "value": 1,
               "useLimitRange": true,
-              "maxValue": 99.0,
-              "minValue": 0.0
+              "maxValue": 99,
+              "minValue": 0
             }
           ],
           "onRemoved": [
             {
               "$type": "SetAnimatorTrigger",
+              "triggerID": "WeakStart",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "_MOSNTER_SKIRMISHER_RETURNTOBORN_",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
-              ],
-              "triggerID": "WeakStart"
+              ]
             },
             {
               "$type": "SetPoseBool",
-              "canBeHandledOnRecover": true,
-              "boolID": "ImprovedState"
+              "boolID": "ImprovedState",
+              "value": false,
+              "canBeHandledOnRecover": true
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_ImproveAS",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_ImproveAS"
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 0.0,
               "key": "_MONSTER_SKIRMISHER_IMPROVED_",
+              "value": 0,
               "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "maxValue": 0,
+              "minValue": 0
             },
             {
               "$type": "RemoveModifier",
+              "modifierName": "ImproveEffect_BackPackEffect",
               "otherTargets": {
                 "$type": "SelectTargetsByEquipParts",
                 "equipPartNames": ["equip02"]
-              },
-              "modifierName": "ImproveEffect_BackPackEffect"
+              }
             },
             {
               "$type": "RemoveModifier",
+              "modifierName": "ImproveEffect_SprayGunEffect",
               "otherTargets": {
                 "$type": "SelectTargetsByEquipParts",
                 "equipPartNames": ["equip01"]
-              },
-              "modifierName": "ImproveEffect_SprayGunEffect"
+              }
             }
           ]
         },
         "ImproveEffect_SprayGunEffect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_SprayGunImprove",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_SprayGunImprove"
             },
             {
               "$type": "SetAnimatorBool",
               "boolID": "Improved",
-              "ratio": true
+              "value": true
             }
           ],
           "onRemoved": [
             {
               "$type": "SetAnimatorBool",
-              "canBeHandledOnRecover": true,
-              "boolID": "Improved"
+              "boolID": "Improved",
+              "value": false,
+              "canBeHandledOnRecover": true
             }
           ]
         },
         "ImproveEffect_BackPackEffect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_BackPackImprove",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_BackPackImprove"
             },
             {
               "$type": "SetAnimatorBool",
               "boolID": "Improved",
-              "ratio": true
+              "value": true
             }
           ],
           "onRemoved": [
             {
               "$type": "SetAnimatorBool",
-              "canBeHandledOnRecover": true,
-              "boolID": "Improved"
+              "boolID": "Improved",
+              "value": false,
+              "canBeHandledOnRecover": true
             }
           ]
         },
         "EyeEffect_Normal": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_EyeNormal",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_EyeNormal"
             }
           ]
         },
         "EyeEffect_Improve": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Ice_EyeToImprove",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Ice_EyeToImprove"
             }
           ],
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Ice_EyeToNormal",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Ice_EyeToNormal"
             }
           ]
         },
         "ImprovedConfig": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "properties": {
             "Actor_EndureDelta": 0.0,
-            "Actor_SubHurtDelta": 0.949999988079071
+            "Actor_SubHurtDelta": 0.95
           },
           "onAdded": [
             {
@@ -250,44 +248,42 @@
         },
         "Skirmisher_Male_Fat_SprayGun_Water_ForceImprove": {
           "stacking": "Unique",
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetPoseBool",
+              "boolID": "SpecaialState",
+              "value": true,
               "canBeHandledOnRecover": true,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "_MONSTER_SKIRMISHER_IMPROVED_COUNT_",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
-              ],
-              "boolID": "SpecaialState",
-              "ratio": true
+              ]
             }
           ],
           "onRemoved": [
             {
               "$type": "SetPoseBool",
-              "boolID": "SpecaialState"
+              "boolID": "SpecaialState",
+              "value": false
             }
           ]
         },
         "RemoveImproveState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "Invincible",
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
+              "target": "Self",
               "key": "_MOSNTER_SKIRMISHER_RETURNTOBORN_",
+              "value": 1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 1.0
+              "maxValue": 1,
+              "minValue": 1
             },
             {
               "$type": "RemoveUniqueModifier",
@@ -297,25 +293,24 @@
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 0.0,
+              "target": "Self",
               "key": "_MOSNTER_SKIRMISHER_RETURNTOBORN_",
+              "value": 0,
               "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "maxValue": 0,
+              "minValue": 0
             }
           ]
         },
         "ResetMonsterSkill": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 0.0,
               "key": "_MONSTER_SKIRMISHER_IMPROVED_COUNT_",
+              "value": 0,
               "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "maxValue": 0,
+              "minValue": 0
             },
             {
               "$type": "SetAISkillCDAvailableNow",
@@ -329,17 +324,8 @@
             }
           ]
         },
-        "Empty": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "UNIQUE_Skirmisher_Male_Fat_SprayGun_Water_ImprovedState"
-        }
-      ]
+        "Empty": {}
+      }
     }
   },
   {
@@ -354,6 +340,11 @@
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  EyeAlert
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -361,21 +352,25 @@
       "onAbilityStart": [
         {
           "$type": "FireEffect",
+          "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_EyeImprove",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "target": "Self",
               "key": "_MONSTER_SKIRMISHER_IMPROVED_",
-              "ratio": 0.0,
+              "value": 0,
               "compareType": "NoneOrEqual"
             }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_EyeImprove",
-          "EBHJMLOKDGB": -1.0
+          ]
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  DamageWave
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -386,16 +381,16 @@
           "bulletID": 42301004,
           "born": {
             "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "WeaponEffect",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             },
             "direction": {
               "$type": "ConfigDirectionByAttackTarget",
               "maxAngle": 60.0
-            },
-            "attachPointName": "WeaponEffect"
+            }
           }
         }
       ]
@@ -405,11 +400,75 @@
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Skirmisher_Fat_SprayGun_Water_DamageWave_Explode",
+      "onAdded": [
+        {
+          "$type": "AttachEffect",
+          "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_DamageWaveLoop"
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_DamageWaveAS",
+          "born": {
+            "$type": "ConfigBornByCollisionPoint",
+            "offset": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
+          }
+        },
+        {
+          "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
+          "attackEvent": {
+            "attackPattern": {
+              "$type": "ConfigAttackSphere",
+              "triggerType": "TriggerNoRepeat",
+              "radius": 1.0,
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                }
+              }
+            },
+            "attackInfo": {
+              "canBeModifiedBy": "OriginOwner",
+              "attackProperty": {
+                "damagePercentage": 1.0,
+                "strikeType": "Default",
+                "attackType": "Range",
+                "elementType": "Water",
+                "elementDurability": 50,
+                "enBreak": 50.0
+              },
+              "hitPattern": {
+                "hitImpulseType": "LV2",
+                "reboundRatio": 0,
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.05,
+                "muteHitText": false
+              }
+            }
+          }
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "ElementalFlag",
+          "target": "Target"
+        },
+        {
+          "$type": "KillSelf"
+        }
+      ],
       "modifiers": {
         "ElementalFlag": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 8.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 8,
+          "stacking": "Refresh",
           "modifierMixins": [
             {
               "$type": "AttachToAbilityStateMixin",
@@ -419,119 +478,79 @@
           ]
         },
         "HasWater": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
+              "target": "Self",
               "key": "_SKIRMISHER_ELEMENT_WATER_",
+              "value": 1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 1.0
+              "maxValue": 1,
+              "minValue": 1
             }
           ],
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 0.0,
+              "target": "Self",
               "key": "_SKIRMISHER_ELEMENT_WATER_",
+              "value": 0,
               "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "maxValue": 0,
+              "minValue": 0
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_DamageWaveLoop",
-          "EBHJMLOKDGB": -1.0
-        }
-      ],
-      "onAbilityStart": [
-        {
-          "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_DamageWaveAS",
-          "born": {
-            "$type": "ConfigBornByCollisionPoint",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            }
-          },
-          "EBHJMLOKDGB": -1.0
-        },
-        {
-          "$type": "TriggerAttackEvent",
-          "attackEvent": {
-            "attackPattern": {
-              "$type": "ConfigAttackSphere",
-              "triggerType": "TriggerNoRepeat",
-              "born": {
-                "$type": "ConfigBornBySelf",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
-                }
-              },
-              "DCMPFCIBIPA": 1.0
-            },
-            "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
-              "attackProperty": {
-                "HBIOLEEGHPD": 1.0,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Water",
-                "bonusCriticalHurt": 50.0,
-                "strikeType": "Default",
-                "enBreak": 50.0,
-                "attackType": "Range"
-              },
-              "hitPattern": {
-                "onHitEffectName": "default",
-                "hitImpulseType": "LV2",
-                "hitHaltTimeScale": 0.05000000074505806
-              },
-              "canBeModifiedBy": "OriginOwner"
-            }
-          },
-          "targetType": "Enemy"
-        },
-        {
-          "$type": "ApplyModifier",
-          "target": "Target",
-          "modifierName": "ElementalFlag"
-        },
-        {
-          "$type": "KillSelf"
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  HealingWave
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Skirmisher_Male_Fat_SprayGun_Water_HealingWave",
-      "abilitySpecials": {
-        "HealHPRatio": 0.10000000149011612
-      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Skirmisher_Male_Fat_SprayGun_Water_HealingDetect"
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "TriggerBullet",
+          "target": "Self",
+          "bulletID": 42301005,
+          "campID": 4001,
+          "trackTarget": "SelfAttackTarget",
+          "born": {
+            "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "WeaponEffect",
+            "offset": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "direction": {
+              "$type": "ConfigDirectionByAttackTarget"
+            }
+          }
+        }
+      ],
       "modifiers": {
         "Skirmisher_Male_Fat_SprayGun_Water_HealingDetect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAttackLanded": [
             {
               "$type": "ApplyModifier",
+              "modifierName": "HealingWave_HealHp",
               "target": "Target",
               "predicates": [
                 {
                   "$type": "ByTargetType",
+                  "targetType": "Self",
                   "isTarget": false
                 },
                 {
@@ -542,126 +561,55 @@
                   "$type": "ByEntityTypes",
                   "entityTypes": ["Monster"]
                 }
-              ],
-              "modifierName": "HealingWave_HealHp"
+              ]
             }
           ]
         },
         "HealingWave_HealHp": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 5.099999904632568,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 1.0,
-          "onAdded": [
-            {
-              "$type": "HealHP",
-              "amountByCasterMaxHPRatio": "HealHPRatio"
-            },
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_HealHp",
-              "EBHJMLOKDGB": -1.0
-            }
-          ],
+          "duration": 5.1,
+          "thinkInterval": 1,
           "onThinkInterval": [
             {
               "$type": "HealHP",
-              "amountByCasterMaxHPRatio": "HealHPRatio"
+              "amountByTargetMaxHPRatio": "%HealHPRatio",
+              "target": "Self"
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Shaman_Water_SupportAttack_Heal",
+              "effectPattern": "Eff_Monster_Shaman_Water_SupportAttack_Heal",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
                 "attachPointName": "RootNode"
-              },
-              "EBHJMLOKDGB": -1.0
+              }
+            }
+          ],
+          "onAdded": [
+            {
+              "$type": "HealHP",
+              "amountByTargetMaxHPRatio": "%HealHPRatio",
+              "target": "Self"
+            },
+            {
+              "$type": "AttachEffect",
+              "target": "Self",
+              "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_HealHp"
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Skirmisher_Male_Fat_SprayGun_Water_HealingDetect"
-        }
-      ],
-      "onAbilityStart": [
-        {
-          "$type": "TriggerBullet",
-          "bulletID": 42301005,
-          "born": {
-            "$type": "ConfigBornByAttachPoint",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "direction": {
-              "$type": "ConfigDirectionByAttackTarget"
-            },
-            "attachPointName": "WeaponEffect"
-          }
-        }
-      ]
+      "abilitySpecials": {
+        "HealHPRatio": 0.1
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Skirmisher_Fat_SprayGun_Water_HealingWave_Explode",
-      "modifiers": {
-        "HealingWave_Handler": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "TriggerAttackEvent",
-              "target": "Caster",
-              "attackEvent": {
-                "attackPattern": {
-                  "$type": "ConfigAttackSphere",
-                  "triggerType": "TriggerNoRepeat",
-                  "born": {
-                    "$type": "ConfigBornByGlobalValue",
-                    "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 0.0
-                    },
-                    "positionKey": "_HealingWavePos_",
-                    "directionKey": ""
-                  },
-                  "DCMPFCIBIPA": 0.5
-                },
-                "attackInfo": {
-                  "attackTag": "Skirmisher_Fat_SprayGun_Water_HealingWave",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
-                  "attackProperty": {
-                    "HBIOLEEGHPD": 0.0,
-                    "CCNJGLPMIEP": 0.0,
-                    "bonusCriticalHurt": 100.0,
-                    "strikeType": "Default"
-                  },
-                  "hitPattern": {
-                    "onHitEffectName": "none",
-                    "hitImpulseType": "LV0",
-                    "hitHaltTimeScale": 0.05000000074505806
-                  }
-                }
-              },
-              "targetType": "AllExceptSelf"
-            }
-          ]
-        }
-      },
       "onAdded": [
         {
           "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_HealingWaveLoop",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_HealingWaveLoop"
         }
       ],
       "onAbilityStart": [
@@ -671,6 +619,7 @@
           "targetPredicates": [
             {
               "$type": "ByTargetType",
+              "targetType": "Self",
               "isTarget": false
             },
             {
@@ -685,41 +634,90 @@
               "key": "_HealingWavePos_",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "RootNode",
+                "attachPointTargetType": "Target",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
-                },
-                "attachPointName": "RootNode"
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                }
               },
               "setTarget": false
             },
             {
               "$type": "ApplyModifier",
-              "target": "Owner",
-              "modifierName": "HealingWave_Handler"
+              "modifierName": "HealingWave_Handler",
+              "target": "Owner"
             }
           ]
         },
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_HealingWaveAS",
+          "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_HealingWaveAS",
           "born": {
             "$type": "ConfigBornByCollisionPoint",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             }
-          },
-          "EBHJMLOKDGB": -1.0
+          }
         },
         {
           "$type": "KillSelf"
         }
-      ]
+      ],
+      "modifiers": {
+        "HealingWave_Handler": {
+          "duration": 1,
+          "onAdded": [
+            {
+              "$type": "TriggerAttackEvent",
+              "target": "Caster",
+              "targetType": "AllExceptSelf",
+              "attackEvent": {
+                "attackPattern": {
+                  "$type": "ConfigAttackSphere",
+                  "triggerType": "TriggerNoRepeat",
+                  "radius": 0.5,
+                  "born": {
+                    "$type": "ConfigBornByGlobalValue",
+                    "positionKey": "_HealingWavePos_",
+                    "offset": {
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
+                    }
+                  }
+                },
+                "attackInfo": {
+                  "attackTag": "Skirmisher_Fat_SprayGun_Water_HealingWave",
+                  "attackProperty": {
+                    "damagePercentage": 0,
+                    "strikeType": "Default"
+                  },
+                  "hitPattern": {
+                    "onHitEffectName": "none",
+                    "hitImpulseType": "LV0",
+                    "reboundRatio": 0,
+                    "canBeDefenceHalt": false,
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
+                    "muteHitText": false
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  ImprovedHealingWave
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -735,32 +733,22 @@
           "modifierName": "ResetSkillInitialCD"
         }
       ],
-      "modifiers": {
-        "ResetSkillInitialCD": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onRemoved": [
-            {
-              "$type": "ReTriggerAISkillInitialCD",
-              "skillIDs": [201]
-            }
-          ]
-        }
-      },
       "onAbilityStart": [
         {
           "$type": "Predicated",
           "otherTargets": {
             "$type": "SelectTargetsByShape",
-            "topLimit": 3,
             "shapeName": "CircleR20",
             "centerBasedOn": "SelfAttackTarget",
             "campTargetType": "Alliance",
-            "sizeRatio": 1.0
+            "campBasedOn": "Self",
+            "topLimit": 3,
+            "sortType": "Default"
           },
           "targetPredicates": [
             {
               "$type": "ByTargetType",
+              "targetType": "Self",
               "isTarget": false
             },
             {
@@ -776,25 +764,27 @@
             {
               "$type": "TriggerBullet",
               "bulletID": 42301006,
+              "campID": 4001,
+              "trackTarget": "SelfAttackTarget",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "WeaponEffect",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 },
                 "direction": {
                   "$type": "ConfigDirectionByAttachPoint",
+                  "attachPointName": "WeaponEffect",
                   "angleOffset": {
-                    "IBKBLDAJIMA": 0.0,
-                    "LKHJADIPBFL": 0.0,
-                    "PJCOKIGCJOK": 0.0
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
                   },
-                  "randomAngleHor": 60.0,
-                  "randomAngleVer": 20.0,
-                  "attachPointName": "WeaponEffect"
-                },
-                "attachPointName": "WeaponEffect"
+                  "randomAngleHor": 60,
+                  "randomAngleVer": 20
+                }
               }
             }
           ]
@@ -802,65 +792,27 @@
         {
           "$type": "ResetAIAttackTarget"
         }
-      ]
+      ],
+      "modifiers": {
+        "ResetSkillInitialCD": {
+          "onRemoved": [
+            {
+              "$type": "ReTriggerAISkillInitialCD",
+              "skillIDs": [201]
+            }
+          ]
+        }
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Skirmisher_Fat_SprayGun_Water_ImprovedHealingWave_Explode",
-      "modifiers": {
-        "HealingWave_Handler": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "TriggerAttackEvent",
-              "target": "Caster",
-              "attackEvent": {
-                "attackPattern": {
-                  "$type": "ConfigAttackSphere",
-                  "triggerType": "TriggerNoRepeat",
-                  "born": {
-                    "$type": "ConfigBornByGlobalValue",
-                    "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 0.0
-                    },
-                    "positionKey": "_HealingWavePos_",
-                    "directionKey": ""
-                  },
-                  "DCMPFCIBIPA": 0.5
-                },
-                "attackInfo": {
-                  "attackTag": "Skirmisher_Fat_SprayGun_Water_HealingWave",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
-                  "attackProperty": {
-                    "HBIOLEEGHPD": 0.0,
-                    "CCNJGLPMIEP": 0.0,
-                    "bonusCriticalHurt": 100.0,
-                    "strikeType": "Default"
-                  },
-                  "hitPattern": {
-                    "onHitEffectName": "none",
-                    "hitImpulseType": "LV0",
-                    "hitHaltTimeScale": 0.05000000074505806
-                  }
-                }
-              },
-              "targetType": "AllExceptSelf"
-            }
-          ]
-        }
-      },
       "onAdded": [
         {
           "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_HealingWaveLoop",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_HealingWaveLoop"
         }
       ],
       "onAbilityStart": [
@@ -870,6 +822,7 @@
           "targetPredicates": [
             {
               "$type": "ByTargetType",
+              "targetType": "Self",
               "isTarget": false
             },
             {
@@ -884,41 +837,90 @@
               "key": "_HealingWavePos_",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "RootNode",
+                "attachPointTargetType": "Target",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
-                },
-                "attachPointName": "RootNode"
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                }
               },
               "setTarget": false
             },
             {
               "$type": "ApplyModifier",
-              "target": "Owner",
-              "modifierName": "HealingWave_Handler"
+              "modifierName": "HealingWave_Handler",
+              "target": "Owner"
             }
           ]
         },
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_HealingWaveAS",
+          "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_HealingWaveAS",
           "born": {
             "$type": "ConfigBornByCollisionPoint",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             }
-          },
-          "EBHJMLOKDGB": -1.0
+          }
         },
         {
           "$type": "KillSelf"
         }
-      ]
+      ],
+      "modifiers": {
+        "HealingWave_Handler": {
+          "duration": 1,
+          "onAdded": [
+            {
+              "$type": "TriggerAttackEvent",
+              "target": "Caster",
+              "targetType": "AllExceptSelf",
+              "attackEvent": {
+                "attackPattern": {
+                  "$type": "ConfigAttackSphere",
+                  "triggerType": "TriggerNoRepeat",
+                  "radius": 0.5,
+                  "born": {
+                    "$type": "ConfigBornByGlobalValue",
+                    "positionKey": "_HealingWavePos_",
+                    "offset": {
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
+                    }
+                  }
+                },
+                "attackInfo": {
+                  "attackTag": "Skirmisher_Fat_SprayGun_Water_HealingWave",
+                  "attackProperty": {
+                    "damagePercentage": 0,
+                    "strikeType": "Default"
+                  },
+                  "hitPattern": {
+                    "onHitEffectName": "none",
+                    "hitImpulseType": "LV0",
+                    "reboundRatio": 0,
+                    "canBeDefenceHalt": false,
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
+                    "muteHitText": false
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Weak
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -932,60 +934,53 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_MONSTER_SKIRMISHER_RECOVER",
-          "defaultGlobalValueOnCreate": 0.0,
+          "defaultGlobalValueOnCreate": 0,
           "valueSteps": [-0.5, 0.5, 1.5],
+          "removeAppliedModifier": true,
           "modifierNameSteps": ["Empty", "Recover"]
         }
       ],
       "modifiers": {
         "WeakState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "modifierMixins": [
-            {
-              "$type": "AttachModifierToSelfGlobalValueMixin",
-              "globalValueKey": "_MONSTER_SKIRMISHER_RECOVER",
-              "defaultGlobalValueOnCreate": 0.0,
-              "valueSteps": [-0.5, 0.5, 1.5],
-              "modifierNameSteps": ["Empty", "Recover"]
-            }
-          ],
           "onAdded": [
             {
               "$type": "SetPoseBool",
               "boolID": "WeakState",
-              "ratio": true
+              "value": true
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 0.0,
               "key": "_MONSTER_SKIRMISHER_RECOVER",
+              "value": 0,
               "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "maxValue": 0,
+              "minValue": 0
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
               "key": "_MONSTER_SKIRMISHER_WEAK_",
+              "value": 1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 1.0
+              "maxValue": 1,
+              "minValue": 1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetPoseBool",
-              "canBeHandledOnRecover": true,
-              "boolID": "WeakState"
+              "boolID": "WeakState",
+              "value": false,
+              "canBeHandledOnRecover": true
             },
             {
               "$type": "Predicated",
+              "target": "Self",
               "targetPredicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_MONSTER_SKIRMISHER_RECOVER",
-                  "ratio": 1.0
+                  "value": 1,
+                  "compareType": "Equal"
                 }
               ],
               "successActions": [
@@ -1003,27 +998,35 @@
             },
             {
               "$type": "AddGlobalValue",
-              "canBeHandledOnRecover": true,
-              "ratio": 0.0,
               "key": "_MONSTER_SKIRMISHER_RECOVER",
+              "value": 0,
               "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "maxValue": 0,
+              "minValue": 0,
+              "canBeHandledOnRecover": true
             },
             {
               "$type": "AddGlobalValue",
-              "canBeHandledOnRecover": true,
-              "ratio": 0.0,
               "key": "_MONSTER_SKIRMISHER_WEAK_",
+              "value": 0,
               "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "maxValue": 0,
+              "minValue": 0,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_MONSTER_SKIRMISHER_RECOVER",
+              "defaultGlobalValueOnCreate": 0,
+              "valueSteps": [-0.5, 0.5, 1.5],
+              "removeAppliedModifier": true,
+              "modifierNameSteps": ["Empty", "Recover"]
             }
           ]
         },
         "Recover": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorTrigger",
@@ -1031,13 +1034,15 @@
             }
           ]
         },
-        "Empty": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        }
+        "Empty": {}
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  RocketJump
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1051,28 +1056,30 @@
         {
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "RocketJump",
-          "modifierName": "BackPackEffect",
-          "normalizeStart": 0.47999998927116394,
-          "normalizeEnd": 0.800000011920929
+          "target": "Self",
+          "normalizeStart": 0.48,
+          "normalizeEnd": 0.8,
+          "modifierName": "BackPackEffect"
         }
       ],
       "modifiers": {
         "RocketJumpState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "Predicated",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
-                "topLimit": 1,
                 "shapeName": "CircleR25",
+                "centerBasedOn": "Self",
                 "campTargetType": "Alliance",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self",
+                "topLimit": 1,
+                "sortType": "Default"
               },
               "targetPredicates": [
                 {
                   "$type": "ByTargetType",
+                  "targetType": "Self",
                   "isTarget": false
                 },
                 {
@@ -1099,16 +1106,14 @@
           ]
         },
         "BackPackEffect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachModifier",
+              "modifierName": "RocketJump_BackPackEffect",
               "otherTargets": {
                 "$type": "SelectTargetsByEquipParts",
                 "equipPartNames": ["equip02"]
-              },
-              "modifierName": "RocketJump_BackPackEffect"
+              }
             }
           ],
           "onRemoved": [
@@ -1117,36 +1122,37 @@
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR3.5H2",
+                "centerBasedOn": "Self",
                 "campTargetType": "Enemy",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
               "attackInfo": {
-                "attackTag": "",
-                "attenuationTag": "",
-                "attenuationGroup": "default",
                 "attackProperty": {
-                  "HBIOLEEGHPD": 0.25,
-                  "CCNJGLPMIEP": 0.0,
+                  "damagePercentage": 0.25,
                   "elementType": "Water",
-                  "bonusCriticalHurt": 25.0,
+                  "elementDurability": 25,
                   "strikeType": "Blunt",
-                  "enBreak": 200.0
+                  "enBreak": 200
                 },
                 "hitPattern": {
                   "onHitEffectName": "default",
                   "hitImpulseType": "LV5",
-                  "hitHaltTimeScale": 0.05000000074505806,
+                  "reboundRatio": 0,
+                  "canBeDefenceHalt": false,
+                  "hitHaltTime": 0.0,
+                  "hitHaltTimeScale": 0.05,
                   "muteHitText": true
                 },
                 "forceCameraShake": true,
                 "cameraShake": {
                   "shakeType": "CustomVector",
-                  "shakeRange": 0.800000011920929,
+                  "shakeRange": 0.8,
                   "shakeTime": 0.5,
-                  "shakeDistance": 30.0,
+                  "shakeDistance": 30,
                   "shakeDir": {
-                    "y": 1.0,
-                    "z": 1.0
+                    "x": 0,
+                    "y": 1,
+                    "z": 1
                   }
                 }
               }
@@ -1154,24 +1160,25 @@
           ]
         },
         "RocketJump_BackPackEffect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_RocketJumpLoop1",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_RocketJumpLoop1"
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_RocketJumpLoop2",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_RocketJumpLoop2"
             }
           ]
         }
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Weapon Alert Effect
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1179,12 +1186,11 @@
       "onAbilityStart": [
         {
           "$type": "FireEffect",
+          "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_SprayGunAlert",
           "otherTargets": {
             "$type": "SelectTargetsByEquipParts",
             "equipPartNames": ["equip01"]
-          },
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_SprayGunAlert",
-          "EBHJMLOKDGB": -1.0
+          }
         }
       ]
     }
@@ -1196,25 +1202,28 @@
       "onAbilityStart": [
         {
           "$type": "FireEffect",
+          "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_BackPack_Water_BackPackAlert",
           "otherTargets": {
             "$type": "SelectTargetsByEquipParts",
             "equipPartNames": ["equip02"]
-          },
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_BackPack_Water_BackPackAlert",
-          "EBHJMLOKDGB": -1.0
+          }
         },
         {
           "$type": "FireEffect",
+          "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_BackPack_Water_BackPackAlertR",
           "otherTargets": {
             "$type": "SelectTargetsByEquipParts",
             "equipPartNames": ["equip02"]
-          },
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_BackPack_Water_BackPackAlertR",
-          "EBHJMLOKDGB": -1.0
+          }
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Weapon Freeze/Petrifaction
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1233,46 +1242,43 @@
       ],
       "modifiers": {
         "WeaponElementFreezeHandler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachModifier",
+              "modifierName": "WeaponElementFreeze",
               "otherTargets": {
                 "$type": "SelectTargetsByEquipParts",
                 "equipPartNames": ["equip01", "equip02"]
-              },
-              "modifierName": "WeaponElementFreeze"
+              }
             }
           ]
         },
         "WeaponElementPetrifactionHandler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachModifier",
+              "modifierName": "WeaponElementPetrifaction",
               "otherTargets": {
                 "$type": "SelectTargetsByEquipParts",
                 "equipPartNames": ["equip01", "equip02"]
-              },
-              "modifierName": "WeaponElementPetrifaction"
+              }
             }
           ]
         },
         "WeaponElementFreeze": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "ElementFreeze"
         },
         "WeaponElementPetrifaction": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "ElementPetrifaction"
         }
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Steer
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1281,49 +1287,56 @@
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Turn"],
-          "angularSpeed": 150.0,
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 1,
+          "angularSpeed": 150,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["MeleeAtk"],
-          "endNormalizedTime": 0.2800000011920929,
-          "angularSpeed": 90.0,
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 0.28,
+          "angularSpeed": 90,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["RocketJump"],
-          "endNormalizedTime": 0.5299999713897705,
-          "angularSpeed": 150.0,
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 0.53,
+          "angularSpeed": 150,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["ImprovedHealingWave_AS"],
-          "endNormalizedTime": 0.4000000059604645,
-          "angularSpeed": 120.0,
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 0.4,
+          "angularSpeed": 120,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["HealingWave_AS"],
-          "endNormalizedTime": 0.4000000059604645,
-          "angularSpeed": 120.0,
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 0.4,
+          "angularSpeed": 120,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["DamageWave_AS"],
-          "endNormalizedTime": 0.4000000059604645,
-          "angularSpeed": 120.0,
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 0.4,
+          "angularSpeed": 120,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         }
       ]
     }

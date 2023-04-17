@@ -1,130 +1,148 @@
 {
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Slime_Fire_Immune: FindHome_FireBall
+  //
+  ////////////////////////////////////////////////////////////////
   "Slime_FindHome_FireBall": {
     "$type": "ConfigGadget",
     "common": {
       "effectAttachShape": {
         "$type": "ConfigEffectAttachBox",
-        "scaleZ": 0.4000000059604645
+        "emitFrom": "Volume",
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 0.4
       }
     },
     "combat": {
       "property": {
-        "useCreatorProperty": true,
-        "HP": 999999.0,
+        "useCreatorProperty": true, // 是否继承创造者的数值
+        "HP": 999999,
         "attack": 15.0,
-        "defense": 999999.0,
-        "isGhostToAllied": true
+        "defense": 999999,
+        "isInvincible": false,
+        "isGhostToAllied": true,
+        "isGhostToEnemy": false,
+        "canTriggerBullet": true
+      },
+      "combatLock": {
+        "denyLockOn": true
       },
       "beHit": {
         "hitBloodEffect": "",
+        "muteAllHit": false,
+        "muteAllHitEffect": false,
         "muteAllHitText": true
-      },
-      "combatLock": {
-        "lockShape": "CircleLockEnemy",
-        "denyLockOn": true,
-        "lockType": "Default"
       }
     },
-    "attackAttenuation": "",
-    "abilities": [
-      {
-        "abilityID": "FireBall_Loop",
-        "abilityName": "Slime_Fire_FireBall_Loop",
-        "abilityOverride": ""
-      },
-      {
-        "abilityID": "FireBall_Explode",
-        "abilityName": "Slime_Fire_Immune_FireBall_Explode",
-        "abilityOverride": ""
-      }
-    ],
-    "timer": {
-      "lifeInfinite": true,
-      "lifeTime": 999.0
-    },
+    // 子弹跟踪目标
     "move": {
       "$type": "ConfigTrackBulletMove",
-      "speed": 1.0,
-      "canBornInWater": true,
+      "speed": 1,
+      "destroyWhenTargetDie": false,
+      "traceOnYAxis": true,
       "updateAngle": {
         "$type": "ConfigBulletMoveAngleByVelocity"
       },
-      "traceOnYAxis": true
+      "canBornInWater": true
     },
+    // 生命周期管理
+    "timer": {
+      "lifeInfinite": true, //如果未触发是否一致存在
+      "lifeTime": 999.0 //存在时间
+    },
+    // 子弹参数
     "gadget": {
       "$type": "ConfigBulletPattern",
       "collision": {
-        "targetType": "Alliance"
+        "targetType": "Alliance",
+        "triggerType": "TriggerOnce"
       },
       "triggerActions": [
         {
           "$type": "ConfigGadgetTriggerAbility",
-          "abilityName": "Slime_Fire_Immune_FireBall_Explode"
+          "abilityName": "Slime_Fire_Immune_FireBall_Explode",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_SLIME_FIRE_IMMUNE2_TAG",
+              "value": 1,
+              "compareType": "Equal"
+            }
+          ]
         }
       ],
       "killByOther": true
-    }
+    },
+    "abilities": [
+      {
+        "abilityID": "FireBall_Loop",
+        "abilityName": "Slime_Fire_FireBall_Loop"
+      },
+      {
+        "abilityID": "FireBall_Explode",
+        "abilityName": "Slime_Fire_Immune_FireBall_Explode"
+      }
+    ]
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Slime_Fire_Immune: Slime_FireBall_RigidBody
+  //
+  ////////////////////////////////////////////////////////////////
   "Slime_FireBall_RigidBody": {
     "$type": "ConfigGadget",
     "common": {
       "effectAttachShape": {
-        "$type": "ConfigEffectAttachBox"
+        "$type": "ConfigEffectAttachBox",
+        "emitFrom": "Volume", //EmitFrom
+        "scaleX": 1,
+        "scaleY": 1,
+        "scaleZ": 1
       },
       "affectedByWorld": true,
       "checkInSurface": true
     },
-    "combat": {
-      "property": {
-        "useCreatorProperty": true,
-        "HP": 999999.0,
-        "attack": 15.0,
-        "defense": 999999.0,
-        "isGhostToAllied": true
-      },
-      "beHit": {
-        "hitBloodEffect": "",
-        "muteAllHitText": true
-      },
-      "combatLock": {
-        "lockShape": "CircleLockEnemy",
-        "denyLockOn": true,
-        "lockType": "Default"
-      }
-    },
-    "attackAttenuation": "",
-    "abilities": [
-      {
-        "abilityID": "FireBall_Loop",
-        "abilityName": "Slime_Fire_FireBall_Loop",
-        "abilityOverride": ""
-      },
-      {
-        "abilityID": "Slime_Fire_FireBall_Explode",
-        "abilityName": "Slime_Fire_FireBall_Explode",
-        "abilityOverride": ""
-      },
-      {
-        "abilityID": "Slime_Fire_Immune_FireBall_RigidBody",
-        "abilityName": "Slime_Fire_Immune_FireBall_RigidBody",
-        "abilityOverride": ""
-      }
-    ],
     "timer": {
       "lifeTime": 2.5
     },
+    "combat": {
+      "property": {
+        "useCreatorProperty": true, // 是否继承创造者的数值
+        "HP": 999999,
+        "attack": 15.0,
+        "defense": 999999,
+        "isInvincible": false,
+        "isGhostToAllied": true,
+        "isGhostToEnemy": false,
+        "canTriggerBullet": true
+      },
+      "combatLock": {
+        "denyLockOn": true
+      },
+      "beHit": {
+        "hitBloodEffect": "",
+        "muteAllHit": false,
+        "muteAllHitEffect": false,
+        "muteAllHitText": true
+      }
+    },
     "move": {
       "$type": "ConfigRigidbodyMove",
+      "startCloseToGround": false,
       "velocityForce": {
         "includeForces": ["RetreatType", "RetreatAirType", "WindZoneType"]
-      },
-      "startCloseToGround": false
+      }
     },
+    // 子弹参数
     "gadget": {
       "$type": "ConfigGadgetCollidedPattern",
       "collision": {
-        "triggerCD": 0.30000001192092896,
-        "targetType": "All"
+        "targetType": "All",
+        "triggerType": "TriggerOnce",
+        "triggerCD": 0.3,
+        "ignoreScene": false
       },
       "collisionActions": [
         {
@@ -136,25 +154,53 @@
           "abilityName": "Slime_Fire_Immune_FireBall_RigidBody"
         }
       ],
-      "thisColliderName": "Collider",
-      "targetColliderName": "InteeTrigger"
-    }
+      "killByOther": true
+    },
+    "abilities": [
+      {
+        "abilityID": "FireBall_Loop",
+        "abilityName": "Slime_Fire_FireBall_Loop"
+      },
+      {
+        "abilityID": "Slime_Fire_FireBall_Explode",
+        "abilityName": "Slime_Fire_FireBall_Explode"
+      },
+      {
+        "abilityID": "Slime_Fire_Immune_FireBall_RigidBody",
+        "abilityName": "Slime_Fire_Immune_FireBall_RigidBody"
+      }
+    ]
   },
+
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Slime_Water: Bubble_Missile
+  //
+  ////////////////////////////////////////////////////////////////
   "Slime_Bubble_Missile": {
     "$type": "ConfigGadget",
     "common": {
       "effectAttachShape": {
         "$type": "ConfigEffectAttachBox",
-        "scaleZ": 0.4000000059604645
+        "emitFrom": "Volume",
+        "scaleX": 1.0,
+        "scaleY": 1.0,
+        "scaleZ": 0.4
       }
     },
     "combat": {
       "property": {
-        "useCreatorProperty": true,
-        "HP": 999999.0,
+        "useCreatorProperty": true, // 是否继承创造者的数值
+        "HP": 999999,
         "attack": 15.0,
-        "defense": 999999.0,
-        "isLockHP": true
+        "defense": 999999,
+        "isLockHP": true,
+        "isGhostToAllied": false,
+        "isGhostToEnemy": false,
+        "canTriggerBullet": true
+      },
+      "combatLock": {
+        "denyLockOn": true
       },
       "beHit": {
         "hitBloodEffect": "",
@@ -162,52 +208,36 @@
         "muteAllHitEffect": true,
         "muteAllHitText": true
       },
-      "combatLock": {
-        "lockShape": "CircleLockEnemy",
-        "denyLockOn": true,
-        "lockType": "Default"
-      }
+      "animEvents": {}
     },
-    "attackAttenuation": "",
-    "abilities": [
-      {
-        "abilityID": "Bubble_Loop",
-        "abilityName": "Slime_Water_Bubble_Loop",
-        "abilityOverride": ""
-      },
-      {
-        "abilityID": "Bubble_Explode",
-        "abilityName": "Slime_Water_Bubble_Explode",
-        "abilityOverride": ""
-      },
-      {
-        "abilityID": "Bubble_Surround",
-        "abilityName": "Slime_Water_Bubble_Surround",
-        "abilityOverride": ""
-      }
-    ],
-    "timer": {
-      "lifeTime": 5.0
-    },
+
+    // 子弹线性移动
     "move": {
       "$type": "ConfigParabolaBulletMove",
       "speed": 9.0,
+      "angleOffHor": 60,
+      "gravityOfAcceleration": 15,
       "updateAngle": {
         "$type": "ConfigBulletMoveAngleByVelocity"
       },
-      "angleOffHor": 60.0,
-      "gravityOfAcceleration": 15.0,
       "correction": {
         "$type": "ConfigParabolaBulletMoveCorrection",
         "deviation": 2.0,
+        "fixAngleOfVer": 0.0,
         "minSpeed": 4.0,
         "maxSpeed": 12.0
       }
     },
+    "timer": {
+      "lifeInfinite": false, //如果未触发是否一致存在
+      "lifeTime": 5.0 //存在时间
+    },
+    // 子弹参数
     "gadget": {
       "$type": "ConfigBulletPattern",
       "collision": {
-        "targetType": "All"
+        "targetType": "All",
+        "triggerType": "TriggerOnce"
       },
       "triggerActions": [
         {
@@ -222,6 +252,20 @@
         }
       ],
       "killByOther": true
-    }
+    },
+    "abilities": [
+      {
+        "abilityID": "Bubble_Loop",
+        "abilityName": "Slime_Water_Bubble_Loop"
+      },
+      {
+        "abilityID": "Bubble_Explode",
+        "abilityName": "Slime_Water_Bubble_Explode"
+      },
+      {
+        "abilityID": "Bubble_Surround",
+        "abilityName": "Slime_Water_Bubble_Surround"
+      }
+    ]
   }
 }

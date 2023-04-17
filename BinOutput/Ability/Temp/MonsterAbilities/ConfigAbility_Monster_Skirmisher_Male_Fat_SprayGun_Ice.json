@@ -1,4 +1,9 @@
 [
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Improve
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -7,12 +12,14 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_MONSTER_SKIRMISHER_IMPROVED_",
-          "defaultGlobalValueOnCreate": 0.0,
+          "defaultGlobalValueOnCreate": 0,
           "valueSteps": [-0.5, 0.5, 1.5],
+          "removeAppliedModifier": true,
           "modifierNameSteps": ["EyeEffect_Normal", "EyeEffect_Improve"]
         },
         {
           "$type": "AttachToStateIDMixin",
+          "poseIDs": ["Improve"],
           "modifierName": "ImprovedConfig"
         },
         {
@@ -34,45 +41,63 @@
           "modifierName": "ResetMonsterSkill"
         }
       ],
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_Skirmisher_Male_Fat_SprayGun_Ice_ImprovedState"
+        }
+      ],
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Skirmisher_Male_Fat_SprayGun_Ice_AttackDetect"
+        },
+        {
+          "$type": "AddGlobalValue",
+          "key": "_MONSTER_SIGNLEELEMENTMETHOD_FROZEN_",
+          "value": 1,
+          "useLimitRange": true,
+          "maxValue": 1,
+          "minValue": 1
+        }
+      ],
       "modifiers": {
         "UNIQUE_Skirmisher_Male_Fat_SprayGun_Ice_ImprovedState": {
-          "modifierName": "",
           "isUnique": true,
           "elementType": "Frozen",
-          "bonusCriticalHurt": 200.0,
+          "elementDurability": 200,
+          "properties": {
+            "Entity_WeightRatio": 5.0,
+            "Actor_EndureDelta": 0.0,
+            "Actor_PhysicalSubHurtDelta": 1,
+            "Actor_FireSubHurtDelta": 1,
+            "Actor_ElecSubHurtDelta": 1,
+            "Actor_WaterSubHurtDelta": 1,
+            "Actor_GrassSubHurtDelta": 1,
+            "Actor_WindSubHurtDelta": 1,
+            "Actor_IceSubHurtDelta": 1,
+            "Actor_RockSubHurtDelta": 1
+          },
           "modifierMixins": [
             {
               "$type": "ShieldBarMixin",
-              "showDamageText": ""
+              "revert": false
             },
             {
               "$type": "ModifyElementDecrateMixin",
               "group": "Monster_SingleElement_Method_Frozen"
             }
           ],
-          "properties": {
-            "Entity_WeightRatio": 5.0,
-            "Actor_EndureDelta": 0.0,
-            "Actor_PhysicalSubHurtDelta": 1.0,
-            "Actor_FireSubHurtDelta": 1.0,
-            "Actor_ElecSubHurtDelta": 1.0,
-            "Actor_WaterSubHurtDelta": 1.0,
-            "Actor_GrassSubHurtDelta": 1.0,
-            "Actor_WindSubHurtDelta": 1.0,
-            "Actor_IceSubHurtDelta": 1.0,
-            "Actor_RockSubHurtDelta": 1.0
-          },
           "onAdded": [
             {
               "$type": "SetPoseBool",
-              "canBeHandledOnRecover": true,
               "boolID": "ImprovedState",
-              "ratio": true
+              "value": true,
+              "canBeHandledOnRecover": true
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Ice_ImproveBS",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Ice_ImproveBS"
             },
             {
               "$type": "SetAISkillCDAvailableNow",
@@ -80,35 +105,35 @@
             },
             {
               "$type": "ApplyModifier",
+              "modifierName": "ImproveEffect_SprayGunEffect",
               "otherTargets": {
                 "$type": "SelectTargetsByEquipParts",
                 "equipPartNames": ["equip01"]
-              },
-              "modifierName": "ImproveEffect_SprayGunEffect"
+              }
             },
             {
               "$type": "ApplyModifier",
+              "modifierName": "ImproveEffect_BackPackEffect",
               "otherTargets": {
                 "$type": "SelectTargetsByEquipParts",
                 "equipPartNames": ["equip02"]
-              },
-              "modifierName": "ImproveEffect_BackPackEffect"
+              }
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
               "key": "_MONSTER_SKIRMISHER_IMPROVED_",
+              "value": 1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 1.0
+              "maxValue": 1,
+              "minValue": 1
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
               "key": "_MONSTER_SKIRMISHER_IMPROVED_COUNT_",
+              "value": 1,
               "useLimitRange": true,
-              "maxValue": 99.0,
-              "minValue": 0.0
+              "maxValue": 99,
+              "minValue": 0
             },
             {
               "$type": "AttachAbilityStateResistance",
@@ -118,138 +143,127 @@
           "onRemoved": [
             {
               "$type": "SetAnimatorTrigger",
+              "triggerID": "WeakStart",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "_MOSNTER_SKIRMISHER_RETURNTOBORN_",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
-              ],
-              "triggerID": "WeakStart"
+              ]
             },
             {
               "$type": "SetPoseBool",
-              "canBeHandledOnRecover": true,
-              "boolID": "ImprovedState"
+              "boolID": "ImprovedState",
+              "value": false,
+              "canBeHandledOnRecover": true
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Ice_ImproveAS",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Ice_ImproveAS"
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 0.0,
               "key": "_MONSTER_SKIRMISHER_IMPROVED_",
+              "value": 0,
               "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "maxValue": 0,
+              "minValue": 0
             },
             {
               "$type": "RemoveModifier",
+              "modifierName": "ImproveEffect_BackPackEffect",
               "otherTargets": {
                 "$type": "SelectTargetsByEquipParts",
                 "equipPartNames": ["equip02"]
-              },
-              "modifierName": "ImproveEffect_BackPackEffect"
+              }
             },
             {
               "$type": "RemoveModifier",
+              "modifierName": "ImproveEffect_SprayGunEffect",
               "otherTargets": {
                 "$type": "SelectTargetsByEquipParts",
                 "equipPartNames": ["equip01"]
-              },
-              "modifierName": "ImproveEffect_SprayGunEffect"
+              }
             }
           ]
         },
         "ImproveEffect_SprayGunEffect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Ice_SprayGunImprove",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Ice_SprayGunImprove"
             },
             {
               "$type": "SetAnimatorBool",
               "boolID": "Improved",
-              "ratio": true
+              "value": true
             }
           ],
           "onRemoved": [
             {
               "$type": "SetAnimatorBool",
-              "canBeHandledOnRecover": true,
-              "boolID": "Improved"
+              "boolID": "Improved",
+              "value": false,
+              "canBeHandledOnRecover": true
             }
           ]
         },
         "ImproveEffect_BackPackEffect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Ice_BackPackImprove",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Ice_BackPackImprove"
             },
             {
               "$type": "SetAnimatorBool",
               "boolID": "Improved",
-              "ratio": true
+              "value": true
             }
           ],
           "onRemoved": [
             {
               "$type": "SetAnimatorBool",
-              "canBeHandledOnRecover": true,
-              "boolID": "Improved"
+              "boolID": "Improved",
+              "value": false,
+              "canBeHandledOnRecover": true
             }
           ]
         },
         "EyeEffect_Normal": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Ice_EyeNormal",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Ice_EyeNormal"
             }
           ]
         },
         "EyeEffect_Improve": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Ice_EyeToImprove",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Ice_EyeToImprove"
             }
           ],
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Ice_EyeToNormal",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Ice_EyeToNormal"
             }
           ]
         },
         "Skirmisher_Male_Fat_SprayGun_Ice_AttackDetect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAttackLanded": [
             {
               "$type": "ApplyModifier",
+              "modifierName": "ElementalFlag",
               "target": "Target",
               "predicates": [
                 {
                   "$type": "ByTargetType",
+                  "targetType": "Self",
                   "isTarget": false
                 },
                 {
@@ -269,15 +283,13 @@
                   "$type": "ByEntityTypes",
                   "entityTypes": ["Avatar", "Partner"]
                 }
-              ],
-              "modifierName": "ElementalFlag"
+              ]
             }
           ]
         },
         "ElementalFlag": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 8.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 8,
+          "stacking": "Refresh",
           "modifierMixins": [
             {
               "$type": "AttachToAbilityStateMixin",
@@ -287,35 +299,33 @@
           ]
         },
         "HasIce": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
+              "target": "Self",
               "key": "_SKIRMISHER_ELEMENT_ICE_",
+              "value": 1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 1.0
+              "maxValue": 1,
+              "minValue": 1
             }
           ],
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 0.0,
+              "target": "Self",
               "key": "_SKIRMISHER_ELEMENT_ICE_",
+              "value": 0,
               "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "maxValue": 0,
+              "minValue": 0
             }
           ]
         },
         "ImprovedConfig": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "properties": {
             "Actor_EndureDelta": 0.0,
-            "Actor_SubHurtDelta": 0.949999988079071
+            "Actor_SubHurtDelta": 0.95
           },
           "onAdded": [
             {
@@ -325,44 +335,42 @@
         },
         "Skirmisher_Male_Fat_SprayGun_Ice_ForceImprove": {
           "stacking": "Unique",
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetPoseBool",
+              "boolID": "SpecaialState",
+              "value": true,
               "canBeHandledOnRecover": true,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "_MONSTER_SKIRMISHER_IMPROVED_COUNT_",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
-              ],
-              "boolID": "SpecaialState",
-              "ratio": true
+              ]
             }
           ],
           "onRemoved": [
             {
               "$type": "SetPoseBool",
-              "boolID": "SpecaialState"
+              "boolID": "SpecaialState",
+              "value": false
             }
           ]
         },
         "RemoveImproveState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "Invincible",
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
+              "target": "Self",
               "key": "_MOSNTER_SKIRMISHER_RETURNTOBORN_",
+              "value": 1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 1.0
+              "maxValue": 1,
+              "minValue": 1
             },
             {
               "$type": "RemoveUniqueModifier",
@@ -372,25 +380,24 @@
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 0.0,
+              "target": "Self",
               "key": "_MOSNTER_SKIRMISHER_RETURNTOBORN_",
+              "value": 0,
               "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "maxValue": 0,
+              "minValue": 0
             }
           ]
         },
         "ResetMonsterSkill": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 0.0,
               "key": "_MONSTER_SKIRMISHER_IMPROVED_COUNT_",
+              "value": 0,
               "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "maxValue": 0,
+              "minValue": 0
             },
             {
               "$type": "SetAISkillCDAvailableNow",
@@ -404,31 +411,8 @@
             }
           ]
         },
-        "Empty": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "Skirmisher_Male_Fat_SprayGun_Ice_AttackDetect"
-        },
-        {
-          "$type": "AddGlobalValue",
-          "ratio": 1.0,
-          "key": "_MONSTER_SIGNLEELEMENTMETHOD_FROZEN_",
-          "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 1.0
-        }
-      ],
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "UNIQUE_Skirmisher_Male_Fat_SprayGun_Ice_ImprovedState"
-        }
-      ]
+        "Empty": {}
+      }
     }
   },
   {
@@ -443,6 +427,11 @@
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  EyeAlert
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -450,21 +439,25 @@
       "onAbilityStart": [
         {
           "$type": "FireEffect",
+          "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_EyeImprove",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "target": "Self",
               "key": "_MONSTER_SKIRMISHER_IMPROVED_",
-              "ratio": 0.0,
+              "value": 0,
               "compareType": "NoneOrEqual"
             }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Water_EyeImprove",
-          "EBHJMLOKDGB": -1.0
+          ]
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Weak
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -478,60 +471,53 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_MONSTER_SKIRMISHER_RECOVER",
-          "defaultGlobalValueOnCreate": 0.0,
+          "defaultGlobalValueOnCreate": 0,
           "valueSteps": [-0.5, 0.5, 1.5],
+          "removeAppliedModifier": true,
           "modifierNameSteps": ["Empty", "Recover"]
         }
       ],
       "modifiers": {
         "WeakState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "modifierMixins": [
-            {
-              "$type": "AttachModifierToSelfGlobalValueMixin",
-              "globalValueKey": "_MONSTER_SKIRMISHER_RECOVER",
-              "defaultGlobalValueOnCreate": 0.0,
-              "valueSteps": [-0.5, 0.5, 1.5],
-              "modifierNameSteps": ["Empty", "Recover"]
-            }
-          ],
           "onAdded": [
             {
               "$type": "SetPoseBool",
               "boolID": "WeakState",
-              "ratio": true
+              "value": true
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 0.0,
               "key": "_MONSTER_SKIRMISHER_RECOVER",
+              "value": 0,
               "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "maxValue": 0,
+              "minValue": 0
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
               "key": "_MONSTER_SKIRMISHER_WEAK_",
+              "value": 1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 1.0
+              "maxValue": 1,
+              "minValue": 1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetPoseBool",
-              "canBeHandledOnRecover": true,
-              "boolID": "WeakState"
+              "boolID": "WeakState",
+              "value": false,
+              "canBeHandledOnRecover": true
             },
             {
               "$type": "Predicated",
+              "target": "Self",
               "targetPredicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_MONSTER_SKIRMISHER_RECOVER",
-                  "ratio": 1.0
+                  "value": 1,
+                  "compareType": "Equal"
                 }
               ],
               "successActions": [
@@ -549,26 +535,34 @@
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 0.0,
               "key": "_MONSTER_SKIRMISHER_RECOVER",
+              "value": 0,
               "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "maxValue": 0,
+              "minValue": 0
             },
             {
               "$type": "AddGlobalValue",
-              "canBeHandledOnRecover": true,
-              "ratio": 0.0,
               "key": "_MONSTER_SKIRMISHER_WEAK_",
+              "value": 0,
               "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "maxValue": 0,
+              "minValue": 0,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_MONSTER_SKIRMISHER_RECOVER",
+              "defaultGlobalValueOnCreate": 0,
+              "valueSteps": [-0.5, 0.5, 1.5],
+              "removeAppliedModifier": true,
+              "modifierNameSteps": ["Empty", "Recover"]
             }
           ]
         },
         "Recover": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorTrigger",
@@ -576,13 +570,15 @@
             }
           ]
         },
-        "Empty": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        }
+        "Empty": {}
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  IceSpray
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -591,86 +587,82 @@
         {
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "IceSpray",
-          "modifierName": "IceSprayDamageHandler",
-          "normalizeStart": 0.3799999952316284,
-          "normalizeEnd": 0.800000011920929
+          "target": "Self",
+          "normalizeStart": 0.38,
+          "normalizeEnd": 0.8,
+          "modifierName": "IceSprayDamageHandler"
         },
         {
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "IceSpray",
-          "modifierName": "IceSprayEffectHandler",
-          "normalizeStart": 0.3799999952316284,
-          "normalizeEnd": 0.8500000238418579
+          "target": "Self",
+          "normalizeStart": 0.38,
+          "normalizeEnd": 0.85,
+          "modifierName": "IceSprayEffectHandler"
         }
       ],
       "modifiers": {
         "UNIQUE_IceSprayDamage": {
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": 2.700000047683716,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.15000000596046448,
+          "duration": 2.7,
+          "thinkInterval": 0.15,
           "onThinkInterval": [
             {
               "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackBox",
                   "triggerType": "TriggerNoRepeat",
+                  "size": {
+                    "x": 1.5,
+                    "y": 1.75,
+                    "z": 8.5
+                  },
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
+                    "attachPointName": "WeaponEffect",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": -0.25,
-                      "PJCOKIGCJOK": -2.0
-                    },
-                    "attachPointName": "WeaponEffect"
-                  },
-                  "size": {
-                    "IBKBLDAJIMA": 1.5,
-                    "LKHJADIPBFL": 1.75,
-                    "PJCOKIGCJOK": 8.5
+                      "x": 0.0,
+                      "y": -0.25,
+                      "z": -2.0
+                    }
                   }
                 },
                 "attackInfo": {
                   "attackTag": "IceSpary",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "HBIOLEEGHPD": 0.30000001192092896,
-                    "CCNJGLPMIEP": 0.0,
+                    "damagePercentage": 0.3,
                     "elementType": "Ice",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25,
                     "strikeType": "Default",
-                    "enBreak": 1.0
+                    "enBreak": 1
                   },
                   "hitPattern": {
                     "onHitEffectName": "default",
                     "hitImpulseType": "LV1",
-                    "hitHaltTimeScale": 0.05000000074505806
+                    "reboundRatio": 0,
+                    "canBeDefenceHalt": false,
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
+                    "muteHitText": false
                   }
                 }
-              },
-              "targetType": "Enemy"
+              }
             }
           ]
         },
         "UNIQUE_IceSprayEffect": {
-          "modifierName": "",
+          "duration": 2.7,
           "isUnique": true,
-          "HCJLIGBLGJA": 2.700000047683716,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Ice_IceSprayLoop",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Ice_IceSprayLoop"
             }
           ]
         },
         "IceSprayDamageHandler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
@@ -685,8 +677,6 @@
           ]
         },
         "IceSprayEffectHandler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
@@ -703,6 +693,11 @@
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  ImprovedIceSpray
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -718,22 +713,27 @@
           "modifierName": "IceSprayState"
         }
       ],
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_Skirmisher_Male_Fat_SprayGun_Ice_ImprovedIceSprayEffect"
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_Skirmisher_Male_Fat_SprayGun_Ice_ImprovedIceSprayDamage"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Skirmisher_Male_Fat_SprayGun_Ice_ImprovedIceSprayEffect": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Ice_ImprovedIceSprayLoop",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Ice_ImprovedIceSprayLoop"
             }
           ]
         },
         "IceSprayState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "RemoveModifier",
@@ -746,66 +746,55 @@
           ]
         },
         "UNIQUE_Skirmisher_Male_Fat_SprayGun_Ice_ImprovedIceSprayDamage": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.15000000596046448,
+          "thinkInterval": 0.15,
           "onThinkInterval": [
             {
               "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackBox",
                   "triggerType": "TriggerNoRepeat",
+                  "size": {
+                    "x": 1.5,
+                    "y": 1.75,
+                    "z": 8.5
+                  },
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
+                    "attachPointName": "WeaponEffect",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": -0.25,
-                      "PJCOKIGCJOK": -2.0
-                    },
-                    "attachPointName": "WeaponEffect"
-                  },
-                  "size": {
-                    "IBKBLDAJIMA": 1.5,
-                    "LKHJADIPBFL": 1.75,
-                    "PJCOKIGCJOK": 8.5
+                      "x": 0.0,
+                      "y": -0.25,
+                      "z": -2.0
+                    }
                   }
                 },
                 "attackInfo": {
                   "attackTag": "IceSpary",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "HBIOLEEGHPD": 0.30000001192092896,
-                    "CCNJGLPMIEP": 0.0,
+                    "damagePercentage": 0.3,
                     "elementType": "Ice",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25,
                     "strikeType": "Default",
-                    "enBreak": 1.0
+                    "enBreak": 1
                   },
                   "hitPattern": {
                     "onHitEffectName": "default",
                     "hitImpulseType": "LV1",
-                    "hitHaltTimeScale": 0.05000000074505806
+                    "reboundRatio": 0,
+                    "canBeDefenceHalt": false,
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
+                    "muteHitText": false
                   }
                 }
-              },
-              "targetType": "Enemy"
+              }
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "UNIQUE_Skirmisher_Male_Fat_SprayGun_Ice_ImprovedIceSprayEffect"
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "UNIQUE_Skirmisher_Male_Fat_SprayGun_Ice_ImprovedIceSprayDamage"
-        }
-      ]
+      }
     }
   },
   {
@@ -824,6 +813,11 @@
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  RocketJump
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -837,22 +831,22 @@
         {
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "RocketJump",
-          "modifierName": "BackPackEffect",
-          "normalizeStart": 0.47999998927116394,
-          "normalizeEnd": 0.8199999928474426
+          "target": "Self",
+          "normalizeStart": 0.48,
+          "normalizeEnd": 0.82,
+          "modifierName": "BackPackEffect"
         },
         {
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "RocketJump",
-          "modifierName": "RocketJump_InAir",
-          "normalizeStart": 0.5400000214576721,
-          "normalizeEnd": 0.7900000214576721
+          "target": "Self",
+          "normalizeStart": 0.54,
+          "normalizeEnd": 0.79,
+          "modifierName": "RocketJump_InAir"
         }
       ],
       "modifiers": {
         "ResetAISkill": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "SetAISkillCDAvailableNow",
@@ -861,16 +855,14 @@
           ]
         },
         "BackPackEffect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachModifier",
+              "modifierName": "RocketJump_BackPackEffect",
               "otherTargets": {
                 "$type": "SelectTargetsByEquipParts",
                 "equipPartNames": ["equip02"]
-              },
-              "modifierName": "RocketJump_BackPackEffect"
+              }
             }
           ],
           "onRemoved": [
@@ -879,25 +871,26 @@
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR4H2",
+                "centerBasedOn": "Self",
                 "campTargetType": "Enemy",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
               "attackInfo": {
                 "attackTag": "RocketJump",
-                "attenuationTag": "",
-                "attenuationGroup": "default",
                 "attackProperty": {
-                  "HBIOLEEGHPD": 0.5,
-                  "CCNJGLPMIEP": 0.0,
+                  "damagePercentage": 0.5,
                   "elementType": "Ice",
-                  "bonusCriticalHurt": 50.0,
+                  "elementDurability": 50,
                   "strikeType": "Blunt",
-                  "enBreak": 200.0
+                  "enBreak": 200
                 },
                 "hitPattern": {
                   "onHitEffectName": "default",
                   "hitImpulseType": "LV5",
-                  "hitHaltTimeScale": 0.05000000074505806,
+                  "reboundRatio": 0,
+                  "canBeDefenceHalt": false,
+                  "hitHaltTime": 0.0,
+                  "hitHaltTimeScale": 0.05,
                   "muteHitText": true
                 }
               }
@@ -905,29 +898,24 @@
           ]
         },
         "RocketJump_BackPackEffect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Ice_RocketJumpLoop1",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Ice_RocketJumpLoop1"
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Ice_RocketJumpLoop2",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Ice_RocketJumpLoop2"
             }
           ]
         },
         "RocketJump_InAir": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "IsGhostToEnemy",
           "onAdded": [
             {
               "$type": "EnableHitBoxByName",
-              "hitBoxNames": ["HitBox", "HeadBox"]
+              "hitBoxNames": ["HitBox", "HeadBox"],
+              "setEnable": false
             }
           ],
           "onRemoved": [
@@ -948,46 +936,52 @@
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
+              "duration": 0.0,
               "triggerType": "TriggerNoRepeat",
+              "radius": 5.0,
               "born": {
                 "$type": "ConfigBornBySelf"
-              },
-              "DCMPFCIBIPA": 5.0
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
               "attackProperty": {
-                "HBIOLEEGHPD": 0.0,
-                "CCNJGLPMIEP": 0.0,
-                "bonusCriticalHurt": 100.0
+                "damagePercentage": 0.0
               },
               "hitPattern": {
                 "onHitEffectName": "default",
-                "hitImpulseType": "LV0"
+                "hitImpulseType": "LV0",
+                "reboundRatio": 0,
+                "hitHaltTime": 0,
+                "hitHaltTimeScale": 0,
+                "muteHitText": false
               },
               "forceCameraShake": true,
               "cameraShake": {
                 "shakeType": "CustomVector",
-                "shakeRange": 0.800000011920929,
-                "shakeTime": 0.4000000059604645,
-                "shakeDistance": 30.0,
+                "shakeRange": 0.8,
+                "shakeTime": 0.4,
+                "shakeDistance": 30,
                 "shakeDir": {
-                  "y": 1.0,
-                  "z": 1.0
+                  "x": 0,
+                  "y": 1,
+                  "z": 1
                 }
               }
             }
-          },
-          "targetType": "Enemy"
+          }
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Weapon Alert Effect
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -995,12 +989,11 @@
       "onAbilityStart": [
         {
           "$type": "FireEffect",
+          "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Ice_SprayGunAlert",
           "otherTargets": {
             "$type": "SelectTargetsByEquipParts",
             "equipPartNames": ["equip01"]
-          },
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_SprayGun_Ice_SprayGunAlert",
-          "EBHJMLOKDGB": -1.0
+          }
         }
       ]
     }
@@ -1012,25 +1005,28 @@
       "onAbilityStart": [
         {
           "$type": "FireEffect",
+          "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_BackPack_Ice_BackPackAlert",
           "otherTargets": {
             "$type": "SelectTargetsByEquipParts",
             "equipPartNames": ["equip02"]
-          },
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_BackPack_Ice_BackPackAlert",
-          "EBHJMLOKDGB": -1.0
+          }
         },
         {
           "$type": "FireEffect",
+          "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_BackPack_Ice_BackPackAlertR",
           "otherTargets": {
             "$type": "SelectTargetsByEquipParts",
             "equipPartNames": ["equip02"]
-          },
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_BackPack_Ice_BackPackAlertR",
-          "EBHJMLOKDGB": -1.0
+          }
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Weapon Freeze/Petrifaction
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1049,16 +1045,14 @@
       ],
       "modifiers": {
         "WeaponElementFreezeHandler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachModifier",
+              "modifierName": "WeaponElementFreeze",
               "otherTargets": {
                 "$type": "SelectTargetsByEquipParts",
                 "equipPartNames": ["equip01", "equip02"]
-              },
-              "modifierName": "WeaponElementFreeze"
+              }
             },
             {
               "$type": "TriggerAbility",
@@ -1087,16 +1081,14 @@
           ]
         },
         "WeaponElementPetrifactionHandler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachModifier",
+              "modifierName": "WeaponElementPetrifaction",
               "otherTargets": {
                 "$type": "SelectTargetsByEquipParts",
                 "equipPartNames": ["equip01", "equip02"]
-              },
-              "modifierName": "WeaponElementPetrifaction"
+              }
             },
             {
               "$type": "TriggerAbility",
@@ -1125,32 +1117,34 @@
           ]
         },
         "WeaponElementFreeze": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "ElementFreeze",
           "onAdded": [
             {
               "$type": "SetAnimatorBool",
               "boolID": "Dark",
-              "ratio": true
+              "value": true
             }
           ],
           "onRemoved": [
             {
               "$type": "SetAnimatorBool",
-              "canBeHandledOnRecover": true,
-              "boolID": "Dark"
+              "boolID": "Dark",
+              "value": false,
+              "canBeHandledOnRecover": true
             }
           ]
         },
         "WeaponElementPetrifaction": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "ElementPetrifaction"
         }
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Steer
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1159,52 +1153,65 @@
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Turn"],
-          "angularSpeed": 150.0,
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 1,
+          "angularSpeed": 150,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["MeleeAtk"],
-          "endNormalizedTime": 0.30000001192092896,
-          "angularSpeed": 120.0,
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 0.3,
+          "angularSpeed": 120,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["IceSpray"],
-          "endNormalizedTime": 0.3499999940395355,
-          "angularSpeed": 120.0,
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 0.35,
+          "angularSpeed": 120,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["RocketJump"],
-          "endNormalizedTime": 0.5299999713897705,
-          "angularSpeed": 120.0,
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 0.53,
+          "angularSpeed": 120,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["ImprovedIceSpray_BS"],
-          "angularSpeed": 120.0,
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 1,
+          "angularSpeed": 120,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         },
         {
           "$type": "SteerAttackTraceMixin",
           "steerStateIDs": ["ImprovedIceSpray_Loop"],
-          "endNormalizedTime": 4.0,
-          "angularSpeed": 120.0,
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 4,
+          "angularSpeed": 120,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Fat Eat Effect
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1218,13 +1225,10 @@
       ],
       "modifiers": {
         "Monster_Skirmisher_Male_Fat_EatEffect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Skirmisher_Male_Fat_Eat",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Skirmisher_Male_Fat_Eat"
             }
           ]
         }

@@ -1,17 +1,13 @@
 [
+  ////////////////////////////////////////////////////////////////
+  //
+  //  ElementState
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Oceanid_Falcon_ElementState",
-      "modifiers": {
-        "UNIQUE_ElementState": {
-          "modifierName": "",
-          "isUnique": true,
-          "elementType": "Water",
-          "bonusCriticalHurt": 100.0,
-          "isElementDurabilityMutable": false
-        }
-      },
       "onAdded": [
         {
           "$type": "ApplyModifier",
@@ -23,12 +19,24 @@
         },
         {
           "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_Falcon_Eye",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_Monster_Oceanid_Falcon_Eye"
         }
-      ]
+      ],
+      "modifiers": {
+        "UNIQUE_ElementState": {
+          "isUnique": true,
+          "elementType": "Water",
+          "elementDurability": 100,
+          "isElementDurabilityMutable": false
+        }
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Dive
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -37,27 +45,27 @@
         {
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "Dive",
-          "modifierName": "DiveState",
           "normalizeStart": 0.375,
-          "normalizeEnd": 0.75
+          "normalizeEnd": 0.75,
+          "modifierName": "DiveState"
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Dive"],
-          "endNormalizedTime": 0.3199999928474426,
-          "angularSpeed": 180.0,
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 0.32,
+          "angularSpeed": 180,
           "attackTrigger": "",
           "attackDistance": 1.5
         }
       ],
       "modifiers": {
         "DiveState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "EnablePushColliderName",
-              "pushColliderNames": ["PushCollider"]
+              "pushColliderNames": ["PushCollider"],
+              "setEnable": false
             }
           ],
           "onRemoved": [
@@ -71,6 +79,11 @@
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Steer
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -79,13 +92,20 @@
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["NormalIdle"],
-          "angularSpeed": 180.0,
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 1.0,
+          "angularSpeed": 180,
           "attackTrigger": "",
           "attackDistance": 1.5
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Die
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -93,24 +113,28 @@
       "onAbilityStart": [
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_AnimalDie",
+          "effectPattern": "Eff_Monster_Oceanid_AnimalDie",
           "born": {
             "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "RootNode",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             },
             "direction": {
               "$type": "ConfigDirectionByEntity"
-            },
-            "attachPointName": "RootNode"
-          },
-          "EBHJMLOKDGB": -1.0
+            }
+          }
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  HealHp
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -119,20 +143,40 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_HEALHP_STATE_",
-          "defaultGlobalValueOnCreate": 1.0,
+          "defaultGlobalValueOnCreate": 1,
           "valueSteps": [-0.5, 0.5, 1.5],
+          "removeAppliedModifier": true,
           "modifierNameSteps": ["Empty", "UNIQUE_Falcon_Water_HealHp"]
         }
       ],
-      "abilitySpecials": {
-        "HealHPHigh": 0.15000000596046448
-      },
       "modifiers": {
         "UNIQUE_Falcon_Water_HealHp": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "thinkInterval": 1.5,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "SGV_MONSTERAFFIX_OCEANID_02_ANIMALHEAL_UP",
+                  "value": 1,
+                  "compareType": "Equal"
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "HealHP",
+                  "amountByCasterMaxHPRatio": "%HealHPHigh"
+                },
+                {
+                  "$type": "FireEffect",
+                  "effectPattern": "Eff_Monster_Oceanid_Falcon_Heal"
+                }
+              ],
+              "failActions": []
+            }
+          ],
           "onBeingHit": [
             {
               "$type": "Predicated",
@@ -140,7 +184,8 @@
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "SGV_MONSTERAFFIX_OCEANID_02_ANIMALHEAL_UP",
-                  "ratio": 1.0
+                  "value": 1,
+                  "compareType": "Equal"
                 }
               ],
               "successActions": [
@@ -156,85 +201,58 @@
                 }
               ]
             }
-          ],
-          "onThinkInterval": [
-            {
-              "$type": "Predicated",
-              "targetPredicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "SGV_MONSTERAFFIX_OCEANID_02_ANIMALHEAL_UP",
-                  "ratio": 1.0
-                }
-              ],
-              "successActions": [
-                {
-                  "$type": "HealHP",
-                  "ILOICKNNKKL": "HealHPHigh"
-                },
-                {
-                  "$type": "FireEffect",
-                  "healLimitedByCasterMaxHPRatio": "Eff_Monster_Oceanid_Falcon_Heal",
-                  "EBHJMLOKDGB": -1.0
-                }
-              ]
-            }
           ]
         },
         "HealHP_Pause": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 3.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 3,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 0.0,
               "key": "_HEALHP_STATE_",
+              "value": 0,
               "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "maxValue": 0,
+              "minValue": 0
             }
           ],
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
               "key": "_HEALHP_STATE_",
+              "value": 1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 1.0
+              "maxValue": 1,
+              "minValue": 1
             }
           ]
         },
         "HealHP_Pause_AffixUp": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1.5,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 0.0,
               "key": "_HEALHP_STATE_",
+              "value": 0,
               "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "maxValue": 0,
+              "minValue": 0
             }
           ],
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
               "key": "_HEALHP_STATE_",
+              "value": 1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 1.0
+              "maxValue": 1,
+              "minValue": 1
             }
           ]
         },
-        "Empty": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        }
+        "Empty": {}
+      },
+      "abilitySpecials": {
+        "HealHPHigh": 0.15
       }
     }
   }

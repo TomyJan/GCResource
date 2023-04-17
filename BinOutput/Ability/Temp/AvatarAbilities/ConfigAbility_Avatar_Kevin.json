@@ -1,4 +1,9 @@
 [
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Wind_Trigger1
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -7,11 +12,11 @@
         {
           "$type": "SkillButtonHoldChargeMixin",
           "skillID": 10011,
-          "nextLoopTriggerID": "NextLoopTrigger",
-          "endHoldTrigger": "EndHoldTrigger",
           "beforeStateIDs": ["Attack_Pre"],
           "chargeLoopStateIDs": ["WindBlade_Charge", "WindBlade_AS"],
-          "chargeLoopDurations": [1.0]
+          "chargeLoopDurations": [1],
+          "nextLoopTriggerID": "NextLoopTrigger",
+          "endHoldTrigger": "EndHoldTrigger"
         },
         {
           "$type": "AttachToStateIDMixin",
@@ -21,19 +26,21 @@
       ],
       "modifiers": {
         "Charge1": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": ""
             }
           ]
         }
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Wind_Trigger2
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -42,11 +49,11 @@
         {
           "$type": "SkillButtonHoldChargeMixin",
           "skillID": 10012,
-          "nextLoopTriggerID": "NextLoopTrigger",
-          "endHoldTrigger": "EndHoldTrigger",
           "beforeStateIDs": ["Turbulence_BS"],
           "chargeLoopStateIDs": ["StormBlow_Charge", "StormBlow_AS"],
-          "chargeLoopDurations": [1.5]
+          "chargeLoopDurations": [1.5],
+          "nextLoopTriggerID": "NextLoopTrigger",
+          "endHoldTrigger": "EndHoldTrigger"
         },
         {
           "$type": "AttachToStateIDMixin",
@@ -56,28 +63,59 @@
       ],
       "modifiers": {
         "Charge1": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": ""
             }
           ]
         }
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  WindBlade
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Kevin_WindBlade",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "WindBlade",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "WindBlade": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 20.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 20,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": ""
+            },
+            {
+              "$type": "AddGlobalValue",
+              "key": "_ABILITY_WindBlade_COUNT",
+              "value": 5,
+              "useLimitRange": true,
+              "maxValue": 5,
+              "minValue": 0
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "AddGlobalValue",
+              "key": "_ABILITY_WindBlade_COUNT",
+              "value": -5,
+              "useLimitRange": true,
+              "maxValue": 5,
+              "minValue": 0
+            }
+          ],
           "modifierMixins": [
             {
               "$type": "ReplaceEventPatternMixin",
@@ -97,43 +135,15 @@
               ]
             },
             {
-              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "$type": "AttachModifierToSelfGlobalValueMixin", // 计数到0时，移除WindBlade这个modifier
               "globalValueKey": "_ABILITY_WindBlade_COUNT",
-              "defaultGlobalValueOnCreate": 0.0,
-              "valueSteps": [-1.0, 0.5],
+              "valueSteps": [-1, 0.5],
               "modifierNameSteps": ["WindBlade_Remove"]
-            }
-          ],
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "AddGlobalValue",
-              "ratio": 5.0,
-              "key": "_ABILITY_WindBlade_COUNT",
-              "useLimitRange": true,
-              "maxValue": 5.0,
-              "minValue": 0.0
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "AddGlobalValue",
-              "ratio": -5.0,
-              "key": "_ABILITY_WindBlade_COUNT",
-              "useLimitRange": true,
-              "maxValue": 5.0,
-              "minValue": 0.0
             }
           ]
         },
         "WindBlade_Remove": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1,
           "onAdded": [
             {
               "$type": "RemoveModifier",
@@ -141,126 +151,142 @@
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "WindBlade"
-        }
-      ]
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Kevin_WindBlade_CountDown",
-      "modifiers": {
-        "WindBlade_CountDown": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AddGlobalValue",
-              "ratio": -1.0,
-              "key": "_ABILITY_WindBlade_COUNT",
-              "useLimitRange": true,
-              "maxValue": 5.0,
-              "minValue": 0.0
-            }
-          ]
-        }
-      },
       "onAbilityStart": [
         {
           "$type": "ApplyModifier",
-          "modifierName": "WindBlade_CountDown"
+          "modifierName": "WindBlade_CountDown",
+          "target": "Self"
         }
-      ]
+      ],
+      "modifiers": {
+        "WindBlade_CountDown": {
+          "duration": 1,
+          "onAdded": [
+            {
+              "$type": "AddGlobalValue",
+              "key": "_ABILITY_WindBlade_COUNT",
+              "value": -1,
+              "useLimitRange": true,
+              "maxValue": 5,
+              "minValue": 0
+            }
+          ]
+        }
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Turbulence
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Kevin_Turbulence",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Turbulence",
+          "target": "Self"
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Turbulence_Effect",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "Turbulence": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1,
           "onAdded": [
             {
               "$type": "DamageByAttackValue",
-              "otherTargets": {
-                "$type": "SelectTargetsByShape",
-                "shapeName": "SectorR8D50",
-                "campTargetType": "Enemy",
-                "sizeRatio": 1.0
-              },
               "born": {
                 "$type": "ConfigBornByTarget",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 1.0,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": 1.0,
+                  "z": 0.0
                 }
               },
               "attackInfo": {
-                "attackTag": "",
-                "attenuationTag": "",
-                "attenuationGroup": "default",
                 "attackProperty": {
-                  "HBIOLEEGHPD": 2.0,
-                  "CCNJGLPMIEP": 0.0,
+                  "damagePercentage": 2,
                   "elementType": "Wind",
-                  "bonusCriticalHurt": 50.0
+                  "elementDurability": 50
                 },
                 "hitPattern": {
-                  "onHitEffectName": "default",
+                  //"onHitEffectName": "",
                   "hitLevel": "Heavy",
-                  "MOELECJEOEI": 700.0,
-                  "hitImpulseY": 0.0,
-                  "hitImpulseType": "",
-                  "hitHaltTimeScale": 0.05000000074505806
-                }
+                  "hitImpulseX": 700,
+                  "hitImpulseY": 0,
+                  "reboundRatio": 0,
+                  "hitHaltTime": 0.0,
+                  "hitHaltTimeScale": 0.05,
+                  "muteHitText": false
+                },
+                "forceCameraShake": false
+              },
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "SectorR8D50",
+                "centerBasedOn": "Self",
+                "campTargetType": "Enemy",
+                "campBasedOn": "Self"
               }
             }
           ]
         },
         "Turbulence_Effect": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1.5,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": ""
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Turbulence"
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Turbulence_Effect"
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  StormBlow
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Kevin_StormBlow",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "StormBlow",
+          "otherTargets": {
+            "$type": "SelectTargetsByShape",
+            "shapeName": "CircleR10",
+            "centerBasedOn": "Self",
+            "campTargetType": "Enemy",
+            "campBasedOn": "Self"
+          }
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "StormBlow_Effect",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "StormBlow": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1,
           "onAdded": [
             {
               "$type": "TriggerAttackEvent",
@@ -268,70 +294,56 @@
                 "attackPattern": {
                   "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
+                  "radius": 1,
                   "born": {
                     "$type": "ConfigBornBySelf",
+                    //"attachPointName" : "RootNode",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.800000011920929,
-                      "PJCOKIGCJOK": 0.0
+                      "x": 0.0,
+                      "y": 0.8,
+                      "z": 0.0
                     }
-                  },
-                  "DCMPFCIBIPA": 1.0
+                  }
                 },
                 "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "HBIOLEEGHPD": 4.0,
-                    "CCNJGLPMIEP": 0.0,
+                    "damagePercentage": 4,
                     "elementType": "Wind",
-                    "bonusCriticalHurt": 100.0
+                    "elementDurability": 100
                   },
                   "hitPattern": {
-                    "onHitEffectName": "default",
+                    //"onHitEffectName": "",
                     "hitLevel": "Air",
-                    "MOELECJEOEI": 700.0,
-                    "hitImpulseY": 700.0,
-                    "hitImpulseType": "",
-                    "hitHaltTimeScale": 0.05000000074505806
-                  }
+                    "hitImpulseX": 700,
+                    "hitImpulseY": 700,
+                    "reboundRatio": 0,
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
+                    "muteHitText": false
+                  },
+                  "forceCameraShake": false
                 }
               }
             }
           ]
         },
         "StormBlow_Effect": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 2.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 2,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": ""
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "otherTargets": {
-            "$type": "SelectTargetsByShape",
-            "shapeName": "CircleR10",
-            "campTargetType": "Enemy",
-            "sizeRatio": 1.0
-          },
-          "modifierName": "StormBlow"
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "StormBlow_Effect"
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  WindWalk
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -343,37 +355,37 @@
           "modifierName": "SupportInvincible"
         }
       ],
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "WindWalk",
+          "target": "CurLocalAvatar"
+        }
+      ],
       "modifiers": {
         "SupportInvincible": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "Invincible"
         },
         "WindWalk": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 8.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 8,
           "properties": {
-            "Animator_MoveSpeedRatio": 0.20000000298023224
+            "Animator_MoveSpeedRatio": 0.2
           },
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": ""
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "target": "CurLocalAvatar",
-          "modifierName": "WindWalk"
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  WindWalk_Trigger
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -387,15 +399,36 @@
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  RockFall
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Kevin_RockFall",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "RockFall",
+          "otherTargets": {
+            "$type": "SelectTargetsByShape",
+            "shapeName": "CircleR5",
+            "centerBasedOn": "Self",
+            "campTargetType": "Enemy",
+            "campBasedOn": "Self"
+          }
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "RockFall_Effect",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "RockFall": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1,
           "onAdded": [
             {
               "$type": "TriggerAttackEvent",
@@ -403,130 +436,118 @@
                 "attackPattern": {
                   "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
+                  "radius": 1,
                   "born": {
                     "$type": "ConfigBornBySelf",
+                    //"attachPointName" : "RootNode",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.800000011920929,
-                      "PJCOKIGCJOK": 0.0
+                      "x": 0.0,
+                      "y": 0.8,
+                      "z": 0.0
                     }
-                  },
-                  "DCMPFCIBIPA": 1.0
+                  }
                 },
                 "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "HBIOLEEGHPD": 4.0,
-                    "CCNJGLPMIEP": 0.0,
+                    "damagePercentage": 4,
                     "elementType": "Rock",
-                    "bonusCriticalHurt": 100.0
+                    "elementDurability": 100
                   },
                   "hitPattern": {
-                    "onHitEffectName": "default",
+                    //"onHitEffectName": "",
                     "hitLevel": "Heavy",
-                    "MOELECJEOEI": 0.0,
-                    "hitImpulseY": 0.0,
-                    "hitImpulseType": "",
-                    "hitHaltTimeScale": 0.05000000074505806
-                  }
+                    "hitImpulseX": 0,
+                    "hitImpulseY": 0,
+                    "reboundRatio": 0,
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
+                    "muteHitText": false
+                  },
+                  "forceCameraShake": false
                 }
               }
             },
             {
               "$type": "ApplyModifier",
-              "modifierName": "RockFall_Stun"
+              "modifierName": "RockFall_Stun",
+              "target": "Self"
             }
           ]
         },
         "RockFall_Effect": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 2.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 2,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": ""
             }
           ]
         },
         "RockFall_Stun": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 4.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 4,
+          //"state" : "Stun",
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": ""
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "otherTargets": {
-            "$type": "SelectTargetsByShape",
-            "shapeName": "CircleR5",
-            "campTargetType": "Enemy",
-            "sizeRatio": 1.0
-          },
-          "modifierName": "RockFall"
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "RockFall_Effect"
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Taunt
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Kevin_Taunt",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Taunt",
+          "otherTargets": {
+            "$type": "SelectTargetsByShape",
+            "shapeName": "CircleR10",
+            "centerBasedOn": "Self",
+            "campTargetType": "Enemy",
+            "campBasedOn": "Self"
+          }
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Taunt_Buff",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "Taunt": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 4.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 4,
+          //"state" : "Taunt",
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": ""
             }
           ]
         },
         "Taunt_Buff": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 8.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 8,
           "properties": {
-            "Actor_DefenceRatio": 1.0
+            "Actor_DefenceRatio": 1
           }
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "otherTargets": {
-            "$type": "SelectTargetsByShape",
-            "shapeName": "CircleR10",
-            "campTargetType": "Enemy",
-            "sizeRatio": 1.0
-          },
-          "modifierName": "Taunt"
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Taunt_Buff"
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  RockImpact
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -538,15 +559,22 @@
           "born": {
             "$type": "ConfigBornByTarget",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.30000001192092896,
-              "PJCOKIGCJOK": 0.0
+              "x": 0.0,
+              "y": 0.3,
+              "z": 0.0
             }
           }
         }
-      ]
+      ],
+      "modifiers": {}
     }
   },
+
+  ////////////////////////////////////////////////////////////////
+  //
+  //  RockShield
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -558,37 +586,37 @@
           "modifierName": "SupportInvincible"
         }
       ],
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "RockShield",
+          "target": "CurLocalAvatar"
+        }
+      ],
       "modifiers": {
         "SupportInvincible": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "Invincible"
         },
         "RockShield": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 8.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 8,
           "properties": {
-            "Actor_DefenceRatio": 0.20000000298023224
+            "Actor_DefenceRatio": 0.2
           },
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": ""
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "target": "CurLocalAvatar",
-          "modifierName": "RockShield"
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  RockShield_Trigger
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",

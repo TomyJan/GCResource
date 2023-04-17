@@ -1,4 +1,9 @@
 [
+  ////////////////////////////////////////////////////////////////
+  //
+  //  AIStateInitial
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -27,6 +32,11 @@
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Random
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -38,27 +48,31 @@
           "modifierName": "Random_MoveSpeedRatio"
         }
       ],
-      "abilitySpecials": {
-        "RandomSpeed": 0.0
-      },
-      "modifiers": {
-        "Random_MoveSpeedRatio": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Animator_MoveSpeedRatio": "RandomSpeed"
-          }
-        }
-      },
       "onAdded": [
         {
           "$type": "SetRandomOverrideMapValue",
-          "valueRangeMax": 0.25,
-          "overrideMapKey": "RandomSpeed"
+          "overrideMapKey": "RandomSpeed",
+          "valueRangeMin": 0.0,
+          "valueRangeMax": 0.25
         }
-      ]
+      ],
+      "modifiers": {
+        "Random_MoveSpeedRatio": {
+          "properties": {
+            "Animator_MoveSpeedRatio": "%RandomSpeed"
+          }
+        }
+      },
+      "abilitySpecials": {
+        "RandomSpeed": 0.0
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Wander
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -67,7 +81,7 @@
         {
           "$type": "SetPoseBool",
           "boolID": "WanderState",
-          "ratio": true
+          "value": true
         }
       ]
     }
@@ -79,11 +93,17 @@
       "onAbilityStart": [
         {
           "$type": "SetPoseBool",
-          "boolID": "WanderState"
+          "boolID": "WanderState",
+          "value": false
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Disappear
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -97,8 +117,6 @@
       ],
       "modifiers": {
         "DisappearTimer": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "StartDither",
@@ -107,20 +125,25 @@
             {
               "$type": "SetAnimatorBool",
               "boolID": "Disappear",
-              "ratio": true
+              "value": true
             },
             {
               "$type": "KillSelf",
-              "duration": 2.5,
               "banDrop": true,
               "banExp": true,
-              "killSelfType": "Disappear"
+              "killSelfType": "Disappear",
+              "duration": 2.5
             }
           ]
         }
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  AwareTigger
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -132,37 +155,48 @@
           "enterActions": [
             {
               "$type": "SetAnimatorTrigger",
+              "triggerID": "AwareTrigger",
               "predicates": [
                 {
                   "$type": "ByTargetPositionToSelfPosition",
-                  "logic": "GreaterOrEqual",
-                  "ratio": 5.0
+                  "compareType": "XZ",
+                  "value": 5,
+                  "logic": "GreaterOrEqual"
                 }
-              ],
-              "triggerID": "AwareTrigger"
+              ]
             }
           ]
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Alert nerveTrigger
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Animal_Fox_02_GoToMHPoint",
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Animal_Fox_02_CheckPlayerArround"
+        }
+      ],
       "modifiers": {
         "Animal_Fox_02_CheckPlayerArround": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 1.0,
+          "thinkInterval": 1,
           "onThinkInterval": [
             {
               "$type": "Predicated",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR5",
+                "centerBasedOn": "Self",
                 "campTargetType": "Enemy",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
               "targetPredicates": [
                 {
@@ -176,17 +210,12 @@
                   "neuronName": "SURROUND",
                   "enable": true
                 }
-              ]
+              ],
+              "failActions": []
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "Animal_Fox_02_CheckPlayerArround"
-        }
-      ]
+      }
     }
   },
   {

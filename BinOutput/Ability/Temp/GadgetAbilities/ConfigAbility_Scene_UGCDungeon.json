@@ -1,4 +1,10 @@
 [
+  //ServerUploadTool Save to [/root/data/json/ability/Temp/GadgetAbilities]
+  //////////////////////////////////////////////////////
+  //
+  //	UGC 金币
+  //
+  //////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -6,12 +12,17 @@
       "onAdded": [
         {
           "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_UGC_TriathlonCoin_01",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_SceneObj_UGC_TriathlonCoin_01"
         }
       ]
     }
   },
+
+  //////////////////////////////////////////////////////
+  //
+  //	UGC 加速环
+  //
+  //////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -19,177 +30,140 @@
       "onAdded": [
         {
           "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_WindField_Horizontal_UGC",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_WindField_Horizontal_UGC"
         }
       ]
     }
   },
+
+  //////////////////////////////////////////////////////
+  //
+  //	UGC 金币
+  //
+  //////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_UGC_Coin_Run",
-      "modifiers": {
-        "CoinMaterial": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_UGC_TriathlonCoin_01",
-              "EBHJMLOKDGB": -1.0
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "SetGlobalValue",
-              "ratio": 1.0,
-              "key": "GV_UGC_CoinDead",
-              "maxValue": 0.0,
-              "minValue": 0.0
-            },
-            {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_GlideChampCoin_Hit",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "KillSelf"
-            }
-          ]
-        },
-        "AddCoin": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_GetGlideChampCoin",
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        },
-        "CallGroupDie": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "ServerLuaCall",
-              "luaCallType": "CurChallengeGroup",
-              "funcName": "SLC_UGC_CoinDie",
-              "ODAOGCJFIHC": 0.0,
-              "GCCFLBLEHDB": 0.0,
-              "DJODIFOBEJG": 0.0
-            }
-          ]
-        }
-      },
       "onAdded": [
         {
           "$type": "ApplyModifier",
-          "modifierName": "CoinMaterial"
+          "modifierName": "CoinMaterial",
+          "target": "Self"
         },
         {
           "$type": "SetGlobalValue",
-          "ratio": 0.0,
+          "target": "Self",
           "key": "GV_UGC_CoinDead",
-          "maxValue": 0.0,
-          "minValue": 0.0
+          "value": 0
         }
       ],
       "onFieldEnter": [
         {
           "$type": "ApplyModifier",
+          "modifierName": "CallGroupDie",
+          "target": "Self",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "target": "Self",
               "key": "GV_UGC_CoinDead",
-              "ratio": 0.0
+              "compareType": "Equal",
+              "value": 0
             }
-          ],
-          "modifierName": "CallGroupDie"
+          ]
         },
         {
           "$type": "ApplyModifier",
+          "modifierName": "AddCoin",
           "target": "Target",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "target": "Self",
               "key": "GV_UGC_CoinDead",
-              "ratio": 0.0
+              "compareType": "Equal",
+              "value": 0
             }
-          ],
-          "modifierName": "AddCoin"
+          ]
         },
         {
           "$type": "RemoveModifier",
-          "modifierName": "CoinMaterial"
+          "modifierName": "CoinMaterial",
+          "target": "Self"
         }
-      ]
+      ],
+      "modifiers": {
+        "CoinMaterial": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_SceneObj_UGC_TriathlonCoin_01"
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "target": "Self",
+              "key": "GV_UGC_CoinDead",
+              "value": 1
+            },
+            {
+              "$type": "FireEffect",
+              "target": "Self",
+              "effectPattern": "Eff_SceneObj_GlideChampCoin_Hit"
+            },
+            {
+              "$type": "KillSelf",
+              "target": "Self"
+            }
+          ]
+        },
+        "AddCoin": {
+          "duration": 1.0,
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "effectPattern": "Eff_SceneObj_GetGlideChampCoin"
+            }
+          ]
+        },
+        "CallGroupDie": {
+          "onAdded": [
+            {
+              "$type": "ServerLuaCall",
+              "luaCallType": "CurChallengeGroup",
+              "funcName": "SLC_UGC_CoinDie"
+            }
+          ]
+        }
+      }
     }
   },
+
+  //////////////////////////////////////////////////////
+  //
+  //	UGC 地刺物件攻击
+  //
+  //////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_UGC_Spike_Attack",
-      "abilityMixins": [
-        {
-          "$type": "UnitDurationMixin",
-          "modifierName": ["CanAttack", "NotAttack", "CanAttackV2"],
-          "NLLLEJAMEHA": [4.0, 2.0, 2.0]
-        }
-      ],
-      "modifiers": {
-        "CanAttack": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "SetGlobalValue",
-              "ratio": 1.0,
-              "key": "GV_CanAttack",
-              "maxValue": 0.0,
-              "minValue": 0.0
-            }
-          ]
-        },
-        "NotAttack": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "SetGlobalValue",
-              "ratio": 0.0,
-              "key": "GV_CanAttack",
-              "maxValue": 0.0,
-              "minValue": 0.0
-            }
-          ]
-        },
-        "CanAttackV2": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "SetGlobalValue",
-              "ratio": 1.0,
-              "key": "GV_CanAttack",
-              "maxValue": 0.0,
-              "minValue": 0.0
-            }
-          ]
-        }
-      },
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "ratio": 1.0,
+          "target": "Self",
           "key": "GV_CanAttack",
-          "maxValue": 0.0,
-          "minValue": 0.0
+          "value": 1
+        }
+      ],
+      "abilityMixins": [
+        {
+          "$type": "UnitDurationMixin",
+          "isTrigger": false,
+          "steps": [4, 2, 2],
+          "modifierName": ["CanAttack", "NotAttack", "CanAttackV2"]
         }
       ],
       "onFieldEnter": [
@@ -205,156 +179,195 @@
               "$type": "ByTargetGlobalValue",
               "target": "Self",
               "key": "GV_CanAttack",
-              "ratio": 1.0
+              "compareType": "Equal",
+              "value": 1
             }
           ],
           "attackInfo": {
-            "attackTag": "",
-            "attenuationTag": "",
-            "attenuationGroup": "default",
             "attackProperty": {
-              "HBIOLEEGHPD": 0.0,
-              "CCNJGLPMIEP": 0.0,
-              "bonusCriticalHurt": 100.0,
+              "damagePercentage": 0.0,
               "strikeType": "Default",
-              "enBreak": 100.0,
-              "ignoreLevelDiff": true
+              "elementType": "None",
+              "ignoreLevelDiff": true,
+              "enBreak": 100
             },
             "hitPattern": {
               "onHitEffectName": "default",
               "hitImpulseType": "LV4",
-              "hitHaltTimeScale": 0.009999999776482582,
+              "canBeDefenceHalt": false,
+              "hitHaltTime": 0.0,
+              "hitHaltTimeScale": 0.01,
               "muteHitText": true
             }
           }
         }
-      ]
+      ],
+      "modifiers": {
+        "CanAttack": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "target": "Self",
+              "key": "GV_CanAttack",
+              "value": 1
+            }
+          ]
+        },
+        "NotAttack": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "target": "Self",
+              "key": "GV_CanAttack",
+              "value": 0
+            }
+          ]
+        },
+        "CanAttackV2": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "target": "Self",
+              "key": "GV_CanAttack",
+              "value": 1
+            }
+          ]
+        }
+      }
     }
   },
+
+  //////////////////////////////////////////////////////
+  //
+  //	UGC 地刺物件1
+  //
+  //////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_UGC_CreateBase_01",
+      "onAdded": [
+        {
+          "$type": "CreateGadget",
+          "byServer": true,
+          "lifeByOwnerIsAlive": true,
+          "gadgetID": 70350338,
+          "target": "Self",
+          "propOwnerIs": "Caster",
+          "born": {
+            "$type": "ConfigBornByTarget",
+            "offset": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "onGround": false
+          }
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "SpikeCallWatcher"
+        }
+      ],
       "modifiers": {
         "SpikeCallWatcher": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAttackLanded": [
             {
               "$type": "ApplyModifier",
+              "modifierName": "UGC_HitCall",
               "target": "Target",
               "predicates": [
                 {
                   "$type": "ByEntityTypes",
                   "entityTypes": ["Avatar"]
                 }
-              ],
-              "modifierName": "UGC_HitCall"
+              ]
             }
           ]
         },
         "UGC_HitCall": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "ServerLuaCall",
               "luaCallType": "CurChallengeGroup",
-              "isTarget": true,
               "funcName": "SLC_UGC_HitBySpike",
-              "ODAOGCJFIHC": 0.0,
-              "GCCFLBLEHDB": 0.0,
-              "DJODIFOBEJG": 0.0
+              "isTarget": true
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "CreateGadget",
-          "propOwnerIs": "Caster",
-          "lifeByOwnerIsAlive": true,
-          "born": {
-            "$type": "ConfigBornByTarget",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            }
-          },
-          "gadgetID": 70350338,
-          "byServer": true
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "SpikeCallWatcher"
-        }
-      ]
+      }
     }
   },
+
+  //////////////////////////////////////////////////////
+  //
+  //	UGC 地刺物件1
+  //
+  //////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_UGC_CreateBase_02",
+      "onAdded": [
+        {
+          "$type": "CreateGadget",
+          "lifeByOwnerIsAlive": true,
+          "gadgetID": 70350339,
+          "byServer": true,
+          "target": "Self",
+          "propOwnerIs": "Caster",
+          "born": {
+            "$type": "ConfigBornByTarget",
+            "offset": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "onGround": false
+          }
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "SpikeCallWatcher"
+        }
+      ],
       "modifiers": {
         "SpikeCallWatcher": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAttackLanded": [
             {
               "$type": "ApplyModifier",
+              "modifierName": "UGC_HitCall",
               "target": "Target",
               "predicates": [
                 {
                   "$type": "ByEntityTypes",
                   "entityTypes": ["Avatar"]
                 }
-              ],
-              "modifierName": "UGC_HitCall"
+              ]
             }
           ]
         },
         "UGC_HitCall": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "ServerLuaCall",
               "luaCallType": "CurChallengeGroup",
-              "isTarget": true,
               "funcName": "SLC_UGC_HitBySpike",
-              "ODAOGCJFIHC": 0.0,
-              "GCCFLBLEHDB": 0.0,
-              "DJODIFOBEJG": 0.0
+              "isTarget": true
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "CreateGadget",
-          "propOwnerIs": "Caster",
-          "lifeByOwnerIsAlive": true,
-          "born": {
-            "$type": "ConfigBornByTarget",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            }
-          },
-          "gadgetID": 70350339,
-          "byServer": true
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "SpikeCallWatcher"
-        }
-      ]
+      }
     }
   },
+
+  //////////////////////////////////////////////////////
+  //
+  //	UGC 地刺物件1
+  //
+  //////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -364,21 +377,19 @@
           "$type": "DamageByAttackValue",
           "target": "Target",
           "attackInfo": {
-            "attackTag": "",
-            "attenuationTag": "",
-            "attenuationGroup": "default",
             "attackProperty": {
-              "HBIOLEEGHPD": 0.0,
-              "CCNJGLPMIEP": 0.0,
-              "bonusCriticalHurt": 100.0,
+              "damagePercentage": 0.0,
               "strikeType": "Default",
-              "enBreak": 100.0,
-              "ignoreLevelDiff": true
+              "elementType": "None",
+              "ignoreLevelDiff": true,
+              "enBreak": 100
             },
             "hitPattern": {
               "onHitEffectName": "default",
               "hitImpulseType": "LV4",
-              "hitHaltTimeScale": 0.009999999776482582,
+              "canBeDefenceHalt": false,
+              "hitHaltTime": 0.0,
+              "hitHaltTimeScale": 0.01,
               "muteHitText": true
             }
           }
@@ -386,105 +397,110 @@
       ]
     }
   },
+
+  //////////////////////////////////////////////////////
+  //
+  //	UGC 地刺物件2
+  //
+  //////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_Level_Common_Property_Prop_UGCSpikeBlock_02",
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "HitAway"
+        }
+      ],
+
       "modifiers": {
         "HitAway": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.800000011920929,
-          "onAttackLanded": [
-            {
-              "$type": "ApplyModifier",
-              "target": "Target",
-              "predicates": [
-                {
-                  "$type": "ByEntityTypes",
-                  "entityTypes": ["Avatar"]
-                }
-              ],
-              "modifierName": "UGC_HitCall"
-            }
-          ],
+          "thinkInterval": 0.8,
           "onThinkInterval": [
+            //打伤�?
             {
               "$type": "TriggerAttackEvent",
+              "targetType": "AllExceptSelf",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackBox",
                   "triggerType": "TriggerNoRepeat",
+                  "size": {
+                    "x": 4.4,
+                    "y": 1,
+                    "z": 1.4
+                  },
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
-                    "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.6000000238418579,
-                      "PJCOKIGCJOK": -1.0
-                    },
+                    "attachPointTargetType": "Self",
                     "attachPointName": "RootNode",
-                    "attachPointTargetType": "Self"
-                  },
-                  "size": {
-                    "IBKBLDAJIMA": 4.400000095367432,
-                    "LKHJADIPBFL": 1.0,
-                    "PJCOKIGCJOK": 1.399999976158142
+                    "offset": {
+                      "x": 0.0,
+                      "y": 0.6,
+                      "z": -1.0
+                    }
                   }
                 },
                 "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "HBIOLEEGHPD": 0.0,
-                    "CCNJGLPMIEP": 0.0,
-                    "elementRank": 1.5,
-                    "bonusCriticalHurt": 0.0,
+                    "damagePercentage": 0.0,
                     "strikeType": "Default",
-                    "enBreak": 500.0
+                    "elementType": "None",
+                    "elementDurability": 0,
+                    "elementRank": 1.5,
+                    "enBreak": 500
                   },
                   "hitPattern": {
                     "onHitEffectName": "default",
                     "hitImpulseType": "LV7",
                     "overrideHitImpulse": {
                       "hitLevel": "Heavy",
-                      "MOELECJEOEI": 800.0,
-                      "hitImpulseY": 600.0
+                      "hitImpulseX": 800,
+                      "hitImpulseY": 600
                     },
-                    "hitHaltTimeScale": 0.05000000074505806,
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
                     "muteHitText": true
                   }
                 }
-              },
-              "targetType": "AllExceptSelf"
+              }
+            }
+          ],
+          "onAttackLanded": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "UGC_HitCall",
+              "target": "Target",
+              "predicates": [
+                {
+                  "$type": "ByEntityTypes",
+                  "entityTypes": ["Avatar"]
+                }
+              ]
             }
           ]
         },
         "UGC_HitCall": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "ServerLuaCall",
               "luaCallType": "CurChallengeGroup",
-              "isTarget": true,
               "funcName": "SLC_UGC_HitBySpike",
-              "ODAOGCJFIHC": 0.0,
-              "GCCFLBLEHDB": 0.0,
-              "DJODIFOBEJG": 0.0
+              "isTarget": true
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "HitAway"
-        }
-      ]
+      }
     }
   },
+
+  //////////////////////////////////////////////////////
+  //
+  // UGC 体力�? 摆放
+  //
+  //////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -492,25 +508,38 @@
       "onAdded": [
         {
           "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_BoatRaceCrate_02_Float",
+          "effectPattern": "Eff_SceneObj_BoatRaceCrate_02_Float",
           "born": {
             "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "RootNode",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "attachPointName": "RootNode"
-          },
-          "EBHJMLOKDGB": -1.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
+          }
         }
       ]
     }
   },
+
+  //////////////////////////////////////////////////////
+  //
+  // UGC 体力球 运行
+  //
+  //////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_UGC_StaminaBall_Run",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "target": "Self",
+          "key": "GV_CanRecoverEnergy",
+          "value": 1
+        }
+      ],
       "abilityMixins": [
         {
           "$type": "AttachModifierToGlobalValueMixin",
@@ -520,42 +549,20 @@
         }
       ],
       "modifiers": {
-        "CoolDown": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
+        "CoolDown": {},
         "Actived": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.30000001192092896,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_BoatRaceCrate_02_Float",
-              "EBHJMLOKDGB": -1.0
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_BoatRaceCrate_02_Smash",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "RecoverManager"
-            }
-          ],
+          "thinkInterval": 0.3,
           "onThinkInterval": [
             {
               "$type": "Predicated",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
-                "topLimit": 1,
-                "entityTypePriority": ["Avatar"],
                 "shapeName": "CircleR1.5H3",
+                "centerBasedOn": "Self",
+                "campBasedOn": "Self",
                 "campTargetType": "All",
-                "sizeRatio": 1.0
+                "entityTypePriority": ["Avatar"],
+                "topLimit": 1
               },
               "predicatesForeach": [
                 {
@@ -566,57 +573,67 @@
               "successActions": [
                 {
                   "$type": "ApplyModifier",
-                  "target": "Target",
-                  "modifierName": "RecoverEnergy"
+                  "modifierName": "RecoverEnergy",
+                  "target": "Target"
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 0.0,
+                  "target": "Self",
                   "key": "GV_CanRecoverEnergy",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 0
                 }
               ]
             }
+          ],
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_SceneObj_BoatRaceCrate_02_Float"
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "FireEffect",
+              "effectPattern": "Eff_SceneObj_BoatRaceCrate_02_Smash"
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "RecoverManager",
+              "target": "Self"
+            }
           ]
         },
+
         "RecoverManager": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 10.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 10,
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "target": "Self",
               "key": "GV_CanRecoverEnergy",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             }
           ]
         },
+
         "RecoverEnergy": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1.0,
           "onAdded": [
             {
               "$type": "ReviveStamina",
-              "ratio": 50.0
+              "value": 50
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 1.0,
-          "key": "GV_CanRecoverEnergy",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        }
-      ]
+      }
     }
   },
+
+  ///////////////////////////////////////
+  //
+  // 加速球 摆放
+  //
+  ////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -624,21 +641,26 @@
       "onAdded": [
         {
           "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_PropGoldShoes_01",
+          "effectPattern": "Eff_SceneObj_PropGoldShoes_01",
           "born": {
             "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "RootNode",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "attachPointName": "RootNode"
-          },
-          "EBHJMLOKDGB": -1.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
+          }
         }
       ]
     }
   },
+
+  ///////////////////////////////////////
+  //
+  // 加速球 运行
+  //
+  ////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -651,43 +673,35 @@
           "modifierNameSteps": ["CoolDown", "Actived"]
         }
       ],
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "target": "Self",
+          "key": "GV_CanSpeedUp",
+          "value": 1
+        }
+      ],
       "modifiers": {
-        "CoolDown": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
+        "CoolDown": {},
         "Actived": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.30000001192092896,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_PropGoldShoes_01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_PropGoldShoes_01"
             }
           ],
-          "onRemoved": [
-            {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_PropGoldShoes_01_Disappear",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "RecoverManager"
-            }
-          ],
+          "thinkInterval": 0.3,
           "onThinkInterval": [
             {
               "$type": "Predicated",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
-                "topLimit": 1,
-                "entityTypePriority": ["Avatar"],
                 "shapeName": "CircleR1.5H3",
+                "centerBasedOn": "Self",
+                "campBasedOn": "Self",
                 "campTargetType": "All",
-                "sizeRatio": 1.0
+                "entityTypePriority": ["Avatar"],
+                "topLimit": 1
               },
               "predicatesForeach": [
                 {
@@ -698,71 +712,73 @@
               "successActions": [
                 {
                   "$type": "ApplyModifier",
-                  "target": "Target",
-                  "modifierName": "UGC_SpeedUp_Attacher"
+                  "modifierName": "UGC_SpeedUp_Attacher",
+                  "target": "Target"
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 0.0,
+                  "target": "Self",
                   "key": "GV_CanSpeedUp",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 0
                 }
               ]
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "FireEffect",
+              "effectPattern": "Eff_SceneObj_PropGoldShoes_01_Disappear"
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "RecoverManager",
+              "target": "Self"
             }
           ]
         },
         "UGC_SpeedUp_Attacher": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 6.0,
-          "bonusCriticalHurt": 100.0,
-          "modifierMixins": [
-            {
-              "$type": "CurLocalAvatarMixinV2",
-              "modifierName": "UGCSpeedUp"
-            }
-          ],
+          "duration": 6,
+          "stacking": "Refresh",
           "onAdded": [
             {
               "$type": "AttachModifier",
               "modifierName": "UGCSpeedUp"
             }
+          ],
+          "modifierMixins": [
+            {
+              "$type": "CurLocalAvatarMixinV2",
+              "modifierName": "UGCSpeedUp"
+            }
           ]
         },
+
         "UGCSpeedUp": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "isLimitedProperties": true,
           "properties": {
-            "Animator_MoveSpeedRatio": 0.30000001192092896
-          },
-          "isLimitedProperties": true
+            "Animator_MoveSpeedRatio": 0.3
+          }
         },
+
         "RecoverManager": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 10.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 10,
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "target": "Self",
               "key": "GV_CanSpeedUp",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 1.0,
-          "key": "GV_CanSpeedUp",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        }
-      ]
+      }
     }
   },
+  ///////////////////////////////////////
+  //
+  // 超级跳球 摆放
+  //
+  ////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -770,22 +786,27 @@
       "onAdded": [
         {
           "$type": "AttachEffect",
+          "effectPattern": "Eff_SceneObj_UGCjumpbuff_Idle",
           "muteRemoteAction": true,
-          "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_UGCjumpbuff_Idle",
           "born": {
             "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "RootNode",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "attachPointName": "RootNode"
-          },
-          "EBHJMLOKDGB": -1.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
+          }
         }
       ]
     }
   },
+
+  ///////////////////////////////////////
+  //
+  // 超级跳球生成器
+  //
+  ////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -798,43 +819,35 @@
           "modifierNameSteps": ["CoolDown", "Actived"]
         }
       ],
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "target": "Self",
+          "key": "GV_CanRocketJump",
+          "value": 1
+        }
+      ],
       "modifiers": {
-        "CoolDown": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
+        "CoolDown": {},
         "Actived": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.30000001192092896,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_UGCjumpbuff_Idle",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_UGCjumpbuff_Idle"
             }
           ],
-          "onRemoved": [
-            {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_PropGoldShoes_01_Disappear",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "RecoverManager"
-            }
-          ],
+          "thinkInterval": 0.3,
           "onThinkInterval": [
             {
               "$type": "Predicated",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
-                "topLimit": 1,
-                "entityTypePriority": ["Avatar"],
                 "shapeName": "CircleR1.5H3",
+                "centerBasedOn": "Self",
+                "campBasedOn": "Self",
                 "campTargetType": "All",
-                "sizeRatio": 1.0
+                "entityTypePriority": ["Avatar"],
+                "topLimit": 1
               },
               "predicatesForeach": [
                 {
@@ -845,80 +858,81 @@
               "successActions": [
                 {
                   "$type": "ApplyModifier",
-                  "target": "TargetTeam",
-                  "modifierName": "UGC_RocketJumpBallBuff"
+                  "modifierName": "UGC_RocketJumpBallBuff",
+                  "target": "TargetTeam"
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 0.0,
+                  "target": "Self",
                   "key": "GV_CanRocketJump",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 0
                 }
               ]
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "FireEffect",
+              "effectPattern": "Eff_SceneObj_PropGoldShoes_01_Disappear"
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "RecoverManager",
+              "target": "Self"
             }
           ]
         },
         "RecoverManager": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 10.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 10,
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "target": "Self",
               "key": "GV_CanRocketJump",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             }
           ]
         },
         "UGC_RocketJumpBallBuff": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 6.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 6,
+          "stacking": "Refresh",
           "onAdded": [
             {
               "$type": "AddGlobalValue",
               "target": "Team",
-              "RotationDampTime": true,
-              "ratio": 1.0,
               "key": "GV_UGC_AvatarCanRocketJump",
+              "value": 1,
               "useLimitRange": true,
-              "maxValue": 999.0,
-              "minValue": 0.0
+              "minValue": 0,
+              "maxValue": 999,
+              "doOffStage": true
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_JumpUp_01_Buff",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_JumpUp_01_Buff"
             }
           ],
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
               "target": "Team",
-              "RotationDampTime": true,
-              "ratio": -1.0,
               "key": "GV_UGC_AvatarCanRocketJump",
+              "value": -1,
               "useLimitRange": true,
-              "maxValue": 999.0,
-              "minValue": 0.0
+              "minValue": 0,
+              "maxValue": 999,
+              "doOffStage": true
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 1.0,
-          "key": "GV_CanRocketJump",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        }
-      ]
+      }
     }
   },
+  ///////////////////////////////////////
+  //
+  // UGC 起点
+  //
+  ////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -926,28 +940,26 @@
       "abilityMixins": [
         {
           "$type": "AttachToGadgetStateMixin",
-          "modifierName": "GS_Idle"
+          "modifierName": "GS_Idle",
+          "gadgetState": 0
         },
         {
           "$type": "AttachToGadgetStateMixin",
-          "gadgetState": 201,
-          "modifierName": "GS_Started"
+          "modifierName": "GS_Started",
+          "gadgetState": 201
         },
         {
           "$type": "AttachToGadgetStateMixin",
-          "gadgetState": 202,
-          "modifierName": "GS_Normal"
+          "modifierName": "GS_Normal",
+          "gadgetState": 202
         }
       ],
       "modifiers": {
         "GS_Idle": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_UGCstartpoint_Idle",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_UGCstartpoint_Idle"
             },
             {
               "$type": "EnableSceneTransformByName",
@@ -957,82 +969,85 @@
           ]
         },
         "GS_Started": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_UGCstartpoint_Disappear",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_UGCstartpoint_Disappear"
             },
             {
               "$type": "EnableSceneTransformByName",
-              "transformNames": ["Airwalls"]
+              "transformNames": ["Airwalls"],
+              "setEnable": false
             }
           ]
         },
         "GS_Normal": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_UGCstartpoint_Idle",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_UGCstartpoint_Idle"
             },
             {
               "$type": "EnableSceneTransformByName",
-              "transformNames": ["Airwalls"]
+              "transformNames": ["Airwalls"],
+              "setEnable": false
             }
           ]
         }
       }
     }
   },
+
+  ///////////////////////////////////////
+  //
+  // UGC 终点
+  //
+  ////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_UGC_EndPoint",
-      "modifiers": {
-        "UNIQUE_CallArrive": {
-          "stacking": "Unique",
-          "modifierName": "",
-          "isUnique": true,
-          "HCJLIGBLGJA": 2.0,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "ServerLuaCall",
-              "luaCallType": "CurChallengeGroup",
-              "isTarget": true,
-              "funcName": "SLC_UGC_ArriveDest",
-              "ODAOGCJFIHC": 1.0,
-              "GCCFLBLEHDB": 0.0,
-              "DJODIFOBEJG": 0.0
-            },
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_UGCgoal_Active",
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        }
-      },
       "onAdded": [
         {
           "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_UGCgoal_Idle",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_SceneObj_UGCgoal_Idle"
         }
       ],
       "onFieldEnter": [
         {
           "$type": "ApplyModifier",
+          "target": "Self",
           "modifierName": "UNIQUE_CallArrive"
         }
-      ]
+      ],
+      "modifiers": {
+        "UNIQUE_CallArrive": {
+          "isUnique": true,
+          "duration": 2,
+          "stacking": "Unique",
+          "onAdded": [
+            {
+              "$type": "ServerLuaCall",
+              "luaCallType": "CurChallengeGroup",
+              "funcName": "SLC_UGC_ArriveDest",
+              "isTarget": true,
+              "param1": 1
+            },
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_SceneObj_UGCgoal_Active"
+            }
+          ]
+        }
+      }
     }
   },
+
+  //////////////////////////////////////////////////////
+  //
+  //	UGC 渐隐平台
+  //
+  //////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1040,19 +1055,19 @@
       "abilityMixins": [
         {
           "$type": "UnitDurationMixin",
-          "modifierName": ["Appear", "Dissolve"],
-          "NLLLEJAMEHA": [4.0, 3.0]
+          "isTrigger": false,
+          "steps": [4, 3],
+          "modifierName": ["Appear", "Dissolve"]
         }
       ],
       "modifiers": {
         "Appear": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorInt",
+              "target": "Self",
               "intID": "Dissolve",
-              "ratio": 0.0
+              "value": 0
             },
             {
               "$type": "ApplyModifier",
@@ -1061,24 +1076,22 @@
           ]
         },
         "Dissolve": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorInt",
+              "target": "Self",
               "intID": "Dissolve",
-              "ratio": 201.0
+              "value": 201
             },
             {
               "$type": "EnableSceneTransformByName",
-              "transformNames": ["Block"]
+              "transformNames": ["Block"],
+              "setEnable": false
             }
           ]
         },
         "EnableBlock": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onRemoved": [
             {
               "$type": "EnableSceneTransformByName",
@@ -1090,117 +1103,128 @@
       }
     }
   },
+
+  ///////////////////////////////////////
+  //
+  // UGC 渐隐平台
+  //
+  ////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_Level_Common_Property_Ani_Prop_UGCVanishPlatform_02",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "target": "Self",
+          "key": "GS_UGC_Vanish",
+          "value": 1
+        }
+      ],
       "abilityMixins": [
         {
           "$type": "AttachToGadgetStateMixin",
-          "modifierName": "Appear"
+          "modifierName": "Appear",
+          "gadgetState": 0
         },
         {
           "$type": "AttachToGadgetStateMixin",
-          "gadgetState": 201,
-          "modifierName": "Dissolve"
+          "modifierName": "Dissolve",
+          "gadgetState": 201
         },
         {
           "$type": "AttachToGadgetStateMixin",
-          "gadgetState": 202,
-          "modifierName": "Recover"
+          "modifierName": "Recover",
+          "gadgetState": 202
         }
       ],
       "modifiers": {
         "Appear": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Brokenplatform01_01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_Brokenplatform01_01"
             },
             {
               "$type": "EnableSceneTransformByName",
-              "RotationDampTime": true,
               "transformNames": ["Block"],
-              "setEnable": true
+              "setEnable": true,
+              "doOffStage": true
             }
           ]
         },
         "Dissolve": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 2.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 2,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Brokenplatform01_02",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_Brokenplatform01_02"
             }
           ],
           "onRemoved": [
             {
               "$type": "EnableSceneTransformByName",
-              "RotationDampTime": true,
-              "transformNames": ["Block"]
+              "transformNames": ["Block"],
+              "setEnable": false,
+              "doOffStage": true
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Brokenplatform02_01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_Brokenplatform02_01"
             },
             {
               "$type": "ExecuteGadgetLua",
+              "target": "Self",
               "param1": 202
             }
           ]
         },
         "Recover": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 4.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 4,
           "onRemoved": [
             {
-              "$type": "ExecuteGadgetLua"
+              "$type": "ExecuteGadgetLua",
+              "target": "Self",
+              "param1": 0
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 1.0,
-          "key": "GS_UGC_Vanish",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        }
-      ]
+      }
     }
   },
+
+  //////////////////////////////////////////////////////////////////////////
+  //
+  // UGC 地城玩家射线
+  //
+  /////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_Dynamic_UGCDungeon_Ray",
-      "modifiers": {
-        "ImmuneFall": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_FallingDamageRatio": -1.0
-          },
-          "state": "LockHP"
-        }
-      },
+      "isDynamicAbility": true,
       "onAdded": [
         {
           "$type": "AttachModifier",
           "modifierName": "ImmuneFall"
         }
       ],
-      "isDynamicAbility": true
+      "modifiers": {
+        "ImmuneFall": {
+          "state": "LockHP",
+          "properties": {
+            "Actor_FallingDamageRatio": -1
+          }
+        }
+      }
     }
   },
+
+  ///////////////////////////////////////
+  //
+  // UGC 弹幕发射�?
+  //
+  ////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1213,20 +1237,38 @@
           "modifierNameSteps": ["GearStop", "GearStart"]
         }
       ],
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "target": "Self",
+          "key": "GV_BarrageStart",
+          "value": 0
+        },
+        {
+          "$type": "SetGlobalValue",
+          "target": "Self",
+          "key": "GV_PlayerNums",
+          "value": 0
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "FireManager"
+        }
+      ],
+
       "modifiers": {
         "FireManager": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 1.0,
+          "thinkInterval": 1,
           "onThinkInterval": [
             {
               "$type": "Predicated",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
-                "entityTypePriority": ["Avatar"],
                 "shapeName": "CircleR15H10",
+                "centerBasedOn": "Self",
+                "campBasedOn": "Self",
                 "campTargetType": "All",
-                "sizeRatio": 1.0
+                "entityTypePriority": ["Avatar"]
               },
               "targetPredicates": [
                 {
@@ -1237,65 +1279,58 @@
               "successActions": [
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 1.0,
+                  "target": "Self",
                   "key": "GV_PlayerNums",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 1
                 }
               ]
             },
             {
               "$type": "Predicated",
+              "target": "Self",
               "targetPredicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "GV_PlayerNums",
-                  "ratio": 0.0,
-                  "compareType": "MoreThan"
+                  "compareType": "MoreThan",
+                  "value": 0
                 }
               ],
               "successActions": [
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 1.0,
+                  "target": "Self",
                   "key": "GV_BarrageStart",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 1
                 }
               ],
               "failActions": [
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 0.0,
+                  "target": "Self",
                   "key": "GV_BarrageStart",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 0
                 }
               ]
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "target": "Self",
               "key": "GV_PlayerNums",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         },
         "GearStop": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
-              "$type": "ExecuteGadgetLua"
+              "$type": "ExecuteGadgetLua",
+              "param1": 0
             }
           ]
         },
         "GearStart": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 4.0,
           "onAdded": [
             {
               "$type": "ExecuteGadgetLua",
@@ -1317,7 +1352,7 @@
               "failActions": [
                 {
                   "$type": "Randomed",
-                  "chance": 0.33000001311302185,
+                  "chance": 0.33,
                   "successActions": [
                     {
                       "$type": "TriggerBullet",
@@ -1358,6 +1393,7 @@
               ]
             }
           ],
+          "thinkInterval": 4,
           "onThinkInterval": [
             {
               "$type": "Randomed",
@@ -1375,7 +1411,7 @@
               "failActions": [
                 {
                   "$type": "Randomed",
-                  "chance": 0.33000001311302185,
+                  "chance": 0.33,
                   "successActions": [
                     {
                       "$type": "TriggerBullet",
@@ -1417,38 +1453,64 @@
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "GV_BarrageStart",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "GV_PlayerNums",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "FireManager"
-        }
-      ]
+      }
     }
   },
+
+  ///////////////////////////////////////
+  //
+  // UGC 弹幕子弹 环形元素1�?
+  //
+  ////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_UGC_HorizontalBullet_Grow_Ele",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "HitByBulletServerlua",
+          "target": "Target",
+          "predicates": [
+            {
+              "$type": "ByEntityTypes",
+              "entityTypes": ["Avatar"]
+            }
+          ]
+        },
+        {
+          "$type": "DamageByAttackValue",
+          "target": "Target",
+          "attackInfo": {
+            "attackProperty": {
+              "damagePercentage": 0,
+              "elementType": "Electric",
+              "strikeType": "Default",
+              "elementDurability": 25,
+              "overrideByWeapon": true,
+              "enBreak": 50,
+              "damageExtra": 500
+            },
+            "hitPattern": {
+              "onHitEffectName": "default",
+              "hitImpulseType": "LV1",
+              "canBeDefenceHalt": false,
+              "hitHaltTime": 0,
+              "hitHaltTimeScale": 0.01,
+              "muteHitText": true
+            }
+          }
+        }
+      ],
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "BulletMaterial"
+        }
+      ],
       "modifiers": {
         "KillRockGadget": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "KillSelf"
@@ -1456,88 +1518,83 @@
           ]
         },
         "HitByBulletServerlua": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "ServerLuaCall",
               "luaCallType": "CurChallengeGroup",
-              "isTarget": true,
               "funcName": "SLC_UGC_HitByBullet",
-              "ODAOGCJFIHC": 0.0,
-              "GCCFLBLEHDB": 0.0,
-              "DJODIFOBEJG": 0.0
+              "isTarget": true
             }
           ]
         },
         "BulletMaterial": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Barrage_UGCBullet_01_Ring",
-              "EBHJMLOKDGB": 102.0
+              "effectPattern": "Eff_SceneObj_Barrage_UGCBullet_01_Ring",
+              "effectTempleteID": 102
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "BulletMaterial"
-        }
-      ],
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "target": "Target",
-          "predicates": [
-            {
-              "$type": "ByEntityTypes",
-              "entityTypes": ["Avatar"]
-            }
-          ],
-          "modifierName": "HitByBulletServerlua"
-        },
-        {
-          "$type": "DamageByAttackValue",
-          "target": "Target",
-          "attackInfo": {
-            "attackTag": "",
-            "attenuationTag": "",
-            "attenuationGroup": "default",
-            "attackProperty": {
-              "HBIOLEEGHPD": 0.0,
-              "CCNJGLPMIEP": 0.0,
-              "elementType": "Electric",
-              "bonusCriticalHurt": 25.0,
-              "overrideByWeapon": true,
-              "strikeType": "Default",
-              "enBreak": 50.0,
-              "damageExtra": 500.0
-            },
-            "hitPattern": {
-              "onHitEffectName": "default",
-              "hitImpulseType": "LV1",
-              "hitHaltTimeScale": 0.009999999776482582,
-              "muteHitText": true
-            }
-          }
-        }
-      ]
+      }
     }
   },
+
+  ///////////////////////////////////////
+  //
+  // UGC 弹幕子弹 环形元素2
+  //
+  ////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_UGC_HorizontalBullet_Grow_Ice",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "HitByBulletServerlua",
+          "target": "Target",
+          "predicates": [
+            {
+              "$type": "ByEntityTypes",
+              "entityTypes": ["Avatar"]
+            }
+          ]
+        },
+        {
+          "$type": "DamageByAttackValue",
+          "target": "Target",
+          "attackInfo": {
+            "attackProperty": {
+              "damagePercentage": 0,
+              "elementType": "Ice",
+              "strikeType": "Default",
+              "elementDurability": 25,
+              "overrideByWeapon": true,
+              "enBreak": 50,
+              "damageExtra": 500
+            },
+            "hitPattern": {
+              "onHitEffectName": "default",
+              "hitImpulseType": "LV1",
+              "canBeDefenceHalt": false,
+              "hitHaltTime": 0,
+              "hitHaltTimeScale": 0.01,
+              "muteHitText": true
+            }
+          }
+        }
+      ],
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "BulletMaterial"
+        }
+      ],
       "modifiers": {
         "KillRockGadget": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "KillSelf"
@@ -1545,88 +1602,83 @@
           ]
         },
         "HitByBulletServerlua": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "ServerLuaCall",
               "luaCallType": "CurChallengeGroup",
-              "isTarget": true,
               "funcName": "SLC_UGC_HitByBullet",
-              "ODAOGCJFIHC": 0.0,
-              "GCCFLBLEHDB": 0.0,
-              "DJODIFOBEJG": 0.0
+              "isTarget": true
             }
           ]
         },
         "BulletMaterial": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Barrage_UGCBullet_01_Ring",
-              "EBHJMLOKDGB": 104.0
+              "effectPattern": "Eff_SceneObj_Barrage_UGCBullet_01_Ring",
+              "effectTempleteID": 104
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "BulletMaterial"
-        }
-      ],
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "target": "Target",
-          "predicates": [
-            {
-              "$type": "ByEntityTypes",
-              "entityTypes": ["Avatar"]
-            }
-          ],
-          "modifierName": "HitByBulletServerlua"
-        },
-        {
-          "$type": "DamageByAttackValue",
-          "target": "Target",
-          "attackInfo": {
-            "attackTag": "",
-            "attenuationTag": "",
-            "attenuationGroup": "default",
-            "attackProperty": {
-              "HBIOLEEGHPD": 0.0,
-              "CCNJGLPMIEP": 0.0,
-              "elementType": "Ice",
-              "bonusCriticalHurt": 25.0,
-              "overrideByWeapon": true,
-              "strikeType": "Default",
-              "enBreak": 50.0,
-              "damageExtra": 500.0
-            },
-            "hitPattern": {
-              "onHitEffectName": "default",
-              "hitImpulseType": "LV1",
-              "hitHaltTimeScale": 0.009999999776482582,
-              "muteHitText": true
-            }
-          }
-        }
-      ]
+      }
     }
   },
+
+  ///////////////////////////////////////
+  //
+  // UGC 弹幕子弹 环形元素3�?
+  //
+  ////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_UGC_HorizontalBullet_Grow_Fire",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "HitByBulletServerlua",
+          "target": "Target",
+          "predicates": [
+            {
+              "$type": "ByEntityTypes",
+              "entityTypes": ["Avatar"]
+            }
+          ]
+        },
+        {
+          "$type": "DamageByAttackValue",
+          "target": "Target",
+          "attackInfo": {
+            "attackProperty": {
+              "damagePercentage": 0,
+              "elementType": "Fire",
+              "strikeType": "Default",
+              "elementDurability": 25,
+              "overrideByWeapon": true,
+              "enBreak": 50,
+              "damageExtra": 500
+            },
+            "hitPattern": {
+              "onHitEffectName": "default",
+              "hitImpulseType": "LV1",
+              "canBeDefenceHalt": false,
+              "hitHaltTime": 0,
+              "hitHaltTimeScale": 0.01,
+              "muteHitText": true
+            }
+          }
+        }
+      ],
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "BulletMaterial"
+        }
+      ],
       "modifiers": {
         "KillRockGadget": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "KillSelf"
@@ -1634,88 +1686,83 @@
           ]
         },
         "HitByBulletServerlua": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "ServerLuaCall",
               "luaCallType": "CurChallengeGroup",
-              "isTarget": true,
               "funcName": "SLC_UGC_HitByBullet",
-              "ODAOGCJFIHC": 0.0,
-              "GCCFLBLEHDB": 0.0,
-              "DJODIFOBEJG": 0.0
+              "isTarget": true
             }
           ]
         },
         "BulletMaterial": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Barrage_UGCBullet_01_Ring",
-              "EBHJMLOKDGB": 103.0
+              "effectPattern": "Eff_SceneObj_Barrage_UGCBullet_01_Ring",
+              "effectTempleteID": 103
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "BulletMaterial"
-        }
-      ],
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "target": "Target",
-          "predicates": [
-            {
-              "$type": "ByEntityTypes",
-              "entityTypes": ["Avatar"]
-            }
-          ],
-          "modifierName": "HitByBulletServerlua"
-        },
-        {
-          "$type": "DamageByAttackValue",
-          "target": "Target",
-          "attackInfo": {
-            "attackTag": "",
-            "attenuationTag": "",
-            "attenuationGroup": "default",
-            "attackProperty": {
-              "HBIOLEEGHPD": 0.0,
-              "CCNJGLPMIEP": 0.0,
-              "elementType": "Fire",
-              "bonusCriticalHurt": 25.0,
-              "overrideByWeapon": true,
-              "strikeType": "Default",
-              "enBreak": 50.0,
-              "damageExtra": 500.0
-            },
-            "hitPattern": {
-              "onHitEffectName": "default",
-              "hitImpulseType": "LV1",
-              "hitHaltTimeScale": 0.009999999776482582,
-              "muteHitText": true
-            }
-          }
-        }
-      ]
+      }
     }
   },
+
+  ///////////////////////////////////////
+  //
+  // UGC 弹幕子弹 环形元素4�?
+  //
+  ////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_UGC_HorizontalBullet_Grow_Water",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "HitByBulletServerlua",
+          "target": "Target",
+          "predicates": [
+            {
+              "$type": "ByEntityTypes",
+              "entityTypes": ["Avatar"]
+            }
+          ]
+        },
+        {
+          "$type": "DamageByAttackValue",
+          "target": "Target",
+          "attackInfo": {
+            "attackProperty": {
+              "damagePercentage": 0,
+              "elementType": "Water",
+              "strikeType": "Default",
+              "elementDurability": 25,
+              "overrideByWeapon": true,
+              "enBreak": 50,
+              "damageExtra": 500
+            },
+            "hitPattern": {
+              "onHitEffectName": "default",
+              "hitImpulseType": "LV1",
+              "canBeDefenceHalt": false,
+              "hitHaltTime": 0,
+              "hitHaltTimeScale": 0.01,
+              "muteHitText": true
+            }
+          }
+        }
+      ],
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "BulletMaterial"
+        }
+      ],
       "modifiers": {
         "KillRockGadget": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "KillSelf"
@@ -1723,79 +1770,34 @@
           ]
         },
         "HitByBulletServerlua": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "ServerLuaCall",
               "luaCallType": "CurChallengeGroup",
-              "isTarget": true,
               "funcName": "SLC_UGC_HitByBullet",
-              "ODAOGCJFIHC": 0.0,
-              "GCCFLBLEHDB": 0.0,
-              "DJODIFOBEJG": 0.0
+              "isTarget": true
             }
           ]
         },
         "BulletMaterial": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Barrage_UGCBullet_01_Ring",
-              "EBHJMLOKDGB": 101.0
+              "effectPattern": "Eff_SceneObj_Barrage_UGCBullet_01_Ring",
+              "effectTempleteID": 101
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "BulletMaterial"
-        }
-      ],
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "target": "Target",
-          "predicates": [
-            {
-              "$type": "ByEntityTypes",
-              "entityTypes": ["Avatar"]
-            }
-          ],
-          "modifierName": "HitByBulletServerlua"
-        },
-        {
-          "$type": "DamageByAttackValue",
-          "target": "Target",
-          "attackInfo": {
-            "attackTag": "",
-            "attenuationTag": "",
-            "attenuationGroup": "default",
-            "attackProperty": {
-              "HBIOLEEGHPD": 0.0,
-              "CCNJGLPMIEP": 0.0,
-              "elementType": "Water",
-              "bonusCriticalHurt": 25.0,
-              "overrideByWeapon": true,
-              "strikeType": "Default",
-              "enBreak": 50.0,
-              "damageExtra": 500.0
-            },
-            "hitPattern": {
-              "onHitEffectName": "default",
-              "hitImpulseType": "LV1",
-              "hitHaltTimeScale": 0.009999999776482582,
-              "muteHitText": true
-            }
-          }
-        }
-      ]
+      }
     }
   },
+
+  ///////////////////////////////////////
+  //
+  // UGC 方形弹幕发射�?
+  //
+  ////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1808,20 +1810,37 @@
           "modifierNameSteps": ["GearStop", "GearStart"]
         }
       ],
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "target": "Self",
+          "key": "GV_BarrageStart",
+          "value": 0
+        },
+        {
+          "$type": "SetGlobalValue",
+          "target": "Self",
+          "key": "GV_PlayerNums",
+          "value": 0
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "FireManager"
+        }
+      ],
       "modifiers": {
         "FireManager": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 1.0,
+          "thinkInterval": 1,
           "onThinkInterval": [
             {
               "$type": "Predicated",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
-                "entityTypePriority": ["Avatar"],
                 "shapeName": "CircleR15H10",
+                "centerBasedOn": "Self",
+                "campBasedOn": "Self",
                 "campTargetType": "All",
-                "sizeRatio": 1.0
+                "entityTypePriority": ["Avatar"]
               },
               "targetPredicates": [
                 {
@@ -1832,65 +1851,58 @@
               "successActions": [
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 1.0,
+                  "target": "Self",
                   "key": "GV_PlayerNums",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 1
                 }
               ]
             },
             {
               "$type": "Predicated",
+              "target": "Self",
               "targetPredicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "GV_PlayerNums",
-                  "ratio": 0.0,
-                  "compareType": "MoreThan"
+                  "compareType": "MoreThan",
+                  "value": 0
                 }
               ],
               "successActions": [
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 1.0,
+                  "target": "Self",
                   "key": "GV_BarrageStart",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 1
                 }
               ],
               "failActions": [
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 0.0,
+                  "target": "Self",
                   "key": "GV_BarrageStart",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 0
                 }
               ]
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "target": "Self",
               "key": "GV_PlayerNums",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         },
         "GearStop": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
-              "$type": "ExecuteGadgetLua"
+              "$type": "ExecuteGadgetLua",
+              "param1": 0
             }
           ]
         },
         "GearStart": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 4.0,
           "onAdded": [
             {
               "$type": "ExecuteGadgetLua",
@@ -1912,7 +1924,7 @@
               "failActions": [
                 {
                   "$type": "Randomed",
-                  "chance": 0.33000001311302185,
+                  "chance": 0.33,
                   "successActions": [
                     {
                       "$type": "TriggerBullet",
@@ -1953,6 +1965,7 @@
               ]
             }
           ],
+          "thinkInterval": 4,
           "onThinkInterval": [
             {
               "$type": "Randomed",
@@ -1970,7 +1983,7 @@
               "failActions": [
                 {
                   "$type": "Randomed",
-                  "chance": 0.33000001311302185,
+                  "chance": 0.33,
                   "successActions": [
                     {
                       "$type": "TriggerBullet",
@@ -2012,38 +2025,64 @@
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "GV_BarrageStart",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "GV_PlayerNums",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "FireManager"
-        }
-      ]
+      }
     }
   },
+
+  ///////////////////////////////////////
+  //
+  // UGC 弹幕子弹 方形元素1�?
+  //
+  ////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_UGC_HorizontalBullet_GrowSquare_Ele",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "HitByBulletServerlua",
+          "target": "Target",
+          "predicates": [
+            {
+              "$type": "ByEntityTypes",
+              "entityTypes": ["Avatar"]
+            }
+          ]
+        },
+        {
+          "$type": "DamageByAttackValue",
+          "target": "Target",
+          "attackInfo": {
+            "attackProperty": {
+              "damagePercentage": 0,
+              "elementType": "Electric",
+              "strikeType": "Default",
+              "elementDurability": 25,
+              "overrideByWeapon": true,
+              "enBreak": 50,
+              "damageExtra": 500
+            },
+            "hitPattern": {
+              "onHitEffectName": "default",
+              "hitImpulseType": "LV1",
+              "canBeDefenceHalt": false,
+              "hitHaltTime": 0,
+              "hitHaltTimeScale": 0.01,
+              "muteHitText": true
+            }
+          }
+        }
+      ],
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "BulletMaterial"
+        }
+      ],
       "modifiers": {
         "KillRockGadget": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "KillSelf"
@@ -2051,88 +2090,83 @@
           ]
         },
         "HitByBulletServerlua": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "ServerLuaCall",
               "luaCallType": "CurChallengeGroup",
-              "isTarget": true,
               "funcName": "SLC_UGC_HitByBullet",
-              "ODAOGCJFIHC": 0.0,
-              "GCCFLBLEHDB": 0.0,
-              "DJODIFOBEJG": 0.0
+              "isTarget": true
             }
           ]
         },
         "BulletMaterial": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_UGCBulletCreator_Square",
-              "EBHJMLOKDGB": 102.0
+              "effectPattern": "Eff_SceneObj_UGCBulletCreator_Square",
+              "effectTempleteID": 102
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "BulletMaterial"
-        }
-      ],
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "target": "Target",
-          "predicates": [
-            {
-              "$type": "ByEntityTypes",
-              "entityTypes": ["Avatar"]
-            }
-          ],
-          "modifierName": "HitByBulletServerlua"
-        },
-        {
-          "$type": "DamageByAttackValue",
-          "target": "Target",
-          "attackInfo": {
-            "attackTag": "",
-            "attenuationTag": "",
-            "attenuationGroup": "default",
-            "attackProperty": {
-              "HBIOLEEGHPD": 0.0,
-              "CCNJGLPMIEP": 0.0,
-              "elementType": "Electric",
-              "bonusCriticalHurt": 25.0,
-              "overrideByWeapon": true,
-              "strikeType": "Default",
-              "enBreak": 50.0,
-              "damageExtra": 500.0
-            },
-            "hitPattern": {
-              "onHitEffectName": "default",
-              "hitImpulseType": "LV1",
-              "hitHaltTimeScale": 0.009999999776482582,
-              "muteHitText": true
-            }
-          }
-        }
-      ]
+      }
     }
   },
+
+  ///////////////////////////////////////
+  //
+  // UGC 弹幕子弹 方形元素2�?
+  //
+  ////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_UGC_HorizontalBullet_GrowSquare_Ice",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "HitByBulletServerlua",
+          "target": "Target",
+          "predicates": [
+            {
+              "$type": "ByEntityTypes",
+              "entityTypes": ["Avatar"]
+            }
+          ]
+        },
+        {
+          "$type": "DamageByAttackValue",
+          "target": "Target",
+          "attackInfo": {
+            "attackProperty": {
+              "damagePercentage": 0,
+              "elementType": "Ice",
+              "strikeType": "Default",
+              "elementDurability": 25,
+              "overrideByWeapon": true,
+              "enBreak": 50,
+              "damageExtra": 500
+            },
+            "hitPattern": {
+              "onHitEffectName": "default",
+              "hitImpulseType": "LV1",
+              "canBeDefenceHalt": false,
+              "hitHaltTime": 0,
+              "hitHaltTimeScale": 0.01,
+              "muteHitText": true
+            }
+          }
+        }
+      ],
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "BulletMaterial"
+        }
+      ],
       "modifiers": {
         "KillRockGadget": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "KillSelf"
@@ -2140,88 +2174,83 @@
           ]
         },
         "HitByBulletServerlua": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "ServerLuaCall",
               "luaCallType": "CurChallengeGroup",
-              "isTarget": true,
               "funcName": "SLC_UGC_HitByBullet",
-              "ODAOGCJFIHC": 0.0,
-              "GCCFLBLEHDB": 0.0,
-              "DJODIFOBEJG": 0.0
+              "isTarget": true
             }
           ]
         },
         "BulletMaterial": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_UGCBulletCreator_Square",
-              "EBHJMLOKDGB": 104.0
+              "effectPattern": "Eff_SceneObj_UGCBulletCreator_Square",
+              "effectTempleteID": 104
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "BulletMaterial"
-        }
-      ],
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "target": "Target",
-          "predicates": [
-            {
-              "$type": "ByEntityTypes",
-              "entityTypes": ["Avatar"]
-            }
-          ],
-          "modifierName": "HitByBulletServerlua"
-        },
-        {
-          "$type": "DamageByAttackValue",
-          "target": "Target",
-          "attackInfo": {
-            "attackTag": "",
-            "attenuationTag": "",
-            "attenuationGroup": "default",
-            "attackProperty": {
-              "HBIOLEEGHPD": 0.0,
-              "CCNJGLPMIEP": 0.0,
-              "elementType": "Ice",
-              "bonusCriticalHurt": 25.0,
-              "overrideByWeapon": true,
-              "strikeType": "Default",
-              "enBreak": 50.0,
-              "damageExtra": 500.0
-            },
-            "hitPattern": {
-              "onHitEffectName": "default",
-              "hitImpulseType": "LV1",
-              "hitHaltTimeScale": 0.009999999776482582,
-              "muteHitText": true
-            }
-          }
-        }
-      ]
+      }
     }
   },
+
+  ///////////////////////////////////////
+  //
+  // UGC 弹幕子弹 方形元素3�?
+  //
+  ////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_UGC_HorizontalBullet_GrowSquare_Fire",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "HitByBulletServerlua",
+          "target": "Target",
+          "predicates": [
+            {
+              "$type": "ByEntityTypes",
+              "entityTypes": ["Avatar"]
+            }
+          ]
+        },
+        {
+          "$type": "DamageByAttackValue",
+          "target": "Target",
+          "attackInfo": {
+            "attackProperty": {
+              "damagePercentage": 0,
+              "elementType": "Fire",
+              "strikeType": "Default",
+              "elementDurability": 25,
+              "overrideByWeapon": true,
+              "enBreak": 50,
+              "damageExtra": 500
+            },
+            "hitPattern": {
+              "onHitEffectName": "default",
+              "hitImpulseType": "LV1",
+              "canBeDefenceHalt": false,
+              "hitHaltTime": 0,
+              "hitHaltTimeScale": 0.01,
+              "muteHitText": true
+            }
+          }
+        }
+      ],
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "BulletMaterial"
+        }
+      ],
       "modifiers": {
         "KillRockGadget": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "KillSelf"
@@ -2229,88 +2258,83 @@
           ]
         },
         "HitByBulletServerlua": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "ServerLuaCall",
               "luaCallType": "CurChallengeGroup",
-              "isTarget": true,
               "funcName": "SLC_UGC_HitByBullet",
-              "ODAOGCJFIHC": 0.0,
-              "GCCFLBLEHDB": 0.0,
-              "DJODIFOBEJG": 0.0
+              "isTarget": true
             }
           ]
         },
         "BulletMaterial": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_UGCBulletCreator_Square",
-              "EBHJMLOKDGB": 103.0
+              "effectPattern": "Eff_SceneObj_UGCBulletCreator_Square",
+              "effectTempleteID": 103
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "BulletMaterial"
-        }
-      ],
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "target": "Target",
-          "predicates": [
-            {
-              "$type": "ByEntityTypes",
-              "entityTypes": ["Avatar"]
-            }
-          ],
-          "modifierName": "HitByBulletServerlua"
-        },
-        {
-          "$type": "DamageByAttackValue",
-          "target": "Target",
-          "attackInfo": {
-            "attackTag": "",
-            "attenuationTag": "",
-            "attenuationGroup": "default",
-            "attackProperty": {
-              "HBIOLEEGHPD": 0.0,
-              "CCNJGLPMIEP": 0.0,
-              "elementType": "Fire",
-              "bonusCriticalHurt": 25.0,
-              "overrideByWeapon": true,
-              "strikeType": "Default",
-              "enBreak": 50.0,
-              "damageExtra": 500.0
-            },
-            "hitPattern": {
-              "onHitEffectName": "default",
-              "hitImpulseType": "LV1",
-              "hitHaltTimeScale": 0.009999999776482582,
-              "muteHitText": true
-            }
-          }
-        }
-      ]
+      }
     }
   },
+
+  ///////////////////////////////////////
+  //
+  // UGC 弹幕子弹 环形元素4�?
+  //
+  ////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_UGC_HorizontalBullet_GrowSquare_Water",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "HitByBulletServerlua",
+          "target": "Target",
+          "predicates": [
+            {
+              "$type": "ByEntityTypes",
+              "entityTypes": ["Avatar"]
+            }
+          ]
+        },
+        {
+          "$type": "DamageByAttackValue",
+          "target": "Target",
+          "attackInfo": {
+            "attackProperty": {
+              "damagePercentage": 0,
+              "elementType": "Water",
+              "strikeType": "Default",
+              "elementDurability": 25,
+              "overrideByWeapon": true,
+              "enBreak": 50,
+              "damageExtra": 500
+            },
+            "hitPattern": {
+              "onHitEffectName": "default",
+              "hitImpulseType": "LV1",
+              "canBeDefenceHalt": false,
+              "hitHaltTime": 0,
+              "hitHaltTimeScale": 0.01,
+              "muteHitText": true
+            }
+          }
+        }
+      ],
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "BulletMaterial"
+        }
+      ],
       "modifiers": {
         "KillRockGadget": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "KillSelf"
@@ -2318,79 +2342,34 @@
           ]
         },
         "HitByBulletServerlua": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "ServerLuaCall",
               "luaCallType": "CurChallengeGroup",
-              "isTarget": true,
               "funcName": "SLC_UGC_HitByBullet",
-              "ODAOGCJFIHC": 0.0,
-              "GCCFLBLEHDB": 0.0,
-              "DJODIFOBEJG": 0.0
+              "isTarget": true
             }
           ]
         },
         "BulletMaterial": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_UGCBulletCreator_Square",
-              "EBHJMLOKDGB": 101.0
+              "effectPattern": "Eff_SceneObj_UGCBulletCreator_Square",
+              "effectTempleteID": 101
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "BulletMaterial"
-        }
-      ],
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "target": "Target",
-          "predicates": [
-            {
-              "$type": "ByEntityTypes",
-              "entityTypes": ["Avatar"]
-            }
-          ],
-          "modifierName": "HitByBulletServerlua"
-        },
-        {
-          "$type": "DamageByAttackValue",
-          "target": "Target",
-          "attackInfo": {
-            "attackTag": "",
-            "attenuationTag": "",
-            "attenuationGroup": "default",
-            "attackProperty": {
-              "HBIOLEEGHPD": 0.0,
-              "CCNJGLPMIEP": 0.0,
-              "elementType": "Water",
-              "bonusCriticalHurt": 25.0,
-              "overrideByWeapon": true,
-              "strikeType": "Default",
-              "enBreak": 50.0,
-              "damageExtra": 500.0
-            },
-            "hitPattern": {
-              "onHitEffectName": "default",
-              "hitImpulseType": "LV1",
-              "hitHaltTimeScale": 0.009999999776482582,
-              "muteHitText": true
-            }
-          }
-        }
-      ]
+      }
     }
   },
+
+  ///////////////////////////////////////
+  //
+  // UGC 火属性路�?
+  //
+  ////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -2398,181 +2377,171 @@
       "abilityMixins": [
         {
           "$type": "UnitDurationMixin",
-          "modifierName": ["GS_None", "GS_Fire"],
-          "NLLLEJAMEHA": [3.0, 3.0]
+          "steps": [3, 3],
+          "modifierName": ["GS_None", "GS_Fire"]
         },
         {
           "$type": "AttachModifierToGlobalValueMixin",
           "globalValueKey": "UGC_Triggered",
-          "valueSteps": [-0.5, 0.5, 1.5],
-          "modifierNameSteps": ["UGC_CubeNormal", "UGC_CubeAttack"]
+          "modifierNameSteps": ["UGC_CubeNormal", "UGC_CubeAttack"],
+          "valueSteps": [-0.5, 0.5, 1.5]
+        }
+      ],
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "target": "Self",
+          "key": "UGC_Cube_CanAttack",
+          "value": 0
+        },
+        {
+          "$type": "SetGlobalValue",
+          "target": "Self",
+          "key": "UGC_Triggered",
+          "value": 0
         }
       ],
       "modifiers": {
         "GS_None": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "target": "Self",
               "key": "GV_UGC_GearState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             },
             {
               "$type": "SetMaterialParamFloatByTransform",
-              "canBeHandledOnRecover": true,
-              "FBIDGOMNBLJ": "EmissionStrength",
-              "HFGGHONFMMJ": "_EmissionStrength",
-              "ratio": 0.699999988079071,
-              "JNFAMBPFJFM": true,
-              "MHLDAJLMJIL": 12,
-              "HCALGEOPEGJ": 1.0
+              "matName": "EmissionStrength",
+              "patternName": "_EmissionStrength",
+              "value": 0.7,
+              "lerpTime": 1,
+              "useCurve": true,
+              "lerpCurveIndex": 12,
+              "canBeHandledOnRecover": true
             },
             {
-              "$type": "ChangeUGCRayTag"
+              "$type": "ChangeUGCRayTag",
+              "rayTag": 0
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "target": "Self",
               "key": "UGC_Cube_CanAttack",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         },
         "GS_Fire": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "target": "Self",
               "key": "GV_UGC_GearState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             },
             {
               "$type": "TriggerAudio",
+              "responder": "Caster",
               "operation": {
                 "$type": "ConfigAudioEventOp",
-                "operation": {
-                  "text": "Play_amb_sceneObj_gear_UGCCube_in"
-                }
+                "operation": { "text": "Play_amb_sceneObj_gear_UGCCube_in" }
               }
             },
             {
               "$type": "SetMaterialParamFloatByTransform",
-              "canBeHandledOnRecover": true,
-              "FBIDGOMNBLJ": "EmissionStrength",
-              "HFGGHONFMMJ": "_EmissionStrength",
-              "ratio": 3.0,
-              "JNFAMBPFJFM": true,
-              "MHLDAJLMJIL": 11,
-              "HCALGEOPEGJ": 1.0
+              "matName": "EmissionStrength",
+              "patternName": "_EmissionStrength",
+              "value": 3,
+              "lerpTime": 1,
+              "useCurve": true,
+              "lerpCurveIndex": 11,
+              "canBeHandledOnRecover": true
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "target": "Self",
               "key": "UGC_Cube_CanAttack",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             },
             {
               "$type": "ChangeUGCRayTag",
-              "EBAMLIPEBAH": 1
+              "rayTag": 1
             }
           ]
         },
         "UGC_CubeAttack": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "TriggerAttackEvent",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "target": "Self",
-                  "key": "UGC_Cube_CanAttack",
-                  "ratio": 1.0
-                }
-              ],
+              "target": "Self",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackBox",
                   "triggerType": "TriggerNoRepeat",
+                  "size": {
+                    "x": 5,
+                    "y": 1,
+                    "z": 5
+                  },
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
+                    "attachPointName": "AttackPoint",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": -2.5
+                      "x": 0,
+                      "y": 0,
+                      "z": -2.5
                     },
                     "direction": {
                       "$type": "ConfigDirectionByDefault",
                       "angleOffset": {
-                        "IBKBLDAJIMA": 0.0,
-                        "LKHJADIPBFL": 0.0,
-                        "PJCOKIGCJOK": 0.0
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
                       }
-                    },
-                    "attachPointName": "AttackPoint"
-                  },
-                  "size": {
-                    "IBKBLDAJIMA": 5.0,
-                    "LKHJADIPBFL": 1.0,
-                    "PJCOKIGCJOK": 5.0
+                    }
                   }
                 },
                 "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "HBIOLEEGHPD": 0.0,
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Fire",
-                    "bonusCriticalHurt": 25.0,
+                    "damagePercentage": 0,
                     "strikeType": "Default",
-                    "enBreak": 100.0
+                    "elementType": "Fire",
+                    "elementDurability": 25,
+                    "enBreak": 100
                   },
                   "hitPattern": {
-                    "onHitEffectName": "default",
                     "hitImpulseType": "LV1",
-                    "hitHaltTimeScale": 0.05000000074505806,
+                    "onHitEffectName": "default",
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
                     "muteHitText": true
                   }
                 }
               },
-              "targetType": "Enemy"
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "UGC_Cube_CanAttack",
+                  "target": "Self",
+                  "compareType": "Equal",
+                  "value": 1
+                }
+              ]
             }
           ]
         },
-        "UGC_CubeNormal": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        }
-      },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "UGC_Cube_CanAttack",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "UGC_Triggered",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        }
-      ]
+        "UGC_CubeNormal": {}
+      }
     }
   },
+
+  ///////////////////////////////////////
+  //
+  // UGC 水属性路�?
+  //
+  ////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -2580,181 +2549,171 @@
       "abilityMixins": [
         {
           "$type": "UnitDurationMixin",
-          "modifierName": ["GS_None", "GS_Water"],
-          "NLLLEJAMEHA": [3.0, 3.0]
+          "steps": [3, 3],
+          "modifierName": ["GS_None", "GS_Water"]
         },
         {
           "$type": "AttachModifierToGlobalValueMixin",
           "globalValueKey": "UGC_Triggered",
-          "valueSteps": [-0.5, 0.5, 1.5],
-          "modifierNameSteps": ["UGC_CubeNormal", "UGC_CubeAttack"]
+          "modifierNameSteps": ["UGC_CubeNormal", "UGC_CubeAttack"],
+          "valueSteps": [-0.5, 0.5, 1.5]
+        }
+      ],
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "target": "Self",
+          "key": "UGC_Cube_CanAttack",
+          "value": 0
+        },
+        {
+          "$type": "SetGlobalValue",
+          "target": "Self",
+          "key": "UGC_Triggered",
+          "value": 0
         }
       ],
       "modifiers": {
         "GS_None": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "target": "Self",
               "key": "GV_UGC_GearState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             },
             {
               "$type": "SetMaterialParamFloatByTransform",
-              "canBeHandledOnRecover": true,
-              "FBIDGOMNBLJ": "EmissionStrength",
-              "HFGGHONFMMJ": "_EmissionStrength",
-              "ratio": 0.800000011920929,
-              "JNFAMBPFJFM": true,
-              "MHLDAJLMJIL": 12,
-              "HCALGEOPEGJ": 1.0
+              "matName": "EmissionStrength",
+              "patternName": "_EmissionStrength",
+              "value": 0.8,
+              "lerpTime": 1,
+              "useCurve": true,
+              "lerpCurveIndex": 12,
+              "canBeHandledOnRecover": true
             },
             {
-              "$type": "ChangeUGCRayTag"
+              "$type": "ChangeUGCRayTag",
+              "rayTag": 0
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "target": "Self",
               "key": "UGC_Cube_CanAttack",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         },
         "GS_Water": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 2.0,
+              "target": "Self",
               "key": "GV_UGC_GearState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 2
             },
             {
               "$type": "TriggerAudio",
+              "responder": "Caster",
               "operation": {
                 "$type": "ConfigAudioEventOp",
-                "operation": {
-                  "text": "Play_amb_sceneObj_gear_UGCCube_in"
-                }
+                "operation": { "text": "Play_amb_sceneObj_gear_UGCCube_in" }
               }
             },
             {
               "$type": "SetMaterialParamFloatByTransform",
-              "canBeHandledOnRecover": true,
-              "FBIDGOMNBLJ": "EmissionStrength",
-              "HFGGHONFMMJ": "_EmissionStrength",
-              "ratio": 4.0,
-              "JNFAMBPFJFM": true,
-              "MHLDAJLMJIL": 11,
-              "HCALGEOPEGJ": 1.0
+              "matName": "EmissionStrength",
+              "patternName": "_EmissionStrength",
+              "value": 4,
+              "lerpTime": 1,
+              "useCurve": true,
+              "lerpCurveIndex": 11,
+              "canBeHandledOnRecover": true
             },
             {
               "$type": "ChangeUGCRayTag",
-              "EBAMLIPEBAH": 2
+              "rayTag": 2
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "target": "Self",
               "key": "UGC_Cube_CanAttack",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             }
           ]
         },
         "UGC_CubeAttack": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "TriggerAttackEvent",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "target": "Self",
-                  "key": "UGC_Cube_CanAttack",
-                  "ratio": 1.0
-                }
-              ],
+              "target": "Self",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackBox",
                   "triggerType": "TriggerNoRepeat",
+                  "size": {
+                    "x": 5,
+                    "y": 1,
+                    "z": 5
+                  },
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
+                    "attachPointName": "AttackPoint",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": -2.5
+                      "x": 0,
+                      "y": 0,
+                      "z": -2.5
                     },
                     "direction": {
                       "$type": "ConfigDirectionByDefault",
                       "angleOffset": {
-                        "IBKBLDAJIMA": 0.0,
-                        "LKHJADIPBFL": 0.0,
-                        "PJCOKIGCJOK": 0.0
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
                       }
-                    },
-                    "attachPointName": "AttackPoint"
-                  },
-                  "size": {
-                    "IBKBLDAJIMA": 5.0,
-                    "LKHJADIPBFL": 1.0,
-                    "PJCOKIGCJOK": 5.0
+                    }
                   }
                 },
                 "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "HBIOLEEGHPD": 0.0,
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Water",
-                    "bonusCriticalHurt": 25.0,
+                    "damagePercentage": 0,
                     "strikeType": "Default",
-                    "enBreak": 100.0
+                    "elementType": "Water",
+                    "elementDurability": 25,
+                    "enBreak": 100
                   },
                   "hitPattern": {
-                    "onHitEffectName": "default",
                     "hitImpulseType": "LV1",
-                    "hitHaltTimeScale": 0.05000000074505806,
+                    "onHitEffectName": "default",
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
                     "muteHitText": true
                   }
                 }
               },
-              "targetType": "Enemy"
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "UGC_Cube_CanAttack",
+                  "target": "Self",
+                  "compareType": "Equal",
+                  "value": 1
+                }
+              ]
             }
           ]
         },
-        "UGC_CubeNormal": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        }
-      },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "UGC_Cube_CanAttack",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "UGC_Triggered",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        }
-      ]
+        "UGC_CubeNormal": {}
+      }
     }
   },
+
+  ///////////////////////////////////////
+  //
+  // UGC 冰属性路�?
+  //
+  ////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -2762,181 +2721,171 @@
       "abilityMixins": [
         {
           "$type": "UnitDurationMixin",
-          "modifierName": ["GS_None", "GS_Ice"],
-          "NLLLEJAMEHA": [3.0, 3.0]
+          "steps": [3, 3],
+          "modifierName": ["GS_None", "GS_Ice"]
         },
         {
           "$type": "AttachModifierToGlobalValueMixin",
           "globalValueKey": "UGC_Triggered",
-          "valueSteps": [-0.5, 0.5, 1.5],
-          "modifierNameSteps": ["UGC_CubeNormal", "UGC_CubeAttack"]
+          "modifierNameSteps": ["UGC_CubeNormal", "UGC_CubeAttack"],
+          "valueSteps": [-0.5, 0.5, 1.5]
+        }
+      ],
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "target": "Self",
+          "key": "UGC_Cube_CanAttack",
+          "value": 0
+        },
+        {
+          "$type": "SetGlobalValue",
+          "target": "Self",
+          "key": "UGC_Triggered",
+          "value": 0
         }
       ],
       "modifiers": {
         "GS_None": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "target": "Self",
               "key": "GV_UGC_GearState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             },
             {
               "$type": "SetMaterialParamFloatByTransform",
-              "canBeHandledOnRecover": true,
-              "FBIDGOMNBLJ": "EmissionStrength",
-              "HFGGHONFMMJ": "_EmissionStrength",
-              "ratio": 0.699999988079071,
-              "JNFAMBPFJFM": true,
-              "MHLDAJLMJIL": 12,
-              "HCALGEOPEGJ": 1.0
+              "matName": "EmissionStrength",
+              "patternName": "_EmissionStrength",
+              "value": 0.7,
+              "lerpTime": 1,
+              "useCurve": true,
+              "lerpCurveIndex": 12,
+              "canBeHandledOnRecover": true
             },
             {
-              "$type": "ChangeUGCRayTag"
+              "$type": "ChangeUGCRayTag",
+              "rayTag": 0
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "target": "Self",
               "key": "UGC_Cube_CanAttack",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         },
         "GS_Ice": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 3.0,
+              "target": "Self",
               "key": "GV_UGC_GearState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 3
             },
             {
               "$type": "TriggerAudio",
+              "responder": "Caster",
               "operation": {
                 "$type": "ConfigAudioEventOp",
-                "operation": {
-                  "text": "Play_amb_sceneObj_gear_UGCCube_in"
-                }
+                "operation": { "text": "Play_amb_sceneObj_gear_UGCCube_in" }
               }
             },
             {
               "$type": "SetMaterialParamFloatByTransform",
-              "canBeHandledOnRecover": true,
-              "FBIDGOMNBLJ": "EmissionStrength",
-              "HFGGHONFMMJ": "_EmissionStrength",
-              "ratio": 3.0,
-              "JNFAMBPFJFM": true,
-              "MHLDAJLMJIL": 11,
-              "HCALGEOPEGJ": 1.0
+              "matName": "EmissionStrength",
+              "patternName": "_EmissionStrength",
+              "value": 3,
+              "lerpTime": 1,
+              "useCurve": true,
+              "lerpCurveIndex": 11,
+              "canBeHandledOnRecover": true
             },
             {
               "$type": "ChangeUGCRayTag",
-              "EBAMLIPEBAH": 3
+              "rayTag": 3
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "target": "Self",
               "key": "UGC_Cube_CanAttack",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             }
           ]
         },
         "UGC_CubeAttack": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "TriggerAttackEvent",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "target": "Self",
-                  "key": "UGC_Cube_CanAttack",
-                  "ratio": 1.0
-                }
-              ],
+              "target": "Self",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackBox",
                   "triggerType": "TriggerNoRepeat",
+                  "size": {
+                    "x": 5,
+                    "y": 1,
+                    "z": 5
+                  },
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
+                    "attachPointName": "AttackPoint",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": -2.5
+                      "x": 0,
+                      "y": 0,
+                      "z": -2.5
                     },
                     "direction": {
                       "$type": "ConfigDirectionByDefault",
                       "angleOffset": {
-                        "IBKBLDAJIMA": 0.0,
-                        "LKHJADIPBFL": 0.0,
-                        "PJCOKIGCJOK": 0.0
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
                       }
-                    },
-                    "attachPointName": "AttackPoint"
-                  },
-                  "size": {
-                    "IBKBLDAJIMA": 5.0,
-                    "LKHJADIPBFL": 1.0,
-                    "PJCOKIGCJOK": 5.0
+                    }
                   }
                 },
                 "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "HBIOLEEGHPD": 0.0,
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Ice",
-                    "bonusCriticalHurt": 25.0,
+                    "damagePercentage": 0,
                     "strikeType": "Default",
-                    "enBreak": 100.0
+                    "elementType": "Ice",
+                    "elementDurability": 25,
+                    "enBreak": 100
                   },
                   "hitPattern": {
-                    "onHitEffectName": "default",
                     "hitImpulseType": "LV1",
-                    "hitHaltTimeScale": 0.05000000074505806,
+                    "onHitEffectName": "default",
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
                     "muteHitText": true
                   }
                 }
               },
-              "targetType": "Enemy"
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "UGC_Cube_CanAttack",
+                  "target": "Self",
+                  "compareType": "Equal",
+                  "value": 1
+                }
+              ]
             }
           ]
         },
-        "UGC_CubeNormal": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        }
-      },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "UGC_Cube_CanAttack",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "UGC_Triggered",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        }
-      ]
+        "UGC_CubeNormal": {}
+      }
     }
   },
+
+  ///////////////////////////////////////
+  //
+  // UGC 雷属性路面
+  //
+  ////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -2944,181 +2893,171 @@
       "abilityMixins": [
         {
           "$type": "UnitDurationMixin",
-          "modifierName": ["GS_None", "GS_Elec"],
-          "NLLLEJAMEHA": [3.0, 3.0]
+          "steps": [3, 3],
+          "modifierName": ["GS_None", "GS_Elec"]
         },
         {
           "$type": "AttachModifierToGlobalValueMixin",
           "globalValueKey": "UGC_Triggered",
-          "valueSteps": [-0.5, 0.5, 1.5],
-          "modifierNameSteps": ["UGC_CubeNormal", "UGC_CubeAttack"]
+          "modifierNameSteps": ["UGC_CubeNormal", "UGC_CubeAttack"],
+          "valueSteps": [-0.5, 0.5, 1.5]
+        }
+      ],
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "target": "Self",
+          "key": "UGC_Cube_CanAttack",
+          "value": 0
+        },
+        {
+          "$type": "SetGlobalValue",
+          "target": "Self",
+          "key": "UGC_Triggered",
+          "value": 0
         }
       ],
       "modifiers": {
         "GS_None": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "target": "Self",
               "key": "GV_UGC_GearState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             },
             {
               "$type": "SetMaterialParamFloatByTransform",
-              "canBeHandledOnRecover": true,
-              "FBIDGOMNBLJ": "EmissionStrength",
-              "HFGGHONFMMJ": "_EmissionStrength",
-              "ratio": 1.5,
-              "JNFAMBPFJFM": true,
-              "MHLDAJLMJIL": 12,
-              "HCALGEOPEGJ": 1.0
+              "matName": "EmissionStrength",
+              "patternName": "_EmissionStrength",
+              "value": 1.5,
+              "lerpTime": 1,
+              "useCurve": true,
+              "lerpCurveIndex": 12,
+              "canBeHandledOnRecover": true
             },
             {
-              "$type": "ChangeUGCRayTag"
+              "$type": "ChangeUGCRayTag",
+              "rayTag": 0
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "target": "Self",
               "key": "UGC_Cube_CanAttack",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         },
         "GS_Elec": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 4.0,
+              "target": "Self",
               "key": "GV_UGC_GearState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 4
             },
             {
               "$type": "TriggerAudio",
+              "responder": "Caster",
               "operation": {
                 "$type": "ConfigAudioEventOp",
-                "operation": {
-                  "text": "Play_amb_sceneObj_gear_UGCCube_in"
-                }
+                "operation": { "text": "Play_amb_sceneObj_gear_UGCCube_in" }
               }
             },
             {
               "$type": "SetMaterialParamFloatByTransform",
-              "canBeHandledOnRecover": true,
-              "FBIDGOMNBLJ": "EmissionStrength",
-              "HFGGHONFMMJ": "_EmissionStrength",
-              "ratio": 4.0,
-              "JNFAMBPFJFM": true,
-              "MHLDAJLMJIL": 11,
-              "HCALGEOPEGJ": 1.0
+              "matName": "EmissionStrength",
+              "patternName": "_EmissionStrength",
+              "value": 4,
+              "lerpTime": 1,
+              "useCurve": true,
+              "lerpCurveIndex": 11,
+              "canBeHandledOnRecover": true
             },
             {
               "$type": "ChangeUGCRayTag",
-              "EBAMLIPEBAH": 4
+              "rayTag": 4
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "target": "Self",
               "key": "UGC_Cube_CanAttack",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             }
           ]
         },
         "UGC_CubeAttack": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "TriggerAttackEvent",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "target": "Self",
-                  "key": "UGC_Cube_CanAttack",
-                  "ratio": 1.0
-                }
-              ],
+              "target": "Self",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackBox",
                   "triggerType": "TriggerNoRepeat",
+                  "size": {
+                    "x": 5,
+                    "y": 1,
+                    "z": 5
+                  },
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
+                    "attachPointName": "AttackPoint",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": -2.5
+                      "x": 0,
+                      "y": 0,
+                      "z": -2.5
                     },
                     "direction": {
                       "$type": "ConfigDirectionByDefault",
                       "angleOffset": {
-                        "IBKBLDAJIMA": 0.0,
-                        "LKHJADIPBFL": 0.0,
-                        "PJCOKIGCJOK": 0.0
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
                       }
-                    },
-                    "attachPointName": "AttackPoint"
-                  },
-                  "size": {
-                    "IBKBLDAJIMA": 5.0,
-                    "LKHJADIPBFL": 1.0,
-                    "PJCOKIGCJOK": 5.0
+                    }
                   }
                 },
                 "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "HBIOLEEGHPD": 0.0,
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Electric",
-                    "bonusCriticalHurt": 25.0,
+                    "damagePercentage": 0,
                     "strikeType": "Default",
-                    "enBreak": 100.0
+                    "elementType": "Electric",
+                    "elementDurability": 25,
+                    "enBreak": 100
                   },
                   "hitPattern": {
-                    "onHitEffectName": "default",
                     "hitImpulseType": "LV1",
-                    "hitHaltTimeScale": 0.05000000074505806,
+                    "onHitEffectName": "default",
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
                     "muteHitText": true
                   }
                 }
               },
-              "targetType": "Enemy"
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "UGC_Cube_CanAttack",
+                  "target": "Self",
+                  "compareType": "Equal",
+                  "value": 1
+                }
+              ]
             }
           ]
         },
-        "UGC_CubeNormal": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        }
-      },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "UGC_Cube_CanAttack",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "UGC_Triggered",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        }
-      ]
+        "UGC_CubeNormal": {}
+      }
     }
   },
+
+  //////////////////////////////////////////////////////
+  //
+  //	UGC 加速平台
+  //
+  //////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -3126,12 +3065,17 @@
       "onAdded": [
         {
           "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_UGCspeedplatform",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_SceneObj_UGCspeedplatform"
         }
       ]
     }
   },
+
+  //////////////////////////////////////////////////////
+  //
+  //	UGC 加速平台 运行
+  //
+  //////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -3139,12 +3083,17 @@
       "onAdded": [
         {
           "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_UGCspeedplatform",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_SceneObj_UGCspeedplatform"
         }
       ]
     }
   },
+
+  //////////////////////////////////////////////////////
+  //
+  //	UGC 超级跳平台 运行
+  //
+  //////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -3152,12 +3101,17 @@
       "onAdded": [
         {
           "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Stages_Level_Common_Jumpplatform_01",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_Stages_Level_Common_Jumpplatform_01"
         }
       ]
     }
   },
+
+  //////////////////////////////////////////////////////
+  //
+  //	UGC 雷樱枝条处理
+  //
+  //////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -3165,18 +3119,19 @@
       "abilityMixins": [
         {
           "$type": "WidgetMpSupportMixin",
-          "OCKBEGOIGDB": [
+          "succActions": [
             {
               "$type": "DebugLog",
               "content": "### Interact!"
             },
             {
               "$type": "ApplyModifier",
-              "target": "Other",
-              "modifierName": "Electric_Fairy_GV"
+              "modifierName": "Electric_Fairy_GV",
+              "target": "Other"
             },
             {
               "$type": "ExecuteGadgetLua",
+              "target": "Self",
               "param1": 201
             }
           ]
@@ -3184,35 +3139,35 @@
       ],
       "modifiers": {
         "Electric_Fairy_GV": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 20.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 20.5,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
               "target": "Team",
-              "RotationDampTime": true,
-              "ratio": 1.0,
               "key": "GV_UGC_Electric_Fairy",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1,
+              "doOffStage": true
             }
           ],
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
               "target": "Team",
-              "RotationDampTime": true,
-              "ratio": -1.0,
               "key": "GV_UGC_Electric_Fairy",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": -1,
+              "doOffStage": true
             }
           ]
         }
       }
     }
   },
+
+  ///////////////////////////////
+  //
+  // 雷樱枝条 特效和交互处理
+  //
+  ////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -3220,6 +3175,7 @@
       "abilityMixins": [
         {
           "$type": "AttachToGadgetStateMixin",
+          "gadgetState": 0,
           "modifierName": "EnableInteract"
         },
         {
@@ -3240,13 +3196,10 @@
       ],
       "modifiers": {
         "CannotInteract": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_ElecEmitCherryTree_01_Default",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_ElecEmitCherryTree_01_Default"
             },
             {
               "$type": "EnableSceneTransformByName",
@@ -3255,18 +3208,16 @@
             },
             {
               "$type": "EnableSceneTransformByName",
-              "transformNames": ["MeshTwo"]
+              "transformNames": ["MeshTwo"],
+              "setEnable": false
             }
           ]
         },
         "Destory": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_ElecEmitCherryTree_01_Destroy",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_ElecEmitCherryTree_01_Destroy"
             },
             {
               "$type": "EnableSceneTransformByName",
@@ -3275,26 +3226,24 @@
             },
             {
               "$type": "EnableSceneTransformByName",
-              "transformNames": ["MeshOne"]
+              "transformNames": ["MeshOne"],
+              "setEnable": false
             }
           ]
         },
         "EnableInteract": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
-              "$type": "ExecuteGadgetLua"
+              "$type": "ExecuteGadgetLua",
+              "param1": 0
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_ElecEmitCherryTree_01_Recover",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_ElecEmitCherryTree_01_Recover"
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_ElecEmitCherryTree_01_Completed",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_ElecEmitCherryTree_01_Completed"
             },
             {
               "$type": "EnableSceneTransformByName",
@@ -3303,7 +3252,8 @@
             },
             {
               "$type": "EnableSceneTransformByName",
-              "transformNames": ["MeshTwo"]
+              "transformNames": ["MeshTwo"],
+              "setEnable": false
             },
             {
               "$type": "AttachModifier",
@@ -3312,14 +3262,11 @@
           ]
         },
         "DisableInteract": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 10.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 10,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_ElecEmitCherryTree_01_PowerUp",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_ElecEmitCherryTree_01_PowerUp"
             },
             {
               "$type": "EnableSceneTransformByName",
@@ -3328,33 +3275,39 @@
             },
             {
               "$type": "EnableSceneTransformByName",
-              "transformNames": ["MeshTwo"]
+              "transformNames": ["MeshTwo"],
+              "setEnable": false
             }
           ],
           "onRemoved": [
             {
-              "$type": "ExecuteGadgetLua"
+              "$type": "ExecuteGadgetLua",
+              "param1": 0
             }
           ]
         },
         "LEVEL1": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_ThunderSeed_Tree_01",
+              "effectPattern": "Eff_SceneObj_ThunderSeed_Tree_01",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
                 "attachPointName": "AttachPoint"
-              },
-              "EBHJMLOKDGB": -1.0
+              }
             }
           ]
         }
       }
     }
   },
+
+  //////////////////////////////////////////////////////
+  //
+  //	飞雷核
+
+  //
+  //////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -3381,118 +3334,11 @@
           "modifierName": "Waiting"
         }
       ],
-      "modifiers": {
-        "Waiting": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 5.0,
-          "bonusCriticalHurt": 100.0,
-          "onRemoved": [
-            {
-              "$type": "ExecuteGadgetLua",
-              "param1": 202
-            }
-          ]
-        },
-        "PhaseDefault": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_ThunderCoil_Default",
-              "born": {
-                "$type": "ConfigBornByAttachPoint",
-                "attachPointName": "AttachPoint"
-              },
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "SetGlobalValue",
-              "ratio": 1.0,
-              "key": "_IS_ELECTRIC_CORE",
-              "maxValue": 0.0,
-              "minValue": 0.0
-            },
-            {
-              "$type": "ChangeTag",
-              "isAdd": true,
-              "tag": "_IS_ELECTRIC_CORE"
-            },
-            {
-              "$type": "ExecuteGadgetLua"
-            }
-          ]
-        },
-        "PhaseEnd": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_ThunderCoil_End",
-              "born": {
-                "$type": "ConfigBornByAttachPoint",
-                "attachPointName": "AttachPoint"
-              },
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        },
-        "PhaseRecover": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_ThunderCoil_Recover",
-              "born": {
-                "$type": "ConfigBornByAttachPoint",
-                "attachPointName": "AttachPoint"
-              },
-              "EBHJMLOKDGB": -1.0
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "ExecuteGadgetLua"
-            }
-          ]
-        },
-        "LightCoreMove": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "modifierMixins": [
-            {
-              "$type": "AttachModifierToSelfGlobalValueMixin",
-              "globalValueKey": "_IS_ELECTRIC_CORE",
-              "defaultGlobalValueOnCreate": 0.0,
-              "valueSteps": [-1.0, 0.5, 1.5],
-              "modifierNameSteps": ["Charging", "Charged"]
-            }
-          ]
-        },
-        "Charging": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "ExecuteGadgetLua",
-              "param1": 201
-            }
-          ]
-        },
-        "Charged": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        }
-      },
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "ratio": 1.0,
           "key": "_IS_ELECTRIC_CORE",
-          "maxValue": 0.0,
-          "minValue": 0.0
+          "value": 1
         },
         {
           "$type": "ChangeTag",
@@ -3505,19 +3351,109 @@
         },
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_ThunderCoil_Born",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_SceneObj_ThunderCoil_Born"
         }
       ],
       "onKill": [
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_ThunderCoil_Disappear",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_SceneObj_ThunderCoil_Disappear"
         }
-      ]
+      ],
+      "modifiers": {
+        "Waiting": {
+          "duration": 5,
+          "onRemoved": [
+            {
+              "$type": "ExecuteGadgetLua",
+              "param1": 202
+            }
+          ]
+        },
+        "PhaseDefault": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_SceneObj_ThunderCoil_Default",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "AttachPoint"
+              }
+            },
+            {
+              "$type": "SetGlobalValue",
+              "key": "_IS_ELECTRIC_CORE",
+              "value": 1
+            },
+            {
+              "$type": "ChangeTag",
+              "isAdd": true,
+              "tag": "_IS_ELECTRIC_CORE"
+            },
+            {
+              "$type": "ExecuteGadgetLua",
+              "param1": 0
+            }
+          ]
+        },
+        "PhaseEnd": {
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "effectPattern": "Eff_SceneObj_ThunderCoil_End",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "AttachPoint"
+              }
+            }
+          ]
+        },
+        "PhaseRecover": {
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "effectPattern": "Eff_SceneObj_ThunderCoil_Recover",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "AttachPoint"
+              }
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "ExecuteGadgetLua",
+              "param1": 0
+            }
+          ]
+        },
+        "LightCoreMove": {
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_IS_ELECTRIC_CORE",
+              "valueSteps": [-1, 0.5, 1.5],
+              "modifierNameSteps": ["Charging", "Charged"]
+            }
+          ]
+        },
+        "Charging": {
+          "onAdded": [
+            {
+              "$type": "ExecuteGadgetLua",
+              "param1": 201
+            }
+          ]
+        },
+        "Charged": {}
+      }
     }
   },
+
+  //////////////////////////////////////////////////////
+  //
+  //	UGC 水泡 摆放
+  //
+  //////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -3525,50 +3461,85 @@
       "onAdded": [
         {
           "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_UGCWater_Bubble",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_SceneObj_UGCWater_Bubble"
         }
       ]
     }
   },
+
+  //////////////////////////////////////////////////////
+  //
+  //	UGC 水泡 运行
+  //
+  //////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_UGC_Bubble_Run",
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "BubbleMaterial"
+        }
+      ],
+      "onFieldEnter": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Blister",
+          "target": "Target",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Self",
+              "key": "GV_CanBlist",
+              "compareType": "Equal",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "$type": "RemoveModifier",
+          "modifierName": "BubbleMaterial",
+          "target": "Self",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Self",
+              "key": "GV_CanBlist",
+              "compareType": "Equal",
+              "value": 1
+            }
+          ]
+        }
+      ],
       "modifiers": {
         "BubbleMaterial": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_UGCWater_Bubble",
+              "effectPattern": "Eff_SceneObj_UGCWater_Bubble",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
                 "attachPointName": "RootNode"
-              },
-              "EBHJMLOKDGB": -1.0
+              }
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
+              "target": "Self",
               "key": "GV_CanBlist",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "target": "Self",
               "key": "GV_CanBlist",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_TowerWater_03_Bubble_Die",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_TowerWater_03_Bubble_Die"
             },
             {
               "$type": "ApplyModifier",
@@ -3577,21 +3548,18 @@
           ]
         },
         "BubbleRecover": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 6.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 6,
           "onRemoved": [
             {
               "$type": "ApplyModifier",
-              "modifierName": "BubbleMaterial"
+              "modifierName": "BubbleMaterial",
+              "target": "Self"
             }
           ]
         },
         "Blister": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 2.0,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.20000000298023224,
+          "duration": 2,
+          "stacking": "Refresh",
           "onAdded": [
             {
               "$type": "AttachModifier",
@@ -3604,92 +3572,61 @@
             {
               "$type": "ServerLuaCall",
               "luaCallType": "CurChallengeGroup",
-              "isTarget": true,
               "funcName": "SLC_UGC_HitByBullet",
-              "ODAOGCJFIHC": 0.0,
-              "GCCFLBLEHDB": 0.0,
-              "DJODIFOBEJG": 0.0
+              "isTarget": true
             }
           ],
+          "thinkInterval": 0.2,
           "onThinkInterval": [
             {
               "$type": "RemoveModifier",
+              "modifierName": "Blister",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "SGV_UGCDungeon_CanAttachModifier",
-                  "ratio": 1.0
+                  "compareType": "Equal",
+                  "value": 1
                 }
-              ],
-              "modifierName": "Blister"
+              ]
             }
           ]
         },
         "BubbleWaterAttach": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 4.0,
+          "duration": 4,
           "elementType": "Water",
-          "bonusCriticalHurt": 25.0
+          "elementDurability": 25,
+          "isElementDurabilityMutable": true
         },
         "BlisterStruggle": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_AddGravityScale": -2.0
-          },
           "state": "Struggle",
+          "stacking": "Refresh",
+          "properties": {
+            "Actor_AddGravityScale": -2
+          },
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_UGCWater_Bubble",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_UGCWater_Bubble"
             }
           ],
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_TowerWater_03_Bubble_Die",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_TowerWater_03_Bubble_Die"
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "BubbleMaterial"
-        }
-      ],
-      "onFieldEnter": [
-        {
-          "$type": "ApplyModifier",
-          "target": "Target",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "target": "Self",
-              "key": "GV_CanBlist",
-              "ratio": 1.0
-            }
-          ],
-          "modifierName": "Blister"
-        },
-        {
-          "$type": "RemoveModifier",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "target": "Self",
-              "key": "GV_CanBlist",
-              "ratio": 1.0
-            }
-          ],
-          "modifierName": "BubbleMaterial"
-        }
-      ]
+      }
     }
   },
+
+  ///////////////////////////////////////
+  //
+  // 雷矢 陷阱
+  //
+  ////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -3697,15 +3634,14 @@
       "abilityMixins": [
         {
           "$type": "UnitDurationMixin",
-          "modifierName": ["ShootFirst", "ShootSecond"],
-          "NLLLEJAMEHA": [3.0, 3.0]
+          "isTrigger": false,
+          "steps": [3, 3],
+          "modifierName": ["ShootFirst", "ShootSecond"]
         }
       ],
       "modifiers": {
         "ShootFirst": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1,
           "onAdded": [
             {
               "$type": "ExecuteGadgetLua",
@@ -3713,8 +3649,7 @@
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_ScenObj_ThunderArrow_01_Shoot",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_ScenObj_ThunderArrow_01_Shoot"
             },
             {
               "$type": "TriggerBullet",
@@ -3727,14 +3662,13 @@
           ],
           "onRemoved": [
             {
-              "$type": "ExecuteGadgetLua"
+              "$type": "ExecuteGadgetLua",
+              "param1": 0
             }
           ]
         },
         "ShootSecond": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1,
           "onAdded": [
             {
               "$type": "ExecuteGadgetLua",
@@ -3742,8 +3676,7 @@
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_ScenObj_ThunderArrow_01_Shoot",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_ScenObj_ThunderArrow_01_Shoot"
             },
             {
               "$type": "TriggerBullet",
@@ -3756,28 +3689,34 @@
           ],
           "onRemoved": [
             {
-              "$type": "ExecuteGadgetLua"
+              "$type": "ExecuteGadgetLua",
+              "param1": 0
             }
           ]
         }
       }
     }
   },
+
+  ///////////////////////////////////////
+  //
+  // 雷矢 子弹
+  //
+  ////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_UGC_ThunderArrowBullet",
-      "abilitySpecials": {
-        "LevelEntity_AvatarDot_SystemValue": 0.0,
-        "DamagePercentage": 1.7999999523162842
-      },
       "onAdded": [
         {
           "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_ScenObj_ThunderArrow_01_Arrow",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_ScenObj_ThunderArrow_01_Arrow"
         }
       ],
+      "abilitySpecials": {
+        "LevelEntity_AvatarDot_SystemValue": 0,
+        "DamagePercentage": 1.8
+      },
       "onAbilityStart": [
         {
           "$type": "Predicated",
@@ -3796,8 +3735,7 @@
           "successActions": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_ScenObj_ThunderArrow_01_Hit",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_ScenObj_ThunderArrow_01_Hit"
             },
             {
               "$type": "SetSystemValueToOverrideMap",
@@ -3806,31 +3744,24 @@
             },
             {
               "$type": "DamageByAttackValue",
+              "attacker": "Caster",
               "target": "Target",
               "attackInfo": {
-                "attackTag": "",
-                "attenuationTag": "",
-                "attenuationGroup": "default",
                 "attackProperty": {
-                  "HBIOLEEGHPD": 0.0,
-                  "CCNJGLPMIEP": 0.0,
-                  "elementType": "Electric",
-                  "bonusCriticalHurt": 25.0,
                   "ignoreAttackerProperty": true,
-                  "strikeType": "Default",
-                  "enBreak": 0.0,
-                  "damageExtra": [
-                    "LevelEntity_AvatarDot_SystemValue",
-                    "DamagePercentage",
-                    "MUL"
-                  ],
+                  "ignoreModifyDamage": true,
                   "trueDamage": true,
-                  "bonusCritical": true
+                  "damagePercentage": 0.0,
+                  "strikeType": "Default",
+                  "elementType": "Electric",
+                  "elementDurability": 25,
+                  "damageExtra": "%LevelEntity_AvatarDot_SystemValue*%DamagePercentage",
+                  "enBreak": 0.0
                 },
                 "hitPattern": {
-                  "onHitEffectName": "default",
                   "hitImpulseType": "LV1",
-                  "hitHaltTimeScale": 0.05000000074505806,
+                  "hitHaltTime": 0.0,
+                  "hitHaltTimeScale": 0.05,
                   "muteHitText": true
                 }
               }
@@ -3840,9 +3771,16 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiers": {}
     }
   },
+
+  ///////////////////////////////////////
+  //
+  // UGC 喷火机关
+  //
+  ////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -3855,20 +3793,37 @@
           "modifierNameSteps": ["GearStop", "GearStart"]
         }
       ],
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "target": "Self",
+          "key": "GV_BarrageStart",
+          "value": 0
+        },
+        {
+          "$type": "SetGlobalValue",
+          "target": "Self",
+          "key": "GV_PlayerNums",
+          "value": 0
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "FireManager"
+        }
+      ],
       "modifiers": {
         "FireManager": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 1.0,
+          "thinkInterval": 1,
           "onThinkInterval": [
             {
               "$type": "Predicated",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
-                "entityTypePriority": ["Avatar"],
                 "shapeName": "CircleR15H10",
+                "centerBasedOn": "Self",
+                "campBasedOn": "Self",
                 "campTargetType": "All",
-                "sizeRatio": 1.0
+                "entityTypePriority": ["Avatar"]
               },
               "targetPredicates": [
                 {
@@ -3879,208 +3834,178 @@
               "successActions": [
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 1.0,
+                  "target": "Self",
                   "key": "GV_PlayerNums",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 1
                 }
               ]
             },
             {
               "$type": "Predicated",
+              "target": "Self",
               "targetPredicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "GV_PlayerNums",
-                  "ratio": 0.0,
-                  "compareType": "MoreThan"
+                  "compareType": "MoreThan",
+                  "value": 0
                 }
               ],
               "successActions": [
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 1.0,
+                  "target": "Self",
                   "key": "GV_BarrageStart",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 1
                 }
               ],
               "failActions": [
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 0.0,
+                  "target": "Self",
                   "key": "GV_BarrageStart",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 0
                 }
               ]
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
+              "target": "Self",
               "key": "GV_PlayerNums",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         },
         "GearStop": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
-              "$type": "ExecuteGadgetLua"
+              "$type": "ExecuteGadgetLua",
+              "target": "Self",
+              "param1": 0
             }
           ]
         },
         "GearStart": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.20000000298023224,
           "onAdded": [
             {
               "$type": "ExecuteGadgetLua",
+              "target": "Self",
               "param1": 201
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_UGCflamethrower",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_UGCflamethrower"
             }
           ],
-          "onAttackLanded": [
-            {
-              "$type": "ApplyModifier",
-              "target": "Target",
-              "predicates": [
-                {
-                  "$type": "ByEntityTypes",
-                  "entityTypes": ["Avatar"]
-                }
-              ],
-              "modifierName": "UGC_FlameHitCall"
-            }
-          ],
+          "thinkInterval": 0.2,
           "onThinkInterval": [
             {
               "$type": "TriggerAttackEvent",
-              "RotationDampTime": true,
+              "targetType": "Enemy",
+              "doOffStage": true,
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackBox",
                   "triggerType": "TriggerNoRepeat",
+                  "checkHitLayerType": "OnlyHitBox",
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
+                    "attachPointName": "FirePoint01",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": -8.0
-                    },
-                    "attachPointName": "FirePoint01"
+                      "x": 0,
+                      "y": 0,
+                      "z": -8
+                    }
                   },
                   "size": {
-                    "IBKBLDAJIMA": 0.5,
-                    "LKHJADIPBFL": 0.5,
-                    "PJCOKIGCJOK": 16.0
+                    "x": 0.5,
+                    "y": 0.5,
+                    "z": 16.0
                   },
                   "muteHitBehindScene": true
                 },
                 "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "HBIOLEEGHPD": 0.0,
-                    "CCNJGLPMIEP": 0.0,
+                    "damagePercentage": 0,
                     "elementType": "Fire",
-                    "bonusCriticalHurt": 30.0,
-                    "enBreak": 100.0
+                    "elementDurability": 30,
+                    "strikeType": "None",
+                    "enBreak": 100
                   },
                   "hitPattern": {
                     "onHitEffectName": "default",
                     "hitImpulseType": "LV7",
                     "overrideHitImpulse": {
                       "hitLevel": "Heavy",
-                      "MOELECJEOEI": 800.0,
-                      "hitImpulseY": 600.0
+                      "hitImpulseX": 800,
+                      "hitImpulseY": 600
                     },
-                    "hitHaltTimeScale": 0.05000000074505806,
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
                     "muteHitText": true
                   }
                 }
-              },
-              "targetType": "Enemy"
+              }
+            }
+          ],
+          "onAttackLanded": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "UGC_FlameHitCall",
+              "target": "Target",
+              "predicates": [
+                {
+                  "$type": "ByEntityTypes",
+                  "entityTypes": ["Avatar"]
+                }
+              ]
             }
           ]
         },
         "UGC_FlameHitCall": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "ServerLuaCall",
               "luaCallType": "CurChallengeGroup",
-              "isTarget": true,
               "funcName": "SLC_UGC_HitBySpike",
-              "ODAOGCJFIHC": 0.0,
-              "GCCFLBLEHDB": 0.0,
-              "DJODIFOBEJG": 0.0
+              "isTarget": true
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "GV_BarrageStart",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "GV_PlayerNums",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "FireManager"
-        }
-      ]
+      }
     }
   },
+
+  //////////////////////////////////////////////////////
+  //
+  //	UGC 同步器
+  //
+  //////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_UGC_Synchronizer",
-      "modifiers": {
-        "UGC_Synchronizer": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 1.0,
-          "onThinkInterval": [
-            {
-              "$type": "ServerLuaCall",
-              "luaCallType": "CurChallengeGroup",
-              "isTarget": true,
-              "funcName": "SLC_UGC_Synchronizer",
-              "ODAOGCJFIHC": 0.0,
-              "GCCFLBLEHDB": 0.0,
-              "DJODIFOBEJG": 0.0
-            }
-          ]
-        }
-      },
       "onAdded": [
         {
           "$type": "ApplyModifier",
           "modifierName": "UGC_Synchronizer"
         }
-      ]
+      ],
+      "modifiers": {
+        "UGC_Synchronizer": {
+          "thinkInterval": 1,
+          "onThinkInterval": [
+            {
+              "$type": "ServerLuaCall",
+              "luaCallType": "CurChallengeGroup",
+              "funcName": "SLC_UGC_Synchronizer",
+              "isTarget": true
+            }
+          ]
+        }
+      }
     }
   }
 ]

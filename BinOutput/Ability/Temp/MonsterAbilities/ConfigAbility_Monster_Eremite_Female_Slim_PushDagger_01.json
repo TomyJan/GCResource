@@ -1,4 +1,19 @@
 [
+  ///////////////////////////////////////////////////////////////
+  //  Pose 1  Free
+  //	Pose 2  FreeWalk
+  //	Pose 901 902 903 ReturnToBorn
+  //	Pose 101 FightNormal
+  //	Pose 111 ForceImprove
+  //	Pose 201 FightImproved
+  //	Pose 301 FightWeak
+  ///////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////
+  //
+  //  StateControl
+  //
+  ////////////////////////////////////////////////////////////////
+  // Fight Control
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -6,105 +21,120 @@
       "abilityMixins": [
         {
           "$type": "AttachToPoseIDMixin",
-          "poseIDs": [1, 2, 901, 902, 903],
+          "poseIDs": [
+            1, //free
+            2,
+            901,
+            902,
+            903 //reborn
+          ],
           "modifierName": "Eremite_OutFightState"
         },
         {
           "$type": "AttachToPoseIDMixin",
-          "poseIDs": [101, 102, 111, 201, 301],
+          "poseIDs": [
+            101, //FightNormal
+            102, //FightNormal_OutImproved
+            111, //ForceImprove
+            201, //FightImproved
+            301 //FightWeak
+          ],
           "modifierName": "Eremite_InFightState"
+        }
+      ],
+      "onAdded": [
+        //强化状态
+        {
+          "$type": "SetGlobalValue",
+          "key": "_MONSTER_EREMITE_IMPROVED_",
+          "minValue": 0,
+          "maxValue": 1,
+          "useLimitRange": true,
+          "value": 0
+        },
+        //判定是否是从Weak出来后的普通状态
+        {
+          "$type": "SetGlobalValue",
+          "key": "_MONSTER_EREMITE_OUTIMPROVED",
+          "minValue": 0,
+          "maxValue": 1,
+          "useLimitRange": true,
+          "value": 0
+        },
+        //强化次数
+        {
+          "$type": "SetGlobalValue",
+          "key": "_MONSTER_EREMITE_IMPROVED_COUNT_",
+          "minValue": 0,
+          "maxValue": 99,
+          "useLimitRange": true,
+          "value": 0
+        },
+        //是否入战
+        {
+          "$type": "SetGlobalValue",
+          "key": "_MONSTER_EREMITE_ISINFIGHT_",
+          "minValue": 0,
+          "maxValue": 1,
+          "useLimitRange": true,
+          "value": 0
+        },
+        //虚弱状态
+        {
+          "$type": "SetGlobalValue",
+          "key": "_MONSTER_EREMITE_WEAK_",
+          "minValue": 0,
+          "maxValue": 1,
+          "useLimitRange": true,
+          "value": 0
+        },
+        //是否处于重生状态
+        {
+          "$type": "SetGlobalValue",
+          "key": "_MONSTER_EREMITE_RETURNTOBORN_",
+          "value": 0,
+          "useLimitRange": true,
+          "maxValue": 1,
+          "minValue": 0
         }
       ],
       "modifiers": {
         "Eremite_OutFightState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": -10.0,
               "key": "_MONSTER_EREMITE_ISINFIGHT_",
+              "value": -10,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
-            },
+              "maxValue": 1,
+              "minValue": 0
+            }, // out fight
             {
               "$type": "RemoveModifier",
               "modifierName": "Eremite_InFightState"
-            }
+            } //remove in fight
           ]
         },
         "Eremite_InFightState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 10.0,
               "key": "_MONSTER_EREMITE_ISINFIGHT_",
+              "value": 10,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
-            },
+              "maxValue": 1,
+              "minValue": 0
+            }, // in fight
             {
               "$type": "RemoveModifier",
               "modifierName": "Eremite_OutFightState"
-            }
+            } //remove out fight
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "_MONSTER_EREMITE_IMPROVED_",
-          "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "_MONSTER_EREMITE_OUTIMPROVED",
-          "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "_MONSTER_EREMITE_IMPROVED_COUNT_",
-          "useLimitRange": true,
-          "maxValue": 99.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "_MONSTER_EREMITE_ISINFIGHT_",
-          "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "_MONSTER_EREMITE_WEAK_",
-          "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "_MONSTER_EREMITE_RETURNTOBORN_",
-          "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
-        }
-      ]
+      }
     }
   },
+  // Alert
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -112,11 +142,18 @@
       "onAbilityStart": [
         {
           "$type": "SetPoseInt",
-          "intID": "FreePoseMark"
+          "intID": "FreePoseMark",
+          "value": 0
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Improve
+  //
+  ////////////////////////////////////////////////////////////////
+  // improve logic
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -125,37 +162,40 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_MONSTER_EREMITE_IMPROVED_",
-          "defaultGlobalValueOnCreate": 0.0,
+          "defaultGlobalValueOnCreate": 0,
           "valueSteps": [-0.5, 0.5, 1.5],
+          "removeAppliedModifier": true,
           "modifierNameSteps": ["Eremite_NormalState", "Eremite_ImproveState"]
-        },
+        }, //强化状态判定
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_MONSTER_EREMITE_WEAK_",
-          "defaultGlobalValueOnCreate": 0.0,
+          "defaultGlobalValueOnCreate": 0,
           "valueSteps": [-0.5, 0.5, 1.5],
+          "removeAppliedModifier": true,
           "modifierNameSteps": ["Eremite_IsNotWeak", "Eremite_IsWeak"]
-        },
+        }, //虚弱状态判定
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_MONSTER_EREMITE_OUTIMPROVED",
-          "defaultGlobalValueOnCreate": 0.0,
+          "defaultGlobalValueOnCreate": 0,
           "valueSteps": [-0.5, 0.5, 1.5],
+          "removeAppliedModifier": true,
           "modifierNameSteps": [
             "Eremite_ISNotOutImproved",
             "Eremite_IsOutImproved"
           ]
-        },
+        }, //从强化状态退出后的普通状态判定
         {
           "$type": "AttachModifierToHPPercentMixin",
-          "valueSteps": [0.699999988079071],
+          "valueSteps": [0.7],
           "modifierNameSteps": ["Empty", "UNIQUE_Eremite_Force_ImproveState"]
-        },
+        }, //强制进行强化
         {
           "$type": "AttachToPoseIDMixin",
           "poseIDs": [1, 2],
           "modifierName": "ResetMonsterSkill"
-        },
+        }, //技能重置
         {
           "$type": "DoActionByStateIDMixin",
           "stateIDs": ["Die", "Die_RagDoll"],
@@ -173,75 +213,72 @@
               "modifierName": "UNIQUE_Eremite_Effect02"
             }
           ]
-        },
+        }, //移除强化特效
         {
           "$type": "AttachToStateIDMixin",
           "stateIDs": ["Improve"],
           "modifierName": "Improve_AddEndure"
-        },
+        }, //霸体
         {
           "$type": "AttachToPoseIDMixin",
           "poseIDs": [201],
           "modifierName": "Improve_AddEndure"
-        }
+        } //霸体跟体重
       ],
-      "abilitySpecials": {
-        "Eremite_Max_HP": 0.0
-      },
+      "onAdded": [],
+      "onAbilityStart": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_Eremite_ImproveState_Properties"
+        } //进入强化状态
+      ],
       "modifiers": {
         "Improve_AddEndure": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "properties": {
             "Actor_EndureDelta": 0.0,
             "Entity_WeightRatio": 5.0
           }
         },
-        "Empty": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
+        "Empty": {},
         "UNIQUE_Eremite_Force_ImproveState": {
           "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetPoseBool",
+              "boolID": "ForceImprove",
+              "value": true,
               "canBeHandledOnRecover": true,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "_MONSTER_EREMITE_IMPROVED_COUNT_",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
-              ],
-              "boolID": "ForceImprove",
-              "ratio": true
+              ]
             },
             {
               "$type": "SetAISkillCDAvailableNow",
               "skillIDs": [401]
-            }
+            } //重置cd
           ],
           "onRemoved": [
             {
               "$type": "SetPoseBool",
-              "boolID": "ForceImprove"
+              "boolID": "ForceImprove",
+              "value": false
             }
           ]
         },
         "Eremite_NormalState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetPoseBool",
-              "canBeHandledOnRecover": true,
-              "boolID": "ImproveState"
+              "boolID": "ImproveState",
+              "value": false,
+              "canBeHandledOnRecover": true
             },
             {
               "$type": "RemoveModifier",
@@ -250,14 +287,12 @@
           ]
         },
         "Eremite_ImproveState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetPoseBool",
-              "canBeHandledOnRecover": true,
               "boolID": "ImproveState",
-              "ratio": true
+              "value": true,
+              "canBeHandledOnRecover": true
             },
             {
               "$type": "RemoveModifier",
@@ -266,13 +301,12 @@
           ]
         },
         "Eremite_IsNotWeak": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetPoseBool",
-              "canBeHandledOnRecover": true,
-              "boolID": "WeakState"
+              "boolID": "WeakState",
+              "value": false,
+              "canBeHandledOnRecover": true
             },
             {
               "$type": "RemoveModifier",
@@ -281,14 +315,12 @@
           ]
         },
         "Eremite_IsWeak": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetPoseBool",
-              "canBeHandledOnRecover": true,
               "boolID": "WeakState",
-              "ratio": true
+              "value": true,
+              "canBeHandledOnRecover": true
             },
             {
               "$type": "RemoveModifier",
@@ -297,50 +329,83 @@
           ]
         },
         "UNIQUE_Eremite_ImproveState_Properties": {
-          "stacking": "Unique",
-          "modifierName": "",
+          "duration": 20,
           "isUnique": true,
-          "HCJLIGBLGJA": 20.0,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
+          // "state": "LockHP",
+          // "thinkInterval": 1.0,
           "properties": {
             "Actor_EndureDelta": 0.0,
             "Entity_WeightRatio": 5.0
+            // "Actor_WaterSubHurtDelta":-0.6,//水元素抗性降低
           },
+          // "modifierMixins":
+          // [
+          // 	{
+          // 		"$type": "ElementShieldMixin",
+          // 		"elementType": "None",
+          // 		"shieldHPRatio": 2.0,
+          // 		"damageRatio": 1,
+          // 		"onShieldBroken":
+          // 		[
+          // 			{
+          // 				"$type": "RemoveModifier",
+          // 				"modifierName": "Eremite_Improve_Effect",
+          // 			},
+          // 			{
+          // 				"$type": "AddGlobalValue",
+          // 				"key" : "_MONSTER_EREMITE_WEAK_",
+          // 				"value" : 10,
+          // 				"useLimitRange" : true,
+          // 				"maxValue" : 1,
+          // 				"minValue" : 0,
+          // 			},// 进入虚弱状态
+          // 			{
+          // 				"$type": "RemoveUniqueModifier",
+          // 				"modifierName": "UNIQUE_Eremite_ImproveState_Properties",
+          // 			},
+          // 		],
+          // 	},
+          // ],
           "onAdded": [
+            // 进入强化状态
             {
               "$type": "AddGlobalValue",
-              "canBeHandledOnRecover": true,
-              "ratio": 10.0,
               "key": "_MONSTER_EREMITE_IMPROVED_",
+              "value": 10,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
+              "maxValue": 1,
+              "minValue": 0,
+              "canBeHandledOnRecover": true
             },
+            //强化次数+1
             {
               "$type": "AddGlobalValue",
-              "canBeHandledOnRecover": true,
-              "ratio": -10.0,
               "key": "_MONSTER_EREMITE_RECOVER_",
+              "value": -10,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
-            },
+              "maxValue": 1,
+              "minValue": 0,
+              "canBeHandledOnRecover": true
+            }, //重置恢复状态为0
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
               "key": "_MONSTER_EREMITE_IMPROVED_COUNT_",
+              "minValue": 0,
+              "maxValue": 99,
               "useLimitRange": true,
-              "maxValue": 99.0,
-              "minValue": 0.0
+              "value": 1
             },
             {
               "$type": "SetAISkillGCD",
+              "value": 0,
               "canBeHandledOnRecover": true
             },
             {
               "$type": "AttachModifier",
               "modifierName": "Eremite_Improve_Effect"
             },
+            //在第15s的时候开始触发倒计时特效
             {
               "$type": "AttachModifier",
               "modifierName": "Eremite_ASHintEffect02"
@@ -350,19 +415,57 @@
               "modifierName": "Eremite_ASHintEffect01"
             }
           ],
+          // "onThinkInterval":
+          // [
+          // 	{
+          // 		"$type": "GetFightProperty",
+          // 		"fightPropSourceTarget": "Self",
+          // 		"fightProp": "FIGHT_PROP_MAX_HP",
+          // 		"globalValueKey": "_MONSTER_MAX_HP_",
+          // 		"doOffStage": true,
+          // 	},//获取最大生命值
+          // 	{
+          // 		"$type": "SetGlobalValueToOverrideMap",
+          // 		"globalValueKey": "_MONSTER_MAX_HP_",
+          // 		"overrideMapKey": "Eremite_Max_HP",
+          // 		"doOffStage": true,
+          // 	},//设置overridemapkey
+          // 	{
+          // 		"$type": "DamageByAttackValue",
+          // 		"attacker": "Caster",
+          // 		"target": "Self",
+          // 		"attackInfo":
+          // 		{
+          // 			"$type": "ConfigAttackInfo",
+          // 			"attackProperty":
+          // 			{
+          // 				"$type": "ConfigAttackProperty",
+          // 				"ignoreAttackerProperty": true,
+          // 				"trueDamage": true,
+          // 				"damageExtra": "2*%Eremite_Max_HP*0.03",
+          // 				"damagePercentage": 0,
+          // 				"attackType": "Default",
+          // 				"elementType": "None",
+          // 				"enBreak": 0,
+          // 				"strikeType": "None",
+          // 			},
+          // 		},
+          // 	},//每秒对自身造成伤害
+          // ],
           "onRemoved": [
             {
               "$type": "SetAnimatorTrigger",
-              "RotationDampTime": true,
+              "triggerID": "Weak",
+              "doOffStage": true,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
-                  "target": "Self",
                   "key": "_MONSTER_EREMITE_RETURNTOBORN_",
-                  "ratio": 0.0
+                  "value": 0,
+                  "target": "Self",
+                  "compareType": "Equal"
                 }
-              ],
-              "triggerID": "Weak"
+              ]
             },
             {
               "$type": "RemoveModifier",
@@ -378,45 +481,44 @@
             },
             {
               "$type": "AddGlobalValue",
-              "canBeHandledOnRecover": true,
-              "ratio": -10.0,
               "key": "_MONSTER_EREMITE_IMPROVED_",
+              "value": -10,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
-            },
+              "maxValue": 1,
+              "minValue": 0,
+              "canBeHandledOnRecover": true
+            }, // 退出强化状态
             {
               "$type": "AddGlobalValue",
-              "canBeHandledOnRecover": true,
-              "ratio": 10.0,
               "key": "_MONSTER_EREMITE_WEAK_",
+              "value": 10,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
-            },
+              "maxValue": 1,
+              "minValue": 0,
+              "canBeHandledOnRecover": true
+            }, // 进入虚弱状态
             {
               "$type": "RemoveUniqueModifier",
               "modifierName": "UNIQUE_Eremite_Force_ImproveState"
-            },
+            }, //移除强制进入强化状态的状态
             {
               "$type": "SetAISkillGCD",
-              "canBeHandledOnRecover": true,
-              "value": 2.0
+              "value": 2,
+              "canBeHandledOnRecover": true
             }
           ]
         },
         "RemoveImproveState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "Invincible",
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 10.0,
+              "target": "Self",
               "key": "_MOSNTER_EREMITE_RETURNTOBORN_",
+              "value": 10,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
+              "maxValue": 1,
+              "minValue": 0
             },
             {
               "$type": "RemoveUniqueModifier",
@@ -426,62 +528,58 @@
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "ratio": -10.0,
+              "target": "Self",
               "key": "_MOSNTER_EREMITE_RETURNTOBORN_",
+              "value": -10,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
+              "maxValue": 1,
+              "minValue": 0
             }
           ]
         },
         "ResetMonsterSkill": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": -99.0,
               "key": "_MONSTER_EREMITE_IMPROVED_COUNT_",
+              "minValue": 0,
+              "maxValue": 99,
               "useLimitRange": true,
-              "maxValue": 99.0,
-              "minValue": 0.0
+              "value": -99
             },
             {
               "$type": "SetAISkillCDAvailableNow",
               "skillIDs": [401]
             }
+            // {
+            // 	"$type": "ReTriggerAISkillInitialCD",
+            // 	"skillIDs": [401],
+            // },
           ]
         },
         "Eremite_Improve_Effect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Eremite_Female_Slim_PushDagger_Water_Improve_Loop01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Eremite_Female_Slim_PushDagger_Water_Improve_Loop01"
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Eremite_Female_Slim_PushDagger_Water_Improve_Loop02",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Eremite_Female_Slim_PushDagger_Water_Improve_Loop02"
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Eremite_Female_Slim_PushDagger_Water_Improve_Loop03",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Eremite_Female_Slim_PushDagger_Water_Improve_Loop03"
             }
           ]
         },
         "Eremite_IsOutImproved": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetPoseBool",
-              "canBeHandledOnRecover": true,
               "boolID": "OutImproved",
-              "ratio": true
+              "value": true,
+              "canBeHandledOnRecover": true
             },
             {
               "$type": "RemoveModifier",
@@ -490,13 +588,12 @@
           ]
         },
         "Eremite_ISNotOutImproved": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetPoseBool",
-              "canBeHandledOnRecover": true,
-              "boolID": "OutImproved"
+              "boolID": "OutImproved",
+              "value": false,
+              "canBeHandledOnRecover": true
             },
             {
               "$type": "RemoveModifier",
@@ -505,38 +602,32 @@
           ]
         },
         "Eremite_ASHintEffect02": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 18.200000762939453,
+          "thinkInterval": 18.2,
           "onThinkInterval": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Eremite_Female_Slim_PushDagger_Water_Improve_ASHint",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Eremite_Female_Slim_PushDagger_Water_Improve_ASHint"
             }
           ]
         },
+        //倒计时提示
         "Eremite_ASHintEffect01": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 15.0,
+          "thinkInterval": 15,
           "onThinkInterval": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Eremite_Female_Slim_PushDagger_Water_Improve_ASHint02",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Eremite_Female_Slim_PushDagger_Water_Improve_ASHint02"
             }
           ]
         }
+        //倒计时提示
       },
-      "onAbilityStart": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Eremite_ImproveState_Properties"
-        }
-      ]
+      "abilitySpecials": {
+        "Eremite_Max_HP": 0
+      }
     }
   },
+  // die to del improve state
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -553,61 +644,55 @@
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Eremite_Female_Slim_PushDagger_Water_Improve_Effect",
-      "modifiers": {
-        "UNIQUE_Eremite_Effect": {
-          "stacking": "Unique",
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Eremite_Female_Slim_PushDagger_Water_Improve_BS01",
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        }
-      },
       "onAbilityStart": [
         {
           "$type": "ApplyModifier",
           "modifierName": "UNIQUE_Eremite_Effect"
         }
-      ]
+      ],
+      "modifiers": {
+        "UNIQUE_Eremite_Effect": {
+          "isUnique": true,
+          "stacking": "Unique",
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Eremite_Female_Slim_PushDagger_Water_Improve_BS01"
+            }
+          ]
+        }
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Eremite_Female_Slim_PushDagger_Water_Improve_Effect02",
-      "modifiers": {
-        "UNIQUE_Eremite_Effect02": {
-          "stacking": "Unique",
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Eremite_Female_Slim_PushDagger_Water_Improve_BS02",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Eremite_Female_Slim_PushDagger_Water_Improve_BS03",
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        }
-      },
       "onAbilityStart": [
         {
           "$type": "ApplyModifier",
           "modifierName": "UNIQUE_Eremite_Effect02"
         }
-      ]
+      ],
+      "modifiers": {
+        "UNIQUE_Eremite_Effect02": {
+          "isUnique": true,
+          "stacking": "Unique",
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Eremite_Female_Slim_PushDagger_Water_Improve_BS02"
+            },
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Eremite_Female_Slim_PushDagger_Water_Improve_BS03"
+            }
+          ]
+        }
+      }
     }
   },
+  // weak state
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -621,79 +706,78 @@
       ],
       "modifiers": {
         "WeakState": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 8.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 8,
+          "properties": {
+            "Actor_WaterSubHurtDelta": -0.6, //水元素抗性降低
+            "Actor_EndureDelta": 0.0
+          },
           "modifierMixins": [
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_MONSTER_EREMITE_RECOVER_",
-              "defaultGlobalValueOnCreate": 0.0,
+              "defaultGlobalValueOnCreate": 0,
               "valueSteps": [-0.5, 0.5, 1.5],
+              "removeAppliedModifier": true,
               "modifierNameSteps": ["Empty", "Recover"]
             }
           ],
-          "properties": {
-            "Actor_WaterSubHurtDelta": -0.6000000238418579,
-            "Actor_EndureDelta": 0.0
-          },
           "onAdded": [
+            //虚弱受击特效
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Eremite_Female_Slim_PushDagger_Water_Improve_AS01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Eremite_Female_Slim_PushDagger_Water_Improve_AS01"
             },
+            //抗性降低特效
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Properties_Defense_Down",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Avatar_Properties_Defense_Down"
             },
             {
               "$type": "AddGlobalValue",
-              "canBeHandledOnRecover": true,
-              "ratio": 10.0,
               "key": "_MONSTER_EREMITE_WEAK_",
+              "minValue": 0,
+              "maxValue": 1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
-            },
+              "value": 10,
+              "canBeHandledOnRecover": true
+            }, //进入虚弱状态
             {
               "$type": "AddGlobalValue",
-              "canBeHandledOnRecover": true,
-              "ratio": -10.0,
               "key": "_MONSTER_EREMITE_RECOVER_",
+              "value": -10,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
-            }
+              "maxValue": 1,
+              "minValue": 0,
+              "canBeHandledOnRecover": true
+            } //未进入恢复状态
           ],
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "canBeHandledOnRecover": true,
-              "ratio": 10.0,
               "key": "_MONSTER_EREMITE_RECOVER_",
+              "value": 10,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
-            },
+              "maxValue": 1,
+              "minValue": 0,
+              "canBeHandledOnRecover": true
+            }, //进入恢复状态
             {
               "$type": "AddGlobalValue",
-              "canBeHandledOnRecover": true,
-              "ratio": -10.0,
               "key": "_MONSTER_EREMITE_WEAK_",
+              "minValue": 0,
+              "maxValue": 1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
-            },
+              "value": -10,
+              "canBeHandledOnRecover": true
+            }, //退出虚弱状态
             {
               "$type": "SetGlobalValue",
-              "canBeHandledOnRecover": true,
-              "ratio": 1.0,
               "key": "_MONSTER_EREMITE_OUTIMPROVED",
+              "minValue": 0,
+              "maxValue": 1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
+              "value": 1,
+              "canBeHandledOnRecover": true
             },
             {
               "$type": "ReTriggerAISkillInitialCD",
@@ -703,31 +787,26 @@
           "onChangeAuthority": [
             {
               "$type": "AddGlobalValue",
-              "canBeHandledOnRecover": true,
-              "ratio": 10.0,
               "key": "_MONSTER_EREMITE_WEAK_",
+              "minValue": 0,
+              "maxValue": 1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
-            },
+              "value": 10,
+              "canBeHandledOnRecover": true
+            }, //进入虚弱状态
             {
               "$type": "AddGlobalValue",
-              "canBeHandledOnRecover": true,
-              "ratio": -10.0,
               "key": "_MONSTER_EREMITE_RECOVER_",
+              "value": -10,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
-            }
+              "maxValue": 1,
+              "minValue": 0,
+              "canBeHandledOnRecover": true
+            } //未进入恢复状态
           ]
         },
-        "Empty": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
+        "Empty": {},
         "Recover": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorTrigger",
@@ -738,6 +817,12 @@
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Weapon
+  //
+  ////////////////////////////////////////////////////////////////
+  //背上双刃武器
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -749,11 +834,15 @@
           "modifierName": "UNIQUE_WeaponOnBack_Equip"
         }
       ],
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_WeaponOnBack_Equip"
+        }
+      ],
       "modifiers": {
         "UNIQUE_WeaponOnBack_Equip": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetWeaponAttachPointRealName",
@@ -767,20 +856,27 @@
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "UNIQUE_WeaponOnBack_Equip"
-        }
-      ]
+      }
     }
   },
+  //拔出双刃武器
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Eremite_Female_Slim_PushDagger_Water_DrawWeapon",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "key": "_MONSTER_EREMITE_SHEATH_WEAPON",
+          "target": "Self",
+          "value": 0,
+          "maxValue": 1,
+          "minValue": 0,
+          "useLimitRange": true
+        } //默认收起武器
+      ],
       "abilityMixins": [
+        //3.0 BUG 修复，当受到伤害时，让自身从休闲状态退出来，并拔刀
         {
           "$type": "DoActionByAnimatorStateIDMixin",
           "stateIDs": ["Hit_H", "Hit_L", "HitThrow"],
@@ -791,11 +887,12 @@
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 10.0,
               "key": "_MONSTER_EREMITE_SHEATH_WEAPON",
-              "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
+              "target": "Self",
+              "value": 10,
+              "maxValue": 1,
+              "minValue": 0,
+              "useLimitRange": true
             }
           ]
         },
@@ -813,117 +910,52 @@
           "$type": "AttachToPoseIDMixin",
           "poseIDs": [101],
           "modifierName": "Reconnect_DrawWeapon"
-        },
-        {
-          "$type": "AttachModifierToSelfGlobalValueMixin",
-          "globalValueKey": "_MONSTER_EREMITE_SHEATH_WEAPON",
-          "defaultGlobalValueOnCreate": 0.0,
-          "valueSteps": [-0.5, 0.5, 1.5],
-          "modifierNameSteps": ["UNIQUE_SheathWeapon", "UNIQUE_DrawWeapon"]
-        }
-      ],
-      "modifiers": {
-        "UNIQUE_DrawWeapon": {
-          "stacking": "Unique",
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "RemoveUniqueModifier",
-              "modifierName": "UNIQUE_SheathWeapon"
-            },
-            {
-              "$type": "SetWeaponAttachPointRealName",
-              "canBeHandledOnRecover": true,
-              "partName": "equip01",
-              "realName": ""
-            },
-            {
-              "$type": "SetWeaponAttachPointRealName",
-              "canBeHandledOnRecover": true,
-              "partName": "equip02",
-              "realName": ""
-            }
-          ]
-        },
-        "UNIQUE_SheathWeapon": {
-          "stacking": "Unique",
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "RemoveUniqueModifier",
-              "modifierName": "UNIQUE_DrawWeapon"
-            },
-            {
-              "$type": "SetWeaponAttachPointRealName",
-              "canBeHandledOnRecover": true,
-              "partName": "equip01",
-              "realName": "WeaponOnBackR"
-            },
-            {
-              "$type": "SetWeaponAttachPointRealName",
-              "canBeHandledOnRecover": true,
-              "partName": "equip02",
-              "realName": "WeaponOnBackL"
-            }
-          ]
-        },
-        "Reconnect_DrawWeapon": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 2.0,
-          "bonusCriticalHurt": 100.0,
-          "onRemoved": [
-            {
-              "$type": "AddGlobalValue",
-              "ratio": 10.0,
-              "key": "_MONSTER_EREMITE_SHEATH_WEAPON",
-              "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
-            }
-          ]
-        },
-        "DrawWeapon": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "SetGlobalValue",
-              "canBeHandledOnRecover": true,
-              "ratio": 1.0,
-              "key": "_MONSTER_EREMITE_SHEATH_WEAPON",
-              "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
-            }
-          ]
-        }
-      },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "_MONSTER_EREMITE_SHEATH_WEAPON",
-          "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
-        }
+        } //保底
       ],
       "onAbilityStart": [
         {
           "$type": "AddGlobalValue",
-          "ratio": 10.0,
           "key": "_MONSTER_EREMITE_SHEATH_WEAPON",
-          "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
+          "target": "Self",
+          "value": 10,
+          "maxValue": 1,
+          "minValue": 0,
+          "useLimitRange": true
         }
-      ]
+      ],
+      "modifiers": {
+        "Reconnect_DrawWeapon": {
+          "duration": 2,
+          "onRemoved": [
+            {
+              "$type": "AddGlobalValue",
+              "key": "_MONSTER_EREMITE_SHEATH_WEAPON",
+              "target": "Self",
+              "value": 10,
+              "maxValue": 1,
+              "minValue": 0,
+              "useLimitRange": true
+            }
+          ]
+        },
+        "DrawWeapon": {
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "key": "_MONSTER_EREMITE_SHEATH_WEAPON",
+              "target": "Self",
+              "value": 1,
+              "maxValue": 1,
+              "minValue": 0,
+              "useLimitRange": true,
+              "canBeHandledOnRecover": true
+            } //默认收起武器
+          ]
+        }
+      }
     }
   },
+  //收起双刃武器
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -935,38 +967,50 @@
           "modifierName": "Reconnect_SheathWeapon"
         }
       ],
-      "modifiers": {
-        "Reconnect_SheathWeapon": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onRemoved": [
-            {
-              "$type": "AddGlobalValue",
-              "ratio": -10.0,
-              "key": "_MONSTER_EREMITE_SHEATH_WEAPON",
-              "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
-            }
-          ]
-        }
-      },
       "onAbilityStart": [
         {
           "$type": "AddGlobalValue",
-          "ratio": -10.0,
           "key": "_MONSTER_EREMITE_SHEATH_WEAPON",
-          "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
+          "target": "Self",
+          "value": -10,
+          "maxValue": 1,
+          "minValue": 0,
+          "useLimitRange": true
         }
-      ]
+      ],
+      "modifiers": {
+        "Reconnect_SheathWeapon": {
+          "onRemoved": [
+            {
+              "$type": "AddGlobalValue",
+              "key": "_MONSTER_EREMITE_SHEATH_WEAPON",
+              "target": "Self",
+              "value": -10,
+              "maxValue": 1,
+              "minValue": 0,
+              "useLimitRange": true
+            }
+          ]
+        }
+      }
     }
   },
+  //隐藏双刃武器
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Eremite_Female_Slim_PushDagger_Water_HideWeapon",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "key": "_MONSTER_EREMITE_HIDE_WEAPON",
+          "target": "Self",
+          "value": 0,
+          "maxValue": 1,
+          "minValue": 0,
+          "useLimitRange": true
+        } //默认不隐藏武器
+      ],
       "abilityMixins": [
         {
           "$type": "AttachToStateIDMixin",
@@ -974,52 +1018,62 @@
           "modifierName": "HideWeapon"
         }
       ],
+      "onAbilityStart": [
+        {
+          "$type": "AddGlobalValue",
+          "key": "_MONSTER_EREMITE_SHEATH_HIDEWEAPON",
+          "target": "Self",
+          "value": 10,
+          "maxValue": 1,
+          "minValue": 0,
+          "useLimitRange": true
+        } //默认不隐藏武器
+      ],
       "modifiers": {
         "HideWeapon": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "canBeHandledOnRecover": true,
-              "ratio": 1.0,
               "key": "_MONSTER_EREMITE_HIDE_WEAPON",
+              "target": "Self",
+              "value": 1,
+              "maxValue": 1,
+              "minValue": 0,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
+              "canBeHandledOnRecover": true
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "canBeHandledOnRecover": true,
-              "ratio": 0.0,
               "key": "_MONSTER_EREMITE_HIDE_WEAPON",
+              "target": "Self",
+              "value": 0,
+              "maxValue": 1,
+              "minValue": 0,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
-            }
+              "canBeHandledOnRecover": true
+            } //默认不隐藏武器
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "_MONSTER_EREMITE_HIDE_WEAPON",
-          "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
-        }
-      ],
+      }
+    }
+  },
+  //显示双刃武器
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Monster_Eremite_Female_Slim_PushDagger_Water_UnhideWeapon",
+      "abilityMixins": [],
       "onAbilityStart": [
         {
           "$type": "AddGlobalValue",
-          "ratio": 10.0,
-          "key": "_MONSTER_EREMITE_SHEATH_HIDEWEAPON",
-          "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
+          "key": "_MONSTER_EREMITE_HIDE_WEAPON",
+          "target": "Self",
+          "value": -10,
+          "maxValue": 1,
+          "minValue": 0,
+          "useLimitRange": true
         }
       ]
     }
@@ -1027,19 +1081,142 @@
   {
     "Default": {
       "$type": "ConfigAbility",
-      "abilityName": "Monster_Eremite_Female_Slim_PushDagger_Water_UnhideWeapon",
-      "onAbilityStart": [
+      "abilityName": "Monster_Eremite_Female_Slim_PushDagger_Water_DrawWeapon_R_Logic",
+      "abilityMixins": [
         {
-          "$type": "AddGlobalValue",
-          "ratio": -10.0,
-          "key": "_MONSTER_EREMITE_HIDE_WEAPON",
-          "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
+          "$type": "AttachModifierToGlobalValueMixin",
+          "globalValueKey": "_MONSTER_EREMITE_SHEATH_WEAPON",
+          "valueSteps": [-0.5, 0.5, 1.5],
+          "removeAppliedModifier": true,
+          "modifierNameSteps": ["UNIQUE_SheathWeapon", "UNIQUE_DrawWeapon"],
+          "globalValueTarget": "Owner"
         }
-      ]
+      ],
+      "modifiers": {
+        "UNIQUE_DrawWeapon": {
+          "isUnique": true,
+          "stacking": "Unique",
+          "onAdded": [
+            {
+              "$type": "RemoveUniqueModifier",
+              "modifierName": "UNIQUE_SheathWeapon"
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "SetWeaponAttachPointRealName_OnHandR",
+              "target": "Owner"
+            }
+          ]
+        },
+        "UNIQUE_SheathWeapon": {
+          "isUnique": true,
+          "stacking": "Unique",
+          "onAdded": [
+            {
+              "$type": "RemoveUniqueModifier",
+              "modifierName": "UNIQUE_DrawWeapon"
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "SetWeaponAttachPointRealName_OnBackR",
+              "target": "Owner"
+            }
+          ]
+        },
+        "SetWeaponAttachPointRealName_OnHandR": {
+          "onAdded": [
+            {
+              "$type": "SetWeaponAttachPointRealName",
+              "partName": "equip01",
+              "canBeHandledOnRecover": true
+            }
+          ]
+        },
+        "SetWeaponAttachPointRealName_OnBackR": {
+          "onAdded": [
+            {
+              "$type": "SetWeaponAttachPointRealName",
+              "partName": "equip01",
+              "realName": "WeaponOnBackR",
+              "canBeHandledOnRecover": true
+            }
+          ]
+        }
+      }
     }
   },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Monster_Eremite_Female_Slim_PushDagger_Water_DrawWeapon_L_Logic",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToGlobalValueMixin",
+          "globalValueKey": "_MONSTER_EREMITE_SHEATH_WEAPON",
+          "valueSteps": [-0.5, 0.5, 1.5],
+          "removeAppliedModifier": true,
+          "modifierNameSteps": ["UNIQUE_SheathWeapon", "UNIQUE_DrawWeapon"],
+          "globalValueTarget": "Owner"
+        }
+      ],
+      "modifiers": {
+        "UNIQUE_DrawWeapon": {
+          "isUnique": true,
+          "stacking": "Unique",
+          "onAdded": [
+            {
+              "$type": "RemoveUniqueModifier",
+              "modifierName": "UNIQUE_SheathWeapon"
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "SetWeaponAttachPointRealName_OnHandL",
+              "target": "Owner"
+            }
+          ]
+        },
+        "UNIQUE_SheathWeapon": {
+          "isUnique": true,
+          "stacking": "Unique",
+          "onAdded": [
+            {
+              "$type": "RemoveUniqueModifier",
+              "modifierName": "UNIQUE_DrawWeapon"
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "SetWeaponAttachPointRealName_OnBackL",
+              "target": "Owner"
+            }
+          ]
+        },
+        "SetWeaponAttachPointRealName_OnHandL": {
+          "onAdded": [
+            {
+              "$type": "SetWeaponAttachPointRealName",
+              "partName": "equip02",
+              "canBeHandledOnRecover": true
+            }
+          ]
+        },
+        "SetWeaponAttachPointRealName_OnBackL": {
+          "onAdded": [
+            {
+              "$type": "SetWeaponAttachPointRealName",
+              "partName": "equip02",
+              "realName": "WeaponOnBackL",
+              "canBeHandledOnRecover": true
+            }
+          ]
+        }
+      }
+    }
+  },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Steer
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1048,162 +1225,191 @@
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Turn"],
-          "endNormalizedTime": 99.0,
-          "angularSpeed": 150.0,
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 99,
+          "angularSpeed": 150,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Alert"],
-          "startNormalizedTime": 0.10000000149011612,
-          "endNormalizedTime": 0.6000000238418579,
-          "angularSpeed": 90.0,
+          "startNormalizedTime": 0.1,
+          "endNormalizedTime": 0.6,
+          "angularSpeed": 90,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Sit_Alert"],
-          "startNormalizedTime": 0.10000000149011612,
-          "endNormalizedTime": 0.6000000238418579,
-          "angularSpeed": 90.0,
+          "startNormalizedTime": 0.1,
+          "endNormalizedTime": 0.6,
+          "angularSpeed": 90,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Squat_Alert"],
-          "startNormalizedTime": 0.10000000149011612,
-          "endNormalizedTime": 0.6000000238418579,
-          "angularSpeed": 150.0,
+          "startNormalizedTime": 0.1,
+          "endNormalizedTime": 0.6,
+          "angularSpeed": 150,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Improve"],
-          "angularSpeed": 90.0,
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 1,
+          "angularSpeed": 90,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["NormalAtk01"],
-          "angularSpeed": 90.0,
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 1,
+          "angularSpeed": 90,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["MeleeAttackBS"],
-          "angularSpeed": 150.0,
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 1,
+          "angularSpeed": 150,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["MeleeAttackBS02"],
-          "angularSpeed": 150.0,
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 1,
+          "angularSpeed": 150,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["MeleeRush"],
-          "endNormalizedTime": 99.0,
-          "angularSpeed": 100.0,
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 99,
+          "angularSpeed": 100,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["MeleeAtkAS"],
-          "startNormalizedTime": 0.10000000149011612,
+          "startNormalizedTime": 0.1,
           "endNormalizedTime": 0.75,
-          "angularSpeed": 120.0,
+          "angularSpeed": 120,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["SlamAtk01"],
-          "endNormalizedTime": 0.20000000298023224,
-          "angularSpeed": 300.0,
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 0.2,
+          "angularSpeed": 300,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["SlamAtk01"],
-          "startNormalizedTime": 0.4000000059604645,
-          "angularSpeed": 150.0,
+          "startNormalizedTime": 0.4,
+          "endNormalizedTime": 1,
+          "angularSpeed": 150,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["ImproveNormalAtk01"],
-          "angularSpeed": 150.0,
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 1,
+          "angularSpeed": 150,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["ImproveMeleeAttackBS"],
-          "angularSpeed": 150.0,
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 1,
+          "angularSpeed": 150,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["ImproveMeleeAttackBS02"],
-          "angularSpeed": 150.0,
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 1,
+          "angularSpeed": 150,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["ImproveMeleeRush"],
-          "endNormalizedTime": 99.0,
-          "angularSpeed": 100.0,
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 99,
+          "angularSpeed": 100,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["ImproveMeleeAtkAS"],
-          "startNormalizedTime": 0.10000000149011612,
-          "angularSpeed": 120.0,
+          "startNormalizedTime": 0.1,
+          "endNormalizedTime": 1,
+          "angularSpeed": 120,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["ImproveSlamAtk01"],
-          "endNormalizedTime": 0.20000000298023224,
-          "angularSpeed": 300.0,
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 0.2,
+          "angularSpeed": 300,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["ImproveSlamAtk01"],
-          "startNormalizedTime": 0.44999998807907104,
-          "angularSpeed": 150.0,
+          "startNormalizedTime": 0.45,
+          "endNormalizedTime": 1,
+          "angularSpeed": 150,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["ImproveSlamAtk02"],
-          "angularSpeed": 100.0,
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 1,
+          "angularSpeed": 100,
           "attackTrigger": "",
-          "attackDistance": 2.0
+          "attackDistance": 2
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  RushMove
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1220,11 +1426,17 @@
           "modifierName": "ImproveMeleeRush_Effect"
         }
       ],
+      "onAbilityStart": [],
       "modifiers": {
         "MeleeRush_Effect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.10000000149011612,
+          "thinkInterval": 0.1,
+          // "onAdded":
+          // [
+          // 	{
+          // 		"$type": "AttachEffect",
+          // 		"effectPattern": "Eff_Monster_Eremite_Female_Slim_PushDagger_Water_MeleeAttackLoop",
+          // 	},
+          // ],
           "onThinkInterval": [
             {
               "$type": "Predicated",
@@ -1232,8 +1444,9 @@
               "targetPredicates": [
                 {
                   "$type": "ByTargetPositionToSelfPosition",
-                  "logic": "LesserOrEqual",
-                  "ratio": 3.0
+                  "compareType": "XZ",
+                  "value": 3,
+                  "logic": "LesserOrEqual"
                 }
               ],
               "successActions": [
@@ -1241,14 +1454,20 @@
                   "$type": "SetAnimatorTrigger",
                   "triggerID": "NearTarget"
                 }
-              ]
+              ],
+              "failActions": []
             }
           ]
         },
         "ImproveMeleeRush_Effect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.10000000149011612,
+          "thinkInterval": 0.1,
+          // "onAdded":
+          // [
+          // 	{
+          // 		"$type": "AttachEffect",
+          // 		"effectPattern": "Eff_Monster_Eremite_Female_Slim_PushDagger_Water_MeleeAttackLoop",
+          // 	},
+          // ],
           "onThinkInterval": [
             {
               "$type": "Predicated",
@@ -1256,8 +1475,9 @@
               "targetPredicates": [
                 {
                   "$type": "ByTargetPositionToSelfPosition",
-                  "logic": "LesserOrEqual",
-                  "ratio": 3.0
+                  "compareType": "XZ",
+                  "value": 3,
+                  "logic": "LesserOrEqual"
                 }
               ],
               "successActions": [
@@ -1265,7 +1485,8 @@
                   "$type": "SetAnimatorTrigger",
                   "triggerID": "NearTarget"
                 }
-              ]
+              ],
+              "failActions": []
             }
           ]
         }
@@ -1276,88 +1497,91 @@
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Eremite_Female_Slim_PushDagger_Water_RushMove_Damage",
-      "modifiers": {
-        "RushMove_Damage": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.38999998569488525,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.10000000149011612,
-          "onThinkInterval": [
-            {
-              "$type": "TriggerAttackEvent",
-              "attackEvent": {
-                "attackPattern": {
-                  "$type": "ConfigAttackBox",
-                  "triggerType": "TriggerNoRepeat",
-                  "ignoreMassive": true,
-                  "born": {
-                    "$type": "ConfigBornByAttachPoint",
-                    "offset": {
-                      "IBKBLDAJIMA": -0.25,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": -4.75
-                    },
-                    "direction": {
-                      "$type": "ConfigDirectionByAttachPoint",
-                      "angleOffset": {
-                        "IBKBLDAJIMA": 0.0,
-                        "LKHJADIPBFL": 0.0,
-                        "PJCOKIGCJOK": 0.0
-                      },
-                      "attachPointName": "RootNode"
-                    },
-                    "attachPointName": "RootNode"
-                  },
-                  "size": {
-                    "IBKBLDAJIMA": 1.5,
-                    "LKHJADIPBFL": 2.0,
-                    "PJCOKIGCJOK": 4.0
-                  },
-                  "muteHitBehindScene": true
-                },
-                "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
-                  "attackProperty": {
-                    "HBIOLEEGHPD": 0.30000001192092896,
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Water",
-                    "bonusCriticalHurt": 100.0,
-                    "strikeType": "Slash",
-                    "enBreak": 100.0,
-                    "attackType": "Melee"
-                  },
-                  "hitPattern": {
-                    "onHitEffectName": "default",
-                    "hitImpulseType": "LV4",
-                    "canBeDefenceHalt": true
-                  },
-                  "cameraShake": {
-                    "shakeType": "CustomVector",
-                    "shakeRange": 0.10000000149011612,
-                    "shakeTime": 0.10000000149011612,
-                    "shakeDistance": 30.0,
-                    "shakeDir": {
-                      "y": 1.0,
-                      "z": 1.0
-                    }
-                  }
-                }
-              },
-              "targetType": "Enemy"
-            }
-          ]
-        }
-      },
       "onAbilityStart": [
         {
           "$type": "ApplyModifier",
           "modifierName": "RushMove_Damage"
         }
-      ]
+      ],
+      "modifiers": {
+        "RushMove_Damage": {
+          "duration": 0.39,
+          "thinkInterval": 0.1,
+          "onThinkInterval": [
+            {
+              "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
+              "attackEvent": {
+                "attackPattern": {
+                  "$type": "ConfigAttackBox",
+                  "muteHitBehindScene": true,
+                  "checkHitLayerType": "OnlyHitBox",
+                  "ignoreMassive": true,
+                  "size": {
+                    "x": 1.5,
+                    "y": 2,
+                    "z": 4
+                  },
+                  "triggerType": "TriggerNoRepeat",
+                  "born": {
+                    "$type": "ConfigBornByAttachPoint",
+                    "attachPointName": "RootNode",
+                    "offset": {
+                      "x": -0.25,
+                      "y": 0.0,
+                      "z": -4.75
+                    },
+                    "direction": {
+                      "$type": "ConfigDirectionByAttachPoint",
+                      "attachPointName": "RootNode",
+                      "angleOffset": {
+                        "x": 0.0,
+                        "y": 0.0,
+                        "z": 0.0
+                      }
+                    }
+                  }
+                },
+                "attackInfo": {
+                  "attackProperty": {
+                    "damagePercentage": 0.3,
+                    "strikeType": "Slash",
+                    "overrideByWeapon": false,
+                    "elementType": "Water",
+                    "attackType": "Melee",
+                    "enBreak": 100
+                  },
+                  "hitPattern": {
+                    "onHitEffectName": "default",
+                    "hitImpulseType": "LV4",
+                    "canBeDefenceHalt": true,
+                    "muteHitText": false,
+                    "retreatType": "ByAttacker"
+                  },
+                  "cameraShake": {
+                    "shakeType": "CustomVector",
+                    "shakeRange": 0.1,
+                    "shakeTime": 0.1,
+                    "shakeDistance": 30,
+                    "shakeDir": {
+                      "x": 0,
+                      "y": 1,
+                      "z": 1
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  // Return to Born
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1376,58 +1600,56 @@
       ],
       "modifiers": {
         "ReturnToBorn_Start": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorTrigger",
               "triggerID": "SheathWeaponTrigger"
             }
-          ]
+          ],
+          "onRemoved": []
         },
         "ReturnToBornHandler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
+            //强化状态
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_MONSTER_EREMITE_IMPROVED_",
+              "minValue": 0,
+              "maxValue": 1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
+              "value": 0
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "_MONSTER_EREMITE_RETURNTOBORN_",
+              "value": 1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
+              "maxValue": 1,
+              "minValue": 0
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_MONSTER_EREMITE_WEAK_",
+              "minValue": 0,
+              "maxValue": 1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
+              "value": 0
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_MONSTER_EREMITE_IMPROVED_COUNT_",
+              "minValue": 0,
+              "maxValue": 99,
               "useLimitRange": true,
-              "maxValue": 99.0,
-              "minValue": 0.0
+              "value": 0
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_MONSTER_EREMITE_IMPROVED_COUNT_",
+              "minValue": 0,
+              "maxValue": 99,
               "useLimitRange": true,
-              "maxValue": 99.0,
-              "minValue": 0.0
+              "value": 0
             },
             {
               "$type": "RemoveUniqueModifier",
@@ -1441,56 +1663,61 @@
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Death_Sand_Eremite",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Death_Sand_Eremite"
             },
+            //强化状态
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_MONSTER_EREMITE_IMPROVED_",
+              "minValue": 0,
+              "maxValue": 1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
+              "value": 0
             },
+            //强化次数
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_MONSTER_EREMITE_IMPROVED_COUNT_",
+              "minValue": 0,
+              "maxValue": 99,
               "useLimitRange": true,
-              "maxValue": 99.0,
-              "minValue": 0.0
+              "value": 0
             },
+            //是否入战
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_MONSTER_EREMITE_ISINFIGHT_",
+              "minValue": 0,
+              "maxValue": 1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
+              "value": 0
             },
+            //虚弱状态
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_MONSTER_EREMITE_WEAK_",
+              "minValue": 0,
+              "maxValue": 1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
+              "value": 0
             },
+            //是否处于重生状态
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_MONSTER_EREMITE_RETURNTOBORN_",
+              "value": 0,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
+              "maxValue": 1,
+              "minValue": 0
             },
+            //判定是否是从Weak出来后的普通状态
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_MONSTER_EREMITE_OUTIMPROVED",
+              "minValue": 0,
+              "maxValue": 1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         }

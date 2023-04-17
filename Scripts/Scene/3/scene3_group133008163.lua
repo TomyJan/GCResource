@@ -138,7 +138,7 @@ function action_EVENT_GADGET_STATE_CHANGE_163019(context, evt)
 				if evt.param2 == v then
 					if evt.param1 == 201 then
 						local value_1 = ScriptLib.GetGroupVariableValue(context, "value_1")
-						if value_1 % math.pow(10,i) // math.pow(10,i-1) ~= 1 then
+						if value_1 % math.floor(math.pow(10,i) / math.pow(10,i-1)) ~= 1 then
 							value_1 = value_1 + math.pow(10,i-1)
 						end
 						ScriptLib.SetGroupVariableValue(context, "value_1", value_1)
@@ -151,7 +151,7 @@ function action_EVENT_GADGET_STATE_CHANGE_163019(context, evt)
 				if evt.param2 == v then
 					if evt.param1 == 201 then
 						local value_2 = ScriptLib.GetGroupVariableValue(context, "value_2")
-						if value_2 % math.pow(10,i) // math.pow(10,i-1) ~= 1 then
+						if value_2 % math.floor(math.pow(10,i) / math.pow(10,i-1)) ~= 1 then
 							value_2 = value_2 + math.pow(10,i-1)
 						end
 						ScriptLib.SetGroupVariableValue(context, "value_2", value_2)

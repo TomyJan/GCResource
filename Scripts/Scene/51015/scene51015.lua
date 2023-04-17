@@ -2,8 +2,8 @@
 scene_config = {
 	begin_pos = { x = -512.0, z = -512.0 },
 	size = { x = 1024.0, z = 1024.0 },
-	born_pos = { x = -3.923, y = 83.324, z = -19.827 },
-	born_rot = { x = 0.000, y = 0.000, z = 0.000 },
+	born_pos = { x = -58.961, y = -0.043, z = -28.594 },
+	born_rot = { x = 0.000, y = 185.601, z = 0.000 },
 	die_y = -20,
 	city_id = 1,
 	vision_anchor = { x = -1000.0, z = -1000.0 }

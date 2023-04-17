@@ -1,14 +1,48 @@
 [
+  //////////////////////////////////
+  //
+  //  玩家额外技能
+  //
+  //////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_Aster_AvatarExtraAbility",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_PlayerChargeMixin"
+        }
+      ],
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "target": "Team",
+          "modifierName": "UNIQUE_PlayerNotify"
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "SetAbilityEnableF"
+        },
+
+        //临时使用
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Init",
+          "target": "Team"
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_EasyModeController",
+          "target": "Team"
+        }
+      ],
       "abilityMixins": [
+        //根据玩家当前分数加嘲讽。
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "AVATAR_ASTER_SCORE",
-          "defaultGlobalValueOnCreate": 0.0,
-          "valueSteps": [0.0, 99.5, 100.5],
+          "valueSteps": [0, 99.5, 100.5],
           "modifierNameSteps": ["Blank", "SetTaunt"]
         }
       ],
@@ -16,26 +50,26 @@
         "curteamscore": 0.0
       },
       "modifiers": {
+        ////////////////////////////////////////////////////////////////////////////////////
+        //
+        // 临时使用
+        //
+        //////////////////////////////////////////////////////////////////////////////////////
         "Init": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "target": "Team",
-              "ratio": 0.0,
               "key": "AVATAR_ASTER_SCORE",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "target": "Team",
+              "value": 0
             }
           ]
         },
+
         "UNIQUE_EasyModeController": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
           "modifierMixins": [
             {
               "$type": "ApplyModifierWithSharedDurabilityMixin",
@@ -45,14 +79,13 @@
               "$type": "ServerUpdateGlobalValueMixin",
               "key": "AVATAR_ASTER_SCORE",
               "useLimitRange": true,
-              "maxValue": 100.0,
-              "minValue": 0.0
+              "minValue": 0,
+              "maxValue": 100
             }
           ]
         },
+
         "EasyMode_Avatar": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachToStateIDMixin",
@@ -61,63 +94,67 @@
             }
           ]
         },
+
         "HitControl": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onBeingHit": [
             {
               "$type": "AddGlobalValue",
+              "key": "AVATAR_ASTER_SCORE",
               "target": "Team",
+              "value": -20,
+              "useLimitRange": true,
+              "maxValue": 100,
+              "minValue": 0,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "Self",
                   "key": "CHANNEL_BLOCK",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
-              ],
-              "ratio": -20.0,
-              "key": "AVATAR_ASTER_SCORE",
-              "useLimitRange": true,
-              "maxValue": 100.0,
-              "minValue": 0.0
+              ]
             }
           ]
         },
+        //////////////////////////////////////////////////////////////
+
+        ////////////////////////////////////////////////////
         "SetAbilityEnableF": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
-              "$type": "SetExtraAbilityEnable"
+              "$type": "SetExtraAbilityEnable",
+              "enable": false
             }
           ]
         },
+
         "UNIQUE_PlayerNotify": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
           "modifierMixins": [
+            //通过点名清空自己分数
             {
               "$type": "PlayerUidNotifyMixin",
               "opParam": "clear_energy",
               "opType": 1,
               "logic": "Equal",
               "actions": [
+                //清空自己的分数
                 {
                   "$type": "AddGlobalValue",
-                  "target": "Team",
-                  "ratio": 0.0,
                   "key": "AVATAR_ASTER_SCORE",
+                  "target": "Team",
+                  "value": 0,
                   "useLimitRange": true,
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "maxValue": 0,
+                  "minValue": 0
                 }
               ]
             },
+
+            //通过点名上BUFF
             {
               "$type": "PlayerUidNotifyMixin",
               "opParam": "random_buff_aster",
@@ -126,8 +163,8 @@
               "actions": [
                 {
                   "$type": "ApplyModifier",
-                  "target": "Team",
-                  "modifierName": "UNIQUE_Team_DamageUp_Arua"
+                  "modifierName": "UNIQUE_Team_DamageUp_Arua",
+                  "target": "Team"
                 }
               ]
             },
@@ -139,8 +176,8 @@
               "actions": [
                 {
                   "$type": "ApplyModifier",
-                  "target": "Team",
-                  "modifierName": "UNIQUE_Team_ChannelBlock_Arua"
+                  "modifierName": "UNIQUE_Team_ChannelBlock_Arua",
+                  "target": "Team"
                 }
               ]
             },
@@ -152,11 +189,12 @@
               "actions": [
                 {
                   "$type": "ApplyModifier",
-                  "target": "Team",
-                  "modifierName": "UNIQUE_Team_ScoreMult_Arua"
+                  "modifierName": "UNIQUE_Team_ScoreMult_Arua",
+                  "target": "Team"
                 }
               ]
             },
+
             {
               "$type": "PlayerUidNotifyMixin",
               "opParam": "random_buff_aster",
@@ -165,11 +203,12 @@
               "actions": [
                 {
                   "$type": "ApplyModifier",
-                  "target": "Team",
-                  "modifierName": "UNIQUE_DebuffTimer_Team"
+                  "modifierName": "UNIQUE_DebuffTimer_Team",
+                  "target": "Team"
                 }
               ]
             },
+
             {
               "$type": "PlayerUidNotifyMixin",
               "opParam": "random_buff_aster",
@@ -178,19 +217,18 @@
               "actions": [
                 {
                   "$type": "ApplyModifier",
-                  "target": "Team",
-                  "modifierName": "UNIQUE_Team_UperScoreMult_Arua"
+                  "modifierName": "UNIQUE_Team_UperScoreMult_Arua",
+                  "target": "Team"
                 }
               ]
             }
           ]
         },
+
         "UNIQUE_DebuffTimer_Team": {
-          "stacking": "Unique",
-          "modifierName": "",
+          "duration": 5,
           "isUnique": true,
-          "HCJLIGBLGJA": 5.0,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
           "modifierMixins": [
             {
               "$type": "ApplyModifierWithSharedDurabilityMixin",
@@ -198,34 +236,33 @@
             }
           ]
         },
+
         "DebuffTimer": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
+            //放一个循环特效
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Aster_Debuff_01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_Aster_Debuff_01"
             }
           ],
           "onRemoved": [
             {
               "$type": "CreateGadget",
+              "byServer": true,
+              "gadgetID": 70900360,
               "born": {
                 "$type": "ConfigBornBySelf"
               },
-              "gadgetID": 70900360,
-              "byServer": true
+              "onGround": true
             }
           ]
         },
+
         "UNIQUE_Team_DamageUp_Arua": {
-          "stacking": "Unique",
-          "modifierName": "",
+          "duration": 30,
+          "thinkInterval": 5,
           "isUnique": true,
-          "HCJLIGBLGJA": 30.0,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 5.0,
+          "stacking": "Unique",
           "modifierMixins": [
             {
               "$type": "ApplyModifierWithSharedDurabilityMixin",
@@ -235,60 +272,54 @@
           "onThinkInterval": [
             {
               "$type": "ApplyModifier",
+              "modifierName": "DamageUp",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR5",
                 "centerBasedOn": "CurLocalAvatar",
                 "campTargetType": "All",
-                "campBasedOn": "CurLocalAvatar",
-                "sizeRatio": 1.0
+                "campBasedOn": "CurLocalAvatar"
               },
               "predicates": [
                 {
                   "$type": "ByEntityTypes",
                   "entityTypes": ["Avatar"]
                 }
-              ],
-              "modifierName": "DamageUp"
+              ]
             }
           ]
         },
         "Team_DamageUp_Arua_Eff": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Aster_Buff_01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_Aster_Buff_01"
             }
           ]
         },
         "DamageUp": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 5.5,
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_AddHurtDelta": 10.0
-          },
+          "stacking": "Refresh",
+          "duration": 5.5,
           "state": "AttackUp",
+          "isLimitedProperties": true,
+          "buffID": 10001,
+          "properties": {
+            "Actor_AddHurtDelta": 10
+          },
           "onAdded": [
+            //放一个循环特效意思意思
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_MQ1002_XueyueBuff",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_MQ1002_XueyueBuff"
             }
-          ],
-          "isLimitedProperties": true,
-          "buffID": 10001
+          ]
         },
+
         "UNIQUE_Team_ChannelBlock_Arua": {
-          "stacking": "Unique",
-          "modifierName": "",
+          "duration": 30,
+          "thinkInterval": 5,
           "isUnique": true,
-          "HCJLIGBLGJA": 30.0,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 5.0,
+          "stacking": "Unique",
           "modifierMixins": [
             {
               "$type": "ApplyModifierWithSharedDurabilityMixin",
@@ -298,74 +329,68 @@
           "onThinkInterval": [
             {
               "$type": "ApplyModifier",
+              "modifierName": "ChannelBlock",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR5",
                 "centerBasedOn": "CurLocalAvatar",
                 "campTargetType": "All",
-                "campBasedOn": "CurLocalAvatar",
-                "sizeRatio": 1.0
+                "campBasedOn": "CurLocalAvatar"
               },
               "predicates": [
                 {
                   "$type": "ByEntityTypes",
                   "entityTypes": ["Avatar"]
                 }
-              ],
-              "modifierName": "ChannelBlock"
+              ]
             }
           ]
         },
         "ChannelBlock": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 5.5,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Refresh",
+          "duration": 5.5,
           "properties": {
-            "Actor_EndureDelta": 2.0
+            "Actor_EndureDelta": 2
           },
           "onAdded": [
+            //放一个循环特效意思意思
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_MQ1002_XueyueBuff",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_MQ1002_XueyueBuff"
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
               "key": "CHANNEL_BLOCK",
+              "value": 1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 1.0
+              "maxValue": 1,
+              "minValue": 1
             }
           ],
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 0.0,
               "key": "CHANNEL_BLOCK",
+              "value": 0,
               "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "maxValue": 0,
+              "minValue": 0
             }
           ]
         },
         "Team_ChannelBlock_Arua_Eff": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Aster_Buff_01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_Aster_Buff_01"
             }
           ]
         },
+
         "UNIQUE_Team_ScoreMult_Arua": {
-          "stacking": "Unique",
-          "modifierName": "",
+          "duration": 30,
           "isUnique": true,
-          "HCJLIGBLGJA": 30.0,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
           "modifierMixins": [
             {
               "$type": "ApplyModifierWithSharedDurabilityMixin",
@@ -376,40 +401,32 @@
             {
               "$type": "SetGlobalValue",
               "target": "Team",
-              "ratio": 1.0,
               "key": "ASTER_PROGRESS_RATIO",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
               "target": "Team",
-              "ratio": 0.0,
               "key": "ASTER_PROGRESS_RATIO",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         },
         "Team_ScoreMult_Arua_Eff": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Aster_Buff_01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_Aster_Buff_01"
             }
           ]
         },
+
         "UNIQUE_Team_UperScoreMult_Arua": {
-          "stacking": "Unique",
-          "modifierName": "",
+          "duration": 30,
           "isUnique": true,
-          "HCJLIGBLGJA": 30.0,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
           "modifierMixins": [
             {
               "$type": "ApplyModifierWithSharedDurabilityMixin",
@@ -420,66 +437,57 @@
             {
               "$type": "SetGlobalValue",
               "target": "Team",
-              "ratio": 1.0,
               "key": "ASTER_ENERGY_RATIO",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
               "target": "Team",
-              "ratio": 0.0,
               "key": "ASTER_ENERGY_RATIO",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         },
         "Team_UperScoreMult_Arua_Eff": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Aster_Buff_01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_Aster_Buff_01"
             }
           ]
         },
-        "Blank": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
+
+        "Blank": {},
+
         "SetTaunt": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "TriggerTaunt",
+              "careValue": 50,
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR25",
+                "centerBasedOn": "Self",
                 "campTargetType": "Enemy",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
               "predicates": [
                 {
                   "$type": "ByEntityTypes",
                   "entityTypes": ["Monster"]
                 }
-              ],
-              "careValue": 50.0
+              ]
             }
           ]
         },
+
+        //applier: 大陨石    self:avatar
         "UNIQUE_PlayerChargeMixin": {
           "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 5.0,
+          "thinkInterval": 5,
           "modifierMixins": [
             {
               "$type": "AttachToStateIDMixin",
@@ -487,201 +495,193 @@
               "modifierName": "PlayerCharge"
             }
           ],
-          "onAdded": [
-            {
-              "$type": "SetAnimatorTrigger",
-              "triggerID": "StartChannelTrigger"
-            },
-            {
-              "$type": "SetExtraAbilityState"
-            },
-            {
-              "$type": "AttachModifier",
-              "otherTargets": {
-                "$type": "SelectTargetsByShape",
-                "shapeName": "CircleR50",
-                "campTargetType": "AllExceptSelf",
-                "sizeRatio": 1.0
-              },
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "IS_BIG_ASTER",
-                  "ratio": 1.0
-                }
-              ],
-              "modifierName": "LineEff_FindAster"
-            },
+          "onThinkInterval": [
+            //读条结束，打上标记remove自己
             {
               "$type": "AddGlobalValue",
-              "target": "CurLocalAvatar",
-              "ratio": 0.0,
               "key": "CHARGE_SUCCESS",
+              "target": "CurLocalAvatar",
+              "value": 1,
               "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "maxValue": 1,
+              "minValue": 1
             },
+
+            // {
+            // 	"$type": "SetExtraAbilityState",
+            // 	"state": "Success",
+            // },
+
+            //提交完成放个特效庆祝下
             {
               "$type": "AttachEffect",
+              "effectPattern": "Eff_SceneObj_AsterLarge_RecevieFinish",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR50",
+                "centerBasedOn": "Self",
                 "campTargetType": "AllExceptSelf",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "IS_BIG_ASTER",
-                  "ratio": 1.0
+                  "value": 1,
+                  "compareType": "Equal"
                 }
-              ],
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_AsterLarge_Active",
-              "EBHJMLOKDGB": -1.0
-            }
-          ],
-          "onRemoved": [
+              ]
+            },
+
             {
-              "$type": "SetExtraAbilityState",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "target": "CurLocalAvatar",
-                  "key": "CHARGE_SUCCESS",
-                  "ratio": 0.0
-                }
-              ],
-              "state": "Interrupt"
+              "$type": "ServerLuaCall",
+              "target": "Team",
+              "luaCallType": "CurScenePlay",
+              "funcName": "UpdateAsterProgress"
+            },
+
+            //这里要强行切一下角色的动画状态
+            {
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "EndChannelTrigger"
+            },
+
+            {
+              "$type": "RemoveUniqueModifier",
+              "modifierName": "UNIQUE_PlayerChargeMixin"
             }
           ],
           "onBeingHit": [
             {
               "$type": "SetAnimatorTrigger",
+              "triggerID": "EndChannelTrigger",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "CHANNEL_BLOCK",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
-              ],
-              "triggerID": "EndChannelTrigger"
+              ]
             },
             {
               "$type": "RemoveModifier",
+              "modifierName": "PlayerCharge",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "CHANNEL_BLOCK",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
-              ],
-              "modifierName": "PlayerCharge"
+              ]
             }
           ],
-          "onThinkInterval": [
+          "onAdded": [
+            //这里要强行切一下角色的动画状态
             {
-              "$type": "AddGlobalValue",
-              "target": "CurLocalAvatar",
-              "ratio": 1.0,
-              "key": "CHARGE_SUCCESS",
-              "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 1.0
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "StartChannelTrigger"
+            },
+            //切换下按键状态
+            {
+              "$type": "SetExtraAbilityState",
+              "state": "Start"
             },
             {
-              "$type": "AttachEffect",
+              "$type": "AttachModifier",
+              "modifierName": "LineEff_FindAster",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR50",
+                "centerBasedOn": "Self",
                 "campTargetType": "AllExceptSelf",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "IS_BIG_ASTER",
-                  "ratio": 1.0
+                  "value": 1,
+                  "compareType": "Equal"
                 }
-              ],
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_AsterLarge_RecevieFinish",
-              "EBHJMLOKDGB": -1.0
+              ]
             },
+            //标记读条开始
             {
-              "$type": "ServerLuaCall",
-              "target": "Team",
-              "luaCallType": "CurScenePlay",
-              "funcName": "UpdateAsterProgress",
-              "ODAOGCJFIHC": 0.0,
-              "GCCFLBLEHDB": 0.0,
-              "DJODIFOBEJG": 0.0
+              "$type": "AddGlobalValue",
+              "key": "CHARGE_SUCCESS",
+              "target": "CurLocalAvatar",
+              "value": 0,
+              "useLimitRange": true,
+              "maxValue": 0,
+              "minValue": 0
             },
+
+            //通过group找到大陨石，播一个循环特效
             {
-              "$type": "SetAnimatorTrigger",
-              "triggerID": "EndChannelTrigger"
-            },
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_SceneObj_AsterLarge_Active",
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR50",
+                "centerBasedOn": "Self",
+                "campTargetType": "AllExceptSelf",
+                "campBasedOn": "Self"
+              },
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "IS_BIG_ASTER",
+                  "value": 1,
+                  "compareType": "Equal"
+                }
+              ]
+            }
+          ],
+          "onRemoved": [
             {
-              "$type": "RemoveUniqueModifier",
-              "modifierName": "UNIQUE_PlayerChargeMixin"
+              "$type": "SetExtraAbilityState",
+              "state": "Interrupt",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "CHARGE_SUCCESS",
+                  "target": "CurLocalAvatar",
+                  "value": 0,
+                  "compareType": "Equal"
+                }
+              ]
             }
           ]
         },
+
         "LineEff_FindAster": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
+              "effectPattern": "Eff_SceneObj_AsterLarge_Recevie",
               "target": "Applier",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_AsterLarge_Recevie",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
                 "attachPointName": "EffPoint",
                 "attachPointTargetType": "Self"
-              },
-              "EBHJMLOKDGB": -1.0
+              }
             }
           ]
         },
+
+        //applier:Avatar  self:Avatar
         "PlayerCharge": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onRemoved": [
+            //移除自身时同时移除监听modifier
             {
               "$type": "RemoveUniqueModifier",
               "modifierName": "UNIQUE_PlayerChargeMixin"
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "target": "Team",
-          "modifierName": "UNIQUE_PlayerNotify"
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "SetAbilityEnableF"
-        },
-        {
-          "$type": "ApplyModifier",
-          "target": "Team",
-          "modifierName": "Init"
-        },
-        {
-          "$type": "ApplyModifier",
-          "target": "Team",
-          "modifierName": "UNIQUE_EasyModeController"
-        }
-      ],
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "UNIQUE_PlayerChargeMixin"
-        }
-      ]
+      }
     }
   }
 ]

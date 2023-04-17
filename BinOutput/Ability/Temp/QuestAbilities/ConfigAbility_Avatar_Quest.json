@@ -3,30 +3,35 @@
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Player_StaminaReduced_AbilityGroup",
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_Avatar_StaminaReduced_AbilityGroup",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Avatar_StaminaReduced_AbilityGroup": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachToStateIDMixin",
               "stateIDs": ["Fly"],
-              "modifierName": "Avatar_Flying_StaminaReduced"
+              "modifierName": "Avatar_Flying_StaminaReduced",
+              "target": "Self"
             },
             {
               "$type": "AttachToAnimatorStateIDMixin",
               "stateIDs": ["Run"],
-              "modifierName": "Avatar_Flying_StaminaReduced"
+              "modifierName": "Avatar_Flying_StaminaReduced",
+              "target": "Self"
             }
           ]
         },
         "Avatar_Flying_StaminaReduced": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "properties": {
-            "Actor_CostStaminaRatio": -0.8999999761581421,
-            "Actor_EndureDelta": 0.0
+            "Actor_CostStaminaRatio": -0.9,
+            "Actor_EndureDelta": 0
           },
           "onAdded": [
             {
@@ -41,13 +46,7 @@
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Avatar_StaminaReduced_AbilityGroup"
-        }
-      ]
+      }
     }
   },
   {
@@ -57,37 +56,42 @@
       "onAdded": [
         {
           "$type": "RemoveUniqueModifier",
+          "target": "Self",
           "modifierName": "UNIQUE_Avatar_StaminaReduced_AbilityGroup"
         }
       ]
     }
   },
+
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Player_QuestFireDrug_AbilityGroup",
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_AlbedoQuest_Fire_DrugWater",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "UNIQUE_AlbedoQuest_Fire_DrugWater": {
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": 8.0,
+          "duration": 8.0,
           "elementType": "Fire",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100,
           "thinkInterval": 1.0,
-          "onAdded": [
+          "onThinkInterval": [
             {
               "$type": "DamageByAttackValue",
+              "target": "Self",
               "attackInfo": {
-                "attackTag": "",
-                "attenuationTag": "",
-                "attenuationGroup": "default",
                 "attackProperty": {
-                  "CCNJGLPMIEP": 0.0,
+                  "damageExtra": 10.0,
                   "elementType": "Fire",
-                  "bonusCriticalHurt": 100.0,
+                  "elementDurability": 100,
                   "strikeType": "Default",
-                  "enBreak": 0.0,
-                  "damageExtra": 10.0
+                  "enBreak": 0.0
                 },
                 "hitPattern": {
                   "onHitEffectName": "",
@@ -96,20 +100,21 @@
               }
             }
           ],
-          "onThinkInterval": [
+          "onAdded": [
+            // {
+            // 	"$type": "AttachEffect",
+            // 	"effectPattern": "Eff_Element_Burning",
+            // },
             {
               "$type": "DamageByAttackValue",
+              "target": "Self",
               "attackInfo": {
-                "attackTag": "",
-                "attenuationTag": "",
-                "attenuationGroup": "default",
                 "attackProperty": {
-                  "CCNJGLPMIEP": 0.0,
+                  "damageExtra": 10.0,
                   "elementType": "Fire",
-                  "bonusCriticalHurt": 100.0,
+                  "elementDurability": 100,
                   "strikeType": "Default",
-                  "enBreak": 0.0,
-                  "damageExtra": 10.0
+                  "enBreak": 0.0
                 },
                 "hitPattern": {
                   "onHitEffectName": "",
@@ -119,25 +124,45 @@
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_AlbedoQuest_Fire_DrugWater"
-        }
-      ]
+      }
     }
   },
+
+  //魈个人线——主动释放大招，并且挂上减能量modifier
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_QuestAbility_XiaoTriggerElementalBurst",
+      "isDynamicAbility": true,
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "target": "CurLocalAvatar",
+          "modifierName": "AutoTriggerAbility",
+          "predicates": [
+            {
+              "$type": "ByHasFeatureTag",
+              "featureTagIDs": [10026]
+            }
+          ]
+        },
+        {
+          "$type": "ApplyModifier",
+          "target": "CurLocalAvatar",
+          "doOffStage": true,
+          "modifierName": "UNIQUE_QuestBuff_DeductElemEnergy",
+          "predicates": [
+            {
+              "$type": "ByHasFeatureTag",
+              "featureTagIDs": [10026]
+            }
+          ]
+        }
+      ],
       "modifiers": {
         "AutoTriggerAbility": {
+          "duration": 1,
           "stacking": "Multiple",
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorTrigger",
@@ -146,16 +171,37 @@
             {
               "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "ratio": 5.0
+              "value": 5
             }
           ]
         },
         "UNIQUE_QuestBuff_DeductElemEnergy": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
           "thinkInterval": 5.0,
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "key": "QuestBuff_XiaoTriggerElementalBurst",
+              "value": 1,
+              "useLimitRange": true,
+              "minValue": 0,
+              "maxValue": 1
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "ClearGlobalValue",
+              "key": "QuestBuff_XiaoTriggerElementalBurst"
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "AddElementDurability",
+              "value": 100,
+              "modifierName": "UNIQUE_HowlingSoul_Main_Handler"
+            }
+          ],
           "modifierMixins": [
             {
               "$type": "DoActionByEnergyChangeMixin",
@@ -172,15 +218,15 @@
               "onGainEnergyByBall": [
                 {
                   "$type": "HealHP",
-                  "amountByCasterMaxHPRatio": 0.10000000149011612
+                  "amountByTargetMaxHPRatio": 0.1
                 }
               ]
             },
             {
               "$type": "ReviveElemEnergyMixin",
-              "period": 0.5,
-              "baseEnergy": -30.0,
-              "IAAIJMOECLB": 1.0
+              "type": "Both",
+              "period": 0.5, //每x秒回复一次能量
+              "baseEnergy": -30 //每次回y点能量
             },
             {
               "$type": "StageReadyMixin",
@@ -188,71 +234,29 @@
                 {
                   "$type": "ApplyModifier",
                   "target": "CurLocalAvatar",
+                  "modifierName": "AutoTriggerAbility",
                   "predicates": [
                     {
                       "$type": "ByHasFeatureTag",
                       "featureTagIDs": [10026]
                     }
-                  ],
-                  "modifierName": "AutoTriggerAbility"
+                    //       						{
+                    // 	"$type": "ByTargetGlobalValue",
+                    // 	"key": "_ABILITY_HowlingSoul_Flag",
+                    // 	"value": 0,
+                    // 	"compareType": "NoneOrEqual",
+                    // },
+                  ]
                 }
               ]
             }
-          ],
-          "onAdded": [
-            {
-              "$type": "SetGlobalValue",
-              "ratio": 1.0,
-              "key": "QuestBuff_XiaoTriggerElementalBurst",
-              "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "ClearGlobalValue",
-              "key": "QuestBuff_XiaoTriggerElementalBurst"
-            }
-          ],
-          "onThinkInterval": [
-            {
-              "$type": "AddElementDurability",
-              "ratio": 100.0,
-              "modifierName": "UNIQUE_HowlingSoul_Main_Handler",
-              "maxValue": 3.4028234663852886e38
-            }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "target": "CurLocalAvatar",
-          "predicates": [
-            {
-              "$type": "ByHasFeatureTag",
-              "featureTagIDs": [10026]
-            }
-          ],
-          "modifierName": "AutoTriggerAbility"
-        },
-        {
-          "$type": "ApplyModifier",
-          "target": "CurLocalAvatar",
-          "RotationDampTime": true,
-          "predicates": [
-            {
-              "$type": "ByHasFeatureTag",
-              "featureTagIDs": [10026]
-            }
-          ],
-          "modifierName": "UNIQUE_QuestBuff_DeductElemEnergy"
-        }
-      ],
-      "isDynamicAbility": true
+      }
     }
   },
+
+  //任务线通用，删除小道具
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -261,49 +265,53 @@
         {
           "$type": "FollowAttachPointEffectMixin",
           "modifierName": "ClearFollowPet",
-          "NDLMKIHDNIH": "QuestBlank"
+          "attachPriority": "QuestBlank"
         }
       ],
       "modifiers": {
-        "ClearFollowPet": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        }
+        "ClearFollowPet": {}
       }
     }
   },
-  {
-    "Default": {
-      "$type": "ConfigAbility",
-      "abilityName": "Avatar_QuestAbility_ClearFollowPet02",
-      "abilityMixins": [
-        {
-          "$type": "FollowAttachPointEffectMixin",
-          "modifierName": "ClearFollowPet02",
-          "NDLMKIHDNIH": "QuestBlank"
-        }
-      ],
-      "modifiers": {
-        "ClearFollowPet02": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        }
-      }
-    }
-  },
+
+  //将军个人线第二章：随机时停
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_QuestAbility_RandomDeadTime",
-      "abilitySpecials": {
-        "DeadTime_RandomInterval": 25.0
-      },
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "SetRandomOverrideMapValue",
+          "overrideMapKey": "DeadTime_RandomInterval",
+          "valueRangeMin": 20,
+          "valueRangeMax": 30,
+          "doOffStage": true
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_QuestAbility_RandomDeadTime_Interval",
+          "doOffStage": true
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "SetRandomOverrideMapValue",
+          "overrideMapKey": "DeadTime_RandomInterval",
+          "valueRangeMin": 20,
+          "valueRangeMax": 30,
+          "doOffStage": true
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_QuestAbility_RandomDeadTime_Interval",
+          "doOffStage": true
+        }
+      ],
       "modifiers": {
         "UNIQUE_QuestAbility_RandomDeadTime_Interval": {
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "DeadTime_RandomInterval",
-          "bonusCriticalHurt": 100.0,
+          "duration": "%DeadTime_RandomInterval",
           "onRemoved": [
             {
               "$type": "TriggerAbility",
@@ -316,52 +324,28 @@
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "SetRandomOverrideMapValue",
-          "RotationDampTime": true,
-          "valueRangeMax": 30.0,
-          "valueRangeMin": 20.0,
-          "overrideMapKey": "DeadTime_RandomInterval"
-        },
-        {
-          "$type": "AttachModifier",
-          "RotationDampTime": true,
-          "modifierName": "UNIQUE_QuestAbility_RandomDeadTime_Interval"
-        }
-      ],
-      "onAbilityStart": [
-        {
-          "$type": "SetRandomOverrideMapValue",
-          "RotationDampTime": true,
-          "valueRangeMax": 30.0,
-          "valueRangeMin": 20.0,
-          "overrideMapKey": "DeadTime_RandomInterval"
-        },
-        {
-          "$type": "AttachModifier",
-          "RotationDampTime": true,
-          "modifierName": "UNIQUE_QuestAbility_RandomDeadTime_Interval"
-        }
-      ],
-      "isDynamicAbility": true
+      "abilitySpecials": {
+        "DeadTime_RandomInterval": 25
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_QuestAbility_DeadTime",
+      "isDynamicAbility": true,
       "abilityMixins": [
         {
           "$type": "DoActionByEventMixin",
+          "type": "Both",
           "onAbilityStateAdded": [
             {
               "abilityState": "ElementDeadTime",
               "actions": [
                 {
                   "$type": "DebugLog",
-                  "RotationDampTime": true,
-                  "content": "!!!!!!!!!!!SetAvatarCanShakeOn!!!!!!!!!!"
+                  "content": "!!!!!!!!!!!SetAvatarCanShakeOn!!!!!!!!!!",
+                  "doOffStage": true
                 },
                 {
                   "$type": "ForceEnableShakeOffButton",
@@ -376,28 +360,31 @@
               "actions": [
                 {
                   "$type": "DebugLog",
-                  "RotationDampTime": true,
-                  "content": "!!!!!!!!!!!SetAvatarCanShakeOff!!!!!!!!!!"
+                  "content": "!!!!!!!!!!!SetAvatarCanShakeOff!!!!!!!!!!",
+                  "doOffStage": true
                 },
                 {
                   "$type": "ForceEnableShakeOffButton",
-                  "RotationDampTime": true
+                  "enable": false,
+                  "doOffStage": true
                 }
               ]
             }
-          ],
-          "JOPEDINKMCP": ""
+          ]
         }
       ],
-      "abilitySpecials": {
-        "DeadTime": 5.0
-      },
+      "onAbilityStart": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_QuestAbility_DeadTime"
+        }
+      ],
       "modifiers": {
         "UNIQUE_QuestAbility_DeadTime": {
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "DeadTime",
-          "bonusCriticalHurt": 350.0,
+          "duration": "%DeadTime",
+          "elementType": "None",
+          "elementDurability": 350,
           "state": "ElementDeadTime",
           "onAdded": [
             {
@@ -409,12 +396,13 @@
           "onRemoved": [
             {
               "$type": "DebugLog",
-              "RotationDampTime": true,
-              "content": "!!!!!!!!!!!SetAvatarCanShakeOff!!!!!!!!!!"
+              "content": "!!!!!!!!!!!SetAvatarCanShakeOff!!!!!!!!!!",
+              "doOffStage": true
             },
             {
               "$type": "ForceEnableShakeOffButton",
-              "RotationDampTime": true
+              "enable": false,
+              "doOffStage": true
             }
           ]
         }
@@ -422,82 +410,79 @@
       "onRemoved": [
         {
           "$type": "DebugLog",
-          "RotationDampTime": true,
-          "content": "!!!!!!!!!!!SetAvatarCanShakeOff!!!!!!!!!!"
+          "content": "!!!!!!!!!!!SetAvatarCanShakeOff!!!!!!!!!!",
+          "doOffStage": true
         },
         {
           "$type": "ForceEnableShakeOffButton",
-          "RotationDampTime": true
+          "enable": false,
+          "doOffStage": true
         }
       ],
-      "onAbilityStart": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_QuestAbility_DeadTime"
-        }
-      ],
-      "isDynamicAbility": true
+      "abilitySpecials": {
+        "DeadTime": 5
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_QuestAbility_ReviveEnergy",
+      "isDynamicAbility": true,
       "onAdded": [
         {
           "$type": "ReviveElemEnergy",
-          "RotationDampTime": true,
-          "ratio": 100.0
+          "value": 100,
+          "target": "Self",
+          "doOffStage": true
         }
-      ],
-      "isDynamicAbility": true
+      ]
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_QuestAbility_NilouFullMP",
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_Avatar_QuestAbility_NilouFullMP",
+          "predicates": [
+            {
+              "$type": "ByHasFeatureTag",
+              "featureTagIDs": [10070]
+            }
+          ],
+          "doOffStage": true
+        },
+        {
+          "$type": "DebugLog",
+          "content": "!!!!!!!!!Avatar_QuestAbility_NilouFullMP!!!!!!!!!!!",
+          "predicates": [
+            {
+              "$type": "ByHasFeatureTag",
+              "featureTagIDs": [10070]
+            }
+          ],
+          "doOffStage": true
+        }
+      ],
       "modifiers": {
         "UNIQUE_Avatar_QuestAbility_NilouFullMP": {
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": 1.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1.5,
           "thinkInterval": 1.0,
           "onThinkInterval": [
             {
               "$type": "ReviveElemEnergy",
-              "RotationDampTime": true,
-              "ratio": 100.0
+              "value": 100,
+              "target": "Self",
+              "doOffStage": true
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "RotationDampTime": true,
-          "predicates": [
-            {
-              "$type": "ByHasFeatureTag",
-              "featureTagIDs": [10070]
-            }
-          ],
-          "modifierName": "UNIQUE_Avatar_QuestAbility_NilouFullMP"
-        },
-        {
-          "$type": "DebugLog",
-          "RotationDampTime": true,
-          "predicates": [
-            {
-              "$type": "ByHasFeatureTag",
-              "featureTagIDs": [10070]
-            }
-          ],
-          "content": "!!!!!!!!!Avatar_QuestAbility_NilouFullMP!!!!!!!!!!!"
-        }
-      ],
-      "isDynamicAbility": true
+      }
     }
   }
 ]

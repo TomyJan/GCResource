@@ -1,4 +1,9 @@
 [
+  /////////////////////////////////////////////////////////////////
+  //
+  // 散兵工厂 运输装置
+  //
+  /////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -6,8 +11,7 @@
       "abilityMixins": [
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
-          "globalValueKey": "SGV_MachineCarrier_State",
-          "defaultGlobalValueOnCreate": 0.0,
+          "globalValueKey": "SGV_MachineCarrier_State", //转向
           "valueSteps": [-0.5, 0.5, 1.5, 2.5],
           "modifierNameSteps": [
             "MachineCarrier_Default",
@@ -17,8 +21,7 @@
         },
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
-          "globalValueKey": "MachineCarrier_PlayerState",
-          "defaultGlobalValueOnCreate": 0.0,
+          "globalValueKey": "MachineCarrier_PlayerState", //转向
           "valueSteps": [-0.5, 0.5, 1.5],
           "modifierNameSteps": [
             "MachineCarrier_DetectPlayer",
@@ -27,20 +30,29 @@
         },
         {
           "$type": "PlatformMoveMixin",
-          "DEPIDGLFCDK": ["MachineCarrier_Sound"]
+          "isLogicMove": false,
+          "moveModifiers": ["MachineCarrier_Sound"]
         },
         {
           "$type": "AttachToGadgetStateMixin",
+          "gadgetState": 0,
           "modifierName": "MachineCarrier_StartDetectPlayer"
+        }
+      ],
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "key": "MachineCarrier_PlayerState",
+          "value": 0
         }
       ],
       "modifiers": {
         "MachineCarrier_Sound": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          //开始移动
           "onAdded": [
             {
               "$type": "TriggerAudio",
+              "responder": "Caster",
               "operation": {
                 "$type": "ConfigAudioEventOp",
                 "operation": {
@@ -49,9 +61,11 @@
               }
             }
           ],
+          //停止移动
           "onRemoved": [
             {
               "$type": "TriggerAudio",
+              "responder": "Caster",
               "operation": {
                 "$type": "ConfigAudioEventOp",
                 "operation": {
@@ -61,22 +75,20 @@
             }
           ]
         },
-        "MachineCarrier_PlayerIn": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
+        "MachineCarrier_PlayerIn": {},
         "MachineCarrier_DetectPlayer": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.20000000298023224,
+          "thinkInterval": 0.2,
           "onThinkInterval": [
             {
               "$type": "Predicated",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR1",
+                "centerBasedOn": "Self",
                 "campTargetType": "Enemy",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self",
+                "sortType": "Default"
+                //"topLimit": 1,
               },
               "targetPredicates": [
                 {
@@ -90,94 +102,252 @@
                   "param1": 201
                 },
                 {
-                  "$type": "ServerLuaCall",
+                  "$type": "ServerLuaCall", //如果在停车状态下 上车，通知Group开车
                   "luaCallType": "FromGroup",
-                  "funcName": "SLC_MachineCarrier_Player_In",
-                  "ODAOGCJFIHC": 0.0,
-                  "GCCFLBLEHDB": 0.0,
-                  "DJODIFOBEJG": 0.0
+                  "funcName": "SLC_MachineCarrier_Player_In"
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "ratio": 1.0,
                   "key": "MachineCarrier_PlayerState",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "target": "Self",
+                  "value": 1
                 }
               ]
             }
           ]
         },
         "MachineCarrier_Default": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorInt",
               "intID": "GadgetState",
-              "ratio": 0.0
+              "value": 0
             }
           ]
         },
         "MachineCarrier_State_1": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorInt",
               "intID": "GadgetState",
-              "ratio": 201.0
+              "value": 201
             }
           ]
         },
         "MachineCarrier_State_2": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorInt",
               "intID": "GadgetState",
-              "ratio": 101.0
+              "value": 101
             }
           ]
         },
         "MachineCarrier_StartDetectPlayer": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "MachineCarrier_PlayerState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "target": "Self",
+              "value": 0
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "MachineCarrier_PlayerState",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        }
-      ],
+      /*"onFieldEnter": 
+			[
+				{
+					"$type": "ExecuteGadgetLua",
+                    "param1": 201,
+				},
+                {
+                    "$type": "ServerLuaCall",
+                    "luaCallType": "FromGroup",
+                    "funcName": "SLC_MachineCarrier_Player_In",
+                }
+			],  */
       "onFieldExit": [
         {
-          "$type": "ExecuteGadgetLua"
+          "$type": "ExecuteGadgetLua",
+          "param1": 0
         }
       ]
     }
   },
+  /////////////////////////////////////////////////////////////////
+  //
+  // 草神地城传送门
+  //
+  /////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_Level_Common_Property_Prop_DreamPortal_01",
+      "abilitySpecials": {
+        "AmberMuteTime": 5.5
+      },
+      "onAdded": [
+        {
+          "$type": "AttachEffect",
+          "effectPattern": "Eff_SceneObj_DreamPortal_01",
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "offset": {
+              "x": 0,
+              "y": 1.35,
+              "z": 0
+            }
+          }
+        },
+        {
+          "$type": "SendEffectTrigger",
+          "effectPattern": "Eff_SceneObj_DreamPortal_01",
+          "canBeHandledOnRecover": true,
+          "type": "Int",
+          "parameter": "GadgetState",
+          "value": 0,
+          "doAfterDie": true,
+          "doOffStage": true,
+          "predicates": [
+            {
+              "$type": "ByTargetGadgetState",
+              "target": "Self",
+              "gadgetState": 0
+            }
+          ]
+        },
+        {
+          "$type": "SendEffectTrigger",
+          "effectPattern": "Eff_SceneObj_DreamPortal_01",
+          "canBeHandledOnRecover": true,
+          "type": "Int",
+          "parameter": "GadgetState",
+          "value": 201,
+          "doAfterDie": true,
+          "doOffStage": true,
+          "predicates": [
+            {
+              "$type": "ByTargetGadgetState",
+              "target": "Self",
+              "gadgetState": 201
+            }
+          ]
+        }
+      ],
+      "onFieldEnter": [
+        {
+          //防穿帮 移除创生物
+          "$type": "ClearLocalGadgets"
+        },
+        {
+          //防穿帮逃课 短暂移除玩家身上琥珀buff
+          "$type": "ApplyModifier",
+          "modifierName": "DreamPortal_MuteAmberEff_1",
+          "target": "Target",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "TargetTeam",
+              "key": "_HAS_AMBER",
+              "value": 1,
+              "compareType": "Equal"
+            },
+            {
+              "$type": "ByTargetGlobalValue",
+              "value": 0,
+              "target": "Self",
+              "key": "SGV_DreamPortal_KillAmberBuff", //是否永久移除
+              "compareType": "NoneOrEqual"
+            }
+          ]
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "DreamPortal_MuteAmberEff_2",
+          "target": "Target",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "TargetTeam",
+              "key": "_HAS_AMBER",
+              "value": 2,
+              "compareType": "Equal"
+            },
+            {
+              "$type": "ByTargetGlobalValue",
+              "value": 0,
+              "target": "Self",
+              "key": "SGV_DreamPortal_KillAmberBuff",
+              "compareType": "NoneOrEqual"
+            }
+          ]
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "DreamPortal_MuteAmberEff_3",
+          "target": "Target",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "TargetTeam",
+              "key": "_HAS_AMBER",
+              "value": 3,
+              "compareType": "Equal"
+            },
+            {
+              "$type": "ByTargetGlobalValue",
+              "value": 0,
+              "target": "Self",
+              "key": "SGV_DreamPortal_KillAmberBuff",
+              "compareType": "NoneOrEqual"
+            }
+          ]
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "DreamPortal_ClearAmberEff",
+          "target": "Target",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "TargetTeam",
+              "key": "_HAS_AMBER",
+              "value": 0,
+              "compareType": "MoreThan"
+            },
+            {
+              "$type": "ByTargetGlobalValue",
+              "value": 0,
+              "target": "Self",
+              "key": "SGV_DreamPortal_KillAmberBuff",
+              "compareType": "MoreThan"
+            }
+          ]
+        },
+        {
+          "$type": "ChangeGadgetState",
+          "state": 0
+        },
+        {
+          "$type": "ServerLuaCall",
+          "funcName": "SLC_TeleportHotSpot_NeedRemove",
+          "luaCallType": "FromGroup"
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "DreamPortal_StateRecover",
+          "target": "Self"
+        },
+        {
+          "$type": "ServerLuaTriggerEvent",
+          "luaCallType": "FromGroup",
+          "sourceName": "DreamPortalEnter"
+        }
+      ],
       "abilityMixins": [
         {
           "$type": "AttachToGadgetStateMixin",
+          "gadgetState": 0,
           "modifierName": "DreamPortal_DefaultState"
         },
         {
@@ -186,310 +356,133 @@
           "modifierName": "DreamPortal_OpenState"
         }
       ],
-      "abilitySpecials": {
-        "AmberMuteTime": 5.5
-      },
       "modifiers": {
         "DreamPortal_ClearAmberEff": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
               "target": "TargetTeam",
-              "ratio": 0.0,
               "key": "_HAS_AMBER",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         },
         "DreamPortal_MuteAmberEff_1": {
-          "modifierName": "",
-          "HCJLIGBLGJA": "AmberMuteTime",
-          "bonusCriticalHurt": 100.0,
+          "duration": "%AmberMuteTime",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
               "target": "TargetTeam",
-              "ratio": 0.0,
               "key": "_HAS_AMBER",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
               "target": "TargetTeam",
-              "RotationDampTime": true,
-              "ratio": 1.0,
               "key": "_HAS_AMBER",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             }
           ]
         },
         "DreamPortal_MuteAmberEff_2": {
-          "modifierName": "",
-          "HCJLIGBLGJA": "AmberMuteTime",
-          "bonusCriticalHurt": 100.0,
+          "duration": "%AmberMuteTime",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
               "target": "TargetTeam",
-              "ratio": 0.0,
               "key": "_HAS_AMBER",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
               "target": "TargetTeam",
-              "RotationDampTime": true,
-              "ratio": 2.0,
               "key": "_HAS_AMBER",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 2
             }
           ]
         },
         "DreamPortal_MuteAmberEff_3": {
-          "modifierName": "",
-          "HCJLIGBLGJA": "AmberMuteTime",
-          "bonusCriticalHurt": 100.0,
+          "duration": "%AmberMuteTime",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
               "target": "TargetTeam",
-              "ratio": 0.0,
               "key": "_HAS_AMBER",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
               "target": "TargetTeam",
-              "RotationDampTime": true,
-              "ratio": 3.0,
               "key": "_HAS_AMBER",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 3
             }
           ]
         },
         "DreamPortal_StateRecover": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 5.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 5,
           "onRemoved": [
             {
               "$type": "ChangeGadgetState",
-              "CMFMJHJLIPP": 201
+              "state": 201
             }
           ]
         },
         "DreamPortal_DefaultState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
-              "RotationDampTime": true,
+              "effectPattern": "Eff_SceneObj_DreamPortal_01",
               "canBeHandledOnRecover": true,
-              "parameter": "GadgetState",
-              "attachPoint": "",
               "type": "Int",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DreamPortal_01"
+              "parameter": "GadgetState",
+              "value": 0,
+              "doAfterDie": true,
+              "doOffStage": true
             }
           ]
         },
         "DreamPortal_OpenState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
-              "RotationDampTime": true,
+              "effectPattern": "Eff_SceneObj_DreamPortal_01",
               "canBeHandledOnRecover": true,
-              "parameter": "GadgetState",
-              "attachPoint": "",
               "type": "Int",
+              "parameter": "GadgetState",
               "value": 201,
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DreamPortal_01"
+              "doAfterDie": true,
+              "doOffStage": true
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DreamPortal_01",
-          "born": {
-            "$type": "ConfigBornBySelf",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 1.350000023841858,
-              "PJCOKIGCJOK": 0.0
-            }
-          },
-          "EBHJMLOKDGB": -1.0
-        },
-        {
-          "$type": "SendEffectTrigger",
-          "RotationDampTime": true,
-          "canBeHandledOnRecover": true,
-          "predicates": [
-            {
-              "$type": "ByTargetGadgetState",
-              "target": "Self"
-            }
-          ],
-          "parameter": "GadgetState",
-          "attachPoint": "",
-          "type": "Int",
-          "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DreamPortal_01"
-        },
-        {
-          "$type": "SendEffectTrigger",
-          "RotationDampTime": true,
-          "canBeHandledOnRecover": true,
-          "predicates": [
-            {
-              "$type": "ByTargetGadgetState",
-              "target": "Self",
-              "gadgetState": 201
-            }
-          ],
-          "parameter": "GadgetState",
-          "attachPoint": "",
-          "type": "Int",
-          "value": 201,
-          "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DreamPortal_01"
-        }
-      ],
-      "onFieldEnter": [
-        {
-          "$type": "ClearLocalGadgets"
-        },
-        {
-          "$type": "ApplyModifier",
-          "target": "Target",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "target": "TargetTeam",
-              "key": "_HAS_AMBER",
-              "ratio": 1.0
-            },
-            {
-              "$type": "ByTargetGlobalValue",
-              "target": "Self",
-              "key": "SGV_DreamPortal_KillAmberBuff",
-              "ratio": 0.0,
-              "compareType": "NoneOrEqual"
-            }
-          ],
-          "modifierName": "DreamPortal_MuteAmberEff_1"
-        },
-        {
-          "$type": "ApplyModifier",
-          "target": "Target",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "target": "TargetTeam",
-              "key": "_HAS_AMBER",
-              "ratio": 2.0
-            },
-            {
-              "$type": "ByTargetGlobalValue",
-              "target": "Self",
-              "key": "SGV_DreamPortal_KillAmberBuff",
-              "ratio": 0.0,
-              "compareType": "NoneOrEqual"
-            }
-          ],
-          "modifierName": "DreamPortal_MuteAmberEff_2"
-        },
-        {
-          "$type": "ApplyModifier",
-          "target": "Target",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "target": "TargetTeam",
-              "key": "_HAS_AMBER",
-              "ratio": 3.0
-            },
-            {
-              "$type": "ByTargetGlobalValue",
-              "target": "Self",
-              "key": "SGV_DreamPortal_KillAmberBuff",
-              "ratio": 0.0,
-              "compareType": "NoneOrEqual"
-            }
-          ],
-          "modifierName": "DreamPortal_MuteAmberEff_3"
-        },
-        {
-          "$type": "ApplyModifier",
-          "target": "Target",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "target": "TargetTeam",
-              "key": "_HAS_AMBER",
-              "ratio": 0.0,
-              "compareType": "MoreThan"
-            },
-            {
-              "$type": "ByTargetGlobalValue",
-              "target": "Self",
-              "key": "SGV_DreamPortal_KillAmberBuff",
-              "ratio": 0.0,
-              "compareType": "MoreThan"
-            }
-          ],
-          "modifierName": "DreamPortal_ClearAmberEff"
-        },
-        {
-          "$type": "ChangeGadgetState"
-        },
-        {
-          "$type": "ServerLuaCall",
-          "luaCallType": "FromGroup",
-          "funcName": "SLC_TeleportHotSpot_NeedRemove",
-          "ODAOGCJFIHC": 0.0,
-          "GCCFLBLEHDB": 0.0,
-          "DJODIFOBEJG": 0.0
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "DreamPortal_StateRecover"
-        },
-        {
-          "$type": "ServerLuaTriggerEvent",
-          "luaCallType": "FromGroup",
-          "AICKCBIACDM": "DreamPortalEnter",
-          "ODAOGCJFIHC": 0.0,
-          "GCCFLBLEHDB": 0.0,
-          "DJODIFOBEJG": 0.0
-        }
-      ]
+      }
     }
   },
+  /////////////////////////////////////////////////////////////////
+  //
+  // 瀑布1
+  //
+  /////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_Level_Common_Property_Water_Waterfall_01",
+      "onAdded": [
+        {
+          "$type": "AttachEffect",
+          "effectPattern": "Eff_SceneObj_Common_WaterFlow_01_Vo_02"
+        }
+      ],
       "abilityMixins": [
         {
           "$type": "AttachToGadgetStateMixin",
+          "gadgetState": 0,
           "modifierName": "Waterfall_DefaultState"
         },
         {
@@ -500,49 +493,49 @@
       ],
       "modifiers": {
         "Waterfall_DefaultState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
-              "parameter": "GadgetState",
-              "attachPoint": "",
+              "effectPattern": "Eff_SceneObj_Common_WaterFlow_01_Vo_02",
               "type": "Int",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Common_WaterFlow_01_Vo_02"
+              "parameter": "GadgetState",
+              "value": 0
             }
           ]
         },
         "Waterfall_OpenState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
-              "parameter": "GadgetState",
-              "attachPoint": "",
+              "effectPattern": "Eff_SceneObj_Common_WaterFlow_01_Vo_02",
               "type": "Int",
-              "value": 201,
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Common_WaterFlow_01_Vo_02"
+              "parameter": "GadgetState",
+              "value": 201
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Common_WaterFlow_01_Vo_02",
-          "EBHJMLOKDGB": -1.0
-        }
-      ]
+      }
     }
   },
+  /////////////////////////////////////////////////////////////////
+  //
+  // 瀑布2
+  //
+  /////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_Level_Common_Property_Water_Waterfall_02",
+      "onAdded": [
+        {
+          "$type": "AttachEffect",
+          "effectPattern": "Eff_SceneObj_Common_WaterFlow_01_Vo_01"
+        }
+      ],
       "abilityMixins": [
         {
           "$type": "AttachToGadgetStateMixin",
+          "gadgetState": 0,
           "modifierName": "Waterfall_DefaultState"
         },
         {
@@ -553,49 +546,49 @@
       ],
       "modifiers": {
         "Waterfall_DefaultState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
-              "parameter": "GadgetState",
-              "attachPoint": "",
+              "effectPattern": "Eff_SceneObj_Common_WaterFlow_01_Vo_01",
               "type": "Int",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Common_WaterFlow_01_Vo_01"
+              "parameter": "GadgetState",
+              "value": 0
             }
           ]
         },
         "Waterfall_OpenState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
-              "parameter": "GadgetState",
-              "attachPoint": "",
+              "effectPattern": "Eff_SceneObj_Common_WaterFlow_01_Vo_01",
               "type": "Int",
-              "value": 201,
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Common_WaterFlow_01_Vo_01"
+              "parameter": "GadgetState",
+              "value": 201
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Common_WaterFlow_01_Vo_01",
-          "EBHJMLOKDGB": -1.0
-        }
-      ]
+      }
     }
   },
+  /////////////////////////////////////////////////////////////////
+  //
+  // 瀑布3
+  //
+  /////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_Level_Common_Property_Water_Waterfall_03",
+      "onAdded": [
+        {
+          "$type": "AttachEffect",
+          "effectPattern": "Eff_SceneObj_Common_WaterFlow_01_Vo"
+        }
+      ],
       "abilityMixins": [
         {
           "$type": "AttachToGadgetStateMixin",
+          "gadgetState": 0,
           "modifierName": "Waterfall_DefaultState"
         },
         {
@@ -606,42 +599,35 @@
       ],
       "modifiers": {
         "Waterfall_DefaultState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
-              "parameter": "GadgetState",
-              "attachPoint": "",
+              "effectPattern": "Eff_SceneObj_Common_WaterFlow_01_Vo",
               "type": "Int",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Common_WaterFlow_01_Vo"
+              "parameter": "GadgetState",
+              "value": 0
             }
           ]
         },
         "Waterfall_OpenState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
-              "parameter": "GadgetState",
-              "attachPoint": "",
+              "effectPattern": "Eff_SceneObj_Common_WaterFlow_01_Vo",
               "type": "Int",
-              "value": 201,
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Common_WaterFlow_01_Vo"
+              "parameter": "GadgetState",
+              "value": 201
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Common_WaterFlow_01_Vo",
-          "EBHJMLOKDGB": -1.0
-        }
-      ]
+      }
     }
   },
+  /////////////////////////////////////////////////////////////////
+  //
+  // 机关电梯 电梯井特效
+  //
+  /////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -655,33 +641,42 @@
       ],
       "modifiers": {
         "Elevator_Disc_Effect_On": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Build_Elevator_Disc_01_Cover_Loop",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_Build_Elevator_Disc_01_Cover_Loop"
             }
           ],
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Build_Elevator_Disc_01_Cover_Diss",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_Build_Elevator_Disc_01_Cover_Diss"
             }
           ]
         }
       }
     }
   },
+  /////////////////////////////////////////////////////////////////
+  //
+  // 机关电梯 圆盘
+  //
+  /////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_Level_Common_Property_Ani_Build_Elevator_Disc_02",
+      /*"onAdded": 
+            [
+                {
+                    "$type": "AttachEffect",
+                    "effectPattern": "Eff_SceneObj_DreamPortal_01",
+                }
+            ],*/
       "abilityMixins": [
         {
           "$type": "AttachToGadgetStateMixin",
+          "gadgetState": 0,
           "modifierName": "Elevator_Disc_On1"
         },
         {
@@ -697,33 +692,29 @@
       ],
       "modifiers": {
         "Elevator_Disc_Emission": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetMaterialParamFloatByTransform",
               "canBeHandledOnRecover": true,
-              "FBIDGOMNBLJ": "Disc",
-              "HFGGHONFMMJ": "_EmissionStrength",
-              "ratio": 6.0,
-              "HCALGEOPEGJ": 0.5
+              "matName": "Disc",
+              "patternName": "_EmissionStrength",
+              "lerpTime": 0.5,
+              "value": 6
             }
           ],
           "onRemoved": [
             {
               "$type": "SetMaterialParamFloatByTransform",
               "canBeHandledOnRecover": true,
-              "FBIDGOMNBLJ": "Disc",
-              "HFGGHONFMMJ": "_EmissionStrength",
-              "ratio": 0.0,
-              "HCALGEOPEGJ": 0.5
+              "matName": "Disc",
+              "patternName": "_EmissionStrength",
+              "lerpTime": 0.5,
+              "value": 0
             }
           ]
         },
         "Elevator_Disc_EmissionTimer": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1, //等待旋转完成
           "onRemoved": [
             {
               "$type": "ApplyModifier",
@@ -732,8 +723,6 @@
           ]
         },
         "Elevator_Disc_On1": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachModifier",
@@ -748,8 +737,6 @@
           ]
         },
         "Elevator_Disc_On2": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachModifier",
@@ -764,8 +751,6 @@
           ]
         },
         "Elevator_Disc_On3": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachModifier",
@@ -782,6 +767,11 @@
       }
     }
   },
+  /////////////////////////////////////////////////////////////////
+  //
+  // 机关电梯
+  //
+  /////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -789,19 +779,16 @@
       "abilityMixins": [
         {
           "$type": "PlatformMoveMixin",
-          "JKPHFPELMMB": true,
-          "DEPIDGLFCDK": ["Elevator_Disc_Effect"]
+          "isLogicMove": true, //false偶现中间点位停顿误触发
+          "moveModifiers": ["Elevator_Disc_Effect"]
         }
       ],
       "modifiers": {
         "Elevator_Disc_Effect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Build_Elevator_Disc_01_08_Door_Active",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_Build_Elevator_Disc_01_08_Door_Active"
             },
             {
               "$type": "AttachModifier",
@@ -817,8 +804,7 @@
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Build_Elevator_Disc_01_08_Door_Diss",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_Build_Elevator_Disc_01_08_Door_Diss"
             },
             {
               "$type": "RemoveModifier",
@@ -827,14 +813,13 @@
             {
               "$type": "EnableSceneTransformByName",
               "canBeHandledOnRecover": true,
-              "transformNames": ["Collider_Moving"]
+              "transformNames": ["Collider_Moving"],
+              "setEnable": false
             }
           ]
         },
         "Delay_MovingEffect": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1,
           "onRemoved": [
             {
               "$type": "ApplyModifier",
@@ -843,19 +828,21 @@
           ]
         },
         "MovingEffect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Build_Elevator_Disc_01_08_Door_Loop",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_Build_Elevator_Disc_01_08_Door_Loop"
             }
           ]
         }
       }
     }
   },
+  ///////////////////////////////////////////////////
+  //
+  //  琥珀激活机关
+  //
+  ///////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -863,6 +850,7 @@
       "abilityMixins": [
         {
           "$type": "AttachToGadgetStateMixin",
+          "gadgetState": 0,
           "modifierName": "DefaultState"
         },
         {
@@ -871,30 +859,31 @@
           "modifierName": "OpenState"
         }
       ],
+      "onAdded": [],
       "modifiers": {
         "DefaultState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.5,
+          //0
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_AmberKeyGear_Idle",
+              "effectPattern": "Eff_SceneObj_AmberKeyGear_Idle",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
                 "attachPointName": "EffectNode1"
-              },
-              "EBHJMLOKDGB": -1.0
+              }
             }
           ],
+          //检查是不是有玩家接近了这个门，是则需要把琥珀安到门上
+          "thinkInterval": 0.5,
           "onThinkInterval": [
             {
               "$type": "Predicated",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR3H3",
+                "centerBasedOn": "Self",
                 "campTargetType": "All",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
               "predicates": [
                 {
@@ -905,59 +894,69 @@
                   "$type": "ByTargetGlobalValue",
                   "target": "TargetTeam",
                   "key": "_HAS_AMBER",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "MoreThan"
                 },
                 {
+                  //只能算接近的第一次
                   "$type": "ByTargetGlobalValue",
                   "key": "IN_TRIGGRE",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
                   "$type": "ApplyModifier",
-                  "target": "Other",
-                  "modifierName": "UNIQUE_AmberKeyGear_Add_2_Avatar1"
+                  "modifierName": "UNIQUE_AmberKeyGear_Add_2_Avatar1",
+                  "target": "Other"
                 },
                 {
                   "$type": "ExecuteGadgetLua",
-                  "param1": 201
+                  "param1": 201,
+                  "target": "Self"
                 }
               ]
             }
           ]
         },
         "OpenState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          //201
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_AmberKeyGear_Active",
+              "effectPattern": "Eff_SceneObj_AmberKeyGear_Active",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
                 "attachPointName": "EffectNode2"
-              },
-              "EBHJMLOKDGB": -1.0
+              }
             }
           ]
         },
         "UNIQUE_AmberKeyGear_Add_2_Avatar1": {
+          //0 到 901
           "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1,
+          "onRemoved": [
+            {
+              "$type": "AddGlobalValue",
+              "doOffStage": true,
+              "key": "IN_TRIGGRE",
+              "value": 0,
+              "useLimitRange": true,
+              "maxValue": 0,
+              "minValue": 0
+            }
+          ],
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
               "key": "IN_TRIGGRE",
+              "value": 1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 1.0
+              "maxValue": 1,
+              "minValue": 1
             },
             {
               "$type": "Predicated",
@@ -966,38 +965,32 @@
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_HAS_AMBER",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "MoreThan"
                 }
               ],
               "successActions": [
                 {
                   "$type": "AddGlobalValue",
-                  "target": "Team",
-                  "ratio": -1.0,
                   "key": "_HAS_AMBER",
+                  "target": "Team",
+                  "value": -1,
                   "useLimitRange": true,
-                  "maxValue": 3.0,
-                  "minValue": 0.0
+                  "maxValue": 3,
+                  "minValue": 0
                 }
               ]
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "AddGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
-              "key": "IN_TRIGGRE",
-              "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
             }
           ]
         }
       }
     }
   },
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  //	大树地城循环远景
+  //
+  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1005,6 +998,7 @@
       "abilityMixins": [
         {
           "$type": "AttachToGadgetStateMixin",
+          "gadgetState": 0,
           "modifierName": "MoveType_1"
         },
         {
@@ -1015,44 +1009,47 @@
       ],
       "modifiers": {
         "MoveType_1": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorInt",
-              "canBeHandledOnRecover": true,
               "intID": "GadgetState",
-              "ratio": 0.0
+              "canBeHandledOnRecover": true,
+              "value": 0
             },
             {
+              //开启City的tick跟随
               "$type": "SectorCityManeuver",
+              "attachPointName": "FollowNode",
               "canBeHandledOnRecover": true,
-              "start": true,
-              "attachPointName": "FollowNode"
+              "start": true
             }
           ]
         },
         "MoveType_2": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorInt",
-              "canBeHandledOnRecover": true,
               "intID": "GadgetState",
-              "ratio": 201.0
+              "canBeHandledOnRecover": true,
+              "value": 201
             },
             {
+              //开启City的tick跟随
               "$type": "SectorCityManeuver",
+              "attachPointName": "FollowNode",
               "canBeHandledOnRecover": true,
-              "start": true,
-              "attachPointName": "FollowNode"
+              "start": true
             }
           ]
         }
       }
     }
   },
+  /////////////////////////////////////////////////////////////////
+  //
+  // 雨生花
+  //
+  /////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1065,56 +1062,56 @@
         },
         {
           "$type": "AttachToGadgetStateMixin",
+          "gadgetState": 0,
           "modifierName": "RainFlower_Off"
         }
       ],
       "modifiers": {
         "RainFlower_On": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetMaterialParamFloatByTransform",
+              "matName": "Dissolve",
+              "patternName": "_DitherAlpha",
               "canBeHandledOnRecover": true,
-              "FBIDGOMNBLJ": "Dissolve",
-              "HFGGHONFMMJ": "_DitherAlpha",
-              "ratio": 1.0
+              "value": 1
             },
             {
               "$type": "SetMaterialParamFloatByTransform",
-              "FBIDGOMNBLJ": "Dissolve",
-              "HFGGHONFMMJ": "_DitherAlpha",
-              "ratio": 0.0,
-              "JNFAMBPFJFM": true,
-              "HCALGEOPEGJ": 4.0
+              "matName": "Dissolve",
+              "patternName": "_DitherAlpha",
+              "value": 0,
+              "lerpTime": 4,
+              "useCurve": true,
+              "lerpCurveIndex": 0
             },
             {
               "$type": "EnableSceneTransformByName",
               "canBeHandledOnRecover": true,
-              "transformNames": ["Collider"]
+              "transformNames": ["Collider"],
+              "setEnable": false
             },
             {
+              //开启音效
               "$type": "TriggerAudio",
+              "responder": "Caster",
               "operation": {
                 "$type": "ConfigAudioEventOp",
-                "operation": {
-                  "text": "Play_amb_sceneObj_gear_rainFlower_01"
-                }
+                "operation": { "text": "Play_amb_sceneObj_gear_rainFlower_01" }
               }
             }
           ]
         },
         "RainFlower_Off": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetMaterialParamFloatByTransform",
-              "FBIDGOMNBLJ": "Dissolve",
-              "HFGGHONFMMJ": "_DitherAlpha",
-              "ratio": 1.0,
-              "JNFAMBPFJFM": true,
-              "HCALGEOPEGJ": 4.0
+              "matName": "Dissolve",
+              "patternName": "_DitherAlpha",
+              "value": 1,
+              "lerpTime": 4,
+              "useCurve": true,
+              "lerpCurveIndex": 0
             },
             {
               "$type": "EnableSceneTransformByName",
@@ -1123,12 +1120,12 @@
               "setEnable": true
             },
             {
+              //关闭音效
               "$type": "TriggerAudio",
+              "responder": "Caster",
               "operation": {
                 "$type": "ConfigAudioEventOp",
-                "operation": {
-                  "text": "Play_amb_sceneObj_gear_rainFlower_01"
-                }
+                "operation": { "text": "Play_amb_sceneObj_gear_rainFlower_01" }
               }
             }
           ]
@@ -1136,6 +1133,11 @@
       }
     }
   },
+  ///////////////////////////////////////////////////////////////////
+  //
+  // 散兵工厂操作台
+  //
+  ///////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1143,7 +1145,7 @@
       "abilityMixins": [
         {
           "$type": "WidgetMpSupportMixin",
-          "OCKBEGOIGDB": [
+          "succActions": [
             {
               "$type": "ApplyModifier",
               "modifierName": "LuaTriggerOperator_Intee"
@@ -1152,6 +1154,7 @@
         },
         {
           "$type": "AttachToGadgetStateMixin",
+          "gadgetState": 0,
           "modifierName": "Operator_On"
         },
         {
@@ -1160,24 +1163,62 @@
           "modifierName": "Operator_Off"
         }
       ],
+      "onAdded": [
+        {
+          "$type": "EnableGadgetIntee",
+          "enable": true,
+          "predicates": [
+            {
+              "$type": "ByTargetGadgetState",
+              "gadgetState": 0,
+              "target": "Self"
+            }
+          ]
+        },
+        {
+          "$type": "SetMaterialParamFloatByTransform",
+          "canBeHandledOnRecover": true,
+          "matName": "Emission",
+          "patternName": "_EmissionStrength",
+          "value": 0.5,
+          "predicates": [
+            {
+              "$type": "ByTargetGadgetState",
+              "gadgetState": 202,
+              "target": "Self"
+            }
+          ]
+        },
+        {
+          "$type": "SetMaterialParamFloatByTransform",
+          "canBeHandledOnRecover": true,
+          "matName": "Emission",
+          "patternName": "_EmissionStrength",
+          "value": 4,
+          "predicates": [
+            {
+              "$type": "ByTargetGadgetState",
+              "gadgetState": 0,
+              "target": "Self"
+            }
+          ]
+        }
+      ],
       "modifiers": {
         "Operator_On": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetMaterialParamFloatByTransform",
-              "FBIDGOMNBLJ": "Emission",
-              "HFGGHONFMMJ": "_EmissionStrength",
-              "ratio": 4.0,
-              "JNFAMBPFJFM": true,
-              "HCALGEOPEGJ": 0.5
+              "matName": "Emission",
+              "patternName": "_EmissionStrength",
+              "value": 4,
+              "useCurve": true,
+              "lerpCurveIndex": 0,
+              "lerpTime": 0.5
             }
           ]
         },
         "Operator_Off": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
@@ -1186,27 +1227,25 @@
           ]
         },
         "Operator_OffDelay": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1,
           "onRemoved": [
             {
               "$type": "SetMaterialParamFloatByTransform",
-              "FBIDGOMNBLJ": "Emission",
-              "HFGGHONFMMJ": "_EmissionStrength",
-              "ratio": 0.5,
-              "JNFAMBPFJFM": true,
-              "HCALGEOPEGJ": 0.5
+              "matName": "Emission",
+              "patternName": "_EmissionStrength",
+              "value": 0.5,
+              "useCurve": true,
+              "lerpCurveIndex": 0,
+              "lerpTime": 0.5
             }
           ]
         },
         "LuaTriggerOperator_Intee": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1.5,
           "onAdded": [
             {
-              "$type": "EnableGadgetIntee"
+              "$type": "EnableGadgetIntee",
+              "enable": false
             },
             {
               "$type": "SetAnimatorTrigger",
@@ -1215,67 +1254,31 @@
             {
               "$type": "ServerLuaTriggerEvent",
               "luaCallType": "FromGroup",
-              "AICKCBIACDM": "FactoryOperator",
-              "ODAOGCJFIHC": 0.0,
-              "GCCFLBLEHDB": 0.0,
-              "DJODIFOBEJG": 0.0
+              "sourceName": "FactoryOperator"
             }
           ],
           "onRemoved": [
             {
               "$type": "EnableGadgetIntee",
+              "enable": true,
               "predicates": [
                 {
                   "$type": "ByTargetGadgetState",
+                  "gadgetState": 0,
                   "target": "Self"
                 }
-              ],
-              "enable": true
+              ]
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "EnableGadgetIntee",
-          "predicates": [
-            {
-              "$type": "ByTargetGadgetState",
-              "target": "Self"
-            }
-          ],
-          "enable": true
-        },
-        {
-          "$type": "SetMaterialParamFloatByTransform",
-          "canBeHandledOnRecover": true,
-          "predicates": [
-            {
-              "$type": "ByTargetGadgetState",
-              "target": "Self",
-              "gadgetState": 202
-            }
-          ],
-          "FBIDGOMNBLJ": "Emission",
-          "HFGGHONFMMJ": "_EmissionStrength",
-          "ratio": 0.5
-        },
-        {
-          "$type": "SetMaterialParamFloatByTransform",
-          "canBeHandledOnRecover": true,
-          "predicates": [
-            {
-              "$type": "ByTargetGadgetState",
-              "target": "Self"
-            }
-          ],
-          "FBIDGOMNBLJ": "Emission",
-          "HFGGHONFMMJ": "_EmissionStrength",
-          "ratio": 4.0
-        }
-      ]
+      }
     }
   },
+  /////////////////////////////////////////////////////////////////
+  //
+  // 大树地城氛围特效 分平台灯光
+  //
+  /////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1288,57 +1291,44 @@
         },
         {
           "$type": "AttachToGadgetStateMixin",
+          "gadgetState": 0,
           "modifierName": "BigTreeDungeonEff_Off"
         }
       ],
+      "onAdded": [
+        {
+          "$type": "AttachEffect",
+          "effectPattern": "Eff_Level_FCdungeon_BigTree_Light_01",
+          "isPlatformDependent": true
+        }
+      ],
       "modifiers": {
-        "BigTreeDungeonEff": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Level_FCdungeon_BigTree_Light_01",
-              "EBHJMLOKDGB": -1.0,
-              "KFOCJNBHAJJ": true
-            }
-          ]
-        },
         "BigTreeDungeonEff_On": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 201.0,
               "key": "GV_GadgetState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 201
             }
           ]
         },
         "BigTreeDungeonEff_Off": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "GV_GadgetState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "BigTreeDungeonEff"
-        }
-      ]
+      }
     }
   },
+  /////////////////////////////////////////////////////////////////
+  //
+  // 船舵
+  //
+  /////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1352,17 +1342,14 @@
       ],
       "modifiers": {
         "Rudder_On": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Rubber_Active",
+              "effectPattern": "Eff_SceneObj_Rubber_Active",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
                 "attachPointName": "EffectNode"
-              },
-              "EBHJMLOKDGB": -1.0
+              }
             }
           ]
         }

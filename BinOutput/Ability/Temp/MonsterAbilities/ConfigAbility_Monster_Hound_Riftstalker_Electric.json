@@ -1,13 +1,36 @@
 [
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Pose
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Hound_Riftstalker_Electric_Pose",
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_Riftstalker_BeHitCheck"
+        },
+        // 用于区分雷猎犬
+        {
+          "$type": "SetGlobalValue",
+          "key": "_RIFTSTALKER_ELECTRIC_TAG_",
+          "value": 1,
+          "target": "Self"
+        }
+      ],
       "abilityMixins": [
+        // _Riftstalker_POSE_TAG_
+        // 0:未激活
+        // 1:未激活→激活
+        // 2:激活
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_Riftstalker_POSE_TAG_",
-          "defaultGlobalValueOnCreate": 0.0,
+          "defaultGlobalValueOnCreate": 0,
+          "removeAppliedModifier": true,
           "valueSteps": [-0.5, 0.5, 1.5, 2.5],
           "modifierNameSteps": [
             "Pose_None",
@@ -23,8 +46,6 @@
       ],
       "modifiers": {
         "Riftstalker_ChargeBar_Handler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
@@ -39,66 +60,60 @@
           ]
         },
         "UNIQUE_Riftstalker_ChargeBar": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "SetChargeBarValue",
+              "value": 0
+            }
+          ],
           "modifierMixins": [
             {
               "$type": "ChargeBarMixin",
-              "HEIPOAJEHJB": "Electric",
-              "NDODBELPCOJ": 2,
-              "PMDMNDLOMJJ": 0.0,
-              "maxValue": 100.0
+              "chargeBarElementType": "Electric",
+              "chargeBarIconID": 2,
+              "initialValue": 0,
+              "maxValue": 100
             },
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_CHARGEBAR_VALUE",
-              "defaultGlobalValueOnCreate": 0.0,
               "valueSteps": [99.5, 100.5],
+              "removeAppliedModifier": true,
               "modifierNameSteps": ["ChargeActivated"]
-            }
-          ],
-          "onAdded": [
-            {
-              "$type": "SetChargeBarValue",
-              "ratio": 0.0
             }
           ]
         },
+        // 通过充能条来控制怪物激活/未激活的pose切换
         "ChargeActivated": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "_Riftstalker_POSE_TAG_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             }
           ]
         },
         "Pose_None": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetPoseInt",
-              "intID": "ActivatedTag"
+              "intID": "ActivatedTag",
+              "value": 0
             },
             {
               "$type": "SetAnimatorBool",
-              "boolID": "ActivatedTag"
+              "boolID": "ActivatedTag",
+              "value": false
             },
             {
               "$type": "SetAnimatorBool",
-              "boolID": "ShaderActivatedTag"
+              "boolID": "ShaderActivatedTag",
+              "value": false
             }
           ]
         },
         "Pose_NormalToActivated": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetPoseInt",
@@ -107,17 +122,15 @@
             },
             {
               "$type": "SetAISkillGCD",
-              "value": 0.20000000298023224
+              "value": 0.2
             }
           ]
         },
         "Pose_Activated": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_ElecSubHurtDelta": -0.6499999761581421
-          },
           "state": "DefenseDown",
+          "properties": {
+            "Actor_ElecSubHurtDelta": -0.65
+          },
           "onAdded": [
             {
               "$type": "SetPoseInt",
@@ -127,23 +140,21 @@
             {
               "$type": "SetAnimatorBool",
               "boolID": "ActivatedTag",
-              "ratio": true
+              "value": true
             },
             {
               "$type": "SetAnimatorBool",
               "boolID": "ShaderActivatedTag",
-              "ratio": true
+              "value": true
             },
             {
               "$type": "SetAISkillGCD",
-              "value": 1.399999976158142
+              "value": 1.4
             }
           ]
         },
         "UNIQUE_Riftstalker_BeHitCheck": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "onBeingHit": [
             {
               "$type": "Predicated",
@@ -161,9 +172,8 @@
               "successActions": [
                 {
                   "$type": "AddChargeBarValue",
-                  "ratio": 20.0,
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 20,
+                  "target": "Self"
                 }
               ]
             },
@@ -183,30 +193,21 @@
               "successActions": [
                 {
                   "$type": "AddChargeBarValue",
-                  "ratio": 20.0,
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 20,
+                  "target": "Self"
                 }
               ]
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "UNIQUE_Riftstalker_BeHitCheck"
-        },
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 1.0,
-          "key": "_RIFTSTALKER_ELECTRIC_TAG_",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Steer
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -215,94 +216,64 @@
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["RandomWalk"],
-          "angularSpeed": 720.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 1.0,
+          "angularSpeed": 720
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["WavePaw"],
-          "endNormalizedTime": 0.20000000298023224,
-          "angularSpeed": 120.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 0.2,
+          "angularSpeed": 120
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Strike_BS"],
-          "endNormalizedTime": 0.18000000715255737,
-          "angularSpeed": 180.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 0.18,
+          "angularSpeed": 180
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Biting"],
+          "startNormalizedTime": 0.0,
           "endNormalizedTime": 0.25,
-          "angularSpeed": 120.0,
-          "attackTrigger": ""
+          "angularSpeed": 120
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["JumpBack"],
-          "endNormalizedTime": 0.10000000149011612,
-          "angularSpeed": 270.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 0.1,
+          "angularSpeed": 270
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["ShockWave"],
-          "endNormalizedTime": 0.11999999731779099,
-          "angularSpeed": 270.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 0.12,
+          "angularSpeed": 270
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["ShockWave"],
           "startNormalizedTime": 0.5,
-          "endNormalizedTime": 0.5899999737739563,
-          "angularSpeed": 270.0,
-          "attackTrigger": ""
+          "endNormalizedTime": 0.59,
+          "angularSpeed": 270
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Body Effect
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Hound_Riftstalker_Electric_AddBodyEff",
-      "modifiers": {
-        "UNIQUE_Riftstalker_Electric_BodyEff": {
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Riftstalker_Electric_Body",
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        },
-        "UNIQUE_Riftstalker_Electric_EyeEff": {
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Riftstalker_Electric_Eye",
-              "born": {
-                "$type": "ConfigBornByAttachPoint",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
-                },
-                "attachPointName": "Mouth"
-              },
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        }
-      },
       "onAdded": [
         {
           "$type": "ApplyModifier",
@@ -322,7 +293,36 @@
           "$type": "ApplyModifier",
           "modifierName": "UNIQUE_Riftstalker_Electric_EyeEff"
         }
-      ]
+      ],
+      "modifiers": {
+        "UNIQUE_Riftstalker_Electric_BodyEff": {
+          "isUnique": true,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Riftstalker_Electric_Body"
+            }
+          ]
+        },
+        "UNIQUE_Riftstalker_Electric_EyeEff": {
+          "isUnique": true,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Riftstalker_Electric_Eye",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "Mouth",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                }
+              }
+            }
+          ]
+        }
+      }
     }
   },
   {
@@ -341,6 +341,11 @@
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Strike
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -364,9 +369,7 @@
       ],
       "modifiers": {
         "UNIQUE_Strike_Actions": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ClearLockTarget",
@@ -374,26 +377,33 @@
             },
             {
               "$type": "AttachModifier",
-              "modifierName": "Strike_Invincible"
+              "modifierName": "Strike_Invincible",
+              "target": "Self"
             },
             {
               "$type": "AttachModifier",
-              "modifierName": "Strike_DenyLockOn"
+              "modifierName": "Strike_DenyLockOn",
+              "target": "Self"
             },
             {
-              "$type": "TriggerSetVisible"
+              "$type": "TriggerSetVisible",
+              "visible": false,
+              "target": "Self"
             },
             {
               "$type": "HideUIBillBoard",
-              "hide": true
+              "hide": true,
+              "target": "Self"
             },
             {
               "$type": "EnableHitBoxByName",
-              "hitBoxNames": ["HitBox_Head", "HitBox_Body"]
+              "hitBoxNames": ["HitBox_Head", "HitBox_Body"],
+              "setEnable": false
             },
             {
               "$type": "EnablePushColliderName",
-              "pushColliderNames": ["PushCollider"]
+              "pushColliderNames": ["PushCollider"],
+              "setEnable": false
             },
             {
               "$type": "TriggerAbility",
@@ -413,10 +423,13 @@
             },
             {
               "$type": "TriggerSetVisible",
-              "visible": true
+              "visible": true,
+              "target": "Self"
             },
             {
-              "$type": "HideUIBillBoard"
+              "$type": "HideUIBillBoard",
+              "hide": false,
+              "target": "Self"
             },
             {
               "$type": "TriggerAbility",
@@ -425,18 +438,12 @@
           ]
         },
         "Strike_Invincible": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "Invincible"
         },
         "Strike_DenyLockOn": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "DenyLockOn"
         },
         "Strike_FindBlinkPointActions": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "TriggerAbility",
@@ -445,8 +452,6 @@
           ]
         },
         "Strike_BlinkActions": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "TriggerAbility",
@@ -456,11 +461,10 @@
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Riftstalker_Electric_Strike_AS",
+              "effectPattern": "Eff_Monster_Riftstalker_Electric_Strike_AS",
               "born": {
                 "$type": "ConfigBornByTeleportToPoint"
-              },
-              "EBHJMLOKDGB": -1.0
+              }
             }
           ]
         }
@@ -475,57 +479,60 @@
         {
           "$type": "TryFindBlinkPointByBorn",
           "target": "SelfAttackTarget",
+          "hitSceneTest": true,
+          "hitSceneType": "BlinkHitSceneTestByThreeSegments",
+          "limitY": 2.5,
+          "born": {
+            "$type": "ConfigBornByTargetLinearPoint",
+            "linearOffset": 4.8,
+            "baseOnTarget": true,
+            "linearXZ": false,
+            "linearMax": 40,
+            "onGround": true,
+            "offset": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            }
+          },
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
-              "target": "Self",
               "key": "_ROUGUE_HOUNDSTRIKE_TAG_",
-              "ratio": 0.0,
-              "compareType": "NoneOrEqual"
+              "value": 0,
+              "compareType": "NoneOrEqual",
+              "target": "Self"
             }
-          ],
-          "born": {
-            "$type": "ConfigBornByTargetLinearPoint",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "onGround": true,
-            "linearMin": 4.800000190734863,
-            "linearXZ": false,
-            "linearOffset": 0.0,
-            "linearMax": 40.0
-          },
-          "hitSceneType": "BlinkHitSceneTestByThreeSegments",
-          "limitY": 2.5
+          ]
         },
         {
           "$type": "TryFindBlinkPointByBorn",
           "target": "SelfAttackTarget",
+          "hitSceneTest": true,
+          "hitSceneType": "BlinkHitSceneTestByThreeSegments",
+          "limitY": 2.5,
+          "born": {
+            "$type": "ConfigBornByTargetLinearPoint",
+            "linearOffset": 4.8,
+            "baseOnTarget": true,
+            "linearXZ": false,
+            "linearMax": 40,
+            "onGround": true,
+            "offset": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            }
+          },
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
-              "target": "Self",
               "key": "_ROUGUE_HOUNDSTRIKE_TAG_",
-              "ratio": 1.0
+              "value": 1,
+              "compareType": "Equal",
+              "target": "Self"
             }
-          ],
-          "born": {
-            "$type": "ConfigBornByTargetLinearPoint",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "onGround": true,
-            "linearMin": 4.800000190734863,
-            "linearXZ": false,
-            "linearOffset": 0.0,
-            "linearMax": 40.0
-          },
-          "hitSceneType": "BlinkHitSceneTestByThreeSegments",
-          "limitY": 2.5
+          ]
         }
       ]
     }
@@ -555,54 +562,59 @@
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
+              "height": 2.95,
+              "fanAngle": 270.0,
+              "radius": 4.0,
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": -1.4900000095367432,
-                  "LKHJADIPBFL": -0.18000000715255737,
-                  "PJCOKIGCJOK": 1.600000023841858
+                  "x": -1.49,
+                  "y": -0.18,
+                  "z": 1.6
                 },
                 "direction": {
                   "$type": "ConfigDirectionByDefault",
                   "angleOffset": {
-                    "IBKBLDAJIMA": -9.380000114440918,
-                    "LKHJADIPBFL": -4.0,
-                    "PJCOKIGCJOK": 16.5
+                    "x": -9.38,
+                    "y": -4,
+                    "z": 16.5
                   }
                 }
-              },
-              "height": 2.950000047683716,
-              "fanAngle": 270.0,
-              "DCMPFCIBIPA": 4.0
+              }
             },
             "attackInfo": {
               "attackTag": "Hound_Corruption_Tag",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
               "attackProperty": {
-                "HBIOLEEGHPD": 1.0,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Electric",
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 1.0,
                 "strikeType": "Default",
+                "attackType": "Default",
+                "elementType": "Electric",
+                "elementDurability": 50,
                 "enBreak": 20.0
               },
               "hitPattern": {
                 "onHitEffectName": "Eff_Monster_Riftstalker_Hit",
                 "hitImpulseType": "LV2",
-                "hitHaltTimeScale": 0.05000000074505806
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.05,
+                "muteHitText": false
               }
             }
-          },
-          "targetType": "Enemy"
+          }
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  JumpBack
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -611,52 +623,58 @@
         {
           "$type": "AttachToStateIDMixin",
           "stateIDs": ["JumpBack"],
-          "modifierName": "Riftstalker_JumpBack_Actions"
+          "modifierName": "Riftstalker_JumpBack_Actions",
+          "target": "Self"
         }
       ],
       "modifiers": {
         "Riftstalker_JumpBack_Actions": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Riftstalker_Electric_JumpBack",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Riftstalker_Electric_JumpBack"
             },
             {
               "$type": "TryFindBlinkPointByBorn",
               "target": "SelfAttackTarget",
+              "hitSceneTest": true,
+              "hitSceneType": "BlinkHitSceneTestByThreeSegments",
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": -8.0
+                  "x": 0,
+                  "y": 0,
+                  "z": -8
                 }
-              },
-              "hitSceneType": "BlinkHitSceneTestByThreeSegments",
-              "limitY": 2.5
+              }
             },
             {
               "$type": "FixedMonsterRushMove",
+              "timeRange": 1,
+              "animatorStateIDs": ["JumpBack"],
+              "target": "Self",
+              "isInAir": false,
               "toPos": {
                 "$type": "ConfigBornByTeleportToPoint"
-              },
-              "timeRange": 1.0,
-              "animatorStateIDs": ["JumpBack"],
-              "overrideMoveCollider": ""
+              }
             }
           ]
         }
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Howl
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Hound_Riftstalker_Electric_Howl",
       "abilityMixins": [
+        // 2.5新增 嚎叫时击杀获得成就
+        // 用于在动作结束后，添加一个延迟移除成就判定的Modifier
         {
           "$type": "DoActionByAnimatorStateIDMixin",
           "stateIDs": ["Howl"],
@@ -667,31 +685,94 @@
             }
           ]
         },
+        // 这个Mixin的功能在于，只要是在Howl动作中打进Die，就可以解锁成就用的一个检测器
         {
           "$type": "DoActionByAnimatorStateIDMixin",
           "stateIDs": ["Die"],
           "enterActions": [
             {
               "$type": "DoWatcherSystemAction",
+              "watcherId": 82124,
+              "inThreatListOnly": true,
               "predicates": [
                 {
                   "$type": "ByHasModifier",
                   "modifierName": "Watcher_82124_Moniter"
                 }
-              ],
-              "watcherId": 82124,
-              "inThreatListOnly": true
+              ]
             }
           ]
         }
       ],
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "key": "_RIFTSTALKER_ELECTRIC_HOWL_COUNT_",
+          "value": 2,
+          "target": "Self"
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "Predicated",
+          "otherTargets": {
+            "$type": "SelectTargetsByShape",
+            "shapeName": "CircleR30",
+            "centerBasedOn": "Self",
+            "campTargetType": "Alliance",
+            "campBasedOn": "Self",
+            "sortType": "Nearest"
+          },
+          "targetPredicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_KANIS_TAG_",
+              "value": 1,
+              "compareType": "Equal",
+              "target": "Target"
+            },
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_RIFTSTALKER_ELECTRIC_HOWL_COUNT_",
+              "value": 0,
+              "compareType": "MoreThan",
+              "target": "Self"
+            }
+          ],
+          "successActions": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "UNIQUE_Hound_Riftstalker_Electric_Howl",
+              "target": "Target"
+            },
+            {
+              "$type": "AddGlobalValue",
+              "key": "_RIFTSTALKER_ELECTRIC_HOWL_COUNT_",
+              "target": "Self",
+              "value": -1,
+              "useLimitRange": true,
+              "maxValue": 2,
+              "minValue": 0
+            }
+          ]
+        },
+        {
+          "$type": "SetGlobalValue",
+          "key": "_RIFTSTALKER_ELECTRIC_HOWL_COUNT_",
+          "value": 2,
+          "target": "Self"
+        },
+        // 2.5新增 在Howl时击杀获得成就
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Watcher_82124_Moniter"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Hound_Riftstalker_Electric_Howl": {
-          "stacking": "Multiple",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": 10.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 10,
+          "stacking": "Multiple",
           "properties": {
             "Actor_AttackRatio": 0.25
           },
@@ -702,20 +783,17 @@
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Riftstalker_Electric_Howl_Response",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Riftstalker_Electric_Howl_Response"
             }
           ]
         },
         "Watcher_82124_Moniter": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 8.0,
-          "bonusCriticalHurt": 100.0
+          // 安全时间，正常来说这个Modifier会被提前移除
+          // 在这个Moniter存在时，被击杀即可获得成就
+          "duration": 8
         },
         "Watcher_82124_Moniter_Cleaner": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.8799999952316284,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.88,
           "onRemoved": [
             {
               "$type": "RemoveModifier",
@@ -723,70 +801,14 @@
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 2.0,
-          "key": "_RIFTSTALKER_ELECTRIC_HOWL_COUNT_",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        }
-      ],
-      "onAbilityStart": [
-        {
-          "$type": "Predicated",
-          "otherTargets": {
-            "$type": "SelectTargetsByShape",
-            "sortType": "Nearest",
-            "shapeName": "CircleR30",
-            "campTargetType": "Alliance",
-            "sizeRatio": 1.0
-          },
-          "targetPredicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_KANIS_TAG_",
-              "ratio": 1.0
-            },
-            {
-              "$type": "ByTargetGlobalValue",
-              "target": "Self",
-              "key": "_RIFTSTALKER_ELECTRIC_HOWL_COUNT_",
-              "ratio": 0.0,
-              "compareType": "MoreThan"
-            }
-          ],
-          "successActions": [
-            {
-              "$type": "ApplyModifier",
-              "target": "Target",
-              "modifierName": "UNIQUE_Hound_Riftstalker_Electric_Howl"
-            },
-            {
-              "$type": "AddGlobalValue",
-              "ratio": -1.0,
-              "key": "_RIFTSTALKER_ELECTRIC_HOWL_COUNT_",
-              "useLimitRange": true,
-              "maxValue": 2.0,
-              "minValue": 0.0
-            }
-          ]
-        },
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 2.0,
-          "key": "_RIFTSTALKER_ELECTRIC_HOWL_COUNT_",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Watcher_82124_Moniter"
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Smash
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -800,10 +822,11 @@
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Smash_BS"],
+          "startNormalizedTime": 0,
           "endNormalizedTime": 0.5,
-          "angularSpeed": 270.0,
-          "attackTrigger": ""
+          "angularSpeed": 270
         },
+        // b1322492
         {
           "$type": "AttachToStateIDMixin",
           "stateIDs": [
@@ -816,10 +839,14 @@
           "modifierName": "Smash_ShaderProtect"
         }
       ],
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Smash_ShaderHandler"
+        }
+      ],
       "modifiers": {
         "Smash_Actions": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachModifier",
@@ -832,21 +859,23 @@
             {
               "$type": "TriggerBullet",
               "bulletID": 42205004,
+              "target": "Self",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "Body",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": -4.0
-                },
-                "attachPointName": "Body"
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": -4.0
+                }
               },
-              "trackTarget": "Self",
-              "JAEOKOAACJP": true
+              "lifeByOwnerV2": true,
+              "trackTarget": "Self"
             },
             {
               "$type": "EnablePushColliderName",
-              "pushColliderNames": ["PushCollider"]
+              "pushColliderNames": ["PushCollider"],
+              "setEnable": false
             }
           ],
           "onRemoved": [
@@ -854,7 +883,8 @@
               "$type": "KillSelf",
               "otherTargets": {
                 "$type": "SelectTargetsByChildren",
-                "configID": 42205004
+                "configID": 42205004,
+                "sortType": "Default"
               }
             },
             {
@@ -865,13 +895,10 @@
           ]
         },
         "Smash_EffHandler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Riftstalker_Electric_Smash_Loop",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Riftstalker_Electric_Smash_Loop"
             }
           ],
           "onRemoved": [
@@ -882,62 +909,57 @@
           ]
         },
         "Smash_ShaderHandler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorBool",
               "boolID": "ShaderSmashTag",
-              "ratio": true
+              "value": true
             }
           ],
           "onRemoved": [
             {
               "$type": "SetAnimatorBool",
-              "boolID": "ShaderSmashTag"
+              "boolID": "ShaderSmashTag",
+              "value": false
             }
           ]
         },
         "Smash_Rush": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "TryFindBlinkPointByBorn",
               "target": "SelfAttackTarget",
+              "hitSceneTest": false,
               "born": {
                 "$type": "ConfigBornByTargetLinearPoint",
+                "linearOffset": 6.5,
+                "baseOnTarget": true,
+                "linearMin": 10.0,
+                "linearMax": 15.0,
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
-                },
-                "linearMin": 6.5,
-                "linearOffset": 10.0,
-                "linearMax": 15.0
-              },
-              "hitSceneTest": false,
-              "limitY": 2.5
+                  "x": 0,
+                  "y": 0,
+                  "z": 0
+                }
+              }
             },
             {
               "$type": "FixedMonsterRushMove",
-              "toPos": {
-                "$type": "ConfigBornByTeleportToPoint"
-              },
-              "timeRange": 0.4000000059604645,
+              "timeRange": 0.4,
+              "checkAnimatorStateOnExitOnly": true,
               "animatorStateIDs": [
                 "Smash_Loop_01",
                 "Smash_Loop_02",
                 "Smash_Loop_03"
               ],
-              "overrideMoveCollider": "",
-              "checkAnimatorStateOnExitOnly": true
+              "toPos": {
+                "$type": "ConfigBornByTeleportToPoint"
+              }
             }
           ]
         },
+        // b1322492
         "Smash_ShaderProtect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "RemoveModifier",
@@ -945,13 +967,7 @@
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Smash_ShaderHandler"
-        }
-      ]
+      }
     }
   },
   {
@@ -961,18 +977,20 @@
       "abilityMixins": [
         {
           "$type": "AttackHittingSceneMixin",
+          "animEventIDs": [],
           "onHittingScene": [
             {
               "$type": "SetAnimatorTrigger",
-              "target": "Owner",
-              "triggerID": "SmashEnd"
+              "triggerID": "SmashEnd",
+              "target": "Owner"
             },
             {
               "$type": "ActCameraShake",
               "cameraShake": {
-                "shakeRange": 0.1599999964237213,
-                "shakeTime": 0.09000000357627869,
-                "shakeDistance": 25.0
+                "shakeType": "Center",
+                "shakeRange": 0.16,
+                "shakeTime": 0.09,
+                "shakeDistance": 25
               }
             }
           ]
@@ -981,40 +999,44 @@
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "radius": 1.0,
               "born": {
                 "$type": "ConfigBornByCollisionPoint"
-              },
-              "DCMPFCIBIPA": 1.0
+              }
             },
             "attackInfo": {
               "attackTag": "Hound_Corruption_Tag",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
+              "canBeModifiedBy": "OriginOwner",
               "attackProperty": {
-                "HBIOLEEGHPD": 0.8500000238418579,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Electric",
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 0.85,
                 "strikeType": "Blunt",
-                "enBreak": 1.0
+                "enBreak": 1,
+                "elementDurability": 50,
+                "elementType": "Electric"
               },
               "hitPattern": {
                 "onHitEffectName": "Eff_Monster_Riftstalker_Hit",
                 "hitImpulseType": "LV1",
-                "hitHaltTimeScale": 0.009999999776482582
-              },
-              "canBeModifiedBy": "OriginOwner"
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
+              }
             }
-          },
-          "targetType": "Enemy"
+          }
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Activated
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1023,20 +1045,17 @@
         {
           "$type": "AttachToStateIDMixin",
           "stateIDs": ["Activated"],
-          "modifierName": "Riftstalker_Activated_Actions"
+          "modifierName": "Riftstalker_Activated_Actions",
+          "target": "Self"
         }
       ],
       "modifiers": {
         "Riftstalker_Activated_Actions": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 2.0,
               "key": "_Riftstalker_POSE_TAG_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 2
             }
           ],
           "onRemoved": [
@@ -1053,6 +1072,11 @@
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  ShockWave
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1064,7 +1088,8 @@
           "born": {
             "$type": "ConfigBornByAttachPoint",
             "attachPointName": "BulletAttachPoint"
-          }
+          },
+          "trackTarget": "SelfAttackTarget"
         }
       ]
     }
@@ -1076,8 +1101,7 @@
       "onAbilityStart": [
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Riftstalker_Electric_ShockWave",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_Monster_Riftstalker_Electric_ShockWave"
         }
       ]
     }
@@ -1086,24 +1110,6 @@
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Hound_Riftstalker_Electric_ShockWave_Bullet",
-      "modifiers": {
-        "ShockWave_Bullet_Effect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Riftstalker_Electric_ShockWave_Bullet",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Riftstalker_Electric_ShockWave_Bullet_Trail",
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        }
-      },
       "onAdded": [
         {
           "$type": "ApplyModifier",
@@ -1113,40 +1119,39 @@
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "radius": 1.7,
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 }
-              },
-              "DCMPFCIBIPA": 1.7000000476837158
+              }
             },
             "attackInfo": {
               "attackTag": "Hound_Corruption_Tag",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
               "attackProperty": {
-                "HBIOLEEGHPD": 0.949999988079071,
-                "CCNJGLPMIEP": 0.0,
+                "damagePercentage": 0.95,
                 "elementType": "Electric",
-                "bonusCriticalHurt": 50.0,
+                "elementDurability": 50,
                 "strikeType": "Default",
-                "enBreak": 1.0
+                "enBreak": 1
               },
               "hitPattern": {
                 "onHitEffectName": "Eff_Monster_Riftstalker_Hit",
                 "hitImpulseType": "LV2",
-                "hitHaltTimeScale": 0.05000000074505806
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.05,
+                "muteHitText": false
               }
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "RemoveModifier",
@@ -1154,13 +1159,26 @@
         },
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Riftstalker_Electric_ShockWave_Explode",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_Monster_Riftstalker_Electric_ShockWave_Explode"
         },
         {
           "$type": "KillSelf"
         }
-      ]
+      ],
+      "modifiers": {
+        "ShockWave_Bullet_Effect": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Riftstalker_Electric_ShockWave_Bullet"
+            },
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Riftstalker_Electric_ShockWave_Bullet_Trail"
+            }
+          ]
+        }
+      }
     }
   }
 ]

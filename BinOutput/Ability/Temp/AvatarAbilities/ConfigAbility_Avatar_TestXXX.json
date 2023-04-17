@@ -1,4 +1,9 @@
 [
+  ////////////////////////////////////////////////////////////////
+  //
+  //  ExtraAttack
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -7,8 +12,8 @@
         {
           "$type": "ButtonHoldChargeMixin",
           "skillID": 10461,
-          "chargeTime": 0.11999999731779099,
-          "secondChargeTime": 0.20000000298023224,
+          "chargeTime": 0.12,
+          "secondChargeTime": 0.2,
           "OnBeginUncharged": [
             {
               "$type": "SetAnimatorTrigger",
@@ -16,95 +21,107 @@
             },
             {
               "$type": "SetAnimatorInt",
+              "intID": "SkillID",
+              "value": 99,
               "predicates": [
                 {
                   "$type": "ByAny",
                   "predicates": [
                     {
                       "$type": "ByAnimatorInt",
-                      "logic": "Equal",
-                      "ratio": 0,
-                      "parameter": "ComboCount"
+                      "value": 0,
+                      "parameter": "ComboCount",
+                      "logic": "Equal"
                     },
                     {
                       "$type": "ByAnimatorInt",
-                      "logic": "Equal",
-                      "ratio": 5,
-                      "parameter": "ComboCount"
+                      "value": 5,
+                      "parameter": "ComboCount",
+                      "logic": "Equal"
                     }
                   ]
                 }
-              ],
-              "intID": "SkillID",
-              "ratio": 99.0
+              ]
             },
             {
               "$type": "SetAnimatorBool",
-              "boolID": "IsCharging"
+              "boolID": "IsCharging",
+              "value": false
             }
           ],
           "OnReleaseUncharged": [
+            /*						{
+							"$type": "SetAnimatorTrigger",
+							"triggerID": "DoSkill",
+						},*/
             {
               "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "ratio": 1.0
+              "value": 1
             }
           ],
           "OnBeginCharged": [
             {
               "$type": "SetAnimatorBool",
               "boolID": "IsCharging",
-              "ratio": true
+              "value": true
             }
           ],
           "OnReleaseCharged": [
             {
               "$type": "SetAnimatorBool",
-              "boolID": "IsCharging"
+              "boolID": "IsCharging",
+              "value": false
             },
+            /*						{
+							"$type": "SetAnimatorTrigger",
+							"triggerID": "DoSkill",
+						},*/
             {
               "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "ratio": 1.0
+              "value": 1
             }
+            /*						{
+							"$type": "ResetAnimatorTrigger",
+							"triggerID": "DoSkill",
+						},*/
           ],
           "OnBeginSecondCharged": [
             {
               "$type": "SetAnimatorTrigger",
+              "triggerID": "DoSkill",
               "predicates": [
                 {
                   "$type": "ByLocalAvatarStamina",
-                  "logic": "GreaterOrEqual",
-                  "stamina": [
-                    "ExtraAttack_Sword_Stamina_Cost",
-                    "Flexible_Stamina",
-                    "ADD"
-                  ]
+                  "stamina": "%ExtraAttack_Sword_Stamina_Cost+%Flexible_Stamina",
+                  "logic": "GreaterOrEqual"
                 }
-              ],
-              "triggerID": "DoSkill"
+              ]
             },
             {
               "$type": "SetAnimatorInt",
+              "intID": "SkillID",
+              "value": 6,
               "predicates": [
                 {
                   "$type": "ByLocalAvatarStamina",
-                  "logic": "GreaterOrEqual",
-                  "stamina": [
-                    "ExtraAttack_Sword_Stamina_Cost",
-                    "Flexible_Stamina",
-                    "ADD"
-                  ]
+                  "stamina": "%ExtraAttack_Sword_Stamina_Cost+%Flexible_Stamina",
+                  "logic": "GreaterOrEqual"
                 }
-              ],
-              "intID": "SkillID",
-              "ratio": 6.0
+              ]
             },
             {
               "$type": "SetAnimatorBool",
-              "boolID": "IsCharging"
+              "boolID": "IsCharging",
+              "value": false
             }
+            /*						{
+							"$type": "ResetAnimatorTrigger",
+							"triggerID": "DoSkill",
+						},*/
           ],
+          "OnReleaseSecondCharged": [],
           "chargeStateIDs": [
             "Attack01",
             "Attack02",
@@ -116,8 +133,8 @@
         {
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "ExtraAttack_AS",
-          "modifierName": "ExtraAttack_AS_Effect",
-          "normalizeStart": 0.20999999344348907
+          "normalizeStart": 0.21,
+          "modifierName": "ExtraAttack_AS_Effect"
         },
         {
           "$type": "AttachToStateIDMixin",
@@ -125,38 +142,40 @@
           "modifierName": "ExtraAttack_StaminaCost"
         }
       ],
-      "abilitySpecials": {
-        "ExtraAttack_Sword_Stamina_Cost": 0.0,
-        "Flexible_Stamina": -2.0
-      },
       "modifiers": {
         "ExtraAttack_StaminaCost": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          // "duration": 0.2,
           "onAdded": [
             {
               "$type": "AvatarSkillStart",
               "skillID": 10001,
-              "cdDelta": 1.0,
-              "costStaminaDelta": "ExtraAttack_Sword_Stamina_Cost"
+              "costStaminaRatio": "%ExtraAttack_Sword_Stamina_Cost"
             }
           ]
         },
         "ExtraAttack_AS_Effect": {
           "stacking": "Unique",
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Male_Sword_Kaeya_ExtraAttack_SwordAS",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Avatar_Male_Sword_Kaeya_ExtraAttack_SwordAS"
             }
           ]
         }
+      },
+      "abilitySpecials": {
+        //故意少判了一点点体力，为了顾及一部分网络延迟
+        "ExtraAttack_Sword_Stamina_Cost": 0,
+        "Flexible_Stamina": -2
       }
     }
   },
+
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Avatar_TestXXX_Normalattackball
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -165,18 +184,13 @@
         {
           "$type": "AttachToStateIDMixin",
           "stateIDs": ["Attack05"],
-          "modifierName": "GenerateElemBall_IceShield"
+          "modifierName": "GenerateElemBall_IceShield",
+          "target": "Self"
         }
       ],
-      "abilitySpecials": {
-        "damage": 0.0,
-        "GetElementRatio": 1.0,
-        "TasteOfCold": 0.15000000596046448
-      },
+      "onAbilityStart": [],
       "modifiers": {
         "GenerateElemBall_IceShield": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
@@ -186,77 +200,91 @@
                   "$type": "ByEntityTypes",
                   "entityTypes": ["Monster"]
                 }
+                // {
+                //              	"$type": "ByTargetGlobalValue",
+                //              	"key": "_ANIMAL_ENTITY_TYPE",
+                //              	"value": 0,
+                //              	"compareType": "NoneOrEqual",
+                //             },
               ],
               "successActions": [
                 {
                   "$type": "ApplyModifier",
-                  "modifierName": "ElementBall"
+                  "modifierName": "ElementBall",
+                  "target": "Self"
                 },
                 {
                   "$type": "ApplyModifier",
-                  "modifierName": "ElementBall_Extra"
+                  "modifierName": "ElementBall_Extra",
+                  "target": "Self"
                 }
               ]
             }
           ]
         },
         "ElementBall": {
+          "duration": 1.0,
           "stacking": "Unique",
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "GenerateElemBall",
               "configID": 2020,
+              "baseEnergy": 6,
+              "ratio": "%GetElementRatio",
               "born": {
                 "$type": "ConfigBornByTarget",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 1.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 1.0
                 }
-              },
-              "IAAIJMOECLB": "GetElementRatio",
-              "baseEnergy": 6.0
+              }
             }
           ]
         },
         "ElementBall_Extra": {
+          "duration": 1.0,
           "stacking": "MultipleRefreshNoRemove",
           "stackingOption": {
-            "abilitySpecialName": "",
-            "maxModifierNumForMultipleType": 3.0
+            "maxModifierNumForMultipleType": 3
           },
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "Randomed",
-              "chance": 0.9900000095367432,
+              "chance": 0.99,
               "successActions": [
                 {
                   "$type": "GenerateElemBall",
                   "configID": 2020,
+                  "baseEnergy": 3,
+                  "ratio": "%GetElementRatio",
                   "born": {
                     "$type": "ConfigBornByTarget",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 1.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 1.0
                     }
-                  },
-                  "IAAIJMOECLB": "GetElementRatio",
-                  "baseEnergy": 3.0
+                  }
                 }
               ]
             }
           ]
         }
+      },
+      "abilitySpecials": {
+        "damage": 0,
+        "GetElementRatio": 1.0,
+        "TasteOfCold": 0.15
       }
     }
   },
+
+  ////////////////////////////////////////////////////////////////
+  //
+  //  角色每一次技能之后，普攻带元素伤害
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -264,38 +292,51 @@
       "abilityMixins": [
         {
           "$type": "OnAvatarUseSkillMixin",
+          "clearSkillIdDelay": 0.2,
           "onTriggerSkill": [
             {
-              "$type": "ApplyModifier",
+              "$type": "ApplyModifier", //这个modifier用于剑上挂特效。点了天赋时间变长。
+              "modifierName": "Fire_Enhancement_Weapon",
               "otherTargets": {
                 "$type": "SelectTargetsByEquipParts",
-                "equipPartNames": ["equip01", "sheathPoint"]
-              },
-              "modifierName": "Fire_Enhancement_Weapon"
+                "equipPartNames": ["equip01", "sheathPoint"] //这个功能，如果剑在背后就不会生效,需要增加sheathpoint
+              }
             }
-          ],
-          "HPNJGGABBPK": 0.20000000298023224
+          ]
         }
       ],
+
+      "onAbilityStart": [],
       "modifiers": {
+        //附加在武器上，播放特效
         "Fire_Enhancement_Weapon": {
+          "duration": 10,
           "stacking": "Unique",
-          "modifierName": "",
-          "HCJLIGBLGJA": 10.0,
           "elementType": "Fire",
-          "bonusCriticalHurt": 30.0,
+          "elementDurability": 30,
           "overrideWeaponElement": true,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Diluc_FireCross_Weapon_02",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Diluc_FireCross_Weapon_02"
             }
+          ],
+          "onRemoved": [
+            // {
+            // 	"$type":"ApplyModifier",
+            // 	"modifierName":"Eff_Weapon_03",
+            // },
           ]
         }
       }
     }
   },
+
+  ////////////////////////////////////////////////////////////////
+  //
+  //  IceShield_Impact
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -304,13 +345,15 @@
         {
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "IceShield_AS",
-          "modifierName": "IceShield_AS_Effect",
-          "normalizeStart": 0.14000000059604645
+          "normalizeStart": 0.14,
+          "modifierName": "IceShield_AS_Effect"
         },
+
         {
           "$type": "AttachToStateIDMixin",
           "stateIDs": ["IceShield"],
           "modifierName": "TasteOfCold",
+          "target": "Self",
           "predicates": [
             {
               "$type": "ByUnlockTalentParam",
@@ -319,32 +362,84 @@
           ]
         }
       ],
-      "abilitySpecials": {
-        "damage": 0.0,
-        "GetElementRatio": 1.0,
-        "TasteOfCold": 0.15000000596046448
-      },
+      "onAbilityStart": [
+        {
+          "$type": "AvatarSkillStart",
+          "skillID": 10462
+        },
+        {
+          "$type": "FireEffect",
+          "effectPattern": "Eff_TestXXX_IceShield_Impact_Breath"
+        },
+        {
+          "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
+          "attackEvent": {
+            "attackPattern": {
+              "$type": "ConfigAttackBox",
+              "triggerType": "TriggerNoRepeat",
+              "size": {
+                "x": 4.0,
+                "y": 1.8,
+                "z": 8.0
+              },
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "offset": {
+                  "x": 0.0,
+                  "y": 1.0,
+                  "z": -0.2
+                }
+              }
+              // "checkHitLayerType": "Both",
+            },
+            "attackInfo": {
+              "attackTag": "Elemental_Art",
+              "attackProperty": {
+                "damagePercentage": "%damage",
+                "strikeType": "Default",
+                "attackType": "Melee",
+                "elementType": "Electric",
+                "elementDurability": 50,
+                "elementRank": 1.5,
+                "enBreak": 140
+              },
+              "hitPattern": {
+                "onHitEffectName": "default",
+                "hitLevel": "Heavy", //hitlevel = 4
+                "hitImpulseX": 800, //hitlevel = 4
+                "hitImpulseY": 0, //hitlevel = 4
+                "reboundRatio": 0,
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.02,
+                "muteHitText": false
+              },
+              "forceCameraShake": false,
+              "cameraShake": {
+                "shakeType": "Center",
+                "shakeRange": 0.36,
+                "shakeTime": 0.12,
+                "shakeDistance": 30
+              }
+            }
+          }
+        }
+      ],
       "modifiers": {
         "IceShield_AS_Effect": {
           "stacking": "Unique",
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Kaeya_IceShield_Impact_SwordAS",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Kaeya_IceShield_Impact_SwordAS"
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Kaeya_IceShield_Impact_SwordAS1",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Kaeya_IceShield_Impact_SwordAS1"
             }
           ]
         },
         "TasteOfCold": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
@@ -362,15 +457,14 @@
               "successActions": [
                 {
                   "$type": "HealHP",
-                  "amountByTargetCurrentHPRatio": "TasteOfCold"
+                  "amountByCasterAttackRatio": "%TasteOfCold",
+                  "target": "Self"
                 }
               ]
             }
           ]
         },
         "GenerateElemBall_IceShield": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
@@ -384,39 +478,46 @@
                   "$type": "ByEntityTypes",
                   "entityTypes": ["Monster"]
                 }
+                // {
+                //              	"$type": "ByTargetGlobalValue",
+                //              	"key": "_ANIMAL_ENTITY_TYPE",
+                //              	"value": 0,
+                //              	"compareType": "NoneOrEqual",
+                //             },
               ],
               "successActions": [
                 {
                   "$type": "ApplyModifier",
-                  "modifierName": "ElementBall"
+                  "modifierName": "ElementBall",
+                  "target": "Self"
                 },
                 {
                   "$type": "ApplyModifier",
-                  "modifierName": "ElementBall_Extra"
+                  "modifierName": "ElementBall_Extra",
+                  "target": "Self"
                 },
                 {
                   "$type": "ApplyModifier",
+                  "modifierName": "FrozenStar",
                   "target": "Target",
                   "predicates": [
                     {
                       "$type": "ByUnlockTalentParam",
                       "talentParam": "FrozenStar"
                     }
-                  ],
-                  "modifierName": "FrozenStar"
+                  ]
                 }
               ]
             }
           ]
         },
         "FrozenStar": {
+          "duration": 0.1,
           "stacking": "Unique",
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
+              "modifierName": "FrozenStar_ElementBall",
               "target": "Caster",
               "predicates": [
                 {
@@ -424,166 +525,98 @@
                   "predicates": [
                     {
                       "$type": "ByHasAbilityState",
-                      "target": "Self",
-                      "abilityState": "ElementWet"
+                      "abilityState": "ElementWet",
+                      "target": "Self"
                     },
                     {
                       "$type": "ByHasAbilityState",
-                      "target": "Self",
-                      "abilityState": "ElementFreeze"
+                      "abilityState": "ElementFreeze",
+                      "target": "Self"
                     }
                   ]
                 }
-              ],
-              "modifierName": "FrozenStar_ElementBall"
+              ]
             }
           ]
         },
         "FrozenStar_ElementBall": {
+          "duration": 1.0,
           "stacking": "Multiple",
           "stackingOption": {
-            "abilitySpecialName": "",
-            "maxModifierNumForMultipleType": 2.0
+            "maxModifierNumForMultipleType": 2
           },
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "GenerateElemBall",
               "configID": 2022,
+              "baseEnergy": 3,
+              "ratio": 1,
               "born": {
                 "$type": "ConfigBornByTarget",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 1.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 1.0
                 }
-              },
-              "IAAIJMOECLB": 1.0,
-              "baseEnergy": 3.0
+              }
             }
           ]
         },
         "ElementBall": {
+          "duration": 1.0,
           "stacking": "Unique",
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "GenerateElemBall",
               "configID": 2022,
+              "baseEnergy": 6,
+              "ratio": "%GetElementRatio",
               "born": {
                 "$type": "ConfigBornByTarget",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 1.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 1.0
                 }
-              },
-              "IAAIJMOECLB": "GetElementRatio",
-              "baseEnergy": 6.0
+              }
             }
           ]
         },
         "ElementBall_Extra": {
+          "duration": 1.0,
           "stacking": "MultipleRefreshNoRemove",
           "stackingOption": {
-            "abilitySpecialName": "",
-            "maxModifierNumForMultipleType": 3.0
+            "maxModifierNumForMultipleType": 3
           },
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "Randomed",
-              "chance": 0.6700000166893005,
+              "chance": 0.67,
               "successActions": [
                 {
                   "$type": "GenerateElemBall",
                   "configID": 2022,
+                  "baseEnergy": 3,
+                  "ratio": "%GetElementRatio",
                   "born": {
                     "$type": "ConfigBornByTarget",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 1.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 1.0
                     }
-                  },
-                  "IAAIJMOECLB": "GetElementRatio",
-                  "baseEnergy": 3.0
+                  }
                 }
               ]
             }
           ]
         }
       },
-      "onAbilityStart": [
-        {
-          "$type": "AvatarSkillStart",
-          "skillID": 10462,
-          "cdDelta": 1.0,
-          "costStaminaDelta": 1.0
-        },
-        {
-          "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_TestXXX_IceShield_Impact_Breath",
-          "EBHJMLOKDGB": -1.0
-        },
-        {
-          "$type": "TriggerAttackEvent",
-          "attackEvent": {
-            "attackPattern": {
-              "$type": "ConfigAttackBox",
-              "triggerType": "TriggerNoRepeat",
-              "born": {
-                "$type": "ConfigBornBySelf",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 1.0,
-                  "PJCOKIGCJOK": -0.20000000298023224
-                }
-              },
-              "size": {
-                "IBKBLDAJIMA": 4.0,
-                "LKHJADIPBFL": 1.7999999523162842,
-                "PJCOKIGCJOK": 8.0
-              }
-            },
-            "attackInfo": {
-              "attackTag": "Elemental_Art",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
-              "attackProperty": {
-                "HBIOLEEGHPD": "damage",
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Electric",
-                "elementRank": 1.5,
-                "bonusCriticalHurt": 50.0,
-                "strikeType": "Default",
-                "enBreak": 140.0,
-                "attackType": "Melee"
-              },
-              "hitPattern": {
-                "onHitEffectName": "default",
-                "hitLevel": "Heavy",
-                "MOELECJEOEI": 800.0,
-                "hitImpulseY": 0.0,
-                "hitImpulseType": "",
-                "hitHaltTimeScale": 0.019999999552965164
-              },
-              "cameraShake": {
-                "shakeRange": 0.36000001430511475,
-                "shakeTime": 0.11999999731779099,
-                "shakeDistance": 30.0
-              }
-            }
-          },
-          "targetType": "Enemy"
-        }
-      ]
+      "abilitySpecials": {
+        "damage": 0,
+        "GetElementRatio": 1.0,
+        "TasteOfCold": 0.15
+      }
     }
   }
 ]

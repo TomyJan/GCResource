@@ -1,37 +1,57 @@
 [
+  //////////////////////////////////////////////////////////////
+  ///
+  ///   Ver2.3  大世界小道具————抓小动物
+  ///
+  //////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CatchAnimal_Shoot",
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "ActivityAbility_CatchAnimal_AddSkillInfo",
+          "doOffStage": true
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "ActivityAbility_CatchAnimal_SwitchSkill",
+          "doOffStage": true
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "ActivityAbility_CatchAnimal_Aim_Handler",
+          "doOffStage": true
+        }
+      ],
       "modifiers": {
+        //增添抓捕专用技能
         "ActivityAbility_CatchAnimal_AddSkillInfo": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AddAvatarSkillInfo",
-              "RotationDampTime": true,
-              "skillID": 20040
+              "skillID": 20040,
+              "doOffStage": true
             },
             {
-              "$type": "AvatarSkillStart",
+              "$type": "AvatarSkillStart", //这是用来让它装备瞬间闪一下
               "skillID": 20040,
-              "cdDelta": 0.10000000149011612,
-              "costStaminaDelta": 1.0
+              "cdRatio": 0.1
             }
           ],
           "onRemoved": [
             {
               "$type": "RemoveAvatarSkillInfo",
-              "RotationDampTime": true,
               "skillID": 20040,
+              "refreshAfterRemove": true,
               "doOffStage": true
             }
           ]
         },
+        //替换小技能按钮
         "ActivityAbility_CatchAnimal_SwitchSkill": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "SwitchSkillIDMixin",
@@ -41,17 +61,16 @@
             },
             {
               "$type": "WidgetCDSyncMixin",
-              "PEKBMAJCANI": true,
-              "ODIKDFHCHOJ": true,
               "itemId": 220043,
-              "ONEJALHEENC": 20040,
-              "PDJDLNCMHMK": 0.5
+              "skillId": 20040,
+              "syncOnCDChange": true,
+              "syncOnChangeAvatar": true,
+              "skillCDOffset": 0.5
             }
           ]
         },
+        //处理瞄准的主要按键逻辑
         "ActivityAbility_CatchAnimal_Aim_Handler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachToStateIDMixin",
@@ -61,22 +80,22 @@
             {
               "$type": "ButtonHoldChargeMixin",
               "skillID": 20040,
-              "secondChargeTime": 0.11999999731779099,
+              "chargeTime": 0.0,
+              "secondChargeTime": 0.12,
               "OnBeginCharged": [
                 {
                   "$type": "SetGlobalValue",
-                  "RotationDampTime": true,
-                  "ratio": 0.0,
-                  "key": "_ABILITY_Common_Channel_IsTrigger",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "key": "_ABILITY_Common_Channel_IsTrigger", //每次点按重置Trigger
+                  "value": 0,
+                  "doOffStage": true
                 }
               ],
+              //点按释放
               "OnReleaseCharged": [
                 {
                   "$type": "ApplyModifier",
-                  "RotationDampTime": true,
-                  "modifierName": "Shoot_Short"
+                  "modifierName": "Shoot_Short",
+                  "doOffStage": true
                 }
               ],
               "OnBeginSecondCharged": [
@@ -85,36 +104,37 @@
                   "triggerID": "StartChannelTrigger"
                 }
               ],
+              //长按释放
               "OnReleaseSecondCharged": [
                 {
                   "$type": "ApplyModifier",
-                  "RotationDampTime": true,
+                  "modifierName": "Shoot_Long",
+                  "doOffStage": true,
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "key": "_ABILITY_Common_Channel_IsTrigger",
-                      "ratio": 0.0
+                      "value": 0,
+                      "compareType": "Equal"
                     }
-                  ],
-                  "modifierName": "Shoot_Long"
+                  ]
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "RotationDampTime": true,
-                  "ratio": 1.0,
                   "key": "_ABILITY_Common_Channel_IsTrigger",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 1,
+                  "doOffStage": true
                 }
               ],
-              "JLCOFIBNCCJ": [
+              "chargeStateIDs": ["Channel_Loop"],
+              "OnCancelCharged": [
                 {
                   "$type": "SetAnimatorTrigger",
                   "triggerID": "EndChannelTrigger"
                 }
-              ],
-              "chargeStateIDs": ["Channel_Loop"]
+              ]
             },
+
             {
               "$type": "AttachToStateIDMixin",
               "stateIDs": ["Channel_BS", "Channel_Loop"],
@@ -122,94 +142,85 @@
             }
           ]
         },
+        //替换操控面板
         "ActivityAbility_CatchAnimal_ChangePlayMode": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ChangePlayMode",
-              "RotationDampTime": true,
               "muteRemoteAction": true,
-              "toPlayMode": "ActivityAimState"
+              "toPlayMode": "ActivityAimState",
+              "doOffStage": true
             }
           ],
           "onRemoved": [
             {
               "$type": "ChangePlayMode",
-              "RotationDampTime": true,
-              "muteRemoteAction": true
+              "muteRemoteAction": true,
+              "toPlayMode": "Normal",
+              "doOffStage": true
             }
           ]
         },
+        //强制退出时需要TriggerCD
         "Trigger_OnExit": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
-              "$type": "ApplyModifier",
-              "RotationDampTime": true,
+              "$type": "ApplyModifier", //没松手被打断时强制发射子弹
+              "modifierName": "Shoot_Short",
+              "doOffStage": true,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Common_Channel_IsTrigger",
-                  "ratio": 0.0
+                  "value": 0,
+                  "compareType": "Equal"
                 }
-              ],
-              "modifierName": "Shoot_Short"
+              ]
             },
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 1.0,
               "key": "_ABILITY_Common_Channel_IsTrigger",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1,
+              "doOffStage": true
             }
           ]
         },
+        //瞄准镜头
         "Focus": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AvatarEnterFocus",
               "cameraFollowLower": {
-                "x": 0.6000000238418579,
-                "y": 0.20000000298023224,
-                "z": -1.7999999523162842
+                "x": 0.6,
+                "y": 0.2,
+                "z": -1.8
               },
               "cameraFollowUpper": {
-                "x": 0.6000000238418579,
-                "y": -0.10000000149011612,
-                "z": -1.7999999523162842
-              },
-              "cameraFollowMaxDegree": 40.0,
-              "cameraFollowMinDegree": -40.0,
-              "dragButtonName": "Skill2",
-              "assistance": {
-                "ps4": {
-                  "useGyro": true
-                },
-                "ps5": {
-                  "useGyro": true
-                },
-                "other": {
-                  "useGyro": true
-                }
+                "x": 0.6,
+                "y": -0.1,
+                "z": -1.8
               },
               "canMove": false,
-              "vcamFov": 30.0,
-              "disableAnim": true
+              "dragButtonName": "Skill2",
+              "showCrosshair": true,
+              "disableAnim": true,
+              "assistance": {
+                "ps4": { "useGyro": true },
+                "ps5": { "useGyro": true },
+                "other": { "useGyro": true }
+              },
+              "vcam_fov": 30,
+              "cameraFollowMaxDegree": 40,
+              "cameraFollowMinDegree": -40
             },
             {
               "$type": "SetAnimatorBool",
-              "boolID": "LockMotionFlagExitChannel",
-              "ratio": true
+              "boolID": "LockMotionFlagExitChannel", //需要保证Focus阶段不能移动
+              "value": true
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_CatchAnimal_Charge",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_CatchAnimal_Charge"
             },
             {
               "$type": "AttachModifier",
@@ -217,43 +228,38 @@
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "_ABILITY_Common_IsChannelState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             }
           ],
           "onRemoved": [
             {
               "$type": "AvatarExitFocus",
-              "RotationDampTime": true,
-              "keepRotation": true
+              "keepRotation": true,
+              "doOffStage": true
             },
             {
               "$type": "SetAnimatorBool",
-              "RotationDampTime": true,
-              "boolID": "LockMotionFlagExitChannel"
+              "boolID": "LockMotionFlagExitChannel",
+              "value": false,
+              "doOffStage": true
             },
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
               "key": "_ABILITY_Common_IsChannelState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0,
+              "doOffStage": true
             }
           ]
         },
+        //点按发射捕捉器
         "Shoot_Short": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.2,
           "onAdded": [
             {
               "$type": "AvatarSkillStart",
               "skillID": 20040,
-              "cdDelta": 1.0,
-              "costStaminaDelta": 1.0
+              "cdRatio": 1
             },
             {
               "$type": "WidgetSkillStart",
@@ -261,55 +267,52 @@
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_CatchAnimal_Shoot",
+              "effectPattern": "Eff_SceneObj_CatchAnimal_Shoot",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.5,
-                  "PJCOKIGCJOK": 1.2000000476837158
-                },
                 "attachPointName": "FocusAnchor",
-                "attachPointTargetType": "Self"
-              },
-              "EBHJMLOKDGB": -1.0
+                "attachPointTargetType": "Self",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.5,
+                  "z": 1.2
+                }
+              }
             },
             {
               "$type": "TriggerBullet",
               "bulletID": 420000009,
               "born": {
                 "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "FocusAnchor",
+                "attachPointTargetType": "Self",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.5,
-                  "PJCOKIGCJOK": 1.2000000476837158
+                  "x": 0.0,
+                  "y": 0.5,
+                  "z": 1.2
                 },
                 "direction": {
                   "$type": "ConfigDirectionByAttachPoint",
-                  "angleOffset": {
-                    "IBKBLDAJIMA": 0.0,
-                    "LKHJADIPBFL": 0.0,
-                    "PJCOKIGCJOK": 0.0
-                  },
                   "attachPointName": "FocusAnchor",
-                  "attachPointTargetType": "Self"
-                },
-                "attachPointName": "FocusAnchor",
-                "attachPointTargetType": "Self"
+                  "attachPointTargetType": "Self",
+                  "angleOffset": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                  }
+                }
               }
             }
           ]
         },
+        //长按发射捕捉器
         "Shoot_Long": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.3,
           "onAdded": [
             {
               "$type": "AvatarSkillStart",
               "skillID": 20040,
-              "cdDelta": 1.0,
-              "costStaminaDelta": 1.0
+              "cdRatio": 1
             },
             {
               "$type": "WidgetSkillStart",
@@ -317,18 +320,17 @@
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_CatchAnimal_Shoot",
+              "effectPattern": "Eff_SceneObj_CatchAnimal_Shoot",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
-                },
                 "attachPointName": "WeaponR",
-                "attachPointTargetType": "Self"
-              },
-              "EBHJMLOKDGB": -1.0
+                "attachPointTargetType": "Self",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                }
+              }
             },
             {
               "$type": "Predicated",
@@ -338,108 +340,83 @@
                   "weaponTypes": ["WEAPON_BOW"]
                 }
               ],
+              //弓手弹道
               "successActions": [
                 {
                   "$type": "TriggerBullet",
                   "bulletID": 420000010,
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
+                    "attachPointName": "WeaponR",
+                    "attachPointTargetType": "Self",
                     "direction": {
                       "$type": "ConfigDirectionByAttachPoint",
-                      "angleOffset": {
-                        "IBKBLDAJIMA": 0.0,
-                        "LKHJADIPBFL": 0.0,
-                        "PJCOKIGCJOK": 0.0
-                      },
                       "attachPointName": "FocusAnchor",
-                      "attachPointTargetType": "Self"
-                    },
-                    "attachPointName": "WeaponR",
-                    "attachPointTargetType": "Self"
+                      "attachPointTargetType": "Self",
+                      "angleOffset": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                      }
+                    }
                   }
                 }
               ],
+              //非弓手弹道
               "failActions": [
                 {
                   "$type": "TriggerBullet",
                   "bulletID": 420000010,
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
+                    "attachPointName": "WeaponR",
+                    "attachPointTargetType": "Self",
                     "direction": {
                       "$type": "ConfigDirectionByAttachPoint",
-                      "angleOffset": {
-                        "IBKBLDAJIMA": 0.0,
-                        "LKHJADIPBFL": 0.0,
-                        "PJCOKIGCJOK": 0.0
-                      },
                       "attachPointName": "FocusAnchor",
-                      "attachPointTargetType": "Self"
-                    },
-                    "attachPointName": "WeaponR",
-                    "attachPointTargetType": "Self"
+                      "attachPointTargetType": "Self",
+                      "angleOffset": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                      }
+                    }
                   }
                 }
               ]
             }
           ],
+          //延迟一点退出动作
           "onRemoved": [
             {
               "$type": "SetAnimatorTrigger",
-              "RotationDampTime": true,
-              "triggerID": "EndChannelTrigger"
+              "triggerID": "EndChannelTrigger",
+              "doOffStage": true
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "RotationDampTime": true,
-          "modifierName": "ActivityAbility_CatchAnimal_AddSkillInfo"
-        },
-        {
-          "$type": "AttachModifier",
-          "RotationDampTime": true,
-          "modifierName": "ActivityAbility_CatchAnimal_SwitchSkill"
-        },
-        {
-          "$type": "AttachModifier",
-          "RotationDampTime": true,
-          "modifierName": "ActivityAbility_CatchAnimal_Aim_Handler"
-        }
-      ],
+      //加个死亡恢复保护
       "onKill": [
         {
           "$type": "ChangePlayMode",
-          "RotationDampTime": true,
-          "muteRemoteAction": true
+          "muteRemoteAction": true,
+          "toPlayMode": "Normal",
+          "doOffStage": true
         }
-      ],
-      "isDynamicAbility": true
+      ]
     }
   },
+
+  //Gadget  普通小道具捕获器的子弹
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CatchAnimal_Bullet",
-      "modifiers": {
-        "Life_Timer": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.8500000238418579,
-          "onThinkInterval": [
-            {
-              "$type": "TriggerAbility",
-              "abilityName": "ActivityAbility_CatchAnimal_Bullet"
-            }
-          ]
-        }
-      },
       "onAdded": [
         {
           "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_CatchAnimal_Bullet",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_SceneObj_CatchAnimal_Bullet"
         },
         {
           "$type": "AttachModifier",
@@ -447,17 +424,31 @@
         },
         {
           "$type": "SetGlobalValue",
-          "ratio": 0.0,
           "key": "_ABILITY_CatchAnimal_IsCaptured",
-          "maxValue": 0.0,
-          "minValue": 0.0
+          "value": 0
         }
       ],
+      "onKill": [
+        {
+          "$type": "RemoveModifier",
+          "modifierName": "Life_Timer"
+        }
+      ],
+      //碰撞时Trigger
       "onAbilityStart": [
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_CatchAnimal_Hit",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_SceneObj_CatchAnimal_Hit"
+          // "born":
+          // {
+          //     "$type": "ConfigBornByCollisionPoint",
+          //     "offset":
+          //     {
+          //         "x": 0.0,
+          //         "y": 0.0,
+          //         "z": 0.0,
+          //     }
+          // },
         },
         {
           "$type": "FireAISoundEvent"
@@ -466,12 +457,13 @@
           "$type": "Predicated",
           "otherTargets": {
             "$type": "SelectTargetsByShape",
+            "shapeName": "CircleR3H5",
+            "centerBasedOn": "Self",
+            "campTargetType": "Enemy",
+            "campBasedOn": "Self",
             "topLimit": 1,
             "entityTypePriority": ["Monster"],
-            "sortType": "Nearest",
-            "shapeName": "CircleR3H5",
-            "campTargetType": "Enemy",
-            "sizeRatio": 1.0
+            "sortType": "Nearest"
           },
           "targetPredicates": [
             {
@@ -482,7 +474,7 @@
                   "entityTypes": ["EnvAnimal"]
                 },
                 {
-                  "$type": "ByNot",
+                  "$type": "ByNot", //配置太蠢了，但是也没办法
                   "predicates": [
                     {
                       "$type": "ByNot",
@@ -492,9 +484,10 @@
                           "entityTypes": ["Monster"]
                         },
                         {
-                          "$type": "ByTargetGlobalValue",
+                          "$type": "ByTargetGlobalValue", //判定为动物
                           "key": "_ANIMAL_ENTITY_TYPE",
-                          "ratio": 1.0
+                          "value": 1,
+                          "compareType": "Equal"
                         }
                       ]
                     }
@@ -506,23 +499,23 @@
           "successActions": [
             {
               "$type": "CaptureAnimal",
+              "materialId": 220043,
               "target": "Other",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
-                  "target": "Self",
                   "key": "_ABILITY_CatchAnimal_IsCaptured",
-                  "ratio": 0.0
+                  "value": 0,
+                  "compareType": "Equal",
+                  "target": "Self"
                 }
-              ],
-              "materialId": 220043
+              ]
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "_ABILITY_CatchAnimal_IsCaptured",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1,
+              "target": "Self"
             }
           ]
         },
@@ -530,87 +523,113 @@
           "$type": "KillSelf"
         }
       ],
-      "onKill": [
-        {
-          "$type": "RemoveModifier",
-          "modifierName": "Life_Timer"
+      "modifiers": {
+        //子弹生命计时器
+        "Life_Timer": {
+          "thinkInterval": 0.85,
+          "onThinkInterval": [
+            {
+              "$type": "TriggerAbility",
+              "abilityName": "ActivityAbility_CatchAnimal_Bullet"
+            }
+          ]
         }
-      ]
+      }
     }
   },
+  //////////////////////////////////////////////////////////////
+  ///
+  ///   Ver3.2  大世界小道具————抓蕈兽
+  ///
+  //////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CatchMushroomMonster_Shoot",
+      "isDynamicAbility": true,
       "abilityMixins": [
         {
           "$type": "AttachToWidgetStateMixin",
-          "KALABJKPOHA": [220073],
-          "IGILOHDBJNI": [
+          "targetWidgetMaterialId": 220073,
+          "onActive": [
             {
               "$type": "ApplyModifier",
-              "RotationDampTime": true,
-              "modifierName": "ActivityAbility_CatchAnimal_AddSkillInfo"
+              "modifierName": "ActivityAbility_CatchAnimal_AddSkillInfo",
+              "doOffStage": true
             },
             {
               "$type": "ApplyModifier",
-              "RotationDampTime": true,
-              "modifierName": "ActivityAbility_CatchAnimal_SwitchSkill"
+              "modifierName": "ActivityAbility_CatchAnimal_SwitchSkill",
+              "doOffStage": true
             },
             {
               "$type": "ApplyModifier",
-              "RotationDampTime": true,
-              "modifierName": "ActivityAbility_CatchAnimal_Aim_Handler"
+              "modifierName": "ActivityAbility_CatchAnimal_Aim_Handler",
+              "doOffStage": true
             }
           ],
-          "GFHONIDIHOO": [
+          "onDisable": [
             {
               "$type": "RemoveModifier",
-              "RotationDampTime": true,
-              "modifierName": "ActivityAbility_CatchAnimal_AddSkillInfo"
+              "modifierName": "ActivityAbility_CatchAnimal_AddSkillInfo",
+              "doOffStage": true
             },
             {
               "$type": "RemoveModifier",
-              "RotationDampTime": true,
-              "modifierName": "ActivityAbility_CatchAnimal_SwitchSkill"
+              "modifierName": "ActivityAbility_CatchAnimal_SwitchSkill",
+              "doOffStage": true
             },
             {
               "$type": "RemoveModifier",
-              "RotationDampTime": true,
-              "modifierName": "ActivityAbility_CatchAnimal_Aim_Handler"
+              "modifierName": "ActivityAbility_CatchAnimal_Aim_Handler",
+              "doOffStage": true
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "RemoveModifier",
+              "modifierName": "ActivityAbility_CatchAnimal_AddSkillInfo",
+              "doOffStage": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "modifierName": "ActivityAbility_CatchAnimal_SwitchSkill",
+              "doOffStage": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "modifierName": "ActivityAbility_CatchAnimal_Aim_Handler",
+              "doOffStage": true
             }
           ]
         }
       ],
       "modifiers": {
+        //增添抓捕专用技能
         "ActivityAbility_CatchAnimal_AddSkillInfo": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AddAvatarSkillInfo",
-              "RotationDampTime": true,
-              "skillID": 20049
+              "skillID": 20049,
+              "doOffStage": true
             },
             {
-              "$type": "AvatarSkillStart",
+              "$type": "AvatarSkillStart", //这是用来让它装备瞬间闪一下
               "skillID": 20049,
-              "cdDelta": 0.10000000149011612,
-              "costStaminaDelta": 1.0
+              "cdRatio": 0.1
             }
           ],
           "onRemoved": [
             {
               "$type": "RemoveAvatarSkillInfo",
-              "RotationDampTime": true,
               "skillID": 20049,
+              "refreshAfterRemove": true,
               "doOffStage": true
             }
           ]
         },
+        //替换小技能按钮
         "ActivityAbility_CatchAnimal_SwitchSkill": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "SwitchSkillIDMixin",
@@ -620,17 +639,16 @@
             },
             {
               "$type": "WidgetCDSyncMixin",
-              "PEKBMAJCANI": true,
-              "ODIKDFHCHOJ": true,
               "itemId": 220073,
-              "ONEJALHEENC": 20049,
-              "PDJDLNCMHMK": 0.5
+              "skillId": 20049,
+              "syncOnCDChange": true,
+              "syncOnChangeAvatar": true,
+              "skillCDOffset": 0.5
             }
           ]
         },
+        //处理瞄准的主要按键逻辑
         "ActivityAbility_CatchAnimal_Aim_Handler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachToStateIDMixin",
@@ -640,22 +658,22 @@
             {
               "$type": "ButtonHoldChargeMixin",
               "skillID": 20049,
-              "secondChargeTime": 0.11999999731779099,
+              "chargeTime": 0.0,
+              "secondChargeTime": 0.12,
               "OnBeginCharged": [
                 {
                   "$type": "SetGlobalValue",
-                  "RotationDampTime": true,
-                  "ratio": 0.0,
-                  "key": "_ABILITY_Common_Channel_IsTrigger",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "key": "_ABILITY_Common_Channel_IsTrigger", //每次点按重置Trigger
+                  "value": 0,
+                  "doOffStage": true
                 }
               ],
+              //点按释放
               "OnReleaseCharged": [
                 {
                   "$type": "ApplyModifier",
-                  "RotationDampTime": true,
-                  "modifierName": "Shoot_Short"
+                  "modifierName": "Shoot_Short",
+                  "doOffStage": true
                 }
               ],
               "OnBeginSecondCharged": [
@@ -664,36 +682,37 @@
                   "triggerID": "StartChannelTrigger"
                 }
               ],
+              //长按释放
               "OnReleaseSecondCharged": [
                 {
                   "$type": "ApplyModifier",
-                  "RotationDampTime": true,
+                  "modifierName": "Shoot_Long",
+                  "doOffStage": true,
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "key": "_ABILITY_Common_Channel_IsTrigger",
-                      "ratio": 0.0
+                      "value": 0,
+                      "compareType": "Equal"
                     }
-                  ],
-                  "modifierName": "Shoot_Long"
+                  ]
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "RotationDampTime": true,
-                  "ratio": 1.0,
                   "key": "_ABILITY_Common_Channel_IsTrigger",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 1,
+                  "doOffStage": true
                 }
               ],
-              "JLCOFIBNCCJ": [
+              "chargeStateIDs": ["Channel_Loop"],
+              "OnCancelCharged": [
                 {
                   "$type": "SetAnimatorTrigger",
                   "triggerID": "EndChannelTrigger"
                 }
-              ],
-              "chargeStateIDs": ["Channel_Loop"]
+              ]
             },
+
             {
               "$type": "AttachToStateIDMixin",
               "stateIDs": ["Channel_BS", "Channel_Loop"],
@@ -701,94 +720,85 @@
             }
           ]
         },
+        //替换操控面板
         "ActivityAbility_CatchAnimal_ChangePlayMode": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ChangePlayMode",
-              "RotationDampTime": true,
               "muteRemoteAction": true,
-              "toPlayMode": "ActivityAimState"
+              "toPlayMode": "ActivityAimState",
+              "doOffStage": true
             }
           ],
           "onRemoved": [
             {
               "$type": "ChangePlayMode",
-              "RotationDampTime": true,
-              "muteRemoteAction": true
+              "muteRemoteAction": true,
+              "toPlayMode": "Normal",
+              "doOffStage": true
             }
           ]
         },
+        //强制退出时需要TriggerCD
         "Trigger_OnExit": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
-              "$type": "ApplyModifier",
-              "RotationDampTime": true,
+              "$type": "ApplyModifier", //没松手被打断时强制发射子弹
+              "modifierName": "Shoot_Short",
+              "doOffStage": true,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Common_Channel_IsTrigger",
-                  "ratio": 0.0
+                  "value": 0,
+                  "compareType": "Equal"
                 }
-              ],
-              "modifierName": "Shoot_Short"
+              ]
             },
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 1.0,
               "key": "_ABILITY_Common_Channel_IsTrigger",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1,
+              "doOffStage": true
             }
           ]
         },
+        //瞄准镜头
         "Focus": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AvatarEnterFocus",
               "cameraFollowLower": {
-                "x": 0.6000000238418579,
-                "y": 0.20000000298023224,
-                "z": -1.7999999523162842
+                "x": 0.6,
+                "y": 0.2,
+                "z": -1.8
               },
               "cameraFollowUpper": {
                 "x": 0.5,
-                "y": -0.20000000298023224,
-                "z": -1.7999999523162842
-              },
-              "cameraFollowMaxDegree": 40.0,
-              "cameraFollowMinDegree": -40.0,
-              "dragButtonName": "Skill2",
-              "assistance": {
-                "ps4": {
-                  "useGyro": true
-                },
-                "ps5": {
-                  "useGyro": true
-                },
-                "other": {
-                  "useGyro": true
-                }
+                "y": -0.2,
+                "z": -1.8
               },
               "canMove": false,
-              "vcamFov": 30.0,
-              "disableAnim": true
+              "dragButtonName": "Skill2",
+              "showCrosshair": true,
+              "disableAnim": true,
+              "assistance": {
+                "ps4": { "useGyro": true },
+                "ps5": { "useGyro": true },
+                "other": { "useGyro": true }
+              },
+              "vcam_fov": 30,
+              "cameraFollowMaxDegree": 40,
+              "cameraFollowMinDegree": -40
             },
             {
               "$type": "SetAnimatorBool",
-              "boolID": "LockMotionFlagExitChannel",
-              "ratio": true
+              "boolID": "LockMotionFlagExitChannel", //需要保证Focus阶段不能移动
+              "value": true
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_CatchAnimal_Charge_FungusFighter",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_CatchAnimal_Charge_FungusFighter"
             },
             {
               "$type": "AttachModifier",
@@ -796,43 +806,43 @@
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "_ABILITY_Common_IsChannelState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             }
           ],
           "onRemoved": [
             {
               "$type": "AvatarExitFocus",
-              "RotationDampTime": true,
-              "keepRotation": true
+              "keepRotation": true,
+              "doOffStage": true
             },
+            // {
+            // 	"$type": "SetAnimatorTrigger",
+            // 	"triggerID": "EndChannelTrigger",
+            // 	"doOffStage": true,
+            // },
             {
               "$type": "SetAnimatorBool",
-              "RotationDampTime": true,
-              "boolID": "LockMotionFlagExitChannel"
+              "boolID": "LockMotionFlagExitChannel",
+              "value": false,
+              "doOffStage": true
             },
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
               "key": "_ABILITY_Common_IsChannelState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0,
+              "doOffStage": true
             }
           ]
         },
+        //点按发射捕捉器
         "Shoot_Short": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.2,
           "onAdded": [
             {
               "$type": "AvatarSkillStart",
               "skillID": 20049,
-              "cdDelta": 1.0,
-              "costStaminaDelta": 1.0
+              "cdRatio": 1
             },
             {
               "$type": "WidgetSkillStart",
@@ -840,64 +850,58 @@
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_CatchAnimal_Shoot_FungusFighter",
+              "effectPattern": "Eff_SceneObj_CatchAnimal_Shoot_FungusFighter",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.5,
-                  "PJCOKIGCJOK": 1.2000000476837158
-                },
                 "attachPointName": "FocusAnchor",
-                "attachPointTargetType": "Self"
-              },
-              "EBHJMLOKDGB": -1.0
+                "attachPointTargetType": "Self",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.5,
+                  "z": 1.2
+                }
+              }
             },
             {
               "$type": "ServerLuaCall",
-              "RotationDampTime": true,
-              "luaCallType": "CurGalleryControlGroup",
+              "doOffStage": true,
               "funcName": "SLC_AvatarUseCatchWidget",
-              "ODAOGCJFIHC": 0.0,
-              "GCCFLBLEHDB": 0.0,
-              "DJODIFOBEJG": 0.0
+              "luaCallType": "CurGalleryControlGroup"
             },
             {
               "$type": "TriggerBullet",
               "bulletID": 420000020,
               "born": {
                 "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "FocusAnchor",
+                "attachPointTargetType": "Self",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.5,
-                  "PJCOKIGCJOK": 1.2000000476837158
+                  "x": 0.0,
+                  "y": 0.5,
+                  "z": 1.2
                 },
                 "direction": {
                   "$type": "ConfigDirectionByAttachPoint",
-                  "angleOffset": {
-                    "IBKBLDAJIMA": 0.0,
-                    "LKHJADIPBFL": 0.0,
-                    "PJCOKIGCJOK": 0.0
-                  },
                   "attachPointName": "FocusAnchor",
-                  "attachPointTargetType": "Self"
-                },
-                "attachPointName": "FocusAnchor",
-                "attachPointTargetType": "Self"
+                  "attachPointTargetType": "Self",
+                  "angleOffset": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                  }
+                }
               }
             }
           ]
         },
+        //长按发射捕捉器
         "Shoot_Long": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.1,
           "onAdded": [
             {
               "$type": "AvatarSkillStart",
               "skillID": 20049,
-              "cdDelta": 1.0,
-              "costStaminaDelta": 1.0
+              "cdRatio": 1
             },
             {
               "$type": "WidgetSkillStart",
@@ -905,18 +909,17 @@
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_CatchAnimal_Shoot_FungusFighter",
+              "effectPattern": "Eff_SceneObj_CatchAnimal_Shoot_FungusFighter",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
-                },
                 "attachPointName": "WeaponR",
-                "attachPointTargetType": "Self"
-              },
-              "EBHJMLOKDGB": -1.0
+                "attachPointTargetType": "Self",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                }
+              }
             },
             {
               "$type": "Predicated",
@@ -926,41 +929,40 @@
                   "weaponTypes": ["WEAPON_BOW"]
                 }
               ],
+              //弓手弹道
               "successActions": [
                 {
                   "$type": "ServerLuaCall",
-                  "RotationDampTime": true,
-                  "luaCallType": "CurGalleryControlGroup",
+                  "doOffStage": true,
                   "funcName": "SLC_AvatarUseCatchWidget",
-                  "ODAOGCJFIHC": 0.0,
-                  "GCCFLBLEHDB": 0.0,
-                  "DJODIFOBEJG": 0.0
+                  "luaCallType": "CurGalleryControlGroup"
                 },
                 {
                   "$type": "TriggerBullet",
                   "bulletID": 420000021,
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
+                    "attachPointName": "FocusAnchor",
+                    "attachPointTargetType": "Self",
                     "offset": {
-                      "IBKBLDAJIMA": 0.30000001192092896,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 1.2000000476837158
+                      "x": 0.3,
+                      "y": 0.0,
+                      "z": 1.2
                     },
                     "direction": {
                       "$type": "ConfigDirectionByAttachPoint",
-                      "angleOffset": {
-                        "IBKBLDAJIMA": -1.5,
-                        "LKHJADIPBFL": 0.0,
-                        "PJCOKIGCJOK": 0.0
-                      },
                       "attachPointName": "FocusAnchor",
-                      "attachPointTargetType": "Self"
-                    },
-                    "attachPointName": "FocusAnchor",
-                    "attachPointTargetType": "Self"
+                      "attachPointTargetType": "Self",
+                      "angleOffset": {
+                        "x": -1.5,
+                        "y": 0,
+                        "z": 0
+                      }
+                    }
                   }
                 }
               ],
+              //非弓手弹道
               "failActions": [
                 {
                   "$type": "Predicated",
@@ -982,35 +984,32 @@
                   "successActions": [
                     {
                       "$type": "ServerLuaCall",
-                      "RotationDampTime": true,
-                      "luaCallType": "CurGalleryControlGroup",
+                      "doOffStage": true,
                       "funcName": "SLC_AvatarUseCatchWidget",
-                      "ODAOGCJFIHC": 0.0,
-                      "GCCFLBLEHDB": 0.0,
-                      "DJODIFOBEJG": 0.0
+                      "luaCallType": "CurGalleryControlGroup"
                     },
                     {
                       "$type": "TriggerBullet",
                       "bulletID": 420000021,
                       "born": {
                         "$type": "ConfigBornByAttachPoint",
+                        "attachPointName": "FocusAnchor",
+                        "attachPointTargetType": "Self",
                         "offset": {
-                          "IBKBLDAJIMA": 0.0,
-                          "LKHJADIPBFL": 0.10000000149011612,
-                          "PJCOKIGCJOK": 1.2000000476837158
+                          "x": 0.0,
+                          "y": 0.1,
+                          "z": 1.2
                         },
                         "direction": {
                           "$type": "ConfigDirectionByAttachPoint",
-                          "angleOffset": {
-                            "IBKBLDAJIMA": -1.5,
-                            "LKHJADIPBFL": 0.0,
-                            "PJCOKIGCJOK": 0.0
-                          },
                           "attachPointName": "FocusAnchor",
-                          "attachPointTargetType": "Self"
-                        },
-                        "attachPointName": "FocusAnchor",
-                        "attachPointTargetType": "Self"
+                          "attachPointTargetType": "Self",
+                          "angleOffset": {
+                            "x": -1.5,
+                            "y": 0,
+                            "z": 0
+                          }
+                        }
                       }
                     }
                   ],
@@ -1035,70 +1034,64 @@
                       "successActions": [
                         {
                           "$type": "ServerLuaCall",
-                          "RotationDampTime": true,
-                          "luaCallType": "CurGalleryControlGroup",
+                          "doOffStage": true,
                           "funcName": "SLC_AvatarUseCatchWidget",
-                          "ODAOGCJFIHC": 0.0,
-                          "GCCFLBLEHDB": 0.0,
-                          "DJODIFOBEJG": 0.0
+                          "luaCallType": "CurGalleryControlGroup"
                         },
                         {
                           "$type": "TriggerBullet",
                           "bulletID": 420000021,
                           "born": {
                             "$type": "ConfigBornByAttachPoint",
+                            "attachPointName": "FocusAnchor",
+                            "attachPointTargetType": "Self",
                             "offset": {
-                              "IBKBLDAJIMA": 0.0,
-                              "LKHJADIPBFL": 0.25,
-                              "PJCOKIGCJOK": 1.2000000476837158
+                              "x": 0.0,
+                              "y": 0.25,
+                              "z": 1.2
                             },
                             "direction": {
                               "$type": "ConfigDirectionByAttachPoint",
-                              "angleOffset": {
-                                "IBKBLDAJIMA": -1.5,
-                                "LKHJADIPBFL": 0.0,
-                                "PJCOKIGCJOK": 0.0
-                              },
                               "attachPointName": "FocusAnchor",
-                              "attachPointTargetType": "Self"
-                            },
-                            "attachPointName": "FocusAnchor",
-                            "attachPointTargetType": "Self"
+                              "attachPointTargetType": "Self",
+                              "angleOffset": {
+                                "x": -1.5,
+                                "y": 0,
+                                "z": 0
+                              }
+                            }
                           }
                         }
                       ],
                       "failActions": [
                         {
                           "$type": "ServerLuaCall",
-                          "RotationDampTime": true,
-                          "luaCallType": "CurGalleryControlGroup",
+                          "doOffStage": true,
                           "funcName": "SLC_AvatarUseCatchWidget",
-                          "ODAOGCJFIHC": 0.0,
-                          "GCCFLBLEHDB": 0.0,
-                          "DJODIFOBEJG": 0.0
+                          "luaCallType": "CurGalleryControlGroup"
                         },
                         {
                           "$type": "TriggerBullet",
                           "bulletID": 420000021,
                           "born": {
                             "$type": "ConfigBornByAttachPoint",
+                            "attachPointName": "FocusAnchor",
+                            "attachPointTargetType": "Self",
                             "offset": {
-                              "IBKBLDAJIMA": 0.0,
-                              "LKHJADIPBFL": 0.5,
-                              "PJCOKIGCJOK": 1.2000000476837158
+                              "x": 0.0,
+                              "y": 0.5,
+                              "z": 1.2
                             },
                             "direction": {
                               "$type": "ConfigDirectionByAttachPoint",
-                              "angleOffset": {
-                                "IBKBLDAJIMA": -1.5,
-                                "LKHJADIPBFL": 0.0,
-                                "PJCOKIGCJOK": 0.0
-                              },
                               "attachPointName": "FocusAnchor",
-                              "attachPointTargetType": "Self"
-                            },
-                            "attachPointName": "FocusAnchor",
-                            "attachPointTargetType": "Self"
+                              "attachPointTargetType": "Self",
+                              "angleOffset": {
+                                "x": -1.5,
+                                "y": 0,
+                                "z": 0
+                              }
+                            }
                           }
                         }
                       ]
@@ -1109,30 +1102,70 @@
             },
             {
               "$type": "SetAnimatorTrigger",
-              "RotationDampTime": true,
-              "triggerID": "EndChannelTrigger"
+              "triggerID": "EndChannelTrigger",
+              "doOffStage": true
             }
-          ]
+          ],
+          //延迟一点退出动作
+          "onRemoved": []
         }
       },
+      //加个死亡恢复保护
       "onKill": [
         {
           "$type": "ChangePlayMode",
-          "RotationDampTime": true,
-          "muteRemoteAction": true
+          "muteRemoteAction": true,
+          "toPlayMode": "Normal",
+          "doOffStage": true
         }
-      ],
-      "isDynamicAbility": true
+      ]
     }
   },
+  //蕈兽集火技能
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CatchMushroomMonster_ForceFire",
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "ActivityAbility_CatchAnimal_AddSkillInfo",
+          "doOffStage": true
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "ActivityAbility_CatchAnimal_SwitchSkill",
+          "doOffStage": true
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "ActivityAbility_CatchAnimal_Aim_Handler",
+          "doOffStage": true
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "GhostToEmeny",
+          "doOffStage": true
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "GhostToAllied",
+          "doOffStage": true
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "DenyLock",
+          "doOffStage": true
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Invincible",
+          "doOffStage": true
+        }
+      ],
       "modifiers": {
         "DenyLock": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "DenyLockOn",
           "onAdded": [
             {
@@ -1142,61 +1175,61 @@
           ]
         },
         "Invincible": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "state": "Invincible",
           "modifierMixins": [
             {
               "$type": "VelocityForceMixin",
               "excludeForces": ["WindZoneType"]
             }
-          ],
-          "state": "Invincible"
+          ]
         },
         "GhostToAllied": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "IsGhostToAllied"
         },
         "GhostToEmeny": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "IsGhostToEnemy"
         },
+        //增添抓捕专用技能,切换面板
         "ActivityAbility_CatchAnimal_AddSkillInfo": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "modifierMixins": [],
           "onAdded": [
             {
               "$type": "AddAvatarSkillInfo",
-              "RotationDampTime": true,
-              "skillID": 20051
+              "skillID": 20051,
+              "doOffStage": true
             },
+            // {
+            // 	"$type": "AvatarSkillStart",  //这是用来让它装备瞬间闪一下
+            // 	"skillID": 20051,
+            // 	"cdRatio": 0.1,
+            // },
             {
               "$type": "ChangePlayMode",
-              "RotationDampTime": true,
-              "canBeHandledOnRecover": true,
               "muteRemoteAction": true,
-              "toPlayMode": "FungusFighterBattle"
+              "toPlayMode": "FungusFighterBattle",
+              "doOffStage": true,
+              "canBeHandledOnRecover": true
             }
           ],
+
           "onRemoved": [
             {
               "$type": "RemoveAvatarSkillInfo",
-              "RotationDampTime": true,
               "skillID": 20051,
+              "refreshAfterRemove": true,
               "doOffStage": true
             },
             {
               "$type": "ChangePlayMode",
-              "RotationDampTime": true,
-              "canBeHandledOnRecover": true,
-              "muteRemoteAction": true
+              "muteRemoteAction": true,
+              "toPlayMode": "Normal",
+              "doOffStage": true,
+              "canBeHandledOnRecover": true
             }
           ]
         },
+        //替换小技能按钮
         "ActivityAbility_CatchAnimal_SwitchSkill": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "SwitchSkillIDMixin",
@@ -1206,9 +1239,8 @@
             }
           ]
         },
+        //处理瞄准的主要按键逻辑
         "ActivityAbility_CatchAnimal_Aim_Handler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachToStateIDMixin",
@@ -1218,22 +1250,27 @@
             {
               "$type": "ButtonHoldChargeMixin",
               "skillID": 20051,
-              "secondChargeTime": 0.11999999731779099,
+              "chargeTime": 0.0,
+              "secondChargeTime": 0.12,
               "OnBeginCharged": [
                 {
                   "$type": "SetGlobalValue",
-                  "RotationDampTime": true,
-                  "ratio": 0.0,
-                  "key": "_ABILITY_Common_Channel_IsTrigger",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "key": "_ABILITY_Common_Channel_IsTrigger", //每次点按重置Trigger
+                  "value": 0,
+                  "doOffStage": true
                 }
               ],
+              //点按释放
               "OnReleaseCharged": [
+                // {
+                // 	"$type": "ApplyModifier",
+                // 	"modifierName": "Shoot_Short",
+                // 	"doOffStage": true,
+                // },
                 {
                   "$type": "ShowReminder",
-                  "muteRemoteAction": true,
-                  "id": 470510101
+                  "id": 470510101,
+                  "muteRemoteAction": true
                 }
               ],
               "OnBeginSecondCharged": [
@@ -1242,50 +1279,51 @@
                   "triggerID": "StartChannelTrigger"
                 },
                 {
-                  "$type": "CreateGadget",
+                  "$type": "CreateGadget", ////创建创生物 用来瞄准
+                  "gadgetID": 420000024,
+                  "campID": 1001,
+                  "campTargetType": "Enemy",
                   "born": {
                     "$type": "ConfigBornBySelf",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 0.0
+                      "x": 0,
+                      "y": 0,
+                      "z": 0
                     }
-                  },
-                  "gadgetID": 420000024,
-                  "campID": 1001,
-                  "campTargetType": "Enemy"
+                  }
                 }
               ],
+              //长按释放
               "OnReleaseSecondCharged": [
                 {
                   "$type": "ApplyModifier",
-                  "RotationDampTime": true,
+                  "modifierName": "Shoot_Long",
+                  "doOffStage": true,
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "key": "_ABILITY_Common_Channel_IsTrigger",
-                      "ratio": 0.0
+                      "value": 0,
+                      "compareType": "Equal"
                     }
-                  ],
-                  "modifierName": "Shoot_Long"
+                  ]
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "RotationDampTime": true,
-                  "ratio": 1.0,
                   "key": "_ABILITY_Common_Channel_IsTrigger",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 1,
+                  "doOffStage": true
                 }
               ],
-              "JLCOFIBNCCJ": [
+              "chargeStateIDs": ["Channel_Loop"],
+              "OnCancelCharged": [
                 {
                   "$type": "SetAnimatorTrigger",
                   "triggerID": "EndChannelTrigger"
                 }
-              ],
-              "chargeStateIDs": ["Channel_Loop"]
+              ]
             },
+
             {
               "$type": "AttachToStateIDMixin",
               "stateIDs": ["Channel_BS", "Channel_Loop"],
@@ -1293,157 +1331,159 @@
             }
           ]
         },
+        //替换操控面板
         "ActivityAbility_CatchAnimal_ChangePlayMode": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ChangePlayMode",
-              "RotationDampTime": true,
               "muteRemoteAction": true,
-              "toPlayMode": "ActivityAimState"
+              "toPlayMode": "ActivityAimState",
+              "doOffStage": true
             }
           ],
           "onRemoved": [
             {
               "$type": "ChangePlayMode",
-              "RotationDampTime": true,
-              "muteRemoteAction": true
+              "muteRemoteAction": true,
+              "toPlayMode": "Normal",
+              "doOffStage": true
             }
           ]
         },
+        //强制退出时需要TriggerCD
         "Trigger_OnExit": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onRemoved": [
+            // {
+            // 	"$type": "ApplyModifier",       //没松手被打断时强制发射子弹
+            // 	"modifierName": "Shoot_Short",
+            // 	"doOffStage": true,
+            // 	"predicates":
+            // 	[
+            // 		{
+            // 			"$type": "ByTargetGlobalValue",
+            // 			"key": "_ABILITY_Common_Channel_IsTrigger",
+            // 			"value": 0,
+            // 			"compareType": "Equal",
+            // 		},
+            // 	],
+            // },
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 1.0,
               "key": "_ABILITY_Common_Channel_IsTrigger",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1,
+              "doOffStage": true
             },
             {
               "$type": "KillGadget",
-              "RotationDampTime": true,
+              "doOffStage": true,
               "gadgetInfo": {
+                "$type": "SelectTargetsByChildren",
                 "configID": 420000024
               }
             }
           ]
         },
+        //瞄准镜头
         "Focus": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AvatarEnterFocus",
               "cameraFollowLower": {
-                "x": 0.6000000238418579,
-                "y": 0.20000000298023224,
-                "z": -1.7999999523162842
+                "x": 0.6,
+                "y": 0.2,
+                "z": -1.8
               },
               "cameraFollowUpper": {
-                "x": 0.6000000238418579,
-                "y": -0.10000000149011612,
-                "z": -1.7999999523162842
-              },
-              "cameraFollowMaxDegree": 40.0,
-              "cameraFollowMinDegree": -40.0,
-              "dragButtonName": "Skill2",
-              "assistance": {
-                "ps4": {
-                  "useGyro": true
-                },
-                "ps5": {
-                  "useGyro": true
-                },
-                "other": {
-                  "useGyro": true
-                }
+                "x": 0.6,
+                "y": -0.1,
+                "z": -1.8
               },
               "canMove": false,
-              "vcamFov": 30.0,
-              "disableAnim": true
+              "dragButtonName": "Skill2",
+              "showCrosshair": true,
+              "disableAnim": true,
+              "assistance": {
+                "ps4": { "useGyro": true },
+                "ps5": { "useGyro": true },
+                "other": { "useGyro": true }
+              },
+              "vcam_fov": 30,
+              "cameraFollowMaxDegree": 40,
+              "cameraFollowMinDegree": -40
             },
             {
               "$type": "SetAnimatorBool",
-              "boolID": "LockMotionFlagExitChannel",
-              "ratio": true
+              "boolID": "LockMotionFlagExitChannel", //需要保证Focus阶段不能移动
+              "value": true
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_CatchAnimal_Charge",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_CatchAnimal_Charge"
             },
+            // {
+            // 	"$type": "AttachModifier",
+            // 	"modifierName": "ActivityAbility_CatchAnimal_ChangePlayMode",
+            // },
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "_ABILITY_Common_IsChannelState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             }
           ],
           "onRemoved": [
             {
               "$type": "AvatarExitFocus",
-              "RotationDampTime": true,
-              "keepRotation": true
+              "keepRotation": true,
+              "doOffStage": true
             },
             {
               "$type": "SetAnimatorBool",
-              "RotationDampTime": true,
-              "boolID": "LockMotionFlagExitChannel"
+              "boolID": "LockMotionFlagExitChannel",
+              "value": false,
+              "doOffStage": true
             },
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
               "key": "_ABILITY_Common_IsChannelState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0,
+              "doOffStage": true
             }
           ]
         },
+
+        //点按发射捕捉器
         "Shoot_Short": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.2,
           "onAdded": [
             {
               "$type": "AvatarSkillStart",
               "skillID": 20051,
-              "cdDelta": 1.0,
-              "costStaminaDelta": 1.0
+              "cdRatio": 1
             }
           ]
         },
+        //长按发射捕捉器
         "Shoot_Long": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.3,
           "onAdded": [
             {
               "$type": "AvatarSkillStart",
               "skillID": 20051,
-              "cdDelta": 1.0,
-              "costStaminaDelta": 1.0
+              "cdRatio": 1
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_CatchAnimal_Shoot",
+              "effectPattern": "Eff_SceneObj_CatchAnimal_Shoot",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
-                },
                 "attachPointName": "WeaponR",
-                "attachPointTargetType": "Self"
-              },
-              "EBHJMLOKDGB": -1.0
+                "attachPointTargetType": "Self",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                }
+              }
             },
             {
               "$type": "RemoveUniqueModifier",
@@ -1451,83 +1491,55 @@
                 "$type": "SelectTargetsByChildren",
                 "configID": 420000024
               },
-              "modifierName": "UNIQUE_CatchMushroomMonster_Aim_Driver"
+              "modifierName": "UNIQUE_CatchMushroomMonster_Aim_Driver" //把瞄准碰撞检测器卸载
             }
           ],
+          //延迟一点退出动作
           "onRemoved": [
             {
               "$type": "SetAnimatorTrigger",
-              "RotationDampTime": true,
-              "triggerID": "EndChannelTrigger"
+              "triggerID": "EndChannelTrigger",
+              "doOffStage": true
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "RotationDampTime": true,
-          "modifierName": "ActivityAbility_CatchAnimal_AddSkillInfo"
-        },
-        {
-          "$type": "AttachModifier",
-          "RotationDampTime": true,
-          "modifierName": "ActivityAbility_CatchAnimal_SwitchSkill"
-        },
-        {
-          "$type": "AttachModifier",
-          "RotationDampTime": true,
-          "modifierName": "ActivityAbility_CatchAnimal_Aim_Handler"
-        },
-        {
-          "$type": "AttachModifier",
-          "RotationDampTime": true,
-          "modifierName": "GhostToEmeny"
-        },
-        {
-          "$type": "AttachModifier",
-          "RotationDampTime": true,
-          "modifierName": "GhostToAllied"
-        },
-        {
-          "$type": "AttachModifier",
-          "RotationDampTime": true,
-          "modifierName": "DenyLock"
-        },
-        {
-          "$type": "AttachModifier",
-          "RotationDampTime": true,
-          "modifierName": "Invincible"
-        }
-      ],
+      //加个死亡恢复保护
       "onKill": [
         {
           "$type": "ChangePlayMode",
-          "RotationDampTime": true,
-          "muteRemoteAction": true
+          "muteRemoteAction": true,
+          "toPlayMode": "Normal",
+          "doOffStage": true
         }
-      ],
-      "isDynamicAbility": true
+      ]
     }
   },
+  //420000024 集火技能碰撞检测
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CatchMushroomMonster_Aim_Driver",
+      //集火技能负责瞄准碰撞处理的gadget
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_CatchMushroomMonster_Aim_Driver"
+        }
+      ],
       "modifiers": {
         "UNIQUE_CatchMushroomMonster_Aim_Driver": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "DoActionByAimMixin",
               "entityTypes": ["Monster"],
-              "GIOLDCOLJLC": "PRIVATE_RayCast",
-              "KDDELDHCMHA": -1.0,
+              "colliderNodeName": "PRIVATE_RayCast",
+              "aimType": "OneInScope",
               "actionQueue": [
                 {
                   "$type": "AttachModifier",
+                  "modifierName": "Lock_Eff",
                   "target": "Target",
                   "predicates": [
                     {
@@ -1535,18 +1547,18 @@
                       "entityTypes": ["Monster"]
                     },
                     {
-                      "$type": "ByTargetGlobalValue",
+                      "$type": "ByTargetGlobalValue", //非小动物
                       "key": "_ANIMAL_ENTITY_TYPE",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "modifierName": "Lock_Eff"
+                  ]
                 }
               ],
-              "PGAOLEPMAEO": [
+              "onLeaveScopeActionQueue": [
                 {
                   "$type": "RemoveModifier",
+                  "modifierName": "Lock_Eff",
                   "target": "Target",
                   "predicates": [
                     {
@@ -1554,18 +1566,18 @@
                       "entityTypes": ["Monster"]
                     },
                     {
-                      "$type": "ByTargetGlobalValue",
+                      "$type": "ByTargetGlobalValue", //非小动物
                       "key": "_ANIMAL_ENTITY_TYPE",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "modifierName": "Lock_Eff"
+                  ]
                 }
               ],
-              "JEBLBGKEKJD": [
+              "onRemoveActionQueue": [
                 {
                   "$type": "RemoveModifier",
+                  "modifierName": "Lock_Eff",
                   "target": "Target",
                   "predicates": [
                     {
@@ -1573,13 +1585,12 @@
                       "entityTypes": ["Monster"]
                     },
                     {
-                      "$type": "ByTargetGlobalValue",
+                      "$type": "ByTargetGlobalValue", //非小动物
                       "key": "_ANIMAL_ENTITY_TYPE",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "modifierName": "Lock_Eff"
+                  ]
                 },
                 {
                   "$type": "ShowReminder",
@@ -1588,6 +1599,7 @@
                 },
                 {
                   "$type": "ApplyModifier",
+                  "modifierName": "PreOnFire",
                   "target": "Target",
                   "predicates": [
                     {
@@ -1595,16 +1607,14 @@
                       "entityTypes": ["Monster"]
                     },
                     {
-                      "$type": "ByTargetGlobalValue",
+                      "$type": "ByTargetGlobalValue", //非小动物
                       "key": "_ANIMAL_ENTITY_TYPE",
-                      "ratio": 0.0,
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
-                  "modifierName": "PreOnFire"
+                  ]
                 }
-              ],
-              "CFOBAFEAIEO": "OneInScope"
+              ]
             }
           ],
           "onRemoved": [
@@ -1614,30 +1624,29 @@
             }
           ]
         },
+        //预瞄准特效
         "Lock_Eff": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Activity_FungusFighter_Lock",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Activity_FungusFighter_Lock"
             }
           ]
         },
+        //先把周围的集火干掉再上集火
         "PreOnFire": {
+          "duration": 0.3,
           "stacking": "Multiple",
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "RemoveUniqueModifier",
+              "modifierName": "UNIQUE_FungusFighter_FocusFire",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR40",
+                "centerBasedOn": "Self",
                 "campTargetType": "All",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
               "predicates": [
                 {
@@ -1648,8 +1657,7 @@
                     }
                   ]
                 }
-              ],
-              "modifierName": "UNIQUE_FungusFighter_FocusFire"
+              ]
             },
             {
               "$type": "ApplyModifier",
@@ -1657,100 +1665,96 @@
             }
           ]
         },
+        //集火效果
         "UNIQUE_FungusFighter_FocusFire": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 2.0,
+          "stacking": "Unique",
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Activity_FungusFighter_Onfire",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Activity_FungusFighter_Onfire"
             },
             {
               "$type": "TriggerTaunt",
+              "tauntLevel": "Monster_TauntLevel_6",
+              "careValue": 99999,
+              "tauntModifierOwner": true,
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR40",
+                "centerBasedOn": "Self",
                 "campTargetType": "Enemy",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "SGV_Fungus_StartBurst_Immediately",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "MoreThanAndEqual"
                 }
-              ],
+              ]
+            }
+          ],
+          "thinkInterval": 2,
+          "onThinkInterval": [
+            {
+              "$type": "TriggerTaunt",
               "tauntLevel": "Monster_TauntLevel_6",
-              "LAHGNABIKOD": true
+              "careValue": 99999,
+              "tauntModifierOwner": true,
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR40",
+                "centerBasedOn": "Self",
+                "campTargetType": "Enemy",
+                "campBasedOn": "Self"
+              },
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "SGV_Fungus_StartBurst_Immediately",
+                  "value": 0,
+                  "compareType": "MoreThanAndEqual"
+                }
+              ]
             }
           ],
           "onRemoved": [
             {
               "$type": "TriggerTaunt",
+              "careValue": -50000,
+              "tauntModifierOwner": true,
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR40",
+                "centerBasedOn": "Self",
                 "campTargetType": "Enemy",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "SGV_Fungus_StartBurst_Immediately",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "MoreThanAndEqual"
                 }
-              ],
-              "careValue": -50000.0,
-              "LAHGNABIKOD": true
-            }
-          ],
-          "onThinkInterval": [
-            {
-              "$type": "TriggerTaunt",
-              "otherTargets": {
-                "$type": "SelectTargetsByShape",
-                "shapeName": "CircleR40",
-                "campTargetType": "Enemy",
-                "sizeRatio": 1.0
-              },
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "SGV_Fungus_StartBurst_Immediately",
-                  "ratio": 0.0,
-                  "compareType": "MoreThanAndEqual"
-                }
-              ],
-              "tauntLevel": "Monster_TauntLevel_6",
-              "LAHGNABIKOD": true
+              ]
             }
           ]
         },
         "KillSelfDelay": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.3,
           "onRemoved": [
             {
               "$type": "KillSelf"
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_CatchMushroomMonster_Aim_Driver"
-        }
-      ]
+      }
     }
   },
+  //Gadget  蕈兽捕获器的子弹
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1758,96 +1762,116 @@
       "onAdded": [
         {
           "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_CatchAnimal_Bullet_FungusFighter",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_SceneObj_CatchAnimal_Bullet_FungusFighter"
         }
       ],
+      //碰撞时Trigger
       "onAbilityStart": [
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_CatchAnimal_Hit_FungusFighter",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_SceneObj_CatchAnimal_Hit_FungusFighter"
         },
         {
           "$type": "FireAISoundEvent"
         },
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "All",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
+              "fanAngle": 360.0,
+              "radius": 3,
+              "height": 5,
               "ignoreMassive": true,
               "born": {
                 "$type": "ConfigBornByTarget",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": -2.5,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": -2.5,
+                  "z": 0.0
                 }
-              },
-              "height": 5.0,
-              "DCMPFCIBIPA": 3.0
+              }
             },
             "attackInfo": {
               "attackTag": "Mushroom_Monster_Catch",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
               "attackProperty": {
-                "HBIOLEEGHPD": 0.0,
-                "CCNJGLPMIEP": 0.0,
-                "bonusCriticalHurt": 0.0,
+                "damagePercentage": 0.0,
+                "elementType": "None",
+                "elementDurability": 0,
                 "strikeType": "Default",
-                "enBreak": 0.0
+                "enBreak": 0
               },
               "hitPattern": {
-                "onHitEffectName": "default",
                 "hitImpulseType": "LV1",
-                "hitHaltTimeScale": 0.05000000074505806
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.05,
+                "muteHitText": false
               }
             }
-          },
-          "targetType": "All"
+          }
         },
         {
           "$type": "KillSelf"
         }
-      ]
+      ],
+      "modifiers": {}
     }
   },
+  //////////////////////////////////////////////////////////////
+  ///
+  ///   Ver2.3  狗子活动————抓小动物
+  ///
+  //////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CatchAnimal_Shoot_DogGame",
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "ActivityAbility_CatchAnimal_AddSkillInfo",
+          "doOffStage": true
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "ActivityAbility_CatchAnimal_SwitchSkill",
+          "doOffStage": true
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "ActivityAbility_CatchAnimal_Aim_Handler",
+          "doOffStage": true
+        }
+      ],
       "modifiers": {
+        //增添抓捕专用技能
         "ActivityAbility_CatchAnimal_AddSkillInfo": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AddAvatarSkillInfo",
-              "RotationDampTime": true,
-              "skillID": 20041
+              "skillID": 20041,
+              "doOffStage": true
             },
             {
-              "$type": "AvatarSkillStart",
+              "$type": "AvatarSkillStart", //这是用来让它装备瞬间闪一下
               "skillID": 20041,
-              "cdDelta": 0.10000000149011612,
-              "costStaminaDelta": 1.0
+              "cdRatio": 0.1
             }
           ],
           "onRemoved": [
             {
               "$type": "RemoveAvatarSkillInfo",
-              "RotationDampTime": true,
               "skillID": 20041,
+              "refreshAfterRemove": true,
               "doOffStage": true
             }
           ]
         },
+        //替换小技能按钮
         "ActivityAbility_CatchAnimal_SwitchSkill": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "SwitchSkillIDMixin",
@@ -1857,17 +1881,16 @@
             },
             {
               "$type": "WidgetCDSyncMixin",
-              "PEKBMAJCANI": true,
-              "ODIKDFHCHOJ": true,
               "itemId": 220046,
-              "ONEJALHEENC": 20041,
-              "PDJDLNCMHMK": 0.5
+              "skillId": 20041,
+              "syncOnCDChange": true,
+              "syncOnChangeAvatar": true,
+              "skillCDOffset": 0.5
             }
           ]
         },
+        //处理瞄准的主要按键逻辑
         "ActivityAbility_CatchAnimal_Aim_Handler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachToStateIDMixin",
@@ -1877,22 +1900,22 @@
             {
               "$type": "ButtonHoldChargeMixin",
               "skillID": 20041,
-              "secondChargeTime": 0.11999999731779099,
+              "chargeTime": 0.0,
+              "secondChargeTime": 0.12,
               "OnBeginCharged": [
                 {
                   "$type": "SetGlobalValue",
-                  "RotationDampTime": true,
-                  "ratio": 0.0,
-                  "key": "_ABILITY_Common_Channel_IsTrigger",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "key": "_ABILITY_Common_Channel_IsTrigger", //每次点按重置Trigger
+                  "value": 0,
+                  "doOffStage": true
                 }
               ],
+              //点按释放
               "OnReleaseCharged": [
                 {
                   "$type": "ApplyModifier",
-                  "RotationDampTime": true,
-                  "modifierName": "Shoot_Short"
+                  "modifierName": "Shoot_Short",
+                  "doOffStage": true
                 }
               ],
               "OnBeginSecondCharged": [
@@ -1901,35 +1924,35 @@
                   "triggerID": "StartChannelTrigger"
                 }
               ],
+              //长按释放
               "OnReleaseSecondCharged": [
                 {
                   "$type": "ApplyModifier",
-                  "RotationDampTime": true,
+                  "modifierName": "Shoot_Long",
+                  "doOffStage": true,
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "key": "_ABILITY_Common_Channel_IsTrigger",
-                      "ratio": 0.0
+                      "value": 0,
+                      "compareType": "Equal"
                     }
-                  ],
-                  "modifierName": "Shoot_Long"
+                  ]
                 },
                 {
                   "$type": "SetGlobalValue",
-                  "RotationDampTime": true,
-                  "ratio": 1.0,
                   "key": "_ABILITY_Common_Channel_IsTrigger",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 1,
+                  "doOffStage": true
                 }
               ],
-              "JLCOFIBNCCJ": [
+              "chargeStateIDs": ["Channel_Loop"],
+              "OnCancelCharged": [
                 {
                   "$type": "SetAnimatorTrigger",
                   "triggerID": "EndChannelTrigger"
                 }
-              ],
-              "chargeStateIDs": ["Channel_Loop"]
+              ]
             },
             {
               "$type": "AttachToStateIDMixin",
@@ -1938,94 +1961,85 @@
             }
           ]
         },
+        //替换操控面板
         "ActivityAbility_CatchAnimal_ChangePlayMode": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ChangePlayMode",
-              "RotationDampTime": true,
               "muteRemoteAction": true,
-              "toPlayMode": "ActivityAimState"
+              "toPlayMode": "ActivityAimState",
+              "doOffStage": true
             }
           ],
           "onRemoved": [
             {
               "$type": "ChangePlayMode",
-              "RotationDampTime": true,
-              "muteRemoteAction": true
+              "muteRemoteAction": true,
+              "toPlayMode": "Normal",
+              "doOffStage": true
             }
           ]
         },
+        //强制退出时需要TriggerCD
         "Trigger_OnExit": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
-              "$type": "ApplyModifier",
-              "RotationDampTime": true,
+              "$type": "ApplyModifier", //没松手被打断时强制发射子弹
+              "modifierName": "Shoot_Short",
+              "doOffStage": true,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Common_Channel_IsTrigger",
-                  "ratio": 0.0
+                  "value": 0,
+                  "compareType": "Equal"
                 }
-              ],
-              "modifierName": "Shoot_Short"
+              ]
             },
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 1.0,
               "key": "_ABILITY_Common_Channel_IsTrigger",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1,
+              "doOffStage": true
             }
           ]
         },
+        //瞄准镜头
         "Focus": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AvatarEnterFocus",
               "cameraFollowLower": {
-                "x": 0.6000000238418579,
-                "y": 0.20000000298023224,
-                "z": -1.7999999523162842
+                "x": 0.6,
+                "y": 0.2,
+                "z": -1.8
               },
               "cameraFollowUpper": {
-                "x": 0.6000000238418579,
-                "y": -0.10000000149011612,
-                "z": -1.7999999523162842
-              },
-              "cameraFollowMaxDegree": 40.0,
-              "cameraFollowMinDegree": -40.0,
-              "dragButtonName": "Skill2",
-              "assistance": {
-                "ps4": {
-                  "useGyro": true
-                },
-                "ps5": {
-                  "useGyro": true
-                },
-                "other": {
-                  "useGyro": true
-                }
+                "x": 0.6,
+                "y": -0.1,
+                "z": -1.8
               },
               "canMove": false,
-              "vcamFov": 30.0,
-              "disableAnim": true
+              "dragButtonName": "Skill2",
+              "showCrosshair": true,
+              "disableAnim": true,
+              "assistance": {
+                "ps4": { "useGyro": true },
+                "ps5": { "useGyro": true },
+                "other": { "useGyro": true }
+              },
+              "vcam_fov": 30,
+              "cameraFollowMaxDegree": 40,
+              "cameraFollowMinDegree": -40
             },
             {
               "$type": "SetAnimatorBool",
-              "boolID": "LockMotionFlagExitChannel",
-              "ratio": true
+              "boolID": "LockMotionFlagExitChannel", //需要保证Focus阶段不能移动
+              "value": true
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_CatchAnimal_Charge",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_CatchAnimal_Charge"
             },
             {
               "$type": "AttachModifier",
@@ -2033,43 +2047,38 @@
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "_ABILITY_Common_IsChannelState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             }
           ],
           "onRemoved": [
             {
               "$type": "AvatarExitFocus",
-              "RotationDampTime": true,
-              "keepRotation": true
+              "keepRotation": true,
+              "doOffStage": true
             },
             {
               "$type": "SetAnimatorBool",
-              "RotationDampTime": true,
-              "boolID": "LockMotionFlagExitChannel"
+              "boolID": "LockMotionFlagExitChannel",
+              "value": false,
+              "doOffStage": true
             },
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
               "key": "_ABILITY_Common_IsChannelState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0,
+              "doOffStage": true
             }
           ]
         },
+        //点按发射捕捉器
         "Shoot_Short": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.2,
           "onAdded": [
             {
               "$type": "AvatarSkillStart",
               "skillID": 20041,
-              "cdDelta": 1.0,
-              "costStaminaDelta": 1.0
+              "cdRatio": 1
             },
             {
               "$type": "WidgetSkillStart",
@@ -2077,55 +2086,52 @@
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_CatchAnimal_Shoot",
+              "effectPattern": "Eff_SceneObj_CatchAnimal_Shoot",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.5,
-                  "PJCOKIGCJOK": 1.2000000476837158
-                },
                 "attachPointName": "FocusAnchor",
-                "attachPointTargetType": "Self"
-              },
-              "EBHJMLOKDGB": -1.0
+                "attachPointTargetType": "Self",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.5,
+                  "z": 1.2
+                }
+              }
             },
             {
               "$type": "TriggerBullet",
               "bulletID": 420000011,
               "born": {
                 "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "FocusAnchor",
+                "attachPointTargetType": "Self",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.5,
-                  "PJCOKIGCJOK": 1.2000000476837158
+                  "x": 0.0,
+                  "y": 0.5,
+                  "z": 1.2
                 },
                 "direction": {
                   "$type": "ConfigDirectionByAttachPoint",
-                  "angleOffset": {
-                    "IBKBLDAJIMA": 0.0,
-                    "LKHJADIPBFL": 0.0,
-                    "PJCOKIGCJOK": 0.0
-                  },
                   "attachPointName": "FocusAnchor",
-                  "attachPointTargetType": "Self"
-                },
-                "attachPointName": "FocusAnchor",
-                "attachPointTargetType": "Self"
+                  "attachPointTargetType": "Self",
+                  "angleOffset": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                  }
+                }
               }
             }
           ]
         },
+        //长按发射捕捉器
         "Shoot_Long": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.3,
           "onAdded": [
             {
               "$type": "AvatarSkillStart",
               "skillID": 20041,
-              "cdDelta": 1.0,
-              "costStaminaDelta": 1.0
+              "cdRatio": 1
             },
             {
               "$type": "WidgetSkillStart",
@@ -2133,18 +2139,17 @@
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_CatchAnimal_Shoot",
+              "effectPattern": "Eff_SceneObj_CatchAnimal_Shoot",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
-                },
                 "attachPointName": "WeaponR",
-                "attachPointTargetType": "Self"
-              },
-              "EBHJMLOKDGB": -1.0
+                "attachPointTargetType": "Self",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                }
+              }
             },
             {
               "$type": "Predicated",
@@ -2154,239 +2159,87 @@
                   "weaponTypes": ["WEAPON_BOW"]
                 }
               ],
+              //弓手弹道
               "successActions": [
                 {
                   "$type": "TriggerBullet",
                   "bulletID": 420000012,
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
+                    "attachPointName": "WeaponR",
+                    "attachPointTargetType": "Self",
                     "direction": {
                       "$type": "ConfigDirectionByAttachPoint",
-                      "angleOffset": {
-                        "IBKBLDAJIMA": 0.0,
-                        "LKHJADIPBFL": 0.0,
-                        "PJCOKIGCJOK": 0.0
-                      },
                       "attachPointName": "FocusAnchor",
-                      "attachPointTargetType": "Self"
-                    },
-                    "attachPointName": "WeaponR",
-                    "attachPointTargetType": "Self"
+                      "attachPointTargetType": "Self",
+                      "angleOffset": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                      }
+                    }
                   }
                 }
               ],
+              //非弓手弹道
               "failActions": [
                 {
                   "$type": "TriggerBullet",
                   "bulletID": 420000012,
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
+                    "attachPointName": "WeaponR",
+                    "attachPointTargetType": "Self",
                     "direction": {
                       "$type": "ConfigDirectionByAttachPoint",
-                      "angleOffset": {
-                        "IBKBLDAJIMA": 0.0,
-                        "LKHJADIPBFL": 0.0,
-                        "PJCOKIGCJOK": 0.0
-                      },
                       "attachPointName": "FocusAnchor",
-                      "attachPointTargetType": "Self"
-                    },
-                    "attachPointName": "WeaponR",
-                    "attachPointTargetType": "Self"
+                      "attachPointTargetType": "Self",
+                      "angleOffset": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                      }
+                    }
                   }
                 }
               ]
             }
           ],
+          //延迟一点退出动作
           "onRemoved": [
             {
               "$type": "SetAnimatorTrigger",
-              "RotationDampTime": true,
-              "triggerID": "EndChannelTrigger"
+              "triggerID": "EndChannelTrigger",
+              "doOffStage": true
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "RotationDampTime": true,
-          "modifierName": "ActivityAbility_CatchAnimal_AddSkillInfo"
-        },
-        {
-          "$type": "AttachModifier",
-          "RotationDampTime": true,
-          "modifierName": "ActivityAbility_CatchAnimal_SwitchSkill"
-        },
-        {
-          "$type": "AttachModifier",
-          "RotationDampTime": true,
-          "modifierName": "ActivityAbility_CatchAnimal_Aim_Handler"
-        }
-      ],
+      //加个死亡恢复保护
       "onKill": [
         {
           "$type": "ChangePlayMode",
-          "RotationDampTime": true,
-          "muteRemoteAction": true
+          "muteRemoteAction": true,
+          "toPlayMode": "Normal",
+          "doOffStage": true
         }
-      ],
-      "isDynamicAbility": true
+      ]
     }
   },
+
+  //Gadget  狗子活动捕获器的子弹
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CatchAnimal_Bullet_DogGame",
-      "modifiers": {
-        "AnimalKillSelf": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_CatchAnimal_CaughtSuccess",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "ServerLuaCall",
-              "RotationDampTime": true,
-              "predicates": [
-                {
-                  "$type": "ByHasModifier",
-                  "target": "Team",
-                  "modifierName": "IsInHachiSneak"
-                }
-              ],
-              "luaCallType": "FromGroup",
-              "funcName": "MonsterCallCaught",
-              "ODAOGCJFIHC": 0.0,
-              "GCCFLBLEHDB": 0.0,
-              "DJODIFOBEJG": 0.0
-            }
-          ]
-        },
-        "DogGame_Life_Handler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.550000011920929,
-          "onThinkInterval": [
-            {
-              "$type": "TriggerAbility",
-              "abilityName": "ActivityAbility_CatchAnimal_Bullet_DogGame"
-            }
-          ]
-        }
-      },
       "onAdded": [
         {
           "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_CatchAnimal_Bullet",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_SceneObj_CatchAnimal_Bullet"
         },
         {
           "$type": "AttachModifier",
           "modifierName": "DogGame_Life_Handler"
-        }
-      ],
-      "onAbilityStart": [
-        {
-          "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_CatchAnimal_Hit",
-          "EBHJMLOKDGB": -1.0
-        },
-        {
-          "$type": "FireAISoundEvent"
-        },
-        {
-          "$type": "ServerLuaCall",
-          "RotationDampTime": true,
-          "predicates": [
-            {
-              "$type": "ByHasModifier",
-              "target": "Team",
-              "modifierName": "IsInHachiSneak"
-            }
-          ],
-          "luaCallType": "CurChallengeGroup",
-          "funcName": "HachiSneakWidgetUsed",
-          "ODAOGCJFIHC": 0.0,
-          "GCCFLBLEHDB": 0.0,
-          "DJODIFOBEJG": 0.0
-        },
-        {
-          "$type": "Predicated",
-          "target": "Other",
-          "otherTargets": {
-            "$type": "SelectTargetsByShape",
-            "topLimit": 1,
-            "entityTypePriority": ["Monster"],
-            "sortType": "Nearest",
-            "shapeName": "CircleR3H5",
-            "campTargetType": "Enemy",
-            "sizeRatio": 1.0
-          },
-          "targetPredicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_AFFIX_INU_SHIHANDAI_EVENT_ANIMAL_TAG",
-              "ratio": 1.0,
-              "compareType": "MoreThanAndEqual"
-            },
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_PROTECTED_BY_SHIELD",
-              "ratio": 0.0,
-              "compareType": "NoneOrEqual"
-            },
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_ANIMAL_IN_INVISIBLE_WAVE",
-              "ratio": 0.0,
-              "compareType": "NoneOrEqual"
-            }
-          ],
-          "successActions": [
-            {
-              "$type": "ApplyModifier",
-              "target": "Target",
-              "modifierName": "AnimalKillSelf"
-            },
-            {
-              "$type": "CreateGadget",
-              "born": {
-                "$type": "ConfigBornByCollisionPoint",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
-                }
-              },
-              "gadgetID": 70590056,
-              "campID": 1001,
-              "campTargetType": "All"
-            }
-          ],
-          "failActions": [
-            {
-              "$type": "SetGlobalValue",
-              "target": "Target",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_IS_INU_SHIHANDAI",
-                  "ratio": 1.0
-                }
-              ],
-              "ratio": 1.0,
-              "key": "_CAPTURED_BY_SPECIALITEM",
-              "maxValue": 0.0,
-              "minValue": 0.0
-            }
-          ]
-        },
-        {
-          "$type": "KillSelf"
         }
       ],
       "onKill": [
@@ -2394,36 +2247,211 @@
           "$type": "RemoveModifier",
           "modifierName": "DogGame_Life_Handler"
         }
-      ]
+      ],
+      //碰撞时Trigger
+      "onAbilityStart": [
+        {
+          "$type": "FireEffect",
+          "effectPattern": "Eff_SceneObj_CatchAnimal_Hit"
+          // "born":
+          // {
+          //     "$type": "ConfigBornByCollisionPoint",
+          //     "offset":
+          //     {
+          //         "x": 0.0,
+          //         "y": 0.0,
+          //         "z": 0.0,
+          //     }
+          // },
+        },
+        {
+          "$type": "FireAISoundEvent"
+        },
+        {
+          //运营埋点，每次使用要记一次
+          "$type": "ServerLuaCall",
+          "doOffStage": true,
+          "funcName": "HachiSneakWidgetUsed",
+          "luaCallType": "CurChallengeGroup",
+          "predicates": [
+            {
+              "$type": "ByHasModifier",
+              "modifierName": "IsInHachiSneak",
+              "target": "Team"
+            }
+          ]
+        },
+        {
+          "$type": "Predicated",
+          "target": "Other",
+          "otherTargets": {
+            "$type": "SelectTargetsByShape",
+            "shapeName": "CircleR3H5",
+            "centerBasedOn": "Self",
+            "campTargetType": "Enemy",
+            "campBasedOn": "Self",
+            "topLimit": 1,
+            "entityTypePriority": ["Monster"],
+            "sortType": "Nearest"
+          },
+          "targetPredicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_AFFIX_INU_SHIHANDAI_EVENT_ANIMAL_TAG", //是否活动小动物
+              "value": 1,
+              "compareType": "MoreThanAndEqual"
+            },
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_PROTECTED_BY_SHIELD", //是否抵抗抓捕道具
+              "value": 0,
+              "compareType": "NoneOrEqual"
+            },
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_ANIMAL_IN_INVISIBLE_WAVE", //是否隐身
+              "value": 0,
+              "compareType": "NoneOrEqual"
+            }
+          ],
+          "successActions": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "AnimalKillSelf",
+              "target": "Target"
+            },
+            {
+              "$type": "CreateGadget",
+              "target": "Self",
+              "gadgetID": 70590056,
+              "campID": 1001,
+              "campTargetType": "All",
+              "born": {
+                "$type": "ConfigBornByCollisionPoint",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                }
+              }
+            }
+          ],
+          "failActions": [
+            {
+              "$type": "SetGlobalValue",
+              "target": "Target",
+              "key": "_CAPTURED_BY_SPECIALITEM",
+              "value": 1,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue", //是否狗
+                  "key": "_IS_INU_SHIHANDAI",
+                  "value": 1,
+                  "compareType": "Equal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "$type": "KillSelf"
+        }
+      ],
+      "modifiers": {
+        //狗子活动被捕获时, SLC通知关卡移除，不要Kill，因为要区分意外死亡
+        "AnimalKillSelf": {
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "effectPattern": "Eff_SceneObj_CatchAnimal_CaughtSuccess"
+            },
+            {
+              "$type": "ServerLuaCall",
+              "target": "Self",
+              "doOffStage": true,
+              "funcName": "MonsterCallCaught",
+              "luaCallType": "FromGroup",
+              "predicates": [
+                {
+                  "$type": "ByHasModifier",
+                  "modifierName": "IsInHachiSneak",
+                  "target": "Team"
+                }
+              ]
+            }
+            /*{//这是白盒临时特效
+							"$type":"FireEffect",
+							"effectPattern":"Eff_SceneObj_Hole_Disappear",
+						},*/
+          ]
+        },
+        //狗子活动里的子弹生命控制器
+        "DogGame_Life_Handler": {
+          "thinkInterval": 0.55,
+          "onThinkInterval": [
+            {
+              "$type": "TriggerAbility",
+              "abilityName": "ActivityAbility_CatchAnimal_Bullet_DogGame"
+            }
+          ]
+        }
+      }
     }
   },
+
+  //////////////////////////////////////////////////////////////
+  ///
+  ///   Ver2.5测试用  大世界小道具————抓小动物
+  ///
+  //////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CatchAnimal_Shoot_Test",
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "ActivityAbility_CatchAnimal_AddSkillInfo",
+          "doOffStage": true
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "ActivityAbility_CatchAnimal_SwitchSkill",
+          "doOffStage": true
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "ActivityAbility_CatchAnimal_Aim_Handler",
+          "doOffStage": true
+        }
+      ],
       "modifiers": {
+        //增添抓捕专用技能
         "ActivityAbility_CatchAnimal_AddSkillInfo": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AddAvatarSkillInfo",
-              "RotationDampTime": true,
-              "skillID": 20042
+              "skillID": 20042,
+              "doOffStage": true
             }
+            /*						{
+							"$type": "AvatarSkillStart",  //这是用来让它装备瞬间闪一下
+							"skillID": 20042,
+							"cdRatio": 0.1,
+						},*/
           ],
           "onRemoved": [
             {
               "$type": "RemoveAvatarSkillInfo",
-              "RotationDampTime": true,
               "skillID": 20042,
+              "refreshAfterRemove": true,
               "doOffStage": true
             }
           ]
         },
+        //替换小技能按钮
         "ActivityAbility_CatchAnimal_SwitchSkill": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "SwitchSkillIDMixin",
@@ -2431,21 +2459,31 @@
               "skillIndex": 1,
               "skillID": 20042
             }
+            /*						{
+							"$type":"WidgetCDSyncMixin",
+							"itemId": 220043,
+							"skillId": 20042,
+							"syncOnCDChange": true,
+							"syncOnChangeAvatar": true,
+							"skillCDOffset": 0.5,
+						},*/
           ]
         },
+        //处理瞄准的主要按键逻辑
         "ActivityAbility_CatchAnimal_Aim_Handler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "ButtonHoldChargeMixin",
               "skillID": 20042,
-              "secondChargeTime": 0.11999999731779099,
+              "chargeTime": 0.0,
+              "secondChargeTime": 0.12,
+              "OnBeginCharged": [],
+              //点按释放
               "OnReleaseCharged": [
                 {
                   "$type": "ApplyModifier",
-                  "RotationDampTime": true,
-                  "modifierName": "Shoot_Short"
+                  "modifierName": "Shoot_Short",
+                  "doOffStage": true
                 }
               ],
               "OnBeginSecondCharged": [
@@ -2454,27 +2492,29 @@
                   "triggerID": "StartChannelTrigger"
                 }
               ],
+              //长按释放
               "OnReleaseSecondCharged": [
                 {
                   "$type": "ApplyModifier",
-                  "RotationDampTime": true,
+                  "modifierName": "Shoot_Long",
+                  "doOffStage": true,
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "key": "_ABILITY_Common_IsChannelState",
-                      "ratio": 1.0
+                      "value": 1,
+                      "compareType": "Equal"
                     }
-                  ],
-                  "modifierName": "Shoot_Long"
+                  ]
                 }
               ],
-              "JLCOFIBNCCJ": [
+              "chargeStateIDs": ["Channel_Loop"],
+              "OnCancelCharged": [
                 {
                   "$type": "SetAnimatorTrigger",
                   "triggerID": "EndChannelTrigger"
                 }
-              ],
-              "chargeStateIDs": ["Channel_Loop"]
+              ]
             },
             {
               "$type": "AttachToStateIDMixin",
@@ -2483,68 +2523,61 @@
             }
           ]
         },
+        //替换操控面板
         "ActivityAbility_CatchAnimal_ChangePlayMode": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ChangePlayMode",
-              "RotationDampTime": true,
               "muteRemoteAction": true,
-              "toPlayMode": "ActivityAimState"
+              "toPlayMode": "ActivityAimState",
+              "doOffStage": true
             }
           ],
           "onRemoved": [
             {
               "$type": "ChangePlayMode",
-              "RotationDampTime": true,
-              "muteRemoteAction": true
+              "muteRemoteAction": true,
+              "toPlayMode": "Normal",
+              "doOffStage": true
             }
           ]
         },
+        //瞄准镜头
         "Focus": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AvatarEnterFocus",
               "cameraFollowLower": {
-                "x": 0.6000000238418579,
-                "y": 0.20000000298023224,
-                "z": -1.7999999523162842
+                "x": 0.6,
+                "y": 0.2,
+                "z": -1.8
               },
               "cameraFollowUpper": {
-                "x": 0.6000000238418579,
-                "y": -0.10000000149011612,
-                "z": -1.7999999523162842
-              },
-              "cameraFollowMaxDegree": 40.0,
-              "cameraFollowMinDegree": -40.0,
-              "dragButtonName": "Skill2",
-              "assistance": {
-                "ps4": {
-                  "useGyro": true
-                },
-                "ps5": {
-                  "useGyro": true
-                },
-                "other": {
-                  "useGyro": true
-                }
+                "x": 0.6,
+                "y": -0.1,
+                "z": -1.8
               },
               "canMove": false,
-              "vcamFov": 30.0,
-              "disableAnim": true
+              "dragButtonName": "Skill2",
+              "showCrosshair": true,
+              "disableAnim": true,
+              "assistance": {
+                "ps4": { "useGyro": true },
+                "ps5": { "useGyro": true },
+                "other": { "useGyro": true }
+              },
+              "vcam_fov": 30,
+              "cameraFollowMaxDegree": 40,
+              "cameraFollowMinDegree": -40
             },
             {
               "$type": "SetAnimatorBool",
-              "boolID": "LockMotionFlagExitChannel",
-              "ratio": true
+              "boolID": "LockMotionFlagExitChannel", //需要保证Focus阶段不能移动
+              "value": true
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_CatchAnimal_Charge",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_CatchAnimal_Charge"
             },
             {
               "$type": "AttachModifier",
@@ -2552,107 +2585,119 @@
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "_ABILITY_Common_IsChannelState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             }
           ],
           "onRemoved": [
             {
               "$type": "AvatarExitFocus",
-              "RotationDampTime": true,
-              "keepRotation": true
+              "keepRotation": true,
+              "doOffStage": true
             },
             {
               "$type": "SetAnimatorBool",
-              "RotationDampTime": true,
-              "boolID": "LockMotionFlagExitChannel"
+              "boolID": "LockMotionFlagExitChannel",
+              "value": false,
+              "doOffStage": true
             },
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
               "key": "_ABILITY_Common_IsChannelState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0,
+              "doOffStage": true
             }
           ]
         },
+        //点按发射捕捉器
         "Shoot_Short": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.2,
           "onAdded": [
+            /*						{
+							"$type": "AvatarSkillStart",
+							"skillID": 20042,
+							"cdRatio": 1,
+						},
+						{
+							"$type": "WidgetSkillStart",
+							"itemId": 220043,
+						},*/
             {
               "$type": "AvatarShareCDSkillStart",
               "skillID": 20042,
-              "IEAEPDHFDCG": 1
+              "shareCDType": 1
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_CatchAnimal_Shoot",
+              "effectPattern": "Eff_SceneObj_CatchAnimal_Shoot",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.5,
-                  "PJCOKIGCJOK": 1.2000000476837158
-                },
                 "attachPointName": "FocusAnchor",
-                "attachPointTargetType": "Self"
-              },
-              "EBHJMLOKDGB": -1.0
+                "attachPointTargetType": "Self",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.5,
+                  "z": 1.2
+                }
+              }
             },
             {
               "$type": "TriggerBullet",
               "bulletID": 420000009,
               "born": {
                 "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "FocusAnchor",
+                "attachPointTargetType": "Self",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.5,
-                  "PJCOKIGCJOK": 1.2000000476837158
+                  "x": 0.0,
+                  "y": 0.5,
+                  "z": 1.2
                 },
                 "direction": {
                   "$type": "ConfigDirectionByAttachPoint",
-                  "angleOffset": {
-                    "IBKBLDAJIMA": 0.0,
-                    "LKHJADIPBFL": 0.0,
-                    "PJCOKIGCJOK": 0.0
-                  },
                   "attachPointName": "FocusAnchor",
-                  "attachPointTargetType": "Self"
-                },
-                "attachPointName": "FocusAnchor",
-                "attachPointTargetType": "Self"
+                  "attachPointTargetType": "Self",
+                  "angleOffset": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                  }
+                }
               }
             }
           ]
         },
+        //长按发射捕捉器
         "Shoot_Long": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.3,
           "onAdded": [
+            /*						{
+							"$type": "AvatarSkillStart",
+							"skillID": 20042,
+							"cdRatio": 1,
+						},
+						{
+							"$type": "WidgetSkillStart",
+							"itemId": 220043,
+						},*/
             {
               "$type": "AvatarShareCDSkillStart",
-              "skillID": 20042
+              "skillID": 20042,
+              "shareCDType": 0
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_CatchAnimal_Shoot",
+              "effectPattern": "Eff_SceneObj_CatchAnimal_Shoot",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
-                },
                 "attachPointName": "WeaponR",
-                "attachPointTargetType": "Self"
-              },
-              "EBHJMLOKDGB": -1.0
+                "attachPointTargetType": "Self",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                }
+              }
             },
             {
               "$type": "Predicated",
@@ -2662,90 +2707,107 @@
                   "weaponTypes": ["WEAPON_BOW"]
                 }
               ],
+              //弓手弹道
               "successActions": [
                 {
                   "$type": "TriggerBullet",
                   "bulletID": 420000010,
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
+                    "attachPointName": "WeaponR",
+                    "attachPointTargetType": "Self",
                     "direction": {
                       "$type": "ConfigDirectionByAttachPoint",
-                      "angleOffset": {
-                        "IBKBLDAJIMA": 0.0,
-                        "LKHJADIPBFL": 0.0,
-                        "PJCOKIGCJOK": 0.0
-                      },
                       "attachPointName": "FocusAnchor",
-                      "attachPointTargetType": "Self"
-                    },
-                    "attachPointName": "WeaponR",
-                    "attachPointTargetType": "Self"
+                      "attachPointTargetType": "Self",
+                      "angleOffset": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                      }
+                    }
                   }
                 }
               ],
+              //非弓手弹道
               "failActions": [
                 {
                   "$type": "TriggerBullet",
                   "bulletID": 420000010,
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
+                    "attachPointName": "WeaponR",
+                    "attachPointTargetType": "Self",
                     "direction": {
                       "$type": "ConfigDirectionByAttachPoint",
-                      "angleOffset": {
-                        "IBKBLDAJIMA": 0.0,
-                        "LKHJADIPBFL": 0.0,
-                        "PJCOKIGCJOK": 0.0
-                      },
                       "attachPointName": "FocusAnchor",
-                      "attachPointTargetType": "Self"
-                    },
-                    "attachPointName": "WeaponR",
-                    "attachPointTargetType": "Self"
+                      "attachPointTargetType": "Self",
+                      "angleOffset": {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                      }
+                    }
                   }
                 }
               ]
             }
           ],
+          //延迟一点退出动作
           "onRemoved": [
             {
               "$type": "SetAnimatorTrigger",
-              "RotationDampTime": true,
-              "triggerID": "EndChannelTrigger"
+              "triggerID": "EndChannelTrigger",
+              "doOffStage": true
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "RotationDampTime": true,
-          "modifierName": "ActivityAbility_CatchAnimal_AddSkillInfo"
-        },
-        {
-          "$type": "AttachModifier",
-          "RotationDampTime": true,
-          "modifierName": "ActivityAbility_CatchAnimal_SwitchSkill"
-        },
-        {
-          "$type": "AttachModifier",
-          "RotationDampTime": true,
-          "modifierName": "ActivityAbility_CatchAnimal_Aim_Handler"
-        }
-      ],
+      //加个死亡恢复保护
       "onKill": [
         {
           "$type": "ChangePlayMode",
-          "RotationDampTime": true,
-          "muteRemoteAction": true
+          "muteRemoteAction": true,
+          "toPlayMode": "Normal",
+          "doOffStage": true
         }
-      ],
-      "isDynamicAbility": true
+      ]
     }
   },
+  ////////////////////////////////////////
+  //
+  //  V3.1 抛投捕猎小动物
+  //
+  ///////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CatchAnimal_Throw",
+      "isDynamicAbility": true,
+      "onAbilityStart": [],
+      "onAdded": [
+        {
+          "$type": "AddGlobalValue",
+          "key": "_DUMMY_THROW_RANGE",
+          "value": 4,
+          "useLimitRange": true,
+          "maxValue": 8,
+          "minValue": 4
+        },
+        {
+          "$type": "SetGlobalValue",
+          "key": "_ABILITY_Is_In_Crouch",
+          "value": 0
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Quest_AddSkillInfo"
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Quest_ChangePlayMode_Handler"
+        }
+      ],
       "abilityMixins": [
         {
           "$type": "AttachToStateIDMixin",
@@ -2781,7 +2843,9 @@
         {
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "CrouchThrowAS",
-          "modifierName": "ThrowBean_Trigger"
+          "modifierName": "ThrowBean_Trigger",
+          "normalizeStart": 0,
+          "normalizeEnd": 1.0
         },
         {
           "$type": "AttachToStateIDMixin",
@@ -2806,78 +2870,66 @@
         {
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "ChannelAS",
-          "modifierName": "ThrowBean_Trigger_1"
+          "modifierName": "ThrowBean_Trigger_1",
+          "normalizeStart": 0,
+          "normalizeEnd": 1.0
         }
       ],
-      "abilitySpecials": {
-        "DummyThrowSpeedUp": 0.0
-      },
       "modifiers": {
         "SetCrouchState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorInt",
               "intID": "IsInCrouch",
-              "ratio": 1.0
+              "value": 1
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "_ABILITY_Is_In_Crouch",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetAnimatorInt",
               "intID": "IsInCrouch",
-              "ratio": 0.0
+              "value": 0
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_ABILITY_Is_In_Crouch",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         },
         "NotInCrouchSkillSet": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "SkillButtonHoldChargeMixin",
               "skillID": 20045,
-              "nextLoopTriggerID": "NextLoopTrigger",
-              "endHoldTrigger": "EndChannelTrigger",
               "beforeStateIDs": ["Channel_BS"],
               "chargeLoopStateIDs": ["Channel_Loop", "Channel_AS"],
-              "chargeLoopDurations": [0.05000000074505806, 6.5]
+              "chargeLoopDurations": [0.05, 6.5],
+              "nextLoopTriggerID": "NextLoopTrigger",
+              "endHoldTrigger": "EndChannelTrigger"
             }
           ]
         },
         "InCrouchSkillSet": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "SkillButtonHoldChargeMixin",
               "skillID": 20045,
-              "nextLoopTriggerID": "NextLoopTrigger",
-              "endHoldTrigger": "EndHoldTrigger",
               "beforeStateIDs": ["CrouchThrowBS"],
               "chargeLoopStateIDs": ["CrouchThrowLoop", "CrouchThrowAS"],
-              "chargeLoopDurations": [0.05000000074505806, 6.5]
+              "chargeLoopDurations": [0.05, 6.5],
+              "nextLoopTriggerID": "NextLoopTrigger",
+              "endHoldTrigger": "EndHoldTrigger"
             }
           ]
         },
+        //动态上下技能Info
         "Quest_AddSkillInfo": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AddAvatarSkillInfo",
@@ -2891,9 +2943,22 @@
             }
           ]
         },
+        //动态上下playmode
         "Quest_ChangePlayMode_Handler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            // {
+            //     "$type": "ChangePlayMode",
+            //     "muteRemoteAction": true,
+            //     "toPlayMode": "BoarHunt",
+            // },
+          ],
+          "onRemoved": [
+            // {
+            //     "$type": "ChangePlayMode",
+            //     "muteRemoteAction": true,
+            //     "toPlayMode": "Normal",
+            // },
+          ],
           "modifierMixins": [
             {
               "$type": "SwitchSkillIDMixin",
@@ -2904,22 +2969,21 @@
           ]
         },
         "Focus": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AvatarEnterFocus",
               "cameraFollowLower": {
-                "x": 0.800000011920929,
+                "x": 0.8,
                 "y": 0.5,
-                "z": -3.0
+                "z": -3
               },
               "cameraFollowUpper": {
                 "x": 0.5,
-                "y": 0.800000011920929,
+                "y": 0.8,
                 "z": -1.5
               },
               "dragButtonName": "Skill2",
+              "cameraFastFocusMode": false,
               "showCrosshair": false
             }
           ],
@@ -2930,22 +2994,21 @@
           ]
         },
         "Focus_02": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AvatarEnterFocus",
               "cameraFollowLower": {
-                "x": 0.800000011920929,
-                "y": 0.800000011920929,
+                "x": 0.8,
+                "y": 0.8,
                 "z": -3.5
               },
               "cameraFollowUpper": {
                 "x": 0.5,
-                "y": 1.2999999523162842,
+                "y": 1.3,
                 "z": -2.5
               },
               "dragButtonName": "Skill2",
+              "cameraFastFocusMode": false,
               "showCrosshair": false
             }
           ],
@@ -2956,164 +3019,161 @@
           ]
         },
         "Charge": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 8.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
-              "modifierName": "Charge_Return"
+              "modifierName": "Charge_Return",
+              "target": "Self"
+            }
+          ],
+          "thinkInterval": 8,
+          "onThinkInterval": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "Charge_Return",
+              "target": "Self"
             }
           ],
           "onRemoved": [
             {
               "$type": "RemoveModifier",
-              "modifierName": "Charge_Return"
-            }
-          ],
-          "onThinkInterval": [
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "Charge_Return"
+              "modifierName": "Charge_Return",
+              "target": "Self"
             }
           ]
         },
         "Charge_Return": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 3.5,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.10000000149011612,
+          "duration": 3.5,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 3.0,
               "key": "_DUMMY_THROW_RANGE",
+              "value": 3,
               "useLimitRange": true,
-              "maxValue": 3.0,
-              "minValue": 3.0
+              "maxValue": 3,
+              "minValue": 3
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Ambor_Dummy_Line_Duplicate",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Ambor_Dummy_Line_Duplicate"
             }
           ],
+          "thinkInterval": 0.1,
           "onThinkInterval": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 0.25,
               "key": "_DUMMY_THROW_RANGE",
+              "value": 0.25,
               "useLimitRange": true,
-              "maxValue": 8.0,
-              "minValue": 3.0
+              "maxValue": 8,
+              "minValue": 3
             },
             {
               "$type": "SetGlobalValueToOverrideMap",
+              "abilityFormula": "None",
+              "isFromOwner": false,
               "globalValueKey": "_DUMMY_THROW_RANGE",
               "overrideMapKey": "DummyThrowSpeedUp"
             }
           ]
         },
         "Charge2": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
-              "modifierName": "Charge_Return2_Trigger"
+              "modifierName": "Charge_Return2_Trigger",
+              "target": "Self"
             }
           ],
           "onRemoved": [
             {
               "$type": "RemoveModifier",
-              "modifierName": "Charge_Return2"
+              "modifierName": "Charge_Return2",
+              "target": "Self"
             },
             {
               "$type": "RemoveModifier",
-              "modifierName": "Charge_Return2_Trigger"
+              "modifierName": "Charge_Return2_Trigger",
+              "target": "Self"
             }
           ]
         },
         "Charge_Return2_Trigger": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 5.0,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 4.0,
+          "duration": 5,
+          "thinkInterval": 4,
           "onThinkInterval": [
             {
               "$type": "ApplyModifier",
-              "modifierName": "Charge_Return2"
+              "modifierName": "Charge_Return2",
+              "target": "Self"
             }
           ]
         },
         "Charge_Return2": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 8.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
-              "modifierName": "Charge_Return2_Loop"
+              "modifierName": "Charge_Return2_Loop",
+              "target": "Self"
+            }
+          ],
+          "thinkInterval": 8,
+          "onThinkInterval": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "Charge_Return2_Loop",
+              "target": "Self"
             }
           ],
           "onRemoved": [
             {
               "$type": "RemoveModifier",
-              "modifierName": "Charge_Return2_Loop"
-            }
-          ],
-          "onThinkInterval": [
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "Charge_Return2_Loop"
+              "modifierName": "Charge_Return2_Loop",
+              "target": "Self"
             }
           ]
         },
         "Charge_Return2_Loop": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 3.5,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.10000000149011612,
+          "duration": 3.5,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 8.0,
               "key": "_DUMMY_THROW_RANGE",
+              "value": 8,
               "useLimitRange": true,
-              "maxValue": 8.0,
-              "minValue": 8.0
+              "maxValue": 8,
+              "minValue": 8
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Ambor_Dummy_Line_Duplicate",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Ambor_Dummy_Line_Duplicate"
             }
           ],
+          "thinkInterval": 0.1,
           "onThinkInterval": [
             {
               "$type": "AddGlobalValue",
-              "ratio": -0.25,
               "key": "_DUMMY_THROW_RANGE",
+              "value": -0.25,
               "useLimitRange": true,
-              "maxValue": 8.0,
-              "minValue": 3.0
+              "maxValue": 8,
+              "minValue": 3
             },
             {
               "$type": "SetGlobalValueToOverrideMap",
+              "abilityFormula": "None",
+              "isFromOwner": false,
               "globalValueKey": "_DUMMY_THROW_RANGE",
               "overrideMapKey": "DummyThrowSpeedUp"
             }
           ]
         },
+        //抛射豆子
         "ThrowBean_Trigger": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AvatarSkillStart",
-              "skillID": 20045,
-              "cdDelta": 1.0,
-              "costStaminaDelta": 1.0
+              "skillID": 20045
             },
             {
               "$type": "TriggerBullet",
@@ -3121,23 +3181,20 @@
               "born": {
                 "$type": "ConfigBornByTarget",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 1.2999999523162842,
-                  "PJCOKIGCJOK": 0.10000000149011612
+                  "x": 0.0,
+                  "y": 1.3,
+                  "z": 0.1
                 }
               }
             }
           ]
         },
+        //抛射豆子
         "ThrowBean_Trigger_1": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AvatarSkillStart",
-              "skillID": 20045,
-              "cdDelta": 1.0,
-              "costStaminaDelta": 1.0
+              "skillID": 20045
             },
             {
               "$type": "TriggerBullet",
@@ -3145,169 +3202,89 @@
               "born": {
                 "$type": "ConfigBornByTarget",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 2.0999999046325684,
-                  "PJCOKIGCJOK": 0.10000000149011612
+                  "x": 0.0,
+                  "y": 2.1,
+                  "z": 0.1
                 }
               }
             }
           ]
         },
         "Ban_SKill_CatchBoar": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorInt",
               "intID": "CatchBoarMark",
-              "ratio": 1.0
+              "value": 1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetAnimatorInt",
               "intID": "CatchBoarMark",
-              "ratio": 0.0
+              "value": 0
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "AddGlobalValue",
-          "ratio": 4.0,
-          "key": "_DUMMY_THROW_RANGE",
-          "useLimitRange": true,
-          "maxValue": 8.0,
-          "minValue": 4.0
-        },
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "_ABILITY_Is_In_Crouch",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "AttachModifier",
-          "modifierName": "Quest_AddSkillInfo"
-        },
-        {
-          "$type": "AttachModifier",
-          "modifierName": "Quest_ChangePlayMode_Handler"
-        }
-      ],
-      "isDynamicAbility": true
+      "abilitySpecials": {
+        "DummyThrowSpeedUp": 0
+      }
     }
   },
+  // Gadget_420000019  抓野猪抛投子弹
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Ability_Bullet_CatchAnimal_Throw",
-      "abilitySpecials": {
-        "DummyThrowSpeedUp": 0.0
-      },
-      "modifiers": {
-        "SpeedUP": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Animator_OverallSpeedRatio": [
-              "DummyThrowSpeedUp",
-              0.11999999731779099,
-              "MUL",
-              0.47999998927116394,
-              "SUB"
-            ]
-          }
-        },
-        "BoarHunt_Boss_Eff": {
-          "stacking": "Multiple",
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_CaptureSkills_08",
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        }
-      },
-      "onAdded": [
-        {
-          "$type": "CopyGlobalValue",
-          "srcTarget": "OriginOwner",
-          "dstTarget": "Self",
-          "srcKey": "_DUMMY_THROW_RANGE",
-          "dstKey": "_DUMMY_THROW_RANGE"
-        },
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "_ABILITY_HUNT_SUCCESS",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "SetGlobalValueToOverrideMap",
-          "globalValueKey": "_DUMMY_THROW_RANGE",
-          "overrideMapKey": "DummyThrowSpeedUp"
-        },
-        {
-          "$type": "AttachModifier",
-          "modifierName": "SpeedUP"
-        },
-        {
-          "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_CaptureSkills_02",
-          "EBHJMLOKDGB": -1.0
-        }
-      ],
+      //子弹碰撞Trigger
       "onAbilityStart": [
         {
           "$type": "FireAISoundEvent",
-          "volume": 0.0
+          "volume": 0
         },
+
         {
           "$type": "Predicated",
           "otherTargets": {
             "$type": "SelectTargetsByShape",
-            "topLimit": 1,
-            "sortType": "Nearest",
             "shapeName": "CircleR0_9H1_2",
+            "centerBasedOn": "Self",
             "campTargetType": "All",
-            "sizeRatio": 1.0
+            "campBasedOn": "Self",
+            "topLimit": 1,
+            "entityTypePriority": [],
+            "sortType": "Nearest"
           },
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
+              "compareType": "Equal", //判断是不是捕兽夹
+              "target": "Target",
               "key": "_Is_Hunt_Trap",
-              "ratio": 1.0
+              "value": 1
             }
           ],
           "targetPredicates": [
             {
               "$type": "ByTargetGlobalValue",
+              "compareType": "Equal", //判断是不是捕兽夹
               "key": "_Is_Hunt_Trap",
-              "ratio": 1.0
+              "value": 1
             }
           ],
           "successActions": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "_ABILITY_HUNT_SUCCESS",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "target": "Self",
+              "value": 1
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_ABILITY_Hit_Eff_Mark",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "target": "Self",
+              "value": 0
             }
           ]
         },
@@ -3315,11 +3292,13 @@
           "$type": "Predicated",
           "otherTargets": {
             "$type": "SelectTargetsByShape",
-            "entityTypePriority": ["Gadget"],
-            "sortType": "Nearest",
             "shapeName": "CircleR1_1H3",
+            "centerBasedOn": "Self",
             "campTargetType": "Enemy",
-            "sizeRatio": 1.0
+            "campBasedOn": "Self",
+            //"topLimit": 1,
+            "entityTypePriority": ["Gadget"],
+            "sortType": "Nearest"
           },
           "targetPredicates": [
             {
@@ -3328,32 +3307,29 @@
             },
             {
               "$type": "ByTargetGlobalValue",
+              "compareType": "Equal", //判断是不是可被触发的场景物件
               "key": "_Can_Be_Triggered_By_Bullet",
-              "ratio": 1.0
+              "value": 1
             }
           ],
           "successActions": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "_ABILITY_HUNT_SUCCESS",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "target": "Self",
+              "value": 1
             },
             {
-              "$type": "SetGlobalValue",
-              "target": "Target",
-              "ratio": 1.0,
+              "$type": "SetGlobalValue", //触发场景物件效果传参
               "key": "_Gadget_Hunt_Attack",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "target": "Target",
+              "value": 1
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 2.0,
-              "key": "_ABILITY_Hit_Eff_Mark",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "key": "_ABILITY_Hit_Eff_Mark", //播放一个专门打到物件用的特效
+              "target": "Self",
+              "value": 2
             }
           ]
         },
@@ -3361,11 +3337,13 @@
           "$type": "Predicated",
           "otherTargets": {
             "$type": "SelectTargetsByShape",
-            "entityTypePriority": ["Monster"],
-            "sortType": "Nearest",
             "shapeName": "CircleR1_7H6",
+            "centerBasedOn": "Self",
             "campTargetType": "Enemy",
-            "sizeRatio": 1.0
+            "campBasedOn": "Self",
+            //"topLimit": 1,
+            "entityTypePriority": ["Monster"],
+            "sortType": "Nearest"
           },
           "predicates": [
             {
@@ -3374,8 +3352,10 @@
             },
             {
               "$type": "ByTargetGlobalValue",
+              "compareType": "Equal", //判断是不是活动小动物
+              "target": "Target",
               "key": "_Is_Hunt_Animal_Activity3.1",
-              "ratio": 1.0
+              "value": 1
             },
             {
               "$type": "ByNot",
@@ -3383,7 +3363,8 @@
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_HUNT_BOSS",
-                  "ratio": 1.0
+                  "value": 1,
+                  "compareType": "Equal"
                 }
               ]
             }
@@ -3397,30 +3378,26 @@
           "successActions": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "_ABILITY_HUNT_SUCCESS",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "target": "Self",
+              "value": 1
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
-              "key": "_ABILITY_Hit_Eff_Mark",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "key": "_ABILITY_Hit_Eff_Mark", //播放打到野猪的特效
+              "target": "Self",
+              "value": 1
             },
             {
               "$type": "DamageByAttackValue",
               "target": "Target",
               "attackInfo": {
                 "attackTag": "_BOAR_HUNT_ATTACK",
-                "attenuationTag": "",
-                "attenuationGroup": "default",
                 "attackProperty": {
-                  "HBIOLEEGHPD": 0.0,
-                  "CCNJGLPMIEP": 0.0,
-                  "bonusCriticalHurt": 0.0,
-                  "enBreak": 0.0
+                  "damagePercentage": 0,
+                  "elementType": "None",
+                  "elementDurability": 0,
+                  "enBreak": 0
                 }
               }
             }
@@ -3430,12 +3407,13 @@
           "$type": "Predicated",
           "otherTargets": {
             "$type": "SelectTargetsByShape",
+            "shapeName": "CircleR3_5H8",
+            "centerBasedOn": "Self",
+            "campTargetType": "Enemy",
+            "campBasedOn": "Self",
             "topLimit": 1,
             "entityTypePriority": ["Monster"],
-            "sortType": "Nearest",
-            "shapeName": "CircleR3_5H8",
-            "campTargetType": "Enemy",
-            "sizeRatio": 1.0
+            "sortType": "Nearest"
           },
           "predicates": [
             {
@@ -3445,7 +3423,8 @@
             {
               "$type": "ByTargetGlobalValue",
               "key": "_HUNT_BOSS",
-              "ratio": 1.0
+              "value": 1,
+              "compareType": "Equal"
             }
           ],
           "targetPredicates": [
@@ -3457,184 +3436,243 @@
           "successActions": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "_ABILITY_HUNT_SUCCESS",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "target": "Self",
+              "value": 1
             },
             {
               "$type": "ApplyModifier",
-              "target": "Target",
-              "modifierName": "BoarHunt_Boss_Eff"
+              "modifierName": "BoarHunt_Boss_Eff",
+              "target": "Target"
             },
             {
               "$type": "DamageByAttackValue",
               "target": "Target",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_IN_ANGRY",
-                  "ratio": 1.0
-                }
-              ],
               "born": {
                 "$type": "ConfigBornByCollisionPoint"
               },
               "attackInfo": {
                 "attackTag": "_BOAR_HUNT_ATTACK",
-                "attenuationTag": "",
-                "attenuationGroup": "default",
+
                 "attackProperty": {
-                  "HBIOLEEGHPD": 0.0,
-                  "CCNJGLPMIEP": 0.0,
-                  "bonusCriticalHurt": 0.0,
+                  "damagePercentage": 0,
+                  "damageExtra": 100,
+                  "elementType": "None",
+                  "elementDurability": 0,
+                  "enBreak": 0,
+                  "trueDamage": true,
                   "strikeType": "Slash",
-                  "enBreak": 0.0,
                   "attackType": "Range",
-                  "damageExtra": 100.0,
-                  "HFLMOAAADBL": -5.0,
-                  "trueDamage": true
+                  "bonusCritical": -5
                 },
                 "hitPattern": {
                   "onHitEffectName": "default",
-                  "hitImpulseType": "LV1"
+                  "hitImpulseType": "LV1",
+                  "hitHaltTime": 0.0,
+                  "hitHaltTimeScale": 0.0,
+                  "muteHitText": false
                 }
-              }
-            },
-            {
-              "$type": "DamageByAttackValue",
-              "target": "Target",
+              },
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_IN_ANGRY",
-                  "ratio": 0.0,
-                  "compareType": "NoneOrEqual"
+                  "target": "Target",
+                  "compareType": "Equal",
+                  "value": 1
                 }
-              ],
+              ]
+            },
+            {
+              "$type": "DamageByAttackValue",
+              "target": "Target",
               "born": {
                 "$type": "ConfigBornByCollisionPoint"
               },
               "attackInfo": {
                 "attackTag": "_BOAR_HUNT_ATTACK",
-                "attenuationTag": "",
-                "attenuationGroup": "default",
+
                 "attackProperty": {
-                  "HBIOLEEGHPD": 0.0,
-                  "CCNJGLPMIEP": 0.0,
-                  "bonusCriticalHurt": 0.0,
+                  "damagePercentage": 0,
+                  "damageExtra": 18000,
+                  "elementType": "None",
+                  "elementDurability": 0,
+                  "enBreak": 0,
+                  "trueDamage": true,
                   "strikeType": "Slash",
-                  "enBreak": 0.0,
                   "attackType": "Range",
-                  "damageExtra": 18000.0,
-                  "HFLMOAAADBL": -5.0,
-                  "trueDamage": true
+                  "bonusCritical": -5
                 },
                 "hitPattern": {
                   "onHitEffectName": "default",
-                  "hitImpulseType": "LV1"
+                  "hitImpulseType": "LV1",
+                  "hitHaltTime": 0.0,
+                  "hitHaltTimeScale": 0.0,
+                  "muteHitText": false
                 }
-              }
+              },
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_IN_ANGRY",
+                  "target": "Target",
+                  "compareType": "NoneOrEqual",
+                  "value": 0
+                }
+              ]
             }
           ]
         },
         {
           "$type": "SetGlobalValue",
+          "key": "_ABILITY_HUNT_SUCCESS", //播放打到野猪的特效
+          "target": "Self",
+          "value": 1,
           "predicates": [
             {
               "$type": "BySceneSurfaceType",
-              "filters": ["Ice", "Water"],
               "offset": {
-                "y": -0.20000000298023224
-              }
+                "x": 0,
+                "y": -0.2,
+                "z": 0
+              },
+              "filters": ["Ice", "Water"]
             }
-          ],
-          "ratio": 1.0,
-          "key": "_ABILITY_HUNT_SUCCESS",
-          "maxValue": 0.0,
-          "minValue": 0.0
+          ]
         },
         {
           "$type": "FireHitEffect",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "target": "Self",
-              "key": "_ABILITY_Hit_Eff_Mark",
-              "ratio": 0.0,
-              "compareType": "NoneOrEqual"
-            }
-          ],
-          "hitEntity": "",
           "hitScene": {
             "defaultEffect": "Eff_SceneObj_CaptureSkills_03",
             "surfaceEffect": {
               "Water": "Eff_SceneObj_CaptureSkills_07"
             }
-          }
-        },
-        {
-          "$type": "FireEffect",
+          },
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "target": "Self",
               "key": "_ABILITY_Hit_Eff_Mark",
-              "ratio": 1.0
+              "compareType": "NoneOrEqual",
+              "value": 0
             }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_CaptureSkills_05",
-          "EBHJMLOKDGB": -1.0
+          ]
         },
         {
           "$type": "FireEffect",
+          "effectPattern": "Eff_SceneObj_CaptureSkills_05",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "target": "Self",
               "key": "_ABILITY_Hit_Eff_Mark",
-              "ratio": 2.0
+              "compareType": "Equal",
+              "value": 1
             }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_CaptureSkills_04",
-          "EBHJMLOKDGB": -1.0
+          ]
+        },
+        {
+          "$type": "FireEffect",
+          "effectPattern": "Eff_SceneObj_CaptureSkills_04",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Self",
+              "key": "_ABILITY_Hit_Eff_Mark",
+              "compareType": "Equal",
+              "value": 2
+            }
+          ]
         },
         {
           "$type": "CreateGadget",
+          "target": "Self",
+          "gadgetID": 70800231,
+          "campID": 4001,
+          "campTargetType": "All",
+          "born": {
+            "$type": "ConfigBornByCollisionPoint",
+            "offset": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "onGround": true,
+            "onGroundRaycastUpDist": 3
+          },
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "target": "Self",
               "key": "_ABILITY_HUNT_SUCCESS",
-              "ratio": 0.0,
-              "compareType": "NoneOrEqual"
+              "compareType": "NoneOrEqual",
+              "value": 0
             }
-          ],
-          "born": {
-            "$type": "ConfigBornByCollisionPoint",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "onGround": true,
-            "onGroundRaycastUpDist": 3.0
-          },
-          "gadgetID": 70800231,
-          "campID": 4001,
-          "campTargetType": "All"
+          ]
         },
         {
           "$type": "AddAISpecialAlertTemperature",
-          "ONHFACKGPAA": 40.0
+          "temperature": 40
         }
-      ]
+      ],
+      "onAdded": [
+        {
+          "$type": "CopyGlobalValue",
+          "srcTarget": "OriginOwner",
+          "dstTarget": "Self",
+          "srcKey": "_DUMMY_THROW_RANGE",
+          "dstKey": "_DUMMY_THROW_RANGE"
+        },
+        {
+          "$type": "SetGlobalValue",
+          "key": "_ABILITY_HUNT_SUCCESS",
+          "target": "Self",
+          "value": 0
+        },
+        {
+          "$type": "SetGlobalValueToOverrideMap",
+          "globalValueKey": "_DUMMY_THROW_RANGE",
+          "overrideMapKey": "DummyThrowSpeedUp"
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "SpeedUP",
+          "target": "Self"
+        },
+        {
+          "$type": "AttachEffect",
+          "effectPattern": "Eff_SceneObj_CaptureSkills_02"
+        }
+      ],
+
+      "modifiers": {
+        "SpeedUP": {
+          "properties": {
+            "Animator_OverallSpeedRatio": "%DummyThrowSpeedUp*0.12-0.48"
+          }
+        },
+        "BoarHunt_Boss_Eff": {
+          "duration": 1,
+          "stacking": "Multiple",
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "effectPattern": "Eff_SceneObj_CaptureSkills_08"
+            }
+          ]
+        }
+      },
+      "abilitySpecials": {
+        "DummyThrowSpeedUp": 0
+      }
     }
   },
+  //  用于控制3.1丰收节捕猎玩法中的潜行对于怪物温度降低的效果
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CatchAnimal_Temperature_Controller",
+      "isDynamicAbility": true,
       "abilityMixins": [
         {
           "$type": "AttachToStateIDMixin",
@@ -3666,215 +3704,196 @@
           ]
         }
       ],
-      "modifiers": {
-        "Blank": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "target": "Caster",
+          "key": "_Is_In_Crouch_State",
+          "value": 0
         },
+        {
+          "$type": "SetGlobalValue",
+          "target": "Caster",
+          "key": "_Is_In_Jungle",
+          "value": 0
+        }
+      ],
+      "modifiers": {
+        "Blank": {},
         "UNIQUE_BoarHunt_Crouch_State_Mark": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
               "target": "Caster",
-              "ratio": 1.0,
               "key": "_Is_In_Crouch_State",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
               "target": "Caster",
-              "ratio": 0.0,
               "key": "_Is_In_Crouch_State",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         },
         "UNIQUE_Monster_Temperature_Reduce_In_Crouch": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
           "modifierMixins": [
             {
               "$type": "TemperatureGrowRateMixin",
-              "FFAIDEEOJHF": "_Is_Hunt_Animal_Activity3.1",
-              "FMMOIJFBPHM": 0.6000000238418579
+              "growRateMultiplier": 0.6,
+              "monsterGV": "_Is_Hunt_Animal_Activity3.1"
             }
           ]
         },
         "UNIQUE_Monster_Temperature_Reduce_In_Jungle": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
           "modifierMixins": [
             {
               "$type": "TemperatureGrowRateMixin",
-              "FFAIDEEOJHF": "_Is_Hunt_Animal_Activity3.1",
-              "FMMOIJFBPHM": 0.6000000238418579
+              "growRateMultiplier": 0.6,
+              "monsterGV": "_Is_Hunt_Animal_Activity3.1"
             },
             {
               "$type": "TriggerPostProcessEffectMixin",
               "postEffectAssetName": "PostEffect_Activity_BoarHunt_ScreenEffect",
-              "duration": 0.0,
-              "getSubActions": true
+              "duration": 0,
+              "forceFadeOut": true
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "target": "Caster",
-          "ratio": 0.0,
-          "key": "_Is_In_Crouch_State",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "SetGlobalValue",
-          "target": "Caster",
-          "ratio": 0.0,
-          "key": "_Is_In_Jungle",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        }
-      ],
-      "isDynamicAbility": true
+      }
     }
   },
+  //3.1活动用于切换playmode的ability，分别是阶段一阶段二和阶段三三个
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityBoarChallenge_Playmode_Switch_1",
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Activity_BoarChallenge_Playmode_1",
+          "target": "Team"
+        }
+      ],
+
       "modifiers": {
         "Activity_BoarChallenge_Playmode_1": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachActionToModifierMixin",
               "onAdded": [
                 {
                   "$type": "ChangePlayMode",
-                  "RotationDampTime": true,
-                  "canBeHandledOnRecover": true,
                   "muteRemoteAction": true,
-                  "toPlayMode": "BoarChuck"
+                  "toPlayMode": "BoarChuck",
+                  "doOffStage": true,
+                  "canBeHandledOnRecover": true
                 }
               ],
               "onRemoved": [
                 {
                   "$type": "ChangePlayMode",
-                  "RotationDampTime": true,
-                  "canBeHandledOnRecover": true,
-                  "muteRemoteAction": true
+                  "muteRemoteAction": true,
+                  "toPlayMode": "Normal",
+                  "doOffStage": true,
+                  "canBeHandledOnRecover": true
                 }
               ]
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "target": "Team",
-          "modifierName": "Activity_BoarChallenge_Playmode_1"
-        }
-      ],
-      "isDynamicAbility": true
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityBoarChallenge_Playmode_Switch_2",
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Activity_BoarChallenge_Playmode_2",
+          "target": "Team"
+        }
+      ],
       "modifiers": {
         "Activity_BoarChallenge_Playmode_2": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachActionToModifierMixin",
               "onAdded": [
                 {
                   "$type": "ChangePlayMode",
-                  "RotationDampTime": true,
-                  "canBeHandledOnRecover": true,
                   "muteRemoteAction": true,
-                  "toPlayMode": "BoarHunt"
+                  "toPlayMode": "BoarHunt",
+                  "doOffStage": true,
+                  "canBeHandledOnRecover": true
                 }
               ],
               "onRemoved": [
                 {
                   "$type": "ChangePlayMode",
-                  "RotationDampTime": true,
+                  "muteRemoteAction": true,
+                  "toPlayMode": "Normal",
                   "canBeHandledOnRecover": true,
-                  "muteRemoteAction": true
+                  "doOffStage": true
                 }
               ]
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "target": "Team",
-          "modifierName": "Activity_BoarChallenge_Playmode_2"
-        }
-      ],
-      "isDynamicAbility": true
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityBoarChallenge_Playmode_Switch_3",
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Activity_BoarChallenge_Playmode_3",
+          "target": "Team"
+        }
+      ],
       "modifiers": {
         "Activity_BoarChallenge_Playmode_3": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachActionToModifierMixin",
               "onAdded": [
                 {
                   "$type": "ChangePlayMode",
-                  "RotationDampTime": true,
-                  "canBeHandledOnRecover": true,
                   "muteRemoteAction": true,
-                  "toPlayMode": "BoarKingChallenge"
+                  "toPlayMode": "BoarKingChallenge",
+                  "doOffStage": true,
+                  "canBeHandledOnRecover": true
                 }
               ],
               "onRemoved": [
                 {
                   "$type": "ChangePlayMode",
-                  "RotationDampTime": true,
-                  "canBeHandledOnRecover": true,
-                  "muteRemoteAction": true
+                  "muteRemoteAction": true,
+                  "toPlayMode": "Normal",
+                  "doOffStage": true,
+                  "canBeHandledOnRecover": true
                 }
               ]
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "target": "Team",
-          "modifierName": "Activity_BoarChallenge_Playmode_3"
-        }
-      ],
-      "isDynamicAbility": true
+      }
     }
   }
 ]

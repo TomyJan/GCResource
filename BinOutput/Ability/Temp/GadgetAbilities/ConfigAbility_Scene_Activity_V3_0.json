@@ -1,4 +1,9 @@
 [
+  ///////////////////////////
+  //
+  // 寻宝仙灵探查点
+  //
+  ///////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -6,6 +11,7 @@
       "abilityMixins": [
         {
           "$type": "AttachToGadgetStateMixin",
+          "gadgetState": 0,
           "modifierName": "Interactable"
         },
         {
@@ -21,13 +27,10 @@
       ],
       "modifiers": {
         "Interactable": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Seeker_ExplorationPoint_01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_Seeker_ExplorationPoint_01"
             },
             {
               "$type": "AttachModifier",
@@ -36,17 +39,15 @@
           ]
         },
         "Mute": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
-              "$type": "TeasureHuntMarkShow"
+              "$type": "TeasureHuntMarkShow",
+              "markType": "exploration",
+              "show": false
             }
           ]
         },
         "Active": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
@@ -59,32 +60,40 @@
           ]
         },
         "BeActive": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1.0,
+          // "onAdded":
+          // [
+          //     {
+          //         "$type": "TeasureHuntMarkShow",
+          //         "markType": "exploration",
+          //         "show": true,
+          //     }
+          // ],
           "onRemoved": [
             {
               "$type": "ApplyModifier",
-              "modifierName": "Shoot"
+              "modifierName": "Shoot",
+              "target": "Self"
             },
             {
               "$type": "ChangeGadgetState",
-              "CMFMJHJLIPP": 202
+              "state": 202
             }
+            // {
+            //     "$type": "KillSelf",
+            // }
           ]
         },
         "Shoot": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.1,
           "onAdded": [
             {
               "$type": "Predicated",
               "otherTargets": {
                 "$type": "SelectTargetsByTag",
-                "topLimit": 15,
+                "tag": "IS_RESEARCH_POINT",
                 "sortType": "Nearest",
-                "tag": "IS_RESEARCH_POINT"
+                "topLimit": 15 // 测试参数
               },
               "successActions": [
                 {
@@ -93,40 +102,41 @@
                 },
                 {
                   "$type": "TriggerBullet",
-                  "predicates": [
-                    {
-                      "$type": "ByHasAttackTarget"
-                    }
-                  ],
+                  //"target": "Target",
                   "bulletID": 70290407,
                   "born": {
                     "$type": "ConfigBornBySelf",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 2.0,
-                      "PJCOKIGCJOK": 0.0
+                      "x": 0.0,
+                      "y": 2.0,
+                      "z": 0.0
                     },
                     "direction": {
+                      //"$type": "ConfigBornDirectionType",
                       "$type": "ConfigDirectionByAttackTarget",
                       "angleOffset": {
-                        "IBKBLDAJIMA": -45.0,
-                        "LKHJADIPBFL": 0.0,
-                        "PJCOKIGCJOK": 0.0
+                        "x": -45,
+                        "y": 0,
+                        "z": 0
                       }
                     }
-                  }
+                  },
+                  "predicates": [
+                    {
+                      "$type": "ByHasAttackTarget"
+                    }
+                  ]
                 }
               ]
             }
           ]
         },
         "ShowMark": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "thinkInterval": 1.0,
           "onThinkInterval": [
             {
               "$type": "TeasureHuntMarkShow",
+              "markType": "exploration",
               "show": true
             }
           ]
@@ -134,30 +144,39 @@
       }
     }
   },
+
+  ///////////////////////////////////////////////////
+  //
+  //  寻宝仙灵探查点子弹特效
+  //
+  ///////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_Area_Common_Property_Prop_ExplorationBullet_01",
+      "onAdded": [],
       "onAbilityStart": [
+        //
         {
           "$type": "DamageByAttackValue",
           "target": "Target",
+          "attacker": "Caster",
           "attackInfo": {
             "attackTag": "ResearchPointBullet",
-            "attenuationTag": "",
-            "attenuationGroup": "default",
             "attackProperty": {
-              "HBIOLEEGHPD": 0.0,
-              "CCNJGLPMIEP": 0.0,
-              "bonusCriticalHurt": 100.0,
-              "ignoreAttackerProperty": true,
+              "damagePercentage": 0.0,
+              "elementType": "None",
               "strikeType": "Default",
-              "bonusCritical": true
+              "elementDurability": 100,
+              "ignoreAttackerProperty": true,
+              "ignoreModifyDamage": true
             },
             "hitPattern": {
               "onHitEffectName": "default",
               "hitImpulseType": "LV7",
-              "hitHaltTimeScale": 0.05000000074505806,
+              "canBeDefenceHalt": false,
+              "hitHaltTime": 0.0,
+              "hitHaltTimeScale": 0.05,
               "muteHitText": true
             }
           }
@@ -165,6 +184,12 @@
       ]
     }
   },
+
+  ///////////////////////////
+  //
+  // 寻宝仙灵元素微粒
+  //
+  ///////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -172,6 +197,7 @@
       "abilityMixins": [
         {
           "$type": "AttachToGadgetStateMixin",
+          "gadgetState": 0,
           "modifierName": "Mute"
         },
         {
@@ -180,75 +206,33 @@
           "modifierName": "Active"
         }
       ],
-      "modifiers": {
-        "Mute": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 3.0,
-          "bonusCriticalHurt": 100.0,
-          "onRemoved": [
+      "onFieldEnter": [
+        {
+          "$type": "Predicated",
+          "target": "Target",
+          "targetPredicates": [
             {
-              "$type": "ChangeGadgetState",
-              "CMFMJHJLIPP": 201
+              "$type": "ByAvatarIsHost",
+              "target": "Target",
+              "isHost": true
             }
           ],
-          "onBeingHit": [
+          "successActions": [
             {
-              "$type": "ChangeGadgetState",
+              "$type": "ApplyModifier",
+              "target": "Self",
+              "modifierName": "Pickup",
               "predicates": [
                 {
-                  "$type": "ByAttackTags",
-                  "attackTags": ["ResearchPointBullet"]
+                  "$type": "ByTargetGadgetState",
+                  "target": "Self",
+                  "gadgetState": 201
                 }
-              ],
-              "CMFMJHJLIPP": 201
-            }
-          ]
-        },
-        "Active": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_ElementParticle_01",
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        },
-        "EffectBall": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_ElementParticle_01",
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        },
-        "Pickup": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "ServerLuaCall",
-              "luaCallType": "FromGroup",
-              "funcName": "SLC_Activity_TreasureSeelie_PickElementParticle",
-              "ODAOGCJFIHC": 0.0,
-              "GCCFLBLEHDB": 0.0,
-              "DJODIFOBEJG": 0.0
-            },
-            {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_ElementParticle_01_Disappear",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "KillSelf"
+              ]
             }
           ]
         }
-      },
+      ],
       "onAdded": [
         {
           "$type": "ChangeTag",
@@ -256,86 +240,129 @@
           "tag": "IS_RESEARCH_POINT"
         }
       ],
-      "onFieldEnter": [
-        {
-          "$type": "Predicated",
-          "target": "Target",
-          "targetPredicates": [
+      "modifiers": {
+        "Mute": {
+          "duration": 3,
+          "onBeingHit": [
             {
-              "$type": "ByAvatarIsHost"
-            }
-          ],
-          "successActions": [
-            {
-              "$type": "ApplyModifier",
+              "$type": "ChangeGadgetState",
+              "state": 201,
               "predicates": [
                 {
-                  "$type": "ByTargetGadgetState",
-                  "target": "Self",
-                  "gadgetState": 201
+                  "$type": "ByAttackTags",
+                  "attackTags": ["ResearchPointBullet"]
                 }
-              ],
-              "modifierName": "Pickup"
+              ]
+            }
+          ],
+          "onRemoved": [
+            // 状态切换保底 防止子弹未击中
+            {
+              "$type": "ChangeGadgetState",
+              "state": 201
             }
           ]
-        }
-      ]
-    }
-  },
-  {
-    "Default": {
-      "$type": "ConfigAbility",
-      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_ElementParticle_OnGround_01",
-      "modifiers": {
+        },
+        "Active": {
+          "onAdded": [
+            {
+              //待机特效
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_SceneObj_ElementParticle_01"
+            }
+          ]
+        },
+        "EffectBall": {
+          "onAdded": [
+            {
+              //待机特效
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_SceneObj_ElementParticle_01"
+            }
+            // {
+            //     "$type": "SetGlobalValue",
+            //     "key": "GV_CanBePicked",
+            //     "target":"Self",
+            //     "value": 1,
+            // }
+          ]
+        },
         "Pickup": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ServerLuaCall",
-              "luaCallType": "CurChallengeGroup",
               "funcName": "SLC_Activity_TreasureSeelie_PickElementParticle",
-              "ODAOGCJFIHC": 0.0,
-              "GCCFLBLEHDB": 0.0,
-              "DJODIFOBEJG": 0.0
+              "luaCallType": "FromGroup"
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_ElementParticle_01_Disappear",
-              "EBHJMLOKDGB": -1.0
+              "target": "Self",
+              "effectPattern": "Eff_SceneObj_ElementParticle_01_Disappear"
             },
             {
               "$type": "KillSelf"
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_ElementParticle_01",
-          "EBHJMLOKDGB": -1.0
-        }
-      ],
+      }
+    }
+  },
+
+  // 寻宝仙灵元素微粒（贴地版本）
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_ElementParticle_OnGround_01",
       "onFieldEnter": [
         {
           "$type": "Predicated",
           "target": "Target",
           "targetPredicates": [
             {
-              "$type": "ByAvatarIsHost"
+              "$type": "ByAvatarIsHost",
+              "target": "Target",
+              "isHost": true
             }
           ],
           "successActions": [
             {
               "$type": "ApplyModifier",
+              "target": "Self",
               "modifierName": "Pickup"
             }
           ]
         }
-      ]
+      ],
+      "onAdded": [
+        {
+          //待机特效
+          "$type": "AttachEffect",
+          "effectPattern": "Eff_SceneObj_ElementParticle_01"
+        }
+      ],
+      "modifiers": {
+        "Pickup": {
+          "onAdded": [
+            {
+              "$type": "ServerLuaCall",
+              "funcName": "SLC_Activity_TreasureSeelie_PickElementParticle",
+              "luaCallType": "CurChallengeGroup"
+            },
+            {
+              "$type": "FireEffect",
+              "target": "Self",
+              "effectPattern": "Eff_SceneObj_ElementParticle_01_Disappear"
+            },
+            {
+              "$type": "KillSelf"
+            }
+          ]
+        }
+      }
     }
   },
+
+  // 寻宝仙灵-元素微粒创生器
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -343,28 +370,62 @@
       "onAdded": [
         {
           "$type": "CreateGadget",
+          "gadgetID": 70290552,
+          "lifeByOwnerV2": true,
           "born": {
             "$type": "ConfigBornBySelf",
+            "onGround": true, // 贴地生成
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "onGround": true
-          },
-          "JAEOKOAACJP": true,
-          "gadgetID": 70290552
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
+          }
         }
       ]
     }
   },
+
+  ///////////////////////////
+  //
+  // 寻宝仙灵能量球
+  //
+  ///////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_Area_Xm_Property_Ani_Prop_EnergyBall_01",
+      "onFieldEnter": [
+        {
+          "$type": "Predicated",
+          "target": "Target",
+          "targetPredicates": [
+            {
+              "$type": "ByAvatarIsHost",
+              "target": "Target",
+              "isHost": true
+            }
+          ],
+          "successActions": [
+            {
+              "$type": "ApplyModifier",
+              "target": "Self",
+              "modifierName": "Pickup",
+              "predicates": [
+                {
+                  "$type": "ByTargetGadgetState",
+                  "target": "Self",
+                  "gadgetState": 0
+                }
+              ]
+            }
+          ]
+        }
+      ],
       "abilityMixins": [
         {
           "$type": "AttachToGadgetStateMixin",
+          "gadgetState": 0,
           "modifierName": "Active"
         },
         {
@@ -374,69 +435,39 @@
         }
       ],
       "modifiers": {
+        // 可见&可交互
         "Active": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Seeker_EnergyBall_01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_Seeker_EnergyBall_01"
             }
           ]
         },
-        "Inactive": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
+        // 不可见&不可交互
+        "Inactive": {},
         "Pickup": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ServerLuaCall",
-              "luaCallType": "FromGroup",
               "funcName": "SLC_Activity_TreasureSeelie_PickEnergyBall",
-              "ODAOGCJFIHC": 0.0,
-              "GCCFLBLEHDB": 0.0,
-              "DJODIFOBEJG": 0.0
+              "luaCallType": "FromGroup"
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Seeker_EnergyBall_01_Disappear",
-              "EBHJMLOKDGB": -1.0
+              "target": "Self",
+              "effectPattern": "Eff_SceneObj_Seeker_EnergyBall_01_Disappear"
             },
             {
               "$type": "KillSelf"
             }
           ]
         }
-      },
-      "onFieldEnter": [
-        {
-          "$type": "Predicated",
-          "target": "Target",
-          "targetPredicates": [
-            {
-              "$type": "ByAvatarIsHost"
-            }
-          ],
-          "successActions": [
-            {
-              "$type": "ApplyModifier",
-              "predicates": [
-                {
-                  "$type": "ByTargetGadgetState",
-                  "target": "Self"
-                }
-              ],
-              "modifierName": "Pickup"
-            }
-          ]
-        }
-      ]
+      }
     }
   },
+
+  // 寻宝仙灵-挖掘点（操作台）
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -444,6 +475,7 @@
       "abilityMixins": [
         {
           "$type": "AttachToGadgetStateMixin",
+          "gadgetState": 0,
           "modifierName": "Interactable"
         },
         {
@@ -464,26 +496,23 @@
       ],
       "modifiers": {
         "Interactable": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Excavate_01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_Excavate_01"
             },
+            // 离体仙灵常驻挖掘点
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_SeekerSeelie_03_NoFollow",
+              "effectPattern": "Eff_SceneObj_SeekerSeelie_03_NoFollow",
               "born": {
                 "$type": "ConfigBornType",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 1.2000000476837158,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0,
+                  "y": 1.2,
+                  "z": 0
                 }
-              },
-              "EBHJMLOKDGB": -1.0
+              }
             },
             {
               "$type": "AttachModifier",
@@ -492,8 +521,6 @@
           ]
         },
         "Interacted": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachModifier",
@@ -502,22 +529,23 @@
           ]
         },
         "Mute": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "TeasureHuntMarkShow",
-              "markType": "excavation"
+              "markType": "excavation",
+              "show": false
             }
+            /* {
+                            "$type": "KillSelf",
+                        }*/
           ]
         },
         "Die": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "TeasureHuntMarkShow",
-              "markType": "excavation"
+              "markType": "excavation",
+              "show": false
             },
             {
               "$type": "KillSelf"
@@ -525,8 +553,6 @@
           ]
         },
         "ShowMark": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "thinkInterval": 1.0,
           "onThinkInterval": [
             {
@@ -539,6 +565,8 @@
       }
     }
   },
+
+  // 寻宝仙灵-离体仙灵
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -546,16 +574,38 @@
       "onAdded": [
         {
           "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_SeekerSeelie_03_Follow",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_SceneObj_SeekerSeelie_03_Follow" //"Eff_SceneObj_SeekerSeelie_03_NoFollow",
         }
       ]
     }
   },
+
+  ///////////////////////////////////////////////////////////////
+  //
+  // 3.0 跑酷 移动金币
+  //
+  ///////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_Level_Common_Property_Prop_RemovableCoin_01",
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "CoinMaterial",
+          "target": "Self"
+        },
+        {
+          "$type": "SetGlobalValue",
+          "key": "GV_Picked",
+          "value": 0
+        },
+        {
+          "$type": "ChangeTag",
+          "tag": "IS_COIN",
+          "isAdd": true
+        }
+      ],
       "abilityMixins": [
         {
           "$type": "AttachModifierToGlobalValueMixin",
@@ -566,42 +616,36 @@
       ],
       "modifiers": {
         "CoinMaterial": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_UGCCoin_01",
-              "EBHJMLOKDGB": -1.0
+              //"effectPattern": "Eff_SceneObj_UGC_TriathlonCoin_01"
+              "effectPattern": "Eff_SceneObj_UGCCoin_01"
             },
+            // 拖尾特效
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_RemovableCoin_01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_RemovableCoin_01"
             }
           ],
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_GlideChampCoin_Hit",
-              "EBHJMLOKDGB": -1.0
+              "target": "Self",
+              "effectPattern": "Eff_SceneObj_GlideChampCoin_Hit"
             },
             {
-              "$type": "KillSelf"
+              "$type": "KillSelf",
+              "target": "Self"
             }
           ]
         },
         "BePicked": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ServerLuaCall",
               "luaCallType": "CurChallengeGroup",
-              "funcName": "SLC_Activity_Parkour_PickCoin",
-              "ODAOGCJFIHC": 0.0,
-              "GCCFLBLEHDB": 0.0,
-              "DJODIFOBEJG": 0.0
+              "funcName": "SLC_Activity_Parkour_PickCoin"
             },
             {
               "$type": "RemoveModifier",
@@ -609,34 +653,24 @@
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "CoinMaterial"
-        },
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "GV_Picked",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "ChangeTag",
-          "isAdd": true,
-          "tag": "IS_COIN"
-        }
-      ]
+      }
     }
   },
+
+  ///////////////////////////////////////////////////////////////
+  //
+  // 3.0 跑酷 金币拾取BUFF球
+  //
+  ///////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_Level_Common_Property_Prop_ExpandAccessCoin_01",
+      "onAdded": [],
       "abilityMixins": [
         {
           "$type": "AttachToGadgetStateMixin",
+          "gadgetState": 0,
           "modifierName": "Interactable"
         },
         {
@@ -645,93 +679,98 @@
           "modifierName": "Mute"
         }
       ],
-      "modifiers": {
-        "UNIQUE_PickRangeBuff": {
-          "stacking": "RefreshUniqueDurability",
-          "modifierName": "",
-          "isUnique": true,
-          "HCJLIGBLGJA": 20.0,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AddGlobalValue",
-              "target": "Team",
-              "ratio": 1.0,
-              "key": "GV_CoinRangeLevel",
-              "useLimitRange": true,
-              "maxValue": 1000.0,
-              "minValue": 0.0
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "AddGlobalValue",
-              "target": "Team",
-              "ratio": -1.0,
-              "key": "GV_CoinRangeLevel",
-              "useLimitRange": true,
-              "maxValue": 1000.0,
-              "minValue": 0.0
-            }
-          ]
-        },
-        "Interactable": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_ExpandAccessCoin_01",
-              "EBHJMLOKDGB": -1.0
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_ExpandAccessCoin_01_Dis",
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        },
-        "Mute": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 20.0,
-          "bonusCriticalHurt": 100.0,
-          "onRemoved": [
-            {
-              "$type": "ChangeGadgetState"
-            }
-          ]
-        }
-      },
       "onFieldEnter": [
         {
           "$type": "Predicated",
           "target": "Target",
           "targetPredicates": [
             {
-              "$type": "ByAvatarIsHost"
+              "$type": "ByAvatarIsHost",
+              "target": "Target",
+              "isHost": true
             },
             {
               "$type": "ByTargetGadgetState",
+              "gadgetState": 0,
               "target": "Self"
             }
           ],
           "successActions": [
+            // 上BUFF
             {
               "$type": "ApplyModifier",
               "target": "Team",
               "modifierName": "UNIQUE_PickRangeBuff"
             },
+            // 切换为不可交互状态
             {
               "$type": "ChangeGadgetState",
-              "CMFMJHJLIPP": 201
+              "state": 201
             }
           ]
         }
-      ]
+      ],
+      "modifiers": {
+        // 给TEAM上的BUFF
+        "UNIQUE_PickRangeBuff": {
+          "stacking": "RefreshUniqueDurability",
+          "isUnique": true,
+          "duration": 20,
+          "enableMixedUnique": true,
+          "onAdded": [
+            {
+              "$type": "AddGlobalValue",
+              "target": "Team",
+              "key": "GV_CoinRangeLevel",
+              "value": 1,
+              "useLimitRange": true,
+              "maxValue": 1000,
+              "minValue": 0
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "AddGlobalValue",
+              "target": "Team",
+              "key": "GV_CoinRangeLevel",
+              "value": -1,
+              "useLimitRange": true,
+              "maxValue": 1000,
+              "minValue": 0
+            }
+          ]
+        },
+        "Interactable": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_SceneObj_ExpandAccessCoin_01"
+            }
+          ],
+          "onRemoved": [
+            // 消失特效
+            {
+              "$type": "FireEffect",
+              "effectPattern": "Eff_SceneObj_ExpandAccessCoin_01_Dis" //"Eff_SceneObj_BoatRaceCrate_02_Smash",
+            }
+          ]
+        },
+        "Mute": {
+          // 10s后重生
+          "duration": 20,
+          "onRemoved": [
+            {
+              "$type": "ChangeGadgetState",
+              "state": 0
+            }
+          ]
+        }
+      }
     }
   },
+
+  // 3.0 跑酷挑战机关操作台
+  //////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -743,26 +782,28 @@
           "modifierName": "ReMove"
         }
       ],
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "AddEffect",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "AddEffect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Challengestarter_02",
+              "effectPattern": "Eff_SceneObj_Challengestarter_02",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
                 "attachPointName": "EffectPoint"
-              },
-              "EBHJMLOKDGB": -1.0
+              }
             }
           ]
         },
         "ReMove": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 2.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 2.0,
           "onRemoved": [
             {
               "$type": "RemoveModifier",
@@ -770,13 +811,7 @@
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "AddEffect"
-        }
-      ]
+      }
     }
   }
 ]

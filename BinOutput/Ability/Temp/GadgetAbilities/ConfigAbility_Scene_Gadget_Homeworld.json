@@ -1,4 +1,9 @@
 [
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  // 初级壶灵（对应 1,2)
+  //
+  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -6,14 +11,17 @@
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "ratio": 0.0,
           "key": "_ABILITY_Djinn_Advance",
-          "maxValue": 0.0,
-          "minValue": 0.0
+          "value": 0
         }
       ]
     }
   },
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  // 高级壶灵（对应 3,4)
+  //
+  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -21,14 +29,17 @@
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "ratio": 1.0,
           "key": "_ABILITY_Djinn_Advance",
-          "maxValue": 0.0,
-          "minValue": 0.0
+          "value": 1
         }
       ]
     }
   },
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  // 高级壶灵（对应 4)
+  //
+  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -36,10 +47,8 @@
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "ratio": 1.0,
           "key": "_ABILITY_Djinn_Advance",
-          "maxValue": 0.0,
-          "minValue": 0.0
+          "value": 1
         },
         {
           "$type": "EnablePartControl",
@@ -48,19 +57,37 @@
         },
         {
           "$type": "SetPartControlTarget",
+          "partRootNames": ["CloudRoot"],
           "otherTargets": {
             "$type": "SelectTargetsByTag",
             "tag": "Homeworld_Standard_MainBuilding"
-          },
-          "partRootNames": ["CloudRoot"]
+          }
         }
       ]
     }
   },
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  // 壶灵通用（对应 1,2,3,4)
+  //
+  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_Homeworld_NPCObj_Ani_Djinn_01_Ability",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "key": "_ABILITY_Djinn_Comfort",
+          "value": 0
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "ShowEmotion"
+        }
+      ],
       "abilityMixins": [
         {
           "$type": "AttachToAnimatorStateIDMixin",
@@ -85,117 +112,109 @@
       ],
       "modifiers": {
         "AppearState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Djinn_Show",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_Djinn_Show"
             }
           ]
         },
         "SleepState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Djinn_Sleep",
+              "effectPattern": "Eff_SceneObj_Djinn_Sleep",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
                 "attachPointName": "DjinnSleepPoint"
-              },
-              "EBHJMLOKDGB": -1.0
+              }
             }
           ]
         },
         "IdleState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 15.0,
+          "thinkInterval": 15,
           "onThinkInterval": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_Show_Mode",
               "useLimitRange": true,
               "randomInRange": true,
-              "maxValue": 20.0,
-              "minValue": 1.0
+              "minValue": 1,
+              "maxValue": 20
             },
             {
               "$type": "SetAnimatorTrigger",
+              "triggerID": "Show01",
+              "MPTriggerOnRemote": true,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_Show_Mode",
-                  "ratio": 10.0,
+                  "value": 10,
                   "compareType": "LessAndEqual"
                 },
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Djinn_Advance",
-                  "ratio": 0.0
+                  "value": 0,
+                  "compareType": "Equal"
                 }
-              ],
-              "triggerID": "Show01",
-              "MPTriggerOnRemote": true
+              ]
             },
             {
               "$type": "SetAnimatorTrigger",
+              "triggerID": "Show01",
+              "MPTriggerOnRemote": true,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_Show_Mode",
-                  "ratio": 7.0,
+                  "value": 7,
                   "compareType": "LessAndEqual"
                 },
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Djinn_Advance",
-                  "ratio": 1.0
+                  "value": 1,
+                  "compareType": "Equal"
                 }
-              ],
-              "triggerID": "Show01",
-              "MPTriggerOnRemote": true
+              ]
             },
             {
               "$type": "SetAnimatorTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_Show_Mode",
-                  "ratio": 7.0,
-                  "maxValue": 11.0,
-                  "compareType": "Between"
-                },
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_ABILITY_Djinn_Advance",
-                  "ratio": 1.0
-                }
-              ],
               "triggerID": "Show02",
-              "MPTriggerOnRemote": true
+              "MPTriggerOnRemote": true,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_Show_Mode",
+                  "value": 7,
+                  "maxValue": 11,
+                  "compareType": "Between" // 8 ~ 10
+                },
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ABILITY_Djinn_Advance",
+                  "value": 1,
+                  "compareType": "Equal"
+                }
+              ]
             },
             {
               "$type": "ApplyModifier",
+              "modifierName": "ShowEmotion",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_Show_Mode",
-                  "ratio": 11.0,
-                  "compareType": "MoreThanAndEqual"
+                  "value": 11,
+                  "compareType": "MoreThanAndEqual" // 11 ~ 20
                 }
-              ],
-              "modifierName": "ShowEmotion"
+              ]
             }
           ]
         },
         "TalkState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
@@ -204,81 +223,56 @@
           ]
         },
         "ShowEmotion": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1,
           "modifierMixins": [
             {
-              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "$type": "AttachModifierToSelfGlobalValueMixin", // 计数到0时,移除WindBlade这个modifier
               "globalValueKey": "_ABILITY_Djinn_Comfort",
-              "defaultGlobalValueOnCreate": 0.0,
               "valueSteps": [0.5, 3.5, 6.5, 9.5, 10.5],
               "modifierNameSteps": ["Level1", "Level2", "Level3", "Level4"]
             }
           ]
         },
         "Level1": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Djinn_Feeling_01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_Djinn_Feeling_01"
             }
           ]
         },
         "Level2": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Djinn_Feeling_02",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_Djinn_Feeling_02"
             }
           ]
         },
         "Level3": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Djinn_Feeling_03",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_Djinn_Feeling_03"
             }
           ]
         },
         "Level4": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Djinn_Feeling_04",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_Djinn_Feeling_04"
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "_ABILITY_Djinn_Comfort",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        }
-      ],
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "ShowEmotion"
-        }
-      ]
+      }
     }
   },
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  // 周末壶灵
+  //
+  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -302,71 +296,62 @@
       ],
       "modifiers": {
         "AppearState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Djinn_Show",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_SceneObj_Djinn_Show"
             }
           ]
         },
         "SleepState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Djinn_Sleep",
+              "effectPattern": "Eff_SceneObj_Djinn_Sleep",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
                 "attachPointName": "DjinnSleepPoint"
-              },
-              "EBHJMLOKDGB": -1.0
+              }
             }
           ]
         },
         "IdleState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 15.0,
+          "thinkInterval": 15,
           "onThinkInterval": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_Show_Mode",
               "useLimitRange": true,
               "randomInRange": true,
-              "maxValue": 10.0,
-              "minValue": 1.0
+              "minValue": 1,
+              "maxValue": 10
             },
             {
               "$type": "SetAnimatorTrigger",
+              "triggerID": "Show01",
+              "MPTriggerOnRemote": true,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_Show_Mode",
-                  "ratio": 7.0,
+                  "value": 7,
                   "compareType": "LessAndEqual"
                 }
-              ],
-              "triggerID": "Show01",
-              "MPTriggerOnRemote": true
+              ]
             },
             {
               "$type": "SetAnimatorTrigger",
+              "triggerID": "Show02",
+              "MPTriggerOnRemote": true,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_Show_Mode",
-                  "ratio": 7.0,
-                  "maxValue": 11.0,
-                  "compareType": "Between"
+                  "value": 7,
+                  "maxValue": 11,
+                  "compareType": "Between" // 8 ~ 10
                 }
-              ],
-              "triggerID": "Show02",
-              "MPTriggerOnRemote": true
+              ]
             }
           ]
         }

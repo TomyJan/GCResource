@@ -1,16 +1,22 @@
 [
+  ////////////////////////////////////////////////////////////////
+  //
+  //  HitShield
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_ForlornVessel_Strong_Lance_HitShield",
-      "abilitySpecials": {
-        "ForlornVessel_Heal_Layer": 4.0,
-        "ForlornVessel_Heal": 0.009999999776482582
-      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "target": "Self",
+          "modifierName": "ForlornVessel_Lance_HitShield_Detect"
+        }
+      ],
       "modifiers": {
         "ForlornVessel_Lance_HitShield_Detect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
@@ -29,7 +35,8 @@
                 },
                 {
                   "$type": "ByEntityTypes",
-                  "entityTypes": ["Avatar"]
+                  "entityTypes": ["Avatar"],
+                  "target": "Target"
                 }
               ],
               "successActions": [
@@ -43,34 +50,35 @@
           ]
         },
         "UNIQUE_ForlornVessel_Lance_HitShield_Succ": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": 2.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 2.0,
+          "stacking": "Unique",
           "onAdded": [
             {
               "$type": "LoseHP",
               "target": "Caster",
-              "cdRatio": 0.0,
-              "amountByTargetMaxHPRatio": 0.15000000596046448,
+              "amount": 0.0,
+              "amountByTargetCurrentHPRatio": 0.15,
+              "enableInvincible": true, //无敌可以抵挡这个扣血行为
+              "enableLockHP": true, //锁血可以抵挡这个扣血行为
               "lethal": false,
-              "enableInvincible": true,
-              "enableLockHP": true
+              "useMeta": false
             },
             {
               "$type": "Predicated",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR5H5",
+                "centerBasedOn": "Self",
                 "campTargetType": "All",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
               "targetPredicates": [
                 {
                   "$type": "ByEntityTypes",
                   "entityTypes": ["Monster"]
                 },
+                // 只给黑蛇加
                 {
                   "$type": "ByAny",
                   "predicates": [
@@ -88,86 +96,86 @@
               "successActions": [
                 {
                   "$type": "FireEffect",
-                  "healLimitedByCasterMaxHPRatio": "Eff_Monster_ForlornVessel_Strong_Lance_HealCircle",
+                  "effectPattern": "Eff_Monster_ForlornVessel_Strong_Lance_HealCircle",
                   "born": {
                     "$type": "ConfigBornBySelf",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
                     "alongGround": true
-                  },
-                  "EBHJMLOKDGB": -1.0
+                  }
                 },
                 {
                   "$type": "ApplyModifier",
+                  "modifierName": "ForlornVessel_Lance_Hot",
                   "target": "Target",
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
+                      "target": "Target",
                       "key": "ForlornVessel_Lance_Heal",
-                      "ratio": 3.0,
+                      "value": 3,
                       "compareType": "LessAndEqual"
                     }
-                  ],
-                  "modifierName": "ForlornVessel_Lance_Hot"
+                  ]
                 }
               ]
             }
           ]
         },
         "ForlornVessel_Lance_Hot": {
+          "duration": 10.2,
           "stacking": "Multiple",
           "stackingOption": {
-            "abilitySpecialName": "",
-            "maxModifierNumForMultipleType": "ForlornVessel_Heal_Layer"
+            "maxModifierNumForMultipleType": "%ForlornVessel_Heal_Layer"
           },
-          "modifierName": "",
-          "HCJLIGBLGJA": 10.199999809265137,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 1.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
               "key": "ForlornVessel_Lance_Heal",
+              "value": 1,
               "useLimitRange": true,
-              "maxValue": 4.0,
-              "minValue": 0.0
+              "minValue": 0,
+              "maxValue": 4
+            }
+          ],
+          "thinkInterval": 1.0,
+          "onThinkInterval": [
+            {
+              "$type": "HealHP",
+              "amountByTargetMaxHPRatio": "%ForlornVessel_Heal",
+              "target": "Self"
+            },
+            {
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Monster_ForlornVessel_Strong_Lance_HealTick"
             }
           ],
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "ratio": -1.0,
               "key": "ForlornVessel_Lance_Heal",
+              "value": -1,
               "useLimitRange": true,
-              "maxValue": 4.0,
-              "minValue": 0.0
-            }
-          ],
-          "onThinkInterval": [
-            {
-              "$type": "HealHP",
-              "amountByCasterMaxHPRatio": "ForlornVessel_Heal"
-            },
-            {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_ForlornVessel_Strong_Lance_HealTick",
-              "EBHJMLOKDGB": -1.0
+              "minValue": 0,
+              "maxValue": 4
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "ForlornVessel_Lance_HitShield_Detect"
-        }
-      ]
+      "abilitySpecials": {
+        "ForlornVessel_Heal_Layer": 4,
+        "ForlornVessel_Heal": 0.01
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  ExitBattle
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -181,11 +189,10 @@
       ],
       "modifiers": {
         "ExitBattle": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "RemoveUniqueModifier",
+              "target": "Self",
               "modifierName": "UNIQUE_ForlornVessel_Warbanner_ElementShield_ShieldHandler"
             }
           ]
@@ -193,6 +200,11 @@
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Steer
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -201,56 +213,60 @@
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Turn"],
-          "angularSpeed": 180.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 1.0,
+          "angularSpeed": 180
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["NormalAtk01"],
-          "startNormalizedTime": 0.03999999910593033,
-          "endNormalizedTime": 0.07000000029802322,
-          "angularSpeed": 120.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.04,
+          "endNormalizedTime": 0.07,
+          "angularSpeed": 120
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["NormalAtk01"],
-          "startNormalizedTime": 0.28999999165534973,
-          "endNormalizedTime": 0.3199999928474426,
-          "angularSpeed": 120.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.29,
+          "endNormalizedTime": 0.32,
+          "angularSpeed": 120
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["NormalAtk02"],
-          "endNormalizedTime": 0.15000000596046448,
-          "angularSpeed": 180.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 0.15,
+          "angularSpeed": 180
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["ChargeAtk_BS"],
-          "endNormalizedTime": 0.25999999046325684,
-          "angularSpeed": 180.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 0.26,
+          "angularSpeed": 180
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["ChargeAtk_BS"],
-          "startNormalizedTime": 0.4099999964237213,
-          "endNormalizedTime": 0.5199999809265137,
-          "angularSpeed": 180.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.41,
+          "endNormalizedTime": 0.52,
+          "angularSpeed": 180
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["ChargeAtk_Loop"],
-          "angularSpeed": 180.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 1.0,
+          "angularSpeed": 180
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  EndureDelta
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -259,14 +275,16 @@
         {
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "NormalAtk01",
-          "modifierName": "ForlornVessel_Strong_Lance_EndureDelta",
-          "normalizeEnd": 0.4000000059604645
+          "normalizeStart": 0,
+          "normalizeEnd": 0.4,
+          "modifierName": "ForlornVessel_Strong_Lance_EndureDelta"
         },
         {
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "NormalAtk02",
-          "modifierName": "ForlornVessel_Strong_Lance_EndureDelta",
-          "normalizeEnd": 0.3499999940395355
+          "normalizeStart": 0,
+          "normalizeEnd": 0.35,
+          "modifierName": "ForlornVessel_Strong_Lance_EndureDelta"
         },
         {
           "$type": "AttachToStateIDMixin",
@@ -277,8 +295,6 @@
       "modifiers": {
         "ForlornVessel_Strong_Lance_EndureDelta": {
           "stacking": "Unique",
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "TriggerAbility",
@@ -295,6 +311,11 @@
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Lance
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -303,15 +324,13 @@
         {
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "NormalAtk01",
-          "modifierName": "ForlornVessel_Strong_Lance_NormalAtk_WeaponHanler",
-          "normalizeStart": 0.10999999940395355,
-          "normalizeEnd": 0.6800000071525574
+          "normalizeStart": 0.11,
+          "normalizeEnd": 0.68,
+          "modifierName": "ForlornVessel_Strong_Lance_NormalAtk_WeaponHanler"
         }
       ],
       "modifiers": {
         "ForlornVessel_Strong_Lance_NormalAtk_WeaponHanler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetWeaponAttachPointRealName",
@@ -330,6 +349,11 @@
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  ChargeAtk
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -348,30 +372,28 @@
       ],
       "modifiers": {
         "Lance_ChargeAtk_Detect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "AttackHittingSceneMixin",
+              "animEventIDs": ["ChargeAtk_Route"],
               "onHittingScene": [
                 {
                   "$type": "SetAnimatorTrigger",
                   "triggerID": "ChargeAtkEnd"
                 }
-              ],
-              "animEventIDs": ["ChargeAtk_Route"]
+              ]
             }
           ],
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_ForlornVessel_Strong_Lance_ChargeAtk_Route",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_ForlornVessel_Strong_Lance_ChargeAtk_Route"
             }
           ],
           "onAttackLanded": [
             {
               "$type": "SetAnimatorTrigger",
+              "triggerID": "ChargeAtkEnd",
               "predicates": [
                 {
                   "$type": "ByEntityTypes",
@@ -382,25 +404,26 @@
                   "$type": "ByAttackTags",
                   "attackTags": ["Monster_ForlornVessel_Lance_ChargeAtk"]
                 }
-              ],
-              "triggerID": "ChargeAtkEnd"
+              ]
             }
           ]
         },
         "Lance_ChargeAtk_Effect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_ForlornVessel_Strong_Lance_ChargeAtk_Hand",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_ForlornVessel_Strong_Lance_ChargeAtk_Hand"
             }
           ]
         }
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Alert
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -414,26 +437,32 @@
       ],
       "modifiers": {
         "ForlornVessel_Strong_Lance_AlertHandler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "SetPoseBool",
-              "boolID": "Leisure"
+              "boolID": "Leisure",
+              "value": false
             },
             {
               "$type": "SetPoseBool",
-              "boolID": "Patrol"
+              "boolID": "Patrol",
+              "value": false
             },
             {
               "$type": "SetPoseBool",
-              "boolID": "Worship"
+              "boolID": "Worship",
+              "value": false
             }
           ]
         }
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Weapon Freeze/Petrifaction
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -452,41 +481,33 @@
       ],
       "modifiers": {
         "WeaponElementFreezeHandler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachModifier",
+              "modifierName": "WeaponElementFreeze",
               "otherTargets": {
                 "$type": "SelectTargetsByEquipParts",
                 "equipPartNames": ["equip01", "equip02"]
-              },
-              "modifierName": "WeaponElementFreeze"
+              }
             }
           ]
         },
         "WeaponElementPetrifactionHandler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachModifier",
+              "modifierName": "WeaponElementPetrifaction",
               "otherTargets": {
                 "$type": "SelectTargetsByEquipParts",
                 "equipPartNames": ["equip01", "equip02"]
-              },
-              "modifierName": "WeaponElementPetrifaction"
+              }
             }
           ]
         },
         "WeaponElementFreeze": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "ElementFreeze"
         },
         "WeaponElementPetrifaction": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "ElementPetrifaction"
         }
       }

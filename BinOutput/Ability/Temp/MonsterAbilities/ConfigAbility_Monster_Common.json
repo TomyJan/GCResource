@@ -1,4 +1,9 @@
 [
+  ////////////////////////////////////////////////////////////////
+  //
+  //  岩属性创生物创生时检测技能
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -6,15 +11,20 @@
       "onAdded": [
         {
           "$type": "AddGlobalValue",
-          "ratio": 1.0,
           "key": "_COMMON_GADGET_ISSUMMON",
+          "value": 1,
           "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
+          "maxValue": 1,
+          "minValue": 0
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  非岩属性创生物不被钟离吸能
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -22,303 +32,321 @@
       "onAdded": [
         {
           "$type": "AddGlobalValue",
-          "ratio": 1.0,
           "key": "_COMMON_GADGET_ISSUMMON_NOT_ROCK",
+          "value": 1,
           "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
+          "maxValue": 1,
+          "minValue": 0
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  ArmedWithEquip / dropEquip
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Common_ArmedWithEquip",
-      "modifiers": {
-        "DropAll": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onBeingHit": [
-            {
-              "$type": "TriggerDropEquipParts",
-              "predicates": [
-                {
-                  "$type": "ByHitImpulse",
-                  "hitImpulse": 1000.0
-                }
-              ],
-              "dropAll": true
-            }
-          ]
-        }
-      },
       "onAdded": [
         {
           "$type": "ApplyModifier",
-          "RotationDampTime": true,
-          "modifierName": "DropAll"
+          "modifierName": "DropAll",
+          "target": "Self",
+          "doOffStage": true
         }
-      ]
+      ],
+      "modifiers": {
+        "DropAll": {
+          "onBeingHit": [
+            {
+              "$type": "TriggerDropEquipParts",
+              "dropAll": true,
+              "predicates": [
+                {
+                  "$type": "ByHitImpulse",
+                  "hitImpulse": 1000
+                }
+              ]
+            }
+          ]
+        }
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Runback
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Common_Runback",
+      "onAbilityStart": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Runback_HealHP",
+          "target": "Caster"
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Runback_Invincible",
+          "target": "Caster"
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Runback_Denylockon",
+          "target": "Caster"
+        },
+        /*{
+				"$type": "AttachModifier",
+				"modifierName": "Runback_Ghosttoenemy",
+				"target": "Caster",
+			},*/
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Runback_Ghosttoallied",
+          "target": "Caster"
+        }
+      ],
       "modifiers": {
         "Runback_HealHP": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 2.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 2,
           "thinkInterval": 0.5,
           "onThinkInterval": [
             {
               "$type": "HealHP",
-              "amountByCasterMaxHPRatio": 0.3499999940395355
+              "amountByTargetMaxHPRatio": 0.35
             }
           ]
         },
         "Runback_Invincible": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "Invincible"
         },
         "Runback_Denylockon": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "DenyLockOn"
         },
+        /*"Runback_Ghosttoenemy":
+			{
+				"state" : "IsGhostToEnemy",
+			},*/
         "Runback_Ghosttoallied": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "IsGhostToAllied"
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "AttachModifier",
-          "target": "Caster",
-          "modifierName": "Runback_HealHP"
-        },
-        {
-          "$type": "AttachModifier",
-          "target": "Caster",
-          "modifierName": "Runback_Invincible"
-        },
-        {
-          "$type": "AttachModifier",
-          "target": "Caster",
-          "modifierName": "Runback_Denylockon"
-        },
-        {
-          "$type": "AttachModifier",
-          "target": "Caster",
-          "modifierName": "Runback_Ghosttoallied"
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  MuteTaunt
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Common_MuteTaunt",
-      "modifiers": {
-        "MuteTaunt": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "state": "MuteTaunt"
-        }
-      },
       "onAdded": [
         {
           "$type": "ApplyModifier",
-          "RotationDampTime": true,
-          "modifierName": "MuteTaunt"
+          "modifierName": "MuteTaunt",
+          "target": "Self",
+          "doOffStage": true
         }
-      ]
+      ],
+      "modifiers": {
+        "MuteTaunt": {
+          "state": "MuteTaunt"
+        }
+      }
     }
   },
+
+  ////////////////////////////////////////////////////////////////
+  //
+  //  ElementMuteHurt
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Common_FireMuteHurt",
-      "modifiers": {
-        "FireMuteHurt": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_FireMuteHurtDelta": 1.0
-          }
-        }
-      },
       "onAdded": [
         {
           "$type": "ApplyModifier",
-          "RotationDampTime": true,
-          "modifierName": "FireMuteHurt"
+          "modifierName": "FireMuteHurt",
+          "target": "Self",
+          "doOffStage": true
         }
-      ]
+      ],
+      "modifiers": {
+        "FireMuteHurt": {
+          "properties": {
+            "Actor_FireMuteHurtDelta": 1
+          }
+        }
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Common_ElecMuteHurt",
-      "modifiers": {
-        "ElecMuteHurt": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_ElecMuteHurtDelta": 1.0
-          }
-        }
-      },
       "onAdded": [
         {
           "$type": "ApplyModifier",
-          "RotationDampTime": true,
-          "modifierName": "ElecMuteHurt"
+          "modifierName": "ElecMuteHurt",
+          "target": "Self",
+          "doOffStage": true
         }
-      ]
+      ],
+      "modifiers": {
+        "ElecMuteHurt": {
+          "properties": {
+            "Actor_ElecMuteHurtDelta": 1
+          }
+        }
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Common_WaterMuteHurt",
-      "modifiers": {
-        "WaterMuteHurt": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_WaterMuteHurtDelta": 1.0
-          }
-        }
-      },
       "onAdded": [
         {
           "$type": "ApplyModifier",
-          "RotationDampTime": true,
-          "modifierName": "WaterMuteHurt"
+          "modifierName": "WaterMuteHurt",
+          "target": "Self",
+          "doOffStage": true
         }
-      ]
+      ],
+      "modifiers": {
+        "WaterMuteHurt": {
+          "properties": {
+            "Actor_WaterMuteHurtDelta": 1
+          }
+        }
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Common_GrassMuteHurt",
-      "modifiers": {
-        "GrassMuteHurt": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_GrassMuteHurtDelta": 1.0
-          }
-        }
-      },
       "onAdded": [
         {
           "$type": "ApplyModifier",
-          "RotationDampTime": true,
-          "modifierName": "GrassMuteHurt"
+          "modifierName": "GrassMuteHurt",
+          "target": "Self",
+          "doOffStage": true
         }
-      ]
+      ],
+      "modifiers": {
+        "GrassMuteHurt": {
+          "properties": {
+            "Actor_GrassMuteHurtDelta": 1
+          }
+        }
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Common_WindMuteHurt",
-      "modifiers": {
-        "WindMuteHurt": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_WindMuteHurtDelta": 1.0
-          }
-        }
-      },
       "onAdded": [
         {
           "$type": "ApplyModifier",
-          "RotationDampTime": true,
-          "modifierName": "WindMuteHurt"
+          "modifierName": "WindMuteHurt",
+          "target": "Self",
+          "doOffStage": true
         }
-      ]
+      ],
+      "modifiers": {
+        "WindMuteHurt": {
+          "properties": {
+            "Actor_WindMuteHurtDelta": 1
+          }
+        }
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Common_IceMuteHurt",
-      "modifiers": {
-        "IceMuteHurt": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_IceMuteHurtDelta": 1.0
-          }
-        }
-      },
       "onAdded": [
         {
           "$type": "ApplyModifier",
-          "RotationDampTime": true,
-          "modifierName": "IceMuteHurt"
+          "modifierName": "IceMuteHurt",
+          "target": "Self",
+          "doOffStage": true
         }
-      ]
+      ],
+      "modifiers": {
+        "IceMuteHurt": {
+          "properties": {
+            "Actor_IceMuteHurtDelta": 1
+          }
+        }
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Common_RockMuteHurt",
-      "modifiers": {
-        "RockMuteHurt": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_RockMuteHurtDelta": 1.0
-          }
-        }
-      },
       "onAdded": [
         {
           "$type": "ApplyModifier",
-          "RotationDampTime": true,
-          "modifierName": "RockMuteHurt"
+          "modifierName": "RockMuteHurt",
+          "target": "Self",
+          "doOffStage": true
         }
-      ]
+      ],
+      "modifiers": {
+        "RockMuteHurt": {
+          "properties": {
+            "Actor_RockMuteHurtDelta": 1
+          }
+        }
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Common_PhysicalMuteHurt",
-      "modifiers": {
-        "PhysicalMuteHurt": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_PhysicalMuteHurtDelta": 1.0
-          }
-        }
-      },
       "onAdded": [
         {
           "$type": "ApplyModifier",
-          "RotationDampTime": true,
-          "modifierName": "PhysicalMuteHurt"
+          "modifierName": "PhysicalMuteHurt",
+          "target": "Self",
+          "doOffStage": true
         }
-      ]
+      ],
+      "modifiers": {
+        "PhysicalMuteHurt": {
+          "properties": {
+            "Actor_PhysicalMuteHurtDelta": 1
+          }
+        }
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Animal Billboard Control
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Animal_Common_BillboardControl",
+      "isDynamicAbility": true,
       "abilityMixins": [
         {
           "$type": "AttachToAIAlertnessMixin",
@@ -328,8 +356,6 @@
       ],
       "modifiers": {
         "Animal_BillboardControl": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "HideUIBillBoard",
@@ -338,12 +364,12 @@
           ],
           "onRemoved": [
             {
-              "$type": "HideUIBillBoard"
+              "$type": "HideUIBillBoard",
+              "hide": false
             }
           ]
         }
-      },
-      "isDynamicAbility": true
+      }
     }
   }
 ]

@@ -1,4 +1,9 @@
 [
+  ////////////////////////////////////////////////////////////////
+  //
+  //  SetPose
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -32,15 +37,46 @@
       "onAbilityStart": [
         {
           "$type": "SetPoseInt",
-          "intID": "ActionState"
+          "intID": "ActionState",
+          "value": 0
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Reset CD
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Animal_Cat_AIStateInitial",
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_Invincible",
+          "target": "Self"
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "DenyLockOn",
+          "target": "Self"
+        },
+        {
+          "$type": "AttachAbilityStateResistance",
+          "resistanceListID": 11001
+        }
+      ],
+      "modifiers": {
+        "UNIQUE_Invincible": {
+          "isUnique": true,
+          "state": "Invincible"
+        },
+        "DenyLockOn": {
+          "state": "DenyLockOn"
+        }
+      },
       "abilityMixins": [
         {
           "$type": "DoActionByPoseIDMixin",
@@ -102,36 +138,14 @@
             }
           ]
         }
-      ],
-      "modifiers": {
-        "UNIQUE_Invincible": {
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "state": "Invincible"
-        },
-        "DenyLockOn": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "state": "DenyLockOn"
-        }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Invincible"
-        },
-        {
-          "$type": "AttachModifier",
-          "modifierName": "DenyLockOn"
-        },
-        {
-          "$type": "AttachAbilityStateResistance",
-          "resistanceListID": 11001
-        }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  BeHit
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -153,22 +167,21 @@
           "enterActions": [
             {
               "$type": "ApplyModifier",
-              "modifierName": "FleeCountDown"
+              "modifierName": "FleeCountDown",
+              "target": "Self"
             }
           ]
         }
       ],
       "modifiers": {
         "BeHitCount": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onBeingHit": [
             {
               "$type": "SetAnimatorFloat",
               "floatID": "DodgeWeight",
               "useRandomValue": true,
-              "randomValueMin": 0.0,
-              "randomValueMax": 1.0
+              "randomValueMin": 0,
+              "randomValueMax": 1
             },
             {
               "$type": "Predicated",
@@ -189,57 +202,61 @@
                 {
                   "$type": "SetPoseBool",
                   "boolID": "FleeState",
-                  "ratio": true
+                  "value": true
                 },
                 {
                   "$type": "SetAnimatorBool",
                   "boolID": "FleeState",
-                  "ratio": true
+                  "value": true
                 }
               ]
             },
             {
               "$type": "SetPoseInt",
-              "intID": "ActionState"
+              "intID": "ActionState",
+              "value": 0
             }
           ]
         },
         "Disappear": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "StartDither",
-              "duration": 3.0
+              "duration": 3
             },
             {
               "$type": "KillSelf",
-              "duration": 2.0,
               "banDrop": true,
               "banExp": true,
-              "killSelfType": "Disappear"
+              "killSelfType": "Disappear",
+              "duration": 2
             }
           ]
         },
         "FleeCountDown": {
           "stacking": "Unique",
-          "modifierName": "",
-          "HCJLIGBLGJA": 30.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 30.0,
           "onRemoved": [
             {
               "$type": "SetPoseBool",
-              "boolID": "FleeState"
+              "boolID": "FleeState",
+              "value": false
             },
             {
               "$type": "SetAnimatorBool",
-              "boolID": "FleeState"
+              "boolID": "FleeState",
+              "value": false
             }
           ]
         }
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Cautious
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -258,58 +275,59 @@
       ],
       "modifiers": {
         "CautiousRunSpeedModifier": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorFloat",
               "floatID": "MoveSpeedRatio",
-              "ratio": 1.5
+              "value": 1.5
             },
             {
               "$type": "SetPoseBool",
               "boolID": "FleeState",
-              "ratio": true
+              "value": true
             },
             {
               "$type": "SetAnimatorBool",
               "boolID": "FleeState",
-              "ratio": true
+              "value": true
             },
             {
               "$type": "SetAnimatorBool",
               "boolID": "DisappearCautious",
-              "ratio": true
+              "value": true
             }
           ],
           "onRemoved": [
             {
               "$type": "SetAnimatorFloat",
               "floatID": "MoveSpeedRatio",
-              "ratio": 1.0
+              "value": 1.0
             }
           ]
         },
         "Disappear_Cautious": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "StartDither",
-              "duration": 5.0
+              "duration": 5
             },
             {
               "$type": "KillSelf",
-              "duration": 1.0,
               "banDrop": true,
               "banExp": true,
-              "killSelfType": "Disappear"
+              "killSelfType": "Disappear",
+              "duration": 1
             }
           ]
         }
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Surround
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -318,7 +336,7 @@
         {
           "$type": "SetPoseBool",
           "boolID": "Surround",
-          "ratio": true
+          "value": true
         }
       ]
     }
@@ -330,11 +348,17 @@
       "onAbilityStart": [
         {
           "$type": "SetPoseBool",
-          "boolID": "Surround"
+          "boolID": "Surround",
+          "value": false
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Special State Action Point Register & Release
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -348,21 +372,19 @@
       ],
       "modifiers": {
         "CatFeedPointRegister": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "RegisterAIActionPoint",
               "pointType": "CatFeedPoint"
             }
           ],
-          "onRemoved": [
+          "onKill": [
             {
               "$type": "ReleaseAIActionPoint",
               "pointType": "CatFeedPoint"
             }
           ],
-          "onKill": [
+          "onRemoved": [
             {
               "$type": "ReleaseAIActionPoint",
               "pointType": "CatFeedPoint"

@@ -1,4 +1,26 @@
 [
+  //************************************************************************************************//
+  ///  全局索引：
+  ///  Avatar_Shinobu_ExtraAttack                普攻、重击触发逻辑
+  ///  Avatar_Shinobu_NormalAttack_Handler       普攻隐身处理
+  ///  Avatar_Shinobu_ElementalArt_Init          元素战技施放时
+  ///  Avatar_Shinobu_ElementalArt               元素战技ability start
+  ///  SkillObj_Shinobu_ElementalArt_LifetimeHandler         元素战技雷环生命周期
+  ///  SkillObj_Shinobu_ElementalArt_FireTickEffect          播元素战技CJB特效【为了表现对上比伤害治疗事件早1-2帧】
+  ///  Avatar_Shinobu_ElementalArt_TickLogic     元素战技间隔伤害&治疗【久岐忍身上ability】
+  ///  Avatar_Shinobu_ElementalBurst             元素爆发镜头天气等
+  ///  Avatar_Shinobu_ElementalBurst_Init        元素爆发施放时逻辑
+  ///  Shinobu_ElementalBurst_Gadget             元素爆发gadget
+  ///  Avatar_Shinobu_FallingAnthem              下落攻击
+  ///  Avatar_Shinobu_PermanentSkill_WhenLowHp    突破天赋1  血量低于X%时治疗加成提升X%
+  ///  Avatar_Shinobu_Constellation6_Limbo        命之座6 护死，提升自身元素精通
+  //************************************************************************************************//
+
+  ////////////////////////////////////////////////////////////////
+  //
+  //  普攻&重击判断
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -7,8 +29,8 @@
         {
           "$type": "ButtonHoldChargeMixin",
           "skillID": 10651,
-          "chargeTime": 0.11999999731779099,
-          "secondChargeTime": 0.20000000298023224,
+          "chargeTime": 0.12,
+          "secondChargeTime": 0.2,
           "OnBeginUncharged": [
             {
               "$type": "SetAnimatorTrigger",
@@ -16,95 +38,91 @@
             },
             {
               "$type": "SetAnimatorInt",
+              "intID": "SkillID",
+              "value": 99,
               "predicates": [
                 {
                   "$type": "ByAny",
                   "predicates": [
                     {
                       "$type": "ByAnimatorInt",
-                      "logic": "Equal",
-                      "ratio": 0,
-                      "parameter": "ComboCount"
+                      "value": 0,
+                      "parameter": "ComboCount",
+                      "logic": "Equal"
                     },
                     {
                       "$type": "ByAnimatorInt",
-                      "logic": "Equal",
-                      "ratio": 4,
-                      "parameter": "ComboCount"
+                      "value": 4,
+                      "parameter": "ComboCount",
+                      "logic": "Equal"
                     }
                   ]
                 }
-              ],
-              "intID": "SkillID",
-              "ratio": 99.0
+              ]
             },
             {
               "$type": "SetAnimatorBool",
-              "boolID": "IsCharging"
+              "boolID": "IsCharging",
+              "value": false
             }
           ],
           "OnReleaseUncharged": [
             {
               "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "ratio": 1.0
+              "value": 1
             }
           ],
           "OnBeginCharged": [
             {
               "$type": "SetAnimatorBool",
               "boolID": "IsCharging",
-              "ratio": true
+              "value": true
             }
           ],
           "OnReleaseCharged": [
             {
               "$type": "SetAnimatorBool",
-              "boolID": "IsCharging"
+              "boolID": "IsCharging",
+              "value": false
             },
             {
               "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "ratio": 1.0
+              "value": 1
             }
           ],
           "OnBeginSecondCharged": [
             {
               "$type": "SetAnimatorTrigger",
+              "triggerID": "DoSkill",
               "predicates": [
                 {
                   "$type": "ByLocalAvatarStamina",
-                  "logic": "GreaterOrEqual",
-                  "stamina": [
-                    "ExtraAttack_Sword_Stamina_Cost",
-                    "Flexible_Stamina",
-                    "ADD"
-                  ]
+                  "stamina": "%ExtraAttack_Sword_Stamina_Cost+%Flexible_Stamina",
+                  "logic": "GreaterOrEqual"
                 }
-              ],
-              "triggerID": "DoSkill"
+              ]
             },
             {
               "$type": "SetAnimatorInt",
+              "intID": "SkillID",
+              "value": 6,
               "predicates": [
                 {
                   "$type": "ByLocalAvatarStamina",
-                  "logic": "GreaterOrEqual",
-                  "stamina": [
-                    "ExtraAttack_Sword_Stamina_Cost",
-                    "Flexible_Stamina",
-                    "ADD"
-                  ]
+                  "stamina": "%ExtraAttack_Sword_Stamina_Cost+%Flexible_Stamina",
+                  "logic": "GreaterOrEqual"
                 }
-              ],
-              "intID": "SkillID",
-              "ratio": 6.0
+              ]
             },
             {
               "$type": "SetAnimatorBool",
-              "boolID": "IsCharging"
+              "boolID": "IsCharging",
+              "value": false
             }
           ],
+          "OnReleaseSecondCharged": [],
           "chargeStateIDs": [
             "Attack01",
             "Attack02",
@@ -119,122 +137,130 @@
           "modifierName": "ExtraAttack_StaminaCost"
         }
       ],
-      "abilitySpecials": {
-        "ExtraAttack_Sword_Stamina_Cost": 0.0,
-        "Flexible_Stamina": -2.0
-      },
       "modifiers": {
         "ExtraAttack_StaminaCost": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AvatarSkillStart",
               "skillID": 10001,
-              "cdDelta": 1.0,
-              "costStaminaDelta": "ExtraAttack_Sword_Stamina_Cost"
+              "costStaminaRatio": "%ExtraAttack_Sword_Stamina_Cost"
             }
           ]
         }
+      },
+      "abilitySpecials": {
+        //故意少判了一点点体力，为了顾及一部分网络延迟
+        "ExtraAttack_Sword_Stamina_Cost": 0,
+        "Flexible_Stamina": -2
       }
     }
   },
+
+  ////////////////////////////////////////////////////////////////
+  //
+  //  普攻动作表现隐身
+  //
+  ///////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Shinobu_NormalAttack_Handler",
       "abilityMixins": [
+        //第三段武器隐藏
         {
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "Attack03",
-          "modifierName": "Avatar_Shinobu_NormalAttack_HideWeapon"
+          "modifierName": "Avatar_Shinobu_NormalAttack_HideWeapon",
+          "normalizeStart": 0.0,
+          "normalizeEnd": 1
         },
         {
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "Attack04",
           "modifierName": "Shinobu_Hide",
-          "normalizeEnd": 0.03400000184774399
+          "normalizeStart": 0,
+          "normalizeEnd": 0.034
         }
       ],
       "modifiers": {
         "Shinobu_Hide": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "TriggerSetVisible",
-              "RotationDampTime": true
+              "visible": false,
+              "doOffStage": true
             },
             {
               "$type": "TriggerSetPassThrough",
-              "RotationDampTime": true,
-              "passThrough": true
+              "passThrough": true,
+              "doOffStage": true
             },
             {
               "$type": "EnableHDMesh",
-              "CAHMNMGJBFO": "Default"
+              "enable": false,
+              "hdMeshKey": "Default"
             }
           ],
           "onRemoved": [
             {
               "$type": "TriggerSetVisible",
-              "RotationDampTime": true,
-              "visible": true
+              "visible": true,
+              "doOffStage": true
             },
             {
               "$type": "TriggerSetPassThrough",
-              "RotationDampTime": true,
+              "passThrough": false,
+              "doOffStage": true,
               "canBeHandledOnRecover": true
             },
             {
               "$type": "EnableHDMesh",
-              "canBeHandledOnRecover": true,
               "enable": true,
-              "CAHMNMGJBFO": "Default"
+              "hdMeshKey": "Default",
+              "canBeHandledOnRecover": true
             }
           ]
         },
         "Shinobu_Hide2": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "TriggerSetVisible",
-              "RotationDampTime": true
+              "visible": false,
+              "doOffStage": true
             },
             {
               "$type": "TriggerSetPassThrough",
-              "RotationDampTime": true,
-              "passThrough": true
+              "passThrough": true,
+              "doOffStage": true
             }
           ],
           "onRemoved": [
             {
               "$type": "TriggerSetVisible",
-              "RotationDampTime": true,
-              "visible": true
+              "visible": true,
+              "doOffStage": true
             },
             {
               "$type": "TriggerSetPassThrough",
-              "RotationDampTime": true,
+              "passThrough": false,
+              "doOffStage": true,
               "canBeHandledOnRecover": true
             }
           ]
         },
         "Avatar_Shinobu_NormalAttack_HideWeapon": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "TriggerHideWeapon",
-              "RotationDampTime": true,
+              "doOffStage": true,
+              "visible": false,
               "partNames": ["equip01", "equip02", "sheathPoint"]
             }
           ],
           "onRemoved": [
             {
               "$type": "TriggerHideWeapon",
-              "RotationDampTime": true,
+              "doOffStage": true,
               "visible": true,
               "partNames": ["equip01", "equip02", "sheathPoint"]
             }
@@ -243,30 +269,166 @@
       }
     }
   },
+
+  //元素战技施放时的处理
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Shinobu_ElementalArt_Init",
       "onAbilityStart": [
+        //如果重复释放的话先把gagdet清掉
         {
           "$type": "KillGadget",
-          "RotationDampTime": true,
           "gadgetInfo": {
-            "configID": 41065001
-          }
+            "$type": "SelectTargetsByChildren",
+            "configID": 41065001,
+            "sortType": "Default"
+          },
+          "doOffStage": true
         },
+        //产球效果modifier清理
         {
           "$type": "RemoveUniqueModifier",
-          "RotationDampTime": true,
-          "modifierName": "UNIQUE_Avatar_Shinobu_ElementalArt_ElemBall_Handler"
+          "modifierName": "UNIQUE_Avatar_Shinobu_ElementalArt_ElemBall_Handler",
+          "doOffStage": true
         }
       ]
     }
   },
+  //////////////////////////////////
+  //
+  //元素战技Trigger各种效果的时点
+  //
+  //////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Shinobu_ElementalArt",
+      "onAbilityStart": [
+        {
+          "$type": "AvatarSkillStart",
+          "skillID": 10652,
+          "cdRatio": 1
+        },
+        //放在同一个时间点内，扣血的时候就必能把gadget创建出来
+        {
+          "$type": "TriggerAttackEvent",
+          "doOffStage": true,
+          "targetType": "Enemy",
+          "attackEvent": {
+            "attackPattern": {
+              "$type": "ConfigAttackCircle",
+              "triggerType": "TriggerNoRepeat",
+              "height": 2,
+              "fanAngle": 360.0,
+              "detectDirection": "CenterToSide",
+              "radius": 4,
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "offset": {
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 0.0
+                }
+              }
+            },
+            "attackInfo": {
+              "attackTag": "Elemental_Art",
+              "canBeModifiedBy": "OriginOwner",
+              "attenuationTag": "Elemental_Art",
+              "attackProperty": {
+                //单次伤害跟攻击力有关
+                "damagePercentage": "%ElementalArt_OnceAttack_Damage",
+                "damageExtra": "%Shinobu_PermanentSkill_2_P2*%FIGHT_PROP_ELEMENT_MASTERY",
+                "strikeType": "Blunt",
+                "attackType": "Melee",
+                "elementType": "Electric",
+                "elementDurability": 25,
+                "enBreak": 30
+              },
+              "hitPattern": {
+                "onHitEffectName": "default",
+                "hitImpulseType": "LV4",
+                "retreatType": "ByHitDirection",
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.02,
+                "muteHitText": false
+              },
+              "forceCameraShake": false
+            }
+          }
+        },
+        //播扣血的特效
+        {
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Avatar_Girl_Sword_Shinobu_ElementalArt_LoseHp"
+        },
+        //扣除自身血量
+        {
+          "$type": "LoseHP",
+          "target": "Self",
+          "doOffStage": true,
+          "amountByTargetCurrentHPRatio": 0.3,
+          "lethal": false,
+          "limboByTargetMaxHPRatio": 0.2
+          // "predicates":
+          // [
+          // 	//血量过低的时候不扣血
+          // 	{
+          // 		"$type": "ByTargetHPRatio",
+          // 		"target": "Caster",
+          // 		"HPRatio": 0.2,
+          // 		"logic": "GreaterOrEqual",
+          // 	},
+          // ]
+        },
+        //创建雷环gadget
+        {
+          "$type": "CreateGadget",
+          "gadgetID": 41065001,
+          "doOffStage": true,
+          "campID": 1001,
+          "campTargetType": "Enemy",
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "offset": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
+          }
+        }
+      ],
+      "modifiers": {
+        // "Avatar_Shinobu_ElementalArt_Bullet_Kill":
+        // {
+        // 	"duration": 1,
+        // 	"onAdded":
+        // 	[
+        // 		{
+        // 			"$type": "KillSelf",
+        // 		}
+        // 	]
+        // },
+        "Shinobu_ElementalArt_WeaponFade": {
+          "onAdded": [
+            {
+              "$type": "TriggerHideWeapon",
+              "doOffStage": true,
+              "visible": false,
+              "partNames": ["equip01", "equip02", "sheathPoint"]
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "TriggerHideWeapon",
+              "doOffStage": true,
+              "visible": true,
+              "partNames": ["equip01", "equip02", "sheathPoint"]
+            }
+          ]
+        }
+      },
       "abilityMixins": [
         {
           "$type": "AttachToStateIDMixin",
@@ -275,143 +437,44 @@
         }
       ],
       "abilitySpecials": {
-        "ElementalArt_OnceAttack_Damage": 0.0,
-        "Shinobu_PermanentSkill_2_P2": 0.0
-      },
-      "modifiers": {
-        "Shinobu_ElementalArt_WeaponFade": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "TriggerHideWeapon",
-              "RotationDampTime": true,
-              "partNames": ["equip01", "equip02", "sheathPoint"]
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "TriggerHideWeapon",
-              "RotationDampTime": true,
-              "visible": true,
-              "partNames": ["equip01", "equip02", "sheathPoint"]
-            }
-          ]
-        }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "AvatarSkillStart",
-          "skillID": 10652,
-          "cdDelta": 1.0,
-          "costStaminaDelta": 1.0
-        },
-        {
-          "$type": "TriggerAttackEvent",
-          "RotationDampTime": true,
-          "attackEvent": {
-            "attackPattern": {
-              "$type": "ConfigAttackCircle",
-              "triggerType": "TriggerNoRepeat",
-              "born": {
-                "$type": "ConfigBornBySelf",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": -0.5,
-                  "PJCOKIGCJOK": 0.0
-                }
-              },
-              "height": 2.0,
-              "DCMPFCIBIPA": 4.0
-            },
-            "attackInfo": {
-              "attackTag": "Elemental_Art",
-              "attenuationTag": "Elemental_Art",
-              "attenuationGroup": "default",
-              "attackProperty": {
-                "HBIOLEEGHPD": "ElementalArt_OnceAttack_Damage",
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Electric",
-                "bonusCriticalHurt": 25.0,
-                "strikeType": "Blunt",
-                "attackType": "Melee",
-                "damageExtra": [
-                  "Shinobu_PermanentSkill_2_P2",
-                  "FIGHT_PROP_ELEMENT_MASTERY",
-                  "MUL"
-                ]
-              },
-              "hitPattern": {
-                "onHitEffectName": "default",
-                "hitImpulseType": "LV4",
-                "retreatType": "ByHitDirection",
-                "hitHaltTimeScale": 0.019999999552965164
-              },
-              "canBeModifiedBy": "OriginOwner"
-            }
-          },
-          "targetType": "Enemy"
-        },
-        {
-          "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Sword_Shinobu_ElementalArt_LoseHp",
-          "EBHJMLOKDGB": -1.0
-        },
-        {
-          "$type": "LoseHP",
-          "RotationDampTime": true,
-          "amountByTargetMaxHPRatio": 0.30000001192092896,
-          "amountByCasterAttackRatio": 0.20000000298023224,
-          "lethal": false
-        },
-        {
-          "$type": "CreateGadget",
-          "RotationDampTime": true,
-          "born": {
-            "$type": "ConfigBornBySelf",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            }
-          },
-          "gadgetID": 41065001,
-          "campID": 1001,
-          "campTargetType": "Enemy"
-        }
-      ]
+        "ElementalArt_OnceAttack_Damage": 0,
+        "Shinobu_PermanentSkill_2_P2": 0
+      }
     }
   },
+  //////////////////////////////////
+  //
+  //   元素战技雷环生命周期管理
+  //
+  //////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SkillObj_Shinobu_ElementalArt_LifetimeHandler",
-      "abilityMixins": [
+      "abilitySpecials": {
+        "Duration": 13,
+        "Duration_Add": 0
+      },
+      "onAdded": [
+        //重置特效状态机
         {
-          "$type": "DoActionByTeamStatusMixin",
-          "actions": [
-            {
-              "$type": "KillSelf",
-              "predicates": [
-                {
-                  "$type": "ByCurTeamHasFeatureTag",
-                  "featureTagID": 10065,
-                  "logic": "LesserOrEqual"
-                }
-              ]
-            }
-          ]
+          "$type": "ResetAnimatorTrigger",
+          "triggerID": "Die"
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Shinobu_ElementalArt_SpawnTimer"
+        },
+        //给小忍身上做个保护标记，用于解决在雷环快结束的时候再创建不会被kill掉
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Shinobu_ElementalArt_ProtectTimer",
+          "doOffStage": true
         }
       ],
-      "abilitySpecials": {
-        "Duration": 13.0,
-        "Duration_Add": 0.0
-      },
       "modifiers": {
         "Shinobu_ElementalArt_SpawnTimer": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.3499999940395355,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.35,
           "onRemoved": [
             {
               "$type": "ApplyModifier",
@@ -420,65 +483,31 @@
           ]
         },
         "Shinobu_ElementalArt_ProtectTimer": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.600000023841858,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1.6,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
+              "doOffStage": true,
               "target": "OriginOwner",
-              "RotationDampTime": true,
-              "ratio": 1.0,
               "key": "Shinobu_ElementalArt_IsProtect",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
+              "doOffStage": true,
               "target": "OriginOwner",
-              "RotationDampTime": true,
-              "ratio": 0.0,
               "key": "Shinobu_ElementalArt_IsProtect",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         },
         "UNIQUE_Shinobu_ElementalArt_LifeTimeHandler": {
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": ["Duration", "Duration_Add", "ADD"],
-          "bonusCriticalHurt": ["Duration", "Duration_Add", "ADD"],
-          "onAdded": [
-            {
-              "$type": "SetAnimatorTrigger",
-              "triggerID": "Appear"
-            },
-            {
-              "$type": "RemoveUniqueModifier",
-              "target": "Team",
-              "modifierName": "UNIQUE_Avatar_Shinobu_ElementalArt_Constellation_Attack_Handler"
-            },
-            {
-              "$type": "AttachModifier",
-              "target": "Team",
-              "predicates": [
-                {
-                  "$type": "ByUnlockTalentParam",
-                  "talentParam": "Shinobu_Constellation_4"
-                }
-              ],
-              "modifierName": "UNIQUE_Avatar_Shinobu_ElementalArt_Constellation_Attack_Handler"
-            },
-            {
-              "$type": "AttachModifier",
-              "target": "OriginOwner",
-              "RotationDampTime": true,
-              "modifierName": "UNIQUE_Avatar_Shinobu_ElementalArt_ElemBall_Handler"
-            }
-          ],
+          "duration": "%Duration+%Duration_Add",
+          "elementType": "None",
+          "elementDurability": "%Duration+%Duration_Add",
           "onRemoved": [
             {
               "$type": "SetAnimatorTrigger",
@@ -488,12 +517,40 @@
               "$type": "ApplyModifier",
               "modifierName": "Avatar_Shinobu_ElementalArt_Bullet_KillGadget"
             }
+          ],
+          "onAdded": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "Appear"
+            },
+            {
+              "$type": "RemoveUniqueModifier",
+              "modifierName": "UNIQUE_Avatar_Shinobu_ElementalArt_Constellation_Attack_Handler",
+              "target": "Team"
+            },
+            //命之座4协同前台攻击
+            {
+              "$type": "AttachModifier",
+              "modifierName": "UNIQUE_Avatar_Shinobu_ElementalArt_Constellation_Attack_Handler",
+              "target": "Team",
+              "predicates": [
+                {
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "Shinobu_Constellation_4"
+                }
+              ]
+            },
+            //通知小忍攻击产球
+            {
+              "$type": "AttachModifier",
+              "modifierName": "UNIQUE_Avatar_Shinobu_ElementalArt_ElemBall_Handler",
+              "target": "OriginOwner",
+              "doOffStage": true
+            }
           ]
         },
         "Avatar_Shinobu_ElementalArt_Bullet_KillGadget": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onRemoved": [
             {
               "$type": "KillSelf",
@@ -502,7 +559,7 @@
                   "$type": "ByTargetGlobalValue",
                   "target": "CasterOriginOwner",
                   "key": "Shinobu_ElementalArt_IsProtect",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
               ]
@@ -510,14 +567,13 @@
           ]
         },
         "UNIQUE_Avatar_Shinobu_ElementalArt_ElemBall_Handler": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          //攻击命中概率产球
           "onAttackLanded": [
             {
               "$type": "Predicated",
+              "doOffStage": true,
               "target": "Other",
-              "RotationDampTime": true,
               "targetPredicates": [
                 {
                   "$type": "ByAttackTags",
@@ -530,54 +586,51 @@
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
                   "$type": "ApplyModifier",
-                  "RotationDampTime": true,
-                  "modifierName": "Avatar_Shinobu_ElementalArt_ElemBall"
+                  "modifierName": "Avatar_Shinobu_ElementalArt_ElemBall",
+                  "target": "Self",
+                  "doOffStage": true
                 }
               ]
             }
           ]
         },
         "Avatar_Shinobu_ElementalArt_ElemBall": {
+          "duration": 0.2,
           "stacking": "Unique",
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "Randomed",
-              "RotationDampTime": true,
-              "chance": 0.44999998807907104,
+              "doOffStage": true,
+              "chance": 0.45,
               "successActions": [
                 {
                   "$type": "GenerateElemBall",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
                   "configID": 2020,
+                  "baseEnergy": 3,
+                  "ratio": 1,
                   "born": {
                     "$type": "ConfigBornBySelf",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     }
-                  },
-                  "IAAIJMOECLB": 1.0,
-                  "baseEnergy": 3.0
+                  }
                 }
               ]
             }
           ]
         },
         "UNIQUE_Avatar_Shinobu_ElementalArt_Constellation_Attack_Handler": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "CurLocalAvatarMixinV2",
@@ -586,8 +639,6 @@
           ]
         },
         "Avatar_Shinobu_Constellation_Attack_Detect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
@@ -600,20 +651,22 @@
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 },
+                //因为CD较长,跟数值确认记在小忍身上,重新创建gadget不会
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "CasterOriginOwner",
                   "key": "_ABILITY_Shinobu_Constellation_IsCD",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 },
                 {
                   "$type": "ByTargetPositionToSelfPosition",
-                  "logic": "LesserOrEqual",
-                  "ratio": 15.0
+                  "compareType": "XZ",
+                  "value": 15,
+                  "logic": "LesserOrEqual"
                 },
                 {
                   "$type": "ByAttackTags",
@@ -630,29 +683,34 @@
                 }
               ],
               "successActions": [
+                //苦无连携攻击
                 {
                   "$type": "SetGlobalPos",
                   "target": "SelfAttackTarget",
                   "key": "_ABILITY_Shinobu_Constellation_Pos",
                   "born": {
-                    "$type": "ConfigBornBySelectedPoint"
+                    "$type": "ConfigBornByTarget"
                   },
                   "setTarget": false
                 },
+                //把位置拷贝给小忍
                 {
                   "$type": "CopyGlobalValue",
+                  "srcTarget": "Caster",
                   "dstTarget": "CasterOriginOwner",
                   "srcKey": "_ABILITY_Shinobu_Constellation_Pos_0",
                   "dstKey": "_ABILITY_Shinobu_Constellation_Pos_0"
                 },
                 {
                   "$type": "CopyGlobalValue",
+                  "srcTarget": "Caster",
                   "dstTarget": "CasterOriginOwner",
                   "srcKey": "_ABILITY_Shinobu_Constellation_Pos_1",
                   "dstKey": "_ABILITY_Shinobu_Constellation_Pos_1"
                 },
                 {
                   "$type": "CopyGlobalValue",
+                  "srcTarget": "Caster",
                   "dstTarget": "CasterOriginOwner",
                   "srcKey": "_ABILITY_Shinobu_Constellation_Pos_2",
                   "dstKey": "_ABILITY_Shinobu_Constellation_Pos_2"
@@ -661,34 +719,44 @@
                   "$type": "DebugLog",
                   "content": "条件满足,触发命之座4效果"
                 },
+                //通过trigger小忍身上的ability来打连携的伤害
                 {
                   "$type": "TriggerAbility",
+                  "abilityName": "Avatar_Shinobu_Constellation_AddAttack",
                   "target": "CasterOriginOwner",
-                  "RotationDampTime": true,
-                  "abilityName": "Avatar_Shinobu_Constellation_AddAttack"
+                  "doOffStage": true
                 }
               ]
             }
           ]
         }
       },
-      "onAdded": [
+      "abilityMixins": [
+        //判断队里没有久岐忍时就干掉雷环
         {
-          "$type": "ResetAnimatorTrigger",
-          "triggerID": "Die"
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Shinobu_ElementalArt_SpawnTimer"
-        },
-        {
-          "$type": "AttachModifier",
-          "RotationDampTime": true,
-          "modifierName": "Shinobu_ElementalArt_ProtectTimer"
+          "$type": "DoActionByTeamStatusMixin",
+          "actions": [
+            {
+              "$type": "KillSelf",
+              "predicates": [
+                {
+                  "$type": "ByCurTeamHasFeatureTag",
+                  "featureTagID": 10065,
+                  "number": 0,
+                  "logic": "LesserOrEqual"
+                }
+              ]
+            }
+          ]
         }
       ]
     }
   },
+  //////////////////////////////////
+  //
+  //    播元素战技CJB特效【为了表现对上比伤害治疗事件早1-2帧】
+  //
+  /////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -696,119 +764,126 @@
       "onAbilityStart": [
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Shinobu_ElementalArt_Gadget_Attack",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_Shinobu_ElementalArt_Gadget_Attack"
         }
       ]
     }
   },
+  //////////////////////////////////
+  //
+  //    元素战技间隔伤害&治疗
+  //
+  /////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SkillObj_Shinobu_ElementalArt_TickLogic",
       "abilitySpecials": {
-        "Elemental_Art_TickDamage": 0.0,
-        "ElementalArt_Heal_MaxHP_Percentage": 0.0,
-        "ElementalArt_Heal_Amount": 0.0,
-        "Shinobu_PermanentSkill_2_P1": 0.0,
-        "Shinobu_PermanentSkill_2_P2": 0.0
+        "Elemental_Art_TickDamage": 0,
+        "ElementalArt_Heal_MaxHP_Percentage": 0,
+        "ElementalArt_Heal_Amount": 0,
+        "Shinobu_PermanentSkill_2_P1": 0,
+        "Shinobu_PermanentSkill_2_P2": 0
       },
+      "onAdded": [],
+      "modifiers": {},
+      //特效状态机驱动
       "onAbilityStart": [
+        //雷环是非快照，所以要去trigger角色身上的ability让角色打
         {
           "$type": "TriggerAbility",
           "target": "OriginOwner",
-          "RotationDampTime": true,
+          "doOffStage": true,
           "abilityName": "Avatar_Shinobu_ElementalArt_TickLogic"
         }
       ]
     }
   },
+
+  //////////////////////////////////
+  //
+  //    元素战技间隔伤害&治疗【久岐忍身上ability】
+  //
+  /////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Shinobu_ElementalArt_TickLogic",
       "abilitySpecials": {
-        "Elemental_Art_TickDamage": 0.0,
-        "ElementalArt_Heal_MaxHP_Percentage": 0.0,
-        "ElementalArt_Heal_Amount": 0.0,
-        "Shinobu_PermanentSkill_2_P1": 0.0,
-        "Shinobu_PermanentSkill_2_P2": 0.0
+        "Elemental_Art_TickDamage": 0,
+        "ElementalArt_Heal_MaxHP_Percentage": 0,
+        "ElementalArt_Heal_Amount": 0,
+        "Shinobu_PermanentSkill_2_P1": 0,
+        "Shinobu_PermanentSkill_2_P2": 0
       },
+      "onAdded": [],
       "modifiers": {
         "Avatar_Shinobu_ElementalArt_TickLogic_Effect": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.1,
           "onAdded": [
             {
               "$type": "TriggerAttackEvent",
+              "doOffStage": true,
               "target": "Caster",
-              "RotationDampTime": true,
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
+                  "fanAngle": 360.0,
+                  "radius": 4,
+                  "height": 2,
                   "born": {
                     "$type": "ConfigBornBySelf",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": -0.5,
-                      "PJCOKIGCJOK": 0.0
+                      "x": 0.0,
+                      "y": -0.5,
+                      "z": 0.0
                     }
-                  },
-                  "height": 2.0,
-                  "DCMPFCIBIPA": 4.0
+                  }
                 },
                 "attackInfo": {
+                  "canBeModifiedBy": "OriginOwner",
                   "attackTag": "Elemental_Art",
                   "attenuationTag": "Elemental_Art",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "HBIOLEEGHPD": "Elemental_Art_TickDamage",
-                    "CCNJGLPMIEP": 0.0,
+                    "damagePercentage": "%Elemental_Art_TickDamage",
+                    "damageExtra": "%Shinobu_PermanentSkill_2_P2*%FIGHT_PROP_ELEMENT_MASTERY",
                     "elementType": "Electric",
-                    "bonusCriticalHurt": 25.0,
                     "strikeType": "Default",
-                    "enBreak": 10.0,
-                    "damageExtra": [
-                      "Shinobu_PermanentSkill_2_P2",
-                      "FIGHT_PROP_ELEMENT_MASTERY",
-                      "MUL"
-                    ]
+                    "elementDurability": 25,
+                    "enBreak": 10
                   },
                   "hitPattern": {
                     "onHitEffectName": "default",
                     "hitImpulseType": "LV3",
-                    "hitHaltTimeScale": 0.009999999776482582
-                  },
-                  "canBeModifiedBy": "OriginOwner"
+                    "canBeDefenceHalt": false,
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.01,
+                    "muteHitText": false
+                  }
                 }
-              },
-              "targetType": "Enemy"
+              }
             },
+            //恢复范围内角色血量
             {
               "$type": "HealHP",
+              "doOffStage": true,
+              "amountByCasterMaxHPRatio": "%ElementalArt_Heal_MaxHP_Percentage",
+              "amount": "%ElementalArt_Heal_Amount+%Shinobu_PermanentSkill_2_P1*%FIGHT_PROP_ELEMENT_MASTERY",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR4",
+                "centerBasedOn": "Self",
                 "campTargetType": "All",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
-              "RotationDampTime": true,
               "predicates": [
                 {
                   "$type": "ByEntityTypes",
                   "entityTypes": ["Avatar"]
                 }
-              ],
-              "cdRatio": [
-                "ElementalArt_Heal_Amount",
-                "Shinobu_PermanentSkill_2_P1",
-                "FIGHT_PROP_ELEMENT_MASTERY",
-                "MUL",
-                "ADD"
-              ],
-              "ILOICKNNKKL": "ElementalArt_Heal_MaxHP_Percentage"
+              ]
             }
           ]
         }
@@ -816,162 +891,170 @@
       "onAbilityStart": [
         {
           "$type": "ApplyModifier",
+          "modifierName": "Avatar_Shinobu_ElementalArt_TickLogic_Effect",
           "target": "CurLocalAvatar",
-          "RotationDampTime": true,
-          "modifierName": "Avatar_Shinobu_ElementalArt_TickLogic_Effect"
+          "doOffStage": true
         }
       ]
     }
   },
+  //////////////////////////////////
+  //
+  //    命之座4小忍身上ability
+  //
+  /////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Shinobu_Constellation_AddAttack",
-      "abilitySpecials": {
-        "Shinobu_Constellation_4_Dmg_P1": 0.0,
-        "Shinobu_Constellation_4_CD_P2": 0.0
-      },
+      "onAbilityStart": [
+        //让小忍去打苦无伤害，同步非快照机制
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Avatar_Shinobu_Constellation_AddAttack_Effect",
+          "doOffStage": true
+        },
+        //让小忍进入CD
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_Avatar_Shinobu_Constellation_AddAttack_IntoCD",
+          "doOffStage": true
+        }
+      ],
       "modifiers": {
         "UNIQUE_Avatar_Shinobu_Constellation_AddAttack_IntoCD": {
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "Shinobu_Constellation_4_CD_P2",
-          "bonusCriticalHurt": 100.0,
+          "duration": "%Shinobu_Constellation_4_CD_P2",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 1.0,
-              "key": "_ABILITY_Shinobu_Constellation_IsCD",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "key": "_ABILITY_Shinobu_Constellation_IsCD", //这个GV记录在小忍上
+              "value": 1,
+              "target": "Self",
+              "doOffStage": true
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
               "key": "_ABILITY_Shinobu_Constellation_IsCD",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0,
+              "target": "Self",
+              "doOffStage": true
             }
           ]
         },
         "Avatar_Shinobu_Constellation_AddAttack_Effect": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.2,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "RotationDampTime": true,
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Sword_Shinobu_ElementalArt_Constellation",
+              "effectPattern": "Eff_Avatar_Girl_Sword_Shinobu_ElementalArt_Constellation",
+              "doOffStage": true,
               "born": {
                 "$type": "ConfigBornByGlobalValue",
-                "positionKey": "_ABILITY_Shinobu_Constellation_Pos",
-                "directionKey": ""
-              },
-              "EBHJMLOKDGB": -1.0
+                "positionKey": "_ABILITY_Shinobu_Constellation_Pos"
+              }
             },
             {
               "$type": "TriggerAttackEvent",
-              "RotationDampTime": true,
+              "doOffStage": true,
+              "target": "Self",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
+                  "radius": 2,
                   "ignoreMassive": true,
                   "born": {
                     "$type": "ConfigBornByGlobalValue",
-                    "positionKey": "_ABILITY_Shinobu_Constellation_Pos",
-                    "directionKey": ""
-                  },
-                  "DCMPFCIBIPA": 2.0
+                    "positionKey": "_ABILITY_Shinobu_Constellation_Pos"
+                  }
                 },
                 "attackInfo": {
+                  "canBeModifiedBy": "OriginOwner",
                   "attackTag": "Elemental_Art",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Electric",
-                    "bonusCriticalHurt": 25.0,
+                    "damageExtra": "%Shinobu_Constellation_4_Dmg_P1*%FIGHT_PROP_MAX_HP",
                     "strikeType": "Default",
-                    "enBreak": 20.0,
-                    "damageExtra": [
-                      "Shinobu_Constellation_4_Dmg_P1",
-                      "FIGHT_PROP_MAX_HP",
-                      "MUL"
-                    ]
+                    "elementType": "Electric",
+                    "elementDurability": 25,
+                    "enBreak": 20
                   },
                   "hitPattern": {
-                    "onHitEffectName": "default",
                     "hitImpulseType": "LV2",
-                    "hitHaltTimeScale": 0.05000000074505806
+                    "reboundRatio": 0,
+                    "canBeDefenceHalt": false,
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
+                    "muteHitText": false
                   },
-                  "canBeModifiedBy": "OriginOwner"
+                  "forceCameraShake": false
                 }
-              },
-              "targetType": "Enemy"
+              }
             }
           ]
         }
       },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "RotationDampTime": true,
-          "modifierName": "Avatar_Shinobu_Constellation_AddAttack_Effect"
-        },
-        {
-          "$type": "ApplyModifier",
-          "RotationDampTime": true,
-          "modifierName": "UNIQUE_Avatar_Shinobu_Constellation_AddAttack_IntoCD"
-        }
-      ]
+      "abilitySpecials": {
+        "Shinobu_Constellation_4_Dmg_P1": 0,
+        "Shinobu_Constellation_4_CD_P2": 0
+      }
     }
   },
+  /////////////////////////////////////////////////////////////
+  //
+  //Shinobu_Onkill_KillArtGadget 因为雷环是非快照，所以小忍死了后要连坐
+  //
+  /////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Shinobu_Onkill_KillArtGadget",
-      "modifiers": {
-        "Shinobu_Onkill_KillArtGadget": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "KillSelf",
-              "RotationDampTime": true
-            }
-          ]
-        }
-      },
       "onKill": [
         {
           "$type": "ApplyModifier",
+          "modifierName": "Shinobu_Onkill_KillArtGadget",
+          "doOffStage": true,
           "otherTargets": {
             "$type": "SelectTargetsByChildren",
-            "configID": 41065001
-          },
-          "RotationDampTime": true,
-          "modifierName": "Shinobu_Onkill_KillArtGadget"
+            "configID": 41065001,
+            "sortType": "Default"
+          }
         }
-      ]
+      ],
+      "onAdded": [],
+      "modifiers": {
+        "Shinobu_Onkill_KillArtGadget": {
+          "duration": 1,
+          "onAdded": [
+            {
+              "$type": "KillSelf",
+              "doOffStage": true
+            }
+          ]
+        }
+      }
     }
   },
+  /////////////////////////////////
+  //
+  //    元素爆发
+  //
+  //////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Shinobu_ElementalBurst",
       "abilityMixins": [
+        //先进CD
         {
           "$type": "AttachToStateIDMixin",
           "stateIDs": ["ElementalBurst"],
           "modifierName": "ElementalBurst_SkillStart"
         },
+        //加无敌
         {
           "$type": "AttachToStateIDMixin",
           "stateIDs": ["ElementalBurst"],
@@ -981,159 +1064,77 @@
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "ElementalBurst_AS",
           "modifierName": "Shinobu_ElementalBurst_Invincible02",
-          "normalizeEnd": 0.05700000002980232
+          "target": "Self",
+          "normalizeStart": 0,
+          "normalizeEnd": 0.057
         },
+        //天气
         {
           "$type": "AttachToStateIDMixin",
           "stateIDs": ["ElementalBurst"],
           "modifierName": "Shinobu_ElementalBurst_Weather"
         },
+
+        //镜头控制
         {
           "$type": "AttachToStateIDMixin",
           "stateIDs": ["ElementalBurst"],
           "modifierName": "Shinobu_ElementalBurst_Camera_Handler"
         },
+        //武器隐藏
         {
           "$type": "AttachToStateIDMixin",
           "stateIDs": ["ElementalBurst", "ElementalBurst_AS"],
           "modifierName": "Shinobu_ElementalBurst_HideWeapon"
         }
+
+        // //武器隐藏2
+        // {
+        // 	"$type": "AttachToNormalizedTimeMixin",
+        // 	"stateID": "ElementalBurst_AS",
+        // 	"modifierName": "Shinobu_ElementalBurst_HideWeapon2",
+        // 	"normalizeStart":0.0,
+        // 	"normalizeEnd":1,
+        // },
       ],
-      "modifiers": {
-        "ElementalBurst_SkillStart": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
-        "Shinobu_ElementalBurst_Invincible": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "state": "Invincible",
-          "onAdded": [
-            {
-              "$type": "AttachAbilityStateResistance",
-              "resistanceListID": 11002
-            }
-          ]
-        },
-        "Shinobu_ElementalBurst_Invincible02": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "state": "Invincible",
-          "onAdded": [
-            {
-              "$type": "AttachAbilityStateResistance",
-              "resistanceListID": 11002
-            }
-          ]
-        },
-        "Shinobu_ElementalBurst_Weather": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "modifierMixins": [
-            {
-              "$type": "TriggerWeatherMixin",
-              "type": "Skill",
-              "weatherPattern": "Weather_Sara_ElementBurst",
-              "duration": 2.0
-            }
-          ]
-        },
-        "Shinobu_ElementalBurst_Camera_Handler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onRemoved": [
-            {
-              "$type": "AvatarExitCameraShot",
-              "RotationDampTime": true
-            },
-            {
-              "$type": "AvatarCameraParam",
-              "RotationDampTime": true,
-              "cameraParam": {
-                "forceRadius": 6.0,
-                "forceRadiusDuration": 0.0,
-                "shouldKeepForceRadius": true
-              }
-            }
-          ],
-          "NPHODJLPMAJ": [
-            {
-              "$type": "AvatarCameraParam",
-              "RotationDampTime": true,
-              "cameraParam": {
-                "forceRadius": 6.0,
-                "forceRadiusDuration": 0.0,
-                "shouldKeepForceRadius": true
-              }
-            },
-            {
-              "$type": "AvatarExitCameraShot",
-              "RotationDampTime": true
-            }
-          ]
-        },
-        "Shinobu_ElementalBurst_HideWeapon": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "TriggerHideWeapon",
-              "RotationDampTime": true,
-              "partNames": ["equip01", "equip02", "sheathPoint"]
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "TriggerHideWeapon",
-              "RotationDampTime": true,
-              "visible": true,
-              "partNames": ["equip01", "equip02", "sheathPoint"]
-            }
-          ]
-        },
-        "Shinobu_ElementalBurst_HideWeapon2": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "TriggerHideWeapon",
-              "partNames": ["equip01", "equip02", "sheathPoint"]
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "TriggerHideWeapon",
-              "visible": true,
-              "partNames": ["equip01", "equip02", "sheathPoint"]
-            }
-          ]
-        }
-      },
       "onAbilityStart": [
         {
+          //屏幕模糊
           "$type": "ActCameraRadialBlur",
           "cameraRadialBlur": {
-            "power": 1.0,
-            "blurTime": 0.4000000059604645,
-            "fadeTime": 0.20000000298023224
+            "power": 1,
+            "blurTime": 0.4,
+            "fadeTime": 0.2
           }
         },
+        // 在怪脚下生成法阵
         {
           "$type": "SetGlobalPos",
+          "key": "ArrowRainAlertPos",
           "target": "SelfAttackTarget",
+          "setTarget": false,
+          "born": {
+            "$type": "ConfigBornByTarget"
+          },
           "predicates": [
             {
               "$type": "ByHasAttackTarget"
             }
-          ],
-          "key": "ArrowRainAlertPos",
-          "born": {
-            "$type": "ConfigBornByTarget"
-          },
-          "setTarget": false
+          ]
         },
+        //如果没怪的时候，根据命座调整默认生成的位置
         {
           "$type": "SetGlobalPos",
+          "key": "ArrowRainAlertPos",
+          "setTarget": false,
+          "born": {
+            "$type": "ConfigBornByTarget",
+            "offset": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 5.5
+            }
+          },
           "predicates": [
             {
               "$type": "ByNot",
@@ -1152,20 +1153,21 @@
                 }
               ]
             }
-          ],
+          ]
+        },
+        //有命1，生成的更远一点
+        {
+          "$type": "SetGlobalPos",
           "key": "ArrowRainAlertPos",
+          "setTarget": false,
           "born": {
             "$type": "ConfigBornByTarget",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 5.5
+              "x": 0.0,
+              "y": 0.0,
+              "z": 7.5
             }
           },
-          "setTarget": false
-        },
-        {
-          "$type": "SetGlobalPos",
           "predicates": [
             {
               "$type": "ByNot",
@@ -1179,34 +1181,134 @@
               "$type": "ByUnlockTalentParam",
               "talentParam": "Shinobu_Constellation_1"
             }
-          ],
-          "key": "ArrowRainAlertPos",
-          "born": {
-            "$type": "ConfigBornByTarget",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 7.5
-            }
-          },
-          "setTarget": false
+          ]
         },
         {
           "$type": "CreateGadget",
-          "RotationDampTime": true,
+          "gadgetID": 41065002,
+          "doOffStage": true,
+          "campID": 1001,
+          "campTargetType": "Enemy",
           "born": {
             "$type": "ConfigBornByGlobalValue",
-            "onGround": true,
             "positionKey": "ArrowRainAlertPos",
-            "directionKey": ""
-          },
-          "gadgetID": 41065002,
-          "campID": 1001,
-          "campTargetType": "Enemy"
+            "onGround": true, //贴地创建
+            "alongGround": false //在BornDirection计算完毕后将方向调整至与地面平行
+          }
         }
-      ]
+      ],
+      "modifiers": {
+        "ElementalBurst_SkillStart": {
+          "onAdded": []
+        },
+        "Shinobu_ElementalBurst_Invincible": {
+          "state": "Invincible",
+          "onAdded": [
+            {
+              //添加状态抵抗
+              "$type": "AttachAbilityStateResistance",
+              "resistanceListID": 11002
+            }
+          ]
+        },
+        "Shinobu_ElementalBurst_Invincible02": {
+          "state": "Invincible",
+          "onAdded": [
+            {
+              //添加状态抵抗
+              "$type": "AttachAbilityStateResistance",
+              "resistanceListID": 11002
+            }
+          ]
+        },
+        "Shinobu_ElementalBurst_Weather": {
+          "modifierMixins": [
+            {
+              "$type": "TriggerWeatherMixin",
+              "weatherPattern": "Weather_Sara_ElementBurst",
+              "type": "Skill",
+              "transDuration": 0.5,
+              "duration": 2
+            }
+          ]
+        },
+        //大招镜头
+        "Shinobu_ElementalBurst_Camera_Handler": {
+          "onRemoved": [
+            {
+              "$type": "AvatarExitCameraShot",
+              "doOffStage": true
+            },
+            {
+              "doOffStage": true,
+              "$type": "AvatarCameraParam",
+              "lockParam": false,
+              "cameraParam": {
+                "forceRadius": 6.0,
+                "forceRadiusDuration": 0,
+                "shouldKeepForceRadius": true
+              }
+            }
+          ],
+          "onAvatarOut": [
+            {
+              "$type": "AvatarCameraParam",
+              "doOffStage": true,
+              "cameraParam": {
+                "forceRadius": 6,
+                "forceRadiusDuration": 0,
+                "shouldKeepForceRadius": true
+              }
+            },
+            {
+              "$type": "AvatarExitCameraShot",
+              "doOffStage": true
+            }
+          ]
+        },
+        "Shinobu_ElementalBurst_HideWeapon": {
+          "onAdded": [
+            {
+              "$type": "TriggerHideWeapon",
+              "doOffStage": true,
+              "visible": false,
+              "partNames": ["equip01", "equip02", "sheathPoint"]
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "TriggerHideWeapon",
+              "visible": true,
+              "doOffStage": true,
+              "partNames": ["equip01", "equip02", "sheathPoint"]
+            }
+          ]
+        },
+        "Shinobu_ElementalBurst_HideWeapon2": {
+          "onAdded": [
+            {
+              "$type": "TriggerHideWeapon",
+              "visible": false,
+              "partNames": ["equip01", "equip02", "sheathPoint"]
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "TriggerHideWeapon",
+              "visible": true,
+              "partNames": ["equip01", "equip02", "sheathPoint"]
+            }
+          ]
+        }
+      }
     }
   },
+
+  /////////////////////////////////////////
+  //
+  //   元素爆发释放时处理的逻辑
+  //
+  /////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1218,52 +1320,26 @@
           "modifierName": "UNIQUE_Avatar_Shinobu_ElementalBurst_Weapon_Remove"
         }
       ],
-      "modifiers": {
-        "UNIQUE_Avatar_Shinobu_ElementalBurst_Weapon_Appear": {
-          "modifierName": "",
-          "isUnique": true,
-          "HCJLIGBLGJA": 4.5,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Sword_Shinobu_ElementalBurst_Start_Weapon",
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        },
-        "UNIQUE_Avatar_Shinobu_ElementalBurst_Weapon_Remove": {
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "onRemoved": [
-            {
-              "$type": "RemoveUniqueModifier",
-              "RotationDampTime": true,
-              "modifierName": "UNIQUE_Avatar_Shinobu_ElementalBurst_Weapon_Appear"
-            }
-          ]
-        }
-      },
       "onAbilityStart": [
         {
           "$type": "RemoveUniqueModifier",
-          "RotationDampTime": true,
-          "modifierName": "UNIQUE_Avatar_Shinobu_ElementalBurst_Weapon_Appear"
+          "modifierName": "UNIQUE_Avatar_Shinobu_ElementalBurst_Weapon_Appear",
+          "doOffStage": true
         },
         {
           "$type": "AvatarSkillStart",
-          "skillID": 10655,
-          "cdDelta": 1.0,
-          "costStaminaDelta": 1.0
+          "skillID": 10655
         },
+        //依据施放时的血量百分比，先把gv置上
         {
           "$type": "Predicated",
+          "target": "Self",
           "targetPredicates": [
             {
               "$type": "ByTargetHPRatio",
               "target": "Self",
-              "HPRatio": 0.5
+              "HPRatio": 0.5,
+              "logic": "Greater"
             }
           ],
           "successActions": [
@@ -1273,11 +1349,10 @@
             },
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
               "key": "_ABILITY_Shinobu_ElementalBurst_HpIsLow",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "target": "Self",
+              "value": 0,
+              "doOffStage": true
             }
           ],
           "failActions": [
@@ -1287,446 +1362,56 @@
             },
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 1.0,
               "key": "_ABILITY_Shinobu_ElementalBurst_HpIsLow",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "target": "Self",
+              "value": 1,
+              "doOffStage": true
             }
           ]
         },
+        //特效武器，特殊处理
         {
           "$type": "ApplyModifier",
           "modifierName": "UNIQUE_Avatar_Shinobu_ElementalBurst_Weapon_Appear"
         }
-      ]
-    }
-  },
-  {
-    "Default": {
-      "$type": "ConfigAbility",
-      "abilityName": "Shinobu_ElementalBurst_Gadget",
-      "abilitySpecials": {
-        "ElementalBurst_Damage_Percentage": 0.0
-      },
+      ],
       "modifiers": {
-        "Shinobu_ElementalBurst_SowrdRainLoop_LowHp_NotUnLock_Constellation_1": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 3.5999999046325684,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.30000001192092896,
+        "UNIQUE_Avatar_Shinobu_ElementalBurst_Weapon_Appear": {
+          "isUnique": true,
+          "duration": 4.5,
           "onAdded": [
             {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Sword_Shinobu_ElementalBurst_ArrowRain_LowHp_R40",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "TriggerAttackEvent",
-              "target": "Caster",
-              "attackEvent": {
-                "attackPattern": {
-                  "$type": "ConfigAttackCircle",
-                  "triggerType": "TriggerNoRepeat",
-                  "born": {
-                    "$type": "ConfigBornBySelf",
-                    "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": -0.5,
-                      "PJCOKIGCJOK": 0.0
-                    }
-                  },
-                  "height": 4.5,
-                  "DCMPFCIBIPA": 4.0
-                },
-                "attackInfo": {
-                  "attackTag": "Elemental_Burst",
-                  "attenuationTag": "Elemental_Burst",
-                  "attenuationGroup": "default",
-                  "attackProperty": {
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Electric",
-                    "bonusCriticalHurt": 25.0,
-                    "strikeType": "Default",
-                    "enBreak": 20.0,
-                    "damageExtra": [
-                      "FIGHT_PROP_MAX_HP",
-                      "ElementalBurst_Damage_Percentage",
-                      "MUL"
-                    ]
-                  },
-                  "hitPattern": {
-                    "onHitEffectName": "default",
-                    "hitImpulseType": "LV2",
-                    "hitHaltTimeScale": 0.05000000074505806
-                  },
-                  "canBeModifiedBy": "OriginOwner"
-                }
-              },
-              "targetType": "Enemy"
-            }
-          ],
-          "onThinkInterval": [
-            {
-              "$type": "TriggerAttackEvent",
-              "target": "Caster",
-              "attackEvent": {
-                "attackPattern": {
-                  "$type": "ConfigAttackCircle",
-                  "triggerType": "TriggerNoRepeat",
-                  "born": {
-                    "$type": "ConfigBornBySelf",
-                    "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": -0.5,
-                      "PJCOKIGCJOK": 0.0
-                    }
-                  },
-                  "height": 4.5,
-                  "DCMPFCIBIPA": 4.0
-                },
-                "attackInfo": {
-                  "attackTag": "Elemental_Burst",
-                  "attenuationTag": "Elemental_Burst",
-                  "attenuationGroup": "default",
-                  "attackProperty": {
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Electric",
-                    "bonusCriticalHurt": 25.0,
-                    "strikeType": "Default",
-                    "enBreak": 20.0,
-                    "damageExtra": [
-                      "FIGHT_PROP_MAX_HP",
-                      "ElementalBurst_Damage_Percentage",
-                      "MUL"
-                    ]
-                  },
-                  "hitPattern": {
-                    "onHitEffectName": "default",
-                    "hitImpulseType": "LV1",
-                    "hitHaltTimeScale": 0.05000000074505806
-                  },
-                  "canBeModifiedBy": "OriginOwner"
-                }
-              },
-              "targetType": "Enemy"
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Girl_Sword_Shinobu_ElementalBurst_Start_Weapon"
             }
           ]
         },
-        "Shinobu_ElementalBurst_SowrdRainLoop_HighHp_NotUnLock_Constellation_1": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 2.0,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.30000001192092896,
-          "onAdded": [
+        "UNIQUE_Avatar_Shinobu_ElementalBurst_Weapon_Remove": {
+          "isUnique": true,
+          "onRemoved": [
             {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Sword_Shinobu_ElementalBurst_ArrowRain_HighHp_R40",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "TriggerAttackEvent",
-              "target": "Caster",
-              "attackEvent": {
-                "attackPattern": {
-                  "$type": "ConfigAttackCircle",
-                  "triggerType": "TriggerNoRepeat",
-                  "born": {
-                    "$type": "ConfigBornBySelf",
-                    "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": -0.5,
-                      "PJCOKIGCJOK": 0.0
-                    }
-                  },
-                  "height": 4.5,
-                  "DCMPFCIBIPA": 4.0
-                },
-                "attackInfo": {
-                  "attackTag": "Elemental_Burst",
-                  "attenuationTag": "Elemental_Burst",
-                  "attenuationGroup": "default",
-                  "attackProperty": {
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Electric",
-                    "bonusCriticalHurt": 25.0,
-                    "strikeType": "Default",
-                    "enBreak": 20.0,
-                    "damageExtra": [
-                      "FIGHT_PROP_MAX_HP",
-                      "ElementalBurst_Damage_Percentage",
-                      "MUL"
-                    ]
-                  },
-                  "hitPattern": {
-                    "onHitEffectName": "default",
-                    "MOELECJEOEI": 0.0,
-                    "hitImpulseType": "LV2",
-                    "retreatType": "ByHitDirection",
-                    "hitHaltTimeScale": 0.05000000074505806
-                  },
-                  "canBeModifiedBy": "OriginOwner"
-                }
-              },
-              "targetType": "Enemy"
-            }
-          ],
-          "onThinkInterval": [
-            {
-              "$type": "TriggerAttackEvent",
-              "target": "Caster",
-              "attackEvent": {
-                "attackPattern": {
-                  "$type": "ConfigAttackCircle",
-                  "triggerType": "TriggerNoRepeat",
-                  "born": {
-                    "$type": "ConfigBornBySelf",
-                    "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": -0.5,
-                      "PJCOKIGCJOK": 0.0
-                    }
-                  },
-                  "height": 4.5,
-                  "DCMPFCIBIPA": 4.0
-                },
-                "attackInfo": {
-                  "attackTag": "Elemental_Burst",
-                  "attenuationTag": "Elemental_Burst",
-                  "attenuationGroup": "default",
-                  "attackProperty": {
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Electric",
-                    "bonusCriticalHurt": 25.0,
-                    "strikeType": "Default",
-                    "enBreak": 20.0,
-                    "damageExtra": [
-                      "FIGHT_PROP_MAX_HP",
-                      "ElementalBurst_Damage_Percentage",
-                      "MUL"
-                    ]
-                  },
-                  "hitPattern": {
-                    "onHitEffectName": "default",
-                    "hitImpulseType": "LV1",
-                    "retreatType": "ByHitDirection",
-                    "hitHaltTimeScale": 0.05000000074505806
-                  },
-                  "canBeModifiedBy": "OriginOwner"
-                }
-              },
-              "targetType": "Enemy"
-            }
-          ]
-        },
-        "Shinobu_ElementalBurst_SowrdRainLoop_LowHp_UnLock_Constellation_1": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 3.5999999046325684,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.30000001192092896,
-          "onAdded": [
-            {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Sword_Shinobu_ElementalBurst_ArrowRain_LowHp",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "TriggerAttackEvent",
-              "target": "Caster",
-              "attackEvent": {
-                "attackPattern": {
-                  "$type": "ConfigAttackCircle",
-                  "triggerType": "TriggerNoRepeat",
-                  "born": {
-                    "$type": "ConfigBornBySelf",
-                    "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": -0.5,
-                      "PJCOKIGCJOK": 0.0
-                    }
-                  },
-                  "height": 4.5,
-                  "DCMPFCIBIPA": 6.0
-                },
-                "attackInfo": {
-                  "attackTag": "Elemental_Burst",
-                  "attenuationTag": "Elemental_Burst",
-                  "attenuationGroup": "default",
-                  "attackProperty": {
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Electric",
-                    "bonusCriticalHurt": 25.0,
-                    "strikeType": "Default",
-                    "enBreak": 20.0,
-                    "damageExtra": [
-                      "FIGHT_PROP_MAX_HP",
-                      "ElementalBurst_Damage_Percentage",
-                      "MUL"
-                    ]
-                  },
-                  "hitPattern": {
-                    "onHitEffectName": "default",
-                    "hitImpulseType": "LV2",
-                    "hitHaltTimeScale": 0.05000000074505806
-                  },
-                  "canBeModifiedBy": "OriginOwner"
-                }
-              },
-              "targetType": "Enemy"
-            }
-          ],
-          "onThinkInterval": [
-            {
-              "$type": "TriggerAttackEvent",
-              "target": "Caster",
-              "attackEvent": {
-                "attackPattern": {
-                  "$type": "ConfigAttackCircle",
-                  "triggerType": "TriggerNoRepeat",
-                  "born": {
-                    "$type": "ConfigBornBySelf",
-                    "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": -0.5,
-                      "PJCOKIGCJOK": 0.0
-                    }
-                  },
-                  "height": 4.5,
-                  "DCMPFCIBIPA": 6.0
-                },
-                "attackInfo": {
-                  "attackTag": "Elemental_Burst",
-                  "attenuationTag": "Elemental_Burst",
-                  "attenuationGroup": "default",
-                  "attackProperty": {
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Electric",
-                    "bonusCriticalHurt": 25.0,
-                    "strikeType": "Default",
-                    "enBreak": 20.0,
-                    "damageExtra": [
-                      "FIGHT_PROP_MAX_HP",
-                      "ElementalBurst_Damage_Percentage",
-                      "MUL"
-                    ]
-                  },
-                  "hitPattern": {
-                    "onHitEffectName": "default",
-                    "hitImpulseType": "LV1",
-                    "hitHaltTimeScale": 0.05000000074505806
-                  },
-                  "canBeModifiedBy": "OriginOwner"
-                }
-              },
-              "targetType": "Enemy"
-            }
-          ]
-        },
-        "Shinobu_ElementalBurst_SowrdRainLoop_HighHp_UnLock_Constellation_1": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 2.0,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.30000001192092896,
-          "onAdded": [
-            {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Sword_Shinobu_ElementalBurst_ArrowRain_HighHp",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "TriggerAttackEvent",
-              "target": "Caster",
-              "attackEvent": {
-                "attackPattern": {
-                  "$type": "ConfigAttackCircle",
-                  "triggerType": "TriggerNoRepeat",
-                  "born": {
-                    "$type": "ConfigBornBySelf",
-                    "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": -0.5,
-                      "PJCOKIGCJOK": 0.0
-                    }
-                  },
-                  "height": 4.5,
-                  "DCMPFCIBIPA": 6.0
-                },
-                "attackInfo": {
-                  "attackTag": "Elemental_Burst",
-                  "attenuationTag": "Elemental_Burst",
-                  "attenuationGroup": "default",
-                  "attackProperty": {
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Electric",
-                    "bonusCriticalHurt": 25.0,
-                    "strikeType": "Default",
-                    "enBreak": 20.0,
-                    "damageExtra": [
-                      "FIGHT_PROP_MAX_HP",
-                      "ElementalBurst_Damage_Percentage",
-                      "MUL"
-                    ]
-                  },
-                  "hitPattern": {
-                    "onHitEffectName": "default",
-                    "hitImpulseType": "LV2",
-                    "hitHaltTimeScale": 0.05000000074505806
-                  },
-                  "canBeModifiedBy": "OriginOwner"
-                }
-              },
-              "targetType": "Enemy"
-            }
-          ],
-          "onThinkInterval": [
-            {
-              "$type": "TriggerAttackEvent",
-              "target": "Caster",
-              "attackEvent": {
-                "attackPattern": {
-                  "$type": "ConfigAttackCircle",
-                  "triggerType": "TriggerNoRepeat",
-                  "born": {
-                    "$type": "ConfigBornBySelf",
-                    "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": -0.5,
-                      "PJCOKIGCJOK": 0.0
-                    }
-                  },
-                  "height": 4.5,
-                  "DCMPFCIBIPA": 6.0
-                },
-                "attackInfo": {
-                  "attackTag": "Elemental_Burst",
-                  "attenuationTag": "Elemental_Burst",
-                  "attenuationGroup": "default",
-                  "attackProperty": {
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Electric",
-                    "bonusCriticalHurt": 25.0,
-                    "strikeType": "Default",
-                    "enBreak": 20.0,
-                    "damageExtra": [
-                      "FIGHT_PROP_MAX_HP",
-                      "ElementalBurst_Damage_Percentage",
-                      "MUL"
-                    ]
-                  },
-                  "hitPattern": {
-                    "onHitEffectName": "default",
-                    "hitImpulseType": "LV1",
-                    "hitHaltTimeScale": 0.05000000074505806
-                  },
-                  "canBeModifiedBy": "OriginOwner"
-                }
-              },
-              "targetType": "Enemy"
+              "$type": "RemoveUniqueModifier",
+              "modifierName": "UNIQUE_Avatar_Shinobu_ElementalBurst_Weapon_Appear",
+              "doOffStage": true
             }
           ]
         }
       },
+      "abilitySpecials": {}
+    }
+  },
+
+  ///////////////////////////////////////////
+  //
+  //    元素爆发gadget
+  //
+  //////////////////////////////////////////
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Shinobu_ElementalBurst_Gadget",
       "onAdded": [
+        //根据释放时的血量百分比，初始打2秒，低血状态下打3.5秒
         {
           "$type": "CopyGlobalValue",
           "srcTarget": "OriginOwner",
@@ -1736,16 +1421,21 @@
         },
         {
           "$type": "Predicated",
+          "target": "Self",
           "targetPredicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_Shinobu_ElementalBurst_HpIsLow",
-              "ratio": 1.0
+              "value": 1,
+              "compareType": "Equal"
             }
           ],
           "successActions": [
+            //血量低，并且没解锁命1，持续时间长且范围小
             {
               "$type": "ApplyModifier",
+              "modifierName": "Shinobu_ElementalBurst_SowrdRainLoop_LowHp_NotUnLock_Constellation_1",
+              "target": "Self",
               "predicates": [
                 {
                   "$type": "ByNot",
@@ -1756,23 +1446,27 @@
                     }
                   ]
                 }
-              ],
-              "modifierName": "Shinobu_ElementalBurst_SowrdRainLoop_LowHp_NotUnLock_Constellation_1"
+              ]
             },
+            //血量低，并且解锁了命1，持续时间长且范围大
             {
               "$type": "ApplyModifier",
+              "modifierName": "Shinobu_ElementalBurst_SowrdRainLoop_LowHp_UnLock_Constellation_1",
+              "target": "Self",
               "predicates": [
                 {
                   "$type": "ByUnlockTalentParam",
                   "talentParam": "Shinobu_Constellation_1"
                 }
-              ],
-              "modifierName": "Shinobu_ElementalBurst_SowrdRainLoop_LowHp_UnLock_Constellation_1"
+              ]
             }
           ],
           "failActions": [
+            //血量高，且没解锁命1，持续时间短且范围小
             {
               "$type": "ApplyModifier",
+              "modifierName": "Shinobu_ElementalBurst_SowrdRainLoop_HighHp_NotUnLock_Constellation_1",
+              "target": "Self",
               "predicates": [
                 {
                   "$type": "ByNot",
@@ -1783,24 +1477,518 @@
                     }
                   ]
                 }
-              ],
-              "modifierName": "Shinobu_ElementalBurst_SowrdRainLoop_HighHp_NotUnLock_Constellation_1"
+              ]
             },
+            //血量高，解锁了命1，持续时间短且范围大
             {
               "$type": "ApplyModifier",
+              "modifierName": "Shinobu_ElementalBurst_SowrdRainLoop_HighHp_UnLock_Constellation_1",
+              "target": "Self",
               "predicates": [
                 {
                   "$type": "ByUnlockTalentParam",
                   "talentParam": "Shinobu_Constellation_1"
                 }
-              ],
-              "modifierName": "Shinobu_ElementalBurst_SowrdRainLoop_HighHp_UnLock_Constellation_1"
+              ]
             }
           ]
         }
-      ]
+      ],
+      "onAbilityStart": [],
+      "modifiers": {
+        //血量低，并且没解锁命1，持续时间长且范围小
+        "Shinobu_ElementalBurst_SowrdRainLoop_LowHp_NotUnLock_Constellation_1": {
+          "duration": 3.6,
+          "thinkInterval": 0.3,
+          "onThinkInterval": [
+            //调整成固定频率的攻击盒
+            {
+              "$type": "TriggerAttackEvent",
+              "target": "Caster",
+              "targetType": "Enemy",
+              "attackEvent": {
+                "attackPattern": {
+                  "$type": "ConfigAttackCircle",
+                  "triggerType": "TriggerNoRepeat",
+                  "fanAngle": 360.0,
+                  "height": 4.5,
+                  "radius": 4,
+                  "born": {
+                    "$type": "ConfigBornBySelf",
+                    "offset": {
+                      "x": 0.0,
+                      "y": -0.5,
+                      "z": 0.0
+                    }
+                  }
+                },
+                "attackInfo": {
+                  "canBeModifiedBy": "OriginOwner",
+                  "attackTag": "Elemental_Burst",
+                  "attenuationTag": "Elemental_Burst",
+                  "attackProperty": {
+                    "damageExtra": "%FIGHT_PROP_MAX_HP*%ElementalBurst_Damage_Percentage",
+                    "elementType": "Electric",
+                    "elementDurability": 25,
+                    "enBreak": 20,
+                    "attackType": "Default",
+                    "strikeType": "Default"
+                  },
+                  "hitPattern": {
+                    "onHitEffectName": "default",
+                    "hitImpulseType": "LV1",
+                    "retreatType": "ByAttacker",
+                    "canBeDefenceHalt": false,
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
+                    "muteHitText": false
+                  }
+                }
+              }
+            }
+          ],
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Avatar_Girl_Sword_Shinobu_ElementalBurst_ArrowRain_LowHp_R40"
+            },
+            {
+              "$type": "TriggerAttackEvent",
+              "target": "Caster",
+              "targetType": "Enemy",
+              "attackEvent": {
+                "attackPattern": {
+                  "$type": "ConfigAttackCircle",
+                  "triggerType": "TriggerNoRepeat",
+                  "fanAngle": 360.0,
+                  "height": 4.5,
+                  "radius": 4,
+                  "born": {
+                    "$type": "ConfigBornBySelf",
+                    "offset": {
+                      "x": 0.0,
+                      "y": -0.5,
+                      "z": 0.0
+                    }
+                  }
+                },
+                "attackInfo": {
+                  "canBeModifiedBy": "OriginOwner",
+                  "attackTag": "Elemental_Burst",
+                  "attenuationTag": "Elemental_Burst",
+                  "attackProperty": {
+                    "damageExtra": "%FIGHT_PROP_MAX_HP*%ElementalBurst_Damage_Percentage",
+                    "elementType": "Electric",
+                    "elementDurability": 25,
+                    "enBreak": 20,
+                    "attackType": "Default",
+                    "strikeType": "Default"
+                  },
+                  "hitPattern": {
+                    "onHitEffectName": "default",
+                    "hitImpulseType": "LV2",
+                    "retreatType": "ByAttacker",
+                    "canBeDefenceHalt": false,
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
+                    "muteHitText": false
+                  }
+                }
+              }
+            }
+          ]
+        },
+        //血量高，且没解锁命1，持续时间短且范围小
+        "Shinobu_ElementalBurst_SowrdRainLoop_HighHp_NotUnLock_Constellation_1": {
+          "duration": 2,
+          "thinkInterval": 0.3,
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Avatar_Girl_Sword_Shinobu_ElementalBurst_ArrowRain_HighHp_R40"
+            },
+            {
+              "$type": "TriggerAttackEvent",
+              "target": "Caster",
+              "targetType": "Enemy",
+              "attackEvent": {
+                "attackPattern": {
+                  "$type": "ConfigAttackCircle",
+                  "triggerType": "TriggerNoRepeat",
+                  "fanAngle": 360.0,
+                  "height": 4.5,
+                  "radius": 4,
+                  "born": {
+                    "$type": "ConfigBornBySelf",
+                    "offset": {
+                      "x": 0.0,
+                      "y": -0.5,
+                      "z": 0.0
+                    }
+                  }
+                },
+                "attackInfo": {
+                  "canBeModifiedBy": "OriginOwner",
+                  "attackTag": "Elemental_Burst",
+                  "attenuationTag": "Elemental_Burst",
+                  "attackProperty": {
+                    "damageExtra": "%FIGHT_PROP_MAX_HP*%ElementalBurst_Damage_Percentage",
+                    "elementType": "Electric",
+                    "elementDurability": 25,
+                    "enBreak": 20,
+                    "attackType": "Default",
+                    "strikeType": "Default"
+                  },
+                  "hitPattern": {
+                    "onHitEffectName": "default",
+                    "hitImpulseType": "LV2",
+                    "retreatType": "ByHitDirection",
+                    "hitImpulseX": 0,
+                    "canBeDefenceHalt": false,
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
+                    "muteHitText": false
+                  }
+                }
+              }
+            }
+          ],
+          "onThinkInterval": [
+            //调整成固定频率的攻击盒
+            {
+              "$type": "TriggerAttackEvent",
+              "target": "Caster",
+              "targetType": "Enemy",
+              "attackEvent": {
+                "attackPattern": {
+                  "$type": "ConfigAttackCircle",
+                  "triggerType": "TriggerNoRepeat",
+                  "fanAngle": 360.0,
+                  "height": 4.5,
+                  "radius": 4,
+                  "born": {
+                    "$type": "ConfigBornBySelf",
+                    "offset": {
+                      "x": 0.0,
+                      "y": -0.5,
+                      "z": 0.0
+                    }
+                  }
+                },
+                "attackInfo": {
+                  "canBeModifiedBy": "OriginOwner",
+                  "attackTag": "Elemental_Burst",
+                  "attenuationTag": "Elemental_Burst",
+                  "attackProperty": {
+                    "damageExtra": "%FIGHT_PROP_MAX_HP*%ElementalBurst_Damage_Percentage",
+                    "elementType": "Electric",
+                    "elementDurability": 25,
+                    "enBreak": 20,
+                    "attackType": "Default",
+                    "strikeType": "Default"
+                  },
+                  "hitPattern": {
+                    "onHitEffectName": "default",
+                    "hitImpulseType": "LV1",
+                    "retreatType": "ByHitDirection",
+                    "canBeDefenceHalt": false,
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
+                    "muteHitText": false
+                  }
+                }
+              }
+            }
+          ]
+        },
+        //血量低，并且解锁了命1，持续时间长且范围大
+        "Shinobu_ElementalBurst_SowrdRainLoop_LowHp_UnLock_Constellation_1": {
+          "duration": 3.6,
+          "thinkInterval": 0.3,
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Avatar_Girl_Sword_Shinobu_ElementalBurst_ArrowRain_LowHp"
+            },
+            {
+              "$type": "TriggerAttackEvent",
+              "target": "Caster",
+              "targetType": "Enemy",
+              "attackEvent": {
+                "attackPattern": {
+                  "$type": "ConfigAttackCircle",
+                  "triggerType": "TriggerNoRepeat",
+                  "fanAngle": 360.0,
+                  "height": 4.5,
+                  "radius": 6,
+                  "born": {
+                    "$type": "ConfigBornBySelf",
+                    "offset": {
+                      "x": 0.0,
+                      "y": -0.5,
+                      "z": 0.0
+                    }
+                  }
+                },
+                "attackInfo": {
+                  "canBeModifiedBy": "OriginOwner",
+                  "attackTag": "Elemental_Burst",
+                  "attenuationTag": "Elemental_Burst",
+                  "attackProperty": {
+                    "damageExtra": "%FIGHT_PROP_MAX_HP*%ElementalBurst_Damage_Percentage",
+                    "elementType": "Electric",
+                    "elementDurability": 25,
+                    "enBreak": 20,
+                    "attackType": "Default",
+                    "strikeType": "Default"
+                  },
+                  "hitPattern": {
+                    "onHitEffectName": "default",
+                    "hitImpulseType": "LV2",
+                    "retreatType": "ByAttacker",
+                    "canBeDefenceHalt": false,
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
+                    "muteHitText": false
+                  }
+                }
+              }
+            }
+          ],
+          "onThinkInterval": [
+            //调整成固定频率的攻击盒
+            {
+              "$type": "TriggerAttackEvent",
+              "target": "Caster",
+              "targetType": "Enemy",
+              "attackEvent": {
+                "attackPattern": {
+                  "$type": "ConfigAttackCircle",
+                  "triggerType": "TriggerNoRepeat",
+                  "fanAngle": 360.0,
+                  "height": 4.5,
+                  "radius": 6,
+                  "born": {
+                    "$type": "ConfigBornBySelf",
+                    "offset": {
+                      "x": 0.0,
+                      "y": -0.5,
+                      "z": 0.0
+                    }
+                  }
+                },
+                "attackInfo": {
+                  "canBeModifiedBy": "OriginOwner",
+                  "attackTag": "Elemental_Burst",
+                  "attenuationTag": "Elemental_Burst",
+                  "attackProperty": {
+                    "damageExtra": "%FIGHT_PROP_MAX_HP*%ElementalBurst_Damage_Percentage",
+                    "elementType": "Electric",
+                    "elementDurability": 25,
+                    "enBreak": 20,
+                    "attackType": "Default",
+                    "strikeType": "Default"
+                  },
+                  "hitPattern": {
+                    "onHitEffectName": "default",
+                    "hitImpulseType": "LV1",
+                    "retreatType": "ByAttacker",
+                    "canBeDefenceHalt": false,
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
+                    "muteHitText": false
+                  }
+                }
+              }
+            }
+          ]
+        },
+        //血量高，解锁了命1，持续时间短且范围大
+        "Shinobu_ElementalBurst_SowrdRainLoop_HighHp_UnLock_Constellation_1": {
+          "duration": 2,
+          "thinkInterval": 0.3,
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Avatar_Girl_Sword_Shinobu_ElementalBurst_ArrowRain_HighHp"
+            },
+            {
+              "$type": "TriggerAttackEvent",
+              "target": "Caster",
+              "targetType": "Enemy",
+              "attackEvent": {
+                "attackPattern": {
+                  "$type": "ConfigAttackCircle",
+                  "triggerType": "TriggerNoRepeat",
+                  "fanAngle": 360.0,
+                  "height": 4.5,
+                  "radius": 6,
+                  "born": {
+                    "$type": "ConfigBornBySelf",
+                    "offset": {
+                      "x": 0.0,
+                      "y": -0.5,
+                      "z": 0.0
+                    }
+                  }
+                },
+                "attackInfo": {
+                  "canBeModifiedBy": "OriginOwner",
+                  "attackTag": "Elemental_Burst",
+                  "attenuationTag": "Elemental_Burst",
+                  "attackProperty": {
+                    "damageExtra": "%FIGHT_PROP_MAX_HP*%ElementalBurst_Damage_Percentage",
+                    "elementType": "Electric",
+                    "elementDurability": 25,
+                    "enBreak": 20,
+                    "attackType": "Default",
+                    "strikeType": "Default"
+                  },
+                  "hitPattern": {
+                    "onHitEffectName": "default",
+                    "hitImpulseType": "LV2",
+                    "retreatType": "ByAttacker",
+                    "canBeDefenceHalt": false,
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
+                    "muteHitText": false
+                  }
+                }
+              }
+            }
+          ],
+          "onThinkInterval": [
+            //调整成固定频率的攻击盒
+            {
+              "$type": "TriggerAttackEvent",
+              "target": "Caster",
+              "targetType": "Enemy",
+              "attackEvent": {
+                "attackPattern": {
+                  "$type": "ConfigAttackCircle",
+                  "triggerType": "TriggerNoRepeat",
+                  "fanAngle": 360.0,
+                  "height": 4.5,
+                  "radius": 6,
+                  "born": {
+                    "$type": "ConfigBornBySelf",
+                    "offset": {
+                      "x": 0.0,
+                      "y": -0.5,
+                      "z": 0.0
+                    }
+                  }
+                },
+                "attackInfo": {
+                  "canBeModifiedBy": "OriginOwner",
+                  "attackTag": "Elemental_Burst",
+                  "attenuationTag": "Elemental_Burst",
+                  "attackProperty": {
+                    "damageExtra": "%FIGHT_PROP_MAX_HP*%ElementalBurst_Damage_Percentage",
+                    "elementType": "Electric",
+                    "elementDurability": 25,
+                    "enBreak": 20,
+                    "attackType": "Default",
+                    "strikeType": "Default"
+                  },
+                  "hitPattern": {
+                    "onHitEffectName": "default",
+                    "hitImpulseType": "LV1",
+                    "retreatType": "ByAttacker",
+                    "canBeDefenceHalt": false,
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
+                    "muteHitText": false
+                  }
+                }
+              }
+            }
+          ]
+        }
+        // "Shinobu_ElementalBurst_SowrdRainLoop_OnTarget":
+        // {
+        // 	"duration": 0.25,
+        // 	"onAdded":
+        // 	[
+        // 		{
+        // 			"$type" : "TriggerAttackEvent",
+        // 			"target": "Caster",
+        // 			"targetType" : "Enemy",
+        // 			"attackEvent":
+        // 			{
+        // 				"attackPattern" :
+        // 				{
+        // 					"$type": "ConfigAttackCircle",
+        // 					"triggerType": "TriggerNoRepeat",
+        // 					"fanAngle": 360.0,
+        // 					"height": 5.5,
+        // 					"radius": 0.5,
+        // 					"born":
+        // 					{
+        // 						"$type": "ConfigBornBySelf",
+        // 						"offset":
+        // 						{
+        // 							"x" : 0.0,
+        // 							"y" : -0.5,
+        // 							"z" : 0.0,
+        // 						},
+        // 					},
+        // 				},
+        // 				"attackInfo":
+        // 				{
+        // 					"canBeModifiedBy": "OriginOwner",
+        // 					"attackTag" : "Elemental_Burst",
+        // 					"attenuationTag": "Elemental_Burst",
+        // 					"attackProperty":
+        // 					{
+        // 						"damageExtra" : "%FIGHT_PROP_MAX_HP*%ElementalBurst_Damage_MaxHP_Percentage",
+        // 						"elementType": "Electric",
+        // 						"elementDurability": 25,
+        // 						"enBreak": 50,
+        // 						"attackType": "Default",
+        // 						"strikeType": "Pierce",
+        // 					},
+        // 					"hitPattern":
+        // 					{
+        // 						"onHitEffectName": "default",
+        // 						"hitImpulseType":"LV1",
+        // 						"retreatType": "ByHitDirection",
+        // 						"canBeDefenceHalt": false,
+        // 						"hitHaltTime": 0.0,
+        // 						"hitHaltTimeScale": 0.05,
+        // 						"muteHitText": false,
+        // 					},
+        // 				},
+        // 			},
+        // 		},
+        // 		{
+        // 			"$type": "SetGlobalValue",
+        // 			"key": "_ABILITY_Shinobu_SowrdRain_UnavailableMark",
+        // 			"value": 1,
+        // 		},
+        // 	],
+        // 	"onRemoved":
+        // 	[
+        // 		{
+        // 			"$type": "SetGlobalValue",
+        // 			"key": "_ABILITY_Shinobu_SowrdRain_UnavailableMark",
+        // 			"value": 0,
+        // 		},
+        // 	]
+
+        // },
+      },
+      "abilitySpecials": {
+        "ElementalBurst_Damage_Percentage": 0
+      }
     }
   },
+
+  ///////////////////////////////////////////
+  //
+  //        普攻伤害配置
+  //
+  //////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1809,50 +1997,50 @@
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": ["ATK01"],
-          "HBIOLEEGHPD": "NormalAttack_01_DamagePercentage",
-          "CCNJGLPMIEP": 0.0
+          "damagePercentage": "%NormalAttack_01_DamagePercentage"
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": ["ATK02"],
-          "HBIOLEEGHPD": "NormalAttack_02_DamagePercentage",
-          "CCNJGLPMIEP": 0.0
+          "damagePercentage": "%NormalAttack_02_DamagePercentage"
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": ["ATK03"],
-          "HBIOLEEGHPD": "NormalAttack_03_DamagePercentage",
-          "CCNJGLPMIEP": 0.0
+          "damagePercentage": "%NormalAttack_03_DamagePercentage"
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": ["ATK04"],
-          "HBIOLEEGHPD": "NormalAttack_04_DamagePercentage",
-          "CCNJGLPMIEP": 0.0
+          "damagePercentage": "%NormalAttack_04_DamagePercentage"
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": ["ExtraAttack_1"],
-          "HBIOLEEGHPD": "ExtraAttack1_DamagePercentag",
-          "CCNJGLPMIEP": 0.0
+          "damagePercentage": "%ExtraAttack1_DamagePercentag"
         },
         {
           "$type": "ModifyDamageMixin",
           "animEventNames": ["ExtraAttack_2"],
-          "HBIOLEEGHPD": "ExtraAttack2_DamagePercentag",
-          "CCNJGLPMIEP": 0.0
+          "damagePercentage": "%ExtraAttack2_DamagePercentag"
         }
       ],
       "abilitySpecials": {
-        "NormalAttack_01_DamagePercentage": 0.0,
-        "NormalAttack_02_DamagePercentage": 0.0,
-        "NormalAttack_03_DamagePercentage": 0.0,
-        "NormalAttack_04_DamagePercentage": 0.0,
-        "ExtraAttack1_DamagePercentag": 0.0,
-        "ExtraAttack2_DamagePercentag": 0.0
+        "NormalAttack_01_DamagePercentage": 0,
+        "NormalAttack_02_DamagePercentage": 0,
+        "NormalAttack_03_DamagePercentage": 0,
+        "NormalAttack_04_DamagePercentage": 0,
+        "ExtraAttack1_DamagePercentag": 0,
+        "ExtraAttack2_DamagePercentag": 0
       }
     }
   },
+
+  ////////////////////////////////////////////////////////////////
+  //
+  //  空中攻击
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1860,6 +2048,7 @@
       "abilityMixins": [
         {
           "$type": "AvatarChangeSkillMixin",
+          "priority": "AvatarCommon",
           "jumpSkillID": 5065010,
           "flySkillID": 5065010
         },
@@ -1880,6 +2069,7 @@
             "FallingAnthem_Loop",
             "FallingAnthem_Loop_Low"
           ],
+
           "modifierName": "FallingAnthem_LoopDamage"
         },
         {
@@ -1943,64 +2133,215 @@
           "modifierName": "FallingAnthem_CameraRadialBlur"
         }
       ],
-      "abilitySpecials": {
-        "FallingAnthem_Normal_Loop_Damage": 0.0,
-        "FallingAnthem_Normal_Rank_1_Damage": 0.0,
-        "FallingAnthem_Normal_Rank_2_Damage": 0.0,
-        "FallingAnthem_Altitude_Lv0": 20.0,
-        "FallingAnthem_Altitude_Lv1": 40.0,
-        "FallingAnthem_Altitude_Lv2": 60.0,
-        "FallingAnthem_Altitude_Lv3": 100.0,
-        "FallingAnthem_Altitude_Lv4": 200.0,
-        "FallingAnthem_FallingDamageRatio_Lv0": -1.0,
-        "FallingAnthem_FallingDamageRatio_Lv1": -1.0,
-        "FallingAnthem_FallingDamageRatio_Lv2": -0.8999999761581421,
-        "FallingAnthem_FallingDamageRatio_Lv3": -0.800000011920929,
-        "FallingAnthem_FallingDamageRatio_Lv4": -0.6000000238418579,
-        "FallingAnthem_FallingDamageRatio": 0.0
-      },
+      "onAdded": [],
+      "onAbilityStart": [
+        //普通状态第一段
+        {
+          "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
+          "attackEvent": {
+            "attackPattern": {
+              "$type": "ConfigAttackCircle",
+              "triggerType": "TriggerNoRepeat",
+              "height": 2.0,
+              "fanAngle": 360.0,
+              "radius": 3.0,
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 1.0
+                }
+              }
+            },
+            "attackInfo": {
+              "attackTag": "FallingAttack",
+              "attackProperty": {
+                "damagePercentage": "%FallingAnthem_Normal_Rank_1_Damage",
+                "overrideByWeapon": true,
+                "strikeType": "Blunt",
+                "attackType": "Melee",
+                "elementType": "None",
+                "elementDurability": 25,
+                "elementRank": 1.0,
+                "enBreak": 100
+              },
+              "hitPattern": {
+                "onHitEffectName": "none",
+                "hitImpulseType": "LV4",
+                // "hitLevel": "Heavy", //hitlevel = 4
+                // "hitImpulseX": 800, //hitlevel = 4
+                // "hitImpulseY": 0, //hitlevel = 4
+                "retreatType": "ByAttacker",
+                "canBeDefenceHalt": false,
+                "hitHaltTime": 0,
+                "hitHaltTimeScale": 0.1,
+                "muteHitText": false
+              },
+              "forceCameraShake": true,
+              "cameraShake": {
+                "shakeType": "CustomVector",
+                "shakeRange": 0.24,
+                "shakeTime": 0.12,
+                "shakeDistance": 30,
+                "shakeDir": {
+                  "x": 0,
+                  "y": 1,
+                  "z": 0
+                },
+                "extension": {
+                  "baseCycle": 0.24,
+                  "cycleDamping": 0,
+                  "rangeAttenuation": 0.3
+                }
+              }
+            }
+          },
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_ABILITY_FallingAnthem_UseCamera",
+              "forceByCaster": true,
+              "value": 0,
+              "compareType": "NoneOrEqual"
+            }
+          ]
+        },
+        //普通状态第二段
+        {
+          "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
+          "attackEvent": {
+            "attackPattern": {
+              "$type": "ConfigAttackCircle",
+              "triggerType": "TriggerNoRepeat",
+              "height": 2.0,
+              "fanAngle": 360.0,
+              "radius": 5.0,
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 1.0
+                }
+              }
+            },
+            "attackInfo": {
+              "attackTag": "FallingAttack",
+              "attackProperty": {
+                "damagePercentage": "%FallingAnthem_Normal_Rank_2_Damage",
+                "overrideByWeapon": true,
+                "strikeType": "Blunt",
+                "attackType": "Melee",
+                "elementType": "None",
+                "elementDurability": 25,
+                "elementRank": 1.0,
+                "enBreak": 150
+              },
+              "hitPattern": {
+                "onHitEffectName": "none",
+                "hitImpulseType": "LV7",
+                // "hitLevel": "Air", //hitlevel = 7
+                // "hitImpulseX": 0, //hitlevel = 7
+                // "hitImpulseY": 800, //hitlevel = 7
+                "retreatType": "ByAttacker",
+                "canBeDefenceHalt": false,
+                "hitHaltTime": 0,
+                "hitHaltTimeScale": 0.1,
+                "muteHitText": false
+              },
+              "forceCameraShake": true,
+              "cameraShake": {
+                "shakeType": "CustomVector",
+                "shakeRange": 0.5,
+                "shakeTime": 0.2,
+                "shakeDistance": 30,
+                "shakeDir": {
+                  "x": 0,
+                  "y": 1,
+                  "z": 1
+                },
+                "extension": {
+                  "baseCycle": 0.4,
+                  "cycleDamping": 0,
+                  "rangeAttenuation": 0.3
+                }
+              }
+            }
+          },
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_ABILITY_FallingAnthem_UseCamera",
+              "forceByCaster": true,
+              "value": 1,
+              "compareType": "Equal"
+            }
+          ]
+        },
+        //普通状态第一段
+        {
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Avatar_Sword_FallAnthem_Strike_01",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_ABILITY_FallingAnthem_UseCamera",
+              "forceByCaster": true,
+              "value": 0,
+              "compareType": "NoneOrEqual"
+            }
+          ]
+        },
+        //普通状态第二段
+        {
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Avatar_Sword_FallAnthem_Strike_02",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_ABILITY_FallingAnthem_UseCamera",
+              "forceByCaster": true,
+              "value": 1,
+              "compareType": "Equal"
+            }
+          ]
+        }
+      ],
       "modifiers": {
         "FallingAnthem_AttachWeaponEffect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Sword_FallAnthem_Self_01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Avatar_Sword_FallAnthem_Self_01"
             }
           ]
         },
         "FallingAnthem_CameraRadialBlur": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.23000000417232513,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.23,
           "modifierMixins": [
             {
               "$type": "CameraBlurMixin",
               "cameraRadialBlur": {
-                "power": 0.30000001192092896,
-                "fadeTime": 0.15000000596046448
+                "power": 0.3,
+                "fadeTime": 0.15
               }
             }
           ]
         },
         "FallingAnthem_BS_Material": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Sword_FallAnthem_BS",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Avatar_Sword_FallAnthem_BS"
             }
           ]
         },
         "FallingAnthem_BS_VelocityForce_Initialize": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "properties": {
-            "Actor_AddGravityScale": -2.0
+            "Actor_AddGravityScale": -2
           },
           "onAdded": [
             {
@@ -2010,53 +2351,54 @@
           ]
         },
         "FallingAnthem_LoopDamage": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.30000001192092896,
+          "thinkInterval": 0.3,
           "onThinkInterval": [
             {
               "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
+                  "radius": 1.0,
                   "born": {
                     "$type": "ConfigBornBySelf",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 1.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 1
                     }
-                  },
-                  "DCMPFCIBIPA": 1.0
+                  }
                 },
                 "attackInfo": {
                   "attackTag": "FallingAttack",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "HBIOLEEGHPD": "FallingAnthem_Normal_Loop_Damage",
-                    "CCNJGLPMIEP": 0.0,
-                    "bonusCriticalHurt": 0.0,
-                    "overrideByWeapon": true,
+                    "damagePercentage": "%FallingAnthem_Normal_Loop_Damage",
                     "strikeType": "Slash",
-                    "enBreak": 25.0,
-                    "attackType": "Melee"
+                    "overrideByWeapon": true,
+                    "attackType": "Melee",
+                    "elementType": "None",
+                    "elementDurability": 0,
+                    "enBreak": 25
                   },
                   "hitPattern": {
                     "onHitEffectName": "default",
                     "hitImpulseType": "LV2",
-                    "hitHaltTimeScale": 0.019999999552965164
+                    // "hitLevel": "Light", //hitlevel = 2
+                    // "hitImpulseX": 200, //hitlevel = 2
+                    // "hitImpulseY": 0, //hitlevel = 2
+                    "reboundRatio": 0,
+                    "canBeDefenceHalt": false,
+                    "hitHaltTime": 0,
+                    "hitHaltTimeScale": 0.02,
+                    "muteHitText": false
                   }
                 }
-              },
-              "targetType": "Enemy"
+              }
             }
           ]
         },
         "FallingAnthem_FallingDamageImmune_01": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ClearGlobalValue",
@@ -2064,90 +2406,95 @@
             },
             {
               "$type": "AddGlobalValue",
+              "key": "_ABILITY_FallingAttack_Altitude",
+              "value": "%FallingAnthem_FallingDamageRatio_Lv0",
+              "useLimitRange": true,
+              "maxValue": "%FallingAnthem_FallingDamageRatio_Lv0",
+              "minValue": "%FallingAnthem_FallingDamageRatio_Lv0",
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv0"
+                  "value": "%FallingAnthem_Altitude_Lv0",
+                  "logic": "LesserOrEqual"
                 }
-              ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv0",
-              "key": "_ABILITY_FallingAttack_Altitude",
-              "useLimitRange": true,
-              "maxValue": "FallingAnthem_FallingDamageRatio_Lv0",
-              "minValue": "FallingAnthem_FallingDamageRatio_Lv0"
-            },
+              ]
+            }, //==================================================================================
             {
               "$type": "AddGlobalValue",
+              "key": "_ABILITY_FallingAttack_Altitude",
+              "value": "%FallingAnthem_FallingDamageRatio_Lv1",
+              "useLimitRange": true,
+              "maxValue": "%FallingAnthem_FallingDamageRatio_Lv1",
+              "minValue": "%FallingAnthem_FallingDamageRatio_Lv1",
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv1"
+                  "value": "%FallingAnthem_Altitude_Lv1",
+                  "logic": "LesserOrEqual"
                 },
                 {
                   "$type": "ByTargetAltitude",
-                  "ratio": "FallingAnthem_Altitude_Lv0"
+                  "value": "%FallingAnthem_Altitude_Lv0",
+                  "logic": "Greater"
                 }
-              ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv1",
-              "key": "_ABILITY_FallingAttack_Altitude",
-              "useLimitRange": true,
-              "maxValue": "FallingAnthem_FallingDamageRatio_Lv1",
-              "minValue": "FallingAnthem_FallingDamageRatio_Lv1"
-            },
+              ]
+            }, //==================================================================================
             {
               "$type": "AddGlobalValue",
+              "key": "_ABILITY_FallingAttack_Altitude",
+              "value": "%FallingAnthem_FallingDamageRatio_Lv2",
+              "useLimitRange": true,
+              "maxValue": "%FallingAnthem_FallingDamageRatio_Lv2",
+              "minValue": "%FallingAnthem_FallingDamageRatio_Lv2",
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv2"
+                  "value": "%FallingAnthem_Altitude_Lv2",
+                  "logic": "LesserOrEqual"
                 },
                 {
                   "$type": "ByTargetAltitude",
-                  "ratio": "FallingAnthem_Altitude_Lv1"
+                  "value": "%FallingAnthem_Altitude_Lv1",
+                  "logic": "Greater"
                 }
-              ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv2",
-              "key": "_ABILITY_FallingAttack_Altitude",
-              "useLimitRange": true,
-              "maxValue": "FallingAnthem_FallingDamageRatio_Lv2",
-              "minValue": "FallingAnthem_FallingDamageRatio_Lv2"
-            },
+              ]
+            }, //==================================================================================
             {
               "$type": "AddGlobalValue",
+              "key": "_ABILITY_FallingAttack_Altitude",
+              "value": "%FallingAnthem_FallingDamageRatio_Lv3",
+              "useLimitRange": true,
+              "maxValue": "%FallingAnthem_FallingDamageRatio_Lv3",
+              "minValue": "%FallingAnthem_FallingDamageRatio_Lv3",
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv3"
+                  "value": "%FallingAnthem_Altitude_Lv3",
+                  "logic": "LesserOrEqual"
                 },
                 {
                   "$type": "ByTargetAltitude",
-                  "ratio": "FallingAnthem_Altitude_Lv2"
+                  "value": "%FallingAnthem_Altitude_Lv2",
+                  "logic": "Greater"
                 }
-              ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv3",
-              "key": "_ABILITY_FallingAttack_Altitude",
-              "useLimitRange": true,
-              "maxValue": "FallingAnthem_FallingDamageRatio_Lv3",
-              "minValue": "FallingAnthem_FallingDamageRatio_Lv3"
-            },
+              ]
+            }, //==================================================================================
             {
               "$type": "AddGlobalValue",
+              "key": "_ABILITY_FallingAttack_Altitude",
+              "value": "%FallingAnthem_FallingDamageRatio_Lv4",
+              "useLimitRange": true,
+              "maxValue": "%FallingAnthem_FallingDamageRatio_Lv4",
+              "minValue": "%FallingAnthem_FallingDamageRatio_Lv4",
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "ratio": "FallingAnthem_Altitude_Lv3"
+                  "value": "%FallingAnthem_Altitude_Lv3",
+                  "logic": "Greater"
                 }
-              ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv4",
-              "key": "_ABILITY_FallingAttack_Altitude",
-              "useLimitRange": true,
-              "maxValue": "FallingAnthem_FallingDamageRatio_Lv4",
-              "minValue": "FallingAnthem_FallingDamageRatio_Lv4"
-            },
+              ]
+            }, //==================================================================================
+
             {
               "$type": "AttachModifier",
               "modifierName": "FallingAnthem_FallingDamageImmune_02"
@@ -2155,8 +2502,6 @@
           ]
         },
         "FallingAnthem_FallingDamageImmune_02": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValueToOverrideMap",
@@ -2170,21 +2515,17 @@
           ]
         },
         "FallingAnthem_FallingDamageImmune_03": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "properties": {
-            "Actor_FallingDamageRatio": "FallingAnthem_FallingDamageRatio"
+            "Actor_FallingDamageRatio": "%FallingAnthem_FallingDamageRatio"
           }
         },
         "FallingAnthem_Loop_Normal": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_FallingAnthem_UseCamera",
-              "defaultGlobalValueOnCreate": 0.0,
-              "valueSteps": [-1.0, 0.5, 1.5],
+              "valueSteps": [-1, 0.5, 1.5],
+              "removeAppliedModifier": true,
               "modifierNameSteps": [
                 "FallingAnthem_Loop_Normal_Rank_1",
                 "FallingAnthem_Loop_Normal_Rank_2"
@@ -2193,168 +2534,155 @@
           ]
         },
         "FallingAnthem_Loop_Normal_Rank_1": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Sword_FallAnthem_Loop_01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Avatar_Sword_FallAnthem_Loop_01"
             }
           ]
         },
         "FallingAnthem_Loop_Normal_Rank_2": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Sword_FallAnthem_Loop_02",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Avatar_Sword_FallAnthem_Loop_02"
             }
           ]
         },
+        //水平惯性继承
         "Inertia": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "ApplyInertiaVelocityMixin",
+              "damping": 0,
               "useXZ": false,
               "useY": false
             }
           ]
         },
         "FallingAnthem_Height_Detect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
+              "key": "_ABILITY_FallingAnthem_UseCamera",
+              "value": 0,
+              "useLimitRange": true,
+              "maxValue": 0,
+              "minValue": 0,
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "logic": "LesserOrEqual",
-                  "ratio": 2.4000000953674316
+                  "value": 2.4,
+                  "logic": "LesserOrEqual"
                 }
-              ],
-              "ratio": 0.0,
-              "key": "_ABILITY_FallingAnthem_UseCamera",
-              "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
+              ]
             },
             {
               "$type": "AddGlobalValue",
-              "predicates": [
-                {
-                  "$type": "ByTargetAltitude",
-                  "ratio": 2.4000000953674316
-                }
-              ],
-              "ratio": 5.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
+              "value": 5,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
-            },
-            {
-              "$type": "SetAnimatorFloat",
+              "maxValue": 1,
+              "minValue": 0,
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "logic": "LesserOrEqual",
-                  "ratio": 2.4000000953674316
+                  "value": 2.4,
+                  "logic": "Greater"
                 }
-              ],
-              "floatID": "FallingAnthem_UseCamera",
-              "ratio": 0.0
+              ]
             },
             {
               "$type": "SetAnimatorFloat",
+              "floatID": "FallingAnthem_UseCamera",
+              "value": 0,
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "ratio": 2.4000000953674316
+                  "value": 2.4,
+                  "logic": "LesserOrEqual"
                 }
-              ],
+              ]
+            },
+            {
+              "$type": "SetAnimatorFloat",
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 1.0
+              "value": 1,
+              "predicates": [
+                {
+                  "$type": "ByTargetAltitude",
+                  "value": 2.4,
+                  "logic": "Greater"
+                }
+              ]
             }
           ],
           "onRemoved": [
             {
               "$type": "SetAnimatorFloat",
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 0.0
+              "value": 0
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 0.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
+              "value": 0,
               "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "maxValue": 0,
+              "minValue": 0
             }
           ]
         },
         "FallingAnthem_OverHead_Camera": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AvatarCameraParam",
+              "lockParam": false,
+              "cameraParam": {
+                "forceRadius": 4.5,
+                "forceRadiusDuration": 0.2,
+                "shouldKeepForceRadius": true
+              },
               "predicates": [
                 {
                   "$type": "ByAnimatorFloat",
-                  "logic": "Equal",
-                  "ratio": 1.0,
-                  "parameter": "FallingAnthem_UseCamera"
+                  "parameter": "FallingAnthem_UseCamera",
+                  "value": 1,
+                  "logic": "Equal"
                 }
-              ],
-              "cameraParam": {
-                "forceRadius": 4.5,
-                "forceRadiusDuration": 0.20000000298023224,
-                "shouldKeepForceRadius": true
-              }
+              ]
             }
           ]
         },
         "FallingAnthem_OverHead_Camera_Remover": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
-              "$type": "AvatarExitCameraShot",
-              "RotationDampTime": true
+              "doOffStage": true,
+              "$type": "AvatarExitCameraShot"
             }
           ]
         },
         "FallingAnthem_Landed_Camera": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AvatarCameraParam",
+              "cameraParam": {
+                "forceRadius": 6.0,
+                "forceRadiusDuration": 0.1,
+                "shouldKeepForceRadius": true
+              },
               "predicates": [
                 {
                   "$type": "ByAnimatorFloat",
-                  "logic": "Equal",
-                  "ratio": 1.0,
-                  "parameter": "FallingAnthem_UseCamera"
+                  "parameter": "FallingAnthem_UseCamera",
+                  "value": 1,
+                  "logic": "Equal"
                 }
-              ],
-              "cameraParam": {
-                "forceRadius": 6.0,
-                "forceRadiusDuration": 0.10000000149011612,
-                "shouldKeepForceRadius": true
-              }
+              ]
             }
           ]
         },
         "FallingAnthem_ClearVelocityForce": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "RemoveVelocityForce",
@@ -2363,8 +2691,6 @@
           ]
         },
         "FallingAnthem_ClearVelocityForce_AS": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "RemoveVelocityForce",
@@ -2373,163 +2699,33 @@
           ]
         }
       },
-      "onAbilityStart": [
-        {
-          "$type": "TriggerAttackEvent",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 0.0,
-              "forceByCaster": true,
-              "compareType": "NoneOrEqual"
-            }
-          ],
-          "attackEvent": {
-            "attackPattern": {
-              "$type": "ConfigAttackCircle",
-              "triggerType": "TriggerNoRepeat",
-              "born": {
-                "$type": "ConfigBornByTarget",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": -0.5,
-                  "PJCOKIGCJOK": 1.0
-                }
-              },
-              "height": 2.0,
-              "DCMPFCIBIPA": 3.0
-            },
-            "attackInfo": {
-              "attackTag": "FallingAttack",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
-              "attackProperty": {
-                "HBIOLEEGHPD": "FallingAnthem_Normal_Rank_1_Damage",
-                "CCNJGLPMIEP": 0.0,
-                "bonusCriticalHurt": 25.0,
-                "overrideByWeapon": true,
-                "strikeType": "Blunt",
-                "enBreak": 100.0,
-                "attackType": "Melee"
-              },
-              "hitPattern": {
-                "onHitEffectName": "none",
-                "hitImpulseType": "LV4",
-                "hitHaltTimeScale": 0.10000000149011612
-              },
-              "forceCameraShake": true,
-              "cameraShake": {
-                "shakeType": "CustomVector",
-                "shakeRange": 0.23999999463558197,
-                "shakeTime": 0.11999999731779099,
-                "shakeDistance": 30.0,
-                "shakeDir": {
-                  "y": 1.0
-                },
-                "extension": {
-                  "baseCycle": 0.23999999463558197,
-                  "cycleDamping": 0.0,
-                  "rangeAttenuation": 0.30000001192092896
-                }
-              }
-            }
-          },
-          "targetType": "Enemy"
-        },
-        {
-          "$type": "TriggerAttackEvent",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 1.0,
-              "forceByCaster": true
-            }
-          ],
-          "attackEvent": {
-            "attackPattern": {
-              "$type": "ConfigAttackCircle",
-              "triggerType": "TriggerNoRepeat",
-              "born": {
-                "$type": "ConfigBornByTarget",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": -0.5,
-                  "PJCOKIGCJOK": 1.0
-                }
-              },
-              "height": 2.0,
-              "DCMPFCIBIPA": 5.0
-            },
-            "attackInfo": {
-              "attackTag": "FallingAttack",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
-              "attackProperty": {
-                "HBIOLEEGHPD": "FallingAnthem_Normal_Rank_2_Damage",
-                "CCNJGLPMIEP": 0.0,
-                "bonusCriticalHurt": 25.0,
-                "overrideByWeapon": true,
-                "strikeType": "Blunt",
-                "enBreak": 150.0,
-                "attackType": "Melee"
-              },
-              "hitPattern": {
-                "onHitEffectName": "none",
-                "hitImpulseType": "LV7",
-                "hitHaltTimeScale": 0.10000000149011612
-              },
-              "forceCameraShake": true,
-              "cameraShake": {
-                "shakeType": "CustomVector",
-                "shakeRange": 0.5,
-                "shakeTime": 0.20000000298023224,
-                "shakeDistance": 30.0,
-                "shakeDir": {
-                  "y": 1.0,
-                  "z": 1.0
-                },
-                "extension": {
-                  "baseCycle": 0.4000000059604645,
-                  "cycleDamping": 0.0,
-                  "rangeAttenuation": 0.30000001192092896
-                }
-              }
-            }
-          },
-          "targetType": "Enemy"
-        },
-        {
-          "$type": "FireEffect",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 0.0,
-              "forceByCaster": true,
-              "compareType": "NoneOrEqual"
-            }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Sword_FallAnthem_Strike_01",
-          "EBHJMLOKDGB": -1.0
-        },
-        {
-          "$type": "FireEffect",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 1.0,
-              "forceByCaster": true
-            }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Sword_FallAnthem_Strike_02",
-          "EBHJMLOKDGB": -1.0
-        }
-      ]
+      "abilitySpecials": {
+        "FallingAnthem_Normal_Loop_Damage": 0,
+        "FallingAnthem_Normal_Rank_1_Damage": 0,
+        "FallingAnthem_Normal_Rank_2_Damage": 0,
+
+        "FallingAnthem_Altitude_Lv0": 20,
+        "FallingAnthem_Altitude_Lv1": 40,
+        "FallingAnthem_Altitude_Lv2": 60,
+        "FallingAnthem_Altitude_Lv3": 100,
+        "FallingAnthem_Altitude_Lv4": 200,
+
+        "FallingAnthem_FallingDamageRatio_Lv0": -1,
+        "FallingAnthem_FallingDamageRatio_Lv1": -1,
+        "FallingAnthem_FallingDamageRatio_Lv2": -0.9,
+        "FallingAnthem_FallingDamageRatio_Lv3": -0.8,
+        "FallingAnthem_FallingDamageRatio_Lv4": -0.6,
+
+        "FallingAnthem_FallingDamageRatio": 0
+      }
     }
   },
+
+  ///////////////////////////////////////////////////////////////
+  //
+  // Show相关配置
+  //
+  ///////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -2543,292 +2739,303 @@
       ],
       "modifiers": {
         "Shinobu_Show01_AttachEffect_Modifier": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "DebugLog",
-              "RotationDampTime": true,
-              "content": "##show01特效"
+              "content": "##show01特效",
+              "doOffStage": true
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Sword_Shinobu_Show01_00",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Avatar_Girl_Sword_Shinobu_Show01_00"
             }
           ]
         }
       }
     }
   },
+
+  ///////////////////////////////////////////////////////////////
+  //
+  // 突破天赋1  血量低于X%时治疗加成提升X%
+  //
+  ///////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Shinobu_PermanentSkill_WhenLowHp",
-      "abilityMixins": [
-        {
-          "$type": "AttachModifierToPredicateMixin",
-          "onEvent": "HP",
-          "predicates": [
-            {
-              "$type": "ByTargetHPRatio",
-              "logic": "LesserOrEqual",
-              "HPRatio": "HpRate_P1"
-            }
-          ],
-          "modifierName": "Avatar_Shinobu_PermanentSkill_HealUpWhenLowHp"
-        }
-      ],
       "abilitySpecials": {
-        "HpRate_P1": 0.0,
-        "HealAddDelta_P2": 0.0
-      },
-      "modifiers": {
-        "Avatar_Shinobu_PermanentSkill_HealUpWhenLowHp": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_HealAddDelta": "HealAddDelta_P2"
-          },
-          "isLimitedProperties": true
-        }
+        "HpRate_P1": 0,
+        "HealAddDelta_P2": 0
       },
       "onAdded": [
         {
           "$type": "ApplyModifier",
-          "RotationDampTime": true,
+          "target": "Self",
+          "modifierName": "Avatar_Shinobu_PermanentSkill_HealUpWhenLowHp",
+          "doOffStage": true,
           "predicates": [
             {
               "$type": "ByTargetHPRatio",
-              "logic": "LesserOrEqual",
-              "HPRatio": "HpRate_P1"
+              "HPRatio": "%HpRate_P1",
+              "logic": "LesserOrEqual"
             }
-          ],
-          "modifierName": "Avatar_Shinobu_PermanentSkill_HealUpWhenLowHp"
+          ]
         }
-      ]
+      ],
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToPredicateMixin",
+          "onEvent": "HP",
+          "modifierName": "Avatar_Shinobu_PermanentSkill_HealUpWhenLowHp",
+          "predicates": [
+            {
+              "$type": "ByTargetHPRatio",
+              "HPRatio": "%HpRate_P1",
+              "logic": "LesserOrEqual"
+            }
+          ]
+        }
+      ],
+      "modifiers": {
+        "Avatar_Shinobu_PermanentSkill_HealUpWhenLowHp": {
+          "isLimitedProperties": true,
+          "properties": {
+            "Actor_HealAddDelta": "%HealAddDelta_P2"
+          }
+        }
+      }
     }
   },
+
+  ////////////////////////////////////////////////////////////////////
+  ///
+  ///  命之座6 护死，提升自身元素精通
+  ///
+  ////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Shinobu_Constellation6_Limbo",
+      "isDynamicAbility": true,
       "abilitySpecials": {
-        "Shinobu_Constellation_6_HpRate_P1": 0.0
+        "Shinobu_Constellation_6_HpRate_P1": 0
       },
+      "onAdded": [
+        //护死
+        {
+          "$type": "ApplyModifier",
+          "target": "Self",
+          "doOffStage": true,
+          "modifierName": "Shinobu_Constellation6_Limbo_Main_Handler"
+        },
+        //血量降低时提升元素精通
+        {
+          "$type": "ApplyModifier",
+          "target": "Self",
+          "doOffStage": true,
+          "modifierName": "Shinobu_Constellation6_ElemMastery_Main_Handler"
+        },
+        {
+          "$type": "UnlockSkill",
+          "doOffStage": true,
+          "skillID": 10656
+        },
+        {
+          "$type": "UnlockSkill",
+          "doOffStage": true,
+          "skillID": 10657
+        }
+      ],
       "modifiers": {
         "Shinobu_Constellation6_Limbo_Main_Handler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 2.0,
           "modifierMixins": [
             {
               "$type": "DoActionByEventMixin",
+              "type": "Both",
               "onEvent": "HPDown",
-              "predicates": [
-                {
-                  "$type": "ByTargetHPValue",
-                  "target": "Caster",
-                  "logic": "Lesser",
-                  "HP": 2.0
-                },
-                {
-                  "$type": "BySkillReady",
-                  "skillID": 10656
-                }
-              ],
               "actions": [
                 {
                   "$type": "TriggerAbility",
-                  "RotationDampTime": true,
+                  "target": "Self",
+                  "doOffStage": true,
                   "abilityName": "Avatar_Shinobu_Constellation6_Limbo_Trigger_Protect"
                 }
               ],
-              "JOPEDINKMCP": ""
-            }
-          ],
-          "onThinkInterval": [
-            {
-              "$type": "AttachModifier",
-              "RotationDampTime": true,
               "predicates": [
-                {
-                  "$type": "BySkillReady",
-                  "skillID": 10656
-                }
-              ],
-              "modifierName": "UNIQUE_Shinobu_Constellation6_Limbo_Untriggered_Limbo"
-            },
-            {
-              "$type": "TriggerAbility",
-              "RotationDampTime": true,
-              "predicates": [
+                //精度不够，只能判小于2而不是等于1
                 {
                   "$type": "ByTargetHPValue",
                   "target": "Caster",
-                  "logic": "Lesser",
-                  "HP": 2.0
+                  "HP": 2,
+                  "logic": "Lesser"
                 },
                 {
                   "$type": "BySkillReady",
                   "skillID": 10656
                 }
-              ],
-              "abilityName": "Avatar_Shinobu_Constellation6_Limbo_Trigger_Protect"
+              ]
+            }
+          ],
+          "thinkInterval": 2.0,
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "target": "Self",
+              "doOffStage": true,
+              "modifierName": "UNIQUE_Shinobu_Constellation6_Limbo_Untriggered_Limbo",
+              "predicates": [
+                {
+                  "$type": "BySkillReady",
+                  "skillID": 10656
+                }
+              ]
+            },
+            {
+              "$type": "TriggerAbility",
+              "target": "Self",
+              "doOffStage": true,
+              "abilityName": "Avatar_Shinobu_Constellation6_Limbo_Trigger_Protect",
+              "predicates": [
+                //精度不够，只能判小于2而不是等于1
+                {
+                  "$type": "ByTargetHPValue",
+                  "target": "Caster",
+                  "HP": 2,
+                  "logic": "Lesser"
+                },
+                {
+                  "$type": "BySkillReady",
+                  "skillID": 10656
+                }
+              ]
             }
           ]
         },
         "Shinobu_Constellation6_ElemMastery_Main_Handler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "DoActionByEventMixin",
+              "type": "Both",
               "onEvent": "HPDown",
+              "actions": [
+                {
+                  "$type": "TriggerAbility",
+                  "target": "Self",
+                  "doOffStage": true,
+                  "abilityName": "Avatar_Shinobu_Constellation6_Limbo_Trigger_ElemMastery"
+                }
+              ],
               "predicates": [
                 {
                   "$type": "ByTargetHPRatio",
                   "target": "Caster",
-                  "logic": "Lesser",
-                  "HPRatio": "Shinobu_Constellation_6_HpRate_P1"
+                  "HPRatio": "%Shinobu_Constellation_6_HpRate_P1",
+                  "logic": "Lesser"
                 },
                 {
                   "$type": "BySkillReady",
                   "skillID": 10657
                 }
-              ],
-              "actions": [
-                {
-                  "$type": "TriggerAbility",
-                  "RotationDampTime": true,
-                  "abilityName": "Avatar_Shinobu_Constellation6_Limbo_Trigger_ElemMastery"
-                }
-              ],
-              "JOPEDINKMCP": ""
+              ]
             }
           ]
         },
         "UNIQUE_Shinobu_Constellation6_Limbo_Untriggered_Limbo": {
-          "modifierName": "",
+          "duration": 3.0,
+          "stacking": "Refresh",
           "isUnique": true,
-          "HCJLIGBLGJA": 3.0,
-          "bonusCriticalHurt": 100.0,
           "state": "Limbo"
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "RotationDampTime": true,
-          "modifierName": "Shinobu_Constellation6_Limbo_Main_Handler"
-        },
-        {
-          "$type": "ApplyModifier",
-          "RotationDampTime": true,
-          "modifierName": "Shinobu_Constellation6_ElemMastery_Main_Handler"
-        },
-        {
-          "$type": "UnlockSkill",
-          "RotationDampTime": true,
-          "skillID": 10656
-        },
-        {
-          "$type": "UnlockSkill",
-          "RotationDampTime": true,
-          "skillID": 10657
-        }
-      ],
-      "isDynamicAbility": true
+      }
     }
   },
+  //触发后元素精通提升
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Shinobu_Constellation6_Limbo_Trigger_ElemMastery",
+      "isDynamicAbility": true,
       "abilitySpecials": {
-        "Shinobu_Constellation6_BuffDuration_P2": 0.0,
-        "Shinobu_Constellation6_ElemMasteryDelta_P3": 0.0
-      },
-      "modifiers": {
-        "UNIQUE_Shinobu_Constellation_ElemMastery_Trigger_Handler": {
-          "modifierName": "",
-          "isUnique": true,
-          "HCJLIGBLGJA": "Shinobu_Constellation6_BuffDuration_P2",
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_ElemMasteryDelta": "Shinobu_Constellation6_ElemMasteryDelta_P3"
-          },
-          "state": "AttackUp",
-          "onAdded": [
-            {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Sword_Shinobu_BuffStart",
-              "EBHJMLOKDGB": -1.0
-            }
-          ],
-          "isLimitedProperties": true
-        }
+        "Shinobu_Constellation6_BuffDuration_P2": 0,
+        "Shinobu_Constellation6_ElemMasteryDelta_P3": 0
       },
       "onAbilityStart": [
         {
           "$type": "ApplyModifier",
-          "RotationDampTime": true,
-          "modifierName": "UNIQUE_Shinobu_Constellation_ElemMastery_Trigger_Handler"
+          "modifierName": "UNIQUE_Shinobu_Constellation_ElemMastery_Trigger_Handler",
+          "target": "Self",
+          "doOffStage": true
         },
         {
           "$type": "AvatarSkillStart",
-          "RotationDampTime": true,
-          "skillID": 10657,
-          "cdDelta": 1.0,
-          "costStaminaDelta": 1.0
+          "target": "Self",
+          "doOffStage": true,
+          "skillID": 10657
         }
       ],
-      "isDynamicAbility": true
+      "modifiers": {
+        "UNIQUE_Shinobu_Constellation_ElemMastery_Trigger_Handler": {
+          "duration": "%Shinobu_Constellation6_BuffDuration_P2",
+          "isUnique": true,
+          "isLimitedProperties": true,
+          "state": "AttackUp",
+          "properties": {
+            "Actor_ElemMasteryDelta": "%Shinobu_Constellation6_ElemMasteryDelta_P3"
+          },
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Avatar_Girl_Sword_Shinobu_BuffStart"
+            }
+          ]
+        }
+      }
     }
   },
+
+  //触发护死
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Shinobu_Constellation6_Limbo_Trigger_Protect",
+      "isDynamicAbility": true,
       "abilitySpecials": {
-        "Shinobu_Constellation6_BuffDuration_P2": 0.0
-      },
-      "modifiers": {
-        "UNIQUE_Shinobu_Constellation_Limbo_Trigger_Handler": {
-          "modifierName": "",
-          "isUnique": true,
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Girl_Sword_Shinobu_Limbo_Start",
-              "EBHJMLOKDGB": -1.0
-            }
-          ],
-          "isLimitedProperties": true
-        }
+        "Shinobu_Constellation6_BuffDuration_P2": 0
       },
       "onAbilityStart": [
         {
           "$type": "ApplyModifier",
-          "RotationDampTime": true,
-          "modifierName": "UNIQUE_Shinobu_Constellation_Limbo_Trigger_Handler"
+          "modifierName": "UNIQUE_Shinobu_Constellation_Limbo_Trigger_Handler",
+          "target": "Self",
+          "doOffStage": true
         },
         {
           "$type": "RemoveUniqueModifier",
-          "RotationDampTime": true,
-          "modifierName": "UNIQUE_Shinobu_Constellation6_Limbo_Untriggered_Limbo"
+          "modifierName": "UNIQUE_Shinobu_Constellation6_Limbo_Untriggered_Limbo",
+          "target": "Self",
+          "doOffStage": true
         },
         {
           "$type": "AvatarSkillStart",
-          "RotationDampTime": true,
-          "skillID": 10656,
-          "cdDelta": 1.0,
-          "costStaminaDelta": 1.0
+          "target": "Self",
+          "doOffStage": true,
+          "skillID": 10656
         }
       ],
-      "isDynamicAbility": true
+      "modifiers": {
+        "UNIQUE_Shinobu_Constellation_Limbo_Trigger_Handler": {
+          "duration": 1,
+          "isUnique": true,
+          "isLimitedProperties": true,
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Avatar_Girl_Sword_Shinobu_Limbo_Start"
+            }
+          ]
+        }
+      }
     }
   }
 ]

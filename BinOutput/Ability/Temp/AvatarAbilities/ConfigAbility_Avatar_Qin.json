@@ -1,4 +1,9 @@
 [
+  ////////////////////////////////////////////////////////////////
+  //
+  //  ExtraAttack
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -7,8 +12,8 @@
         {
           "$type": "ButtonHoldChargeMixin",
           "skillID": 10031,
-          "chargeTime": 0.11999999731779099,
-          "secondChargeTime": 0.20000000298023224,
+          "chargeTime": 0.12,
+          "secondChargeTime": 0.2,
           "OnBeginUncharged": [
             {
               "$type": "SetAnimatorTrigger",
@@ -16,95 +21,107 @@
             },
             {
               "$type": "SetAnimatorInt",
+              "intID": "SkillID",
+              "value": 99,
               "predicates": [
                 {
                   "$type": "ByAny",
                   "predicates": [
                     {
                       "$type": "ByAnimatorInt",
-                      "logic": "Equal",
-                      "ratio": 0,
-                      "parameter": "ComboCount"
+                      "value": 0,
+                      "parameter": "ComboCount",
+                      "logic": "Equal"
                     },
                     {
                       "$type": "ByAnimatorInt",
-                      "logic": "Equal",
-                      "ratio": 5,
-                      "parameter": "ComboCount"
+                      "value": 5,
+                      "parameter": "ComboCount",
+                      "logic": "Equal"
                     }
                   ]
                 }
-              ],
-              "intID": "SkillID",
-              "ratio": 99.0
+              ]
             },
             {
               "$type": "SetAnimatorBool",
-              "boolID": "IsCharging"
+              "boolID": "IsCharging",
+              "value": false
             }
           ],
           "OnReleaseUncharged": [
+            /*						{
+							"$type": "SetAnimatorTrigger",
+							"triggerID": "DoSkill",
+						},*/
             {
               "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "ratio": 1.0
+              "value": 1
             }
           ],
           "OnBeginCharged": [
             {
               "$type": "SetAnimatorBool",
               "boolID": "IsCharging",
-              "ratio": true
+              "value": true
             }
           ],
           "OnReleaseCharged": [
             {
               "$type": "SetAnimatorBool",
-              "boolID": "IsCharging"
+              "boolID": "IsCharging",
+              "value": false
             },
+            /*						{
+							"$type": "SetAnimatorTrigger",
+							"triggerID": "DoSkill",
+						},*/
             {
               "$type": "SetAnimatorInt",
               "intID": "SkillID",
-              "ratio": 1.0
+              "value": 1
             }
+            /*						{
+							"$type": "ResetAnimatorTrigger",
+							"triggerID": "DoSkill",
+						},*/
           ],
           "OnBeginSecondCharged": [
             {
               "$type": "SetAnimatorTrigger",
+              "triggerID": "DoSkill",
               "predicates": [
                 {
                   "$type": "ByLocalAvatarStamina",
-                  "logic": "GreaterOrEqual",
-                  "stamina": [
-                    "ExtraAttack_Sword_Stamina_Cost",
-                    "Flexible_Stamina",
-                    "ADD"
-                  ]
+                  "stamina": "%ExtraAttack_Sword_Stamina_Cost+%Flexible_Stamina",
+                  "logic": "GreaterOrEqual"
                 }
-              ],
-              "triggerID": "DoSkill"
+              ]
             },
             {
               "$type": "SetAnimatorInt",
+              "intID": "SkillID",
+              "value": 6,
               "predicates": [
                 {
                   "$type": "ByLocalAvatarStamina",
-                  "logic": "GreaterOrEqual",
-                  "stamina": [
-                    "ExtraAttack_Sword_Stamina_Cost",
-                    "Flexible_Stamina",
-                    "ADD"
-                  ]
+                  "stamina": "%ExtraAttack_Sword_Stamina_Cost+%Flexible_Stamina",
+                  "logic": "GreaterOrEqual"
                 }
-              ],
-              "intID": "SkillID",
-              "ratio": 6.0
+              ]
             },
             {
               "$type": "SetAnimatorBool",
-              "boolID": "IsCharging"
+              "boolID": "IsCharging",
+              "value": false
             }
+            /*						{
+							"$type": "ResetAnimatorTrigger",
+							"triggerID": "DoSkill",
+						},*/
           ],
+          "OnReleaseSecondCharged": [],
           "chargeStateIDs": [
             "Attack01",
             "Attack02",
@@ -119,30 +136,30 @@
           "modifierName": "ExtraAttack_StaminaCost"
         }
       ],
-      "abilitySpecials": {
-        "ExtraAttack_Sword_Stamina_Cost": 0.0,
-        "Flexible_Stamina": -2.0
-      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Qin_ExtraAttack_Detect",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "ExtraAttack_StaminaCost": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          // "duration": 0.2,
           "onAdded": [
             {
               "$type": "AvatarSkillStart",
               "skillID": 10001,
-              "cdDelta": 1.0,
-              "costStaminaDelta": "ExtraAttack_Sword_Stamina_Cost"
+              "costStaminaRatio": "%ExtraAttack_Sword_Stamina_Cost"
             }
           ]
         },
         "Qin_ExtraAttack_Detect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAttackLanded": [
             {
               "$type": "ApplyModifier",
               "target": "Target",
+              "modifierName": "UNIQUE_Qin_ExtraAttack_WeightDown_Pre",
               "predicates": [
                 {
                   "$type": "ByAttackTags",
@@ -155,124 +172,157 @@
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "Qin_ExtraAttack_Recently_Lifted",
-                  "ratio": 0.0,
-                  "maxValue": 1.0,
+                  "value": 0,
+                  "maxValue": 1,
                   "compareType": "NoneOrEqual"
                 }
-              ],
-              "modifierName": "UNIQUE_Qin_ExtraAttack_WeightDown_Pre"
+              ]
             }
           ]
         },
         "UNIQUE_Qin_ExtraAttack_WeightDown_Pre": {
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": 0.4000000059604645,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.4,
           "onRemoved": [
             {
               "$type": "ApplyModifier",
+              "target": "Self",
               "modifierName": "UNIQUE_Qin_ExtraAttack_WeightDown"
             }
           ]
         },
         "UNIQUE_Qin_ExtraAttack_WeightDown": {
-          "stacking": "Unique",
-          "modifierName": "",
+          "duration": 3.0,
           "isUnique": true,
-          "HCJLIGBLGJA": 3.0,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
+          "isLimitedProperties": true,
           "properties": {
-            "Actor_AddGravityScale": -1.9800000190734863
+            "Actor_AddGravityScale": -1.98
           },
           "onAdded": [
             {
               "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Boy_Bow_Venti_Rise_Monster",
               "predicates": [
                 {
                   "$type": "ByEntityTypes",
                   "entityTypes": ["Monster", "Gadget"]
                 }
-              ],
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Boy_Bow_Venti_Rise_Monster",
-              "EBHJMLOKDGB": -1.0
+              ]
             },
             {
               "$type": "ApplyModifier",
               "modifierName": "Qin_ExtraAttack_Recently_Lifted"
             }
-          ],
-          "isLimitedProperties": true
+          ]
+          /*					"onBeingHit":
+					[
+						{
+							"$type" : "ApplyModifier",
+							"modifierName" : "Qin_ExtraAttack_WeightDown_Afterwards",
+							"target" : "Self",
+							"predicates" :
+							[
+								{
+									"$type" : "ByAttackTags",
+									"attackTags" : ["Elemental_Art"],
+								},
+							],
+						},
+						{
+							"$type" : "RemoveUniqueModifier",
+							"modifierName" : "UNIQUE_Qin_ExtraAttack_WeightDown",
+							"predicates" :
+							[
+								{
+									"$type" : "ByNot",
+									"predicates" :
+									[
+										{
+											"$type" : "ByAttackTags",
+											"attackTags" : ["Elemental_Art_Hold"],
+										},
+									],
+								},
+							],
+						},
+					],*/
         },
         "Qin_ExtraAttack_WeightDown_Afterwards": {
+          "duration": 1.5,
           "stacking": "Unique",
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.5,
-          "bonusCriticalHurt": 100.0,
           "properties": {
-            "Actor_AddGravityScale": -1.9299999475479126
+            "Actor_AddGravityScale": -1.93
           },
           "onAdded": [
             {
               "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Boy_Bow_Venti_Rise_Monster",
               "predicates": [
                 {
                   "$type": "ByEntityTypes",
                   "entityTypes": ["Monster", "Gadget"]
                 }
-              ],
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Boy_Bow_Venti_Rise_Monster",
-              "EBHJMLOKDGB": -1.0
+              ]
             }
           ]
         },
         "Qin_ExtraAttack_Recently_Lifted": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 6.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 6.0,
+          "stacking": "Refresh",
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
               "key": "Qin_ExtraAttack_Recently_Lifted",
+              "value": 1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
+              "maxValue": 1,
+              "minValue": 0
             }
           ],
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "ratio": -5.0,
               "key": "Qin_ExtraAttack_Recently_Lifted",
+              "value": -5,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
+              "maxValue": 1,
+              "minValue": 0
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Qin_ExtraAttack_Detect"
-        }
-      ]
+      "abilitySpecials": {
+        //故意少判了一点点体力，为了顾及一部分网络延迟
+        "ExtraAttack_Sword_Stamina_Cost": 0,
+        "Flexible_Stamina": -2
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Vortex Smash
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Qin_VortexSmash",
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "GenerateElemBall_VortexSmash" //掉球常驻
+        }
+      ],
       "abilityMixins": [
         {
           "$type": "SkillButtonHoldChargeMixin",
           "skillID": 10033,
-          "nextLoopTriggerID": "NextLoopTrigger",
-          "endHoldTrigger": "EndHoldTrigger",
           "beforeStateIDs": ["VortexSmash_BS"],
           "chargeLoopStateIDs": ["VortexSmash_Charge_01"],
-          "chargeLoopDurations": [5.0]
+          "chargeLoopDurations": [5], //5秒其实并不能正确消耗掉体力，会剩一点点。
+          "nextLoopTriggerID": "NextLoopTrigger",
+          "endHoldTrigger": "EndHoldTrigger"
         },
         {
           "$type": "AttachToStateIDMixin",
@@ -296,145 +346,273 @@
         },
         {
           "$type": "AttachToStateIDMixin",
-          "stateIDs": ["VortexSmash_Charge_01", "VortexSmash_Strike_01"],
+          "stateIDs": ["VortexSmash_Charge_01", "VortexSmash_Strike_01"], //"VortexSmash_BS",
           "modifierName": "Focus"
         },
         {
           "$type": "AttachToStateIDMixin",
           "stateIDs": ["VortexSmash_Strike"],
-          "modifierName": "Before_VortexSmash"
+          "modifierName": "Before_VortexSmash" //由于1.1挪走了modifier，导致删除了提早struggle的效果，必须重现这个效果。
         }
       ],
-      "abilitySpecials": {
-        "GetElementRatio": 1.0,
-        "Art_DMG": 0.0,
-        "Attenuation": 2.0,
-        "Strength": 2.0,
-        "StaminaCost": 0.0,
-        "DamageRate": 0.0,
-        "IsCharged": 0.0
-      },
+      "onAbilityStart": [
+        {
+          "$type": "AvatarSkillStart",
+          "skillID": 10033,
+          "predicates": [
+            {
+              "$type": "BySkillReady",
+              "skillID": 10033
+            }
+          ]
+        },
+        {
+          "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
+          "attackEvent": {
+            "attackPattern": {
+              "$type": "ConfigAttackBox",
+              "triggerType": "TriggerNoRepeat",
+              "size": {
+                "x": 4.0,
+                "y": 2.4,
+                "z": 4.1 //原参数为3.0,2.4,2.2
+              },
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "FocusAnchor",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.4,
+                  "z": 0.0
+                }
+              }
+            },
+            "attackInfo": {
+              "attackTag": "Elemental_Art",
+              "attackProperty": {
+                "damagePercentage": "%Art_DMG",
+                "strikeType": "Default",
+                "elementType": "Wind",
+                "attackType": "Melee",
+                "elementDurability": 50,
+                "enBreak": 250
+              },
+              "hitPattern": {
+                "onHitEffectName": "default",
+                "hitImpulseType": "LV9",
+                // "hitLevel": "Air",	//hitlevel = 9
+                // "hitImpulseX": 1200,	//hitlevel = 9
+                // "hitImpulseY": 600,	//hitlevel = 9
+                "retreatType": "ByHitDirection", //hitlevel = 9
+                "reboundRatio": 0,
+                "canBeDefenceHalt": false,
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.05,
+                "muteHitText": false
+              }
+            }
+          }
+        },
+        {
+          "$type": "TriggerAttackEvent",
+          "targetType": "Alliance",
+          "attackEvent": {
+            "attackPattern": {
+              "$type": "ConfigAttackBox",
+              "triggerType": "TriggerNoRepeat",
+              "size": {
+                "x": 4.0,
+                "y": 2.4,
+                "z": 3.5
+              },
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "FocusAnchor",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.4,
+                  "z": 0.6
+                }
+              }
+            },
+            "attackInfo": {
+              "attackTag": "Qin_VortexSmash", //这个打击队友用不同的tag，用于避免击中avatar。
+              "attackProperty": {
+                "damagePercentage": 0.0,
+                "strikeType": "Default",
+                "elementType": "None",
+                "elementDurability": 50,
+                "enBreak": 250,
+                "attackType": "Melee"
+              },
+              "hitPattern": {
+                "onHitEffectName": "default",
+                "hitImpulseType": "LV9",
+                // "hitLevel": "Air",	//hitlevel = 9
+                // "hitImpulseX": 1200,	//hitlevel = 9
+                // "hitImpulseY": 600,	//hitlevel = 9
+                "retreatType": "ByHitDirection", //hitlevel = 9
+                "reboundRatio": 0,
+                "canBeDefenceHalt": false,
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.05,
+                "muteHitText": false
+              }
+            }
+          }
+        },
+        {
+          "$type": "ActCameraShake",
+          "cameraShake": {
+            "shakeType": "Center",
+            "shakeRange": 0.36,
+            "shakeTime": 0.12,
+            "shakeDistance": 30
+          },
+          "extension": {
+            "baseOnCamera": true
+          }
+        },
+        {
+          "$type": "ActCameraRadialBlur",
+          "cameraRadialBlur": {
+            "power": 1,
+            "blurTime": 0.25,
+            "fadeTime": 0.3
+          }
+        }
+      ],
       "modifiers": {
+        //每次重置天赋的数值。
         "Initialize": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
               "attackTags": ["Elemental_Art"],
-              "CCNJGLPMIEP": ["DamageRate", "IsCharged", "MUL"]
+              "damagePercentageRatio": "%DamageRate*%IsCharged"
             }
           ],
           "onAdded": [
             {
               "$type": "AttachModifier",
-              "RotationDampTime": true,
-              "modifierName": "DetectAttackLanded"
+              "doOffStage": true,
+              "modifierName": "DetectAttackLanded",
+              "target": "Self"
             },
             {
               "$type": "SetOverrideMapValue",
-              "ratio": 2.0,
-              "overrideMapKey": "Strength"
+              "overrideMapKey": "Strength",
+              "value": 2
             },
             {
               "$type": "SetOverrideMapValue",
-              "ratio": 0.0,
-              "overrideMapKey": "IsCharged"
+              "overrideMapKey": "IsCharged",
+              "value": 0
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 0.0,
               "key": "_ABILITY_Qin_VortexSmash_IsCharged",
+              "value": 0,
               "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "maxValue": 0,
+              "minValue": 0
             },
             {
+              //在发动攻击之前，将队友都加上reject，这样就不会被击飞了。
               "$type": "ApplyModifier",
-              "target": "AllPlayerAvatars",
-              "modifierName": "Reject_Push"
+              "modifierName": "Reject_Push",
+              "target": "AllPlayerAvatars"
             }
           ]
         },
+        //这个是攻击盒、cd相关
         "Charging": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.15000000596046448,
           "onRemoved": [
             {
-              "$type": "AvatarSkillStart",
+              "$type": "AvatarSkillStart", //攻击之前就会进入cd
+              "skillID": 10033,
               "predicates": [
                 {
                   "$type": "BySkillReady",
                   "skillID": 10033
                 }
-              ],
-              "skillID": 10033,
-              "cdDelta": 1.0,
-              "costStaminaDelta": 1.0
+              ]
             }
           ],
+          "thinkInterval": 0.15,
           "onThinkInterval": [
             {
               "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackBox",
                   "triggerType": "TriggerNoRepeat",
+                  "size": {
+                    "x": 2.0,
+                    "y": 2.0,
+                    "z": 2.5
+                  },
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
+                    "attachPointName": "FocusAnchor",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 0.0
-                    },
-                    "attachPointName": "FocusAnchor"
-                  },
-                  "size": {
-                    "IBKBLDAJIMA": 2.0,
-                    "LKHJADIPBFL": 2.0,
-                    "PJCOKIGCJOK": 2.5
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
+                    }
                   }
                 },
                 "attackInfo": {
                   "attackTag": "VortexSmash_Detect",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "HBIOLEEGHPD": 0.0,
-                    "CCNJGLPMIEP": 0.0,
-                    "bonusCriticalHurt": 50.0,
-                    "enBreak": 0.0
+                    "damagePercentage": 0.0,
+                    "elementType": "None",
+                    "elementDurability": 50,
+                    "enBreak": 0
                   },
                   "hitPattern": {
-                    "onHitEffectName": "default",
                     "hitImpulseType": "LV0"
+                    //		"hitLevel" : "Air",
+                    //		"hitImpulseX" : 0,
+                    //		"hitImpulseY" : 160,
+                    //		"reboundRatio" : 0,
+                    //		"hitHaltTime" : 0.0,
+                    //		"hitHaltTimeScale" : 0.05,
+                    //		"muteHitText" : false,
                   }
+                  //	"forceCameraShake": false,
+                  //	"cameraShake": {},
                 }
-              },
-              "targetType": "Enemy"
+              }
             }
           ]
         },
+        //镜头相关
         "Focus": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AvatarEnterFocus",
               "cameraFollowLower": {
                 "x": 0.5,
+                "y": 0.0,
                 "z": -2.5
               },
               "cameraFollowUpper": {
-                "x": 0.30000001192092896,
-                "y": -0.20000000298023224
+                "x": 0.3,
+                "y": -0.2,
+                "z": 0.0
               },
               "cameraFastFocusMode": true,
               "dragButtonName": "Skill2",
               "assistance": {
-                "ps4": {},
-                "ps5": {},
+                "ps4": {
+                  "useGyro": false
+                },
+                "ps5": {
+                  "useGyro": false
+                },
                 "other": {
                   "useGyro": true
                 }
@@ -449,44 +627,68 @@
             }
           ]
         },
+        //这个是风场相关，天赋相关，击飞保护相关。
         "Charging_Wind": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 1.0,
+          "onAdded": [
+            //这个是命之座1改变特效和伤害的入口。进行1秒计时。
+            {
+              "$type": "AttachModifier",
+              "modifierName": "VortexSmash_TalentTimer",
+              "predicates": [
+                {
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "Stronger_VortexSmash"
+                }
+              ]
+            },
+            {
+              //在发动攻击之前，将队友都加上reject，这样就不会被击飞了。
+              "$type": "ApplyModifier",
+              "modifierName": "Reject_Push",
+              "target": "AllPlayerAvatars"
+            }
+          ],
+          "thinkInterval": 1,
+          "onThinkInterval": [
+            {
+              //在发动攻击之前，将队友都加上reject，这样就不会被击飞了。
+              "$type": "ApplyModifier",
+              "modifierName": "Reject_Push",
+              "target": "AllPlayerAvatars"
+            }
+          ],
           "modifierMixins": [
             {
               "$type": "WindZoneMixin",
               "shapeName": "CircleR10",
+              "strength": "%Strength",
+              "attenuation": "%Attenuation",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "FocusAnchor",
                 "offset": {
-                  "IBKBLDAJIMA": 0.4000000059604645,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 1.7999999523162842
-                },
-                "attachPointName": "FocusAnchor"
+                  "x": 0.4,
+                  "y": 0.0,
+                  "z": 1.8
+                }
               },
-              "LFMBDMGKEFB": "Strength",
-              "innerRadius": "Attenuation",
-              "radius": 0.0,
               "targetType": "All",
               "predicates": [
                 {
-                  "$type": "ByTargetWeight",
-                  "logic": "LesserOrEqual",
-                  "weight": 150.0
+                  "$type": "ByTargetWeight", //WindZoneLevel = 1
+                  "logic": "LesserOrEqual", //WindZoneLevel = 1
+                  "weight": 150.0 //WindZoneLevel = 1//从原先100提升到150
                 },
                 {
                   "$type": "ByEntityTypes",
                   "entityTypes": ["Avatar"],
                   "reject": true
                 }
-              ],
-              "modifierName": ""
+              ]
             },
             {
               "$type": "CostStaminaMixin",
-              "costStaminaRatio": "StaminaCost",
+              "costStaminaDelta": "%StaminaCost",
               "onStaminaEmpty": [
                 {
                   "$type": "SetAnimatorTrigger",
@@ -494,109 +696,79 @@
                 }
               ]
             },
+            //控制不同天赋下的特效变化。
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_Qin_VortexSmash_IsCharged",
-              "defaultGlobalValueOnCreate": 0.0,
               "valueSteps": [-0.5, 0.5, 1.5],
               "modifierNameSteps": ["Effect_Control1", "Effect_Control2"],
               "removeAppliedModifier": false
             }
-          ],
-          "onAdded": [
-            {
-              "$type": "AttachModifier",
-              "predicates": [
-                {
-                  "$type": "ByUnlockTalentParam",
-                  "talentParam": "Stronger_VortexSmash"
-                }
-              ],
-              "modifierName": "VortexSmash_TalentTimer"
-            },
-            {
-              "$type": "ApplyModifier",
-              "target": "AllPlayerAvatars",
-              "modifierName": "Reject_Push"
-            }
-          ],
-          "onThinkInterval": [
-            {
-              "$type": "ApplyModifier",
-              "target": "AllPlayerAvatars",
-              "modifierName": "Reject_Push"
-            }
           ]
         },
         "VortexSmash_TalentTimer": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0499999523162842,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 1.0,
+          "duration": 1.05,
+          "thinkInterval": 1, //略微考虑一点延迟。
+          "onThinkInterval": [
+            {
+              "$type": "SetOverrideMapValue",
+              "overrideMapKey": "Strength",
+              "value": 4
+            },
+            {
+              "$type": "AddGlobalValue",
+              "key": "_ABILITY_Qin_VortexSmash_IsCharged",
+              "value": 1
+            },
+            {
+              "$type": "SetOverrideMapValue",
+              "overrideMapKey": "IsCharged",
+              "value": 1
+            },
+            //建议有震屏提示
+            {
+              "$type": "ActCameraShake",
+              "cameraShake": {
+                "shakeType": "Center",
+                "shakeRange": 0.12,
+                "shakeTime": 0.15,
+                "shakeDistance": 10,
+                "extension": {
+                  "baseCycle": 0.08,
+                  "cycleDamping": -0.04
+                }
+              }
+            }
+          ],
+          //由于特效发动需要时间，删除特效就晚一些。
           "onRemoved": [
             {
               "$type": "RemoveModifier",
               "modifierName": "Effect_Control1"
             }
-          ],
-          "onThinkInterval": [
-            {
-              "$type": "SetOverrideMapValue",
-              "ratio": 4.0,
-              "overrideMapKey": "Strength"
-            },
-            {
-              "$type": "AddGlobalValue",
-              "ratio": 1.0,
-              "key": "_ABILITY_Qin_VortexSmash_IsCharged",
-              "maxValue": 0.0,
-              "minValue": 0.0
-            },
-            {
-              "$type": "SetOverrideMapValue",
-              "ratio": 1.0,
-              "overrideMapKey": "IsCharged"
-            },
-            {
-              "$type": "ActCameraShake",
-              "cameraShake": {
-                "shakeRange": 0.11999999731779099,
-                "shakeTime": 0.15000000596046448,
-                "shakeDistance": 10.0,
-                "extension": {
-                  "baseCycle": 0.07999999821186066,
-                  "cycleDamping": -0.03999999910593033
-                }
-              }
-            }
           ]
         },
+        //普通特效
         "Effect_Control1": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_VortexSmash_Charge_01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Avatar_VortexSmash_Charge_01"
             }
           ]
         },
+        //天赋开启时会播放更强特效
         "Effect_Control2": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_VortexSmash_Charge_02",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Avatar_VortexSmash_Charge_02"
             }
           ]
         },
+        //得想办法在打击之前将范围内的队友都加上不会被hit的效果。包括吸引的时候，包括hit的时候。
         "Reject_Push": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 2.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 2,
           "modifierMixins": [
             {
               "$type": "RejectAttackMixin",
@@ -604,18 +776,16 @@
             }
           ]
         },
+        //上的间隔0.15秒，持续0.25秒  ，只持续0.2的时候会出现怪退出struggle的问题。
         "Drag": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5, // thinkinterval可能有问题，导致0.2秒不够覆盖interval
           "state": "Struggle"
         },
         "DetectAttackLanded": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAttackLanded": [
             {
               "$type": "ApplyModifier",
+              "modifierName": "Collision",
               "target": "Target",
               "predicates": [
                 {
@@ -627,11 +797,11 @@
                   "entityTypes": ["Avatar"],
                   "reject": true
                 }
-              ],
-              "modifierName": "Collision"
+              ]
             },
             {
               "$type": "ApplyModifier",
+              "modifierName": "Drag",
               "target": "Target",
               "predicates": [
                 {
@@ -639,20 +809,20 @@
                   "attackTags": ["VortexSmash_Detect"]
                 },
                 {
-                  "$type": "ByTargetWeight",
-                  "logic": "LesserOrEqual",
-                  "weight": 100.0
+                  "$type": "ByTargetWeight", //WindZoneLevel = 1
+                  "logic": "LesserOrEqual", //WindZoneLevel = 1
+                  "weight": 100.0 //WindZoneLevel = 1
                 },
                 {
                   "$type": "ByEntityTypes",
                   "entityTypes": ["Avatar"],
                   "reject": true
                 }
-              ],
-              "modifierName": "Drag"
+              ]
             },
             {
               "$type": "ApplyModifier",
+              "modifierName": "Drag2",
               "target": "Target",
               "predicates": [
                 {
@@ -660,23 +830,21 @@
                   "attackTags": ["VortexSmash_Detect_Short"]
                 },
                 {
-                  "$type": "ByTargetWeight",
-                  "logic": "LesserOrEqual",
-                  "weight": 100.0
+                  "$type": "ByTargetWeight", //WindZoneLevel = 1
+                  "logic": "LesserOrEqual", //WindZoneLevel = 1
+                  "weight": 100.0 //WindZoneLevel = 1
                 },
                 {
                   "$type": "ByEntityTypes",
                   "entityTypes": ["Avatar"],
                   "reject": true
                 }
-              ],
-              "modifierName": "Drag2"
+              ]
             }
           ]
         },
         "Collision": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          //"duration": 5.0,
           "modifierMixins": [
             {
               "$type": "VelocityDetectMixin",
@@ -693,11 +861,10 @@
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_VortexSmash_Trail01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Avatar_VortexSmash_Trail01"
             }
           ],
-          "OJIKPOMAJGD": [
+          "onCrash": [
             {
               "$type": "RemoveModifier",
               "modifierName": "Collision"
@@ -705,8 +872,6 @@
           ]
         },
         "GenerateElemBall_VortexSmash": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
@@ -723,38 +888,38 @@
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_ANIMAL_ENTITY_TYPE",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
               ],
               "successActions": [
                 {
-                  "$type": "RemoveModifier",
+                  "$type": "RemoveModifier", //在这里搭车回收一下drag这个modifier
                   "target": "Target",
                   "modifierName": "Drag"
                 },
                 {
-                  "$type": "RemoveModifier",
+                  "$type": "RemoveModifier", //在这里搭车回收一下drag这个modifier
                   "target": "Target",
                   "modifierName": "Drag2"
                 },
                 {
                   "$type": "ApplyModifier",
-                  "modifierName": "Ball"
+                  "modifierName": "Ball",
+                  "target": "Self"
                 },
                 {
                   "$type": "ApplyModifier",
-                  "modifierName": "Ball_Extra"
+                  "modifierName": "Ball_Extra",
+                  "target": "Self"
                 }
               ]
             }
           ]
         },
         "Ball": {
+          "duration": 0.3,
           "stacking": "Unique",
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "Randomed",
@@ -763,235 +928,160 @@
                 {
                   "$type": "GenerateElemBall",
                   "configID": 2021,
+                  "baseEnergy": 6,
+                  "ratio": "%GetElementRatio",
                   "born": {
                     "$type": "ConfigBornByTarget",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 1.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 1.0
                     }
-                  },
-                  "IAAIJMOECLB": "GetElementRatio",
-                  "baseEnergy": 6.0
+                  }
                 }
               ]
             }
           ]
         },
         "Ball_Extra": {
+          "duration": 1.0,
           "stacking": "Unique",
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "Randomed",
-              "chance": 0.6700000166893005,
+              "chance": 0.67,
               "successActions": [
                 {
                   "$type": "GenerateElemBall",
                   "configID": 2021,
+                  "baseEnergy": 3,
+                  "ratio": "%GetElementRatio",
                   "born": {
                     "$type": "ConfigBornByTarget",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 1.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 1.0
                     }
-                  },
-                  "IAAIJMOECLB": "GetElementRatio",
-                  "baseEnergy": 3.0
+                  }
                 }
               ]
             }
           ]
         },
+        //为了还原1.0，必须有原来只有0.2秒的drag
         "Drag2": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.2,
           "state": "Struggle"
         },
         "Before_VortexSmash": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
-              "target": "AllPlayerAvatars",
-              "modifierName": "Reject_Push"
+              "modifierName": "Reject_Push",
+              "target": "AllPlayerAvatars"
             },
             {
               "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackBox",
                   "triggerType": "TriggerNoRepeat",
+                  "size": {
+                    "x": 2.0,
+                    "y": 2.0,
+                    "z": 2.5
+                  },
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
+                    "attachPointName": "FocusAnchor",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 0.0
-                    },
-                    "attachPointName": "FocusAnchor"
-                  },
-                  "size": {
-                    "IBKBLDAJIMA": 2.0,
-                    "LKHJADIPBFL": 2.0,
-                    "PJCOKIGCJOK": 2.5
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
+                    }
                   }
                 },
                 "attackInfo": {
                   "attackTag": "VortexSmash_Detect_Short",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "HBIOLEEGHPD": 0.0,
-                    "CCNJGLPMIEP": 0.0,
-                    "bonusCriticalHurt": 50.0,
-                    "enBreak": 0.0
+                    "damagePercentage": 0.0,
+                    "elementType": "None",
+                    "elementDurability": 50,
+                    "enBreak": 0
                   },
                   "hitPattern": {
-                    "onHitEffectName": "default",
                     "hitImpulseType": "LV0"
+                    //		"hitLevel" : "Air",
+                    //		"hitImpulseX" : 0,
+                    //		"hitImpulseY" : 160,
+                    //		"reboundRatio" : 0,
+                    //		"hitHaltTime" : 0.0,
+                    //		"hitHaltTimeScale" : 0.05,
+                    //		"muteHitText" : false,
                   }
+                  //	"forceCameraShake": false,
+                  //	"cameraShake": {},
                 }
-              },
-              "targetType": "Enemy"
+              }
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "GenerateElemBall_VortexSmash"
-        }
-      ],
-      "onAbilityStart": [
-        {
-          "$type": "AvatarSkillStart",
-          "predicates": [
-            {
-              "$type": "BySkillReady",
-              "skillID": 10033
-            }
-          ],
-          "skillID": 10033,
-          "cdDelta": 1.0,
-          "costStaminaDelta": 1.0
-        },
-        {
-          "$type": "TriggerAttackEvent",
-          "attackEvent": {
-            "attackPattern": {
-              "$type": "ConfigAttackBox",
-              "triggerType": "TriggerNoRepeat",
-              "born": {
-                "$type": "ConfigBornByAttachPoint",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.4000000059604645,
-                  "PJCOKIGCJOK": 0.0
-                },
-                "attachPointName": "FocusAnchor"
-              },
-              "size": {
-                "IBKBLDAJIMA": 4.0,
-                "LKHJADIPBFL": 2.4000000953674316,
-                "PJCOKIGCJOK": 4.099999904632568
-              }
-            },
-            "attackInfo": {
-              "attackTag": "Elemental_Art",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
-              "attackProperty": {
-                "HBIOLEEGHPD": "Art_DMG",
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Wind",
-                "bonusCriticalHurt": 50.0,
-                "strikeType": "Default",
-                "enBreak": 250.0,
-                "attackType": "Melee"
-              },
-              "hitPattern": {
-                "onHitEffectName": "default",
-                "hitImpulseType": "LV9",
-                "retreatType": "ByHitDirection",
-                "hitHaltTimeScale": 0.05000000074505806
-              }
-            }
-          },
-          "targetType": "Enemy"
-        },
-        {
-          "$type": "TriggerAttackEvent",
-          "attackEvent": {
-            "attackPattern": {
-              "$type": "ConfigAttackBox",
-              "triggerType": "TriggerNoRepeat",
-              "born": {
-                "$type": "ConfigBornByAttachPoint",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.4000000059604645,
-                  "PJCOKIGCJOK": 0.6000000238418579
-                },
-                "attachPointName": "FocusAnchor"
-              },
-              "size": {
-                "IBKBLDAJIMA": 4.0,
-                "LKHJADIPBFL": 2.4000000953674316,
-                "PJCOKIGCJOK": 3.5
-              }
-            },
-            "attackInfo": {
-              "attackTag": "Qin_VortexSmash",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
-              "attackProperty": {
-                "HBIOLEEGHPD": 0.0,
-                "CCNJGLPMIEP": 0.0,
-                "bonusCriticalHurt": 50.0,
-                "strikeType": "Default",
-                "enBreak": 250.0,
-                "attackType": "Melee"
-              },
-              "hitPattern": {
-                "onHitEffectName": "default",
-                "hitImpulseType": "LV9",
-                "retreatType": "ByHitDirection",
-                "hitHaltTimeScale": 0.05000000074505806
-              }
-            }
-          },
-          "targetType": "Alliance"
-        },
-        {
-          "$type": "ActCameraShake",
-          "cameraShake": {
-            "shakeRange": 0.36000001430511475,
-            "shakeTime": 0.11999999731779099,
-            "shakeDistance": 30.0
-          }
-        },
-        {
-          "$type": "ActCameraRadialBlur",
-          "cameraRadialBlur": {
-            "power": 1.0,
-            "blurTime": 0.25,
-            "fadeTime": 0.30000001192092896
-          }
-        }
-      ]
+      "abilitySpecials": {
+        "GetElementRatio": 1.0,
+        "Art_DMG": 0,
+        "Attenuation": 2,
+        "Strength": 2,
+        "StaminaCost": 0,
+        "DamageRate": 0,
+        "IsCharged": 0
+      }
     }
   },
+
+  ////////////////////////////////////////////////////////////////
+  //
+  //  DandelionWind
+  //
+  ////////////////////////////////////////////////////////////////
   {
+    //技能开始的镜头和特效支持
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Qin_DandelionWind_Camera",
+      "onAbilityStart": [
+        {
+          "$type": "AvatarEnterCameraShot",
+          "cameraMoveCfgPath": "Camera_Qin_DandelionWind",
+          "predicates": [
+            {
+              "$type": "ByAttackNotHitScene",
+              "attackPattern": {
+                "$type": "ConfigAttackCircle",
+                "triggerType": "TriggerNoRepeat",
+                "height": 0.2,
+                "fanAngle": 30.0,
+                "radius": 0.8,
+                "born": {
+                  "$type": "ConfigBornBySelf",
+                  "offset": {
+                    "x": 0.0,
+                    "y": 1.2,
+                    "z": 0.0
+                  }
+                }
+              }
+            },
+            {
+              "$type": "ByAvatarInWaterDepth",
+              "compareType": "LessAndEqual",
+              "depth": 0.5
+            }
+          ]
+        }
+      ],
       "abilityMixins": [
         {
           "$type": "AttachToStateIDMixin",
@@ -1013,18 +1103,21 @@
           "stateIDs": ["DandelionWind", "DandelionWind_Out"],
           "modifierName": "DandelionWind_Camera_Handler_2"
         },
+        // {
+        // 	"$type":"AttachToStateIDMixin",
+        // 	"stateIDs":["DandelionWind","DandelionWind_Out",],
+        // 	"modifierName":"camera_extra"
+        // },
         {
-          "$type": "AttachToNormalizedTimeMixin",
+          "$type": "AttachToNormalizedTimeMixin", //删除释放技能按键缓存，防止连续小技能。
           "stateID": "DandelionWind",
           "modifierName": "SetEmission",
-          "normalizeStart": 0.1599999964237213,
-          "normalizeEnd": 0.949999988079071
+          "normalizeStart": 0.16,
+          "normalizeEnd": 0.95
         }
       ],
       "modifiers": {
         "isGhost": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "Invincible",
           "onAdded": [
             {
@@ -1034,284 +1127,274 @@
           ]
         },
         "Tornado_Eff": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Qin_DandelionWind_SurroundWind"
+            }
+          ],
           "modifierMixins": [
             {
               "$type": "WindZoneMixin",
               "shapeName": "CircleR2",
-              "LFMBDMGKEFB": -2.0,
-              "innerRadius": 0.0,
-              "radius": 0.0,
+              "strength": -2,
               "targetType": "All",
               "predicates": [
                 {
-                  "$type": "ByTargetWeight",
-                  "logic": "LesserOrEqual",
-                  "weight": 150.0
+                  "$type": "ByTargetWeight", //WindZoneLevel = 1
+                  "logic": "LesserOrEqual", //WindZoneLevel = 1
+                  "weight": 150.0 //WindZoneLevel = 1
                 },
                 {
                   "$type": "ByEntityTypes",
                   "entityTypes": ["Avatar"],
                   "reject": true
                 }
-              ],
-              "modifierName": ""
-            }
-          ],
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Qin_DandelionWind_SurroundWind",
-              "EBHJMLOKDGB": -1.0
+              ]
             }
           ]
         },
+        //兼职调整背景颜色。
         "DandelionWind_Camera_Handler_1": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "ControlEmotion",
+              "toggleBlink": false,
+              "toggleEmoSync": false,
+              "toggleEyeKey": false
+            }
+          ],
           "modifierMixins": [
             {
               "$type": "TriggerWeatherMixin",
               "type": "Skill",
               "weatherPattern": "Weather_Default_SkillPreset",
-              "transDuration": 0.30000001192092896,
-              "duration": 0.9900000095367432
-            }
-          ],
-          "onAdded": [
-            {
-              "$type": "ControlEmotion",
-              "toggleEmoSync": false,
-              "toggleBlink": false,
-              "toggleEyeKey": false
+              "transDuration": 0.3, //这个同时是渐入时长和渐出时长。
+              "duration": 0.99 //释放时变亮的参数
+              // "duration":1.4,//释放时仍然暗的参数,剑变亮时间增长了。
             }
           ],
           "onRemoved": [
             {
               "$type": "SetEmissionScaler",
               "materialType": "Weapon",
-              "value": -1.0,
-              "duration": 0.30000001192092896
+              "value": -1,
+              "duration": 0.3
             },
             {
               "$type": "ControlEmotion",
-              "RotationDampTime": true
+              "doOffStage": true,
+              "toggleBlink": true,
+              "toggleEmoSync": true,
+              "toggleEyeKey": true
             }
           ],
-          "NPHODJLPMAJ": [
+          "onAvatarOut": [
             {
               "$type": "SetEmissionScaler",
               "materialType": "Weapon",
-              "value": -1.0,
-              "duration": 0.30000001192092896
+              "value": -1,
+              "duration": 0.3
             },
             {
               "$type": "ControlEmotion",
-              "RotationDampTime": true
+              "doOffStage": true,
+              "toggleBlink": true,
+              "toggleEmoSync": true,
+              "toggleEyeKey": true
             }
           ]
         },
         "DandelionWind_Camera_Handler_2": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "AvatarExitCameraShot",
-              "RotationDampTime": true
+              "doOffStage": true
             },
             {
               "$type": "AvatarCameraParam",
               "cameraParam": {
-                "forceRadius": 6.0,
-                "forceRadiusDuration": 0.6000000238418579,
+                "forceRadius": 6,
+                "forceRadiusDuration": 0.6,
                 "shouldKeepForceRadius": true
               }
             }
           ],
-          "NPHODJLPMAJ": [
+          "onAvatarOut": [
             {
               "$type": "AvatarExitCameraShot",
-              "RotationDampTime": true
+              "doOffStage": true
             },
             {
               "$type": "AvatarCameraParam",
-              "RotationDampTime": true,
+              "doOffStage": true,
               "cameraParam": {
-                "forceRadius": 6.0,
-                "forceRadiusDuration": 0.6000000238418579,
+                "forceRadius": 6,
+                "forceRadiusDuration": 0.6,
                 "shouldKeepForceRadius": true
               }
             }
           ]
         },
         "SetEmission": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
-              "$type": "SetEmissionScaler",
+              "$type": "SetEmissionScaler", //调整武器发光。配置文件为EquipElementStyle。可以参考神之眼AvatarElementStyle的配置进行配置
               "materialType": "Weapon",
-              "value": 15.0,
-              "duration": 0.30000001192092896
+              "useDefaultColor": false,
+              "value": 15,
+              "duration": 0.3 //渐入渐出时间，这个需要配置在PlusSkillEmission里。
             }
           ],
           "onRemoved": [
             {
               "$type": "SetEmissionScaler",
               "materialType": "Weapon",
-              "value": -1.0,
-              "duration": 0.6000000238418579
+              "value": -1,
+              "duration": 0.6
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "AvatarEnterCameraShot",
-          "predicates": [
-            {
-              "$type": "ByAttackNotHitScene",
-              "attackPattern": {
-                "$type": "ConfigAttackCircle",
-                "triggerType": "TriggerNoRepeat",
-                "born": {
-                  "$type": "ConfigBornBySelf",
-                  "offset": {
-                    "IBKBLDAJIMA": 0.0,
-                    "LKHJADIPBFL": 1.2000000476837158,
-                    "PJCOKIGCJOK": 0.0
-                  }
-                },
-                "height": 0.20000000298023224,
-                "fanAngle": 30.0,
-                "DCMPFCIBIPA": 0.800000011920929
-              }
-            },
-            {
-              "$type": "ByAvatarInWaterDepth",
-              "compareType": "LessAndEqual",
-              "depth": 0.5
-            }
-          ],
-          "cameraMoveCfgPath": "Camera_Qin_DandelionWind"
-        }
-      ]
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Qin_DandelionWind",
-      "abilitySpecials": {
-        "Rate": 0.0,
-        "ReviveElemEnergyRatio": 1.0
-      },
-      "modifiers": {
-        "RestorEnergy": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.15000000596046448,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "ReviveElemEnergy",
-              "RotationDampTime": true,
-              "ratio": ["Rate", "ReviveElemEnergyRatio", "MUL"]
-            }
-          ]
-        }
-      },
+      //创建一个法术场,制造治疗
       "onAbilityStart": [
         {
           "$type": "AvatarSkillStart",
-          "skillID": 10034,
-          "cdDelta": 1.0,
-          "costStaminaDelta": 1.0
+          "skillID": 10034
         },
+        //治疗field
         {
           "$type": "CreateGadget",
-          "born": {
-            "$type": "ConfigBornByTarget",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            }
-          },
           "gadgetID": 41003004,
           "campID": 1001,
-          "campTargetType": "Alliance"
-        },
-        {
-          "$type": "CreateGadget",
+          "campTargetType": "Alliance",
           "born": {
             "$type": "ConfigBornByTarget",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             }
-          },
+          }
+        },
+        //伤害field
+        {
+          "$type": "CreateGadget",
           "gadgetID": 41003005,
           "campID": 1001,
-          "campTargetType": "Enemy"
+          "campTargetType": "Enemy",
+          "born": {
+            "$type": "ConfigBornByTarget",
+            "offset": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
+          }
         },
         {
           "$type": "ApplyModifier",
+          "modifierName": "RestorEnergy",
           "predicates": [
             {
               "$type": "ByUnlockTalentParam",
               "talentParam": "RestoreEnergy"
             }
-          ],
-          "modifierName": "RestorEnergy"
+          ]
         }
-      ]
+      ],
+      "modifiers": {
+        "RestorEnergy": {
+          "duration": 0.15,
+          "onAdded": [
+            {
+              "$type": "ReviveElemEnergy",
+              "value": "%Rate*%ReviveElemEnergyRatio",
+              "target": "Self",
+              "doOffStage": true
+            }
+          ]
+        }
+      },
+      "abilitySpecials": {
+        "Rate": 0,
+        "ReviveElemEnergyRatio": 1
+      }
     }
   },
   {
+    //技能：给自己进入法术场的角色每秒加攻击力百分比血
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Qin_DandelionWind_Heal",
-      "abilitySpecials": {
-        "BurstHeal": 0.0,
-        "Heal": 0.0,
-        "WindHurt": 0.0,
-        "LessHurt": 0.0,
-        "BurstHealConst": 0.0,
-        "HealConst": 0.0
-      },
+      //法术场创生即生效的效果：友军回血
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "DandelionWind_Buff" //10秒里慢慢生效效果
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "DandelionWind_Field" //各种即时生效效果
+        }
+      ],
       "modifiers": {
         "DandelionWind_Field": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 10.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 10,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Qin_DandelionWind",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Qin_DandelionWind"
             },
+            // {//奶6米内队友，npc等。
+            // 	"$type": "ApplyModifier",
+            // 	"modifierName": "DandelionWind_Field_UniqueHeal",
+            // 	"otherTargets":
+            // 	{
+            // 		"$type": "SelectTargetsByShape",
+            // 		"shapeName": "CircleR6",
+            // 		"centerBasedOn": "Self",
+            // 		"campTargetType": "Alliance",
+            // 		"campBasedOn": "Self",
+            // 	},
+            // 	"predicates":
+            // 	[
+            // 		{
+            // 			"$type" : "ByEntityTypes",
+            // 			"entityTypes" : ["Avatar"],
+            // 		},
+            // 	],
+            // },
             {
+              //奶40米内联机队友。  //这次不包括路人了，不存在重复奶的情况。不再用modifier了。
               "$type": "HealHP",
+              "amountByCasterAttackRatio": "%BurstHeal",
+              "amount": "%BurstHealConst",
               "target": "AllPlayerAvatars",
               "predicates": [
                 {
                   "$type": "ByTargetPositionToSelfPosition",
-                  "logic": "LesserOrEqual",
-                  "ratio": 40.0
+                  "compareType": "XZ",
+                  "value": 40,
+                  "logic": "LesserOrEqual"
                 }
-              ],
-              "cdRatio": "BurstHealConst",
-              "amountByTargetCurrentHPRatio": "BurstHeal"
+              ]
             },
             {
               "$type": "ApplyModifier",
+              "modifierName": "Qin_Talent_WindShieldNumSet",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR6",
+                "centerBasedOn": "Self",
                 "campTargetType": "Alliance",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
               "predicates": [
                 {
@@ -1322,16 +1405,17 @@
                   "$type": "ByUnlockTalentParam",
                   "talentParam": "WindShield"
                 }
-              ],
-              "modifierName": "Qin_Talent_WindShieldNumSet"
+              ]
             },
             {
               "$type": "ApplyModifier",
+              "modifierName": "UNIQUE_Talent_WindShield",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR6",
+                "centerBasedOn": "Self",
                 "campTargetType": "Alliance",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
               "predicates": [
                 {
@@ -1343,16 +1427,17 @@
                   "target": "Owner",
                   "talentParam": "WindShield"
                 }
-              ],
-              "modifierName": "UNIQUE_Talent_WindShield"
+              ]
             },
             {
               "$type": "ApplyModifier",
+              "modifierName": "UNIQUE_Qin_Talent_WindDown",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR6",
+                "centerBasedOn": "Self",
                 "campTargetType": "Enemy",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
               "predicates": [
                 {
@@ -1364,57 +1449,79 @@
                   "target": "Owner",
                   "talentParam": "WindPressure"
                 }
-              ],
-              "modifierName": "UNIQUE_Qin_Talent_WindDown"
+              ]
             }
           ]
         },
+        //非UNIQUE,让2个琴都可以刷新这个。
         "Qin_Talent_WindShieldNumSet": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.1,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 3.0,
+              "doOffStage": true,
               "key": "_ABILITY_QinWindShield_COUNT",
+              "value": 3,
               "useLimitRange": true,
-              "maxValue": 3.0,
-              "minValue": 3.0
+              "maxValue": 3,
+              "minValue": 3
             }
           ]
         },
+        //奶友军的modifier
         "DandelionWind_Buff": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 10.5,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 1.0,
+          "duration": 10.5,
+          "thinkInterval": 1,
           "onThinkInterval": [
             {
               "$type": "HealHP",
+              "amountByCasterAttackRatio": "%Heal",
+              "amount": "%HealConst",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR6",
+                "centerBasedOn": "Self",
                 "campTargetType": "Alliance",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
               "predicates": [
                 {
                   "$type": "ByEntityTypes",
                   "entityTypes": ["Avatar"]
                 }
-              ],
-              "cdRatio": "HealConst",
-              "amountByTargetCurrentHPRatio": "Heal"
+              ]
             },
             {
               "$type": "ApplyModifier",
+              "modifierName": "UNIQUE_Talent_WindShield",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR6",
+                "centerBasedOn": "Self",
                 "campTargetType": "Alliance",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
+              },
+              "predicates": [
+                {
+                  "$type": "ByEntityTypes",
+                  "entityTypes": ["Avatar"]
+                },
+                {
+                  "$type": "ByUnlockTalentParam",
+                  // "target":"Owner",//这个的指定是无意义的，unlock这个总在找Caster的。
+                  "talentParam": "WindShield"
+                }
+              ]
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "Qin_Talent_WindShieldNumSet",
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR6",
+                "centerBasedOn": "Self",
+                "campTargetType": "Alliance",
+                "campBasedOn": "Self"
               },
               "predicates": [
                 {
@@ -1425,36 +1532,17 @@
                   "$type": "ByUnlockTalentParam",
                   "talentParam": "WindShield"
                 }
-              ],
-              "modifierName": "UNIQUE_Talent_WindShield"
+              ]
             },
             {
               "$type": "ApplyModifier",
+              "modifierName": "UNIQUE_Qin_Talent_WindDown",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR6",
-                "campTargetType": "Alliance",
-                "sizeRatio": 1.0
-              },
-              "predicates": [
-                {
-                  "$type": "ByEntityTypes",
-                  "entityTypes": ["Avatar"]
-                },
-                {
-                  "$type": "ByUnlockTalentParam",
-                  "talentParam": "WindShield"
-                }
-              ],
-              "modifierName": "Qin_Talent_WindShieldNumSet"
-            },
-            {
-              "$type": "ApplyModifier",
-              "otherTargets": {
-                "$type": "SelectTargetsByShape",
-                "shapeName": "CircleR6",
+                "centerBasedOn": "Self",
                 "campTargetType": "Enemy",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
               "predicates": [
                 {
@@ -1466,362 +1554,373 @@
                   "target": "Owner",
                   "talentParam": "WindPressure"
                 }
-              ],
-              "modifierName": "UNIQUE_Qin_Talent_WindDown"
+              ]
             },
             {
               "$type": "ApplyModifier",
+              "modifierName": "UNIQUE_DandelionWind_Buff_WindBuff",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR6",
+                "centerBasedOn": "Self",
                 "campTargetType": "Alliance",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
               "predicates": [
                 {
                   "$type": "ByEntityTypes",
                   "entityTypes": ["Avatar"]
                 }
-              ],
-              "modifierName": "UNIQUE_DandelionWind_Buff_WindBuff"
+              ]
             }
           ]
         },
+        //
         "UNIQUE_Qin_Talent_WindDown": {
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": 1.2000000476837158,
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_WindSubHurtDelta": "WindHurt"
-          },
+          "duration": 1.2,
+          "isLimitedProperties": true,
           "state": "DefenseDown",
-          "isLimitedProperties": true
+          "properties": {
+            // "Animator_OverallSpeedRatio": "%SlowRate",
+            "Actor_WindSubHurtDelta": "%WindHurt"
+          }
         },
         "UNIQUE_DandelionWind_Buff_WindBuff": {
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": 0.20000000298023224,
+          "stacking": "Refresh",
+          "duration": 0.2,
           "elementType": "Wind",
-          "bonusCriticalHurt": 25.0
+          "elementDurability": 25
         },
         "UNIQUE_Talent_WindShield_Timer": {
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "modifierMixins": [
-            {
-              "$type": "AttachModifierToSelfGlobalValueMixin",
-              "globalValueKey": "_ABILITY_QinWindShield_COUNT",
-              "defaultGlobalValueOnCreate": 3.0,
-              "valueSteps": [-100.0, 0.5, 1.5, 2.5, 3.5],
-              "modifierNameSteps": ["None", "eff_1", "eff_2", "eff_3"]
-            }
-          ],
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Lady_Sword_Qin_TalentShield",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Avatar_Lady_Sword_Qin_TalentShield"
+            },
+            {
+              "$type": "SetGlobalValue", //先设到外面，这样切回来后必然可以触发。
+              "key": "_ABILITY_QinWindShield_COUNT",
+              "value": 4,
+              "doOffStage": true
             },
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 4.0,
               "key": "_ABILITY_QinWindShield_COUNT",
-              "maxValue": 0.0,
-              "minValue": 0.0
-            },
+              "value": 3,
+              "doOffStage": true
+            }
+          ],
+          // "duration":10.5,
+          "stacking": "Refresh",
+          "isUnique": true,
+          "modifierMixins": [
             {
-              "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 3.0,
-              "key": "_ABILITY_QinWindShield_COUNT",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "$type": "AttachModifierToSelfGlobalValueMixin", // 类似于一个永续的转换器，每次全局值越过边界就会applymodifier和执行action.(并不是只在apply时生效一次)
+              "globalValueKey": "_ABILITY_QinWindShield_COUNT",
+              "valueSteps": [-100, 0.5, 1.5, 2.5, 3.5],
+              "defaultGlobalValueOnCreate": 3,
+              "removeAppliedModifier": true,
+              "modifierNameSteps": ["None", "eff_1", "eff_2", "eff_3"]
             }
           ]
         },
+        //这个用unique反而有问题。改为refresh了。
         "UNIQUE_Talent_WindShield": {
-          "stacking": "RefreshUniqueDurability",
-          "modifierName": "",
-          "isUnique": true,
-          "HCJLIGBLGJA": 10.0,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
               "modifierName": "UNIQUE_Talent_WindShield_Timer"
             }
           ],
-          "onRemoved": [
-            {
-              "$type": "AddGlobalValue",
-              "RotationDampTime": true,
-              "ratio": -3.0,
-              "key": "_ABILITY_QinWindShield_COUNT",
-              "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
-            }
-          ],
+          "duration": 10, //
+          "stacking": "RefreshUniqueDurability",
+          "isUnique": true,
           "onBeingHit": [
             {
               "$type": "AddGlobalValue",
+              "key": "_ABILITY_QinWindShield_COUNT",
+              "value": -1,
+              "useLimitRange": true,
+              "maxValue": 3,
+              "minValue": 0,
               "predicates": [
                 {
                   "$type": "ByHitDamage",
-                  "damage": 0.0
+                  "damage": 0,
+                  "logic": "Greater"
                 }
-              ],
-              "ratio": -1.0,
-              "key": "_ABILITY_QinWindShield_COUNT",
-              "useLimitRange": true,
-              "maxValue": 3.0,
-              "minValue": 0.0
+              ]
             }
           ],
           "onKill": [
             {
               "$type": "AddGlobalValue",
-              "RotationDampTime": true,
-              "ratio": -3.0,
               "key": "_ABILITY_QinWindShield_COUNT",
+              "value": -3,
               "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "maxValue": 0,
+              "minValue": 0,
+              "doOffStage": true
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "AddGlobalValue",
+              "key": "_ABILITY_QinWindShield_COUNT",
+              "value": -3,
+              "useLimitRange": true,
+              "maxValue": 0,
+              "minValue": 0,
+              "doOffStage": true
             }
           ]
         },
         "None": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.4000000059604645,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "Level_0",
-              "attachPoint": "",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Lady_Sword_Qin_TalentShield"
+              "effectPattern": "Eff_Avatar_Lady_Sword_Qin_TalentShield"
             }
           ],
+          "thinkInterval": 0.4,
           "onThinkInterval": [
             {
               "$type": "RemoveUniqueModifier",
-              "RotationDampTime": true,
-              "modifierName": "UNIQUE_Talent_WindShield"
+              "doOffStage": true,
+              "modifierName": "UNIQUE_Talent_WindShield" //可以这个时候只remove特效，不removebuff，那么在阵里也不会重复添加buff。（阵11秒，按interval算，只会tic十次，正好不够加上新buff）
+              //但是好像没有remove特效的指令,只能干掉modifier了。
             },
             {
               "$type": "RemoveUniqueModifier",
-              "RotationDampTime": true,
+              "doOffStage": true,
               "modifierName": "UNIQUE_Talent_WindShield_Timer"
             }
           ]
         },
         "eff_1": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_SubHurtDelta": "LessHurt"
-          },
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "Level_1",
-              "attachPoint": "",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Lady_Sword_Qin_TalentShield"
+              "effectPattern": "Eff_Avatar_Lady_Sword_Qin_TalentShield"
             }
           ],
-          "isLimitedProperties": true
+          "isLimitedProperties": true,
+          "properties": {
+            "Actor_SubHurtDelta": "%LessHurt"
+          }
         },
         "eff_2": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_SubHurtDelta": "LessHurt"
-          },
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "Level_2",
-              "attachPoint": "",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Lady_Sword_Qin_TalentShield"
+              "effectPattern": "Eff_Avatar_Lady_Sword_Qin_TalentShield"
             }
           ],
-          "isLimitedProperties": true
+          "isLimitedProperties": true,
+          "properties": {
+            "Actor_SubHurtDelta": "%LessHurt"
+          }
         },
         "eff_3": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_SubHurtDelta": "LessHurt"
-          },
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
               "parameter": "Level_3",
-              "attachPoint": "",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Lady_Sword_Qin_TalentShield"
+              "effectPattern": "Eff_Avatar_Lady_Sword_Qin_TalentShield"
             }
           ],
-          "isLimitedProperties": true
+          "isLimitedProperties": true,
+          "properties": {
+            "Actor_SubHurtDelta": "%LessHurt"
+          }
         }
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "DandelionWind_Buff"
-        },
-        {
-          "$type": "AttachModifier",
-          "modifierName": "DandelionWind_Field"
-        }
-      ]
+      "abilitySpecials": {
+        "BurstHeal": 0, //治疗系数
+        "Heal": 0,
+        // "SlowRate":-0.25, //不再减速了
+        "WindHurt": 0, //怪物受到风抗下降
+        "LessHurt": 0, //天赋盾减伤
+        "BurstHealConst": 0,
+        "HealConst": 0
+      }
     }
   },
   {
+    //技能：给进出法术场的怪予以伤害
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Qin_DandelionWind_Harm",
-      "abilitySpecials": {
-        "InOutHarm": 0.0,
-        "interval": 1.0
-      },
+      //开场击退
+      "onAdded": [],
+      //一旦有怪物进来就干它
+      "onFieldEnter": [
+        {
+          "$type": "ApplyModifier",
+          "target": "Target",
+          "modifierName": "Avatar_Qin_DandelionWind_Harm_FieldDamage", //多个琴field也应该能生效，不能unique
+          "predicates": [
+            {
+              "$type": "ByEntityTypes",
+              "entityTypes": ["Monster"]
+            }
+          ]
+        }
+      ],
+      //一旦有怪物出去也干它
+      "onFieldExit": [
+        {
+          "$type": "ApplyModifier",
+          "target": "Target",
+          "modifierName": "Avatar_Qin_DandelionWind_Harm_FieldDamage",
+          "predicates": [
+            {
+              "$type": "ByEntityTypes",
+              "entityTypes": ["Monster"]
+            }
+          ]
+        }
+      ],
       "modifiers": {
         "Avatar_Qin_DandelionWind_Harm_FieldDamage": {
           "stacking": "Unique",
-          "modifierName": "",
-          "HCJLIGBLGJA": "interval",
-          "bonusCriticalHurt": 100.0,
+          "duration": "%interval",
           "onAdded": [
             {
               "$type": "DamageByAttackValue",
+              "attacker": "Caster",
+              // "target":"Self",
+              // "target": "Target", //x原本写在field就是target了，但是现在是在怪身上所以默认self是对的。
               "born": {
                 "$type": "ConfigBornByTarget",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 1.0,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": 1.0,
+                  "z": 0.0
                 }
               },
               "attackInfo": {
                 "attackTag": "Elemental_Burst",
-                "attenuationTag": "",
-                "attenuationGroup": "default",
+                "canBeModifiedBy": "OriginOwner",
                 "attackProperty": {
-                  "HBIOLEEGHPD": "InOutHarm",
-                  "CCNJGLPMIEP": 0.0,
+                  "damagePercentage": "%InOutHarm",
                   "elementType": "Wind",
-                  "elementRank": 3.0,
-                  "bonusCriticalHurt": 50.0,
                   "strikeType": "Default",
-                  "enBreak": 50.0
+                  "elementDurability": 50,
+                  "elementRank": 3,
+                  "enBreak": 50
                 },
                 "hitPattern": {
                   "onHitEffectName": "default",
                   "hitImpulseType": "LV2",
-                  "hitHaltTimeScale": 0.05000000074505806
+                  // "hitLevel": "Light",	//hitlevel = 2
+                  // "hitImpulseX": 200,	//hitlevel = 2
+                  // "hitImpulseY": 0,	//hitlevel = 2
+                  "reboundRatio": 0,
+                  "hitHaltTime": 0.0,
+                  "hitHaltTimeScale": 0.05,
+                  "muteHitText": false
                 },
-                "canBeModifiedBy": "OriginOwner"
+                "forceCameraShake": false
               }
             }
           ]
         }
       },
-      "onFieldEnter": [
-        {
-          "$type": "ApplyModifier",
-          "target": "Target",
-          "predicates": [
-            {
-              "$type": "ByEntityTypes",
-              "entityTypes": ["Monster"]
-            }
-          ],
-          "modifierName": "Avatar_Qin_DandelionWind_Harm_FieldDamage"
-        }
-      ],
-      "onFieldExit": [
-        {
-          "$type": "ApplyModifier",
-          "target": "Target",
-          "predicates": [
-            {
-              "$type": "ByEntityTypes",
-              "entityTypes": ["Monster"]
-            }
-          ],
-          "modifierName": "Avatar_Qin_DandelionWind_Harm_FieldDamage"
-        }
-      ]
+      "abilitySpecials": {
+        "InOutHarm": 0,
+        "interval": 1
+      }
     }
   },
+
+  //技能发动推开周围敌人，因为有镜头和震屏需求。时间和生成gadget分开。
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Qin_DandelionWind_Push",
-      "abilitySpecials": {
-        "Burst_DMG": 0.0
-      },
+      //创建一个法术场,制造伤害
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
+              "fanAngle": 360.0,
+              "radius": 6.0,
+              "checkHitScene": true,
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 }
-              },
-              "DCMPFCIBIPA": 6.0
+              }
             },
             "attackInfo": {
               "attackTag": "Elemental_Burst",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
               "attackProperty": {
-                "HBIOLEEGHPD": "Burst_DMG",
-                "CCNJGLPMIEP": 0.0,
+                "damagePercentage": "%Burst_DMG",
                 "elementType": "Wind",
-                "elementRank": 3.0,
-                "bonusCriticalHurt": 50.0,
                 "strikeType": "Default",
-                "enBreak": 400.0
+                "elementDurability": 50,
+                "elementRank": 3,
+                "enBreak": 400
               },
               "hitPattern": {
                 "onHitEffectName": "default",
                 "hitImpulseType": "LV4",
+                // "hitLevel": "Heavy",	//hitlevel = 4
+                // "hitImpulseX": 800,	//hitlevel = 4
+                // "hitImpulseY": 0,	//hitlevel = 4
                 "retreatType": "ByHitDirection",
-                "hitHaltTimeScale": 0.05000000074505806
+                "reboundRatio": 0,
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.05,
+                "muteHitText": false
               },
+              "forceCameraShake": false,
               "cameraShake": {}
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "ActCameraShake",
           "cameraShake": {
             "shakeType": "CustomVector",
-            "shakeRange": 0.15000000596046448,
-            "shakeTime": 0.11999999731779099,
-            "shakeDistance": 30.0,
+            "shakeRange": 0.15,
+            "shakeTime": 0.12,
+            "shakeDistance": 30,
             "shakeDir": {
-              "z": 1.0
+              "x": 0,
+              "y": 0,
+              "z": 1
             },
             "extension": {
               "baseOnCamera": true
             }
           }
         }
-      ]
+      ],
+      "abilitySpecials": {
+        "Burst_DMG": 0
+      }
     }
   },
+
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Speed Blur  未在使用 2020.10.12确认
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1835,32 +1934,40 @@
       ],
       "modifiers": {
         "Blur": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ActCameraRadialBlur",
               "cameraRadialBlur": {
-                "power": 1.0,
-                "blurTime": 0.15000000596046448,
-                "fadeTime": 0.30000001192092896
+                "power": 1,
+                "blurTime": 0.15,
+                "fadeTime": 0.3
               }
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_FlyBlur",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_FlyBlur"
             }
           ]
         }
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  HinowaSlash  (未在使用) 2021.4.1确认
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Qin_HinowaSlash",
       "abilityMixins": [
+        //CB1屏蔽空中攻击
+        // {
+        // 	"$type": "AvatarChangeSkillMixin",
+        // 	"jumpSkillID": 10311,
+        // 	"flySkillID": 10311,
+        // },
         {
           "$type": "AttachToStateIDMixin",
           "stateIDs": ["HinowaSlash_Loop"],
@@ -1874,22 +1981,19 @@
       ],
       "modifiers": {
         "Loop": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_HinowaSlash_Loop",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Avatar_HinowaSlash_Loop"
             }
           ]
         },
         "Inertia": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "ApplyInertiaVelocityMixin",
+              "damping": 0,
+              "useXZ": true,
               "useY": false
             }
           ]
@@ -1897,59 +2001,72 @@
       }
     }
   },
+
+  ////////////////////////////////////////////////////////////////
+  //
+  //  HealRate   低血量治疗量上升
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Qin_GreaterSelfHeal",
       "abilityMixins": [
+        // {
+        // 	"$type":"HPThresholdMixin",
+        // 	"Treshold":
+        // 	"modifierName":
+        // },
         {
           "$type": "AttachModifierToPredicateMixin",
+          "modifierName": "HealUp",
           "onEvent": "HP",
           "predicates": [
             {
               "$type": "ByTargetHPRatio",
               "target": "Self",
-              "logic": "LesserOrEqual",
-              "HPRatio": 0.30000001192092896
-            }
-          ],
-          "modifierName": "HealUp"
-        }
-      ],
-      "abilitySpecials": {
-        "Rate": 0.0
-      },
-      "modifiers": {
-        "HealUp": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_HealedAddDelta": "Rate"
-          },
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Properties_Heal_Up",
-              "EBHJMLOKDGB": -1.0
+              "HPRatio": 0.3,
+              "logic": "LesserOrEqual"
             }
           ]
         }
+      ],
+      "modifiers": {
+        "HealUp": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Avatar_Properties_Heal_Up"
+            }
+          ],
+          "properties": {
+            "Actor_HealedAddDelta": "%Rate"
+          }
+        }
+      },
+      "abilitySpecials": {
+        "Rate": 0
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  AttackCritic   命中后概率治疗队伍
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Qin_AttackCritic",
-      "abilitySpecials": {
-        "Chance": 0.0,
-        "HealByAttack": 0.0,
-        "BonusCritical": 0.0
-      },
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Talent_HealTeam_Check"
+        }
+      ],
       "modifiers": {
         "Talent_HealTeam_Check": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
@@ -1973,19 +2090,20 @@
               "successActions": [
                 {
                   "$type": "Randomed",
-                  "chance": "Chance",
+                  "chance": "%Chance",
                   "successActions": [
                     {
                       "$type": "HealHP",
-                      "target": "AllPlayerAvatars",
+                      "amountByCasterAttackRatio": "%HealByAttack",
+                      "target": "AllPlayerAvatars", //会包括右侧队伍角色。联机同理。
                       "predicates": [
                         {
                           "$type": "ByTargetPositionToSelfPosition",
-                          "logic": "LesserOrEqual",
-                          "ratio": 40.0
+                          "compareType": "XZ",
+                          "value": 40,
+                          "logic": "LesserOrEqual"
                         }
-                      ],
-                      "amountByTargetCurrentHPRatio": "HealByAttack"
+                      ]
                     }
                   ]
                 }
@@ -1994,19 +2112,23 @@
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "Talent_HealTeam_Check"
-        }
-      ],
-      "isDynamicAbility": true
+      "abilitySpecials": {
+        "Chance": 0,
+        "HealByAttack": 0.0, //
+        "BonusCritical": 0.0
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Avatar_Qin_GetElementBall    吃球后全队加速
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Qin_TeamSpeedWhenGetElementBall",
+      "isDynamicAbility": true,
       "abilityMixins": [
         {
           "$type": "DoActionByEnergyChangeMixin",
@@ -2023,53 +2145,59 @@
           "onGainEnergyByBall": [
             {
               "$type": "RemoveUniqueModifier",
+              "modifierName": "UNIQUE_Team_Speed_Up",
               "target": "AllPlayerAvatars",
               "predicates": [
                 {
                   "$type": "ByTargetPositionToSelfPosition",
-                  "logic": "LesserOrEqual",
-                  "ratio": 40.0
+                  "compareType": "XZ",
+                  "value": 40,
+                  "logic": "LesserOrEqual"
                 }
-              ],
-              "modifierName": "UNIQUE_Team_Speed_Up"
+              ]
             },
             {
               "$type": "ApplyModifier",
+              "modifierName": "UNIQUE_Team_Speed_Up",
               "target": "AllPlayerAvatars",
               "predicates": [
                 {
                   "$type": "ByTargetPositionToSelfPosition",
-                  "logic": "LesserOrEqual",
-                  "ratio": 40.0
+                  "compareType": "XZ",
+                  "value": 40,
+                  "logic": "LesserOrEqual"
                 }
-              ],
-              "modifierName": "UNIQUE_Team_Speed_Up"
+              ]
             }
           ]
         }
       ],
-      "abilitySpecials": {
-        "Time": 0.0,
-        "AtkSpeed": 0.0,
-        "Speed": 0.0
-      },
       "modifiers": {
         "UNIQUE_Team_Speed_Up": {
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "Time",
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Animator_MoveSpeedRatio": "Speed",
-            "Animator_AttackSpeedRatio": "AtkSpeed"
-          },
           "state": "SpeedUp",
-          "isLimitedProperties": true
+          "duration": "%Time",
+          "elementType": "None",
+          "isLimitedProperties": true,
+          "properties": {
+            "Animator_MoveSpeedRatio": "%Speed",
+            "Animator_AttackSpeedRatio": "%AtkSpeed"
+          }
         }
       },
-      "isDynamicAbility": true
+      "abilitySpecials": {
+        "Time": 0,
+        "AtkSpeed": 0,
+        "Speed": 0.0 //
+      }
     }
   },
+
+  ////////////////////////////////////////////////////////////////
+  //
+  //  固有技：普通攻击伤害变化/
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -2078,50 +2206,50 @@
         {
           "$type": "ModifyDamageMixin",
           "attackTags": ["NormalAttack_01"],
-          "HBIOLEEGHPD": "Attack01",
-          "CCNJGLPMIEP": 0.0
+          "damagePercentage": "%Attack01"
         },
         {
           "$type": "ModifyDamageMixin",
           "attackTags": ["NormalAttack_02"],
-          "HBIOLEEGHPD": "Attack02",
-          "CCNJGLPMIEP": 0.0
+          "damagePercentage": "%Attack02"
         },
         {
           "$type": "ModifyDamageMixin",
           "attackTags": ["NormalAttack_03"],
-          "HBIOLEEGHPD": "Attack03",
-          "CCNJGLPMIEP": 0.0
+          "damagePercentage": "%Attack03"
         },
         {
           "$type": "ModifyDamageMixin",
           "attackTags": ["NormalAttack_04"],
-          "HBIOLEEGHPD": "Attack04",
-          "CCNJGLPMIEP": 0.0
+          "damagePercentage": "%Attack04"
         },
         {
           "$type": "ModifyDamageMixin",
           "attackTags": ["NormalAttack_05"],
-          "HBIOLEEGHPD": "Attack05",
-          "CCNJGLPMIEP": 0.0
+          "damagePercentage": "%Attack05"
         },
         {
           "$type": "ModifyDamageMixin",
           "attackTags": ["ExtraAttack"],
-          "HBIOLEEGHPD": "ExtraAttack",
-          "CCNJGLPMIEP": 0.0
+          "damagePercentage": "%ExtraAttack"
         }
       ],
+      "modifiers": {},
       "abilitySpecials": {
-        "Attack01": 0.0,
-        "Attack02": 0.0,
-        "Attack03": 0.0,
-        "Attack04": 0.0,
-        "Attack05": 0.0,
-        "ExtraAttack": 0.0
+        "Attack01": 0,
+        "Attack02": 0,
+        "Attack03": 0,
+        "Attack04": 0,
+        "Attack05": 0,
+        "ExtraAttack": 0
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Auto Defend  (废弃)
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -2139,18 +2267,27 @@
             "NormalStandbyWeapon"
           ],
           "defendTriggerID": "AutoDefendTrigger",
-          "defendProbability": 1.0,
-          "defendProbabilityDelta": 0.0,
-          "GNFIPJADKND": "Inv",
-          "ELDOHIOFFJL": 0
+          "defendProbability": 1,
+          "defendProbabilityDelta": 0,
+          "defendAngle": 360.0,
+          "alwaysRecover": true,
+          "defendTimeInterval": "%Inv",
+          "defendCountInterval": 0
         }
       ],
       "abilitySpecials": {
-        "Prob": 0.3019999861717224,
-        "Inv": 9.0
+        //这里通过dota的C值和时机概率对比表计算的。如果没触发，下次概率为2c，再下次为3c，直到触发。
+        "Prob": 0.302, //0.119等于30%理论概率，0.201等于40%理论概率，0.302等于50%理论概率，0.422等于60%理论概率，0.571等于70%理论概率。（感受不好，暂时不用）
+        "Inv": 9
       }
     }
   },
+
+  ////////////////////////////////////////////////////////////////
+  //
+  //  空中攻击
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -2158,6 +2295,7 @@
       "abilityMixins": [
         {
           "$type": "AvatarChangeSkillMixin",
+          "priority": "AvatarCommon",
           "jumpSkillID": 5003010,
           "flySkillID": 5003010
         },
@@ -2178,6 +2316,7 @@
             "FallingAnthem_Loop",
             "FallingAnthem_Loop_Low"
           ],
+
           "modifierName": "FallingAnthem_LoopDamage"
         },
         {
@@ -2241,64 +2380,229 @@
           "modifierName": "FallingAnthem_CameraRadialBlur"
         }
       ],
-      "abilitySpecials": {
-        "FallingAnthem_Normal_Loop_Damage": 0.0,
-        "FallingAnthem_Normal_Rank_1_Damage": 0.0,
-        "FallingAnthem_Normal_Rank_2_Damage": 0.0,
-        "FallingAnthem_Altitude_Lv0": 20.0,
-        "FallingAnthem_Altitude_Lv1": 40.0,
-        "FallingAnthem_Altitude_Lv2": 60.0,
-        "FallingAnthem_Altitude_Lv3": 100.0,
-        "FallingAnthem_Altitude_Lv4": 200.0,
-        "FallingAnthem_FallingDamageRatio_Lv0": -1.0,
-        "FallingAnthem_FallingDamageRatio_Lv1": -1.0,
-        "FallingAnthem_FallingDamageRatio_Lv2": -0.8999999761581421,
-        "FallingAnthem_FallingDamageRatio_Lv3": -0.800000011920929,
-        "FallingAnthem_FallingDamageRatio_Lv4": -0.6000000238418579,
-        "FallingAnthem_FallingDamageRatio": 0.0
-      },
+      "onAdded": [],
+      "onAbilityStart": [
+        //普通状态第一段
+        {
+          "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
+          "attackEvent": {
+            "attackPattern": {
+              "$type": "ConfigAttackCircle",
+              "triggerType": "TriggerNoRepeat",
+              "scale": 1.0,
+              "height": 2.0,
+              "centerYOffset": 0.0,
+              "offsetZ": 0.0,
+              "fanAngle": 360.0,
+              "radius": 3.0,
+              "followRootNodeY": false,
+              "followTransformY": false,
+              "offsetAngle": 0.0,
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 1.0
+                }
+              }
+            },
+            "attackInfo": {
+              "attackTag": "FallingAttack",
+              "attackProperty": {
+                "damagePercentage": "%FallingAnthem_Normal_Rank_1_Damage",
+                "overrideByWeapon": true,
+                "strikeType": "Blunt",
+                "attackType": "Melee",
+                "elementType": "None",
+                "elementDurability": 25,
+                "elementRank": 1.0,
+                "enBreak": 100
+              },
+              "hitPattern": {
+                "onHitEffectName": "none",
+                "hitImpulseType": "LV4",
+                // "hitLevel": "Heavy", //hitlevel = 4
+                // "hitImpulseX": 800, //hitlevel = 4
+                // "hitImpulseY": 0, //hitlevel = 4
+                "retreatType": "ByAttacker",
+                "reboundRatio": 0,
+                "canBeDefenceHalt": false,
+                "hitHaltTime": 0,
+                "hitHaltTimeScale": 0.1,
+                "muteHitText": false
+              },
+              "forceCameraShake": true,
+              "cameraShake": {
+                "shakeType": "CustomVector",
+                "shakeRange": 0.24,
+                "shakeTime": 0.12,
+                "shakeDistance": 30,
+                "shakeDir": {
+                  "x": 0,
+                  "y": 1,
+                  "z": 0
+                },
+                "extension": {
+                  "baseCycle": 0.24,
+                  "cycleDamping": 0,
+                  "rangeAttenuation": 0.3
+                }
+              }
+            }
+          },
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_ABILITY_FallingAnthem_UseCamera",
+              "forceByCaster": true,
+              "value": 0,
+              "compareType": "NoneOrEqual"
+            }
+          ]
+        },
+        //普通状态第二段
+        {
+          "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
+          "attackEvent": {
+            "attackPattern": {
+              "$type": "ConfigAttackCircle",
+              "triggerType": "TriggerNoRepeat",
+              "scale": 1.0,
+              "height": 2.0,
+              "centerYOffset": 0.0,
+              "offsetZ": 0.0,
+              "fanAngle": 360.0,
+              "radius": 5.0,
+              "followRootNodeY": false,
+              "followTransformY": false,
+              "offsetAngle": 0.0,
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": 0.0,
+                  "y": -0.5,
+                  "z": 1.0
+                }
+              }
+            },
+            "attackInfo": {
+              "attackTag": "FallingAttack",
+              "attackProperty": {
+                "damagePercentage": "%FallingAnthem_Normal_Rank_2_Damage",
+                "overrideByWeapon": true,
+                "strikeType": "Blunt",
+                "attackType": "Melee",
+                "elementType": "None",
+                "elementDurability": 25,
+                "elementRank": 1.0,
+                "enBreak": 150
+              },
+              "hitPattern": {
+                "onHitEffectName": "none",
+                "hitImpulseType": "LV7",
+                // "hitLevel": "Air", //hitlevel = 7
+                // "hitImpulseX": 0, //hitlevel = 7
+                // "hitImpulseY": 800, //hitlevel = 7
+                "retreatType": "ByAttacker",
+                "reboundRatio": 0,
+                "canBeDefenceHalt": false,
+                "hitHaltTime": 0,
+                "hitHaltTimeScale": 0.1,
+                "muteHitText": false
+              },
+              "forceCameraShake": true,
+              "cameraShake": {
+                "shakeType": "CustomVector",
+                "shakeRange": 0.5,
+                "shakeTime": 0.2,
+                "shakeDistance": 30,
+                "shakeDir": {
+                  "x": 0,
+                  "y": 1,
+                  "z": 1
+                },
+                "extension": {
+                  "baseCycle": 0.4,
+                  "cycleDamping": 0,
+                  "rangeAttenuation": 0.3
+                }
+              }
+            }
+          },
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_ABILITY_FallingAnthem_UseCamera",
+              "forceByCaster": true,
+              "value": 1,
+              "compareType": "Equal"
+            }
+          ]
+        },
+        //普通状态第一段
+        {
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Avatar_Sword_FallAnthem_Strike_01",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_ABILITY_FallingAnthem_UseCamera",
+              "forceByCaster": true,
+              "value": 0,
+              "compareType": "NoneOrEqual"
+            }
+          ]
+        },
+        //普通状态第二段
+        {
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Avatar_Sword_FallAnthem_Strike_02",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_ABILITY_FallingAnthem_UseCamera",
+              "forceByCaster": true,
+              "value": 1,
+              "compareType": "Equal"
+            }
+          ]
+        }
+      ],
       "modifiers": {
         "FallingAnthem_AttachWeaponEffect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Sword_FallAnthem_Self_01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Avatar_Sword_FallAnthem_Self_01"
             }
           ]
         },
         "FallingAnthem_CameraRadialBlur": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.23000000417232513,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.23,
           "modifierMixins": [
             {
               "$type": "CameraBlurMixin",
               "cameraRadialBlur": {
-                "power": 0.30000001192092896,
-                "fadeTime": 0.15000000596046448
+                "power": 0.3,
+                "fadeTime": 0.15
               }
             }
           ]
         },
         "FallingAnthem_BS_Material": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Sword_FallAnthem_BS",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Avatar_Sword_FallAnthem_BS"
             }
           ]
         },
         "FallingAnthem_BS_VelocityForce_Initialize": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "properties": {
-            "Actor_AddGravityScale": -2.0
+            "Actor_AddGravityScale": -2
           },
           "onAdded": [
             {
@@ -2308,53 +2612,54 @@
           ]
         },
         "FallingAnthem_LoopDamage": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.30000001192092896,
+          "thinkInterval": 0.3,
           "onThinkInterval": [
             {
               "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
+                  "radius": 1.0,
                   "born": {
                     "$type": "ConfigBornBySelf",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 1.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 1
                     }
-                  },
-                  "DCMPFCIBIPA": 1.0
+                  }
                 },
                 "attackInfo": {
                   "attackTag": "FallingAttack",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "HBIOLEEGHPD": "FallingAnthem_Normal_Loop_Damage",
-                    "CCNJGLPMIEP": 0.0,
-                    "bonusCriticalHurt": 0.0,
-                    "overrideByWeapon": true,
+                    "damagePercentage": "%FallingAnthem_Normal_Loop_Damage",
                     "strikeType": "Slash",
-                    "enBreak": 25.0,
-                    "attackType": "Melee"
+                    "overrideByWeapon": true,
+                    "attackType": "Melee",
+                    "elementType": "None",
+                    "elementDurability": 0,
+                    "enBreak": 25
                   },
                   "hitPattern": {
                     "onHitEffectName": "default",
                     "hitImpulseType": "LV2",
-                    "hitHaltTimeScale": 0.019999999552965164
+                    // "hitLevel": "Light", //hitlevel = 2
+                    // "hitImpulseX": 200, //hitlevel = 2
+                    // "hitImpulseY": 0, //hitlevel = 2
+                    "reboundRatio": 0,
+                    "canBeDefenceHalt": false,
+                    "hitHaltTime": 0,
+                    "hitHaltTimeScale": 0.02,
+                    "muteHitText": false
                   }
                 }
-              },
-              "targetType": "Enemy"
+              }
             }
           ]
         },
         "FallingAnthem_FallingDamageImmune_01": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ClearGlobalValue",
@@ -2362,90 +2667,95 @@
             },
             {
               "$type": "AddGlobalValue",
+              "key": "_ABILITY_FallingAttack_Altitude",
+              "value": "%FallingAnthem_FallingDamageRatio_Lv0",
+              "useLimitRange": true,
+              "maxValue": "%FallingAnthem_FallingDamageRatio_Lv0",
+              "minValue": "%FallingAnthem_FallingDamageRatio_Lv0",
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv0"
+                  "value": "%FallingAnthem_Altitude_Lv0",
+                  "logic": "LesserOrEqual"
                 }
-              ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv0",
-              "key": "_ABILITY_FallingAttack_Altitude",
-              "useLimitRange": true,
-              "maxValue": "FallingAnthem_FallingDamageRatio_Lv0",
-              "minValue": "FallingAnthem_FallingDamageRatio_Lv0"
-            },
+              ]
+            }, //==================================================================================
             {
               "$type": "AddGlobalValue",
+              "key": "_ABILITY_FallingAttack_Altitude",
+              "value": "%FallingAnthem_FallingDamageRatio_Lv1",
+              "useLimitRange": true,
+              "maxValue": "%FallingAnthem_FallingDamageRatio_Lv1",
+              "minValue": "%FallingAnthem_FallingDamageRatio_Lv1",
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv1"
+                  "value": "%FallingAnthem_Altitude_Lv1",
+                  "logic": "LesserOrEqual"
                 },
                 {
                   "$type": "ByTargetAltitude",
-                  "ratio": "FallingAnthem_Altitude_Lv0"
+                  "value": "%FallingAnthem_Altitude_Lv0",
+                  "logic": "Greater"
                 }
-              ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv1",
-              "key": "_ABILITY_FallingAttack_Altitude",
-              "useLimitRange": true,
-              "maxValue": "FallingAnthem_FallingDamageRatio_Lv1",
-              "minValue": "FallingAnthem_FallingDamageRatio_Lv1"
-            },
+              ]
+            }, //==================================================================================
             {
               "$type": "AddGlobalValue",
+              "key": "_ABILITY_FallingAttack_Altitude",
+              "value": "%FallingAnthem_FallingDamageRatio_Lv2",
+              "useLimitRange": true,
+              "maxValue": "%FallingAnthem_FallingDamageRatio_Lv2",
+              "minValue": "%FallingAnthem_FallingDamageRatio_Lv2",
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv2"
+                  "value": "%FallingAnthem_Altitude_Lv2",
+                  "logic": "LesserOrEqual"
                 },
                 {
                   "$type": "ByTargetAltitude",
-                  "ratio": "FallingAnthem_Altitude_Lv1"
+                  "value": "%FallingAnthem_Altitude_Lv1",
+                  "logic": "Greater"
                 }
-              ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv2",
-              "key": "_ABILITY_FallingAttack_Altitude",
-              "useLimitRange": true,
-              "maxValue": "FallingAnthem_FallingDamageRatio_Lv2",
-              "minValue": "FallingAnthem_FallingDamageRatio_Lv2"
-            },
+              ]
+            }, //==================================================================================
             {
               "$type": "AddGlobalValue",
+              "key": "_ABILITY_FallingAttack_Altitude",
+              "value": "%FallingAnthem_FallingDamageRatio_Lv3",
+              "useLimitRange": true,
+              "maxValue": "%FallingAnthem_FallingDamageRatio_Lv3",
+              "minValue": "%FallingAnthem_FallingDamageRatio_Lv3",
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "logic": "LesserOrEqual",
-                  "ratio": "FallingAnthem_Altitude_Lv3"
+                  "value": "%FallingAnthem_Altitude_Lv3",
+                  "logic": "LesserOrEqual"
                 },
                 {
                   "$type": "ByTargetAltitude",
-                  "ratio": "FallingAnthem_Altitude_Lv2"
+                  "value": "%FallingAnthem_Altitude_Lv2",
+                  "logic": "Greater"
                 }
-              ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv3",
-              "key": "_ABILITY_FallingAttack_Altitude",
-              "useLimitRange": true,
-              "maxValue": "FallingAnthem_FallingDamageRatio_Lv3",
-              "minValue": "FallingAnthem_FallingDamageRatio_Lv3"
-            },
+              ]
+            }, //==================================================================================
             {
               "$type": "AddGlobalValue",
+              "key": "_ABILITY_FallingAttack_Altitude",
+              "value": "%FallingAnthem_FallingDamageRatio_Lv4",
+              "useLimitRange": true,
+              "maxValue": "%FallingAnthem_FallingDamageRatio_Lv4",
+              "minValue": "%FallingAnthem_FallingDamageRatio_Lv4",
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "ratio": "FallingAnthem_Altitude_Lv3"
+                  "value": "%FallingAnthem_Altitude_Lv3",
+                  "logic": "Greater"
                 }
-              ],
-              "ratio": "FallingAnthem_FallingDamageRatio_Lv4",
-              "key": "_ABILITY_FallingAttack_Altitude",
-              "useLimitRange": true,
-              "maxValue": "FallingAnthem_FallingDamageRatio_Lv4",
-              "minValue": "FallingAnthem_FallingDamageRatio_Lv4"
-            },
+              ]
+            }, //==================================================================================
+
             {
               "$type": "AttachModifier",
               "modifierName": "FallingAnthem_FallingDamageImmune_02"
@@ -2453,8 +2763,6 @@
           ]
         },
         "FallingAnthem_FallingDamageImmune_02": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValueToOverrideMap",
@@ -2468,21 +2776,17 @@
           ]
         },
         "FallingAnthem_FallingDamageImmune_03": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "properties": {
-            "Actor_FallingDamageRatio": "FallingAnthem_FallingDamageRatio"
+            "Actor_FallingDamageRatio": "%FallingAnthem_FallingDamageRatio"
           }
         },
         "FallingAnthem_Loop_Normal": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_FallingAnthem_UseCamera",
-              "defaultGlobalValueOnCreate": 0.0,
-              "valueSteps": [-1.0, 0.5, 1.5],
+              "valueSteps": [-1, 0.5, 1.5],
+              "removeAppliedModifier": true,
               "modifierNameSteps": [
                 "FallingAnthem_Loop_Normal_Rank_1",
                 "FallingAnthem_Loop_Normal_Rank_2"
@@ -2491,168 +2795,156 @@
           ]
         },
         "FallingAnthem_Loop_Normal_Rank_1": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Sword_FallAnthem_Loop_01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Avatar_Sword_FallAnthem_Loop_01"
             }
           ]
         },
         "FallingAnthem_Loop_Normal_Rank_2": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Sword_FallAnthem_Loop_02",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Avatar_Sword_FallAnthem_Loop_02"
             }
           ]
         },
+        //水平惯性继承
         "Inertia": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "ApplyInertiaVelocityMixin",
+              "damping": 0,
               "useXZ": false,
               "useY": false
             }
           ]
         },
         "FallingAnthem_Height_Detect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
+              "key": "_ABILITY_FallingAnthem_UseCamera",
+              "value": 0,
+              "useLimitRange": true,
+              "maxValue": 0,
+              "minValue": 0,
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "logic": "LesserOrEqual",
-                  "ratio": 2.4000000953674316
+                  "value": 2.4,
+                  "logic": "LesserOrEqual"
                 }
-              ],
-              "ratio": 0.0,
-              "key": "_ABILITY_FallingAnthem_UseCamera",
-              "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
+              ]
             },
             {
               "$type": "AddGlobalValue",
-              "predicates": [
-                {
-                  "$type": "ByTargetAltitude",
-                  "ratio": 2.4000000953674316
-                }
-              ],
-              "ratio": 5.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
+              "value": 5,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
-            },
-            {
-              "$type": "SetAnimatorFloat",
+              "maxValue": 1,
+              "minValue": 0,
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "logic": "LesserOrEqual",
-                  "ratio": 2.4000000953674316
+                  "value": 2.4,
+                  "logic": "Greater"
                 }
-              ],
-              "floatID": "FallingAnthem_UseCamera",
-              "ratio": 0.0
+              ]
             },
             {
               "$type": "SetAnimatorFloat",
+              "floatID": "FallingAnthem_UseCamera",
+              "value": 0,
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "ratio": 2.4000000953674316
+                  "value": 2.4,
+                  "logic": "LesserOrEqual"
                 }
-              ],
+              ]
+            },
+            {
+              "$type": "SetAnimatorFloat",
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 1.0
+              "value": 1,
+              "predicates": [
+                {
+                  "$type": "ByTargetAltitude",
+                  "value": 2.4,
+                  "logic": "Greater"
+                }
+              ]
             }
           ],
           "onRemoved": [
             {
               "$type": "SetAnimatorFloat",
               "floatID": "FallingAnthem_UseCamera",
-              "ratio": 0.0
+              "value": 0
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 0.0,
               "key": "_ABILITY_FallingAnthem_UseCamera",
+              "value": 0,
               "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "maxValue": 0,
+              "minValue": 0
             }
           ]
         },
         "FallingAnthem_OverHead_Camera": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AvatarCameraParam",
+              "lockParam": false,
+              "cameraParam": {
+                "forceRadius": 4.5,
+                "forceRadiusDuration": 0.2,
+                "shouldKeepForceRadius": true
+              },
               "predicates": [
                 {
                   "$type": "ByAnimatorFloat",
-                  "logic": "Equal",
-                  "ratio": 1.0,
-                  "parameter": "FallingAnthem_UseCamera"
+                  "parameter": "FallingAnthem_UseCamera",
+                  "value": 1,
+                  "logic": "Equal"
                 }
-              ],
-              "cameraParam": {
-                "forceRadius": 4.5,
-                "forceRadiusDuration": 0.20000000298023224,
-                "shouldKeepForceRadius": true
-              }
+              ]
             }
           ]
         },
         "FallingAnthem_OverHead_Camera_Remover": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
-              "$type": "AvatarExitCameraShot",
-              "RotationDampTime": true
+              "doOffStage": true,
+              "$type": "AvatarExitCameraShot"
             }
           ]
         },
         "FallingAnthem_Landed_Camera": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AvatarCameraParam",
+              "lockParam": false,
+              "cameraParam": {
+                "forceRadius": 6.0,
+                "forceRadiusDuration": 0.1,
+                "shouldKeepForceRadius": true
+              },
               "predicates": [
                 {
                   "$type": "ByAnimatorFloat",
-                  "logic": "Equal",
-                  "ratio": 1.0,
-                  "parameter": "FallingAnthem_UseCamera"
+                  "parameter": "FallingAnthem_UseCamera",
+                  "value": 1,
+                  "logic": "Equal"
                 }
-              ],
-              "cameraParam": {
-                "forceRadius": 6.0,
-                "forceRadiusDuration": 0.10000000149011612,
-                "shouldKeepForceRadius": true
-              }
+              ]
             }
           ]
         },
         "FallingAnthem_ClearVelocityForce": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "RemoveVelocityForce",
@@ -2661,8 +2953,6 @@
           ]
         },
         "FallingAnthem_ClearVelocityForce_AS": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "RemoveVelocityForce",
@@ -2671,161 +2961,25 @@
           ]
         }
       },
-      "onAbilityStart": [
-        {
-          "$type": "TriggerAttackEvent",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 0.0,
-              "forceByCaster": true,
-              "compareType": "NoneOrEqual"
-            }
-          ],
-          "attackEvent": {
-            "attackPattern": {
-              "$type": "ConfigAttackCircle",
-              "triggerType": "TriggerNoRepeat",
-              "born": {
-                "$type": "ConfigBornByTarget",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": -0.5,
-                  "PJCOKIGCJOK": 1.0
-                }
-              },
-              "height": 2.0,
-              "DCMPFCIBIPA": 3.0
-            },
-            "attackInfo": {
-              "attackTag": "FallingAttack",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
-              "attackProperty": {
-                "HBIOLEEGHPD": "FallingAnthem_Normal_Rank_1_Damage",
-                "CCNJGLPMIEP": 0.0,
-                "bonusCriticalHurt": 25.0,
-                "overrideByWeapon": true,
-                "strikeType": "Blunt",
-                "enBreak": 100.0,
-                "attackType": "Melee"
-              },
-              "hitPattern": {
-                "onHitEffectName": "none",
-                "hitImpulseType": "LV4",
-                "hitHaltTimeScale": 0.10000000149011612
-              },
-              "forceCameraShake": true,
-              "cameraShake": {
-                "shakeType": "CustomVector",
-                "shakeRange": 0.23999999463558197,
-                "shakeTime": 0.11999999731779099,
-                "shakeDistance": 30.0,
-                "shakeDir": {
-                  "y": 1.0
-                },
-                "extension": {
-                  "baseCycle": 0.23999999463558197,
-                  "cycleDamping": 0.0,
-                  "rangeAttenuation": 0.30000001192092896
-                }
-              }
-            }
-          },
-          "targetType": "Enemy"
-        },
-        {
-          "$type": "TriggerAttackEvent",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 1.0,
-              "forceByCaster": true
-            }
-          ],
-          "attackEvent": {
-            "attackPattern": {
-              "$type": "ConfigAttackCircle",
-              "triggerType": "TriggerNoRepeat",
-              "born": {
-                "$type": "ConfigBornByTarget",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": -0.5,
-                  "PJCOKIGCJOK": 1.0
-                }
-              },
-              "height": 2.0,
-              "DCMPFCIBIPA": 5.0
-            },
-            "attackInfo": {
-              "attackTag": "FallingAttack",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
-              "attackProperty": {
-                "HBIOLEEGHPD": "FallingAnthem_Normal_Rank_2_Damage",
-                "CCNJGLPMIEP": 0.0,
-                "bonusCriticalHurt": 25.0,
-                "overrideByWeapon": true,
-                "strikeType": "Blunt",
-                "enBreak": 150.0,
-                "attackType": "Melee"
-              },
-              "hitPattern": {
-                "onHitEffectName": "none",
-                "hitImpulseType": "LV7",
-                "hitHaltTimeScale": 0.10000000149011612
-              },
-              "forceCameraShake": true,
-              "cameraShake": {
-                "shakeType": "CustomVector",
-                "shakeRange": 0.5,
-                "shakeTime": 0.20000000298023224,
-                "shakeDistance": 30.0,
-                "shakeDir": {
-                  "y": 1.0,
-                  "z": 1.0
-                },
-                "extension": {
-                  "baseCycle": 0.4000000059604645,
-                  "cycleDamping": 0.0,
-                  "rangeAttenuation": 0.30000001192092896
-                }
-              }
-            }
-          },
-          "targetType": "Enemy"
-        },
-        {
-          "$type": "FireEffect",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 0.0,
-              "forceByCaster": true,
-              "compareType": "NoneOrEqual"
-            }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Sword_FallAnthem_Strike_01",
-          "EBHJMLOKDGB": -1.0
-        },
-        {
-          "$type": "FireEffect",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_ABILITY_FallingAnthem_UseCamera",
-              "ratio": 1.0,
-              "forceByCaster": true
-            }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Sword_FallAnthem_Strike_02",
-          "EBHJMLOKDGB": -1.0
-        }
-      ]
+      "abilitySpecials": {
+        "FallingAnthem_Normal_Loop_Damage": 0,
+        "FallingAnthem_Normal_Rank_1_Damage": 0,
+        "FallingAnthem_Normal_Rank_2_Damage": 0,
+
+        "FallingAnthem_Altitude_Lv0": 20,
+        "FallingAnthem_Altitude_Lv1": 40,
+        "FallingAnthem_Altitude_Lv2": 60,
+        "FallingAnthem_Altitude_Lv3": 100,
+        "FallingAnthem_Altitude_Lv4": 200,
+
+        "FallingAnthem_FallingDamageRatio_Lv0": -1,
+        "FallingAnthem_FallingDamageRatio_Lv1": -1,
+        "FallingAnthem_FallingDamageRatio_Lv2": -0.9,
+        "FallingAnthem_FallingDamageRatio_Lv3": -0.8,
+        "FallingAnthem_FallingDamageRatio_Lv4": -0.6,
+
+        "FallingAnthem_FallingDamageRatio": 0
+      }
     }
   }
 ]

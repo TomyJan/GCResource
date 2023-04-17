@@ -1,13 +1,66 @@
 [
+  //  3.1 营地挑战buff
+  //
+  ////////////////////////////////////////////////////////////////
+  //
+  //  阶段一
+  //  1个风种子：换人后产生风场
+  //  2个风种子：风场能够造成风元素伤害
+  //  3个风种子：风场持续时间提升到5s
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_VintageChallenge_Stage_1",
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "key": "_ABILITY_VintageChallenge_Wind_Seed_Count",
+          "target": "Team",
+          "value": 0,
+          "useLimitRange": true,
+          "minValue": 0,
+          "maxValue": 3,
+          "doOffStage": true
+        },
+        {
+          "$type": "SetGlobalValue",
+          "key": "_ABILITY_VintageChallenge_WindZone_CD_Mark",
+          "target": "Team",
+          "value": 0,
+          "doOffStage": true
+        }
+        // {
+        // 	"$type": "AttachModifier",
+        // 	"target": "CurTeamAvatars",
+        // 	"modifierName": "UNIQUE_VintageChallenge_Mark_replicator_01",
+        // 	"doOffStage": true
+        // },
+        // {
+        // 	"$type": "AttachModifier",
+        // 	"target": "CurTeamAvatars",
+        // 	"modifierName": "UNIQUE_VintageChallenge_Mark_replicator_01",
+        // 	"doOffStage": true
+        // }
+      ],
+      "onRemoved": [
+        {
+          "$type": "SetGlobalValue",
+          "key": "_ABILITY_VintageChallenge_Wind_Seed_Count",
+          "target": "Team",
+          "value": 0,
+          "useLimitRange": true,
+          "minValue": 0,
+          "maxValue": 3
+        }
+      ],
       "abilityMixins": [
         {
           "$type": "LocalAvatarsMixin",
           "modifierName": "UNIQUE_VintageChallenge_Mark_replicator_01",
-          "PEHAHKINGOC": true
+          "avatarAppearAttachModifier": true
         },
         {
           "$type": "CurLocalAvatarMixinV2",
@@ -15,18 +68,43 @@
         }
       ],
       "modifiers": {
-        "Blank": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
+        "Blank": {},
         "UNIQUE_VintageChallenge_Mark_replicator_01": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "thinkInterval": 0.5,
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "key": "_ABILITY_VintageChallenge_Wind_Seed_Count_Avatar",
+              "value": 0,
+              "useLimitRange": true,
+              "minValue": 0,
+              "maxValue": 3,
+              "doOffStage": true
+            },
+            {
+              "$type": "CopyGlobalValue",
+              "srcTarget": "Team",
+              "srcKey": "_ABILITY_VintageChallenge_Wind_Seed_Count",
+              "dstTarget": "Self",
+              "dstKey": "_ABILITY_VintageChallenge_Wind_Seed_Count_Avatar",
+              "doOffStage": true
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "CopyGlobalValue",
+              "srcTarget": "Team",
+              "srcKey": "_ABILITY_VintageChallenge_Wind_Seed_Count",
+              "dstTarget": "Self",
+              "dstKey": "_ABILITY_VintageChallenge_Wind_Seed_Count_Avatar",
+              "doOffStage": true
+            }
+          ],
           "modifierMixins": [
             {
               "$type": "AttachModifierToGlobalValueMixin",
+              "globalValueTarget": "Self",
               "globalValueKey": "_ABILITY_VintageChallenge_Wind_Seed_Count_Avatar",
               "valueSteps": [-0.5, 0.5, 1.5, 2.5, 3.5],
               "modifierNameSteps": [
@@ -36,203 +114,162 @@
                 "Wind_Seed_Buff_Stage_1_Phase_3"
               ]
             }
-          ],
-          "onAdded": [
-            {
-              "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
-              "key": "_ABILITY_VintageChallenge_Wind_Seed_Count_Avatar",
-              "useLimitRange": true,
-              "maxValue": 3.0,
-              "minValue": 0.0
-            },
-            {
-              "$type": "CopyGlobalValue",
-              "RotationDampTime": true,
-              "srcTarget": "Team",
-              "dstTarget": "Self",
-              "srcKey": "_ABILITY_VintageChallenge_Wind_Seed_Count",
-              "dstKey": "_ABILITY_VintageChallenge_Wind_Seed_Count_Avatar"
-            }
-          ],
-          "onThinkInterval": [
-            {
-              "$type": "CopyGlobalValue",
-              "RotationDampTime": true,
-              "srcTarget": "Team",
-              "dstTarget": "Self",
-              "srcKey": "_ABILITY_VintageChallenge_Wind_Seed_Count",
-              "dstKey": "_ABILITY_VintageChallenge_Wind_Seed_Count_Avatar"
-            }
           ]
         },
         "Wind_Seed_Buff_Stage_1_Phase_1": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "NPHODJLPMAJ": [
+          "onAvatarOut": [
             {
               "$type": "Predicated",
               "target": "Team",
-              "RotationDampTime": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "Team",
+                  "compareType": "NoneOrEqual",
                   "key": "_ABILITY_VintageChallenge_WindZone_CD_Mark",
-                  "ratio": 0.0,
-                  "compareType": "NoneOrEqual"
+                  "value": 0
                 }
               ],
               "successActions": [
                 {
                   "$type": "CreateGadget",
+                  "gadgetID": 44000434,
                   "target": "CurLocalAvatar",
-                  "RotationDampTime": true,
+                  "campID": 1001,
+                  "doOffStage": true,
+                  "campTargetType": "Enemy",
                   "born": {
                     "$type": "ConfigBornByTarget",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
                     "onGround": true
-                  },
-                  "gadgetID": 44000434,
-                  "campID": 1001,
-                  "campTargetType": "Enemy"
+                  }
                 },
                 {
                   "$type": "ApplyModifier",
+                  "modifierName": "VintageChallenge_WindZone_CD_Set",
                   "target": "Team",
-                  "RotationDampTime": true,
-                  "modifierName": "VintageChallenge_WindZone_CD_Set"
+                  "doOffStage": true
                 }
               ]
             }
           ]
         },
         "Wind_Seed_Buff_Stage_1_Phase_2": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "NPHODJLPMAJ": [
+          "onAvatarOut": [
             {
               "$type": "Predicated",
               "target": "Team",
-              "RotationDampTime": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "Team",
+                  "compareType": "NoneOrEqual",
                   "key": "_ABILITY_VintageChallenge_WindZone_CD_Mark",
-                  "ratio": 0.0,
-                  "compareType": "NoneOrEqual"
+                  "value": 0
                 }
               ],
               "successActions": [
                 {
                   "$type": "CreateGadget",
+                  "gadgetID": 44000435,
                   "target": "CurLocalAvatar",
-                  "RotationDampTime": true,
+                  "campID": 1001,
+                  "doOffStage": true,
+                  "campTargetType": "Enemy",
                   "born": {
                     "$type": "ConfigBornByTarget",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
                     "onGround": true
-                  },
-                  "gadgetID": 44000435,
-                  "campID": 1001,
-                  "campTargetType": "Enemy"
+                  }
                 },
                 {
                   "$type": "ApplyModifier",
+                  "modifierName": "VintageChallenge_WindZone_CD_Set",
                   "target": "Team",
-                  "RotationDampTime": true,
-                  "modifierName": "VintageChallenge_WindZone_CD_Set"
+                  "doOffStage": true
                 }
               ]
             }
           ]
         },
         "Wind_Seed_Buff_Stage_1_Phase_3": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "NPHODJLPMAJ": [
+          "onAvatarOut": [
             {
               "$type": "Predicated",
               "target": "Team",
-              "RotationDampTime": true,
+              "doOffStage": true,
               "targetPredicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "Team",
+                  "compareType": "NoneOrEqual",
                   "key": "_ABILITY_VintageChallenge_WindZone_CD_Mark",
-                  "ratio": 0.0,
-                  "compareType": "NoneOrEqual"
+                  "value": 0
                 }
               ],
               "successActions": [
                 {
                   "$type": "CreateGadget",
+                  "gadgetID": 44000436,
                   "target": "CurLocalAvatar",
-                  "RotationDampTime": true,
+                  "campID": 1001,
+                  "doOffStage": true,
+                  "campTargetType": "Enemy",
                   "born": {
                     "$type": "ConfigBornByTarget",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
                     "onGround": true
-                  },
-                  "gadgetID": 44000436,
-                  "campID": 1001,
-                  "campTargetType": "Enemy"
+                  }
                 },
                 {
                   "$type": "ApplyModifier",
+                  "modifierName": "VintageChallenge_WindZone_CD_Set",
                   "target": "Team",
-                  "RotationDampTime": true,
-                  "modifierName": "VintageChallenge_WindZone_CD_Set"
+                  "doOffStage": true
                 }
               ]
             }
           ]
         },
         "VintageChallenge_WindZone_CD_Set": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 5.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 5,
+          "stacking": "Refresh",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 1.0,
               "key": "_ABILITY_VintageChallenge_WindZone_CD_Mark",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1,
+              "doOffStage": true
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "RotationDampTime": true,
-              "ratio": 0.0,
               "key": "_ABILITY_VintageChallenge_WindZone_CD_Mark",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0,
+              "doOffStage": true
             }
           ]
         },
         "VintageChallenge_Eff_Controller": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachModifierToGlobalValueMixin",
+              "globalValueTarget": "Self",
               "globalValueKey": "_ABILITY_VintageChallenge_Wind_Seed_Count_Avatar",
               "valueSteps": [-0.5, 0.5, 1.5, 2.5, 3.5],
               "modifierNameSteps": [
@@ -246,116 +283,84 @@
           "onRemoved": [
             {
               "$type": "FireEffect",
+              "effectPattern": "Eff_ScenObj_Area_Common_Property_Prop_WindBuff_Around_Disappear",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
+                  "compareType": "MoreThanAndEqual",
                   "key": "_ABILITY_VintageChallenge_Wind_Seed_Count_Avatar",
-                  "ratio": 1.0,
-                  "compareType": "MoreThanAndEqual"
+                  "value": 1
                 }
-              ],
-              "healLimitedByCasterMaxHPRatio": "Eff_ScenObj_Area_Common_Property_Prop_WindBuff_Around_Disappear",
-              "EBHJMLOKDGB": -1.0
+              ]
             }
           ]
         },
         "Wind_Seed_Buff_Eff_01": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "RotationDampTime": true,
-              "healLimitedByCasterMaxHPRatio": "Eff_ScenObj_Area_Common_Property_Prop_WindBuff_Around_01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_ScenObj_Area_Common_Property_Prop_WindBuff_Around_01",
+              "doOffStage": true
             }
           ]
         },
         "Wind_Seed_Buff_Eff_02": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "RotationDampTime": true,
-              "healLimitedByCasterMaxHPRatio": "Eff_ScenObj_Area_Common_Property_Prop_WindBuff_Around_02",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_ScenObj_Area_Common_Property_Prop_WindBuff_Around_02",
+              "doOffStage": true
             }
           ]
         },
         "Wind_Seed_Buff_Eff_03": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "RotationDampTime": true,
-              "healLimitedByCasterMaxHPRatio": "Eff_ScenObj_Area_Common_Property_Prop_WindBuff_Around_03",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_ScenObj_Area_Common_Property_Prop_WindBuff_Around_03",
+              "doOffStage": true
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "target": "Team",
-          "RotationDampTime": true,
-          "ratio": 0.0,
-          "key": "_ABILITY_VintageChallenge_Wind_Seed_Count",
-          "useLimitRange": true,
-          "maxValue": 3.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "SetGlobalValue",
-          "target": "Team",
-          "RotationDampTime": true,
-          "ratio": 0.0,
-          "key": "_ABILITY_VintageChallenge_WindZone_CD_Mark",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        }
-      ],
-      "onRemoved": [
-        {
-          "$type": "SetGlobalValue",
-          "target": "Team",
-          "ratio": 0.0,
-          "key": "_ABILITY_VintageChallenge_Wind_Seed_Count",
-          "useLimitRange": true,
-          "maxValue": 3.0,
-          "minValue": 0.0
-        }
-      ],
-      "isDynamicAbility": true
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Ability_VintageChallenge_WindZone_1",
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "WindZone_Handler"
+        }
+      ],
       "modifiers": {
         "WindZone_Handler": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 3.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 3,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Activity_Vintage_Challenge_Wind_Zone"
+            }
+          ],
           "modifierMixins": [
             {
               "$type": "WindZoneMixin",
               "shapeName": "CircleR7",
+              "innerRadius": 1.0,
+              "strength": 6,
+              "attenuation": 1,
+              //"reverse":true,
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 1.0,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": 1.0,
+                  "z": 0.0
                 },
-                "alongGround": true
+                "alongGround": true //其朝向与地面法向一致
               },
-              "LFMBDMGKEFB": 6.0,
-              "innerRadius": 1.0,
-              "radius": 1.0,
               "targetType": "All",
               "predicates": [
                 {
@@ -364,19 +369,12 @@
                   "reject": true
                 },
                 {
+                  //暂时考虑无法击飞的怪物不会被吸引，怪物质量与ImpluseY比值为 1：5.5
                   "$type": "ByTargetWeight",
                   "logic": "LesserOrEqual",
-                  "weight": 150.0
+                  "weight": 150
                 }
-              ],
-              "modifierName": ""
-            }
-          ],
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Activity_Vintage_Challenge_Wind_Zone",
-              "EBHJMLOKDGB": -1.0
+              ]
             }
           ],
           "onRemoved": [
@@ -385,45 +383,103 @@
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "WindZone_Handler"
-        }
-      ]
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Ability_VintageChallenge_WindZone_2",
-      "abilitySpecials": {
-        "DamageSystemValue": 0.0,
-        "DamageRatio": 0.0
-      },
+      "onAdded": [
+        {
+          "$type": "SetSystemValueToOverrideMap",
+          "type": "ElementLevelCo",
+          "key": "DamageSystemValue",
+          "doOffStage": true
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "WindZone_Handler"
+        }
+      ],
       "modifiers": {
         "WindZone_Handler": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 3.0,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.699999988079071,
+          "duration": 3,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Activity_Vintage_Challenge_Wind_Zone"
+            },
+            {
+              "$type": "TriggerAttackEvent",
+              "target": "Self",
+              "targetType": "Enemy",
+              "attackEvent": {
+                "attackPattern": {
+                  "$type": "ConfigAttackCircle",
+                  "triggerType": "TriggerNoRepeat",
+                  "fanAngle": 360.0,
+                  "height": 6.0,
+                  "radius": 7.0,
+                  "massiveAttackRatio": 0.3, //对于水草entity的攻击盒范围
+                  "born": {
+                    "$type": "ConfigBornBySelf",
+                    "offset": {
+                      "x": 0.0,
+                      "y": -1.5,
+                      "z": 0.0
+                    },
+                    "onGround": true
+                  }
+                },
+                "attackInfo": {
+                  // "attenuationTag": "Elemental_Art",
+                  "attackProperty": {
+                    "damageExtra": "%DamageRatio*%DamageSystemValue",
+                    "elementType": "Wind",
+                    "elementDurability": 20,
+                    "enBreak": 20, //需要一个高Enbreak值才能起到吸怪效果
+                    "attackType": "Range",
+                    "strikeType": "Default",
+                    "trueDamage": true
+                  },
+                  "hitPattern": {
+                    "onHitEffectName": "default",
+                    "hitImpulseType": "LV3",
+                    // "overrideHitImpulse":
+                    // {
+                    // 	"hitLevel":"Air",
+                    // 	"hitImpulseX":0,
+                    // 	"hitImpulseY":800,
+                    // },
+                    // "reboundRatio": 0,
+                    "retreatType": "ByHitDirectionInverse",
+                    "canBeDefenceHalt": false,
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
+                    "muteHitText": false
+                  }
+                }
+              }
+            }
+          ],
           "modifierMixins": [
             {
               "$type": "WindZoneMixin",
               "shapeName": "CircleR7",
+              "innerRadius": 1.0,
+              "strength": 6,
+              "attenuation": 1.0,
+              //"reverse":true,
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 1.0,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": 1.0,
+                  "z": 0.0
                 },
-                "alongGround": true
+                "alongGround": true //其朝向与地面法向一致
               },
-              "LFMBDMGKEFB": 6.0,
-              "innerRadius": 1.0,
-              "radius": 1.0,
               "targetType": "All",
               "predicates": [
                 {
@@ -432,160 +488,172 @@
                   "reject": true
                 },
                 {
+                  //暂时考虑无法击飞的怪物不会被吸引，怪物质量与ImpluseY比值为 1：5.5
                   "$type": "ByTargetWeight",
                   "logic": "LesserOrEqual",
-                  "weight": 150.0
+                  "weight": 150
                 }
-              ],
-              "modifierName": ""
+              ]
             }
           ],
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Activity_Vintage_Challenge_Wind_Zone",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "TriggerAttackEvent",
-              "attackEvent": {
-                "attackPattern": {
-                  "$type": "ConfigAttackCircle",
-                  "triggerType": "TriggerNoRepeat",
-                  "massiveAttackRatio": 0.30000001192092896,
-                  "born": {
-                    "$type": "ConfigBornBySelf",
-                    "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": -1.5,
-                      "PJCOKIGCJOK": 0.0
-                    },
-                    "onGround": true
-                  },
-                  "height": 6.0,
-                  "DCMPFCIBIPA": 7.0
-                },
-                "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
-                  "attackProperty": {
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Wind",
-                    "bonusCriticalHurt": 20.0,
-                    "strikeType": "Default",
-                    "enBreak": 20.0,
-                    "attackType": "Range",
-                    "damageExtra": ["DamageRatio", "DamageSystemValue", "MUL"],
-                    "trueDamage": true
-                  },
-                  "hitPattern": {
-                    "onHitEffectName": "default",
-                    "hitImpulseType": "LV3",
-                    "retreatType": "ByHitDirectionInverse",
-                    "hitHaltTimeScale": 0.05000000074505806
-                  }
-                }
-              },
-              "targetType": "Enemy"
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "KillSelf"
-            }
-          ],
+          "thinkInterval": 0.7,
           "onThinkInterval": [
             {
               "$type": "TriggerAttackEvent",
+              "target": "Self",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
-                  "massiveAttackRatio": 0.30000001192092896,
+                  "fanAngle": 360.0,
+                  "height": 6.0,
+                  "radius": 7.0,
+                  "massiveAttackRatio": 0.3, //对于水草entity的攻击盒范围
                   "born": {
                     "$type": "ConfigBornBySelf",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": -1.5,
-                      "PJCOKIGCJOK": 0.0
+                      "x": 0.0,
+                      "y": -1.5,
+                      "z": 0.0
                     },
                     "onGround": true
-                  },
-                  "height": 6.0,
-                  "DCMPFCIBIPA": 7.0
+                  }
                 },
                 "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
+                  // "attenuationTag": "Elemental_Art",
                   "attackProperty": {
-                    "CCNJGLPMIEP": 0.0,
+                    "damageExtra": "%DamageRatio*%DamageSystemValue",
                     "elementType": "Wind",
-                    "bonusCriticalHurt": 20.0,
-                    "strikeType": "Default",
-                    "enBreak": 20.0,
+                    "elementDurability": 20,
+                    "enBreak": 20, //需要一个高Enbreak值才能起到吸怪效果
                     "attackType": "Range",
-                    "damageExtra": ["DamageRatio", "DamageSystemValue", "MUL"],
+                    "strikeType": "Default",
                     "trueDamage": true
                   },
                   "hitPattern": {
                     "onHitEffectName": "default",
                     "hitImpulseType": "LV3",
+                    // "overrideHitImpulse":
+                    // {
+                    // 	"hitLevel":"Air",
+                    // 	"hitImpulseX":0,
+                    // 	"hitImpulseY":800,
+                    // },
+                    // "reboundRatio": 0,
                     "retreatType": "ByHitDirectionInverse",
-                    "hitHaltTimeScale": 0.05000000074505806
+                    "canBeDefenceHalt": false,
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
+                    "muteHitText": false
                   }
                 }
-              },
-              "targetType": "Enemy"
+              }
             }
-          ]
+          ],
+          "onRemoved": [{ "$type": "KillSelf" }]
         }
       },
-      "onAdded": [
-        {
-          "$type": "SetSystemValueToOverrideMap",
-          "RotationDampTime": true,
-          "key": "DamageSystemValue",
-          "type": "ElementLevelCo"
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "WindZone_Handler"
-        }
-      ]
+      "abilitySpecials": {
+        "DamageSystemValue": 0,
+        "DamageRatio": 0
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Ability_VintageChallenge_WindZone_3",
-      "abilitySpecials": {
-        "DamageSystemValue": 0.0,
-        "DamageRatio": 0.0
-      },
+      "onAdded": [
+        {
+          "$type": "SetSystemValueToOverrideMap",
+          "type": "ElementLevelCo",
+          "key": "DamageSystemValue",
+          "doOffStage": true
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "WindZone_Handler"
+        }
+      ],
       "modifiers": {
         "WindZone_Handler": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 5.0,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.699999988079071,
+          "duration": 5,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Activity_Vintage_Challenge_Wind_Zone"
+            },
+            {
+              "$type": "TriggerAttackEvent",
+              "target": "Self",
+              "targetType": "Enemy",
+              "attackEvent": {
+                "attackPattern": {
+                  "$type": "ConfigAttackCircle",
+                  "triggerType": "TriggerNoRepeat",
+                  "fanAngle": 360.0,
+                  "height": 6.0,
+                  "radius": 7.0,
+                  "massiveAttackRatio": 0.3, //对于水草entity的攻击盒范围
+                  "born": {
+                    "$type": "ConfigBornBySelf",
+                    "offset": {
+                      "x": 0.0,
+                      "y": -1.5,
+                      "z": 0.0
+                    },
+                    "onGround": true
+                  }
+                },
+                "attackInfo": {
+                  // "attenuationTag": "Elemental_Art",
+                  "attackProperty": {
+                    "damageExtra": "%DamageRatio*%DamageSystemValue",
+                    "elementType": "Wind",
+                    "elementDurability": 20,
+                    "enBreak": 20, //需要一个高Enbreak值才能起到吸怪效果
+                    "attackType": "Range",
+                    "strikeType": "Default",
+                    "trueDamage": true
+                  },
+                  "hitPattern": {
+                    "onHitEffectName": "default",
+                    "hitImpulseType": "LV3",
+                    // "overrideHitImpulse":
+                    // {
+                    // 	"hitLevel":"Air",
+                    // 	"hitImpulseX":0,
+                    // 	"hitImpulseY":800,
+                    // },
+                    // "reboundRatio": 0,
+                    "retreatType": "ByHitDirectionInverse",
+                    "canBeDefenceHalt": false,
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
+                    "muteHitText": false
+                  }
+                }
+              }
+            }
+          ],
           "modifierMixins": [
             {
               "$type": "WindZoneMixin",
               "shapeName": "CircleR7",
+              "innerRadius": 1.0,
+              "strength": 6,
+              "attenuation": 1.0,
+              //"reverse":true,
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 1.0,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": 1.0,
+                  "z": 0.0
                 },
-                "alongGround": true
+                "alongGround": true //其朝向与地面法向一致
               },
-              "LFMBDMGKEFB": 6.0,
-              "innerRadius": 1.0,
-              "radius": 1.0,
               "targetType": "All",
               "predicates": [
                 {
@@ -594,134 +662,113 @@
                   "reject": true
                 },
                 {
+                  //暂时考虑无法击飞的怪物不会被吸引，怪物质量与ImpluseY比值为 1：5.5
                   "$type": "ByTargetWeight",
                   "logic": "LesserOrEqual",
-                  "weight": 150.0
+                  "weight": 150
                 }
-              ],
-              "modifierName": ""
+              ]
             }
           ],
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Activity_Vintage_Challenge_Wind_Zone",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "TriggerAttackEvent",
-              "attackEvent": {
-                "attackPattern": {
-                  "$type": "ConfigAttackCircle",
-                  "triggerType": "TriggerNoRepeat",
-                  "massiveAttackRatio": 0.30000001192092896,
-                  "born": {
-                    "$type": "ConfigBornBySelf",
-                    "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": -1.5,
-                      "PJCOKIGCJOK": 0.0
-                    },
-                    "onGround": true
-                  },
-                  "height": 6.0,
-                  "DCMPFCIBIPA": 7.0
-                },
-                "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
-                  "attackProperty": {
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Wind",
-                    "bonusCriticalHurt": 20.0,
-                    "strikeType": "Default",
-                    "enBreak": 20.0,
-                    "attackType": "Range",
-                    "damageExtra": ["DamageRatio", "DamageSystemValue", "MUL"],
-                    "trueDamage": true
-                  },
-                  "hitPattern": {
-                    "onHitEffectName": "default",
-                    "hitImpulseType": "LV3",
-                    "retreatType": "ByHitDirectionInverse",
-                    "hitHaltTimeScale": 0.05000000074505806
-                  }
-                }
-              },
-              "targetType": "Enemy"
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "KillSelf"
-            }
-          ],
+          "thinkInterval": 0.7,
           "onThinkInterval": [
             {
               "$type": "TriggerAttackEvent",
+              "target": "Self",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
-                  "massiveAttackRatio": 0.30000001192092896,
+                  "fanAngle": 360.0,
+                  "height": 6.0,
+                  "radius": 7.0,
+                  "massiveAttackRatio": 0.3, //对于水草entity的攻击盒范围
                   "born": {
                     "$type": "ConfigBornBySelf",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": -1.5,
-                      "PJCOKIGCJOK": 0.0
+                      "x": 0.0,
+                      "y": -1.5,
+                      "z": 0.0
                     },
                     "onGround": true
-                  },
-                  "height": 6.0,
-                  "DCMPFCIBIPA": 7.0
+                  }
                 },
                 "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
+                  // "attenuationTag": "Elemental_Art",
                   "attackProperty": {
-                    "CCNJGLPMIEP": 0.0,
+                    "damageExtra": "%DamageRatio*%DamageSystemValue",
                     "elementType": "Wind",
-                    "bonusCriticalHurt": 20.0,
-                    "strikeType": "Default",
-                    "enBreak": 20.0,
+                    "elementDurability": 20,
+                    "enBreak": 20, //需要一个高Enbreak值才能起到吸怪效果
                     "attackType": "Range",
-                    "damageExtra": ["DamageRatio", "DamageSystemValue", "MUL"],
+                    "strikeType": "Default",
                     "trueDamage": true
                   },
                   "hitPattern": {
                     "onHitEffectName": "default",
                     "hitImpulseType": "LV3",
+                    // "overrideHitImpulse":
+                    // {
+                    // 	"hitLevel":"Air",
+                    // 	"hitImpulseX":0,
+                    // 	"hitImpulseY":800,
+                    // },
+                    // "reboundRatio": 0,
                     "retreatType": "ByHitDirectionInverse",
-                    "hitHaltTimeScale": 0.05000000074505806
+                    "canBeDefenceHalt": false,
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
+                    "muteHitText": false
                   }
                 }
-              },
-              "targetType": "Enemy"
+              }
             }
-          ]
+          ],
+          "onRemoved": [{ "$type": "KillSelf" }]
         }
       },
-      "onAdded": [
-        {
-          "$type": "SetSystemValueToOverrideMap",
-          "RotationDampTime": true,
-          "key": "DamageSystemValue",
-          "type": "ElementLevelCo"
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "WindZone_Handler"
-        }
-      ]
+      "abilitySpecials": {
+        "DamageSystemValue": 0,
+        "DamageRatio": 0
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  阶段二
+  //  1个风种子：获得超级跳，下落攻击伤害提升
+  //  2个风种子：下落攻击伤害进一步提升
+  //  3个风种子：体力消耗降低
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_VintageChallenge_Stage_2",
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "key": "_ABILITY_VintageChallenge_Wind_Seed_Count",
+          "target": "Team",
+          "value": 0,
+          "useLimitRange": true,
+          "minValue": 0,
+          "maxValue": 3
+        }
+      ],
+      "onRemoved": [
+        {
+          "$type": "SetGlobalValue",
+          "key": "_ABILITY_VintageChallenge_Wind_Seed_Count",
+          "target": "Team",
+          "value": 0,
+          "useLimitRange": true,
+          "minValue": 0,
+          "maxValue": 3
+        }
+      ],
       "abilityMixins": [
         {
           "$type": "AttachModifierToGlobalValueMixin",
@@ -736,32 +783,50 @@
         {
           "$type": "LocalAvatarsMixin",
           "modifierName": "UNIQUE_VintageChallenge_Mark_replicator_02",
-          "PEHAHKINGOC": true
+          "avatarAppearAttachModifier": true
         },
         {
           "$type": "CurLocalAvatarMixinV2",
           "modifierName": "VintageChallenge_Eff_Controller"
         }
       ],
-      "abilitySpecials": {
-        "FallingAttack_Up_Ratio_1": 0.0,
-        "FallingAttack_Up_Ratio_2": 0.0,
-        "FallingAttack_Up_Ratio_3": 0.0,
-        "CostStaminaRatio": 0.0
-      },
       "modifiers": {
-        "Blank": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
+        "Blank": {},
         "UNIQUE_VintageChallenge_Mark_replicator_02": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "thinkInterval": 0.5,
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "key": "_ABILITY_VintageChallenge_Wind_Seed_Count_Avatar",
+              "value": 0,
+              "useLimitRange": true,
+              "minValue": 0,
+              "maxValue": 3
+            },
+            {
+              "$type": "CopyGlobalValue",
+              "srcTarget": "Team",
+              "srcKey": "_ABILITY_VintageChallenge_Wind_Seed_Count",
+              "dstTarget": "Self",
+              "dstKey": "_ABILITY_VintageChallenge_Wind_Seed_Count_Avatar",
+              "doOffStage": true
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "CopyGlobalValue",
+              "srcTarget": "Team",
+              "srcKey": "_ABILITY_VintageChallenge_Wind_Seed_Count",
+              "dstTarget": "Self",
+              "dstKey": "_ABILITY_VintageChallenge_Wind_Seed_Count_Avatar",
+              "doOffStage": true
+            }
+          ],
           "modifierMixins": [
             {
               "$type": "AttachModifierToGlobalValueMixin",
+              "globalValueTarget": "Self",
               "globalValueKey": "_ABILITY_VintageChallenge_Wind_Seed_Count_Avatar",
               "valueSteps": [-0.5, 0.5, 1.5, 2.5, 3.5],
               "modifierNameSteps": [
@@ -771,40 +836,10 @@
                 "Wind_Seed_Buff_Stage_2_Phase_3"
               ]
             }
-          ],
-          "onAdded": [
-            {
-              "$type": "SetGlobalValue",
-              "ratio": 0.0,
-              "key": "_ABILITY_VintageChallenge_Wind_Seed_Count_Avatar",
-              "useLimitRange": true,
-              "maxValue": 3.0,
-              "minValue": 0.0
-            },
-            {
-              "$type": "CopyGlobalValue",
-              "RotationDampTime": true,
-              "srcTarget": "Team",
-              "dstTarget": "Self",
-              "srcKey": "_ABILITY_VintageChallenge_Wind_Seed_Count",
-              "dstKey": "_ABILITY_VintageChallenge_Wind_Seed_Count_Avatar"
-            }
-          ],
-          "onThinkInterval": [
-            {
-              "$type": "CopyGlobalValue",
-              "RotationDampTime": true,
-              "srcTarget": "Team",
-              "dstTarget": "Self",
-              "srcKey": "_ABILITY_VintageChallenge_Wind_Seed_Count",
-              "dstKey": "_ABILITY_VintageChallenge_Wind_Seed_Count_Avatar"
-            }
           ]
         },
         "UNIQUE_VintageChallenge_RocketJump_Controller": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "CurLocalAvatarMixinV2",
@@ -813,97 +848,86 @@
           ]
         },
         "VintageChallenge_RocketJump": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Refresh",
           "modifierMixins": [
             {
               "$type": "RocketJumpMixin",
               "type": "DungeonJump",
               "extention": {
-                "xzMultiplier": 2.299999952316284,
+                "xzMultiplier": 2.3,
                 "yMultiplier": 5.0
               }
             }
           ]
         },
         "Wind_Seed_Buff_Stage_2_Phase_1": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "AttackUp",
           "onAdded": [
             {
               "$type": "AttachModifier",
-              "RotationDampTime": true,
-              "modifierName": "VintageChallenge_FallingAttack_Up_1"
+              "target": "Self",
+              "modifierName": "VintageChallenge_FallingAttack_Up_1",
+              "doOffStage": true
             }
           ]
         },
         "Wind_Seed_Buff_Stage_2_Phase_2": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "AttackUp",
           "onAdded": [
             {
               "$type": "AttachModifier",
-              "RotationDampTime": true,
-              "modifierName": "VintageChallenge_FallingAttack_Up_2"
+              "target": "Self",
+              "modifierName": "VintageChallenge_FallingAttack_Up_2",
+              "doOffStage": true
             }
           ]
         },
         "Wind_Seed_Buff_Stage_2_Phase_3": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_CostStaminaRatio": "CostStaminaRatio"
-          },
           "state": "AttackUp",
           "onAdded": [
             {
               "$type": "AttachModifier",
-              "RotationDampTime": true,
-              "modifierName": "VintageChallenge_FallingAttack_Up_3"
+              "target": "Self",
+              "modifierName": "VintageChallenge_FallingAttack_Up_3",
+              "doOffStage": true
             }
-          ]
+          ],
+          "properties": {
+            "Actor_CostStaminaRatio": "%CostStaminaRatio"
+          }
         },
         "VintageChallenge_FallingAttack_Up_1": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
               "attackTags": ["FallingAttack"],
-              "CCNJGLPMIEP": "FallingAttack_Up_Ratio_1"
+              "damagePercentageRatio": "%FallingAttack_Up_Ratio_1"
             }
           ]
         },
         "VintageChallenge_FallingAttack_Up_2": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
               "attackTags": ["FallingAttack"],
-              "CCNJGLPMIEP": "FallingAttack_Up_Ratio_2"
+              "damagePercentageRatio": "%FallingAttack_Up_Ratio_2"
             }
           ]
         },
         "VintageChallenge_FallingAttack_Up_3": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
               "attackTags": ["FallingAttack"],
-              "CCNJGLPMIEP": "FallingAttack_Up_Ratio_3"
+              "damagePercentageRatio": "%FallingAttack_Up_Ratio_3"
             }
           ]
         },
         "VintageChallenge_Eff_Controller": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachModifierToGlobalValueMixin",
+              "globalValueTarget": "Self",
               "globalValueKey": "_ABILITY_VintageChallenge_Wind_Seed_Count_Avatar",
               "valueSteps": [-0.5, 0.5, 1.5, 2.5, 3.5],
               "modifierNameSteps": [
@@ -917,112 +941,144 @@
           "onRemoved": [
             {
               "$type": "FireEffect",
+              "effectPattern": "Eff_ScenObj_Area_Common_Property_Prop_WindBuff_Around_Disappear",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
+                  "compareType": "MoreThanAndEqual",
                   "key": "_ABILITY_VintageChallenge_Wind_Seed_Count_Avatar",
-                  "ratio": 1.0,
-                  "compareType": "MoreThanAndEqual"
+                  "value": 1
                 }
-              ],
-              "healLimitedByCasterMaxHPRatio": "Eff_ScenObj_Area_Common_Property_Prop_WindBuff_Around_Disappear",
-              "EBHJMLOKDGB": -1.0
+              ]
             }
           ]
         },
         "Wind_Seed_Buff_Eff_01": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "RotationDampTime": true,
-              "healLimitedByCasterMaxHPRatio": "Eff_ScenObj_Area_Common_Property_Prop_WindBuff_Around_01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_ScenObj_Area_Common_Property_Prop_WindBuff_Around_01",
+              "doOffStage": true
             }
           ]
         },
         "Wind_Seed_Buff_Eff_02": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "RotationDampTime": true,
-              "healLimitedByCasterMaxHPRatio": "Eff_ScenObj_Area_Common_Property_Prop_WindBuff_Around_02",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_ScenObj_Area_Common_Property_Prop_WindBuff_Around_02",
+              "doOffStage": true
             }
           ]
         },
         "Wind_Seed_Buff_Eff_03": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "RotationDampTime": true,
-              "healLimitedByCasterMaxHPRatio": "Eff_ScenObj_Area_Common_Property_Prop_WindBuff_Around_03",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_ScenObj_Area_Common_Property_Prop_WindBuff_Around_03",
+              "doOffStage": true
             }
           ]
         }
       },
+      "abilitySpecials": {
+        "FallingAttack_Up_Ratio_1": 0,
+        "FallingAttack_Up_Ratio_2": 0,
+        "FallingAttack_Up_Ratio_3": 0,
+        "CostStaminaRatio": 0
+      }
+    }
+  },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  阶段三
+  //  1个风种子：战斗中全队周期性回能
+  //  2个风种子：回能速度提升
+  //  3个风种子：元素爆发伤害提升
+  //
+  ////////////////////////////////////////////////////////////////
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "ActivityAbility_VintageChallenge_Stage_3",
+      "isDynamicAbility": true,
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "target": "Team",
-          "ratio": 0.0,
           "key": "_ABILITY_VintageChallenge_Wind_Seed_Count",
+          "target": "Team",
+          "value": 0,
           "useLimitRange": true,
-          "maxValue": 3.0,
-          "minValue": 0.0
+          "minValue": 0,
+          "maxValue": 3
+        },
+        {
+          "$type": "SetGlobalValue",
+          "key": "_ABILITY_VintageChallenge_Wind_Seed_Count_Avatar",
+          "value": 0,
+          "useLimitRange": true,
+          "minValue": 0,
+          "maxValue": 3
+        },
+
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_VintageChallenge_ElemBall_Handler",
+          "target": "Team"
         }
       ],
       "onRemoved": [
         {
           "$type": "SetGlobalValue",
-          "target": "Team",
-          "ratio": 0.0,
           "key": "_ABILITY_VintageChallenge_Wind_Seed_Count",
+          "target": "Team",
+          "value": 0,
           "useLimitRange": true,
-          "maxValue": 3.0,
-          "minValue": 0.0
+          "minValue": 0,
+          "maxValue": 3
         }
       ],
-      "isDynamicAbility": true
-    }
-  },
-  {
-    "Default": {
-      "$type": "ConfigAbility",
-      "abilityName": "ActivityAbility_VintageChallenge_Stage_3",
       "abilityMixins": [
         {
           "$type": "LocalAvatarsMixin",
           "modifierName": "UNIQUE_VintageChallenge_Mark_replicator_03",
-          "PEHAHKINGOC": true
+          "avatarAppearAttachModifier": true
         },
         {
           "$type": "CurLocalAvatarMixinV2",
           "modifierName": "VintageChallenge_Eff_Controller"
         }
       ],
-      "abilitySpecials": {
-        "ElementBurst_Up_Ratio": 0.0
-      },
       "modifiers": {
-        "Blank": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
+        "Blank": {},
+
         "UNIQUE_VintageChallenge_Mark_replicator_03": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "thinkInterval": 0.5,
+          "onAdded": [
+            {
+              "$type": "CopyGlobalValue",
+              "srcTarget": "Team",
+              "srcKey": "_ABILITY_VintageChallenge_Wind_Seed_Count",
+              "dstTarget": "Self",
+              "dstKey": "_ABILITY_VintageChallenge_Wind_Seed_Count_Avatar",
+              "doOffStage": true
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "CopyGlobalValue",
+              "srcTarget": "Team",
+              "srcKey": "_ABILITY_VintageChallenge_Wind_Seed_Count",
+              "dstTarget": "Self",
+              "dstKey": "_ABILITY_VintageChallenge_Wind_Seed_Count_Avatar",
+              "doOffStage": true
+            }
+          ],
           "modifierMixins": [
             {
               "$type": "AttachModifierToGlobalValueMixin",
+              "globalValueTarget": "Self",
               "globalValueKey": "_ABILITY_VintageChallenge_Wind_Seed_Count_Avatar",
               "valueSteps": [-0.5, 0.5, 1.5, 2.5, 3.5],
               "modifierNameSteps": [
@@ -1032,152 +1088,119 @@
                 "Wind_Seed_Buff_Stage_3_Phase_3"
               ]
             }
-          ],
-          "onAdded": [
-            {
-              "$type": "CopyGlobalValue",
-              "RotationDampTime": true,
-              "srcTarget": "Team",
-              "dstTarget": "Self",
-              "srcKey": "_ABILITY_VintageChallenge_Wind_Seed_Count",
-              "dstKey": "_ABILITY_VintageChallenge_Wind_Seed_Count_Avatar"
-            }
-          ],
-          "onThinkInterval": [
-            {
-              "$type": "CopyGlobalValue",
-              "RotationDampTime": true,
-              "srcTarget": "Team",
-              "dstTarget": "Self",
-              "srcKey": "_ABILITY_VintageChallenge_Wind_Seed_Count",
-              "dstKey": "_ABILITY_VintageChallenge_Wind_Seed_Count_Avatar"
-            }
           ]
         },
         "UNIQUE_VintageChallenge_ElemBall_Handler": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 2.0,
+          "stacking": "Unique",
           "onAdded": [
             {
               "$type": "ApplyModifier",
               "target": "CurLocalAvatar",
+              "modifierName": "Vintage_Challenge_Energy_Revive",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "Team",
+                  "compareType": "Equal",
                   "key": "_ABILITY_VintageChallenge_Wind_Seed_Count",
-                  "ratio": 1.0
+                  "value": 1
                 }
-              ],
-              "modifierName": "Vintage_Challenge_Energy_Revive"
+              ]
             },
             {
               "$type": "ApplyModifier",
               "target": "CurLocalAvatar",
+              "modifierName": "Vintage_Challenge_Energy_Revive_Double",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "Team",
+                  "compareType": "MoreThanAndEqual",
                   "key": "_ABILITY_VintageChallenge_Wind_Seed_Count",
-                  "ratio": 2.0,
-                  "compareType": "MoreThanAndEqual"
+                  "value": 2
                 }
-              ],
-              "modifierName": "Vintage_Challenge_Energy_Revive_Double"
+              ]
             }
           ],
+          "thinkInterval": 2,
           "onThinkInterval": [
             {
               "$type": "ApplyModifier",
               "target": "CurLocalAvatar",
+              "modifierName": "Vintage_Challenge_Energy_Revive",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "Team",
+                  "compareType": "Equal",
                   "key": "_ABILITY_VintageChallenge_Wind_Seed_Count",
-                  "ratio": 1.0
+                  "value": 1
                 }
-              ],
-              "modifierName": "Vintage_Challenge_Energy_Revive"
+              ]
             },
             {
               "$type": "ApplyModifier",
               "target": "CurLocalAvatar",
+              "modifierName": "Vintage_Challenge_Energy_Revive_Double",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "target": "Team",
+                  "compareType": "MoreThanAndEqual",
                   "key": "_ABILITY_VintageChallenge_Wind_Seed_Count",
-                  "ratio": 2.0,
-                  "compareType": "MoreThanAndEqual"
+                  "value": 2
                 }
-              ],
-              "modifierName": "Vintage_Challenge_Energy_Revive_Double"
+              ]
             }
           ]
         },
         "Vintage_Challenge_Energy_Revive": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "ReviveElemEnergy",
+              "value": 6,
               "predicates": [
                 {
                   "$type": "ByIsCombat",
                   "target": "Self"
                 }
-              ],
-              "ratio": 6.0
+              ]
             }
           ]
         },
         "Vintage_Challenge_Energy_Revive_Double": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "ReviveElemEnergy",
+              "value": 12,
               "predicates": [
                 {
                   "$type": "ByIsCombat",
                   "target": "Self"
                 }
-              ],
-              "ratio": 12.0
+              ]
             }
           ]
         },
-        "Wind_Seed_Buff_Stage_3_Phase_1": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
-        "Wind_Seed_Buff_Stage_3_Phase_2": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
+        "Wind_Seed_Buff_Stage_3_Phase_1": {},
+        "Wind_Seed_Buff_Stage_3_Phase_2": {},
         "Wind_Seed_Buff_Stage_3_Phase_3": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
               "attackTags": ["Elemental_Burst"],
-              "CCNJGLPMIEP": "ElementBurst_Up_Ratio"
+              "damagePercentageRatio": "%ElementBurst_Up_Ratio"
             }
           ]
         },
         "VintageChallenge_Eff_Controller": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachModifierToGlobalValueMixin",
+              "globalValueTarget": "Self",
               "globalValueKey": "_ABILITY_VintageChallenge_Wind_Seed_Count_Avatar",
               "valueSteps": [-0.5, 0.5, 1.5, 2.5, 3.5],
               "modifierNameSteps": [
@@ -1191,92 +1214,49 @@
           "onRemoved": [
             {
               "$type": "FireEffect",
+              "effectPattern": "Eff_ScenObj_Area_Common_Property_Prop_WindBuff_Around_Disappear",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
+                  "compareType": "MoreThanAndEqual",
                   "key": "_ABILITY_VintageChallenge_Wind_Seed_Count_Avatar",
-                  "ratio": 1.0,
-                  "compareType": "MoreThanAndEqual"
+                  "value": 1
                 }
-              ],
-              "healLimitedByCasterMaxHPRatio": "Eff_ScenObj_Area_Common_Property_Prop_WindBuff_Around_Disappear",
-              "EBHJMLOKDGB": -1.0
+              ]
             }
           ]
         },
         "Wind_Seed_Buff_Eff_01": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "RotationDampTime": true,
-              "healLimitedByCasterMaxHPRatio": "Eff_ScenObj_Area_Common_Property_Prop_WindBuff_Around_01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_ScenObj_Area_Common_Property_Prop_WindBuff_Around_01",
+              "doOffStage": true
             }
           ]
         },
         "Wind_Seed_Buff_Eff_02": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "RotationDampTime": true,
-              "healLimitedByCasterMaxHPRatio": "Eff_ScenObj_Area_Common_Property_Prop_WindBuff_Around_02",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_ScenObj_Area_Common_Property_Prop_WindBuff_Around_02",
+              "doOffStage": true
             }
           ]
         },
         "Wind_Seed_Buff_Eff_03": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "RotationDampTime": true,
-              "healLimitedByCasterMaxHPRatio": "Eff_ScenObj_Area_Common_Property_Prop_WindBuff_Around_03",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_ScenObj_Area_Common_Property_Prop_WindBuff_Around_03",
+              "doOffStage": true
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "target": "Team",
-          "ratio": 0.0,
-          "key": "_ABILITY_VintageChallenge_Wind_Seed_Count",
-          "useLimitRange": true,
-          "maxValue": 3.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "_ABILITY_VintageChallenge_Wind_Seed_Count_Avatar",
-          "useLimitRange": true,
-          "maxValue": 3.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "AttachModifier",
-          "target": "Team",
-          "modifierName": "UNIQUE_VintageChallenge_ElemBall_Handler"
-        }
-      ],
-      "onRemoved": [
-        {
-          "$type": "SetGlobalValue",
-          "target": "Team",
-          "ratio": 0.0,
-          "key": "_ABILITY_VintageChallenge_Wind_Seed_Count",
-          "useLimitRange": true,
-          "maxValue": 3.0,
-          "minValue": 0.0
-        }
-      ],
-      "isDynamicAbility": true
+      "abilitySpecials": {
+        "ElementBurst_Up_Ratio": 0
+      }
     }
   }
 ]

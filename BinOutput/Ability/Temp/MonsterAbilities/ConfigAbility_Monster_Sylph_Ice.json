@@ -1,39 +1,56 @@
 [
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Pose
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Sylph_Ice_PoseHandler",
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_Sylph_Limbo"
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_Sylph_ChargeBar"
+        },
+        {
+          "$type": "SetGlobalValue",
+          "key": "_SYLPH_DEATH_TAG_",
+          "value": 0
+        }
+      ],
       "abilityMixins": [
+        // _SYLPH_POSE_TAG_
+        // 0:未激活
+        // 1:激活
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_SYLPH_POSE_TAG_",
-          "defaultGlobalValueOnCreate": 0.0,
+          "defaultGlobalValueOnCreate": 0,
+          "removeAppliedModifier": true,
           "valueSteps": [-0.5, 0.5, 1.5],
           "modifierNameSteps": ["Pose_None", "Pose_Activated"]
         },
         {
           "$type": "AttachModifierToHPPercentMixinV2",
-          "valueSteps": [0.019999999552965164],
+          "valueSteps": [0.02],
           "modifierNameSteps": ["Sylph_Empty", "Sylph_DyingPoseState"]
         }
       ],
       "modifiers": {
         "UNIQUE_Sylph_Limbo": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "state": "Limbo",
           "properties": {
             "Actor_HpThresholdRatio": 0.0
-          },
-          "state": "Limbo"
+          }
         },
-        "Empty": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
+        "Empty": {},
         "Achieve_Moniter": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onKill": [
             {
               "$type": "DoWatcherSystemAction",
@@ -43,21 +60,26 @@
           ]
         },
         "UNIQUE_Sylph_ChargeBar": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "SetChargeBarValue",
+              "value": 0
+            }
+          ],
           "modifierMixins": [
             {
               "$type": "ChargeBarMixin",
-              "NDODBELPCOJ": 2,
-              "PMDMNDLOMJJ": 0.0,
-              "maxValue": 100.0
+              "chargeBarElementType": "None",
+              "chargeBarIconID": 2,
+              "initialValue": 0,
+              "maxValue": 100
             },
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_CHARGEBAR_VALUE",
-              "defaultGlobalValueOnCreate": 0.0,
               "valueSteps": [-0.5, 0.5, 99.5, 100.5],
+              "removeAppliedModifier": true,
               "modifierNameSteps": [
                 "Achieve_Moniter",
                 "Empty",
@@ -66,74 +88,60 @@
             },
             {
               "$type": "DoActionByDamageReceivedMixin",
-              "KNGPADCIOKI": 0.1875,
-              "INMAOKLBJPN": 0.3125,
+              "paramType": "HPMaxPercent",
+              "valueMin": 0.1875,
+              "valueMax": 0.3125,
               "actionQueue": [
                 {
                   "$type": "AddChargeBarValue",
-                  "ratio": 20.0,
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 20
                 }
               ]
             },
             {
               "$type": "DoActionByDamageReceivedMixin",
-              "KNGPADCIOKI": 0.3125,
-              "INMAOKLBJPN": 0.4375,
+              "paramType": "HPMaxPercent",
+              "valueMin": 0.3125,
+              "valueMax": 0.4375,
               "actionQueue": [
                 {
                   "$type": "AddChargeBarValue",
-                  "ratio": 40.0,
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 40
                 }
               ]
             },
             {
               "$type": "DoActionByDamageReceivedMixin",
-              "KNGPADCIOKI": 0.4375,
-              "INMAOKLBJPN": 0.5625,
+              "paramType": "HPMaxPercent",
+              "valueMin": 0.4375,
+              "valueMax": 0.5625,
               "actionQueue": [
                 {
                   "$type": "AddChargeBarValue",
-                  "ratio": 70.0,
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 70
                 }
               ]
             },
             {
               "$type": "DoActionByDamageReceivedMixin",
-              "KNGPADCIOKI": 0.5625,
-              "INMAOKLBJPN": 3.4028234663852886e38,
+              "paramType": "HPMaxPercent",
+              "valueMin": 0.5625,
               "actionQueue": [
                 {
                   "$type": "AddChargeBarValue",
-                  "ratio": 100.0,
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 100
                 }
               ]
-            }
-          ],
-          "onAdded": [
-            {
-              "$type": "SetChargeBarValue",
-              "ratio": 0.0
             }
           ]
         },
+        // 通过充能条来控制怪物激活/未激活的pose切换
         "ChargeActivated": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "_SYLPH_POSE_TAG_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             },
             {
               "$type": "SetAnimatorTrigger",
@@ -143,10 +151,8 @@
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_SYLPH_POSE_TAG_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             },
             {
               "$type": "ResetAnimatorTrigger",
@@ -155,22 +161,20 @@
           ]
         },
         "Pose_None": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetPoseBool",
-              "boolID": "ActivatedTag"
+              "boolID": "ActivatedTag",
+              "value": false
             },
             {
               "$type": "SetAnimatorBool",
-              "boolID": "ActivatedTag"
+              "boolID": "ActivatedTag",
+              "value": false
             }
           ]
         },
         "Pose_Activated": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "VelocityForceMixin",
@@ -184,12 +188,12 @@
             {
               "$type": "SetPoseBool",
               "boolID": "ActivatedTag",
-              "ratio": true
+              "value": true
             },
             {
               "$type": "SetAnimatorBool",
               "boolID": "ActivatedTag",
-              "ratio": true
+              "value": true
             },
             {
               "$type": "SetAISkillCDAvailableNow",
@@ -201,7 +205,8 @@
             },
             {
               "$type": "EnableHitBoxByName",
-              "hitBoxNames": ["HitBoxBody"]
+              "hitBoxNames": ["HitBoxBody"],
+              "setEnable": false
             },
             {
               "$type": "EnableHitBoxByName",
@@ -210,7 +215,8 @@
             },
             {
               "$type": "EnablePushColliderName",
-              "pushColliderNames": ["PushCollider"]
+              "pushColliderNames": ["PushCollider"],
+              "setEnable": false
             },
             {
               "$type": "EnablePushColliderName",
@@ -219,34 +225,33 @@
             }
           ]
         },
+        // 通过血量来控制怪物是否进入濒死pose
         "Sylph_DyingPoseState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "state": "DenyLockOn",
           "properties": {
-            "Actor_EndureDelta": 0.0,
+            "Actor_EndureDelta": 0,
             "Actor_SubHurtDelta": 1.0
           },
-          "state": "DenyLockOn",
           "onAdded": [
             {
               "$type": "SetPoseBool",
               "boolID": "DyingState",
-              "ratio": true
+              "value": true
             },
             {
               "$type": "EnableHitBoxByName",
-              "hitBoxNames": ["HitBoxBody"]
+              "hitBoxNames": ["HitBoxBody"],
+              "setEnable": false
             },
             {
               "$type": "EnableHitBoxByName",
-              "hitBoxNames": ["HitBoxBody_Activated"]
+              "hitBoxNames": ["HitBoxBody_Activated"],
+              "setEnable": false
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "_SYLPH_DEATH_TAG_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             },
             {
               "$type": "AttachModifier",
@@ -268,84 +273,56 @@
           "onRemoved": [
             {
               "$type": "SetPoseBool",
-              "boolID": "DyingState"
+              "boolID": "DyingState",
+              "value": false
             },
             {
               "$type": "EnableHitBoxByName",
+              "hitBoxNames": ["HitBoxBody"],
+              "setEnable": true,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_SYLPH_POSE_TAG_",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
-              ],
-              "hitBoxNames": ["HitBoxBody"],
-              "setEnable": true
+              ]
             },
             {
               "$type": "EnableHitBoxByName",
+              "hitBoxNames": ["HitBoxBody_Activated"],
+              "setEnable": true,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_SYLPH_POSE_TAG_",
-                  "ratio": 1.0
+                  "value": 1,
+                  "compareType": "Equal"
                 }
-              ],
-              "hitBoxNames": ["HitBoxBody_Activated"],
-              "setEnable": true
+              ]
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_SYLPH_DEATH_TAG_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         },
         "Dying_IsGhostToAllied": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "IsGhostToAllied"
         },
         "Dying_IsGhostToEnemy": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "IsGhostToEnemy"
         },
         "Dying_LockHP": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "LockHP"
         },
         "Dying_NoHeal": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "NoHeal"
         },
-        "Sylph_Empty": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "UNIQUE_Sylph_Limbo"
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "UNIQUE_Sylph_ChargeBar"
-        },
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "_SYLPH_DEATH_TAG_",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        }
-      ]
+        "Sylph_Empty": {}
+      }
     }
   },
   {
@@ -353,6 +330,9 @@
       "$type": "ConfigAbility",
       "abilityName": "Monster_Sylph_Ice_PoseAction",
       "abilityMixins": [
+        // Pose驱动动画状态
+        // 如果用SetAISkillCDAvailableNow，不会立刻退出当前技能状态并执行亡语
+        // 限制是，技能配置中的modifier要做好生命周期管理，避免亡语的时候有没下掉的modifier
         {
           "$type": "AttachToPoseIDMixin",
           "poseIDs": [211, 311],
@@ -360,36 +340,42 @@
         }
       ],
       "modifiers": {
+        // Pose用一个参数就可以控制了，但是由于AnimatorController是从anystate拉线，所以需要区分两种trigger参数
         "Sylph_DyingAnimState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.20000000298023224,
           "onAdded": [
             {
               "$type": "SetAnimatorBool",
+              "boolID": "DeathTag",
+              "value": true,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_SYLPH_POSE_TAG_",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
-              ],
-              "boolID": "DeathTag",
-              "ratio": true
+              ]
             },
             {
               "$type": "SetAnimatorBool",
+              "boolID": "ActivatedDeathTag",
+              "value": true,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_SYLPH_POSE_TAG_",
-                  "ratio": 1.0
+                  "value": 1,
+                  "compareType": "Equal"
                 }
-              ],
-              "boolID": "ActivatedDeathTag",
-              "ratio": true
+              ]
             },
+            {
+              "$type": "RemoveModifierByAbilityStateResistanceID",
+              "resistanceListID": 13002
+            }
+          ],
+          "thinkInterval": 0.2,
+          "onThinkInterval": [
             {
               "$type": "RemoveModifierByAbilityStateResistanceID",
               "resistanceListID": 13002
@@ -398,38 +384,40 @@
           "onRemoved": [
             {
               "$type": "SetAnimatorBool",
+              "boolID": "DeathTag",
+              "value": false,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_SYLPH_POSE_TAG_",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
-              ],
-              "boolID": "DeathTag"
+              ]
             },
             {
               "$type": "SetAnimatorBool",
+              "boolID": "ActivatedDeathTag",
+              "value": false,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_SYLPH_POSE_TAG_",
-                  "ratio": 1.0
+                  "value": 1,
+                  "compareType": "Equal"
                 }
-              ],
-              "boolID": "ActivatedDeathTag"
-            }
-          ],
-          "onThinkInterval": [
-            {
-              "$type": "RemoveModifierByAbilityStateResistanceID",
-              "resistanceListID": 13002
+              ]
             }
           ]
         }
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Steer
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -438,57 +426,74 @@
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Activated_Standby"],
-          "angularSpeed": 240.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 1.0,
+          "angularSpeed": 240,
+          "attackTrigger": "",
+          "attackDistance": 0
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Warning"],
-          "angularSpeed": 150.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 1.0,
+          "angularSpeed": 150,
+          "attackTrigger": "",
+          "attackDistance": 0
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["IceBullet"],
-          "endNormalizedTime": 0.4399999976158142,
-          "angularSpeed": 270.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 0.44,
+          "angularSpeed": 270,
+          "attackTrigger": "",
+          "attackDistance": 0
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["IceBullet"],
-          "startNormalizedTime": 0.8999999761581421,
-          "angularSpeed": 240.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.9,
+          "endNormalizedTime": 1,
+          "angularSpeed": 240,
+          "attackTrigger": "",
+          "attackDistance": 0
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["FlyHigh"],
-          "endNormalizedTime": 0.30000001192092896,
-          "angularSpeed": 120.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 0.3,
+          "angularSpeed": 120,
+          "attackTrigger": "",
+          "attackDistance": 0
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["FlyBackHit"],
-          "startNormalizedTime": 0.6000000238418579,
-          "endNormalizedTime": 0.8999999761581421,
-          "angularSpeed": 180.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.6,
+          "endNormalizedTime": 0.9,
+          "angularSpeed": 180,
+          "attackTrigger": "",
+          "attackDistance": 0
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["FlyBackHit"],
-          "endNormalizedTime": 0.4000000059604645,
-          "angularSpeed": 180.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 0.4,
+          "angularSpeed": 180,
+          "attackTrigger": "",
+          "attackDistance": 0
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["FlyHigh"],
-          "startNormalizedTime": 0.8999999761581421,
-          "angularSpeed": 240.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.9,
+          "endNormalizedTime": 1.0,
+          "angularSpeed": 240,
+          "attackTrigger": "",
+          "attackDistance": 0
         },
         {
           "$type": "SteerAttackMixin",
@@ -497,13 +502,20 @@
             "Activated_AirGun_Loop",
             "Activated_AirGun_AS"
           ],
-          "endNormalizedTime": 0.30000001192092896,
-          "angularSpeed": 120.0,
-          "attackTrigger": ""
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 0.3,
+          "angularSpeed": 120,
+          "attackTrigger": "",
+          "attackDistance": 0
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  ExitBattle
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -517,44 +529,44 @@
       ],
       "modifiers": {
         "ExitBattle": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorTrigger",
+              "triggerID": "ActivatedToNormal",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_SYLPH_POSE_TAG_",
-                  "ratio": 1.0
+                  "value": 1,
+                  "compareType": "Equal"
                 }
-              ],
-              "triggerID": "ActivatedToNormal"
+              ]
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_SYLPH_POSE_TAG_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             },
             {
               "$type": "SetPoseBool",
-              "boolID": "DyingState"
+              "boolID": "DyingState",
+              "value": false
             },
             {
               "$type": "SetPoseBool",
-              "boolID": "ActivatedTag"
+              "boolID": "ActivatedTag",
+              "value": false
             },
             {
               "$type": "SetAnimatorBool",
-              "boolID": "ActivatedTag"
+              "boolID": "ActivatedTag",
+              "value": false
             },
             {
               "$type": "SetChargeBarValue",
-              "ratio": 0.0
+              "value": 0
             },
             {
               "$type": "RemoveUniqueModifier",
@@ -565,6 +577,11 @@
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  IceBullet
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -572,13 +589,14 @@
       "onAbilityStart": [
         {
           "$type": "TriggerBullet",
+          "bulletID": 42006401, //有待改成冰专门的bullet
           "target": "SelfAttackTarget",
-          "bulletID": 42006401,
           "born": {
             "$type": "ConfigBornByAttachPoint",
             "attachPointName": "BulletAttachPoint1",
             "attachPointTargetType": "Caster"
-          }
+          },
+          "trackTarget": "SelfAttackTarget"
         }
       ]
     }
@@ -590,57 +608,58 @@
       "onAdded": [
         {
           "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Sylph_Ice_IceBullet_Loop",
-          "EBHJMLOKDGB": -1.0
-        }
-      ],
-      "onAbilityStart": [
-        {
-          "$type": "TriggerAttackEvent",
-          "attackEvent": {
-            "attackPattern": {
-              "$type": "ConfigAttackSphere",
-              "triggerType": "TriggerNoRepeat",
-              "born": {
-                "$type": "ConfigBornByCollisionPoint"
-              },
-              "DCMPFCIBIPA": 0.5
-            },
-            "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
-              "attackProperty": {
-                "HBIOLEEGHPD": 0.800000011920929,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Ice",
-                "bonusCriticalHurt": 30.0,
-                "strikeType": "Blunt",
-                "enBreak": 10.0
-              },
-              "hitPattern": {
-                "onHitEffectName": "none",
-                "hitImpulseType": "LV2",
-                "hitHaltTimeScale": 0.009999999776482582
-              },
-              "canBeModifiedBy": "OriginOwner"
-            }
-          },
-          "targetType": "Enemy"
-        },
-        {
-          "$type": "KillSelf"
+          "effectPattern": "Eff_Monster_Sylph_Ice_IceBullet_Loop" //临时，小雪球飞行特效
         }
       ],
       "onKill": [
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Sylph_Ice_IceBullet_AS",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_Monster_Sylph_Ice_IceBullet_AS" //临时，小雪球爆炸特效
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
+          "attackEvent": {
+            "attackPattern": {
+              "$type": "ConfigAttackSphere",
+              "triggerType": "TriggerNoRepeat",
+              "radius": 0.5,
+              "born": {
+                "$type": "ConfigBornByCollisionPoint"
+              }
+            },
+            "attackInfo": {
+              "canBeModifiedBy": "OriginOwner",
+              "attackProperty": {
+                "damagePercentage": 0.8,
+                "strikeType": "Blunt",
+                "enBreak": 10.0,
+                "elementDurability": 30,
+                "elementType": "Ice"
+              },
+              "hitPattern": {
+                "onHitEffectName": "none",
+                "hitImpulseType": "LV2",
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
+              }
+            }
+          }
+        },
+        {
+          "$type": "KillSelf"
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  FlyHor
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -650,38 +669,35 @@
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "FlyBackHit",
           "modifierName": "IceRotation",
-          "normalizeStart": 0.14000000059604645,
-          "normalizeEnd": 0.7200000286102295
+          "normalizeStart": 0.14,
+          "normalizeEnd": 0.72
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "TriggerBullet",
+          "bulletID": 42006402, //有待改成冰专门的bullet
+          "born": {
+            "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "RootNode",
+            "offset": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
+          }
         }
       ],
       "modifiers": {
         "IceRotation": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Sylph_Ice_Fly_Loop",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Sylph_Ice_Fly_Loop"
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "TriggerBullet",
-          "bulletID": 42006402,
-          "born": {
-            "$type": "ConfigBornByAttachPoint",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "attachPointName": "RootNode"
-          }
-        }
-      ]
+      }
     }
   },
   {
@@ -691,48 +707,47 @@
       "onAdded": [
         {
           "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Sylph_Ice_ElementBullet",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_Monster_Sylph_Ice_ElementBullet" //临时，冰属性子弹
         }
       ],
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "radius": 2.5,
               "born": {
                 "$type": "ConfigBornBySelf"
-              },
-              "DCMPFCIBIPA": 2.5
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
+              "canBeModifiedBy": "OriginOwner",
               "attackProperty": {
-                "HBIOLEEGHPD": 0.800000011920929,
-                "CCNJGLPMIEP": 0.0,
+                "damagePercentage": 0.8,
+                "strikeType": "None",
                 "elementType": "Ice",
-                "bonusCriticalHurt": 30.0,
-                "enBreak": 10.0
+                "elementDurability": 30,
+                "enBreak": 10
               },
               "hitPattern": {
                 "onHitEffectName": "",
                 "hitImpulseType": "LV3",
-                "retreatType": "ByHitDirection"
+                "retreatType": "ByHitDirection",
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.0,
+                "muteHitText": false
               },
-              "canBeModifiedBy": "OriginOwner"
+              "forceCameraShake": false
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Sylph_Ice_ElementBullet_AS",
-          "scale": 2.0,
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_Monster_Sylph_Ice_ElementBullet_AS", //临时，冰子弹特效
+          "scale": 2.0
         },
         {
           "$type": "KillSelf"
@@ -740,6 +755,11 @@
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Deathrattle
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -753,28 +773,28 @@
       ],
       "modifiers": {
         "Deathrattle_Pos": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "CreateGadget",
+              "gadgetID": 42006406, //小亡语用自爆炸弹
+              "byServer": true,
+              "lifeByOwnerIsAlive": false,
+              "campID": 4001,
               "born": {
                 "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "RootNode",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
-                },
-                "attachPointName": "RootNode"
-              },
-              "gadgetID": 42006406,
-              "campID": 4001,
-              "byServer": true
+                  "x": 0,
+                  "y": 0,
+                  "z": 0
+                }
+              }
             }
           ],
           "onRemoved": [
             {
               "$type": "RemoveUniqueModifier",
+              "target": "Self",
               "modifierName": "UNIQUE_Sylph_Limbo"
             },
             {
@@ -789,16 +809,23 @@
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Sylph_Ice_DeathPosAction",
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Deathrattle_Timer"
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Deathrattle_LifeHandler"
+        }
+      ],
       "modifiers": {
         "Deathrattle_Timer": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.2000000476837158,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1.2,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Sylph_Ice_Deathrattle",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Sylph_Ice_Deathrattle" //临时，有待替换正式特效
             }
           ],
           "onRemoved": [
@@ -809,77 +836,72 @@
           ]
         },
         "Deathrattle_Actions": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.2,
           "onAdded": [
             {
               "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
+                  "radius": 2.5,
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
+                    "attachPointName": "RootNode",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 0.0
-                    },
-                    "attachPointName": "RootNode"
-                  },
-                  "DCMPFCIBIPA": 2.5
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
+                    }
+                  }
                 },
                 "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "HBIOLEEGHPD": 1.0,
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Ice",
-                    "bonusCriticalHurt": 30.0,
+                    "damagePercentage": 1.0,
                     "strikeType": "Blunt",
-                    "enBreak": 10.0
+                    "enBreak": 10.0,
+                    "elementDurability": 30,
+                    "elementType": "Ice"
                   },
                   "hitPattern": {
                     "onHitEffectName": "default",
                     "hitImpulseType": "LV4",
-                    "hitHaltTimeScale": 0.009999999776482582
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.01,
+                    "muteHitText": false
                   }
                 }
-              },
-              "targetType": "Enemy"
+              }
             }
           ]
         },
         "Deathrattle_LifeHandler": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 5.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 5.0,
           "onRemoved": [
             {
               "$type": "KillSelf"
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Deathrattle_Timer"
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Deathrattle_LifeHandler"
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Activated_AirGun
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Sylph_Ice_Activated_AirGun",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Activated_AirGun"
+        }
+      ],
       "abilityMixins": [
         {
           "$type": "DoActionByStateIDMixin",
@@ -894,23 +916,8 @@
       ],
       "modifiers": {
         "Activated_AirGun_CountDown": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 10.699999809265137,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.10000000149011612,
-          "onAdded": [
-            {
-              "$type": "SetAnimatorBool",
-              "boolID": "ActiveAirGunEnd"
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "SetAnimatorBool",
-              "boolID": "ActiveAirGunEnd",
-              "ratio": true
-            }
-          ],
+          "duration": 10.7,
+          "thinkInterval": 0.1,
           "onThinkInterval": [
             {
               "$type": "Predicated",
@@ -918,8 +925,9 @@
               "targetPredicates": [
                 {
                   "$type": "ByTargetPositionToSelfPosition",
-                  "logic": "GreaterOrEqual",
-                  "ratio": 20.0
+                  "compareType": "XZ",
+                  "value": 20,
+                  "logic": "GreaterOrEqual"
                 }
               ],
               "successActions": [
@@ -929,16 +937,28 @@
                 }
               ]
             }
+          ],
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "boolID": "ActiveAirGunEnd",
+              "value": false
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "SetAnimatorBool",
+              "boolID": "ActiveAirGunEnd",
+              "value": true
+            }
           ]
         },
         "Activated_AirGun": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.1,
           "onAdded": [
             {
               "$type": "TriggerBullet",
-              "bulletID": 42006403,
+              "bulletID": 42006403, //临时，大雪球
               "born": {
                 "$type": "ConfigBornByAttachPoint",
                 "attachPointName": "BulletAttachPoint2",
@@ -947,13 +967,7 @@
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Activated_AirGun"
-        }
-      ]
+      }
     }
   },
   {
@@ -963,57 +977,58 @@
       "onAdded": [
         {
           "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Sylph_Ice_Activated_IceBall_Bullet",
-          "EBHJMLOKDGB": -1.0
-        }
-      ],
-      "onAbilityStart": [
-        {
-          "$type": "TriggerAttackEvent",
-          "attackEvent": {
-            "attackPattern": {
-              "$type": "ConfigAttackSphere",
-              "triggerType": "TriggerNoRepeat",
-              "born": {
-                "$type": "ConfigBornByCollisionPoint"
-              },
-              "DCMPFCIBIPA": 1.7999999523162842
-            },
-            "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
-              "attackProperty": {
-                "HBIOLEEGHPD": 1.0,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Ice",
-                "bonusCriticalHurt": 50.0,
-                "strikeType": "Blunt",
-                "enBreak": 100.0
-              },
-              "hitPattern": {
-                "onHitEffectName": "none",
-                "hitImpulseType": "LV4",
-                "hitHaltTimeScale": 0.009999999776482582
-              },
-              "canBeModifiedBy": "OriginOwner"
-            }
-          },
-          "targetType": "Enemy"
-        },
-        {
-          "$type": "KillSelf"
+          "effectPattern": "Eff_Monster_Sylph_Ice_Activated_IceBall_Bullet" //临时，大雪球飞行特效
         }
       ],
       "onKill": [
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Sylph_Ice_Activated_IceBall_BulletExplode",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_Monster_Sylph_Ice_Activated_IceBall_BulletExplode" //临时，大雪球爆炸特效
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
+          "attackEvent": {
+            "attackPattern": {
+              "$type": "ConfigAttackSphere",
+              "triggerType": "TriggerNoRepeat",
+              "radius": 1.8,
+              "born": {
+                "$type": "ConfigBornByCollisionPoint"
+              }
+            },
+            "attackInfo": {
+              "canBeModifiedBy": "OriginOwner",
+              "attackProperty": {
+                "damagePercentage": 1.0,
+                "strikeType": "Blunt",
+                "enBreak": 100.0,
+                "elementDurability": 50,
+                "elementType": "Ice"
+              },
+              "hitPattern": {
+                "onHitEffectName": "none",
+                "hitImpulseType": "LV4",
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
+              }
+            }
+          }
+        },
+        {
+          "$type": "KillSelf"
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Activated_Deathrattle
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1027,28 +1042,28 @@
       ],
       "modifiers": {
         "Activated_Deathrattle_Pos": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "CreateGadget",
+              "gadgetID": 42006405, //临时，大亡语子弹
+              "byServer": true,
+              "lifeByOwnerIsAlive": false,
+              "campID": 4001,
               "born": {
                 "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "RootNode",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
-                },
-                "attachPointName": "RootNode"
-              },
-              "gadgetID": 42006405,
-              "campID": 4001,
-              "byServer": true
+                  "x": 0,
+                  "y": 0,
+                  "z": 0
+                }
+              }
             }
           ],
           "onRemoved": [
             {
               "$type": "RemoveUniqueModifier",
+              "target": "Self",
               "modifierName": "UNIQUE_Sylph_Limbo"
             },
             {
@@ -1063,16 +1078,23 @@
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Sylph_Ice_Activated_DeathPosAction",
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Activated_Deathrattle_Timer"
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Activated_Deathrattle_LifeHandler"
+        }
+      ],
       "modifiers": {
         "Activated_Deathrattle_Timer": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.8700000047683716,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1.87,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Sylph_Ice_Activated_Deathrattle",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Sylph_Ice_Activated_Deathrattle"
             }
           ],
           "onRemoved": [
@@ -1083,165 +1105,147 @@
           ]
         },
         "Activated_Deathrattle_Actions": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.2,
           "onAdded": [
             {
               "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
+                  "radius": 5.0,
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
+                    "attachPointName": "RootNode",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 0.0
-                    },
-                    "attachPointName": "RootNode"
-                  },
-                  "DCMPFCIBIPA": 5.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
+                    }
+                  }
                 },
                 "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "HBIOLEEGHPD": 1.2000000476837158,
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Ice",
-                    "bonusCriticalHurt": 25.0,
+                    "damagePercentage": 1.2,
                     "strikeType": "Blunt",
-                    "enBreak": 100.0
+                    "enBreak": 100.0, // 虽然不向外击飞，但是感觉可以清空enbreak
+                    "elementDurability": 25,
+                    "elementType": "Ice"
                   },
                   "hitPattern": {
                     "onHitEffectName": "default",
                     "hitImpulseType": "LV0",
-                    "hitHaltTimeScale": 0.009999999776482582
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.01,
+                    "muteHitText": false
                   }
                 }
-              },
-              "targetType": "Enemy"
+              }
             },
             {
               "$type": "CreateGadget",
+              "gadgetID": 42006404, //创建减速区域
+              "byServer": true,
+              "lifeByOwnerIsAlive": false,
+              "campID": 4001,
               "born": {
                 "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "RootNode",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0,
+                  "y": 0,
+                  "z": 0
                 },
-                "onGround": true,
-                "attachPointName": "RootNode"
-              },
-              "gadgetID": 42006404,
-              "campID": 4001,
-              "byServer": true
+                "onGround": true
+              }
             }
           ]
         },
         "Activated_Deathrattle_LifeHandler": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 5.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 5.0,
           "onRemoved": [
             {
               "$type": "KillSelf"
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Activated_Deathrattle_Timer"
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Activated_Deathrattle_LifeHandler"
-        }
-      ]
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Sylph_Ice_Activated_Zone",
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Zone_Handler"
+        }
+      ],
       "modifiers": {
         "Zone_Handler": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 5.0,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.5,
+          "duration": 5.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Sylph_Ice_Activated_Deathrattle_Area",
+              "effectPattern": "Eff_Monster_Sylph_Ice_Activated_Deathrattle_Area", //冰场效果
               "born": {
                 "$type": "ConfigBornBySelf",
                 "onGround": true
-              },
-              "EBHJMLOKDGB": -1.0
+              }
+            }
+          ],
+          "thinkInterval": 0.5,
+          "onThinkInterval": [
+            {
+              "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
+              "attackEvent": {
+                "attackPattern": {
+                  "$type": "ConfigAttackCircle",
+                  "triggerType": "TriggerNoRepeat",
+                  "height": 0.2,
+                  "fanAngle": 360.0,
+                  "radius": 2.5,
+                  "born": {
+                    "$type": "ConfigBornBySelf",
+                    "offset": {
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
+                    }
+                  }
+                },
+                "attackInfo": {
+                  "canBeModifiedBy": "OriginOwner",
+                  "attackProperty": {
+                    "damagePercentage": 0.4,
+                    "strikeType": "Default",
+                    "elementType": "Ice",
+                    "elementDurability": 25,
+                    "enBreak": 0
+                  },
+                  "hitPattern": {
+                    "onHitEffectName": "default",
+                    "hitImpulseType": "LV0",
+                    "retreatType": "ByHitDirection",
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
+                    "muteHitText": false
+                  },
+                  "forceCameraShake": false
+                }
+              }
             }
           ],
           "onRemoved": [
             {
               "$type": "KillSelf"
             }
-          ],
-          "onThinkInterval": [
-            {
-              "$type": "TriggerAttackEvent",
-              "attackEvent": {
-                "attackPattern": {
-                  "$type": "ConfigAttackCircle",
-                  "triggerType": "TriggerNoRepeat",
-                  "born": {
-                    "$type": "ConfigBornBySelf",
-                    "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 0.0
-                    }
-                  },
-                  "height": 0.20000000298023224,
-                  "DCMPFCIBIPA": 2.5
-                },
-                "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
-                  "attackProperty": {
-                    "HBIOLEEGHPD": 0.4000000059604645,
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Ice",
-                    "bonusCriticalHurt": 25.0,
-                    "strikeType": "Default",
-                    "enBreak": 0.0
-                  },
-                  "hitPattern": {
-                    "onHitEffectName": "default",
-                    "hitImpulseType": "LV0",
-                    "retreatType": "ByHitDirection",
-                    "hitHaltTimeScale": 0.05000000074505806
-                  },
-                  "canBeModifiedBy": "OriginOwner"
-                }
-              },
-              "targetType": "Enemy"
-            }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "Zone_Handler"
-        }
-      ]
+      }
     }
   }
 ]

@@ -1,90 +1,51 @@
 [
+  ////////////////////////////////////////////////////////////////
+  //
+  //  3.4连线挑战关卡1角色buff
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Activity_ActivityTeamChain_TeamControlBuff",
+      "isDynamicAbility": true,
+      "abilitySpecials": {
+        "AvatarBuffDuration": 0,
+        "CJBDamageRatio": 0,
+        "CJBCD": 0
+      },
+      "onAdded": [
+        {
+          "$type": "SetSystemValueToOverrideMap",
+          "key": "DamageSystemValue",
+          "type": "ElementLevelCo"
+        }
+      ],
       "abilityMixins": [
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_GO_CJB_TRIGGER",
-          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [-0.5, 0.5, 1.5],
           "modifierNameSteps": ["No_CJB_Trigger", "Has_CJB_Trigger"]
         }
       ],
-      "abilitySpecials": {
-        "AvatarBuffDuration": 0.0,
-        "CJBDamageRatio": 0.0,
-        "CJBCD": 0.0,
-        "ChooseCD": 0.0,
-        "MaxCJBNum": 0.0
-      },
       "modifiers": {
-        "No_CJB_Trigger": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
+        "No_CJB_Trigger": {},
         "Has_CJB_Trigger": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
-              "modifierName": "ChooseMonster_CD"
+              "modifierName": "Activity_ActivityTeamChain_AvatarCJBBuff"
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
-              "key": "_CJB_NUM",
-              "maxValue": 0.0,
-              "minValue": 0.0
-            },
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "Reset_CJB_Value"
-            }
-          ]
-        },
-        "Reset_CJB_Value": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
-          "onRemoved": [
-            {
-              "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_GO_CJB_TRIGGER",
-              "maxValue": 0.0,
-              "minValue": 0.0
-            }
-          ]
-        },
-        "ChooseMonster_CD": {
-          "modifierName": "",
-          "HCJLIGBLGJA": "ChooseCD",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "SetGlobalValue",
-              "ratio": 1.0,
-              "key": "_CHOOSE_IN_CD",
-              "maxValue": 0.0,
-              "minValue": 0.0
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "SetGlobalValue",
-              "ratio": 0.0,
-              "key": "_CHOOSE_IN_CD",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         },
         "Activity_ActivityTeamChain_AvatarCJBBuff": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "duration": "%AvatarBuffDuration",
           "modifierMixins": [
             {
               "$type": "CurLocalAvatarMixinV2",
@@ -93,39 +54,23 @@
           ]
         },
         "CJB_DAMAGE_INCD": {
-          "modifierName": "",
-          "HCJLIGBLGJA": "CJBCD",
-          "bonusCriticalHurt": 100.0,
+          "duration": "%CJBCD",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "_CJB_IN_CD",
-              "maxValue": 0.0,
-              "minValue": 0.0
-            },
-            {
-              "$type": "AddGlobalValue",
-              "ratio": 1.0,
-              "key": "_CJB_NUM",
-              "useLimitRange": true,
-              "maxValue": 10.0,
-              "minValue": 0.0
+              "value": 1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_CJB_IN_CD",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         },
         "Activity_ActivityTeamChain_AvatarCJBBuff_OnBattle": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
@@ -137,234 +82,152 @@
                 },
                 {
                   "$type": "ByTargetGlobalValue",
-                  "target": "Team",
                   "key": "_CJB_IN_CD",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
-                },
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "target": "Team",
-                  "key": "_CJB_NUM",
-                  "ratio": "MaxCJBNum",
-                  "compareType": "LessAndEqual"
-                },
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "target": "Team",
-                  "key": "_CHOOSE_IN_CD",
-                  "ratio": 1.0
                 }
               ],
               "successActions": [
                 {
                   "$type": "FireEffect",
-                  "target": "Other",
-                  "healLimitedByCasterMaxHPRatio": "Eff_EnergyDisk_ElementalBurst_Wave_R40",
+                  "effectPattern": "Eff_EnergyDisk_ElementalBurst_Wave_R40",
                   "born": {
                     "$type": "ConfigBornByTarget"
-                  },
-                  "EBHJMLOKDGB": -1.0
+                  }
                 },
                 {
                   "$type": "TriggerAttackEvent",
+                  "doOffStage": false,
                   "target": "CurLocalAvatar",
-                  "RotationDampTime": false,
+                  "targetType": "Enemy",
                   "attackEvent": {
                     "attackPattern": {
                       "$type": "ConfigAttackSphere",
                       "triggerType": "TriggerNoRepeat",
+                      "radius": 4,
                       "born": {
-                        "$type": "ConfigBornByHitPoint"
-                      },
-                      "DCMPFCIBIPA": 4.0
+                        "$type": "ConfigBornBySelf"
+                      }
                     },
                     "attackInfo": {
-                      "attackTag": "",
-                      "attenuationTag": "",
-                      "attenuationGroup": "default",
                       "attackProperty": {
-                        "CCNJGLPMIEP": 0.0,
-                        "bonusCriticalHurt": 0.0,
+                        "damageExtra": "%CJB_DamageRatio*%DamageSystemValue",
                         "ignoreAttackerProperty": true,
-                        "enBreak": 25.0,
-                        "attackType": "Melee",
-                        "damageExtra": [
-                          "CJBDamageRatio",
-                          "DamageSystemValue",
-                          "MUL"
-                        ],
+                        "ignoreModifyDamage": true,
                         "trueDamage": true,
-                        "bonusCritical": true
+                        "attackType": "Melee",
+                        "elementType": "None",
+                        "elementDurability": 0,
+                        "enBreak": 25
                       },
                       "hitPattern": {
                         "onHitEffectName": "default",
                         "hitImpulseType": "LV2",
-                        "hitHaltTimeScale": 0.019999999552965164
+                        "canBeDefenceHalt": false,
+                        "hitHaltTime": 0,
+                        "hitHaltTimeScale": 0.02,
+                        "muteHitText": false
                       }
                     }
-                  },
-                  "targetType": "Enemy"
+                  }
                 },
                 {
                   "$type": "ApplyModifier",
-                  "target": "Team",
                   "modifierName": "CJB_DAMAGE_INCD"
                 }
               ]
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "SetSystemValueToOverrideMap",
-          "key": "DamageSystemValue",
-          "type": "ElementLevelCo"
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Activity_ActivityTeamChain_AvatarCJBBuff"
-        }
-      ],
-      "isDynamicAbility": true
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  3.4连线挑战关卡2 潮汐buff
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Activity_ActivityTeamChainV3.4_TideBuff",
+      "isDynamicAbility": true,
+      "abilitySpecials": {
+        "DamageUp": 0
+      },
       "abilityMixins": [
         {
           "$type": "AttachModifierToGlobalValueMixin",
+          "globalValueTarget": "Team",
           "globalValueKey": "_IN_HIGH_TIDE_V3.4",
           "valueSteps": [-0.5, 0.5, 1.5],
           "modifierNameSteps": ["Crazy_In_Peace", "Crazy_DamageUp"]
-        },
-        {
-          "$type": "ServerUpdateGlobalValueMixin",
-          "key": "_IN_HIGH_TIDE_V3.4",
-          "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
         }
       ],
-      "abilitySpecials": {
-        "DamageUp": 0.0
-      },
       "modifiers": {
-        "Crazy_In_Peace": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
+        "Crazy_In_Peace": {},
         "Crazy_DamageUp": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "modifierMixins": [
-            {
-              "$type": "CurLocalAvatarMixinV2",
-              "modifierName": "Crazy_DamageUp_TeamChainV3.4_Eff"
-            }
-          ],
           "onAdded": [
             {
               "$type": "AttachModifier",
               "target": "AllPlayerAvatars",
               "modifierName": "Crazy_DamageUp_TeamChainV3.4"
             }
+          ],
+          "modifierMixins": [
+            {
+              "$type": "CurLocalAvatarMixinV2",
+              "modifierName": "Crazy_DamageUp_TeamChainV3.4_Eff"
+            }
           ]
         },
         "Crazy_DamageUp_TeamChainV3.4": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "properties": {
-            "Actor_FireAddHurtDelta": "DamageUp",
-            "Actor_ElecAddHurtDelta": "DamageUp",
-            "Actor_WaterAddHurtDelta": "DamageUp",
-            "Actor_GrassAddHurtDelta": "DamageUp",
-            "Actor_WindAddHurtDelta": "DamageUp",
-            "Actor_IceAddHurtDelta": "DamageUp",
-            "Actor_RockAddHurtDelta": "DamageUp",
-            "Actor_PhysicalAddHurtDelta": "DamageUp"
-          },
-          "state": "AttackUp"
+            "Actor_FireAddHurtDelta": "%DamageUp",
+            "Actor_ElecAddHurtDelta": "%DamageUp",
+            "Actor_WaterAddHurtDelta": "%DamageUp",
+            "Actor_GrassAddHurtDelta": "%DamageUp",
+            "Actor_WindAddHurtDelta": "%DamageUp",
+            "Actor_IceAddHurtDelta": "%DamageUp",
+            "Actor_RockAddHurtDelta": "%DamageUp",
+            "Actor_PhysicalAddHurtDelta": "%DamageUp"
+          }
         },
         "Crazy_DamageUp_TeamChainV3.4_Eff": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
+          "onAdded": [
+            {
+              "$type": "DungeonFogEffects",
+              "enable": true,
+              "muteRemoteAction": true,
+              "cameraFogEffectName": "Eff_Animal_Boar_03_ThrowSnowBall_ScreenEffect"
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "DungeonFogEffects",
+              "enable": false
+            }
+          ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "_IN_HIGH_TIDE_V3.4",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        }
-      ],
-      "isDynamicAbility": true
+      }
     }
   },
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  //  3.4 连线地城  被锁住的角色获得的BUFF
+  //
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+
+  //造成的伤害提升X%，并且在后台时每秒恢复X点能量
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Activity_TeamChain_LockedAvatar",
+      "isDynamicAbility": true,
       "abilitySpecials": {
-        "DamageUpRatio": 0.0,
-        "OffStageInterval": 0.0,
-        "Energy": 0.0
-      },
-      "modifiers": {
-        "UNIQUE_TeamChain_LockedAvatar": {
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "modifierMixins": [
-            {
-              "$type": "ModifyDamageMixin",
-              "ignoreEventInfo": true,
-              "CCNJGLPMIEP": "DamageUpRatio"
-            }
-          ]
-        },
-        "UNIQUE_TeamChain_LockedAvatar_OffStage": {
-          "stacking": "Unique",
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": "OffStageInterval",
-          "onThinkInterval": [
-            {
-              "$type": "Predicated",
-              "RotationDampTime": true,
-              "targetPredicates": [
-                {
-                  "$type": "ByIsCombat"
-                }
-              ],
-              "successActions": [
-                {
-                  "$type": "Predicated",
-                  "RotationDampTime": true,
-                  "targetPredicates": [
-                    {
-                      "$type": "ByIsLocalAvatar",
-                      "target": "Self"
-                    }
-                  ],
-                  "failActions": [
-                    {
-                      "$type": "ReviveElemEnergy",
-                      "RotationDampTime": true,
-                      "ratio": "Energy"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
+        "DamageUpRatio": 0,
+        "OffStageInterval": 0,
+        "Energy": 0
       },
       "onAdded": [
         {
@@ -373,69 +236,99 @@
         },
         {
           "$type": "AttachModifier",
-          "RotationDampTime": true,
-          "modifierName": "UNIQUE_TeamChain_LockedAvatar_OffStage"
+          "modifierName": "UNIQUE_TeamChain_LockedAvatar_OffStage",
+          "doOffStage": true
         }
       ],
-      "isDynamicAbility": true
-    }
-  },
-  {
-    "Default": {
-      "$type": "ConfigAbility",
-      "abilityName": "Activity_TeamChain_ElementAddHurt_Swirl",
-      "abilitySpecials": {
-        "ElementAddHurt_Swirl": 0.0
-      },
       "modifiers": {
-        "UNIQUE_TeamChain_ElementAddHurt_Swirl": {
-          "stacking": "Unique",
-          "modifierName": "",
+        "UNIQUE_TeamChain_LockedAvatar": {
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_ElemReactSwirlFireDelta": "ElementAddHurt_Swirl",
-            "Actor_ElemReactSwirlWaterDelta": "ElementAddHurt_Swirl",
-            "Actor_ElemReactSwirlIceDelta": "ElementAddHurt_Swirl",
-            "Actor_ElemReactSwirlElectricDelta": "ElementAddHurt_Swirl"
-          },
-          "isLimitedProperties": true
-        }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_TeamChain_ElementAddHurt_Swirl"
-        }
-      ],
-      "isDynamicAbility": true
-    }
-  },
-  {
-    "Default": {
-      "$type": "ConfigAbility",
-      "abilityName": "Activity_TeamChain_Frozen_PercentageRatio",
-      "abilitySpecials": {
-        "damagePercentageRatio": 0.0
-      },
-      "modifiers": {
-        "Activity_TeamChain_Frozen_PercentageRatio": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
               "ignoreEventInfo": true,
-              "CCNJGLPMIEP": "damagePercentageRatio",
-              "predicates": [
+              "damagePercentageRatio": "%DamageUpRatio"
+            }
+          ]
+        },
+        "UNIQUE_TeamChain_LockedAvatar_OffStage": {
+          "isUnique": true,
+          "stacking": "Unique",
+          "thinkInterval": "%OffStageInterval",
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "target": "Self",
+              "doOffStage": true,
+              "targetPredicates": [
                 {
-                  "$type": "ByHasAbilityState",
-                  "abilityState": "ElementFrozen"
+                  "$type": "ByIsLocalAvatar",
+                  "target": "Self"
+                },
+                {
+                  "$type": "ByIsCombat"
+                }
+              ],
+              "failActions": [
+                {
+                  "$type": "ReviveElemEnergy",
+                  "value": "%Energy",
+                  "doOffStage": true
                 }
               ]
             }
           ]
+        } //后台角色
+      }
+    }
+  },
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  //  3.4 连线地城  角色选择BUFF
+  //
+  //////////////////////////////////////////////////////////////////////////////////////////////////
+
+  //1.扩散反应造成的伤害提高X%
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Activity_TeamChain_ElementAddHurt_Swirl",
+      "isDynamicAbility": true,
+      "abilitySpecials": {
+        "ElementAddHurt_Swirl": 0
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_TeamChain_ElementAddHurt_Swirl",
+          "target": "Self"
         }
+      ],
+      "modifiers": {
+        "UNIQUE_TeamChain_ElementAddHurt_Swirl": {
+          "isLimitedProperties": true,
+          "stacking": "Unique",
+          "isUnique": true,
+          "properties": {
+            "Actor_ElemReactSwirlFireDelta": "%ElementAddHurt_Swirl",
+            "Actor_ElemReactSwirlWaterDelta": "%ElementAddHurt_Swirl",
+            "Actor_ElemReactSwirlIceDelta": "%ElementAddHurt_Swirl",
+            "Actor_ElemReactSwirlElectricDelta": "%ElementAddHurt_Swirl"
+          }
+        }
+      }
+    }
+  },
+
+  //2.角色攻击处于冻结状态下的敌人时，造成伤害提升X%
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Activity_TeamChain_Frozen_PercentageRatio",
+      "isDynamicAbility": true,
+      "abilitySpecials": {
+        "damagePercentageRatio": 0
       },
       "onAdded": [
         {
@@ -443,33 +336,37 @@
           "modifierName": "Activity_TeamChain_Frozen_PercentageRatio"
         }
       ],
-      "isDynamicAbility": true
+      "modifiers": {
+        //对冰冻中的敌人伤害提升
+        "Activity_TeamChain_Frozen_PercentageRatio": {
+          "modifierMixins": [
+            {
+              "$type": "ModifyDamageMixin",
+              "ignoreEventInfo": true,
+              "damagePercentageRatio": "%damagePercentageRatio",
+              "predicates": [
+                {
+                  "$type": "ByHasAbilityState",
+                  "abilityState": "ElementFrozen",
+                  "target": "Target"
+                }
+              ]
+            }
+          ]
+        }
+      }
     }
   },
+
+  //3.元素爆发造成的伤害提升X%,冷却缩减提升X%
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Activity_TeamChain_BurstDamageUp_ReduceCD",
+      "isDynamicAbility": true,
       "abilitySpecials": {
-        "ElementalBurst_Rate": 0.0,
-        "Actor_SkillCDMinusRatio": 0.0
-      },
-      "modifiers": {
-        "UNIQUE_TeamChain_BurstDamageUp_ReduceCD": {
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "modifierMixins": [
-            {
-              "$type": "ModifyDamageMixin",
-              "attackTags": ["Elemental_Burst"],
-              "CCNJGLPMIEP": "ElementalBurst_Rate"
-            }
-          ],
-          "properties": {
-            "Actor_SkillCDMinusRatio": "Actor_SkillCDMinusRatio"
-          }
-        }
+        "ElementalBurst_Rate": 0,
+        "Actor_SkillCDMinusRatio": 0
       },
       "onAdded": [
         {
@@ -477,180 +374,163 @@
           "modifierName": "UNIQUE_TeamChain_BurstDamageUp_ReduceCD"
         }
       ],
-      "isDynamicAbility": true
+      "modifiers": {
+        "UNIQUE_TeamChain_BurstDamageUp_ReduceCD": {
+          "isUnique": true,
+          "properties": {
+            "Actor_SkillCDMinusRatio": "%Actor_SkillCDMinusRatio"
+          },
+          "modifierMixins": [
+            {
+              "$type": "ModifyDamageMixin",
+              "damagePercentageRatio": "%ElementalBurst_Rate",
+              "attackTags": ["Elemental_Burst"]
+            }
+          ]
+        }
+      }
     }
   },
+
+  //4.施放元素爆发后，每X秒为自身恢复X点元素能量，持续X秒
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Activity_TeamChain_UltGainEnergy",
+      "isDynamicAbility": true,
       "abilitySpecials": {
-        "Duration": 0.0,
-        "Interval": 0.0,
-        "Energy": 0.0
-      },
-      "modifiers": {
-        "UNIQUE_Activity_TeamChain_UltGainEnergy_Handler": {
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "modifierMixins": [
-            {
-              "$type": "OnAvatarUseSkillMixin",
-              "onTriggerUltimateSkill": [
-                {
-                  "$type": "ApplyModifier",
-                  "RotationDampTime": true,
-                  "modifierName": "UNIQUE_Activity_TeamChain_UltGainEnergy_Effect"
-                }
-              ],
-              "HPNJGGABBPK": 0.20000000298023224
-            }
-          ]
-        },
-        "UNIQUE_Activity_TeamChain_UltGainEnergy_Effect": {
-          "modifierName": "",
-          "isUnique": true,
-          "HCJLIGBLGJA": "Duration",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": "Interval",
-          "onThinkInterval": [
-            {
-              "$type": "ReviveElemEnergy",
-              "RotationDampTime": true,
-              "ratio": "Energy"
-            }
-          ]
-        }
+        "Duration": 0,
+        "Interval": 0,
+        "Energy": 0
       },
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "RotationDampTime": true,
-          "modifierName": "UNIQUE_Activity_TeamChain_UltGainEnergy_Handler"
+          "modifierName": "UNIQUE_Activity_TeamChain_UltGainEnergy_Handler",
+          "doOffStage": true
         }
       ],
-      "isDynamicAbility": true
+      "modifiers": {
+        "UNIQUE_Activity_TeamChain_UltGainEnergy_Handler": {
+          "isUnique": true,
+          "modifierMixins": [
+            {
+              "$type": "OnAvatarUseSkillMixin",
+              "clearSkillIdDelay": 0.2,
+              "onTriggerUltimateSkill": [
+                {
+                  "$type": "ApplyModifier",
+                  "target": "Self",
+                  "doOffStage": true,
+                  "modifierName": "UNIQUE_Activity_TeamChain_UltGainEnergy_Effect"
+                }
+              ]
+            }
+          ]
+        },
+        "UNIQUE_Activity_TeamChain_UltGainEnergy_Effect": {
+          "duration": "%Duration",
+          "isUnique": true,
+          "stacking": "Refresh",
+          "thinkInterval": "%Interval",
+          "onThinkInterval": [
+            {
+              "$type": "ReviveElemEnergy",
+              "value": "%Energy",
+              "doOffStage": true
+            }
+          ]
+        }
+      }
     }
   },
+
+  //5.每次触发草元素相关反应时，全队元素精通提升X点，持续X秒，至多叠加4层，独立计时
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Activity_TeamChain_GrassReaction_ElemMasteryDelta",
+      "isDynamicAbility": true,
       "abilitySpecials": {
-        "GrassReaction_ElemMasteryDelta": 0.0,
-        "BuffTime": 0.0,
-        "BuffMaxLevel": 0.0,
-        "Multiple_CdTime": 0.0
+        "GrassReaction_ElemMasteryDelta": 0,
+        "BuffTime": 0,
+        "BuffMaxLevel": 0,
+        "Multiple_CdTime": 0
       },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_TeamChain_GrassReaction_ElemMasteryDelta_Handler",
+          "doOffStage": true
+        }
+      ],
       "modifiers": {
         "UNIQUE_TeamChain_GrassReaction_ElemMasteryDelta_Handler": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "DoActionByElementReactionMixin",
+              "range": 20,
+              "doOffStage": true,
               "entityTypes": ["Monster"],
               "reactionTypes": [
                 "Burning",
                 "Overdose",
                 "Overgrow",
-                "OverdoseGrass",
-                "OverdoseElectric",
-                "OvergrowMushroomElectric",
+                "OverdoseGrass", //蔓激化
+                "OverdoseElectric", //雷激化
+                "OvergrowMushroomElectric", //雷蔓生
                 "OvergrowMushroomFire"
               ],
               "actions": [
                 {
                   "$type": "ApplyModifier",
-                  "target": "Team",
-                  "RotationDampTime": true,
-                  "modifierName": "UNIQUE_TeamChain_GrassReaction_ElemMasteryDelta_Multiple_Handler"
+                  "modifierName": "UNIQUE_TeamChain_GrassReaction_ElemMasteryDelta_Multiple_Handler",
+                  "target": "Team", //叠层不能叠太快，有cd
+                  "doOffStage": true
                 }
               ]
             }
           ]
         },
         "UNIQUE_TeamChain_GrassReaction_ElemMasteryDelta_Multiple_Handler": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "Multiple_CdTime",
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
+          "duration": "%Multiple_CdTime",
           "onAdded": [
             {
               "$type": "ApplyModifier",
+              "modifierName": "UNIQUE_TeamChain_GrassReaction_ElemMasteryDelta_MultipleEffect",
               "target": "CurTeamAvatars",
-              "RotationDampTime": true,
-              "modifierName": "UNIQUE_TeamChain_GrassReaction_ElemMasteryDelta_MultipleEffect"
+              "doOffStage": true
             }
           ]
         },
         "UNIQUE_TeamChain_GrassReaction_ElemMasteryDelta_MultipleEffect": {
-          "stacking": "MultipleRefreshNoRemove",
-          "stackingOption": {
-            "abilitySpecialName": "",
-            "maxModifierNumForMultipleType": "BuffMaxLevel",
-            "enableMixedUnique": true
-          },
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "BuffTime",
-          "bonusCriticalHurt": 100.0,
+          "duration": "%BuffTime",
+          "state": "AttackUp",
+          "stacking": "MultipleRefreshNoRemove",
           "properties": {
-            "Actor_ElemMasteryDelta": "GrassReaction_ElemMasteryDelta"
+            "Actor_ElemMasteryDelta": "%GrassReaction_ElemMasteryDelta"
           },
-          "state": "AttackUp"
+          "stackingOption": {
+            "maxModifierNumForMultipleType": "%BuffMaxLevel",
+            "enableMixedUnique": true
+          }
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "RotationDampTime": true,
-          "modifierName": "UNIQUE_TeamChain_GrassReaction_ElemMasteryDelta_Handler"
-        }
-      ],
-      "isDynamicAbility": true
+      }
     }
   },
+  //6.队伍中所有角色普攻造成的伤害提升A%,元素战技造成的伤害提升B%
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Activity_TeamChain_NormalAttackAndElementalArt_DamageUp",
+      "isDynamicAbility": true,
       "abilitySpecials": {
-        "NormalAttackRate": 0.0,
-        "ElementalArtRate": 0.0
-      },
-      "modifiers": {
-        "UNIQUE_TeamChain_NormalAttackAndElementalArt_DamageUp": {
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "modifierMixins": [
-            {
-              "$type": "ModifyDamageMixin",
-              "attackTags": [
-                "NormalAttack_01",
-                "NormalAttack_02",
-                "NormalAttack_03",
-                "NormalAttack_04",
-                "NormalAttack_05",
-                "NormalAttack_06"
-              ],
-              "CCNJGLPMIEP": "NormalAttackRate"
-            },
-            {
-              "$type": "ModifyDamageMixin",
-              "attackTags": [
-                "Elemental_Art",
-                "Elemental_Art_Hold",
-                "Elemental_Art_Extra"
-              ],
-              "CCNJGLPMIEP": "ElementalArtRate"
-            }
-          ]
-        }
+        "NormalAttackRate": 0,
+        "ElementalArtRate": 0
       },
       "onAdded": [
         {
@@ -658,27 +538,61 @@
           "modifierName": "UNIQUE_TeamChain_NormalAttackAndElementalArt_DamageUp"
         }
       ],
-      "isDynamicAbility": true
+      "modifiers": {
+        "UNIQUE_TeamChain_NormalAttackAndElementalArt_DamageUp": {
+          "isUnique": true,
+          "modifierMixins": [
+            {
+              "$type": "ModifyDamageMixin",
+              "damagePercentageRatio": "%NormalAttackRate",
+              "attackTags": [
+                "NormalAttack_01",
+                "NormalAttack_02",
+                "NormalAttack_03",
+                "NormalAttack_04",
+                "NormalAttack_05",
+                "NormalAttack_06"
+              ]
+            },
+            {
+              "$type": "ModifyDamageMixin",
+              "damagePercentageRatio": "%ElementalArtRate",
+              "attackTags": [
+                "Elemental_Art",
+                "Elemental_Art_Hold",
+                "Elemental_Art_Extra"
+              ]
+            }
+          ]
+        }
+      }
     }
   },
+  //7.下落攻击伤害提高xx%，且在下落攻击命中时触发风眼
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Activity_TeamChain_FallingWindZone",
+      "isDynamicAbility": true,
       "abilitySpecials": {
-        "FallingDamageUp": 0.0,
-        "WindZone_CD": 0.0
+        "FallingDamageUp": 0,
+        "WindZone_CD": 0
       },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_TeamChain_FallingWindZone_Handler",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "UNIQUE_TeamChain_FallingWindZone_Handler": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
-              "$type": "ModifyDamageMixin",
+              "$type": "ModifyDamageMixin", //伤害调整
               "attackTags": ["FallingAttack"],
-              "CCNJGLPMIEP": "FallingDamageUp"
+              "damagePercentageRatio": "%FallingDamageUp"
             }
           ],
           "onAttackLanded": [
@@ -694,105 +608,102 @@
                   "$type": "ByTargetGlobalValue",
                   "target": "Team",
                   "key": "RogueV2_FallingWindZone_CD",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 },
                 {
                   "$type": "ByAttackTags",
                   "target": "Self",
                   "attackTags": ["FallingAttack"]
-                }
+                } //下落攻击
               ],
               "successActions": [
                 {
                   "$type": "ApplyModifier",
-                  "RotationDampTime": true,
-                  "modifierName": "TeamChain_FallingWindZone_WindZoneEffect"
+                  "modifierName": "TeamChain_FallingWindZone_WindZoneEffect",
+                  "doOffStage": true
                 }
               ]
             }
           ]
         },
         "TeamChain_FallingWindZone_WindZoneEffect": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.2, //表现上做了个延迟
+          "onAdded": [],
           "onRemoved": [
+            //产生风场
             {
               "$type": "CreateGadget",
-              "RotationDampTime": true,
+              "gadgetID": 44000428,
+              "doOffStage": true,
+              "campID": 1001,
+              "campTargetType": "Enemy",
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.5,
-                  "PJCOKIGCJOK": 0.0
-                },
-                "useRotation": true
-              },
-              "gadgetID": 44000428,
-              "campID": 1001,
-              "campTargetType": "Enemy"
+                  "x": 0.0,
+                  "y": 0.5,
+                  "z": 0.0
+                }
+              }
             },
+            //进CD
             {
               "$type": "ApplyModifier",
+              "modifierName": "UNIQUE_TeamChain_FallingWindZone_WindZone_CD",
               "target": "Team",
-              "RotationDampTime": true,
-              "modifierName": "UNIQUE_TeamChain_FallingWindZone_WindZone_CD"
+              "doOffStage": true
             }
           ]
         },
         "UNIQUE_TeamChain_FallingWindZone_WindZone_CD": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "WindZone_CD",
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
+          "duration": "%WindZone_CD",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": -1.0,
               "key": "RogueV2_FallingWindZone_CD",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": -1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "RogueV2_FallingWindZone_CD",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_TeamChain_FallingWindZone_Handler"
-        }
-      ],
-      "isDynamicAbility": true
+      }
     }
   },
+
+  //8.对敌人触发扩散反应时，全队造成伤害提升X%，持续X秒，重复触发刷新时间
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Activity_TeamChain_Mastery_DamageUp",
+      "isDynamicAbility": true,
       "abilitySpecials": {
-        "DamageUpTime": 0.0,
-        "DamageUpRatio": 0.0
+        "DamageUpTime": 0,
+        "DamageUpRatio": 0
       },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_TeamChain_Mastery_DamageUp",
+          "target": "Self",
+          "doOffStage": true
+        }
+      ],
       "modifiers": {
         "UNIQUE_TeamChain_Mastery_DamageUp": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "DoActionByElementReactionMixin",
+              "range": 20,
               "entityTypes": ["Monster"],
               "reactionTypes": [
                 "SwirlFire",
@@ -804,107 +715,63 @@
                 {
                   "$type": "AttachModifier",
                   "target": "CurTeamAvatars",
-                  "RotationDampTime": true,
-                  "modifierName": "TeamChain_Mastery_BuffEffect"
+                  "modifierName": "TeamChain_Mastery_BuffEffect",
+                  "doOffStage": true
                 }
               ]
             }
           ]
-        },
+        }, //判断是否发生了扩散反应
         "TeamChain_Mastery_BuffEffect": {
-          "modifierName": "",
-          "HCJLIGBLGJA": "DamageUpTime",
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Refresh",
+          "duration": "%DamageUpTime",
           "modifierMixins": [
             {
               "$type": "ModifyDamageMixin",
               "ignoreEventInfo": true,
-              "CCNJGLPMIEP": "DamageUpRatio"
+              "damagePercentageRatio": "%DamageUpRatio"
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "RotationDampTime": true,
-          "modifierName": "UNIQUE_TeamChain_Mastery_DamageUp"
-        }
-      ],
-      "isDynamicAbility": true
+      }
     }
   },
+  //9.普通攻击速度提升X%
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Activity_TeamChain_AttackSpeedRatio",
+      "isDynamicAbility": true,
       "abilitySpecials": {
-        "AttackSpeedRatio": 0.0,
-        "CriticalUpValue": 0.0
-      },
-      "modifiers": {
-        "UNIQUE_Activity_TeamChain_AttackSpeedRatio": {
-          "stacking": "Unique",
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "modifierMixins": [
-            {
-              "$type": "ModifyDamageMixin",
-              "attackTags": [
-                "NormalAttack_01",
-                "NormalAttack_02",
-                "NormalAttack_03",
-                "NormalAttack_04",
-                "NormalAttack_05",
-                "NormalAttack_06"
-              ],
-              "CCNJGLPMIEP": 0.0,
-              "HFLMOAAADBL": "CriticalUpValue"
-            }
-          ],
-          "properties": {
-            "Animator_AttackSpeedRatio": "AttackSpeedRatio"
-          },
-          "isLimitedProperties": true
-        }
+        "AttackSpeedRatio": 0
       },
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Activity_TeamChain_AttackSpeedRatio"
+          "modifierName": "UNIQUE_Activity_TeamChain_AttackSpeedRatio",
+          "target": "Self"
         }
       ],
-      "isDynamicAbility": true
+      "modifiers": {
+        "UNIQUE_Activity_TeamChain_AttackSpeedRatio": {
+          "isLimitedProperties": true,
+          "stacking": "Unique",
+          "isUnique": true,
+          "properties": {
+            "Animator_AttackSpeedRatio": "%AttackSpeedRatio"
+          }
+        }
+      }
     }
   },
+  //10.角色普通攻击造成的伤害提升
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Activity_TeamChain_NormalAttackDamageUp",
+      "isDynamicAbility": true,
       "abilitySpecials": {
-        "Rate": 0.0
-      },
-      "modifiers": {
-        "UNIQUE_TeamChain_NormalAttackDamageUp": {
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "modifierMixins": [
-            {
-              "$type": "ModifyDamageMixin",
-              "attackTags": [
-                "NormalAttack_01",
-                "NormalAttack_02",
-                "NormalAttack_03",
-                "NormalAttack_04",
-                "NormalAttack_05",
-                "NormalAttack_06"
-              ],
-              "CCNJGLPMIEP": "Rate"
-            }
-          ]
-        }
+        "Rate": 0
       },
       "onAdded": [
         {
@@ -912,113 +779,119 @@
           "modifierName": "UNIQUE_TeamChain_NormalAttackDamageUp"
         }
       ],
-      "isDynamicAbility": true
+      "modifiers": {
+        "UNIQUE_TeamChain_NormalAttackDamageUp": {
+          "isUnique": true,
+          "modifierMixins": [
+            {
+              "$type": "ModifyDamageMixin",
+              "damagePercentageRatio": "%Rate",
+              "attackTags": [
+                "NormalAttack_01",
+                "NormalAttack_02",
+                "NormalAttack_03",
+                "NormalAttack_04",
+                "NormalAttack_05",
+                "NormalAttack_06"
+              ]
+            }
+          ]
+        }
+      }
     }
   },
+  //11.所有角色攻击力提升X%
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Activity_TeamChain_AttackRatio",
+      "isDynamicAbility": true,
       "abilitySpecials": {
-        "AttackRatio": 0.0
-      },
-      "modifiers": {
-        "UNIQUE_Activity_TeamChain_AttackRatio": {
-          "stacking": "Unique",
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_AttackRatio": "AttackRatio"
-          },
-          "isLimitedProperties": true
-        }
+        "AttackRatio": 0
       },
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Activity_TeamChain_AttackRatio"
+          "modifierName": "UNIQUE_Activity_TeamChain_AttackRatio",
+          "target": "Self"
         }
       ],
-      "isDynamicAbility": true
+      "modifiers": {
+        "UNIQUE_Activity_TeamChain_AttackRatio": {
+          "isLimitedProperties": true,
+          "stacking": "Unique",
+          "isUnique": true,
+          "properties": {
+            "Actor_AttackRatio": "%AttackRatio"
+          }
+        }
+      }
     }
   },
+  //12.所有角色暴击伤害提升X%
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Activity_TeamChain_CriticalHurtDelta",
+      "isDynamicAbility": true,
       "abilitySpecials": {
-        "CriticalHurt": 0.0
-      },
-      "modifiers": {
-        "UNIQUE_Activity_TeamChain_CriticalHurtDelta": {
-          "stacking": "Unique",
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_CriticalHurtDelta": "CriticalHurt"
-          },
-          "isLimitedProperties": true
-        }
+        "CriticalHurt": 0
       },
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Activity_TeamChain_CriticalHurtDelta"
+          "modifierName": "UNIQUE_Activity_TeamChain_CriticalHurtDelta",
+          "target": "Self"
         }
       ],
-      "isDynamicAbility": true
+      "modifiers": {
+        "UNIQUE_Activity_TeamChain_CriticalHurtDelta": {
+          "isLimitedProperties": true,
+          "stacking": "Unique",
+          "isUnique": true,
+          "properties": {
+            "Actor_CriticalHurtDelta": "%CriticalHurt"
+          }
+        }
+      }
     }
   },
+  //13.所有角色元素精通提升XX点
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Activity_TeamChain_ElemMasteryDeltaUp",
+      "isDynamicAbility": true,
       "abilitySpecials": {
-        "ElemMasteryDelta": 0.0
-      },
-      "modifiers": {
-        "UNIQUE_Activity_TeamChain_ElemMasteryDeltaUp": {
-          "stacking": "Unique",
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_ElemMasteryDelta": "ElemMasteryDelta"
-          },
-          "isLimitedProperties": true
-        }
+        "ElemMasteryDelta": 0
       },
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Activity_TeamChain_ElemMasteryDeltaUp"
+          "modifierName": "UNIQUE_Activity_TeamChain_ElemMasteryDeltaUp",
+          "target": "Self"
         }
       ],
-      "isDynamicAbility": true
+      "modifiers": {
+        "UNIQUE_Activity_TeamChain_ElemMasteryDeltaUp": {
+          "isLimitedProperties": true,
+          "stacking": "Unique",
+          "isUnique": true,
+          "properties": {
+            "Actor_ElemMasteryDelta": "%ElemMasteryDelta"
+          }
+        }
+      }
     }
   },
+  //14.队伍中所有角色元素爆发造成的伤害提升
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Activity_TeamChain_BurstDamageUp",
+      "isDynamicAbility": true,
       "abilitySpecials": {
-        "Rate": 0.0
-      },
-      "modifiers": {
-        "UNIQUE_TeamChain_BurstDamageUp": {
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "modifierMixins": [
-            {
-              "$type": "ModifyDamageMixin",
-              "attackTags": ["Elemental_Burst"],
-              "CCNJGLPMIEP": "Rate"
-            }
-          ]
-        }
+        "Rate": 0
       },
       "onAdded": [
         {
@@ -1026,175 +899,192 @@
           "modifierName": "UNIQUE_TeamChain_BurstDamageUp"
         }
       ],
-      "isDynamicAbility": true
+      "modifiers": {
+        "UNIQUE_TeamChain_BurstDamageUp": {
+          "isUnique": true,
+          "modifierMixins": [
+            {
+              "$type": "ModifyDamageMixin",
+              "damagePercentageRatio": "%Rate",
+              "attackTags": ["Elemental_Burst"]
+            }
+          ]
+        }
+      }
     }
   },
+
+  //15.风元素增伤
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Activity_TeamChain_ElementAddHurt_Wind",
+      "isDynamicAbility": true,
       "abilitySpecials": {
-        "ElementAddHurt": 0.0
-      },
-      "modifiers": {
-        "UNIQUE_Activity_TeamChain_ElementAddHurt_Wind": {
-          "stacking": "Unique",
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_WindAddHurtDelta": "ElementAddHurt"
-          },
-          "isLimitedProperties": true
-        }
+        "ElementAddHurt": 0
       },
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Activity_TeamChain_ElementAddHurt_Wind"
+          "modifierName": "UNIQUE_Activity_TeamChain_ElementAddHurt_Wind",
+          "target": "Self"
         }
       ],
-      "isDynamicAbility": true
+      "modifiers": {
+        "UNIQUE_Activity_TeamChain_ElementAddHurt_Wind": {
+          "isLimitedProperties": true,
+          "stacking": "Unique",
+          "isUnique": true,
+          "properties": {
+            "Actor_WindAddHurtDelta": "%ElementAddHurt"
+          }
+        }
+      }
     }
   },
+
+  //16.火元素增伤
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Activity_TeamChain_ElementAddHurt_Fire",
+      "isDynamicAbility": true,
       "abilitySpecials": {
-        "ElementAddHurt": 0.0
-      },
-      "modifiers": {
-        "UNIQUE_Activity_TeamChain_ElementAddHurt_Fire": {
-          "stacking": "Unique",
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_FireAddHurtDelta": "ElementAddHurt"
-          },
-          "isLimitedProperties": true
-        }
+        "ElementAddHurt": 0
       },
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Activity_TeamChain_ElementAddHurt_Fire"
+          "modifierName": "UNIQUE_Activity_TeamChain_ElementAddHurt_Fire",
+          "target": "Self"
         }
       ],
-      "isDynamicAbility": true
+      "modifiers": {
+        "UNIQUE_Activity_TeamChain_ElementAddHurt_Fire": {
+          "isLimitedProperties": true,
+          "stacking": "Unique",
+          "isUnique": true,
+          "properties": {
+            "Actor_FireAddHurtDelta": "%ElementAddHurt"
+          }
+        }
+      }
     }
   },
+
+  //17.雷元素增伤
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Activity_TeamChain_ElementAddHurt_Elec",
+      "isDynamicAbility": true,
       "abilitySpecials": {
-        "ElementAddHurt": 0.0
-      },
-      "modifiers": {
-        "UNIQUE_Activity_TeamChain_ElementAddHurt_Elec": {
-          "stacking": "Unique",
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_ElecAddHurtDelta": "ElementAddHurt"
-          },
-          "isLimitedProperties": true
-        }
+        "ElementAddHurt": 0
       },
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Activity_TeamChain_ElementAddHurt_Elec"
+          "modifierName": "UNIQUE_Activity_TeamChain_ElementAddHurt_Elec",
+          "target": "Self"
         }
       ],
-      "isDynamicAbility": true
+      "modifiers": {
+        "UNIQUE_Activity_TeamChain_ElementAddHurt_Elec": {
+          "isLimitedProperties": true,
+          "stacking": "Unique",
+          "isUnique": true,
+          "properties": {
+            "Actor_ElecAddHurtDelta": "%ElementAddHurt"
+          }
+        }
+      }
     }
   },
+
+  //18.水元素增伤
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Activity_TeamChain_ElementAddHurt_Water",
+      "isDynamicAbility": true,
       "abilitySpecials": {
-        "ElementAddHurt": 0.0
-      },
-      "modifiers": {
-        "UNIQUE_Activity_TeamChain_ElementAddHurt_Water": {
-          "stacking": "Unique",
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_WaterAddHurtDelta": "ElementAddHurt"
-          },
-          "isLimitedProperties": true
-        }
+        "ElementAddHurt": 0
       },
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Activity_TeamChain_ElementAddHurt_Water"
+          "modifierName": "UNIQUE_Activity_TeamChain_ElementAddHurt_Water",
+          "target": "Self"
         }
       ],
-      "isDynamicAbility": true
+      "modifiers": {
+        "UNIQUE_Activity_TeamChain_ElementAddHurt_Water": {
+          "isLimitedProperties": true,
+          "stacking": "Unique",
+          "isUnique": true,
+          "properties": {
+            "Actor_WaterAddHurtDelta": "%ElementAddHurt"
+          }
+        }
+      }
     }
   },
+
+  //19.草元素增伤
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Activity_TeamChain_ElementAddHurt_Grass",
+      "isDynamicAbility": true,
       "abilitySpecials": {
-        "ElementAddHurt": 0.0
-      },
-      "modifiers": {
-        "UNIQUE_Activity_TeamChain_ElementAddHurt_Grass": {
-          "stacking": "Unique",
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_GrassAddHurtDelta": "ElementAddHurt"
-          },
-          "isLimitedProperties": true
-        }
+        "ElementAddHurt": 0
       },
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Activity_TeamChain_ElementAddHurt_Grass"
+          "modifierName": "UNIQUE_Activity_TeamChain_ElementAddHurt_Grass",
+          "target": "Self"
         }
       ],
-      "isDynamicAbility": true
+      "modifiers": {
+        "UNIQUE_Activity_TeamChain_ElementAddHurt_Grass": {
+          "isLimitedProperties": true,
+          "stacking": "Unique",
+          "isUnique": true,
+          "properties": {
+            "Actor_GrassAddHurtDelta": "%ElementAddHurt"
+          }
+        }
+      }
     }
   },
+
+  //20.冰元素增伤
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Activity_TeamChain_ElementAddHurt_Ice",
+      "isDynamicAbility": true,
       "abilitySpecials": {
-        "ElementAddHurt": 0.0
-      },
-      "modifiers": {
-        "UNIQUE_Activity_TeamChain_ElementAddHurt_Ice": {
-          "stacking": "Unique",
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_IceAddHurtDelta": "ElementAddHurt"
-          },
-          "isLimitedProperties": true
-        }
+        "ElementAddHurt": 0
       },
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Activity_TeamChain_ElementAddHurt_Ice"
+          "modifierName": "UNIQUE_Activity_TeamChain_ElementAddHurt_Ice",
+          "target": "Self"
         }
       ],
-      "isDynamicAbility": true
+      "modifiers": {
+        "UNIQUE_Activity_TeamChain_ElementAddHurt_Ice": {
+          "isLimitedProperties": true,
+          "stacking": "Unique",
+          "isUnique": true,
+          "properties": {
+            "Actor_IceAddHurtDelta": "%ElementAddHurt"
+          }
+        }
+      }
     }
   }
 ]

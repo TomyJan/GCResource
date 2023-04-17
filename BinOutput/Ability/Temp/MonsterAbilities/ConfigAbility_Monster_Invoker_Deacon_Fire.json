@@ -1,4 +1,11 @@
 [
+  /////////////////////////////////////////////////////////////////
+  //
+  //  StateControl
+  //  300+正常状态 // 400+二阶段状态
+  //  根据FireCore的有无决定子状态
+  //  302   303 //  402（无） 403（有）
+  /////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -6,7 +13,7 @@
       "abilityMixins": [
         {
           "$type": "AttachModifierToHPPercentMixin",
-          "valueSteps": [0.6000000238418579, 0.20000000298023224],
+          "valueSteps": [0.6, 0.2],
           "modifierNameSteps": [
             "Invoker_Empty",
             "UNIQUE_Invoker_Deacon_Fire_NormalState",
@@ -16,23 +23,22 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_Monster_Invoker_Deacon_Fire_FireCoreCount_",
-          "defaultGlobalValueOnCreate": 0.0,
-          "valueSteps": [-0.5, 0.5, 10.0],
+          "valueSteps": [-0.5, 0.5, 10],
+          "defaultGlobalValueOnCreate": 0,
+          "removeAppliedModifier": true,
           "modifierNameSteps": [
             "UNIQUE_Invoker_Deacon_Fire_NoFireCoreCount",
             "UNIQUE_Invoker_Deacon_Fire_HasFireCoreCount"
           ]
         },
         {
-          "$type": "DoActionByPoseIDMixin",
+          "$type": "DoActionByPoseIDMixin", //
           "poseIDs": [402, 403],
           "enterActions": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 3.0,
               "key": "_MONSTER_INVOKER_DEACON_FIRE_STATE",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 3
             }
           ]
         },
@@ -42,10 +48,8 @@
           "enterActions": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 2.0,
               "key": "_MONSTER_INVOKER_DEACON_FIRE_STATE",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 2
             }
           ]
         },
@@ -55,107 +59,12 @@
           "enterActions": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "_MONSTER_INVOKER_DEACON_FIRE_STATE",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             }
           ]
         }
       ],
-      "modifiers": {
-        "UNIQUE_Invoker_Deacon_Fire_Limbo": {
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_HpThresholdRatio": 0.15000000596046448
-          },
-          "state": "Limbo",
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Invoker_Deacon_Fire_Standby",
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        },
-        "Invoker_Empty": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
-        "UNIQUE_Invoker_Deacon_Fire_NormalState": {
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "SetPoseBool",
-              "boolID": "NormalStage",
-              "ratio": true
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "SetPoseBool",
-              "boolID": "NormalStage"
-            }
-          ]
-        },
-        "UNIQUE_Invoker_Deacon_Fire_ElementState": {
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "SetPoseBool",
-              "boolID": "ElementState",
-              "ratio": true
-            },
-            {
-              "$type": "ClearEndura"
-            }
-          ]
-        },
-        "UNIQUE_Invoker_Deacon_Fire_NoFireCoreCount": {
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "SetPoseBool",
-              "boolID": "HasFireCore"
-            },
-            {
-              "$type": "SetPoseBool",
-              "boolID": "MaxFireCore"
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "SetPoseBool",
-              "boolID": "HasFireCore",
-              "ratio": true
-            }
-          ]
-        },
-        "UNIQUE_Invoker_Deacon_Fire_HasFireCoreCount": {
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "SetPoseBool",
-              "boolID": "HasFireCore",
-              "ratio": true
-            },
-            {
-              "$type": "SetPoseBool",
-              "boolID": "MaxFireCore"
-            }
-          ]
-        }
-      },
       "onAdded": [
         {
           "$type": "ApplyModifier",
@@ -165,9 +74,97 @@
           "$type": "TriggerAbility",
           "abilityName": "Invoker_Deacon_Fire_FireCoreKilled"
         }
-      ]
+      ],
+      "modifiers": {
+        "UNIQUE_Invoker_Deacon_Fire_Limbo": {
+          "isUnique": true,
+          "state": "Limbo",
+          "properties": {
+            "Actor_HpThresholdRatio": 0.15
+          },
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Invoker_Deacon_Fire_Standby"
+            }
+          ]
+        },
+        "Invoker_Empty": {},
+        "UNIQUE_Invoker_Deacon_Fire_NormalState": {
+          "isUnique": true,
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "boolID": "NormalStage",
+              "value": true
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "SetPoseBool",
+              "boolID": "NormalStage",
+              "value": false
+            }
+          ]
+        },
+        "UNIQUE_Invoker_Deacon_Fire_ElementState": {
+          "isUnique": true,
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "boolID": "ElementState",
+              "value": true
+            },
+            {
+              "$type": "ClearEndura"
+            }
+          ]
+        },
+        "UNIQUE_Invoker_Deacon_Fire_NoFireCoreCount": {
+          "isUnique": true,
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "boolID": "HasFireCore",
+              "value": false
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "MaxFireCore",
+              "value": false
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "SetPoseBool",
+              "boolID": "HasFireCore",
+              "value": true
+            }
+          ]
+        },
+        "UNIQUE_Invoker_Deacon_Fire_HasFireCoreCount": {
+          "isUnique": true,
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "boolID": "HasFireCore",
+              "value": true
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "MaxFireCore",
+              "value": false
+            }
+          ]
+        }
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  AnimatorSteer
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -176,93 +173,119 @@
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Alert"],
-          "angularSpeed": 250.0,
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 1.0,
+          "angularSpeed": 250,
           "attackTrigger": "",
-          "attackDistance": 12.0
+          "attackDistance": 12
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["HellFire"],
-          "angularSpeed": 250.0,
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 1.0,
+          "angularSpeed": 250,
           "attackTrigger": "",
-          "attackDistance": 12.0
+          "attackDistance": 12
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["FireCoreExplodeHit"],
-          "angularSpeed": 250.0,
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 1.0,
+          "angularSpeed": 250,
           "attackTrigger": "",
-          "attackDistance": 12.0
+          "attackDistance": 12
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["NormalIdle"],
-          "angularSpeed": 180.0,
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 1.0,
+          "angularSpeed": 180,
           "attackTrigger": "",
-          "attackDistance": 12.0
+          "attackDistance": 12
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["NormalAtk"],
-          "angularSpeed": 180.0,
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 1.0,
+          "angularSpeed": 180,
           "attackTrigger": "",
-          "attackDistance": 12.0
+          "attackDistance": 12
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["BurnAtk"],
-          "endNormalizedTime": 0.4000000059604645,
-          "angularSpeed": 300.0,
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 0.4,
+          "angularSpeed": 300,
           "attackTrigger": "",
-          "attackDistance": 12.0
+          "attackDistance": 12
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["RangeAtk"],
-          "angularSpeed": 180.0,
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 1.0,
+          "angularSpeed": 180,
           "attackTrigger": "",
-          "attackDistance": 12.0
+          "attackDistance": 12
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["MeleeAtk"],
-          "angularSpeed": 180.0,
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 1.0,
+          "angularSpeed": 180,
           "attackTrigger": "",
-          "attackDistance": 12.0
+          "attackDistance": 12
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Blink"],
-          "angularSpeed": 180.0,
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 1.0,
+          "angularSpeed": 180,
           "attackTrigger": "",
-          "attackDistance": 12.0
+          "attackDistance": 12
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["HellFireAtkLoop"],
+          "startNormalizedTime": 0.0,
           "endNormalizedTime": 0.0,
-          "angularSpeed": 180.0,
+          "angularSpeed": 180,
           "attackTrigger": "",
-          "attackDistance": 12.0
+          "attackDistance": 12
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["HellFireAtkBS"],
-          "endNormalizedTime": 0.0,
-          "angularSpeed": 180.0,
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 0,
+          "angularSpeed": 180,
           "attackTrigger": "",
-          "attackDistance": 12.0
+          "attackDistance": 12
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["HellFireAtkAS"],
-          "angularSpeed": 180.0,
+          "startNormalizedTime": 0,
+          "endNormalizedTime": 1,
+          "angularSpeed": 180,
           "attackTrigger": "",
-          "attackDistance": 12.0
+          "attackDistance": 12
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Transform
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -274,179 +297,10 @@
           "modifierName": "Invoker_Deacon_Fire_Transform"
         }
       ],
-      "abilitySpecials": {
-        "ElementShield_DurabilityImprove": 0.0
-      },
-      "modifiers": {
-        "Invoker_Deacon_Fire_Transform": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 5.0,
-          "onAdded": [
-            {
-              "$type": "SetAnimatorTrigger",
-              "triggerID": "TransformTrigger",
-              "MPTriggerOnRemote": true
-            },
-            {
-              "$type": "AttachModifier",
-              "modifierName": "Invoker_Deacon_Fire_Transform_LockHP"
-            },
-            {
-              "$type": "AttachModifier",
-              "modifierName": "Invoker_Deacon_Fire_Transform_NoHeal"
-            }
-          ],
-          "onThinkInterval": [
-            {
-              "$type": "ApplyModifier",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_MONSTER_INVOKER_DEACON_FIRE_ELEMENTSTATE",
-                  "ratio": 0.0,
-                  "compareType": "NoneOrEqual"
-                }
-              ],
-              "modifierName": "UNIQUE_Invoker_Deacon_Fire_ElementShield"
-            }
-          ],
-          "LLJDPEONHMA": [
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "UNIQUE_Invoker_Deacon_Fire_ElementShield"
-            }
-          ]
-        },
-        "Invoker_Deacon_Fire_Transform_LockHP": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "state": "LockHP"
-        },
-        "Invoker_Deacon_Fire_Transform_NoHeal": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "state": "NoHeal"
-        },
-        "UNIQUE_Invoker_Deacon_Fire_ElementShield": {
-          "stacking": "Unique",
-          "modifierName": "",
-          "isUnique": true,
-          "elementType": "Fire",
-          "bonusCriticalHurt": [
-            1800.0,
-            "ElementShield_DurabilityImprove",
-            "MUL",
-            1800.0,
-            "ADD"
-          ],
-          "modifierMixins": [
-            {
-              "$type": "ElementShieldMixin",
-              "elementType": "Fire",
-              "showDamageText": "",
-              "DJBPNOPNHFH": 360.0,
-              "shieldHP": 1.0,
-              "damageRatio": 0.20000000298023224,
-              "useMutiPlayerFixData": true
-            },
-            {
-              "$type": "VelocityForceMixin",
-              "excludeForces": ["WindZoneType"]
-            },
-            {
-              "$type": "AttachModifierToElementDurabilityMixin",
-              "valueSteps": [
-                0.5,
-                [300.0, "ElementShield_DurabilityImprove", "MUL", 300.0, "ADD"],
-                [
-                  1200.0,
-                  "ElementShield_DurabilityImprove",
-                  "MUL",
-                  1200.0,
-                  "ADD"
-                ]
-              ],
-              "modifierNameSteps": [
-                "UNIQUE_Invoker_Deacon_Fire_Transform",
-                "Invoker_Empty"
-              ]
-            }
-          ],
-          "properties": {
-            "Actor_EndureDelta": 0.0
-          },
-          "onAdded": [
-            {
-              "$type": "SetGlobalValue",
-              "ratio": 1.0,
-              "key": "_MONSTER_INVOKER_DEACON_FIRE_ELEMENTSTATE",
-              "maxValue": 0.0,
-              "minValue": 0.0
-            },
-            {
-              "$type": "SetGlobalValue",
-              "ratio": 0.0,
-              "key": "_MONSTER_INVOKER_DEACON_FIRE_DISAPPEAR",
-              "maxValue": 0.0,
-              "minValue": 0.0
-            },
-            {
-              "$type": "AttachAbilityStateResistance",
-              "resistanceListID": 14001
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "SetGlobalValue",
-              "ratio": 0.0,
-              "key": "_MONSTER_INVOKER_DEACON_FIRE_ELEMENTSTATE",
-              "maxValue": 0.0,
-              "minValue": 0.0
-            },
-            {
-              "$type": "SetPoseBool",
-              "boolID": "ElementState"
-            },
-            {
-              "$type": "KillSelf",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_MONSTER_INVOKER_DEACON_FIRE_DISAPPEAR",
-                  "ratio": 0.0,
-                  "compareType": "NoneOrEqual"
-                }
-              ]
-            }
-          ]
-        },
-        "Invoker_Empty": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
-        "UNIQUE_Invoker_Deacon_Fire_Transform": {
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "SetPoseBool",
-              "boolID": "TransformStage",
-              "ratio": true
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "SetPoseBool",
-              "boolID": "TransformStage"
-            }
-          ]
-        }
-      },
       "onAdded": [
         {
           "$type": "SetGlobalValueToOverrideMap",
+          "abilityFormula": "None",
           "globalValueKey": "_MONSTERAFFIX_ELEMENTSHIELD_DURABILITYIMPROVE",
           "overrideMapKey": "ElementShield_DurabilityImprove"
         }
@@ -464,9 +318,156 @@
           "$type": "TriggerAbility",
           "abilityName": "Invoker_Deacon_Fire_FireCoreKilled"
         }
-      ]
+      ],
+      "modifiers": {
+        "Invoker_Deacon_Fire_Transform": {
+          "thinkInterval": 5.0,
+          "onThinkInterval": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "UNIQUE_Invoker_Deacon_Fire_ElementShield",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_MONSTER_INVOKER_DEACON_FIRE_ELEMENTSTATE",
+                  "value": 0,
+                  "compareType": "NoneOrEqual"
+                }
+              ]
+            }
+          ],
+          "onAdded": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "TransformTrigger",
+              "MPTriggerOnRemote": true
+            },
+            {
+              "$type": "AttachModifier",
+              "modifierName": "Invoker_Deacon_Fire_Transform_LockHP"
+            },
+            {
+              "$type": "AttachModifier",
+              "modifierName": "Invoker_Deacon_Fire_Transform_NoHeal"
+            }
+          ],
+          "onReconnect": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "UNIQUE_Invoker_Deacon_Fire_ElementShield"
+            }
+          ]
+        },
+        "Invoker_Deacon_Fire_Transform_LockHP": {
+          "state": "LockHP"
+        },
+        "Invoker_Deacon_Fire_Transform_NoHeal": {
+          "state": "NoHeal"
+        },
+        "UNIQUE_Invoker_Deacon_Fire_ElementShield": {
+          "isUnique": true,
+          "stacking": "Unique",
+          "elementType": "Fire",
+          "elementDurability": "1800*%ElementShield_DurabilityImprove+1800",
+          "properties": {
+            "Actor_EndureDelta": 0.0
+          },
+          "modifierMixins": [
+            {
+              "$type": "ElementShieldMixin",
+              "elementType": "Fire",
+              "shieldHPRatio": 1.0,
+              "damageRatio": 0.2,
+              "useMutiPlayerFixData": true
+            },
+            {
+              "$type": "VelocityForceMixin",
+              "excludeForces": ["WindZoneType"]
+            },
+            {
+              "$type": "AttachModifierToElementDurabilityMixin",
+              "valueSteps": [
+                0.5,
+                "300*%ElementShield_DurabilityImprove+300",
+                "1200*%ElementShield_DurabilityImprove+1200"
+              ],
+              "modifierNameSteps": [
+                "UNIQUE_Invoker_Deacon_Fire_Transform",
+                "Invoker_Empty"
+              ]
+            }
+          ],
+          //创建全局变量，FIRE_ELEMENTSTATE与DISAPPEAR，标记为1与0
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "key": "_MONSTER_INVOKER_DEACON_FIRE_ELEMENTSTATE",
+              "value": 1
+            },
+            {
+              "$type": "SetGlobalValue",
+              "key": "_MONSTER_INVOKER_DEACON_FIRE_DISAPPEAR",
+              "value": 0
+            },
+            {
+              "$type": "AttachAbilityStateResistance",
+              "resistanceListID": 14001
+            }
+          ],
+          //将FIRE_ELEMENTSTATE变量设为0，将ElementState的PoseBool设为F，若DISAPPEAR为0，则执行killself
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "key": "_MONSTER_INVOKER_DEACON_FIRE_ELEMENTSTATE",
+              "value": 0
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "ElementState",
+              "value": false
+            },
+            {
+              "$type": "KillSelf",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_MONSTER_INVOKER_DEACON_FIRE_DISAPPEAR",
+                  "value": 0,
+                  "compareType": "NoneOrEqual"
+                }
+              ]
+            }
+          ]
+        },
+        "Invoker_Empty": {},
+        "UNIQUE_Invoker_Deacon_Fire_Transform": {
+          "isUnique": true,
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "boolID": "TransformStage",
+              "value": true
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "SetPoseBool",
+              "boolID": "TransformStage",
+              "value": false
+            }
+          ]
+        }
+      },
+      "abilitySpecials": {
+        "ElementShield_DurabilityImprove": 0.0
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Die and Disappear
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -480,15 +481,11 @@
       ],
       "modifiers": {
         "Invoker_Deacon_Fire_DisappearController": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "_MONSTER_INVOKER_DEACON_FIRE_DISAPPEAR",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             },
             {
               "$type": "RemoveUniqueModifier",
@@ -496,7 +493,8 @@
             },
             {
               "$type": "SetPoseBool",
-              "boolID": "ElementState"
+              "boolID": "ElementState",
+              "value": false
             },
             {
               "$type": "Predicated",
@@ -504,7 +502,8 @@
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_MONSTERAFFIX_QUEST_RETURNTOBORN",
-                  "ratio": 1.0
+                  "value": 1,
+                  "compareType": "Equal"
                 }
               ],
               "successActions": [
@@ -531,24 +530,18 @@
           ]
         },
         "Invoker_Deacon_Fire_Disappear_Invincible": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "Invincible"
         },
         "Invoker_Deacon_Fire_Disappear_DenyLockOn": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "DenyLockOn"
         },
         "Invoker_Deacon_Fire_Disappear": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1.0,
           "onRemoved": [
             {
               "$type": "SetAnimatorBool",
               "boolID": "DisappearState",
-              "ratio": true
+              "value": true
             },
             {
               "$type": "SetCanDieImmediately",
@@ -564,8 +557,6 @@
           ]
         },
         "Invoker_Deacon_Fire_ReturnToBornController": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachToPoseIDMixin",
@@ -577,19 +568,18 @@
             {
               "$type": "SetPoseBool",
               "boolID": "WanderState",
-              "ratio": true
+              "value": true
             }
           ]
         },
         "Invoker_Deacon_Fire_ReturnToBorn": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachActionToModifierMixin",
               "onAdded": [
                 {
-                  "$type": "TriggerSetVisible"
+                  "$type": "TriggerSetVisible",
+                  "visible": false
                 },
                 {
                   "$type": "HideUIBillBoard",
@@ -597,11 +587,13 @@
                 },
                 {
                   "$type": "EnableHitBoxByName",
-                  "hitBoxNames": ["HitBox", "HeadBox"]
+                  "hitBoxNames": ["HitBox", "HeadBox"],
+                  "setEnable": false
                 },
                 {
                   "$type": "EnablePushColliderName",
-                  "pushColliderNames": ["PushCollider"]
+                  "pushColliderNames": ["PushCollider"],
+                  "setEnable": false
                 }
               ],
               "onRemoved": [
@@ -610,7 +602,8 @@
                   "visible": true
                 },
                 {
-                  "$type": "HideUIBillBoard"
+                  "$type": "HideUIBillBoard",
+                  "hide": false
                 },
                 {
                   "$type": "EnableHitBoxByName",
@@ -628,8 +621,7 @@
           "onAdded": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Invoker_BornHigh",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Invoker_BornHigh"
             },
             {
               "$type": "TriggerAbility",
@@ -639,26 +631,32 @@
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Invoker_BornHigh",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Invoker_BornHigh"
             }
           ]
         }
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  // Fire Debuff
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Invoker_Deacon_FireDebuff_LoseHP",
-      "abilitySpecials": {
-        "Avatar_MaxHp": 0.0,
-        "Monster_Max_Attack": 0.0
-      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "FireDebuff_Delay_Damage_OnAttackLanded",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
+        //Debuff  OnattackLanded
         "FireDebuff_Delay_Damage_OnAttackLanded": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
@@ -667,33 +665,34 @@
                 {
                   "$type": "ByAttackTags",
                   "attackTags": ["Invoker_Deacon_Fire_FireDebuff"]
-                },
+                }, //attacktag
                 {
                   "$type": "ByEntityTypes",
                   "entityTypes": ["Avatar"]
                 },
                 {
                   "$type": "ByHitDamage",
-                  "damage": 0.0
-                }
+                  "damage": 0,
+                  "logic": "Greater"
+                } //No damage,no debuff
               ],
               "successActions": [
                 {
                   "$type": "ApplyModifier",
-                  "target": "TargetTeam",
-                  "modifierName": "UNIQUE_FireDebuff_Delay_Damage_Logic"
-                }
+                  "modifierName": "UNIQUE_FireDebuff_Delay_Damage_Logic",
+                  "target": "TargetTeam"
+                } //Debuff for targetteam
               ]
             }
           ]
         },
+        //logic
         "UNIQUE_FireDebuff_Delay_Damage_Logic": {
+          "isUnique": true,
           "timeScale": "Level",
           "stacking": "Unique",
-          "modifierName": "",
-          "isUnique": true,
-          "HCJLIGBLGJA": 4.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 4.0,
+          "modifierTags": ["Corruption"],
           "thinkInterval": 1.5,
           "modifierMixins": [
             {
@@ -708,28 +707,35 @@
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Invoker_Deacon_FireDebuff_LoseHP",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Invoker_Deacon_FireDebuff_LoseHP"
             },
             {
               "$type": "GetFightProperty",
-              "RotationDampTime": true,
-              "EEHIJMAKCPP": "Caster",
-              "AIAPOPJDGIB": "FIGHT_PROP_CUR_ATTACK",
-              "globalValueKey": "_MONSTER_MAX_ATTACK_"
+              "fightPropSourceTarget": "Caster",
+              "fightProp": "FIGHT_PROP_CUR_ATTACK", //当前攻击力
+              "globalValueKey": "_MONSTER_MAX_ATTACK_",
+              "doOffStage": true
             },
             {
               "$type": "SetGlobalValueToOverrideMap",
-              "RotationDampTime": true,
               "globalValueKey": "_MONSTER_MAX_ATTACK_",
-              "overrideMapKey": "Monster_Max_Attack"
+              "overrideMapKey": "Monster_Max_Attack",
+              "doOffStage": true
             }
           ],
           "onThinkInterval": [
             {
               "$type": "LoseHP",
               "target": "CurTeamAvatars",
-              "RotationDampTime": true,
+              "amount": "0.133*%Monster_Max_Attack",
+              "amountByTargetMaxHPRatio": 0.15,
+              "limboByTargetMaxHPRatio": 0.15,
+              "enableInvincible": true, //无敌可以抵挡这个扣血行为
+              "enableLockHP": true, //锁血可以抵挡这个扣血行为
+              "lethal": false,
+              "doOffStage": true,
+              "disableWhenLoading": true,
+              "useMeta": true,
               "predicates": [
                 {
                   "$type": "ByNot",
@@ -740,101 +746,247 @@
                   ]
                 },
                 {
-                  "$type": "ByGameTimeIsLocked"
+                  "$type": "ByGameTimeIsLocked",
+                  "isLocked": false
                 }
-              ],
-              "cdRatio": [0.13300000131130219, "Monster_Max_Attack", "MUL"],
-              "amountByCasterMaxHPRatio": 0.15000000596046448,
-              "amountByCasterAttackRatio": 0.15000000596046448,
-              "lethal": false,
-              "enableInvincible": true,
-              "enableLockHP": true,
-              "disableWhenLoading": true,
-              "amount": true
+              ]
             },
             {
               "$type": "LoseHP",
               "target": "CurTeamAvatars",
-              "RotationDampTime": true,
+              "amount": "0.133*%Monster_Max_Attack",
+              "amountByTargetMaxHPRatio": 0.15,
+              "enableInvincible": true, //无敌可以抵挡这个扣血行为
+              "enableLockHP": true, //锁血可以抵挡这个扣血行为
+              "lethal": true,
+              "doOffStage": true,
+              "disableWhenLoading": true,
+              "useMeta": true,
               "predicates": [
                 {
                   "$type": "ByIsLocalAvatar"
                 },
                 {
-                  "$type": "ByGameTimeIsLocked"
+                  "$type": "ByGameTimeIsLocked",
+                  "isLocked": false
                 }
-              ],
-              "cdRatio": [0.13300000131130219, "Monster_Max_Attack", "MUL"],
-              "amountByCasterMaxHPRatio": 0.15000000596046448,
-              "enableInvincible": true,
-              "enableLockHP": true,
-              "disableWhenLoading": true,
-              "amount": true
+              ]
             },
             {
               "$type": "FireEffect",
+              "effectPattern": "Eff_Monster_Invoker_Deacon_Fire_FireDebuff_Damage",
               "target": "CurLocalAvatar",
               "predicates": [
                 {
                   "$type": "ByIsLocalAvatar"
                 }
-              ],
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Invoker_Deacon_Fire_FireDebuff_Damage",
-              "EBHJMLOKDGB": -1.0
+              ]
             },
             {
               "$type": "RemoveUniqueModifier",
               "modifierName": "UNIQUE_FireDebuff_Delay_Damage_Logic"
             }
-          ],
-          "NMMMNMIMJJI": ["Corruption"]
+          ]
         },
+        //icon
         "FireDebuff_Delay_Damage_Effect_Icon": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "buffID": 90006
         },
+        //effect
         "FireDebuff_Delay_Damage_Effect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_CommonSkill_FireDebuff_LoseHP",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_CommonSkill_FireDebuff_LoseHP"
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "FireDebuff_Delay_Damage_OnAttackLanded"
-        }
-      ]
+      "abilitySpecials": {
+        "Avatar_MaxHp": 0,
+        "Monster_Max_Attack": 0
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  NormalAtk
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Invoker_Deacon_Fire_NormalAtk",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Invoker_Deacon_Fire_NormalAtk01"
+        }
+      ],
       "modifiers": {
+        // "Invoker_Deacon_Fire_NormalAtk01_Effect":
+        // {
+        // 	"duration": 0.15,
+        // 	"onAdded":
+        // 	[
+        // 		{
+        // 			"$type": "FireEffect",
+        // 			"effectPattern": "Eff_Monster_Invoker_Deacon_Fire_NormalAtk01_Alert",
+        // 			"born":
+        // 			{
+        // 				"$type": "ConfigBornBySelf",
+        // 				"offset":
+        // 				{
+        // 					"x":1.95,
+        // 					"y":4.21,
+        // 					"z":-0.5,
+        // 				},
+
+        // 			},
+        // 		},
+        // 	],
+        // 	"onRemoved":
+        // 	[
+        // 		{
+        // 			"$type": "ApplyModifier",
+        // 			"modifierName": "Invoker_Deacon_Fire_NormalAtk02_Effect",
+        // 		},
+        // 	],
+        // },
+        // "Invoker_Deacon_Fire_NormalAtk02_Effect":
+        // {
+        // 	"duration": 0.15,
+        // 	"onAdded":
+        // 	[
+        // 		{
+        // 			"$type": "FireEffect",
+        // 			"effectPattern": "Eff_Monster_Invoker_Deacon_Fire_NormalAtk01_Alert", // Eff_Monster_Regisvine_Fire_WillOWispLauncher_Effect（施法提示特效）
+        // 			"born":
+        // 			{
+        // 				"$type": "ConfigBornBySelf",
+        // 				"offset":
+        // 				{
+        // 					"x":-1.26,
+        // 					"y":3.07,
+        // 					"z": -0.5,
+        // 				},
+        // 			},
+        // 		},
+        // 	],
+        // 	"onRemoved":
+        // 	[
+        // 		{
+        // 			"$type": "ApplyModifier",
+        // 			"modifierName": "Invoker_Deacon_Fire_NormalAtk03_Effect",
+        // 		},
+        // 	]
+        // },
+        // "Invoker_Deacon_Fire_NormalAtk03_Effect":
+        // {
+        // 	"duration": 0.15,
+        // 	"onAdded":
+        // 	[
+        // 		{
+        // 			"$type": "FireEffect",
+        // 			"effectPattern": "Eff_Monster_Invoker_Deacon_Fire_NormalAtk01_Alert", // Eff_Monster_Regisvine_Fire_WillOWispLauncher_Effect（施法提示特效）
+        // 			"born":
+        // 			{
+        // 				"$type": "ConfigBornBySelf",
+        // 				"offset":
+        // 				{
+        // 					"x":-0.13,
+        // 					"y":4.16,
+        // 					"z": -0.5,
+        // 				},
+        // 			},
+        // 		},
+        // 	],
+        // 	"onRemoved":
+        // 	[
+        // 		{
+        // 			"$type": "ApplyModifier",
+        // 			"modifierName": "Invoker_Deacon_Fire_NormalAtk04_Effect",
+        // 		},
+        // 	]
+        // },
+        // "Invoker_Deacon_Fire_NormalAtk04_Effect":
+        // {
+        // 	"duration": 0.15,
+        // 	"onAdded":
+        // 	[
+        // 		{
+        // 			"$type": "FireEffect",
+        // 			"effectPattern": "Eff_Monster_Invoker_Deacon_Fire_NormalAtk01_Alert", // Eff_Monster_Regisvine_Fire_WillOWispLauncher_Effect（施法提示特效）
+        // 			"born":
+        // 			{
+        // 				"$type": "ConfigBornBySelf",
+        // 				"offset":
+        // 				{
+        // 					"x":-1.42,
+        // 					"y":4.34,
+        // 					"z": 1.21,
+        // 				},
+        // 			},
+        // 		},
+        // 	],
+        // 	"onRemoved":
+        // 	[
+        // 		{
+        // 			"$type": "ApplyModifier",
+        // 			"modifierName": "Invoker_Deacon_Fire_NormalAtk05_Effect",
+        // 		},
+        // 	]
+        // },
+        // "Invoker_Deacon_Fire_NormalAtk05_Effect":
+        // {
+        // 	"duration": 0.7,
+        // 	"onAdded":
+        // 	[
+        // 		{
+        // 			"$type": "FireEffect",
+        // 			"effectPattern": "Eff_Monster_Invoker_Deacon_Fire_NormalAtk01_Alert",
+        // 			 // Eff_Monster_Regisvine_Fire_WillOWispLauncher_Effect（施法提示特效）
+        // 			 "born":
+        // 			{
+        // 				"$type": "ConfigBornBySelf",
+        // 				"offset":
+        // 				{
+        // 					"x":-1.98,
+        // 					"y":3.98,
+        // 					"z": -0.5,
+        // 				},
+        // 			},
+        // 		},
+        // 	],
+        // 	"onRemoved":
+        // 	[
+        // 		{
+        // 			"$type": "ApplyModifier",
+        // 			"modifierName": "Invoker_Deacon_Fire_NormalAtk01",
+        // 		},
+        // 	],
+        // },
         "Invoker_Deacon_Fire_NormalAtk01": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.15000000596046448,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.15,
           "onAdded": [
             {
               "$type": "TriggerBullet",
-              "target": "SelfAttackTarget",
               "bulletID": 42203004,
+              "target": "SelfAttackTarget",
+              // "trackTarget": "SelfAttackTarget",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
+                "attachPointTargetType": "Self",
+                "attachPointName": "NormalAtk01",
                 "direction": {
                   "$type": "ConfigDirectionByAttackTarget"
-                },
-                "attachPointName": "NormalAtk01",
-                "attachPointTargetType": "Self"
+                  // "angleOffset":
+                  // {
+                  // 	"x": -30,
+                  // 	"y": 60.0,
+                  // 	"z": 0.0,
+                  // },
+                }
               }
             }
           ],
@@ -846,21 +998,26 @@
           ]
         },
         "Invoker_Deacon_Fire_NormalAtk02": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.15000000596046448,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.15,
           "onAdded": [
             {
               "$type": "TriggerBullet",
-              "target": "SelfAttackTarget",
               "bulletID": 42203004,
+              "target": "SelfAttackTarget",
+              // "trackTarget": "SelfAttackTarget",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
+                "attachPointTargetType": "Self",
+                "attachPointName": "NormalAtk02",
                 "direction": {
                   "$type": "ConfigDirectionByAttackTarget"
-                },
-                "attachPointName": "NormalAtk02",
-                "attachPointTargetType": "Self"
+                  // "angleOffset":
+                  // {
+                  // 	"x": -30,
+                  // 	"y": -60.0,
+                  // 	"z": 0.0,
+                  // },
+                }
               }
             }
           ],
@@ -872,21 +1029,26 @@
           ]
         },
         "Invoker_Deacon_Fire_NormalAtk03": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.15000000596046448,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.15,
           "onAdded": [
             {
               "$type": "TriggerBullet",
-              "target": "SelfAttackTarget",
               "bulletID": 42203004,
+              "target": "SelfAttackTarget",
+              // "trackTarget": "SelfAttackTarget",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
+                "attachPointTargetType": "Self",
+                "attachPointName": "NormalAtk03",
                 "direction": {
                   "$type": "ConfigDirectionByAttackTarget"
-                },
-                "attachPointName": "NormalAtk03",
-                "attachPointTargetType": "Self"
+                  // "angleOffset":
+                  // {
+                  // 	"x": 0.0,
+                  // 	"y": 60,
+                  // 	"z": 0.0,
+                  // },
+                }
               }
             }
           ],
@@ -898,21 +1060,26 @@
           ]
         },
         "Invoker_Deacon_Fire_NormalAtk04": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.15000000596046448,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.15,
           "onAdded": [
             {
               "$type": "TriggerBullet",
-              "target": "SelfAttackTarget",
               "bulletID": 42203004,
+              "target": "SelfAttackTarget",
+              // "trackTarget": "SelfAttackTarget",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
+                "attachPointTargetType": "Self",
+                "attachPointName": "NormalAtk04",
                 "direction": {
                   "$type": "ConfigDirectionByAttackTarget"
-                },
-                "attachPointName": "NormalAtk04",
-                "attachPointTargetType": "Self"
+                  // "angleOffset":
+                  // {
+                  // 	"x": 0.0,
+                  // 	"y": -60,
+                  // 	"z": 0.0,
+                  // },
+                }
               }
             }
           ],
@@ -924,48 +1091,51 @@
           ]
         },
         "Invoker_Deacon_Fire_NormalAtk05": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.15000000596046448,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.15,
           "onAdded": [
             {
               "$type": "TriggerBullet",
-              "target": "SelfAttackTarget",
               "bulletID": 42203004,
+              "target": "SelfAttackTarget",
+              // "trackTarget": "SelfAttackTarget",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
+                "attachPointTargetType": "Self",
+                "attachPointName": "NormalAtk05",
                 "direction": {
                   "$type": "ConfigDirectionByAttackTarget"
-                },
-                "attachPointName": "NormalAtk05",
-                "attachPointTargetType": "Self"
+                  // "angleOffset":
+                  // {
+                  // 	"x": 0.0,
+                  // 	"y": -60,
+                  // 	"z": 0.0,
+                  // },
+                }
               }
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Invoker_Deacon_Fire_NormalAtk01"
-        }
-      ]
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Invoker_Deacon_Fire_NormalAtk_Bullet",
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_Invoker_Deacon_Fire_NormalAtk_Bullet",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Invoker_Deacon_Fire_NormalAtk_Bullet": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Invoker_Deacon_Fire_NormalAtk01_Bullet",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Invoker_Deacon_Fire_NormalAtk01_Bullet"
             }
           ],
           "onRemoved": [
@@ -974,13 +1144,7 @@
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Invoker_Deacon_Fire_NormalAtk_Bullet"
-        }
-      ]
+      }
     }
   },
   {
@@ -990,8 +1154,7 @@
       "onAbilityStart": [
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Invoker_Deacon_Fire_NormalAtk01_Explosion",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_Monster_Invoker_Deacon_Fire_NormalAtk01_Explosion"
         },
         {
           "$type": "RemoveUniqueModifier",
@@ -999,57 +1162,71 @@
         },
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "radius": 0.5,
               "born": {
                 "$type": "ConfigBornByCollisionPoint",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 }
-              },
-              "DCMPFCIBIPA": 0.5
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
               "attackProperty": {
-                "HBIOLEEGHPD": 0.26600000262260437,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Fire",
-                "bonusCriticalHurt": 25.0,
+                "damagePercentage": 0.266, //基于新的
                 "strikeType": "Default",
-                "enBreak": 100.0
+                "elementType": "Fire",
+                "elementDurability": 25,
+                "enBreak": 100
               },
               "hitPattern": {
-                "onHitEffectName": "default",
                 "hitImpulseType": "LV1",
-                "hitHaltTimeScale": 0.05000000074505806
+                // "reboundRatio": 0,
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.05,
+                "muteHitText": false
               },
+              "forceCameraShake": false,
               "cameraShake": {
-                "shakeRange": 0.05999999865889549,
-                "shakeTime": 0.09000000357627869
+                "shakeType": "Center",
+                "shakeRange": 0.06,
+                "shakeTime": 0.09,
+                "shakeDistance": 20
               }
             }
-          },
-          "targetType": "Enemy"
+          }
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  BurnAtk
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Invoker_Deacon_Fire_BurnAtk",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Invoker_Deacon_Fire_BurnAtk_Alert"
+        },
+        {
+          "$type": "SetAISkillCDAvailableNow",
+          "skillIDs": [261]
+        }
+      ],
       "modifiers": {
         "Invoker_Deacon_Fire_BurnAtk_Alert": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "SetGlobalPos",
@@ -1060,8 +1237,13 @@
             {
               "$type": "CreateGadget",
               "lifeByOwnerIsAlive": true,
+              "byServer": true,
+              "gadgetID": 42203006,
+              "campID": 4001,
+              "campTargetType": "Enemy",
               "born": {
                 "$type": "ConfigBornByGlobalValue",
+                "positionKey": "_MONSTER_INVOKER_DEACON_FIRE_BURNATK_POS",
                 "bornRandom": {
                   "$type": "BornRandomFromCenter",
                   "minRandomRange": 0.5,
@@ -1071,67 +1253,56 @@
                 "direction": {
                   "$type": "ConfigDirectionByDefault",
                   "angleOffset": {
-                    "IBKBLDAJIMA": 0.0,
-                    "LKHJADIPBFL": 0.0,
-                    "PJCOKIGCJOK": 0.0
+                    "x": 0.0,
+                    "y": 0.0, //角度偏移
+                    "z": 0.0
                   }
-                },
-                "positionKey": "_MONSTER_INVOKER_DEACON_FIRE_BURNATK_POS",
-                "directionKey": ""
-              },
-              "gadgetID": 42203006,
-              "campID": 4001,
-              "campTargetType": "Enemy",
-              "byServer": true
+                }
+              }
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Invoker_Deacon_Fire_BurnAtk_Alert"
-        },
-        {
-          "$type": "SetAISkillCDAvailableNow",
-          "skillIDs": [261]
-        }
-      ]
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Invoker_Deacon_Fire_BurnAtk_Pos",
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Invoker_Deacon_Fire_BurnAtk_Pos"
+        }
+      ],
       "modifiers": {
         "Invoker_Deacon_Fire_BurnAtk_Pos": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
+            ////预警
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Invoker_Deacon_Fire_BurnAtk01_Alert",
+              "effectPattern": "Eff_Monster_Invoker_Deacon_Fire_BurnAtk01_Alert",
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0,
+                  "y": 0,
+                  "z": 0
                 },
                 "onGround": true
-              },
-              "EBHJMLOKDGB": -1.0
+              }
             },
+            ////触发陨石
             {
               "$type": "TriggerBullet",
               "bulletID": 42203005,
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.10000000149011612,
-                  "LKHJADIPBFL": 6.0,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.1,
+                  "y": 6,
+                  "z": 0.0
                 },
                 "onGround": true,
                 "direction": {
@@ -1141,66 +1312,62 @@
             }
           ],
           "onRemoved": [
+            ////摧毁岩造物
             {
               "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
+                  // "checkHitLayerType" : "OnlyHitScene",
+                  "radius": 3.0,
                   "born": {
                     "$type": "ConfigBornBySelf",
+                    // "alongGround": true,
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 0.0
+                      "x": 0, // + means up, - means down
+                      "y": 0, // + means left, - means right
+                      "z": 0 // + means forward, - means backward
                     }
-                  },
-                  "DCMPFCIBIPA": 3.0
+                    // "onGround": true,
+                  }
                 },
                 "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "HBIOLEEGHPD": 0.0,
-                    "CCNJGLPMIEP": 0.0,
-                    "bonusCriticalHurt": 100.0,
+                    "damagePercentage": 0,
                     "strikeType": "Blunt",
-                    "enBreak": 10000.0
+                    "enBreak": 10000
                   },
                   "hitPattern": {
                     "onHitEffectName": "",
                     "hitImpulseType": "LV0"
                   }
                 }
-              },
-              "targetType": "Enemy"
+              }
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Invoker_Deacon_Fire_BurnAtk_Pos"
-        }
-      ]
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Invoker_Deacon_Fire_BurnAtk_Bullet",
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_Invoker_Deacon_Fire_BurnAtk_Bullet"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Invoker_Deacon_Fire_BurnAtk_Bullet": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Invoker_Deacon_Fire_BurnAtk01_Bullet",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Invoker_Deacon_Fire_BurnAtk01_Bullet"
             }
           ],
           "onRemoved": [
@@ -1209,13 +1376,7 @@
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Invoker_Deacon_Fire_BurnAtk_Bullet"
-        }
-      ]
+      }
     }
   },
   {
@@ -1225,56 +1386,57 @@
       "onAbilityStart": [
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Invoker_Deacon_Fire_BurnAtk01_Explosion",
+          "effectPattern": "Eff_Monster_Invoker_Deacon_Fire_BurnAtk01_Explosion",
           "born": {
             "$type": "ConfigBornByCollisionPoint",
             "onGround": true,
             "alongGround": true
-          },
-          "EBHJMLOKDGB": -1.0
+          }
         },
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "radius": 3.0,
               "born": {
                 "$type": "ConfigBornBySelf",
+                "alongGround": true,
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0, // + means up, - means down
+                  "y": 0, // + means left, - means right
+                  "z": 0 // + means forward, - means backward
                 },
-                "onGround": true,
-                "alongGround": true
-              },
-              "DCMPFCIBIPA": 3.0
+                "onGround": true
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
               "attackProperty": {
-                "HBIOLEEGHPD": 0.6660000085830688,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Fire",
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 0.666,
                 "strikeType": "Default",
-                "enBreak": 200.0
+                "elementType": "Fire",
+                "elementDurability": 50,
+                "enBreak": 200
               },
               "hitPattern": {
-                "onHitEffectName": "default",
                 "hitImpulseType": "LV5",
-                "hitHaltTimeScale": 0.05000000074505806
+                // "reboundRatio": 0,
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.05,
+                "muteHitText": false
               },
               "forceCameraShake": true,
               "cameraShake": {
-                "shakeType": "CustomVector",
                 "shakeRange": 0.5,
-                "shakeTime": 1.0,
+                "shakeTime": 1,
+                "shakeDistance": 20,
+                "shakeType": "CustomVector",
                 "shakeDir": {
-                  "y": 2.0
+                  "x": 0,
+                  "y": 2,
+                  "z": 0
                 },
                 "extension": {
                   "baseOnCamera": true,
@@ -1282,19 +1444,19 @@
                 }
               }
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "SetGlobalPos",
           "target": "OriginOwner",
           "key": "_MONSTER_INVOKER_DEACON_FIRE_BURNATK_POS",
+          // "setTarget": true,
           "born": {
             "$type": "ConfigBornBySelf",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             },
             "onGround": true,
             "alongGround": true
@@ -1302,8 +1464,8 @@
         },
         {
           "$type": "TriggerAbility",
-          "target": "OriginOwner",
-          "abilityName": "Invoker_Deacon_Fire_BurnAtk_SummonFireCore"
+          "abilityName": "Invoker_Deacon_Fire_BurnAtk_SummonFireCore",
+          "target": "OriginOwner"
         },
         {
           "$type": "RemoveUniqueModifier",
@@ -1319,63 +1481,70 @@
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "ratio": 0.0,
           "key": "_Monster_Invoker_Deacon_Fire_FireCoreCount_",
-          "maxValue": 0.0,
-          "minValue": 0.0
+          "value": 0
         }
       ],
       "onAbilityStart": [
         {
           "$type": "CreateGadget",
+          "gadgetID": 42203007,
+          "byServer": true,
+          "lifeByOwnerIsAlive": true,
+          "campID": 4001,
+          "sightGroupWithOwner": true,
+          "campTargetType": "Enemy",
+          "ownerIsTarget": true,
+          "born": {
+            "$type": "ConfigBornByGlobalValue",
+            "positionKey": "_MONSTER_INVOKER_DEACON_FIRE_BURNATK_POS",
+            "offset": {
+              "x": 0.0,
+              "y": 0.8,
+              "z": 0.0
+            }
+            // "onGround": true,
+          },
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_Monster_Invoker_Deacon_Fire_FireCoreCount_",
-              "ratio": 0.0,
+              "value": 0,
               "compareType": "LessAndEqual"
             }
-          ],
-          "ownerIsTarget": true,
-          "lifeByOwnerIsAlive": true,
-          "born": {
-            "$type": "ConfigBornByGlobalValue",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.800000011920929,
-              "PJCOKIGCJOK": 0.0
-            },
-            "positionKey": "_MONSTER_INVOKER_DEACON_FIRE_BURNATK_POS",
-            "directionKey": ""
-          },
-          "sightGroupWithOwner": true,
-          "gadgetID": 42203007,
-          "campID": 4001,
-          "campTargetType": "Enemy",
-          "byServer": true
+          ]
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  MeleeAtk
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Invoker_Deacon_Fire_MeleeAtk",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "target": "Self",
+          "modifierName": "Invoker_Deacon_Fire_MeleeAtk"
+        }
+      ],
       "modifiers": {
         "Invoker_Deacon_Fire_MeleeAtkHandler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "RemoveModifier",
-              "modifierName": "Invoker_Deacon_Fire_MeleeAtk"
+              "modifierName": "Invoker_Deacon_Fire_MeleeAtk",
+              "target": "Self"
             }
           ]
         },
         "Invoker_Deacon_Fire_MeleeAtk": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 3.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 3.0,
           "onAdded": [
             {
               "$type": "TriggerAbility",
@@ -1383,86 +1552,87 @@
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Invoker_Deacon_Fire_MeleeAtk"
-        }
-      ]
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Invoker_Deacon_Fire_MeleeAtk_Explosion",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Invoker_Deacon_Fire_MeleeAtk_Explosion",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "Invoker_Deacon_Fire_MeleeAtk_Explosion": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.2,
           "onAdded": [
             {
               "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
-                  "massiveAttackRatio": 0.25,
+                  "radius": 8.0,
+                  "height": 4.0,
+                  "fanAngle": 360,
                   "born": {
                     "$type": "ConfigBornBySelf",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     }
                   },
-                  "height": 4.0,
-                  "DCMPFCIBIPA": 8.0
+                  "massiveAttackRatio": 0.25
                 },
                 "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "HBIOLEEGHPD": 1.0,
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Fire",
-                    "bonusCriticalHurt": 50.0,
+                    "damagePercentage": 1,
                     "strikeType": "Default",
-                    "enBreak": 200.0
+                    "elementType": "Fire",
+                    "elementDurability": 50,
+                    "enBreak": 200
                   },
                   "hitPattern": {
                     "onHitEffectName": "default",
-                    "hitImpulseType": "LV5"
+                    "hitImpulseType": "LV5",
+                    "hitHaltTime": 0,
+                    "hitHaltTimeScale": 0
                   },
                   "forceCameraShake": true,
                   "cameraShake": {
                     "shakeRange": 0.5,
-                    "shakeTime": 0.30000001192092896,
-                    "shakeDistance": 35.0,
+                    "shakeTime": 0.3,
+                    "shakeDistance": 35,
+                    "shakeType": "Center",
                     "shakeDir": {
-                      "y": 2.0
+                      "x": 0,
+                      "y": 2,
+                      "z": 0
                     },
                     "extension": {
-                      "baseOnCamera": true
+                      "baseOnCamera": true,
+                      "rangeAttenuation": 0.5
                     }
                   }
                 }
-              },
-              "targetType": "Enemy"
+              }
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Invoker_Deacon_Fire_MeleeAtk_Explosion"
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //   FireCore Abilities
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1471,34 +1641,125 @@
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_FireCoreLoopTime_",
-          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [-0.5, 0.5, 1.5],
           "modifierNameSteps": [
             "Invoker_Deacon_Fire_FireCoreStateOff",
             "Invoker_Deacon_Fire_FireCoreStateOn"
-          ]
+          ],
+          "defaultGlobalValueOnCreate": 0,
+          "removeAppliedModifier": true
+        } // 判断是否处于处于激活状态
+      ],
+      "onAdded": [
+        {
+          "$type": "EnablePushColliderName",
+          "pushColliderNames": ["PushCollider"],
+          "setEnable": true
+        },
+        {
+          "$type": "EnableHitBoxByName",
+          "hitBoxNames": ["HitBox"],
+          "setEnable": true
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_Invoker_Deacon_Fire_FireCoreLoop",
+          "target": "Self"
+        },
+        {
+          "$type": "ApplyModifier",
+          "target": "Self",
+          "modifierName": "Invoker_Deacon_Fire_FireCoreBornOn"
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_Invoker_Deacon_Fire_FireCoreShieldBar",
+          "target": "Self"
+        },
+        {
+          "$type": "AddGlobalValue",
+          "key": "_Monster_Invoker_Deacon_Fire_FireCoreCount_",
+          "value": 1,
+          "target": "Owner",
+          "useLimitRange": true,
+          "maxValue": 1,
+          "minValue": 0
+        }, //核心数量不能超过1
+        {
+          "$type": "HideUIBillBoard",
+          "hide": false
+        },
+        {
+          "$type": "SetAnimatorBool",
+          "boolID": "Spell",
+          "value": false
+        }
+      ],
+      "onKill": [
+        // {
+        // 	"$type": "RemoveUniqueModifier",
+        // 	"modifierName": "UNIQUE_Invoker_Deacon_Fire_FireCoreStateOff",
+        // 	"target": "Self",
+        // },
+        // {
+        // 	"$type": "RemoveUniqueModifier",
+        // 	"modifierName": "UNIQUE_Invoker_Deacon_Fire_FireCoreStateOn",
+        // 	"target": "Self",
+        // },
+        {
+          "$type": "HideUIBillBoard",
+          "hide": true
+        },
+        {
+          "$type": "EnablePushColliderName",
+          "pushColliderNames": ["PushCollider"],
+          "setEnable": false
+        },
+        {
+          "$type": "EnableHitBoxByName",
+          "hitBoxNames": ["HitBox"],
+          "setEnable": false
+        },
+        {
+          "$type": "AddGlobalValue",
+          "key": "_Monster_Invoker_Deacon_Fire_FireCoreCount_",
+          "value": -1,
+          "target": "Owner",
+          "useLimitRange": true,
+          "maxValue": 1,
+          "minValue": 0
+        }, //计数
+        {
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Monster_Invoker_Deacon_Fire_FireCoreAS", //Eff_Monster_Invoker_Deacon_Fire_FireCoreAS
+          "born": {
+            "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "RootNode",
+            "offset": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            }
+          }
         }
       ],
       "modifiers": {
         "UNIQUE_Invoker_Deacon_Fire_FireCoreLoop": {
           "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Invoker_Deacon_Fire_FireCoreLoop",
+              "effectPattern": "Eff_Monster_Invoker_Deacon_Fire_FireCoreLoop", //Eff_Monster_Invoker_Deacon_Fire_FireCoreLoop
               "born": {
                 "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "RootNode",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
-                },
-                "attachPointName": "RootNode"
-              },
-              "EBHJMLOKDGB": -1.0
+                  "x": 0,
+                  "y": 0,
+                  "z": 0
+                }
+              }
             }
           ],
           "onRemoved": [
@@ -1506,21 +1767,18 @@
               "$type": "KillSelf"
             }
           ]
-        },
+        }, //播放特效
         "UNIQUE_Invoker_Deacon_Fire_FireCoreShieldBar": {
           "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
           "elementType": "Fire",
-          "bonusCriticalHurt": 150.0,
+          "elementDurability": 150,
           "modifierMixins": [
             {
               "$type": "ElementShieldMixin",
               "elementType": "Fire",
-              "showDamageText": "",
-              "DJBPNOPNHFH": 360.0,
-              "shieldHP": 1.0,
-              "damageRatio": 0.0
+              "shieldHPRatio": 1.0,
+              "damageRatio": 0
             },
             {
               "$type": "ShieldBarMixin",
@@ -1528,79 +1786,49 @@
                 {
                   "$type": "ActCameraShake",
                   "cameraShake": {
-                    "shakeRange": 0.20000000298023224,
-                    "shakeTime": 0.11999999731779099,
-                    "shakeDistance": 30.0,
+                    "shakeType": "Center",
+                    "shakeRange": 0.2,
+                    "shakeTime": 0.12,
+                    "shakeDistance": 30,
                     "extension": {
                       "baseOnCamera": true
                     }
                   }
                 }
-              ],
-              "showDamageText": ""
+              ]
             },
             {
               "$type": "RejectAttackMixin",
               "attackTag": "BurningDamage"
-            }
+            } //屏蔽燃烧
           ],
           "onAdded": [
             {
               "$type": "SetSelfAttackTarget",
+              "turnToTargetImmediately": false,
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "topLimit": 1,
-                "sortType": "Nearest",
                 "shapeName": "CircleR50",
+                "centerBasedOn": "Self",
                 "campTargetType": "AllExceptSelf",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self",
+                "sortType": "Nearest"
               },
               "predicates": [
+                // {
+                // 	"$type": "ByTargetType",
+                // 	"target": "OriginOwner",
+                // 	"isTarget": true,
+                // 	"targetType": "OriginOwner",
+                // },
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_MONSTER_INVOKER_DEACON_FIRE_ELEMENTSTATE",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "MoreThan"
                 }
               ]
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "AddGlobalValue",
-              "target": "Owner",
-              "ratio": -1.0,
-              "key": "_Monster_Invoker_Deacon_Fire_FireCoreCount_",
-              "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
-            },
-            {
-              "$type": "EnableHitBoxByName",
-              "hitBoxNames": ["HitBox"]
-            },
-            {
-              "$type": "TriggerBullet",
-              "target": "Owner",
-              "bulletID": 42203009,
-              "born": {
-                "$type": "ConfigBornByAttachPoint",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 1.0,
-                  "PJCOKIGCJOK": 0.0
-                },
-                "attachPointName": "FirePoint",
-                "attachPointTargetType": "Self"
-              },
-              "trackTarget": "Owner"
-            },
-            {
-              "$type": "RemoveModifier",
-              "modifierName": "UNIQUE_Invoker_Deacon_Fire_FireCoreLoop"
-            },
-            {
-              "$type": "KillSelf"
             }
           ],
           "onBeingHit": [
@@ -1617,17 +1845,18 @@
                   "predicates": [
                     {
                       "$type": "ByHitElement",
+                      "element": "None",
                       "target": "Self"
                     },
                     {
                       "$type": "ByHitElement",
-                      "target": "Self",
-                      "element": "Fire"
+                      "element": "Fire",
+                      "target": "Self"
                     },
                     {
                       "$type": "ByHitElement",
-                      "target": "Self",
-                      "element": "Grass"
+                      "element": "Grass",
+                      "target": "Self"
                     }
                   ]
                 }
@@ -1635,20 +1864,20 @@
               "successActions": [
                 {
                   "$type": "FireEffect",
-                  "healLimitedByCasterMaxHPRatio": "Eff_Monster_Regisvine_Fire_BlazeSeed_Hit_Ineffective",
+                  "effectPattern": "Eff_Monster_Regisvine_Fire_BlazeSeed_Hit_Ineffective",
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
+                    "attachPointName": "RootNode",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 0.0
-                    },
-                    "attachPointName": "RootNode"
-                  },
-                  "EBHJMLOKDGB": -1.0
+                      "x": 0,
+                      "y": 0,
+                      "z": 0
+                    }
+                  }
                 }
               ]
             },
+            //根据收到的元素展现不同的受击特效
             {
               "$type": "Predicated",
               "target": "Target",
@@ -1662,28 +1891,28 @@
                   "predicates": [
                     {
                       "$type": "ByHitElement",
-                      "target": "Self",
-                      "element": "Wind"
+                      "element": "Wind",
+                      "target": "Self"
                     },
                     {
                       "$type": "ByHitElement",
-                      "target": "Self",
-                      "element": "Water"
+                      "element": "Water",
+                      "target": "Self"
                     },
                     {
                       "$type": "ByHitElement",
-                      "target": "Self",
-                      "element": "Ice"
+                      "element": "Ice",
+                      "target": "Self"
                     },
                     {
                       "$type": "ByHitElement",
-                      "target": "Self",
-                      "element": "Electric"
+                      "element": "Electric",
+                      "target": "Self"
                     },
                     {
                       "$type": "ByHitElement",
-                      "target": "Self",
-                      "element": "Rock"
+                      "element": "Rock",
+                      "target": "Self"
                     }
                   ]
                 }
@@ -1691,146 +1920,197 @@
               "successActions": [
                 {
                   "$type": "FireEffect",
-                  "healLimitedByCasterMaxHPRatio": "Eff_Monster_Invoker_Deacon_Fire_NormalAtk01_Explosion",
+                  "effectPattern": "Eff_Monster_Invoker_Deacon_Fire_NormalAtk01_Explosion", //Eff_Monster_Invoker_Deacon_Fire_FireCoreAS
                   "born": {
                     "$type": "ConfigBornByAttachPoint",
+                    "attachPointName": "RootNode",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 0.0
-                    },
-                    "attachPointName": "RootNode"
-                  },
-                  "EBHJMLOKDGB": -1.0
+                      "x": 0,
+                      "y": 0,
+                      "z": 0
+                    }
+                  }
                 }
+              ],
+              "failActions": [
+                // {
+                // 	"$type": "FireEffect",
+                // 	"effectPattern": "Eff_Monster_Regisvine_Fire_BlazeSeed_Hit_Ineffective",
+                // 	"born":
+                // 	{
+                // 		"$type": "ConfigBornByHitPoint",
+                // 		"direction":
+                // 		{
+                // 			"$type": "ConfigDirectionByBackToHitBoxCenter",
+                // 		},
+                // 	},
+                // },
               ]
             }
-          ]
-        },
-        "Invoker_Deacon_Fire_FireCoreBornOn": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.2000000476837158,
-          "bonusCriticalHurt": 100.0
-        },
-        "Invoker_Deacon_Fire_FireCoreStateOn": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
+          ],
+          "onRemoved": [
             {
-              "$type": "SendEffectTrigger",
-              "parameter": "Spell",
-              "attachPoint": "",
-              "type": "Bool",
-              "value": 1,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Invoker_Deacon_Fire_FireCoreLoop"
-            }
-          ]
-        },
-        "Invoker_Deacon_Fire_FireCoreStateOff": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "SendEffectTrigger",
-              "parameter": "Spell",
-              "attachPoint": "",
-              "type": "Bool",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Invoker_Deacon_Fire_FireCoreLoop"
-            }
-          ]
-        },
-        "Empty_State": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        }
-      },
-      "onAdded": [
-        {
-          "$type": "EnablePushColliderName",
-          "pushColliderNames": ["PushCollider"],
-          "setEnable": true
-        },
-        {
-          "$type": "EnableHitBoxByName",
-          "hitBoxNames": ["HitBox"],
-          "setEnable": true
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "UNIQUE_Invoker_Deacon_Fire_FireCoreLoop"
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Invoker_Deacon_Fire_FireCoreBornOn"
-        },
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Invoker_Deacon_Fire_FireCoreShieldBar"
-        },
-        {
-          "$type": "AddGlobalValue",
-          "target": "Owner",
-          "ratio": 1.0,
-          "key": "_Monster_Invoker_Deacon_Fire_FireCoreCount_",
-          "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "HideUIBillBoard"
-        },
-        {
-          "$type": "SetAnimatorBool",
-          "boolID": "Spell"
-        }
-      ],
-      "onKill": [
-        {
-          "$type": "HideUIBillBoard",
-          "hide": true
-        },
-        {
-          "$type": "EnablePushColliderName",
-          "pushColliderNames": ["PushCollider"]
-        },
-        {
-          "$type": "EnableHitBoxByName",
-          "hitBoxNames": ["HitBox"]
-        },
-        {
-          "$type": "AddGlobalValue",
-          "target": "Owner",
-          "ratio": -1.0,
-          "key": "_Monster_Invoker_Deacon_Fire_FireCoreCount_",
-          "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Invoker_Deacon_Fire_FireCoreAS",
-          "born": {
-            "$type": "ConfigBornByAttachPoint",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
+              "$type": "AddGlobalValue",
+              "key": "_Monster_Invoker_Deacon_Fire_FireCoreCount_",
+              "value": -1,
+              "target": "Owner",
+              "useLimitRange": true,
+              "maxValue": 1,
+              "minValue": 0
             },
-            "attachPointName": "RootNode"
-          },
-          "EBHJMLOKDGB": -1.0
-        }
-      ]
+            {
+              "$type": "EnableHitBoxByName",
+              "hitBoxNames": ["HitBox"],
+              "setEnable": false
+            },
+            {
+              "$type": "TriggerBullet",
+              "trackTarget": "Owner",
+              "target": "Owner",
+              // "target": "SelfAttackTarget",
+              "bulletID": 42203009,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "FirePoint",
+                "attachPointTargetType": "Self",
+                "offset": {
+                  "x": 0.0,
+                  "y": 1.0,
+                  "z": 0.0
+                }
+              }
+            },
+            // {
+            // 	"$type": "TriggerAbility",
+            // 	"abilityName": "Invoker_Deacon_Fire_HitOwner",
+            // 	"target": "Owner",
+            // },
+            {
+              "$type": "RemoveModifier",
+              "modifierName": "UNIQUE_Invoker_Deacon_Fire_FireCoreLoop"
+            },
+            {
+              "$type": "KillSelf"
+            }
+          ]
+        }, //加载盾条
+        "Invoker_Deacon_Fire_FireCoreBornOn": {
+          "duration": 1.2,
+          "onAdded": [],
+          "onRemoved": [
+            // {
+            // 	"$type": "SetGlobalValue",
+            // 	"key": "_FireCoreLoopTime_",
+            // 	"value": 1,
+            // 	"maxValue": 1,
+            // 	"minValue": 0,
+            // },
+          ]
+        }, //动画首次切换
+        "Invoker_Deacon_Fire_FireCoreStateOn": {
+          "onAdded": [
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Invoker_Deacon_Fire_FireCoreLoop",
+              "type": "Bool",
+              "parameter": "Spell",
+              "value": 1
+            }
+          ]
+        }, //进入施法
+        "Invoker_Deacon_Fire_FireCoreStateOff": {
+          "onAdded": [
+            {
+              "$type": "SendEffectTrigger",
+              "effectPattern": "Eff_Monster_Invoker_Deacon_Fire_FireCoreLoop",
+              "type": "Bool",
+              "parameter": "Spell",
+              "value": 0
+            }
+          ]
+        }, //未进入施法
+        "Empty_State": {}
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Invoker_Deacon_Fire_FiceCoreOwnerAtk_Hit",
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Invoker_Deacon_Fire_FireCore_HitOwner_Bullet" //子弹功能
+        },
+        {
+          "$type": "AttachEffect",
+          "effectPattern": "Eff_Monster_Invoker_Deacon_Fire_FireCore_Bullet" //子弹特效
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "Predicated",
+          "target": "Target",
+          "targetPredicates": [
+            {
+              "$type": "ByTargetType",
+              "targetType": "OriginOwner",
+              "isTarget": true
+            }
+          ],
+          "successActions": [
+            {
+              "$type": "TriggerAttackEvent",
+              "targetType": "All",
+              "attackEvent": {
+                "attackPattern": {
+                  "$type": "ConfigAttackSphere",
+                  "triggerType": "TriggerNoRepeat",
+                  "radius": 3.0,
+                  "born": {
+                    "$type": "ConfigBornByCollisionPoint"
+                  }
+                },
+                "attackInfo": {
+                  //Need no attenuation
+                  "attackProperty": {
+                    "damagePercentage": 0.0,
+                    "strikeType": "Blunt",
+                    "enBreak": 0.0,
+                    "elementDurability": 0,
+                    "elementType": "None"
+                  },
+                  "hitPattern": {
+                    "onHitEffectName": "none",
+                    "hitImpulseType": "LV0",
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.01,
+                    "muteHitText": false
+                  },
+                  "forceCameraShake": false
+                }
+              }
+            },
+            {
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Monster_Invoker_Deacon_Fire_FireCore_Hit",
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                }
+              }
+            },
+            {
+              "$type": "KillSelf"
+            }
+          ]
+        }
+      ],
       "modifiers": {
         "Invoker_Deacon_Fire_FireCore_HitOwner_Bullet": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onHittingOther": [
             {
               "$type": "Predicated",
@@ -1838,49 +2118,51 @@
               "targetPredicates": [
                 {
                   "$type": "ByTargetType",
-                  "targetType": "OriginOwner"
+                  "targetType": "OriginOwner",
+                  "isTarget": true
                 }
               ],
               "successActions": [
                 {
                   "$type": "TriggerAttackEvent",
+                  "targetType": "None",
                   "attackEvent": {
                     "attackPattern": {
                       "$type": "ConfigAttackSphere",
                       "triggerType": "TriggerNoRepeat",
+                      "radius": 1.0,
                       "born": {
                         "$type": "ConfigBornByCollisionPoint",
+                        "alongGround": true,
                         "offset": {
-                          "IBKBLDAJIMA": 0.0,
-                          "LKHJADIPBFL": 0.0,
-                          "PJCOKIGCJOK": 0.0
-                        },
-                        "alongGround": true
-                      },
-                      "DCMPFCIBIPA": 1.0
+                          "x": 0, // + means up, - means down
+                          "y": 0, // + means left, - means right
+                          "z": 0 // + means forward, - means backward
+                        }
+                      }
                     },
                     "attackInfo": {
-                      "attackTag": "",
-                      "attenuationTag": "",
-                      "attenuationGroup": "default",
                       "attackProperty": {
-                        "HBIOLEEGHPD": 0.0,
-                        "CCNJGLPMIEP": 0.0,
-                        "bonusCriticalHurt": 0.0
+                        "damagePercentage": 0,
+                        "elementDurability": 0
                       },
                       "hitPattern": {
                         "onHitEffectName": "none",
                         "hitImpulseType": "LV0",
-                        "hitHaltTimeScale": 0.05000000074505806
+                        "hitHaltTime": 0.0,
+                        "hitHaltTimeScale": 0.05,
+                        "muteHitText": false
                       },
                       "forceCameraShake": true,
                       "cameraShake": {
-                        "shakeType": "CustomVector",
                         "shakeRange": 0.5,
                         "shakeTime": 1.0,
-                        "shakeDistance": 35.0,
+                        "shakeDistance": 35,
+                        "shakeType": "CustomVector",
                         "shakeDir": {
-                          "y": 2.0
+                          "x": 0,
+                          "y": 2,
+                          "z": 0
                         },
                         "extension": {
                           "baseOnCamera": true,
@@ -1892,174 +2174,212 @@
                 },
                 {
                   "$type": "AddElementDurability",
-                  "target": "Target",
-                  "ratio": -300.0,
                   "modifierName": "UNIQUE_Invoker_Deacon_Fire_ElementShield",
-                  "elementType": "Fire",
                   "useLimitRange": true,
-                  "maxValue": 7200.0,
-                  "minValue": 0.0
+                  "elementType": "Fire",
+                  "value": -300,
+                  "maxValue": 7200,
+                  "minValue": 0,
+                  "target": "Target"
                 },
                 {
                   "$type": "SetAnimatorTrigger",
-                  "target": "Target",
                   "triggerID": "FireCoreExplodeHit",
-                  "MPTriggerOnRemote": true
+                  "MPTriggerOnRemote": true,
+                  "target": "Target"
                 }
               ]
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Invoker_Deacon_Fire_FireCore_HitOwner_Bullet"
-        },
-        {
-          "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Invoker_Deacon_Fire_FireCore_Bullet",
-          "EBHJMLOKDGB": -1.0
-        }
-      ],
-      "onAbilityStart": [
-        {
-          "$type": "Predicated",
-          "target": "Target",
-          "targetPredicates": [
-            {
-              "$type": "ByTargetType",
-              "targetType": "OriginOwner"
-            }
-          ],
-          "successActions": [
-            {
-              "$type": "TriggerAttackEvent",
-              "attackEvent": {
-                "attackPattern": {
-                  "$type": "ConfigAttackSphere",
-                  "triggerType": "TriggerNoRepeat",
-                  "born": {
-                    "$type": "ConfigBornByCollisionPoint"
-                  },
-                  "DCMPFCIBIPA": 3.0
-                },
-                "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
-                  "attackProperty": {
-                    "HBIOLEEGHPD": 0.0,
-                    "CCNJGLPMIEP": 0.0,
-                    "bonusCriticalHurt": 0.0,
-                    "strikeType": "Blunt",
-                    "enBreak": 0.0
-                  },
-                  "hitPattern": {
-                    "onHitEffectName": "none",
-                    "hitImpulseType": "LV0",
-                    "hitHaltTimeScale": 0.009999999776482582
-                  }
-                }
-              },
-              "targetType": "All"
-            },
-            {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Invoker_Deacon_Fire_FireCore_Hit",
-              "born": {
-                "$type": "ConfigBornBySelf",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
-                }
-              },
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "KillSelf"
-            }
-          ]
-        }
-      ]
+      }
     }
   },
+  // {
+  // 	"Default":
+  // 	{
+  // 		"$type": "ConfigAbility",
+  // 		"abilityName": "Invoker_Deacon_Fire_HitOwner",
+  // 		"onAbilityStart":
+  // 		[
+  // 			{
+  // 				"$type": "ApplyModifier",
+  // 				"modifierName": "Invoker_Deacon_Fire_FireCore_Borken",//子弹功能
+  // 			},
+  // 		],
+  // 		"modifiers":
+  // 		{
+  // 			"Invoker_Deacon_Fire_FireCore_Borken":
+  // 			{
+  // 					"duration": 0.2,
+  // 					"onAdded":
+  // 					[
+  // 						{
+  // 							"$type": "AddElementDurability",
+  // 							"modifierName": "UNIQUE_Invoker_Deacon_Fire_ElementShield",
+  // 							"useLimitRange": true,
+  // 							"elementType":"Fire",
+  // 							"value": -300,
+  // 							"maxValue": 1800,
+  // 							"minValue":0,
+  // 							"target": "Self",
+  // 						},
+  // 						{
+  // 							"$type": "DamageByAttackValue",
+  // 							"attacker": "Self",
+  // 							"target": "Self",
+  // 							"attackInfo":
+  // 							{
+  // 								"hitPattern":
+  // 								{
+  // 									"hitImpulseType":"LV3",
+  // 									"reboundRatio" : 0,
+  // 									"hitHaltTime" : 0.0,
+  // 									"hitHaltTimeScale" : 0.05,
+  // 									"muteHitText" : false,
+  // 								},
+  // 								"forceCameraShake": true,
+  // 								"cameraShake":
+  // 								{
+  // 									"shakeRange":0.5,
+  // 									"shakeTime":1.0,
+  // 									"shakeDistance":35,
+  // 									"shakeType":"CustomVector",
+  // 									"shakeDir":
+  // 									{
+  // 										"x":0,
+  // 										"y":2,
+  // 										"z":0
+  // 									},
+  // 									"extension":
+  // 									{
+  // 										"baseOnCamera": true,
+  // 										"rangeAttenuation": 0.0,
+  // 									},
+  // 								},
+  // 							},
+  // 						},
+  // 						// {
+  // 						// 	"$type": "AttachEffect",
+  // 						// 	"effectPattern": "Eff_Avatar_Lady_Claymore_Beidou_ThunderShield_Lightning",
+  // 						// 	"born":
+  // 						// 	{
+  // 						// 		"$type":"ConfigBornByAttachPoint",
+  // 						// 		"attachPointName": "RootNode",
+  // 						// 		"attachPointTargetType":"Applier",
+  // 						// 		"offset":
+  // 						// 		{
+  // 						// 			"x":0,
+  // 						// 			"y":1.5,
+  // 						// 			"z":0,
+  // 						// 		},
+  // 						// 	},
+  // 						// },
+  // 						{
+  // 							"$type": "SetAnimatorTrigger",
+  // 							"triggerID": "FireCoreExplodeHit",
+  // 							"MPTriggerOnRemote": true,
+  // 							// "target": "Owner",
+  // 						},
+  // 						{
+  // 							"$type": "AttachEffect",
+  // 							"effectPattern": "Eff_Monster_Invoker_Deacon_Fire_FireCore_Hit", //Eff_Monster_Invoker_Deacon_Fire_FireCore_Lightning
+  // 							"born":
+  // 							{
+  // 								"$type":"ConfigBornBySelf",
+  // 								"offset":
+  // 								{
+  // 									"x":0,
+  // 									"y":1.5,
+  // 									"z":0,
+  // 								},
+  // 							},
+  // 						},
+
+  // 				],
+  // 			},
+  // 		},
+  // 	},
+  // },
+  ///////////////////////////////////////////////////////////////////
+  //
+  //   Big Fire Ball
+  //
+  ///////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Invoker_Deacon_Fire_RangeAtk",
-      "modifiers": {
-        "Invoker_Deacon_Fire_RangeAtk": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.100000023841858,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Invoker_Deacon_Fire_RangeAtk01_Alert",
-              "born": {
-                "$type": "ConfigBornByAttachPoint",
-                "attachPointName": "RangeAtk01"
-              },
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "TriggerBullet",
-              "target": "SelfAttackTarget",
-              "bulletID": 42203008,
-              "born": {
-                "$type": "ConfigBornByAttachPoint",
-                "direction": {
-                  "$type": "ConfigDirectionByAttackTarget"
-                },
-                "attachPointName": "BurnAtk01",
-                "attachPointTargetType": "Self"
-              }
-            }
-          ]
-        },
-        "Invoker_Deacon_Fire_RangeAtk_Alert": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "TriggerBullet",
-              "bulletID": 42203008,
-              "born": {
-                "$type": "ConfigBornByAttachPoint",
-                "direction": {
-                  "$type": "ConfigDirectionByAttackTarget"
-                },
-                "attachPointName": "BurnAtk01"
-              }
-            }
-          ]
-        }
-      },
       "onAbilityStart": [
         {
           "$type": "ApplyModifier",
           "modifierName": "Invoker_Deacon_Fire_RangeAtk"
         }
-      ]
+      ],
+      "modifiers": {
+        "Invoker_Deacon_Fire_RangeAtk": {
+          "duration": 1.1,
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Monster_Invoker_Deacon_Fire_RangeAtk01_Alert",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "RangeAtk01"
+              }
+            },
+            {
+              "$type": "TriggerBullet",
+              "bulletID": 42203008,
+              "target": "SelfAttackTarget",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "BurnAtk01",
+                "attachPointTargetType": "Self",
+                "direction": {
+                  "$type": "ConfigDirectionByAttackTarget"
+                }
+              }
+            }
+          ]
+        },
+        "Invoker_Deacon_Fire_RangeAtk_Alert": {
+          "duration": 0.2,
+          "onAdded": [
+            {
+              "$type": "TriggerBullet",
+              "bulletID": 42203008,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "BurnAtk01",
+                "direction": {
+                  "$type": "ConfigDirectionByAttackTarget"
+                }
+              }
+            }
+          ]
+        }
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Invoker_Deacon_Fire_RangeAtk_Bullet",
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_Invoker_Deacon_Fire_RangeAtk_Bullet",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Invoker_Deacon_Fire_RangeAtk_Bullet": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Invoker_Deacon_Fire_RangeAtk01_Bullet",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Invoker_Deacon_Fire_RangeAtk01_Bullet"
             }
           ],
           "onRemoved": [
@@ -2068,13 +2388,7 @@
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Invoker_Deacon_Fire_RangeAtk_Bullet"
-        }
-      ]
+      }
     }
   },
   {
@@ -2084,7 +2398,6 @@
       "onAbilityStart": [
         {
           "$type": "FireHitEffect",
-          "hitEntity": "",
           "hitScene": {
             "defaultEffect": "Eff_Monster_Invoker_Deacon_Fire_RangeAtk01_HitScene"
           }
@@ -2101,55 +2414,54 @@
           "successActions": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Invoker_Deacon_Fire_RangeAtk01_Explosion",
+              "effectPattern": "Eff_Monster_Invoker_Deacon_Fire_RangeAtk01_Explosion",
               "born": {
                 "$type": "ConfigBornByCollisionPoint"
-              },
-              "EBHJMLOKDGB": -1.0
+              }
             }
           ]
         },
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "radius": 3,
               "born": {
                 "$type": "ConfigBornByCollisionPoint",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0,
+                  "y": 0,
+                  "z": 0
                 }
-              },
-              "DCMPFCIBIPA": 3.0
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
               "attackProperty": {
-                "HBIOLEEGHPD": 0.6660000085830688,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Fire",
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 0.666,
                 "strikeType": "Default",
-                "enBreak": 200.0
+                "elementType": "Fire",
+                "elementDurability": 50,
+                "enBreak": 200
               },
               "hitPattern": {
-                "onHitEffectName": "default",
                 "hitImpulseType": "LV5",
-                "hitHaltTimeScale": 0.05000000074505806
+                // "reboundRatio": 0,
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.05,
+                "muteHitText": false
               },
               "forceCameraShake": true,
               "cameraShake": {
-                "shakeRange": 0.30000001192092896,
-                "shakeTime": 0.5
+                "shakeType": "Center",
+                "shakeRange": 0.3,
+                "shakeTime": 0.5,
+                "shakeDistance": 20
               }
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "RemoveUniqueModifier",
@@ -2158,10 +2470,19 @@
       ]
     }
   },
+  ///////////////////////////////////////////////////////////////////
+  //
+  //   HellFire ability
+  //
+  ///////////////////////////////////////////////////////////////////
+  //Create hellfire,on selfattacktarget or otherway
+  //HellFire created,alert some time, do demage
+  //in TransformState，more hellFire will been created
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Invoker_Deacon_Fire_HellFire",
+
       "abilityMixins": [
         {
           "$type": "AttachToStateIDMixin",
@@ -2174,12 +2495,25 @@
           "modifierName": "Create_HellFire_Loop"
         }
       ],
+      "onAbilityStart": [
+        {
+          "$type": "SetGlobalValue",
+          "key": "_FireCoreLoopTime_",
+          "value": 1,
+          "maxValue": 1,
+          "minValue": 0,
+          "otherTargets": {
+            "$type": "SelectTargetsByChildren",
+            "configID": 42203007,
+            "sortType": "Default"
+          }
+        }
+      ],
       "modifiers": {
+        // 二阶段的LOOP
         "Create_HellFire_Loop": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 200.0,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 2.0,
+          "duration": 200,
+          "thinkInterval": 2,
           "onThinkInterval": [
             {
               "$type": "ApplyModifier",
@@ -2188,39 +2522,37 @@
           ]
         },
         "Create_HellFire_Fellow": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "SetGlobalPos",
-              "target": "SelfAttackTarget",
               "key": "_HELLFIREPOS_",
+              "target": "SelfAttackTarget",
+              "setTarget": false,
               "born": {
                 "$type": "ConfigBornByPredicatePoint",
-                "onGround": true,
-                "timeForPredictive": 0.5
-              },
-              "setTarget": false
+                "timeForPredictive": 0.5,
+                "onGround": true
+              }
             },
             {
               "$type": "CreateGadget",
+              "gadgetID": 42203011,
               "target": "SelfAttackTarget",
               "lifeByOwnerIsAlive": true,
+              "campID": 4001,
+              "campTargetType": "Enemy",
               "born": {
                 "$type": "ConfigBornByGlobalValue",
+                "positionKey": "_HELLFIREPOS_",
+
                 "bornRandom": {
                   "$type": "BornRandomFromCenter",
-                  "minRandomRange": 0.0,
+                  "minRandomRange": 0,
                   "maxRandomRange": 0.5
                 },
-                "onGround": true,
-                "positionKey": "_HELLFIREPOS_",
-                "directionKey": ""
-              },
-              "gadgetID": 42203011,
-              "campID": 4001,
-              "campTargetType": "Enemy"
+                "onGround": true
+              }
             }
           ],
           "onRemoved": [
@@ -2231,14 +2563,15 @@
           ]
         },
         "Create_HellFire_Near": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "CreateGadget",
+              "gadgetID": 42203011,
               "target": "SelfAttackTarget",
               "lifeByOwnerIsAlive": true,
+              "campID": 4001,
+              "campTargetType": "Enemy",
               "born": {
                 "$type": "ConfigBornBySelf",
                 "bornRandom": {
@@ -2247,10 +2580,7 @@
                   "maxRandomRange": 7.5
                 },
                 "onGround": true
-              },
-              "gadgetID": 42203011,
-              "campID": 4001,
-              "campTargetType": "Enemy"
+              }
             }
           ],
           "onRemoved": [
@@ -2261,14 +2591,15 @@
           ]
         },
         "Create_HellFire_Away": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "CreateGadget",
+              "gadgetID": 42203011,
               "target": "SelfAttackTarget",
               "lifeByOwnerIsAlive": true,
+              "campID": 4001,
+              "campTargetType": "Enemy",
               "born": {
                 "$type": "ConfigBornBySelf",
                 "bornRandom": {
@@ -2277,38 +2608,19 @@
                   "maxRandomRange": 15.0
                 },
                 "onGround": true
-              },
-              "gadgetID": 42203011,
-              "campID": 4001,
-              "campTargetType": "Enemy"
+              }
             }
           ]
         },
         "WeaponEffcet_Loop": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Invoker_Deacon_Fire_HellFireAtk01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Invoker_Deacon_Fire_HellFireAtk01"
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "SetGlobalValue",
-          "otherTargets": {
-            "$type": "SelectTargetsByChildren",
-            "configID": 42203007
-          },
-          "ratio": 1.0,
-          "key": "_FireCoreLoopTime_",
-          "maxValue": 1.0,
-          "minValue": 0.0
-        }
-      ]
+      }
     }
   },
   {
@@ -2326,57 +2638,77 @@
             },
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_MONSTER_INVOKER_DEACON_FIRE_HELLFIRE",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             },
             {
               "$type": "SetOverrideMapValue",
+              "overrideMapKey": "Invoker_Deacon_Fire_HellFire_Count",
+              "value": 1,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_MONSTER_INVOKER_DEACON_FIRE_STATE",
-                  "ratio": 1.0
+                  "value": 1,
+                  "compareType": "Equal"
                 }
-              ],
-              "ratio": 1.0,
-              "overrideMapKey": "Invoker_Deacon_Fire_HellFire_Count"
+              ]
             },
             {
               "$type": "SetOverrideMapValue",
+              "overrideMapKey": "Invoker_Deacon_Fire_HellFire_Count",
+              "value": 2,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_MONSTER_INVOKER_DEACON_FIRE_STATE",
-                  "ratio": 3.0
+                  "value": 3,
+                  "compareType": "Equal"
                 }
-              ],
-              "ratio": 2.0,
-              "overrideMapKey": "Invoker_Deacon_Fire_HellFire_Count"
+              ]
             },
             {
               "$type": "SetAnimatorBool",
               "boolID": "AttackContinue",
-              "ratio": true
+              "value": true
             }
           ]
         },
         {
           "$type": "AttachToStateIDMixin",
           "stateIDs": ["HellFireAtkBS", "HellFire"],
-          "modifierName": "HellFire_Rings"
+          "modifierName": "HellFire_Rings",
+          "target": "Self"
         }
       ],
-      "abilitySpecials": {
-        "Invoker_Deacon_Fire_HellFire_Count": 1.0
-      },
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Create_HellFire"
+        },
+        {
+          "$type": "AddGlobalValue",
+          "key": "_MONSTER_INVOKER_DEACON_FIRE_HELLFIRE",
+          "value": 1
+        },
+        {
+          "$type": "SetAnimatorBool",
+          "boolID": "AttackContinue",
+          "value": false,
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_MONSTER_INVOKER_DEACON_FIRE_HELLFIRE",
+              "value": "%Invoker_Deacon_Fire_HellFire_Count",
+              "compareType": "MoreThanAndEqual"
+            }
+          ]
+        }
+      ],
       "modifiers": {
         "Create_HellFire_Loop": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 2.0,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 1.0,
+          "duration": 2,
+          "thinkInterval": 1,
           "onThinkInterval": [
             {
               "$type": "ApplyModifier",
@@ -2385,39 +2717,36 @@
           ]
         },
         "Create_HellFire": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.2,
           "onAdded": [
             {
               "$type": "SetGlobalPos",
-              "target": "SelfAttackTarget",
               "key": "_HELLFIREPOS_",
+              "target": "SelfAttackTarget",
+              "setTarget": false,
               "born": {
                 "$type": "ConfigBornByPredicatePoint",
-                "onGround": true,
-                "timeForPredictive": 0.5
-              },
-              "setTarget": false
+                "timeForPredictive": 0.5,
+                "onGround": true
+              }
             },
             {
               "$type": "CreateGadget",
+              "gadgetID": 42203011,
               "target": "SelfAttackTarget",
               "lifeByOwnerIsAlive": true,
+              "campID": 4001,
+              "campTargetType": "Enemy",
               "born": {
                 "$type": "ConfigBornByGlobalValue",
+                "positionKey": "_HELLFIREPOS_",
                 "bornRandom": {
                   "$type": "BornRandomFromCenter",
-                  "minRandomRange": 0.0,
+                  "minRandomRange": 0,
                   "maxRandomRange": 0.5
                 },
-                "onGround": true,
-                "positionKey": "_HELLFIREPOS_",
-                "directionKey": ""
-              },
-              "gadgetID": 42203011,
-              "campID": 4001,
-              "campTargetType": "Enemy"
+                "onGround": true
+              }
             }
           ],
           "onRemoved": [
@@ -2428,26 +2757,24 @@
           ]
         },
         "Create_HellFire_RandomBorn1": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.2,
           "onAdded": [
             {
               "$type": "CreateGadget",
+              "gadgetID": 42203011,
               "target": "SelfAttackTarget",
               "lifeByOwnerIsAlive": true,
+              "campID": 4001,
+              "campTargetType": "Enemy",
               "born": {
                 "$type": "ConfigBornBySelf",
                 "bornRandom": {
                   "$type": "BornRandomFromCenter",
-                  "minRandomRange": 0.0,
+                  "minRandomRange": 0,
                   "maxRandomRange": 7.5
                 },
                 "onGround": true
-              },
-              "gadgetID": 42203011,
-              "campID": 4001,
-              "campTargetType": "Enemy"
+              }
             }
           ],
           "onRemoved": [
@@ -2458,73 +2785,45 @@
           ]
         },
         "Create_HellFire_RandomBorn2": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.2,
           "onAdded": [
             {
               "$type": "CreateGadget",
+              "gadgetID": 42203011,
               "target": "SelfAttackTarget",
               "lifeByOwnerIsAlive": true,
+              "campID": 4001,
+              "campTargetType": "Enemy",
               "born": {
                 "$type": "ConfigBornBySelf",
                 "bornRandom": {
                   "$type": "BornRandomFromCenter",
                   "minRandomRange": 7.5,
-                  "maxRandomRange": 15.0
+                  "maxRandomRange": 15
                 },
                 "onGround": true
-              },
-              "gadgetID": 42203011,
-              "campID": 4001,
-              "campTargetType": "Enemy"
+              }
             }
           ]
         },
         "HellFire_Rings": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Invoker_Deacon_Fire_Wings",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Invoker_Deacon_Fire_Wings"
             }
           ],
           "onRemoved": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Invoker_Deacon_Fire_Wings_AS",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Invoker_Deacon_Fire_Wings_AS"
             }
           ]
         }
       },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Create_HellFire"
-        },
-        {
-          "$type": "AddGlobalValue",
-          "ratio": 1.0,
-          "key": "_MONSTER_INVOKER_DEACON_FIRE_HELLFIRE",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "SetAnimatorBool",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_MONSTER_INVOKER_DEACON_FIRE_HELLFIRE",
-              "ratio": "Invoker_Deacon_Fire_HellFire_Count",
-              "compareType": "MoreThanAndEqual"
-            }
-          ],
-          "boolID": "AttackContinue"
-        }
-      ]
+      "abilitySpecials": {
+        "Invoker_Deacon_Fire_HellFire_Count": 1.0
+      }
     }
   },
   {
@@ -2535,7 +2834,9 @@
         {
           "$type": "KillServerGadget",
           "gadgetInfo": {
-            "configID": 42203007
+            "$type": "SelectTargetsByChildren",
+            "configID": 42203007,
+            "sortType": "Default"
           }
         }
       ]
@@ -2545,21 +2846,25 @@
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Invoker_Deacon_Fire_HellFire_Logic",
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "HellFire_Alert"
+        }
+      ],
       "modifiers": {
         "HellFire_Alert": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.8999999761581421,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.9,
           "onAdded": [
             {
               "$type": "FireSubEmitterEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Invoker_Deacon_Fire_HellFireAtk01_Alert",
+              "effectPattern": "Eff_Monster_Invoker_Deacon_Fire_HellFireAtk01_Alert",
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0,
+                  "y": 0,
+                  "z": 0
                 },
                 "onGround": true
               }
@@ -2573,139 +2878,162 @@
           ]
         },
         "HellFire_Damage": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "FireSubEmitterEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Invoker_Deacon_Fire_HellFireAtk01_Damage",
+              "effectPattern": "Eff_Monster_Invoker_Deacon_Fire_HellFireAtk01_Damage", //Eff_Monster_Invoker_Deacon_Fire_HellFireAtk01_Damage
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0,
+                  "y": 0,
+                  "z": 0
                 },
                 "onGround": true
               }
             },
             {
               "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
+                  "radius": 1.5,
+                  "height": 2.0,
+                  "fanAngle": 360,
                   "born": {
                     "$type": "ConfigBornBySelf",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     },
                     "onGround": true
-                  },
-                  "height": 2.0,
-                  "DCMPFCIBIPA": 1.5
+                  }
                 },
                 "attackInfo": {
-                  "attackTag": "Invoker_Deacon_Fire_FireDebuff",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
+                  "attackTag": "Invoker_Deacon_Fire_FireDebuff", //attach fire debuff
                   "attackProperty": {
-                    "HBIOLEEGHPD": 0.26600000262260437,
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Fire",
-                    "bonusCriticalHurt": 25.0,
+                    "damagePercentage": 0.266,
                     "strikeType": "Default",
-                    "enBreak": 100.0
+                    "elementType": "Fire",
+                    "elementDurability": 25,
+                    "enBreak": 100
                   },
                   "hitPattern": {
-                    "onHitEffectName": "default",
                     "hitImpulseType": "LV3",
-                    "hitHaltTimeScale": 0.05000000074505806
+                    // "reboundRatio": 0,
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
+                    "muteHitText": false
                   },
                   "forceCameraShake": true,
                   "cameraShake": {
-                    "shakeRange": 0.20000000298023224,
-                    "shakeTime": 0.30000001192092896
+                    "shakeType": "Center",
+                    "shakeRange": 0.2,
+                    "shakeTime": 0.3,
+                    "shakeDistance": 20
                   }
                 }
-              },
-              "targetType": "Enemy"
+              }
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "HellFire_Alert"
-        }
-      ]
+      }
     }
   },
+  ///////////////////////////////////////////////////////////////////
+  //
+  //     Elite Logic
+  //
+  ///////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
-      "abilityName": "MonsterAffix_Invoker_Deacon_Fire_Elite_Property",
-      "modifiers": {
-        "UNIQUE_Invoker_Deacon_Fire_Elite_Property": {
-          "stacking": "Unique",
-          "modifierName": "",
-          "isUnique": true,
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_MaxHPRatio": 0.5
-          }
-        }
-      },
+      "abilityName": "MonsterAffix_Invoker_Deacon_Fire_Elite_Property", //血量与盾值增加
+      "isDynamicAbility": true,
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Invoker_Deacon_Fire_Elite_Property"
+          "modifierName": "UNIQUE_Invoker_Deacon_Fire_Elite_Property",
+          "target": "Self"
         }
       ],
-      "isDynamicAbility": true
+      "modifiers": {
+        "UNIQUE_Invoker_Deacon_Fire_Elite_Property": {
+          "stacking": "Unique",
+          "isUnique": true,
+          "properties": {
+            "Actor_MaxHPRatio": 0.5 //基于当前血量的2倍
+          }
+        }
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
-      "abilityName": "MonsterAffix_Invoker_Deacon_Fire_Elite_Summon",
+      "abilityName": "MonsterAffix_Invoker_Deacon_Fire_Elite_Summon", //血量与盾值处于%时，召唤abyss
+      "isDynamicAbility": true,
+      "abilityMixins": [
+        // {
+        // 	"$type":"AttachModifierToHPPercentMixin",
+        // 	"valueSteps": [1],
+        // 	"modifierNameSteps": ["Invoker_Deacon_Fire_Elite_HPSummon","Invoker_Empty"]
+        // },
+        // {
+        // 	"$type":"AttachModifierToElementDurabilityMixin",
+        // 	"valueSteps": [1,0.6,0],
+        // 	"modifierNameSteps": ["Invoker_Empty","Invoker_Deacon_Fire_Elite_ElementDurabilitySummon"]
+        // },
+      ],
       "modifiers": {
-        "Invoker_Empty": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0
-        },
+        "Invoker_Empty": {},
         "Invoker_Deacon_Fire_Elite_HPSummon": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 5.0,
-          "bonusCriticalHurt": 100.0
+          "duration": 5,
+          "onAdded": [
+            // {
+            // 	"$type": "ShowReminder",
+            // 	"id": 0
+            // },
+            // {
+            // 	"$type":"ServerLuaCall",
+            // 	"luaCallType":"FromGroup",
+            // 	"funcName":"SummonAbyss",
+            // },
+          ]
         },
         "Invoker_Deacon_Fire_Elite_ElementDurabilitySummon": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 5.0,
-          "bonusCriticalHurt": 100.0
+          "duration": 5,
+          "onAdded": [
+            // {
+            // 	"$type": "ShowReminder",
+            // 	"id": 0
+            // },
+            // {
+            // 	"$type":"ServerLuaCall",
+            // 	"luaCallType":"FromGroup",
+            // 	"funcName":"ElementSummonAbyss",
+            // },
+          ]
         }
-      },
-      "isDynamicAbility": true
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
-      "abilityName": "MonsterAffix_Invoker_Deacon_Fire_EliteSkill",
+      "abilityName": "MonsterAffix_Invoker_Deacon_Fire_EliteSkill", // 标记自身为Elite,技能处理Elite化后的逻辑
+      "isDynamicAbility": true,
       "onAdded": [
         {
           "$type": "SetGlobalValue",
-          "ratio": 1.0,
           "key": "_INVOKER_ELITE_TAG",
-          "maxValue": 0.0,
-          "minValue": 0.0
+          "value": 1
         }
-      ],
-      "isDynamicAbility": true
+      ]
     }
   }
 ]

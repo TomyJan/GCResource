@@ -1,4 +1,9 @@
 [
+  ////////////////////////////////////////////////////////////////
+  //
+  //  RisingBladeNE
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -7,14 +12,14 @@
         {
           "$type": "SkillButtonHoldChargeMixin",
           "skillID": 10011,
-          "nextLoopTriggerID": "NextLoopTrigger",
-          "endHoldTrigger": "EndHoldTrigger",
           "beforeStateIDs": ["Attack01"],
           "chargeLoopStateIDs": [
             "RisingBladeNE_Charge1",
             "RisingBladeNE_Charge2"
           ],
-          "chargeLoopDurations": [1.0]
+          "chargeLoopDurations": [1],
+          "nextLoopTriggerID": "NextLoopTrigger",
+          "endHoldTrigger": "EndHoldTrigger"
         },
         {
           "$type": "AttachToStateIDMixin",
@@ -29,30 +34,29 @@
       ],
       "modifiers": {
         "Charge1": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_RisingBladeNE_Charge_01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_RisingBladeNE_Charge_01"
             }
           ]
         },
         "Charge2": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_RisingBladeNE_Charge_01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_RisingBladeNE_Charge_01"
             }
           ]
         }
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  TriggerAbility
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -61,15 +65,15 @@
         {
           "$type": "SkillButtonHoldChargeMixin",
           "skillID": 10012,
-          "nextLoopTriggerID": "NextLoopTrigger",
-          "endHoldTrigger": "EndHoldTrigger",
           "beforeStateIDs": ["FlickerWave_BS"],
           "chargeLoopStateIDs": [
             "FlickerWave_BS2",
             "ThunderFall_Ready",
             "ThunderFall_Strike1"
           ],
-          "chargeLoopDurations": [1.5, 3.0]
+          "chargeLoopDurations": [1.5, 3],
+          "nextLoopTriggerID": "NextLoopTrigger",
+          "endHoldTrigger": "EndHoldTrigger"
         },
         {
           "$type": "AttachToStateIDMixin",
@@ -84,30 +88,29 @@
       ],
       "modifiers": {
         "Charge1": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_ThunderFall_Area",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_ThunderFall_Area"
             }
           ]
         },
         "Charge2": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_RisingBladeNE_Charge_02",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_RisingBladeNE_Charge_02"
             }
           ]
         }
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  FlickerWave
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -115,19 +118,18 @@
       "onAbilityStart": [
         {
           "$type": "AvatarSkillStart",
-          "skillID": 10012,
-          "cdDelta": 1.0,
-          "costStaminaDelta": 1.0
+          "skillID": 10012
         },
         {
           "$type": "TriggerBullet",
           "bulletID": 41006007,
           "born": {
             "$type": "ConfigBornByTarget",
+            //"attachPointName" : "UnshakeRootNode",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 1.0,
-              "PJCOKIGCJOK": 0.0
+              "x": 0.0,
+              "y": 1.0,
+              "z": 0.0
             }
           }
         }
@@ -138,156 +140,197 @@
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Test_FlickerWaveDamage",
+      "onAdded": [
+        {
+          "$type": "AttachEffect",
+          "effectPattern": "Eff_Ani_FlickerWave_Bul"
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "StaticElec_Pre",
+          "target": "Self"
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
+          "doOffStage": true,
+          "attackEvent": {
+            "attackPattern": {
+              "$type": "ConfigAttackSphere",
+              "duration": 0.0,
+              "triggerType": "TriggerNoRepeat",
+              "radius": 1,
+              "born": {
+                "$type": "ConfigBornBySelf",
+                //"attachPointName" : "RootNode",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.8,
+                  "z": 0.0
+                }
+              }
+            },
+            "attackInfo": {
+              "attackProperty": {
+                "damagePercentage": 1,
+                "elementType": "Electric",
+                "elementDurability": 50
+              },
+              "hitPattern": {
+                //"onHitEffectName": "Eff_FlickerWave_Buff",
+                "hitLevel": "Mute",
+                "hitImpulseX": 0,
+                "hitImpulseY": 0,
+                "reboundRatio": 0,
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.05,
+                "muteHitText": false
+              },
+              "forceCameraShake": false
+            }
+          }
+        }
+      ],
       "modifiers": {
         "StaticElec_Pre": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 3.200000047683716,
-          "bonusCriticalHurt": 100.0,
+          "duration": 3.2,
+          "stacking": "Refresh",
           "onAttackLanded": [
             {
               "$type": "TriggerAbility",
+              "abilityName": "Test_StaticElecField",
               "target": "Owner",
-              "RotationDampTime": true,
+              "doOffStage": true,
               "predicates": [
                 {
                   "$type": "ByEntityTypes",
                   "entityTypes": ["Monster"],
                   "useEventSource": true
                 }
-              ],
-              "abilityName": "Test_StaticElecField"
+              ]
             },
             {
               "$type": "KillSelf",
-              "RotationDampTime": true
+              "doOffStage": true
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Ani_FlickerWave_Bul",
-          "EBHJMLOKDGB": -1.0
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "StaticElec_Pre"
-        }
-      ],
-      "onAbilityStart": [
-        {
-          "$type": "TriggerAttackEvent",
-          "RotationDampTime": true,
-          "attackEvent": {
-            "attackPattern": {
-              "$type": "ConfigAttackSphere",
-              "triggerType": "TriggerNoRepeat",
-              "born": {
-                "$type": "ConfigBornBySelf",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.800000011920929,
-                  "PJCOKIGCJOK": 0.0
-                }
-              },
-              "DCMPFCIBIPA": 1.0
-            },
-            "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
-              "attackProperty": {
-                "HBIOLEEGHPD": 1.0,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Electric",
-                "bonusCriticalHurt": 50.0
-              },
-              "hitPattern": {
-                "onHitEffectName": "default",
-                "MOELECJEOEI": 0.0,
-                "hitImpulseY": 0.0,
-                "hitImpulseType": "",
-                "hitHaltTimeScale": 0.05000000074505806
-              }
-            }
-          },
-          "targetType": "Enemy"
-        }
-      ]
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Test_StaticElecField",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "StaticElec",
+          "otherTargets": {
+            "$type": "SelectTargetsByShape",
+            "shapeName": "CircleR3",
+            "centerBasedOn": "Target",
+            "campTargetType": "Enemy",
+            "campBasedOn": "Self"
+          },
+          "predicates": [
+            {
+              "$type": "ByEntityTypes",
+              "entityTypes": ["Monster"]
+            }
+          ]
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_StaticElec_Effect",
+          "otherTargets": {
+            "$type": "SelectTargetsByShape",
+            "shapeName": "CircleR3",
+            "centerBasedOn": "Target",
+            "campTargetType": "Enemy",
+            "campBasedOn": "Self"
+          },
+          "predicates": [
+            {
+              "$type": "ByEntityTypes",
+              "entityTypes": ["Monster"]
+            }
+          ]
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "FlickerWave_Effect",
+          "target": "Target",
+          "predicates": [
+            {
+              "$type": "ByEntityTypes",
+              "entityTypes": ["Monster"]
+            }
+          ]
+        }
+      ],
       "modifiers": {
         "FlickerWave_Effect": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.800000011920929,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.8,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_FlickerWave_Buff",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_FlickerWave_Buff"
             }
           ]
         },
         "StaticElec": {
+          "duration": 15,
           "stacking": "MultipleRefreshNoRemove",
           "stackingOption": {
-            "abilitySpecialName": "",
-            "maxModifierNumForMultipleType": 3.0
+            "maxModifierNumForMultipleType": 3
           },
-          "modifierName": "",
-          "HCJLIGBLGJA": 15.0,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.10000000149011612,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
               "key": "_ABILITY_StaticElec_COUNT",
+              "value": 1,
               "useLimitRange": true,
-              "maxValue": 3.0,
-              "minValue": 0.0
+              "maxValue": 3,
+              "minValue": 0
             }
           ],
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "ratio": -1.0,
               "key": "_ABILITY_StaticElec_COUNT",
+              "value": -1,
               "useLimitRange": true,
-              "maxValue": 3.0,
-              "minValue": 0.0
+              "maxValue": 3,
+              "minValue": 0
             }
           ],
+          "thinkInterval": 0.1,
           "onThinkInterval": [
             {
               "$type": "RemoveModifier",
+              "modifierName": "StaticElec",
+              "target": "Self",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_StaticElec_COUNT",
-                  "ratio": 0.0
+                  "value": 0,
+                  "compareType": "Equal"
                 }
-              ],
-              "modifierName": "StaticElec"
+              ]
             }
           ]
         },
         "UNIQUE_StaticElec_Effect": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
-              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "$type": "AttachModifierToSelfGlobalValueMixin", // BUFF增加和减少时，都触发这个modifier来检查和替换特效
               "globalValueKey": "_ABILITY_StaticElec_COUNT",
-              "defaultGlobalValueOnCreate": 0.0,
-              "valueSteps": [-1.0, 0.5, 1.5, 2.5, 3.5],
+              "valueSteps": [-1, 0.5, 1.5, 2.5, 3.5],
               "modifierNameSteps": [
                 "StaticElec_effect_0",
                 "StaticElec_effect_1",
@@ -298,8 +341,6 @@
           ]
         },
         "StaticElec_effect_0": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "RemoveModifier",
@@ -316,13 +357,10 @@
           ]
         },
         "StaticElec_effect_1": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_StaticElec_01",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_StaticElec_01"
             },
             {
               "$type": "RemoveModifier",
@@ -335,13 +373,10 @@
           ]
         },
         "StaticElec_effect_2": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_StaticElec_02",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_StaticElec_02"
             },
             {
               "$type": "RemoveModifier",
@@ -354,13 +389,10 @@
           ]
         },
         "StaticElec_effect_3": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_StaticElec_03",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_StaticElec_03"
             },
             {
               "$type": "RemoveModifier",
@@ -368,414 +400,402 @@
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "otherTargets": {
-            "$type": "SelectTargetsByShape",
-            "shapeName": "CircleR3",
-            "centerBasedOn": "Target",
-            "campTargetType": "Enemy",
-            "sizeRatio": 1.0
-          },
-          "predicates": [
-            {
-              "$type": "ByEntityTypes",
-              "entityTypes": ["Monster"]
-            }
-          ],
-          "modifierName": "StaticElec"
-        },
-        {
-          "$type": "ApplyModifier",
-          "otherTargets": {
-            "$type": "SelectTargetsByShape",
-            "shapeName": "CircleR3",
-            "centerBasedOn": "Target",
-            "campTargetType": "Enemy",
-            "sizeRatio": 1.0
-          },
-          "predicates": [
-            {
-              "$type": "ByEntityTypes",
-              "entityTypes": ["Monster"]
-            }
-          ],
-          "modifierName": "UNIQUE_StaticElec_Effect"
-        },
-        {
-          "$type": "ApplyModifier",
-          "target": "Target",
-          "predicates": [
-            {
-              "$type": "ByEntityTypes",
-              "entityTypes": ["Monster"]
-            }
-          ],
-          "modifierName": "FlickerWave_Effect"
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  ThunderFall
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Kate_ThunderFall",
-      "modifiers": {
-        "SelectNearModifier": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "DamageByAttackValue",
-              "otherTargets": {
-                "$type": "SelectTargetsByShape",
-                "shapeName": "CircleR10",
-                "campTargetType": "Enemy",
-                "sizeRatio": 1.0
-              },
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_ABILITY_StaticElec_COUNT",
-                  "ratio": 1.0
-                }
-              ],
-              "born": {
-                "$type": "ConfigBornByTarget",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 1.0,
-                  "PJCOKIGCJOK": 0.0
-                }
-              },
-              "attackInfo": {
-                "attackTag": "",
-                "attenuationTag": "",
-                "attenuationGroup": "default",
-                "attackProperty": {
-                  "HBIOLEEGHPD": 3.0,
-                  "CCNJGLPMIEP": 0.0,
-                  "elementType": "Electric",
-                  "bonusCriticalHurt": 50.0
-                },
-                "hitPattern": {
-                  "onHitEffectName": "default",
-                  "hitLevel": "Light",
-                  "MOELECJEOEI": 0.0,
-                  "hitImpulseY": 0.0,
-                  "hitImpulseType": "",
-                  "hitHaltTimeScale": 0.05000000074505806
-                }
-              }
-            },
-            {
-              "$type": "DamageByAttackValue",
-              "otherTargets": {
-                "$type": "SelectTargetsByShape",
-                "shapeName": "CircleR10",
-                "campTargetType": "Enemy",
-                "sizeRatio": 1.0
-              },
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_ABILITY_StaticElec_COUNT",
-                  "ratio": 2.0
-                }
-              ],
-              "born": {
-                "$type": "ConfigBornByTarget",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 1.0,
-                  "PJCOKIGCJOK": 0.0
-                }
-              },
-              "attackInfo": {
-                "attackTag": "",
-                "attenuationTag": "",
-                "attenuationGroup": "default",
-                "attackProperty": {
-                  "HBIOLEEGHPD": 4.5,
-                  "CCNJGLPMIEP": 0.0,
-                  "elementType": "Electric",
-                  "bonusCriticalHurt": 80.0
-                },
-                "hitPattern": {
-                  "onHitEffectName": "default",
-                  "hitLevel": "Light",
-                  "MOELECJEOEI": 0.0,
-                  "hitImpulseY": 0.0,
-                  "hitImpulseType": "",
-                  "hitHaltTimeScale": 0.05000000074505806
-                }
-              }
-            },
-            {
-              "$type": "DamageByAttackValue",
-              "otherTargets": {
-                "$type": "SelectTargetsByShape",
-                "shapeName": "CircleR10",
-                "campTargetType": "Enemy",
-                "sizeRatio": 1.0
-              },
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_ABILITY_StaticElec_COUNT",
-                  "ratio": 3.0
-                }
-              ],
-              "born": {
-                "$type": "ConfigBornByTarget",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 1.0,
-                  "PJCOKIGCJOK": 0.0
-                }
-              },
-              "attackInfo": {
-                "attackTag": "",
-                "attenuationTag": "",
-                "attenuationGroup": "default",
-                "attackProperty": {
-                  "HBIOLEEGHPD": 6.0,
-                  "CCNJGLPMIEP": 0.0,
-                  "elementType": "Electric",
-                  "bonusCriticalHurt": 100.0
-                },
-                "hitPattern": {
-                  "onHitEffectName": "default",
-                  "hitLevel": "Light",
-                  "MOELECJEOEI": 0.0,
-                  "hitImpulseY": 0.0,
-                  "hitImpulseType": "",
-                  "hitHaltTimeScale": 0.05000000074505806
-                }
-              }
-            },
-            {
-              "$type": "ApplyModifier",
-              "otherTargets": {
-                "$type": "SelectTargetsByShape",
-                "shapeName": "CircleR10",
-                "campTargetType": "Enemy",
-                "sizeRatio": 1.0
-              },
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_ABILITY_StaticElec_COUNT",
-                  "ratio": 1.0
-                }
-              ],
-              "modifierName": "ThunderFall_1"
-            },
-            {
-              "$type": "ApplyModifier",
-              "otherTargets": {
-                "$type": "SelectTargetsByShape",
-                "shapeName": "CircleR10",
-                "campTargetType": "Enemy",
-                "sizeRatio": 1.0
-              },
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_ABILITY_StaticElec_COUNT",
-                  "ratio": 2.0
-                }
-              ],
-              "modifierName": "ThunderFall_2"
-            },
-            {
-              "$type": "ApplyModifier",
-              "otherTargets": {
-                "$type": "SelectTargetsByShape",
-                "shapeName": "CircleR10",
-                "campTargetType": "Enemy",
-                "sizeRatio": 1.0
-              },
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_ABILITY_StaticElec_COUNT",
-                  "ratio": 3.0
-                }
-              ],
-              "modifierName": "ThunderFall_3"
-            }
-          ]
-        },
-        "ThunderFall_1": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_ThunderFall_01",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "AddGlobalValue",
-              "ratio": -1.0,
-              "key": "_ABILITY_StaticElec_COUNT",
-              "useLimitRange": true,
-              "maxValue": 3.0,
-              "minValue": 0.0
-            }
-          ]
-        },
-        "ThunderFall_2": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_ThunderFall_02",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "AddGlobalValue",
-              "ratio": -2.0,
-              "key": "_ABILITY_StaticElec_COUNT",
-              "useLimitRange": true,
-              "maxValue": 3.0,
-              "minValue": 0.0
-            }
-          ]
-        },
-        "ThunderFall_3": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_ThunderFall_03",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "AddGlobalValue",
-              "ratio": -3.0,
-              "key": "_ABILITY_StaticElec_COUNT",
-              "useLimitRange": true,
-              "maxValue": 3.0,
-              "minValue": 0.0
-            },
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "Paralysis"
-            }
-          ]
-        },
-        "Paralysis": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 4.0,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Common_Paralysis",
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        }
-      },
       "onAbilityStart": [
         {
           "$type": "AvatarSkillStart",
           "skillID": 10012,
-          "cdDelta": 8.0,
-          "costStaminaDelta": 1.0
+          "cdRatio": 8
         },
         {
           "$type": "ApplyModifier",
-          "modifierName": "SelectNearModifier"
+          "modifierName": "SelectNearModifier",
+          "target": "Self"
         }
-      ]
+      ],
+      "modifiers": {
+        "SelectNearModifier": {
+          "duration": 0.5,
+          "onAdded": [
+            {
+              "$type": "DamageByAttackValue",
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": 0.0,
+                  "y": 1.0,
+                  "z": 0.0
+                }
+              },
+              "attackInfo": {
+                "attackProperty": {
+                  "damagePercentage": 3,
+                  "elementType": "Electric",
+                  "elementDurability": 50
+                },
+                "hitPattern": {
+                  //"onHitEffectName": "",
+                  "hitLevel": "Light",
+                  "hitImpulseX": 0,
+                  "hitImpulseY": 0,
+                  "reboundRatio": 0,
+                  "hitHaltTime": 0.0,
+                  "hitHaltTimeScale": 0.05,
+                  "muteHitText": false
+                },
+                "forceCameraShake": false
+              },
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR10",
+                "centerBasedOn": "Self",
+                "campTargetType": "Enemy",
+                "campBasedOn": "Self"
+              },
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ABILITY_StaticElec_COUNT",
+                  "value": 1,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "DamageByAttackValue",
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": 0.0,
+                  "y": 1.0,
+                  "z": 0.0
+                }
+              },
+              "attackInfo": {
+                "attackProperty": {
+                  "damagePercentage": 4.5,
+                  "elementType": "Electric",
+                  "elementDurability": 80
+                },
+                "hitPattern": {
+                  //"onHitEffectName": "",
+                  "hitLevel": "Light",
+                  "hitImpulseX": 0,
+                  "hitImpulseY": 0,
+                  "reboundRatio": 0,
+                  "hitHaltTime": 0.0,
+                  "hitHaltTimeScale": 0.05,
+                  "muteHitText": false
+                },
+                "forceCameraShake": false
+              },
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR10",
+                "centerBasedOn": "Self",
+                "campTargetType": "Enemy",
+                "campBasedOn": "Self"
+              },
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ABILITY_StaticElec_COUNT",
+                  "value": 2,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "DamageByAttackValue",
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": 0.0,
+                  "y": 1.0,
+                  "z": 0.0
+                }
+              },
+              "attackInfo": {
+                "attackProperty": {
+                  "damagePercentage": 6,
+                  "elementType": "Electric",
+                  "elementDurability": 100
+                },
+                "hitPattern": {
+                  //"onHitEffectName": "",
+                  "hitLevel": "Light",
+                  "hitImpulseX": 0,
+                  "hitImpulseY": 0,
+                  "reboundRatio": 0,
+                  "hitHaltTime": 0.0,
+                  "hitHaltTimeScale": 0.05,
+                  "muteHitText": false
+                },
+                "forceCameraShake": false
+              },
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR10",
+                "centerBasedOn": "Self",
+                "campTargetType": "Enemy",
+                "campBasedOn": "Self"
+              },
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ABILITY_StaticElec_COUNT",
+                  "value": 3,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "ThunderFall_1",
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR10",
+                "centerBasedOn": "Self",
+                "campTargetType": "Enemy",
+                "campBasedOn": "Self"
+              },
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ABILITY_StaticElec_COUNT",
+                  "value": 1,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "ThunderFall_2",
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR10",
+                "centerBasedOn": "Self",
+                "campTargetType": "Enemy",
+                "campBasedOn": "Self"
+              },
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ABILITY_StaticElec_COUNT",
+                  "value": 2,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "ThunderFall_3",
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR10",
+                "centerBasedOn": "Self",
+                "campTargetType": "Enemy",
+                "campBasedOn": "Self"
+              },
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ABILITY_StaticElec_COUNT",
+                  "value": 3,
+                  "compareType": "Equal"
+                }
+              ]
+            }
+          ]
+        },
+        "ThunderFall_1": {
+          "duration": 1,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_ThunderFall_01"
+            },
+            {
+              "$type": "AddGlobalValue",
+              "key": "_ABILITY_StaticElec_COUNT",
+              "value": -1,
+              "useLimitRange": true,
+              "maxValue": 3,
+              "minValue": 0
+            }
+          ]
+        },
+        "ThunderFall_2": {
+          "duration": 1,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_ThunderFall_02"
+            },
+            {
+              "$type": "AddGlobalValue",
+              "key": "_ABILITY_StaticElec_COUNT",
+              "value": -2,
+              "useLimitRange": true,
+              "maxValue": 3,
+              "minValue": 0
+            }
+          ]
+        },
+        "ThunderFall_3": {
+          "duration": 1,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_ThunderFall_03"
+            },
+            {
+              "$type": "AddGlobalValue",
+              "key": "_ABILITY_StaticElec_COUNT",
+              "value": -3,
+              "useLimitRange": true,
+              "maxValue": 3,
+              "minValue": 0
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "Paralysis",
+              "target": "Self"
+            }
+          ]
+        },
+        "Paralysis": {
+          "duration": 4,
+          // "state" : "Paralyze",	//无效的state，于2.5版本删除
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Common_Paralysis"
+            }
+          ]
+        }
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  PierceLightning
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Kate_PierceLightning",
+      /*"abilityMixins": 
+			[
+				{
+					"$type": "AttachToStateIDMixin", 
+					"stateIDs": ["SupportPierceLightning", "SupportPierceLightning_Out"], 
+					"modifierName": "SupportInvincible", 
+				},
+			],*/
+      "onAbilityStart": [
+        {
+          "$type": "AvatarSkillStart",
+          "skillID": 10014
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "SelectNearModifier",
+          "target": "Self"
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "PierceLightning_Effect",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
+        /*"SupportInvincible":
+				{
+					"state" : "Invincible",
+				},*/
         "SelectNearModifier": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "ApplyModifier",
+              "modifierName": "PierceLightning",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR10",
+                "centerBasedOn": "Self",
                 "campTargetType": "Enemy",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
               "predicates": [
                 {
                   "$type": "ByEntityTypes",
                   "entityTypes": ["Monster"]
                 }
-              ],
-              "modifierName": "PierceLightning"
+              ]
             }
           ]
         },
         "PierceLightning": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 8.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 8,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Common_DefenseFall",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Common_DefenseFall"
             }
           ]
         },
         "PierceLightning_Effect": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_PierceLightning",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_PierceLightning"
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "AvatarSkillStart",
-          "skillID": 10014,
-          "cdDelta": 1.0,
-          "costStaminaDelta": 1.0
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "SelectNearModifier"
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "PierceLightning_Effect"
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  PierceLightning_Trigger
+  //
+  ////////////////////////////////////////////////////////////////
+  /*{
+	"Default": 
+	{
+		"$type": "ConfigAbility",
+		"abilityName": "Avatar_Kate_PierceLightning_Trigger",
+		"abilityMixins": 
+		[
+			{
+				"$type": "TriggerElementSupportMixin", 
+				"duration" : 3.0,
+				"elementType" : "Water",
+			},
+		], 
+	},
+},*/
+  ///丢炸弹技能白盒
+  ///
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Kate_ThrowingBomb",
+      "onAbilityStart": [],
       "abilityMixins": [
         {
           "$type": "AttachToStateIDMixin",
@@ -785,12 +805,11 @@
       ],
       "modifiers": {
         "SkillChange": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "SwitchSkillIDMixin",
               "priority": "AvatarSpecial",
+              "skillIndex": 0,
               "skillID": 10300
             }
           ]
@@ -798,6 +817,670 @@
       }
     }
   },
+  // //////////////////////////////////
+  // //
+  // //  JUMP
+  // //
+  // //
+  // //////////////////////////////////
+  // {
+  // "Default" :
+  // 	{
+  // 		"$type" : "ConfigAbility",
+  // 		"abilityName" : "Avatar_Kate_JumpingBomb",
+  // 		"onAbilityStart":
+  // 		[
+  // 			{
+  // 				"$type":"TriggerBullet",
+  // 				"bulletID":40000174,
+  // 				"target":"Target",
+  // 				"campID":1001,
+  // 				"born":
+  // 				{
+  // 					"$type": "ConfigBornByTarget",
+  // 					"offset" :
+  // 					{
+  // 						"x": 0.0,
+  // 						"y": 1.2,
+  // 						"z": 0.0,
+  // 					},
+  // 				},
+  // 			},
+  // 			{
+  // 				"$type":"AddGlobalValue",
+  // 				"target":"Self",
+  // 				"key":"_ABILITY_Jump_COUNT",
+  // 				"value":2,
+  // 				"useLimitRange" : true,
+  // 				"maxValue" : 4,
+  // 				"minValue" : 0,
+  // 			},
+  // 		],
+  // 	},
+  // },
+  // {
+  // 	"Default":
+  // 	{
+  // 		"$type": "ConfigAbility",
+  // 		"abilityName": "Jumping_Drug_Explode",
+  // 		"onAbilityStart":
+  // 		[
+  // 			{
+  // 				"$type" : "TriggerAttackEvent",
+  // 				"targetType" : "Enemy",
+  // 				"attackEvent":
+  // 				{
+  // 					"attackPattern" :
+  // 					{
+  // 						"$type" : "ConfigAttackSphere",
+  // 						"triggerType" : "TriggerNoRepeat",
+  // 						"radius" : 0.5,
+  // 						"born":
+  // 						{
+  // 							"$type": "ConfigBornByCollisionPoint",
+  // 						},
+  // 					},
+  // 					"attackInfo":
+  // 					{
+  // 						"attackProperty":
+  // 						{
+  // 							"damagePercentage": 1.0,
+  // 							"elementType": "Fire",
+  // 							"elementDurability": 30,
+  // 							"strikeType": "Blunt",
+  // 						},
+  // 						"hitPattern" :
+  // 						{
+  // 							"hitLevel" : "Air",
+  // 							"hitImpulseX" : 200,
+  // 							"hitImpulseY" : 400,
+  // 							"reboundRatio" : 0,
+  // 							"hitHaltTime" : 0.0,
+  // 							"hitHaltTimeScale" : 0.05,
+  // 							"muteHitText" : false,
+  // 						},
+  // 						"forceCameraShake": true,
+  // 						"cameraShake":
+  // 						{
+  // 							"shakeRange": 0.12,
+  // 							"shakeTime": 0.12,
+  // 						},
+  // 					},
+  // 				},
+  // 			},
+  // 			{
+  // 				"$type": "FireEffect",
+  // 				"effectPattern": "Eff_WhiteBox_Explode",
+  // 				// "effectPattern": "Eff_Monster_Slime_Fire_SelfExplosion_Large",
+  // 				// "predicates" :
+  // 				// [
+  // 				// 	{
+  // 				// 		"$type": "ByHasElement",
+  // 				// 		"element": "Fire",
+  // 				// 	},
+  // 				// ],
+  // 			},
+  // 			{
+  // 				"$type":"SetSelfAttackTarget",
+  // 				"otherTargets":
+  // 				{
+  // 					"$type": "SelectTargetsByShape",
+  // 					"shapeName": "CircleR10",
+  // 					"centerBasedOn": "Self",
+  // 					"campTargetType": "Enemy",
+  // 					"campBasedOn": "Self",
+  // 					"topLimit":1
+  // 				},
+  // 				"predicates":
+  // 				[
+  // 					{
+  // 						"$type":"ByEntityTypes",
+  // 						"entityTypes":["Monster",],
+  // 					},
+  // 				],
+  // 			},
+  // 			{
+  // 						"$type":"TriggerBullet",
+  // 						"bulletID":40000175,
+  // 						"campID":1001,
+  // 						// "target":"Target",
+  // 						// "targets":
+  // 						// {
+  // 						// 	"shapeName": "CircleR10",
+  // 						// 	"centerBasedOn": "Self",
+  // 						// 	"campTargetType": "Enemy",
+  // 						// 	"campBasedOn": "Self",
+  // 						// 	"topLimit":1
+  // 						// },
+  // 						// "predicates":
+  // 						// [
+  // 						// 	{
+  // 						// 		"$type":"ByEntityTypes",
+  // 						// 		"entityTypes":["Monster",],
+  // 						// 	},
+  // 						// ],
+  // 						"born":
+  // 						{
+  // 							"$type": "ConfigBornByTarget",
+  // 							"offset" :
+  // 							{
+  // 								"x": 0,
+  // 								"y": 1.2,
+  // 								"z": 0,
+  // 							},
+  // 							// "onGround":true,
+  // 							"direction":
+  // 							{
+  // 								"$type":"ConfigDirectionByAttackTarget",
+  // 								"maxAngle":360,
+  // 							},
+  // 						},
+  // 						// "predicates":
+  // 						// [
+  // 						// 	{
+  // 						// 		"$type":"ByTargetGlobalValue",
+  // 						// 		"target":"OriginOwner",
+  // 						// 		"key": "_ABILITY_Jump_COUNT",
+  // 						// 		"value": 0,
+  // 						// 		"compareType": "MoreThan",
+  // 						// 	},
+  // 						// ],
+  // 					},
+  // 					{
+  // 						"$type":"KillSelf",
+  // 						"target":"Self",
+  // 					},
+  // 		],
+  // 		// "modifiers":
+  // 		// {
+  // 		// 	"time":
+  // 		// 	{
+  // 		// 		"duration":0.3,
+  // 		// 		"onRemoved":
+  // 		// 		[
+  // 		// 			{
+  // 		// 				"$type":"TriggerBullet",
+  // 		// 				"bulletID":40000175,
+  // 		// 				"campID":1001,
+  // 		// 				// "target":"Target",
+  // 		// 				// "targets":
+  // 		// 				// {
+  // 		// 				// 	"shapeName": "CircleR10",
+  // 		// 				// 	"centerBasedOn": "Self",
+  // 		// 				// 	"campTargetType": "Enemy",
+  // 		// 				// 	"campBasedOn": "Self",
+  // 		// 				// 	"topLimit":1
+  // 		// 				// },
+  // 		// 				// "predicates":
+  // 		// 				// [
+  // 		// 				// 	{
+  // 		// 				// 		"$type":"ByEntityTypes",
+  // 		// 				// 		"entityTypes":["Monster",],
+  // 		// 				// 	},
+  // 		// 				// ],
+  // 		// 				"born":
+  // 		// 				{
+  // 		// 					"$type": "ConfigBornByTarget",
+  // 		// 					"offset" :
+  // 		// 					{
+  // 		// 						"x": 0,
+  // 		// 						"y": 1.2,
+  // 		// 						"z": 0,
+  // 		// 					},
+  // 		// 					// "onGround":true,
+  // 		// 					"direction":
+  // 		// 					{
+  // 		// 						"$type":"ConfigDirectionByAttackTarget",
+  // 		// 						"maxAngle":360,
+  // 		// 					},
+  // 		// 				},
+  // 		// 				// "predicates":
+  // 		// 				// [
+  // 		// 				// 	{
+  // 		// 				// 		"$type":"ByTargetGlobalValue",
+  // 		// 				// 		"target":"OriginOwner",
+  // 		// 				// 		"key": "_ABILITY_Jump_COUNT",
+  // 		// 				// 		"value": 0,
+  // 		// 				// 		"compareType": "MoreThan",
+  // 		// 				// 	},
+  // 		// 				// ],
+  // 		// 			},
+  // 		// 			{
+  // 		// 				"$type":"KillSelf",
+  // 		// 				"target":"Self",
+  // 		// 			},
+  // 		// 		],
+  // 		// 	},
+  // 		// },
+
+  // 			// {
+  // 			// 	"$type":"FireEffect",
+  // 			// 	"effectPattern": "Eff_Hit_Blood_01",
+  // 			// },
+
+  // 	},
+  // },
+  // {
+  // 	"Default":
+  // 	{
+  // 		"$type": "ConfigAbility",
+  // 		"abilityName": "Jumping_Drug_Explode2",
+  // 		"onAbilityStart":
+  // 		[
+  // 			{
+  // 				"$type" : "TriggerAttackEvent",
+  // 				"targetType" : "Enemy",
+  // 				"attackEvent":
+  // 				{
+  // 					"attackPattern" :
+  // 					{
+  // 						"$type" : "ConfigAttackSphere",
+  // 						"triggerType" : "TriggerNoRepeat",
+  // 						"radius" : 0.5,
+  // 						"born":
+  // 						{
+  // 							"$type": "ConfigBornByCollisionPoint",
+  // 						},
+  // 					},
+  // 					"attackInfo":
+  // 					{
+  // 						"attackProperty":
+  // 						{
+  // 							"damagePercentage": 1.0,
+  // 							"elementType": "Fire",
+  // 							"elementDurability": 30,
+  // 							"strikeType": "Blunt",
+  // 						},
+  // 						"hitPattern" :
+  // 						{
+  // 							"hitLevel" : "Air",
+  // 							"hitImpulseX" : 200,
+  // 							"hitImpulseY" : 400,
+  // 							"reboundRatio" : 0,
+  // 							"hitHaltTime" : 0.0,
+  // 							"hitHaltTimeScale" : 0.05,
+  // 							"muteHitText" : false,
+  // 						},
+  // 						"forceCameraShake": true,
+  // 						"cameraShake":
+  // 						{
+  // 							"shakeRange": 0.12,
+  // 							"shakeTime": 0.12,
+  // 						},
+  // 					},
+  // 				},
+  // 			},
+  // 			{
+  // 				"$type": "FireEffect",
+  // 				"effectPattern": "Eff_WhiteBox_Explode",
+  // 				// "effectPattern": "Eff_Monster_Slime_Fire_SelfExplosion_Large",
+  // 				// "predicates" :
+  // 				// [
+  // 				// 	{
+  // 				// 		"$type": "ByHasElement",
+  // 				// 		"element": "Fire",
+  // 				// 	},
+  // 				// ],
+  // 			},
+  // 			{
+  // 				"$type":"SetSelfAttackTarget",
+  // 				"otherTargets":
+  // 				{
+  // 					"$type": "SelectTargetsByShape",
+  // 					"shapeName": "CircleR6",
+  // 					"centerBasedOn": "Self",
+  // 					"campTargetType": "Enemy",
+  // 					"campBasedOn": "Self",
+  // 					"topLimit":1
+  // 				},
+  // 				"predicates":
+  // 				[
+  // 					{
+  // 						"$type":"ByEntityTypes",
+  // 						"entityTypes":["Monster",],
+  // 					},
+  // 				],
+  // 			},
+  // 			{
+  // 						"$type":"TriggerBullet",
+  // 						"bulletID":40000176,
+  // 						"campID":1001,
+  // 						// "target":"Target",
+  // 						// "targets":
+  // 						// {
+  // 						// 	"shapeName": "CircleR10",
+  // 						// 	"centerBasedOn": "Self",
+  // 						// 	"campTargetType": "Enemy",
+  // 						// 	"campBasedOn": "Self",
+  // 						// 	"topLimit":1
+  // 						// },
+  // 						// "predicates":
+  // 						// [
+  // 						// 	{
+  // 						// 		"$type":"ByEntityTypes",
+  // 						// 		"entityTypes":["Monster",],
+  // 						// 	},
+  // 						// ],
+  // 						"born":
+  // 						{
+  // 							"$type": "ConfigBornByTarget",
+  // 							"offset" :
+  // 							{
+  // 								"x": 0,
+  // 								"y": 1.2,
+  // 								"z": 0,
+  // 							},
+  // 							// "onGround":true,
+  // 							"direction":
+  // 							{
+  // 								"$type":"ConfigDirectionByAttackTarget",
+  // 								"maxAngle":360,
+  // 							},
+  // 						},
+  // 						// "predicates":
+  // 						// [
+  // 						// 	{
+  // 						// 		"$type":"ByTargetGlobalValue",
+  // 						// 		"target":"OriginOwner",
+  // 						// 		"key": "_ABILITY_Jump_COUNT",
+  // 						// 		"value": 0,
+  // 						// 		"compareType": "MoreThan",
+  // 						// 	},
+  // 						// ],
+  // 					},
+  // 					{
+  // 						"$type":"KillSelf",
+  // 						"target":"Self",
+  // 					},
+  // 		],
+  // 		// "modifiers":
+  // 		// {
+  // 		// 	"time":
+  // 		// 	{
+  // 		// 		"duration":0.3,
+  // 		// 		"onRemoved":
+  // 		// 		[
+  // 		// 				{
+  // 		// 				"$type":"TriggerBullet",
+  // 		// 				"bulletID":40000175,
+  // 		// 				"campID":1001,
+  // 		// 				// "target":"Target",
+  // 		// 				// "targets":
+  // 		// 				// {
+  // 		// 				// 	"shapeName": "CircleR10",
+  // 		// 				// 	"centerBasedOn": "Self",
+  // 		// 				// 	"campTargetType": "Enemy",
+  // 		// 				// 	"campBasedOn": "Self",
+  // 		// 				// 	"topLimit":1
+  // 		// 				// },
+  // 		// 				// "predicates":
+  // 		// 				// [
+  // 		// 				// 	{
+  // 		// 				// 		"$type":"ByEntityTypes",
+  // 		// 				// 		"entityTypes":["Monster",],
+  // 		// 				// 	},
+  // 		// 				// ],
+  // 		// 				"born":
+  // 		// 				{
+  // 		// 					"$type": "ConfigBornByTarget",
+  // 		// 					"offset" :
+  // 		// 					{
+  // 		// 						"x": 0,
+  // 		// 						"y": 1.2,
+  // 		// 						"z": 0,
+  // 		// 					},
+  // 		// 					// "onGround":true,
+  // 		// 					"direction":
+  // 		// 					{
+  // 		// 						"$type":"ConfigDirectionByAttackTarget",
+  // 		// 						"maxAngle":360,
+  // 		// 					},
+  // 		// 				},
+  // 		// 				// "predicates":
+  // 		// 				// [
+  // 		// 				// 	{
+  // 		// 				// 		"$type":"ByTargetGlobalValue",
+  // 		// 				// 		"target":"OriginOwner",
+  // 		// 				// 		"key": "_ABILITY_Jump_COUNT",
+  // 		// 				// 		"value": 0,
+  // 		// 				// 		"compareType": "MoreThan",
+  // 		// 				// 	},
+  // 		// 				// ],
+  // 		// 			},
+  // 		// 			{
+  // 		// 				"$type":"KillSelf",
+  // 		// 				"target":"Self",
+  // 		// 			},
+  // 		// 		],
+  // 		// 	},
+  // 		// },
+  // 	},
+  // },
+  // {
+  // 	"Default":
+  // 	{
+  // 		"$type": "ConfigAbility",
+  // 		"abilityName": "Jumping_Drug_Explode3",
+  // 		"onAbilityStart":
+  // 		[
+  // 			{
+  // 					"$type":"AddGlobalValue",
+  // 					"target":"Caster",
+  // 					"key":"_ABILITY_Jump_COUNT",
+  // 					"value":-1,
+  // 					"useLimitRange" : true,
+  // 					"maxValue" : 4,
+  // 					"minValue" : 0,
+  // 			},
+  // 			{
+  // 				"$type":"KillSelf",
+  // 			},
+  // 			// {
+  // 			// 	"$type":"FireEffect",
+  // 			// 	"effectPattern": "Eff_Hit_Blood_01",
+  // 			// },
+  // 			{
+  // 				"$type" : "TriggerAttackEvent",
+  // 				"targetType" : "Enemy",
+  // 				"attackEvent":
+  // 				{
+  // 					"attackPattern" :
+  // 					{
+  // 						"$type" : "ConfigAttackSphere",
+  // 						"triggerType" : "TriggerNoRepeat",
+  // 						"radius" : 0.5,
+  // 						"born":
+  // 						{
+  // 							"$type": "ConfigBornByCollisionPoint",
+  // 						},
+  // 					},
+  // 					"attackInfo":
+  // 					{
+  // 						"attackProperty":
+  // 						{
+  // 							"damagePercentage": 1.0,
+  // 							"elementType": "Fire",
+  // 							"elementDurability": 30,
+  // 							"strikeType": "Blunt",
+  // 						},
+  // 						"hitPattern" :
+  // 						{
+  // 							"hitLevel" : "Air",
+  // 							"hitImpulseX" : 200,
+  // 							"hitImpulseY" : 400,
+  // 							"reboundRatio" : 0,
+  // 							"hitHaltTime" : 0.0,
+  // 							"hitHaltTimeScale" : 0.05,
+  // 							"muteHitText" : false,
+  // 						},
+  // 						"forceCameraShake": true,
+  // 						"cameraShake":
+  // 						{
+  // 							"shakeRange": 0.12,
+  // 							"shakeTime": 0.12,
+  // 						},
+  // 					},
+  // 				},
+  // 			},
+  // 			{
+  // 				"$type": "FireEffect",
+  // 				"effectPattern": "Eff_WhiteBox_Explode",
+  // 				// "effectPattern": "Eff_Monster_Slime_Fire_SelfExplosion_Large",
+  // 				// "predicates" :
+  // 				// [
+  // 				// 	{
+  // 				// 		"$type": "ByHasElement",
+  // 				// 		"element": "Fire",
+  // 				// 	},
+  // 				// ],
+  // 			},
+  // 		],
+  // 	},
+  // },
+  // ///用于大招的只炸一次的炸弹。
+  // ///
+  // {
+  // 	"Default" :
+  // 	{
+  // 		"$type" : "ConfigAbility",
+  // 		"abilityName" : "Avatar_Kate_JumpingBomb2",
+  // 		"onAbilityStart":
+  // 		[
+  // 			{
+  // 				"$type":"CreateGadget",//考虑先丢一个gadget，然后拿到gadget的global地址用于子弹最终目的地点。
+  // 				"gadgetID":40000139,
+  // 				"campID":1001,
+  // 				"born":
+  // 				{
+  // 					"$type": "ConfigBornByTarget",
+  // 					"offset" :
+  // 					{
+  // 						"x": 0.0,
+  // 						"y": 0,
+  // 						"z": 4,
+  // 					},
+  // 				},
+  // 				"maxRandomRange":5,
+  // 			},
+  // 			{
+  // 				"$type":"TriggerBullet",
+  // 				"bulletID":40000177,
+  // 				"target":"Target",
+  // 				"campID":1001,
+  // 				"born":
+  // 				{
+  // 					"$type": "ConfigBornByTarget",
+  // 					"offset" :
+  // 					{
+  // 						"x": 0.0,
+  // 						"y": 1.2,
+  // 						"z": 1.0,
+  // 					},
+  // 				},
+  // 				"maxRandomRange":1,
+  // 			},
+  // 			// {
+  // 			// 	"$type":"TriggerBullet",
+  // 			// 	"bulletID":40000177,
+  // 			// 	"target":"Target",
+  // 			// 	"campID":1001,
+  // 			// 	"born":
+  // 			// 	{
+  // 			// 		"$type": "ConfigBornByTarget",
+  // 			// 		"offset" :
+  // 			// 		{
+  // 			// 			"x": 0.0,
+  // 			// 			"y": 1.2,
+  // 			// 			"z": 1.0,
+  // 			// 		},
+  // 			// 	},
+  // 			// 	"maxRandomRange":1,
+  // 			// },
+  // 			// {
+  // 			// 	"$type":"TriggerBullet",
+  // 			// 	"bulletID":40000177,
+  // 			// 	"target":"Target",
+  // 			// 	"campID":1001,
+  // 			// 	"born":
+  // 			// 	{
+  // 			// 		"$type": "ConfigBornByTarget",
+  // 			// 		"offset" :
+  // 			// 		{
+  // 			// 			"x": 0.0,
+  // 			// 			"y": 1.2,
+  // 			// 			"z": 1.0,
+  // 			// 		},
+  // 			// 		"maxRandomRange":1,
+  // 			// 	},
+  // 			// },
+  // 		],
+  // 	},
+  // },
+  // {
+  // 	"Default":
+  // 	{
+  // 		"$type": "ConfigAbility",
+  // 		"abilityName": "Jumping_Drug_Explode4",
+  // 		"onAbilityStart":
+  // 		[
+  // 			{
+  // 				"$type" : "TriggerAttackEvent",
+  // 				"targetType" : "Enemy",
+  // 				"attackEvent":
+  // 				{
+  // 					"attackPattern" :
+  // 					{
+  // 						"$type" : "ConfigAttackSphere",
+  // 						"triggerType" : "TriggerNoRepeat",
+  // 						"radius" : 0.5,
+  // 						"born":
+  // 						{
+  // 							"$type": "ConfigBornByCollisionPoint",
+  // 						},
+  // 					},
+  // 					"attackInfo":
+  // 					{
+  // 						"attackProperty":
+  // 						{
+  // 							"damagePercentage": 1.0,
+  // 							"elementType": "Fire",
+  // 							"elementDurability": 30,
+  // 							"strikeType": "Blunt",
+  // 						},
+  // 						"hitPattern" :
+  // 						{
+  // 							"hitLevel" : "Air",
+  // 							"hitImpulseX" : 200,
+  // 							"hitImpulseY" : 400,
+  // 							"reboundRatio" : 0,
+  // 							"hitHaltTime" : 0.0,
+  // 							"hitHaltTimeScale" : 0.05,
+  // 							"muteHitText" : false,
+  // 						},
+  // 						"forceCameraShake": true,
+  // 						"cameraShake":
+  // 						{
+  // 							"shakeRange": 0.12,
+  // 							"shakeTime": 0.12,
+  // 						},
+  // 					},
+  // 				},
+  // 			},
+  // 			{
+  // 				"$type": "FireEffect",
+  // 				"effectPattern": "Eff_WhiteBox_Explode",
+  // 			},
+  // 			{
+  // 				"$type":"KillSelf",
+  // 				"target":"Self",
+  // 			},
+  // 		],
+  // 	},
+  // },
+  /////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////温迪小技能第一版////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////
+
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -821,12 +1504,13 @@
         {
           "$type": "SkillButtonHoldChargeMixin",
           "skillID": 10224,
-          "nextLoopTriggerID": "NextLoopTrigger",
-          "endHoldTrigger": "EndHoldTrigger",
           "beforeStateIDs": ["WindBlade_Rise_BS"],
           "chargeLoopStateIDs": ["WindBlade_Rise_Charge", "WindBlade_RiseUp"],
-          "chargeLoopDurations": [0.30000001192092896]
+          "chargeLoopDurations": [0.3],
+          "nextLoopTriggerID": "NextLoopTrigger",
+          "endHoldTrigger": "EndHoldTrigger"
         },
+        ///////温迪的竖琴特效，有个想法是完成温迪取回"天空"的任务后，竖琴的外形替换成天空的外形//////////
         {
           "$type": "AttachToStateIDMixin",
           "stateIDs": [
@@ -838,42 +1522,53 @@
           "modifierName": "Eff_Venti_Harp"
         }
       ],
+      "onAbilityStart": [],
+      "onAttackLanded": [],
       "modifiers": {
         "WindBlade_Trap": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1,
           "properties": {
-            "Animator_OverallSpeedRatioMultiplied": 0.10000000149011612
+            "Animator_OverallSpeedRatioMultiplied": 0.1
           }
         },
         "TriggerAttack": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "CreateGadget",
+              "gadgetID": 41022003,
               "target": "SelfAttackTarget",
+              "campID": 1001,
+              "campTargetType": "Enemy",
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.5,
+                  "z": 0.0
+                },
+                "onGround": true
+              },
               "predicates": [
                 {
                   "$type": "ByHasAttackTarget"
                 }
-              ],
-              "born": {
-                "$type": "ConfigBornByTarget",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.5,
-                  "PJCOKIGCJOK": 0.0
-                },
-                "onGround": true
-              },
-              "gadgetID": 41022003,
-              "campID": 1001,
-              "campTargetType": "Enemy"
+              ]
             },
             {
               "$type": "CreateGadget",
+              "gadgetID": 41022003,
+              "campID": 1001,
+              "campTargetType": "Enemy",
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 6.0
+                },
+                "onGround": true,
+                "alongGround": true
+              },
               "predicates": [
                 {
                   "$type": "ByNot",
@@ -883,95 +1578,53 @@
                     }
                   ]
                 }
-              ],
-              "born": {
-                "$type": "ConfigBornByTarget",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 6.0
-                },
-                "onGround": true,
-                "alongGround": true
-              },
-              "gadgetID": 41022003,
-              "campID": 1001,
-              "campTargetType": "Enemy"
+              ]
             },
             {
               "$type": "AvatarSkillStart",
               "skillID": 10224,
-              "cdDelta": 0.800000011920929,
-              "costStaminaDelta": 1.0
+              "cdRatio": 0.8
             }
           ]
         },
         "TriggerAttack_Land": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "CreateGadget",
+              "gadgetID": 41022003,
               "target": "SelfAttackTarget",
+              "campID": 1001,
+              "campTargetType": "Enemy",
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.5,
+                  "z": 0.5
+                },
+                "onGround": true
+              },
               "predicates": [
                 {
                   "$type": "ByHasAttackTarget"
                 }
-              ],
-              "born": {
-                "$type": "ConfigBornByTarget",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.5,
-                  "PJCOKIGCJOK": 0.5
-                },
-                "onGround": true
-              },
-              "gadgetID": 41022003,
-              "campID": 1001,
-              "campTargetType": "Enemy"
+              ]
             },
             {
               "$type": "CreateGadget",
-              "predicates": [
-                {
-                  "$type": "ByNot",
-                  "predicates": [
-                    {
-                      "$type": "ByHasAttackTarget"
-                    }
-                  ]
-                }
-              ],
+              "gadgetID": 41022003,
+              "campID": 1001,
+              "campTargetType": "Enemy",
               "born": {
                 "$type": "ConfigBornByTarget",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 6.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 6.0
                 },
                 "onGround": true,
                 "alongGround": true
               },
-              "gadgetID": 41022003,
-              "campID": 1001,
-              "campTargetType": "Enemy"
-            },
-            {
-              "$type": "AvatarSkillStart",
-              "skillID": 10224,
-              "cdDelta": 0.30000001192092896,
-              "costStaminaDelta": 1.0
-            }
-          ]
-        },
-        "WindBlade_Rise_Charge_Timer": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.800000011920929,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "ApplyModifier",
               "predicates": [
                 {
                   "$type": "ByNot",
@@ -981,76 +1634,106 @@
                     }
                   ]
                 }
-              ],
-              "modifierName": "SetCamera"
+              ]
+            },
+            {
+              "$type": "AvatarSkillStart",
+              "skillID": 10224,
+              "cdRatio": 0.3
+            }
+          ]
+        },
+        "WindBlade_Rise_Charge_Timer": {
+          "duration": 0.8,
+          "onAdded": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "SetCamera",
+              "predicates": [
+                {
+                  "$type": "ByNot",
+                  "predicates": [
+                    {
+                      "$type": "ByHasAttackTarget"
+                    }
+                  ]
+                }
+              ]
             }
           ],
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Boy_Bow_Venti_Rise_Up",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Avatar_Boy_Bow_Venti_Rise_Up"
             },
             {
               "$type": "ApplyModifier",
+              "modifierName": "WindBlade_Trap",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR15",
+                "centerBasedOn": "Self",
                 "campTargetType": "Enemy",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
               "predicates": [
                 {
                   "$type": "ByEntityTypes",
                   "entityTypes": ["Monster"]
                 }
-              ],
-              "modifierName": "WindBlade_Trap"
+                // {
+                // 	"$type" : "ByAttackTags",
+                // 	"attackTags" : ["Avatar_Venti_WindBlade"],
+                // },
+              ]
             },
+            //起跳时吹飞周围的怪
             {
               "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
+                  "radius": 10.0,
                   "born": {
                     "$type": "ConfigBornByTarget",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     }
-                  },
-                  "DCMPFCIBIPA": 10.0
+                  }
                 },
                 "attackInfo": {
                   "attackTag": "Avatar_Venti_WindBlade",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "HBIOLEEGHPD": 0.0,
-                    "CCNJGLPMIEP": 0.0,
-                    "bonusCriticalHurt": 100.0
+                    "damagePercentage": 0,
+                    "strikeType": "None"
                   },
                   "hitPattern": {
                     "onHitEffectName": "default",
                     "hitLevel": "Air",
-                    "MOELECJEOEI": 700.0,
-                    "hitImpulseY": 0.0,
-                    "hitImpulseType": "",
+                    "hitImpulseX": 700,
+                    "hitImpulseY": 0,
+                    "reboundRatio": 0,
                     "hitHaltTime": 1.0,
-                    "hitHaltTimeScale": 1.0
-                  }
+                    "hitHaltTimeScale": 1.0,
+                    "muteHitText": false
+                  },
+                  "forceCameraShake": false
+                  // "cameraShake":
+                  // {
+                  // 	"shakeRange": 0.08,
+                  // 	"shakeTime": 0.04,
+                  // },
                 }
-              },
-              "targetType": "Enemy"
+              }
             }
           ]
         },
         "SetCamera": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1,
           "onAdded": [
             {
               "$type": "AvatarEnterCameraShot",
@@ -1059,25 +1742,186 @@
           ]
         },
         "Eff_Venti_Harp": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Boy_Bow_Venti_Harp",
+              "effectPattern": "Eff_Avatar_Boy_Bow_Venti_Harp",
               "born": {
                 "$type": "ConfigBornByTarget",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.30000001192092896,
-                  "PJCOKIGCJOK": 0.30000001192092896
+                  "x": 0.0, // + means up, - means down
+                  "y": 0.3, // + means left, - means right
+                  "z": 0.3 // + means forward, - means backward
                 }
-              },
-              "EBHJMLOKDGB": -1.0
+              }
             }
           ]
         }
       }
     }
   }
+
+  // {
+  // 	"Default":
+  // 	{
+  // 		"$type": "ConfigAbility",
+  // 		"abilityName": "Venti_WindBlade_FX",
+  // 		"onAdded":
+  // 		[
+  // 			{
+  // 				"$type":"FireEffect",
+  // 				"effectPattern":"Eff_Avatar_Boy_Bow_Venti_WIndBlade",
+  // 			},
+  // 			{
+  // 				"$type":"AttachModifier",
+  // 				"modifierName":"WindBlade_Timer"
+  // 			},
+  // 		],
+  // 		"modifiers":
+  // 		{
+  // 			"WindBlade_Timer":
+  // 			{
+  // 				"duration":0.4,
+  // 				"onRemoved":
+  // 				[
+  // 					{
+  // 						"$type" : "TriggerAttackEvent",
+  // 						"targetType" : "Enemy",
+  // 						"attackEvent":
+  // 						{
+  // 							"attackPattern" :
+  // 							{
+  // 								"$type" : "ConfigAttackSphere",
+  // 								"triggerType" : "TriggerNoRepeat",
+  // 								"radius" : 3.0,
+  // 								"born":
+  // 								{
+  // 									"$type": "ConfigBornByTarget",
+  // 									"offset" :
+  // 									{
+  // 										"x" : 0.0,
+  // 										"y" : 0.0,
+  // 										"z" : 0.0,
+  // 									},
+  // 								},
+  // 							},
+  // 							"attackInfo":
+  // 							{
+  // 								"attackProperty":
+  // 								{
+  // 									"damagePercentage": "%WindBladeDamage",
+  // 									"strikeType": "Pierce",
+  // 									"elementType": "Wind",
+  // 									"elementDurability": 50,
+  // 								},
+  // 								"hitPattern" :
+  // 								{
+  // 									"hitLevel" : "Heavy",
+  // 									"hitImpulseX" : 200,
+  // 									"hitImpulseY" : 0,
+  // 									"reboundRatio" : 0,
+  // 									"hitHaltTime" : 0.0,
+  // 									"hitHaltTimeScale" : 0.05,
+  // 									"muteHitText" : false,
+  // 								},
+  // 								"forceCameraShake": false,
+  // 								"cameraShake":
+  // 								{
+  // 									"shakeRange": 0.36,
+  // 									"shakeTime": 0.12,
+  // 								},
+  // 							},
+  // 						},
+  // 					},
+  // 				],
+  // 			},
+  // 		},
+  // 		"abilitySpecials" :
+  // 		{
+  // 			"WindBladeDamage" : 2,
+  // 		},
+  // 	},
+  // },
+
+  // {
+  // 	"Default":
+  // 	{
+  // 		"$type": "ConfigAbility",
+  // 		"abilityName": "Venti_WindBlade_FX_Land",
+  // 		"onAdded":
+  // 		[
+  // 			{
+  // 				"$type":"FireEffect",
+  // 				"effectPattern":"Eff_Avatar_Boy_Bow_Venti_WIndBlade_0",
+  // 			},
+  // 			{
+  // 				"$type":"AttachModifier",
+  // 				"modifierName":"WindBlade_Timer"
+  // 			}
+  // 		],
+  // 		"modifiers":
+  // 		{
+  // 			"WindBlade_Timer":
+  // 			{
+  // 				"duration":0.4,
+  // 				"onRemoved":
+  // 				[
+  // 					{
+  // 						"$type" : "TriggerAttackEvent",
+  // 						"targetType" : "Enemy",
+  // 						"attackEvent":
+  // 						{
+  // 							"attackPattern" :
+  // 							{
+  // 								"$type" : "ConfigAttackSphere",
+  // 								"triggerType" : "TriggerNoRepeat",
+  // 								"radius" : 3.0,
+  // 								"born":
+  // 								{
+  // 									"$type": "ConfigBornByTarget",
+  // 									"offset" :
+  // 									{
+  // 										"x" : 0.0,
+  // 										"y" : 0.0,
+  // 										"z" : 0.0,
+  // 									},
+  // 								},
+  // 							},
+  // 							"attackInfo":
+  // 							{
+  // 								"attackProperty":
+  // 								{
+  // 									"damagePercentage": "%WindBladeDamage_Land",
+  // 									"strikeType": "Pierce",
+  // 									"elementType": "Wind",
+  // 									"elementDurability": 50,
+  // 								},
+  // 								"hitPattern" :
+  // 								{
+  // 									"hitLevel" : "Heavy",
+  // 									"hitImpulseX" : 200,
+  // 									"hitImpulseY" : 0,
+  // 									"reboundRatio" : 0,
+  // 									"hitHaltTime" : 0.0,
+  // 									"hitHaltTimeScale" : 0.05,
+  // 									"muteHitText" : false,
+  // 								},
+  // 								"forceCameraShake": false,
+  // 								"cameraShake":
+  // 								{
+  // 									"shakeRange": 0.36,
+  // 									"shakeTime": 0.12,
+  // 								},
+  // 							},
+  // 						},
+  // 					},
+  // 				],
+  // 			}
+  // 		},
+  // 		"abilitySpecials" :
+  // 		{
+  // 			"WindBladeDamage_Land" : 2,
+  // 		},
+  // 	},
+  // },
 ]

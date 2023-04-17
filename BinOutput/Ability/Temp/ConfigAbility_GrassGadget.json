@@ -1,17 +1,29 @@
 [
+  /////////////////////////////////////////////////////////////////////////////////////
+  //
+  // 石油
+  //
+  /////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Oil_Interact",
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "NormalModifier"
+        }
+      ],
       "modifiers": {
         "NormalModifier": {
-          "modifierName": "",
           "elementType": "Wood",
-          "bonusCriticalHurt": 5.0,
+          "elementDurability": 5,
           "isElementDurabilityMutable": false,
           "onBeingHit": [
             {
               "$type": "ApplyModifier",
+              "modifierName": "Burning",
+              "target": "Self",
               "predicates": [
                 {
                   "$type": "ByHitElement",
@@ -26,11 +38,12 @@
                     }
                   ]
                 }
-              ],
-              "modifierName": "Burning"
+              ]
             },
             {
               "$type": "ApplyModifier",
+              "modifierName": "On_Burning",
+              "target": "Self",
               "predicates": [
                 {
                   "$type": "ByHitElement",
@@ -45,64 +58,64 @@
                     }
                   ]
                 }
-              ],
-              "modifierName": "On_Burning"
+              ]
             }
           ]
         },
         "On_Burning": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onRemoved": [
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "Delay"
-            },
-            {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_FireBasin_Smoke",
-              "born": {
-                "$type": "ConfigBornByAttachPoint",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
-                },
-                "attachPointName": "attachPoint"
-              },
-              "EBHJMLOKDGB": -1.0
-            }
-          ],
           "onBeingHit": [
             {
               "$type": "ApplyModifier",
+              "modifierName": "Check_Fire",
+              "target": "Self",
               "predicates": [
                 {
                   "$type": "ByHitElement",
                   "element": "Water"
                 }
-              ],
-              "modifierName": "Check_Fire"
+              ]
             },
             {
               "$type": "ApplyModifier",
+              "modifierName": "Check_Fire",
+              "target": "Self",
               "predicates": [
                 {
                   "$type": "ByHitElement",
                   "element": "Ice"
                 }
-              ],
-              "modifierName": "Check_Fire"
+              ]
+            }
+          ],
+          "onRemoved": [
+            //延迟3秒后检测自身周围火源
+            {
+              "$type": "ApplyModifier",
+              "target": "Self",
+              "modifierName": "Delay"
+            },
+            {
+              "$type": "FireEffect",
+              "effectPattern": "Eff_FireBasin_Smoke",
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "attachPointName": "attachPoint",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                }
+              }
             }
           ]
         },
         "Check_Fire": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.2,
           "onRemoved": [
+            //检测自身是否熄灭
             {
               "$type": "RemoveModifier",
+              "modifierName": "On_Burning",
               "predicates": [
                 {
                   "$type": "ByNot",
@@ -113,18 +126,16 @@
                     }
                   ]
                 }
-              ],
-              "modifierName": "On_Burning"
+              ]
             }
           ]
         },
         "Check_Around": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.2,
           "onAdded": [
             {
               "$type": "Predicated",
+              "target": "Self",
               "targetPredicates": [
                 {
                   "$type": "ByHasElement",
@@ -132,29 +143,29 @@
                 }
               ],
               "successActions": [
+                //若自身着火则反向点燃搜寻者
                 {
                   "$type": "DamageByAttackValue",
                   "target": "Caster",
                   "attackInfo": {
-                    "attackTag": "",
-                    "attenuationTag": "",
-                    "attenuationGroup": "default",
                     "attackProperty": {
-                      "HBIOLEEGHPD": 0.10000000149011612,
-                      "CCNJGLPMIEP": 0.0,
+                      "damagePercentage": 0.1,
+                      "strikeType": "Default",
                       "elementType": "Fire",
-                      "bonusCriticalHurt": 40.0,
-                      "strikeType": "Default"
+                      "elementDurability": 40
                     },
                     "hitPattern": {
                       "onHitEffectName": "default",
-                      "hitImpulseType": "",
                       "overrideHitImpulse": {
                         "hitLevel": "Air",
-                        "MOELECJEOEI": 0.0,
-                        "hitImpulseY": 420.0
+                        "hitImpulseX": 0,
+                        "hitImpulseY": 420
                       },
-                      "hitHaltTimeScale": 0.009999999776482582
+                      "reboundRatio": 0,
+                      "canBeDefenceHalt": false,
+                      "hitHaltTime": 0.0,
+                      "hitHaltTimeScale": 0.01,
+                      "muteHitText": false
                     }
                   }
                 }
@@ -163,69 +174,60 @@
           ]
         },
         "Delay": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 4.5,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 3.0,
+          "duration": 4.5,
+          "thinkInterval": 3,
           "onThinkInterval": [
             {
               "$type": "ApplyModifier",
+              "modifierName": "Check_Around",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR5",
+                "centerBasedOn": "Self",
                 "campTargetType": "SelfCamp",
-                "sizeRatio": 1.0
-              },
-              "modifierName": "Check_Around"
+                "campBasedOn": "Self"
+              }
             }
           ]
         },
         "Burning": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.2000000476837158,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 1.0,
+          "duration": 1.2,
+          "thinkInterval": 1,
           "onThinkInterval": [
             {
               "$type": "DamageByAttackValue",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR5",
+                "centerBasedOn": "Self",
                 "campTargetType": "SelfCamp",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
               "attackInfo": {
-                "attackTag": "",
-                "attenuationTag": "",
-                "attenuationGroup": "default",
                 "attackProperty": {
-                  "HBIOLEEGHPD": 0.10000000149011612,
-                  "CCNJGLPMIEP": 0.0,
+                  "damagePercentage": 0.1,
+                  "strikeType": "Default",
                   "elementType": "Fire",
-                  "bonusCriticalHurt": 40.0,
-                  "strikeType": "Default"
+                  "elementDurability": 40
                 },
                 "hitPattern": {
                   "onHitEffectName": "default",
-                  "hitImpulseType": "",
                   "overrideHitImpulse": {
                     "hitLevel": "Air",
-                    "MOELECJEOEI": 0.0,
-                    "hitImpulseY": 420.0
+                    "hitImpulseX": 0,
+                    "hitImpulseY": 420
                   },
-                  "hitHaltTimeScale": 0.009999999776482582
+                  "reboundRatio": 0,
+                  "canBeDefenceHalt": false,
+                  "hitHaltTime": 0.0,
+                  "hitHaltTimeScale": 0.01,
+                  "muteHitText": false
                 }
               }
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "NormalModifier"
-        }
-      ]
+      }
     }
   }
 ]

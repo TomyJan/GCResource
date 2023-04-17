@@ -1,4 +1,9 @@
 [
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Alert
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -6,28 +11,35 @@
       "onAbilityStart": [
         {
           "$type": "SetPoseBool",
+          "boolID": "IsNear",
+          "value": true,
           "predicates": [
             {
               "$type": "ByTargetPositionToSelfPosition",
               "target": "SelfAttackTarget",
-              "logic": "Lesser",
-              "ratio": 15.0
+              "compareType": "XZ",
+              "value": 15,
+              "logic": "Lesser"
             }
-          ],
-          "boolID": "IsNear",
-          "ratio": true
+          ]
         },
         {
           "$type": "AddGlobalValue",
-          "ratio": -1.0,
-          "key": "_WYRM_ROCK_CRUSHING_COUNT",
+          "value": -1,
+          "key": "_WYRM_ROCK_CRUSHING_COUNT", //触发crushatk的计数，每滚动一轮+1
           "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
+          "maxValue": 1,
+          "minValue": 0
         }
       ]
     }
   },
+
+  ////////////////////////////////////////////////////////////////
+  //
+  //  StateSwitch
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -35,45 +47,105 @@
       "onAbilityStart": [
         {
           "$type": "SetPoseBool",
+          "boolID": "IsNear",
+          "value": false,
           "predicates": [
             {
               "$type": "ByTargetPositionToSelfPosition",
               "target": "SelfAttackTarget",
-              "logic": "GreaterOrEqual",
-              "ratio": 10.0
+              "compareType": "XZ",
+              "value": 10,
+              "logic": "GreaterOrEqual"
             }
-          ],
-          "boolID": "IsNear"
+          ]
         },
         {
           "$type": "SetPoseBool",
+          "boolID": "IsNear",
+          "value": true,
           "predicates": [
             {
               "$type": "ByTargetPositionToSelfPosition",
               "target": "SelfAttackTarget",
-              "logic": "Lesser",
-              "ratio": 10.0
+              "compareType": "XZ",
+              "value": 10,
+              "logic": "Lesser"
             }
-          ],
-          "boolID": "IsNear",
-          "ratio": true
+          ]
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Wyrm_Rock_FollowHitBox
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
+      //移除跟随攻击盒
       "$type": "ConfigAbility",
       "abilityName": "Monster_Wyrm_Rock_CreateFollowBullet",
+      "onAbilityStart": [
+        {
+          "$type": "TriggerBullet",
+          "bulletID": 42603014,
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "offset": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
+          },
+          "lifeByOwnerV2": true,
+          "trackTarget": "Self",
+          "target": "Self",
+          "predicates": [
+            {
+              "$type": "ByAnimatorInt",
+              "value": 231,
+              "parameter": "SkillID",
+              "logic": "Equal"
+            }
+          ]
+        },
+        {
+          "$type": "TriggerBullet",
+          "bulletID": 42603015,
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "offset": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
+          },
+          "lifeByOwnerIsAlive": true,
+          "trackTarget": "Self",
+          "target": "Self",
+          "predicates": [
+            {
+              "$type": "ByAnimatorInt",
+              "value": 241,
+              "parameter": "SkillID",
+              "logic": "Equal"
+            }
+          ]
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_Wyrm_Rock_FollowHitBox"
+        }
+      ],
       "modifiers": {
         "UNIQUE_Wyrm_Rock_FollowHitBox": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "EnablePushColliderName",
-              "pushColliderNames": ["PushCollider", "PushCollider_Tail"]
+              "pushColliderNames": ["PushCollider", "PushCollider_Tail"],
+              "setEnable": false
             },
             {
               "$type": "EnablePushColliderName",
@@ -85,15 +157,17 @@
             {
               "$type": "KillGadget",
               "gadgetInfo": {
-                "sortType": "Reversed",
-                "configID": 42603014
+                "$type": "SelectTargetsByChildren",
+                "configID": 42603014,
+                "sortType": "Reversed"
               }
             },
             {
               "$type": "KillGadget",
               "gadgetInfo": {
-                "sortType": "Reversed",
-                "configID": 42603015
+                "$type": "SelectTargetsByChildren",
+                "configID": 42603015,
+                "sortType": "Reversed"
               }
             },
             {
@@ -103,65 +177,17 @@
             },
             {
               "$type": "EnablePushColliderName",
-              "pushColliderNames": ["PushCollider_Roll"]
+              "pushColliderNames": ["PushCollider_Roll"],
+              "setEnable": false
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "TriggerBullet",
-          "predicates": [
-            {
-              "$type": "ByAnimatorInt",
-              "logic": "Equal",
-              "ratio": 231,
-              "parameter": "SkillID"
-            }
-          ],
-          "bulletID": 42603014,
-          "born": {
-            "$type": "ConfigBornBySelf",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            }
-          },
-          "trackTarget": "Self",
-          "JAEOKOAACJP": true
-        },
-        {
-          "$type": "TriggerBullet",
-          "predicates": [
-            {
-              "$type": "ByAnimatorInt",
-              "logic": "Equal",
-              "ratio": 241,
-              "parameter": "SkillID"
-            }
-          ],
-          "bulletID": 42603015,
-          "born": {
-            "$type": "ConfigBornBySelf",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            }
-          },
-          "lifeByOwnerIsAlive": true,
-          "trackTarget": "Self"
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "UNIQUE_Wyrm_Rock_FollowHitBox"
-        }
-      ]
+      }
     }
   },
   {
     "Default": {
+      //移除跟随攻击盒
       "$type": "ConfigAbility",
       "abilityName": "Monster_Wyrm_Rock_RemoveFollowBullet",
       "onAbilityStart": [
@@ -175,56 +201,57 @@
   {
     "Default": {
       "$type": "ConfigAbility",
-      "abilityName": "Monster_Wyrm_Rock_FollowHitBox_Roll",
+      "abilityName": "Monster_Wyrm_Rock_FollowHitBox_Roll", //滚动攻击时的攻击事件
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackBox",
               "triggerType": "TriggerNoRepeat",
-              "filterByFrame": true,
-              "ignoreMassive": true,
+              "size": {
+                "x": 0.5,
+                "y": 0.5,
+                "z": 0.5
+              },
               "born": {
                 "$type": "ConfigBornByCollisionPoint"
               },
-              "size": {
-                "IBKBLDAJIMA": 0.5,
-                "LKHJADIPBFL": 0.5,
-                "PJCOKIGCJOK": 0.5
-              }
+              "ignoreMassive": true,
+              "filterByFrame": true
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
+              "canBeModifiedBy": "OriginOwner",
               "attackProperty": {
-                "HBIOLEEGHPD": 0.3330000042915344,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Rock",
-                "bonusCriticalHurt": 50.0,
-                "overrideByWeapon": true,
+                "damagePercentage": 0.333,
                 "strikeType": "Blunt",
+                "elementType": "Rock",
+                "elementDurability": 50,
+                "overrideByWeapon": true,
                 "attackType": "Melee"
               },
               "hitPattern": {
-                "onHitEffectName": "default",
                 "hitImpulseType": "LV2",
-                "hitHaltTime": 0.05000000074505806,
-                "hitHaltTimeScale": 0.05000000074505806
+                "reboundRatio": 0,
+                "hitHaltTime": 0.05,
+                "hitHaltTimeScale": 0.05,
+                "muteHitText": false
               },
+              "forceCameraShake": false,
               "cameraShake": {
                 "shakeType": "HitVector",
-                "shakeRange": 0.05999999865889549,
-                "shakeTime": 0.11999999731779099,
+                "shakeRange": 0.06,
+                "shakeTime": 0.12,
+                "shakeDistance": 20,
                 "shakeDir": {
-                  "z": 1.0
+                  "x": 0,
+                  "y": 0,
+                  "z": 1
                 }
-              },
-              "canBeModifiedBy": "OriginOwner"
+              }
             }
-          },
-          "targetType": "Enemy"
+          }
         }
       ]
     }
@@ -232,66 +259,79 @@
   {
     "Default": {
       "$type": "ConfigAbility",
-      "abilityName": "Monster_Wyrm_Rock_FollowHitBox_CrushAtk",
+      "abilityName": "Monster_Wyrm_Rock_FollowHitBox_CrushAtk", //滚动攻击时的攻击事件
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackBox",
               "triggerType": "TriggerNoRepeat",
-              "filterByFrame": true,
-              "ignoreMassive": true,
+              "size": {
+                "x": 0.5,
+                "y": 0.5,
+                "z": 0.5
+              },
               "born": {
                 "$type": "ConfigBornByCollisionPoint"
               },
-              "size": {
-                "IBKBLDAJIMA": 0.5,
-                "LKHJADIPBFL": 0.5,
-                "PJCOKIGCJOK": 0.5
-              }
+              "ignoreMassive": true,
+              "filterByFrame": true
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
+              "canBeModifiedBy": "OriginOwner",
               "attackProperty": {
-                "HBIOLEEGHPD": 0.8330000042915344,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Rock",
-                "bonusCriticalHurt": 50.0,
-                "overrideByWeapon": true,
+                "damagePercentage": 0.833,
                 "strikeType": "Blunt",
+                "elementType": "Rock",
+                "elementDurability": 50,
+                "overrideByWeapon": true,
                 "attackType": "Melee"
               },
               "hitPattern": {
-                "onHitEffectName": "default",
                 "hitImpulseType": "LV2",
-                "hitHaltTime": 0.05000000074505806,
-                "hitHaltTimeScale": 0.05000000074505806
+                "reboundRatio": 0,
+                "hitHaltTime": 0.05,
+                "hitHaltTimeScale": 0.05,
+                "muteHitText": false
               },
+              "forceCameraShake": false,
               "cameraShake": {
                 "shakeType": "HitVector",
-                "shakeRange": 0.05999999865889549,
-                "shakeTime": 0.11999999731779099,
+                "shakeRange": 0.06,
+                "shakeTime": 0.12,
+                "shakeDistance": 20,
                 "shakeDir": {
-                  "z": 1.0
+                  "x": 0,
+                  "y": 0,
+                  "z": 1
                 }
-              },
-              "canBeModifiedBy": "OriginOwner"
+              }
             }
-          },
-          "targetType": "Enemy"
+          }
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  NormalAtk
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
-      "abilityName": "Monster_Wyrm_Rock_NormalAtk"
+      "abilityName": "Monster_Wyrm_Rock_NormalAtk",
+      "onAbilityStart": []
     }
   },
+
+  ////////////////////////////////////////////////////////////////
+  //
+  //  JumpAtk
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -300,22 +340,23 @@
         {
           "$type": "SetPoseBool",
           "boolID": "IsNear",
-          "ratio": true
+          "value": true
         },
         {
           "$type": "RushMove",
           "target": "SelfAttackTarget",
+          "timeRange": 1,
+          "minRange": 8.0,
+          "maxRange": 20.0,
           "toPos": {
             "$type": "ConfigBornByTarget",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 2.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 2.0
             },
             "onGround": true
-          },
-          "minRange": 8.0,
-          "timeRange": 1.0
+          }
         }
       ]
     }
@@ -329,18 +370,45 @@
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "JumpAtk",
           "modifierName": "Monster_Wyrm_Rock_JumpAtk_Collider",
-          "normalizeStart": 0.23000000417232513,
-          "normalizeEnd": 0.6399999856948853
+          "normalizeStart": 0.23,
+          "normalizeEnd": 0.64
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Monster_Wyrm_Rock_JumpAtk_Land_Alert",
+          "born": {
+            "$type": "ConfigBornByRushToPoint",
+            "offset": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            }
+          }
+        },
+        {
+          "$type": "ActCameraShake",
+          "cameraShake": {
+            "shakeType": "CustomVector",
+            "shakeRange": 0.12,
+            "shakeTime": 0.15,
+            "shakeDistance": 20.0,
+            "shakeDir": {
+              "x": 0,
+              "y": 1,
+              "z": 0
+            }
+          }
         }
       ],
       "modifiers": {
         "Monster_Wyrm_Rock_JumpAtk_Collider": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "EnablePushColliderName",
-              "pushColliderNames": ["PushCollider", "PushCollider_Tail"]
+              "pushColliderNames": ["PushCollider", "PushCollider_Tail", ""],
+              "setEnable": false
             }
           ],
           "onRemoved": [
@@ -351,35 +419,14 @@
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Wyrm_Rock_JumpAtk_Land_Alert",
-          "born": {
-            "$type": "ConfigBornByRushToPoint",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            }
-          },
-          "EBHJMLOKDGB": -1.0
-        },
-        {
-          "$type": "ActCameraShake",
-          "cameraShake": {
-            "shakeType": "CustomVector",
-            "shakeRange": 0.11999999731779099,
-            "shakeTime": 0.15000000596046448,
-            "shakeDir": {
-              "y": 1.0
-            }
-          }
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Roll
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -393,8 +440,6 @@
       ],
       "modifiers": {
         "Monster_Wyrm_Rock_RollState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "HideUIBillBoard",
@@ -402,9 +447,9 @@
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Wyrm_Rock_Roll_Dust",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Wyrm_Rock_Roll_Dust"
             },
+            //管理下一轮4次滚动逻辑的ability
             {
               "$type": "TriggerAbility",
               "abilityName": "Monster_Wyrm_Rock_Roll_NextRound"
@@ -412,102 +457,33 @@
             {
               "$type": "SetPoseBool",
               "boolID": "Rolling",
-              "ratio": true
+              "value": true
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": -1.0,
+              "value": -1,
               "key": "_WYRM_ROCK_ROLL_END",
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
+              "maxValue": 1,
+              "minValue": 0
             },
+            //被远程攻击打中激活，作为是否开始下轮滚动的判断之一
             {
               "$type": "ApplyModifier",
-              "modifierName": "Monster_Wyrm_Rock_Roll_HitActive"
+              "modifierName": "Monster_Wyrm_Rock_Roll_HitActive",
+              "target": "Self"
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": -999.0,
+              "value": -999,
               "key": "_WYRM_NEAR_ENEMYCOUNT",
               "useLimitRange": true,
-              "maxValue": 4.0,
-              "minValue": 0.0
+              "maxValue": 4,
+              "minValue": 0
             },
             {
               "$type": "TriggerAbility",
               "abilityName": "Monster_Wyrm_Rock_CreateFollowBullet"
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "HideUIBillBoard"
-            },
-            {
-              "$type": "SetPoseBool",
-              "boolID": "Rolling"
-            },
-            {
-              "$type": "TriggerAbility",
-              "abilityName": "Monster_Wyrm_Rock_RemoveFollowBullet"
-            },
-            {
-              "$type": "Predicated",
-              "otherTargets": {
-                "$type": "SelectTargetsByShape",
-                "shapeName": "CircleR20",
-                "campTargetType": "All",
-                "sizeRatio": 1.0
-              },
-              "targetPredicates": [
-                {
-                  "$type": "ByEntityTypes",
-                  "entityTypes": ["Avatar"]
-                }
-              ],
-              "successActions": [
-                {
-                  "$type": "AddGlobalValue",
-                  "ratio": 1.0,
-                  "key": "_WYRM_NEAR_ENEMYCOUNT",
-                  "useLimitRange": true,
-                  "maxValue": 4.0,
-                  "minValue": 0.0
-                }
-              ]
-            },
-            {
-              "$type": "SetPoseBool",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_WYRM_NEAR_ENEMYCOUNT",
-                  "ratio": 0.0,
-                  "compareType": "MoreThan"
-                }
-              ],
-              "boolID": "IsNear",
-              "ratio": true
-            },
-            {
-              "$type": "SetPoseBool",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_WYRM_NEAR_ENEMYCOUNT",
-                  "ratio": 0.0
-                }
-              ],
-              "boolID": "DigTime",
-              "ratio": true
-            },
-            {
-              "$type": "AddGlobalValue",
-              "ratio": -1.0,
-              "key": "_MONSTER_WYRM_ROCK_DIGMODE",
-              "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
             }
           ],
           "onBeingHit": [
@@ -521,42 +497,122 @@
                 },
                 {
                   "$type": "ByTargetPositionToSelfPosition",
+                  "compareType": "XZ",
                   "target": "TargetOwner",
-                  "ratio": 20.0
+                  "value": 20,
+                  "logic": "Greater"
                 }
               ],
               "successActions": [
                 {
                   "$type": "ApplyModifier",
-                  "target": "Caster",
-                  "modifierName": "Monster_Wyrm_Rock_Roll_HitActive"
+                  "modifierName": "Monster_Wyrm_Rock_Roll_HitActive",
+                  "target": "Caster"
+                }
+              ],
+              "failActions": []
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "HideUIBillBoard",
+              "hide": false
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "Rolling",
+              "value": false
+            },
+            {
+              "$type": "TriggerAbility",
+              "abilityName": "Monster_Wyrm_Rock_RemoveFollowBullet"
+            },
+            //判断附近有没有玩家。
+            {
+              "$type": "Predicated",
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR20",
+                "centerBasedOn": "Self",
+                "campTargetType": "All",
+                "campBasedOn": "Self"
+              },
+              "targetPredicates": [
+                {
+                  "$type": "ByEntityTypes",
+                  "entityTypes": ["Avatar"]
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "AddGlobalValue",
+                  "value": 1,
+                  "key": "_WYRM_NEAR_ENEMYCOUNT",
+                  "useLimitRange": true,
+                  "maxValue": 4,
+                  "minValue": 0
                 }
               ]
+            },
+            //滚完有玩家较近则进近战模式。
+            {
+              "$type": "SetPoseBool",
+              "boolID": "IsNear",
+              "value": true,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_WYRM_NEAR_ENEMYCOUNT",
+                  "value": 0,
+                  "compareType": "MoreThan"
+                }
+              ]
+            },
+            //滚完无玩家较近则直接钻地。
+            {
+              "$type": "SetPoseBool",
+              "boolID": "DigTime",
+              "value": true,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_WYRM_NEAR_ENEMYCOUNT",
+                  "value": 0,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            {
+              "$type": "AddGlobalValue",
+              "value": -1,
+              "key": "_MONSTER_WYRM_ROCK_DIGMODE",
+              "useLimitRange": true,
+              "randomInRange": false,
+              "maxValue": 1,
+              "minValue": 0
             }
           ]
         },
         "Monster_Wyrm_Rock_Roll_HitActive": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 3.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 3,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
+              "value": 1,
               "key": "_WYRM_ROCK_ROLL_GADGETHIT",
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
+              "maxValue": 1,
+              "minValue": 0
             }
           ],
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "ratio": -1.0,
+              "value": -1,
               "key": "_WYRM_ROCK_ROLL_GADGETHIT",
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
+              "maxValue": 1,
+              "minValue": 0
             }
           ]
         }
@@ -567,79 +623,15 @@
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Wyrm_Rock_Roll_FindNext",
-      "abilitySpecials": {
-        "roll_times_counter": 0.0
-      },
-      "modifiers": {
-        "Monster_Wyrm_Rock_Roll_FindNext_Latency": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.4000000059604645,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.30000001192092896,
-          "onRemoved": [
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "Monster_Wyrm_Rock_Roll_FindNext_TriggerAbility_Latency"
-            }
-          ],
-          "onThinkInterval": [
-            {
-              "$type": "TriggerAbility",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_WYRM_ROCK_ROLL_COUNT",
-                  "ratio": 4.0,
-                  "compareType": "MoreThanAndEqual"
-                }
-              ],
-              "abilityName": "Monster_Wyrm_Rock_Roll_StateCheck"
-            }
-          ]
-        },
-        "Monster_Wyrm_Rock_Roll_FindNext_TriggerAbility_Latency": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
-          "onRemoved": [
-            {
-              "$type": "TriggerAbility",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_WYRM_ROCK_ROLL_END",
-                  "ratio": 0.0,
-                  "compareType": "NoneOrEqual"
-                }
-              ],
-              "abilityName": "Monster_Wyrm_Rock_Roll_FindNext"
-            },
-            {
-              "$type": "DebugLog",
-              "content": "WYRM_ROCK_FINDNEXT_MODIFIER!!!!!!!"
-            },
-            {
-              "$type": "SetAnimatorTrigger",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_WYRM_ROCK_ROLL_END",
-                  "ratio": 1.0
-                }
-              ],
-              "triggerID": "RollEndTrigger"
-            }
-          ]
-        }
-      },
       "onAbilityStart": [
         {
           "$type": "AddGlobalValue",
-          "ratio": 1.0,
+          "value": 1,
           "key": "_WYRM_ROCK_ROLL_COUNT",
           "useLimitRange": true,
-          "maxValue": 4.0,
-          "minValue": 0.0
+          "randomInRange": false,
+          "maxValue": 4,
+          "minValue": 0
         },
         {
           "$type": "SetGlobalValueToOverrideMap",
@@ -648,123 +640,286 @@
         },
         {
           "$type": "AddGlobalValue",
+          "value": "%roll_times_counter",
+          "key": "_WYRM_ROCK_ROLL_GADGET_COUNT",
+          "useLimitRange": true,
+          "maxValue": 4,
+          "minValue": 0,
           "otherTargets": {
             "$type": "SelectTargetsByShape",
-            "topLimit": 1,
-            "sortType": "Random",
             "shapeName": "CircleR20",
+            "centerBasedOn": "Self",
             "campTargetType": "All",
-            "sizeRatio": 1.0
+            "campBasedOn": "Self",
+            "topLimit": 1,
+            "sortType": "Random"
           },
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_WYRM_ROCK_ROLL_DESTINATION",
-              "ratio": 1.0
+              "value": 1,
+              "compareType": "Equal"
             }
-          ],
-          "ratio": "roll_times_counter",
-          "key": "_WYRM_ROCK_ROLL_GADGET_COUNT",
-          "useLimitRange": true,
-          "maxValue": 4.0,
-          "minValue": 0.0
+          ]
         },
         {
           "$type": "SetSelfAttackTarget",
+          "turnToTargetImmediately": true,
           "otherTargets": {
             "$type": "SelectTargetsByShape",
             "shapeName": "CircleR30",
+            "centerBasedOn": "Self",
             "campTargetType": "All",
-            "sizeRatio": 1.0
+            "campBasedOn": "Self"
           },
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_WYRM_ROCK_ROLL_GADGET_COUNT",
-              "ratio": "roll_times_counter"
+              "value": "%roll_times_counter",
+              "compareType": "Equal"
             },
             {
               "$type": "ByTargetGlobalValue",
               "key": "_WYRM_ROCK_ROLL_DESTINATION",
-              "ratio": 1.0
+              "value": 1,
+              "compareType": "Equal"
             }
-          ],
-          "turnToTargetImmediately": true
+          ]
         },
         {
           "$type": "RushMove",
           "otherTargets": {
             "$type": "SelectTargetsByShape",
             "shapeName": "CircleR30",
+            "centerBasedOn": "Self",
             "campTargetType": "All",
-            "sizeRatio": 1.0
+            "campBasedOn": "Self"
           },
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_WYRM_ROCK_ROLL_GADGET_COUNT",
-              "ratio": "roll_times_counter"
-            },
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_WYRM_ROCK_ROLL_DESTINATION",
-              "ratio": 1.0
-            }
-          ],
+          "timeRange": 0.3,
+          "minRange": 8.0,
+          "maxRange": 20.0,
           "toPos": {
             "$type": "ConfigBornByTarget",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             },
             "onGround": true
-          },
-          "minRange": 8.0,
-          "timeRange": 0.30000001192092896
-        },
-        {
-          "$type": "AddGlobalValue",
-          "otherTargets": {
-            "$type": "SelectTargetsByShape",
-            "shapeName": "CircleR30",
-            "campTargetType": "All",
-            "sizeRatio": 1.0
           },
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_WYRM_ROCK_ROLL_GADGET_COUNT",
-              "ratio": "roll_times_counter"
+              "value": "%roll_times_counter",
+              "compareType": "Equal"
             },
             {
               "$type": "ByTargetGlobalValue",
               "key": "_WYRM_ROCK_ROLL_DESTINATION",
-              "ratio": 1.0
+              "value": 1,
+              "compareType": "Equal"
             }
-          ],
-          "ratio": -1.0,
+          ]
+        },
+        {
+          "$type": "AddGlobalValue",
+          "value": -1,
           "key": "_WYRM_ROCK_ROLL_DESTINATION",
           "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
+          "maxValue": 1,
+          "minValue": 0,
+          "otherTargets": {
+            "$type": "SelectTargetsByShape",
+            "shapeName": "CircleR30",
+            "centerBasedOn": "Self",
+            "campTargetType": "All",
+            "campBasedOn": "Self"
+          },
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_WYRM_ROCK_ROLL_GADGET_COUNT",
+              "value": "%roll_times_counter",
+              "compareType": "Equal"
+            },
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_WYRM_ROCK_ROLL_DESTINATION",
+              "value": 1,
+              "compareType": "Equal"
+            }
+          ]
         },
         {
           "$type": "ApplyModifier",
           "modifierName": "Monster_Wyrm_Rock_Roll_FindNext_Latency"
         }
-      ]
+      ],
+      "modifiers": {
+        "Monster_Wyrm_Rock_Roll_FindNext_Latency": {
+          "duration": 0.4,
+          "thinkInterval": 0.3,
+          "onThinkInterval": [
+            {
+              "$type": "TriggerAbility",
+              "abilityName": "Monster_Wyrm_Rock_Roll_StateCheck",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_WYRM_ROCK_ROLL_COUNT",
+                  "value": 4,
+                  "compareType": "MoreThanAndEqual"
+                }
+              ]
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "Monster_Wyrm_Rock_Roll_FindNext_TriggerAbility_Latency"
+            }
+          ]
+        },
+        "Monster_Wyrm_Rock_Roll_FindNext_TriggerAbility_Latency": {
+          "duration": 0.1,
+          "onRemoved": [
+            {
+              "$type": "TriggerAbility",
+              "abilityName": "Monster_Wyrm_Rock_Roll_FindNext",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_WYRM_ROCK_ROLL_END",
+                  "value": 0,
+                  "compareType": "NoneOrEqual"
+                }
+              ]
+            },
+            {
+              "$type": "DebugLog",
+              "content": "WYRM_ROCK_FINDNEXT_MODIFIER!!!!!!!"
+            },
+            {
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "RollEndTrigger",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_WYRM_ROCK_ROLL_END",
+                  "value": 1,
+                  "compareType": "Equal"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "abilitySpecials": {
+        "roll_times_counter": 0
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Wyrm_Rock_Roll_NextRound",
+      "onAbilityStart": [
+        {
+          "$type": "AddGlobalValue",
+          "value": -4,
+          "key": "_WYRM_ROCK_ROLL_COUNT",
+          "useLimitRange": true,
+          "randomInRange": false,
+          "maxValue": 4,
+          "minValue": 0
+        },
+        {
+          "$type": "AddGlobalValue",
+          "value": 1,
+          "key": "_WYRM_ROCK_CRUSHING_COUNT",
+          "useLimitRange": true,
+          "maxValue": 1,
+          "minValue": 0
+        },
+        {
+          "$type": "CreateGadget",
+          "gadgetID": 42603011,
+          "campID": 4001,
+          "lifeByOwnerIsAlive": true,
+          "campTargetType": "Alliance",
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "offset": {
+              "x": 5.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "onGround": true,
+            "alongGround": true
+          }
+        },
+        {
+          "$type": "CreateGadget",
+          "gadgetID": 42603011,
+          "campID": 4001,
+          "lifeByOwnerIsAlive": true,
+          "campTargetType": "Alliance",
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "offset": {
+              "x": -5.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "onGround": true,
+            "alongGround": true
+          }
+        },
+        {
+          "$type": "CreateGadget",
+          "gadgetID": 42603011,
+          "campID": 4001,
+          "lifeByOwnerIsAlive": true,
+          "campTargetType": "Alliance",
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "offset": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 5.0
+            },
+            "onGround": true,
+            "alongGround": true
+          }
+        },
+        {
+          "$type": "CreateGadget",
+          "gadgetID": 42603011,
+          "campID": 4001,
+          "lifeByOwnerIsAlive": true,
+          "campTargetType": "Alliance",
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "offset": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": -5.0
+            },
+            "onGround": true,
+            "alongGround": true
+          }
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Monster_Wyrm_Rock_Roll_FindNext_Latency"
+        }
+      ],
       "modifiers": {
         "Monster_Wyrm_Rock_Roll_FindNext_Latency": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.2,
           "onRemoved": [
             {
               "$type": "TriggerAbility",
@@ -772,97 +927,7 @@
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "AddGlobalValue",
-          "ratio": -4.0,
-          "key": "_WYRM_ROCK_ROLL_COUNT",
-          "useLimitRange": true,
-          "maxValue": 4.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "AddGlobalValue",
-          "ratio": 1.0,
-          "key": "_WYRM_ROCK_CRUSHING_COUNT",
-          "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
-        },
-        {
-          "$type": "CreateGadget",
-          "lifeByOwnerIsAlive": true,
-          "born": {
-            "$type": "ConfigBornBySelf",
-            "offset": {
-              "IBKBLDAJIMA": 5.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "onGround": true,
-            "alongGround": true
-          },
-          "gadgetID": 42603011,
-          "campID": 4001,
-          "campTargetType": "Alliance"
-        },
-        {
-          "$type": "CreateGadget",
-          "lifeByOwnerIsAlive": true,
-          "born": {
-            "$type": "ConfigBornBySelf",
-            "offset": {
-              "IBKBLDAJIMA": -5.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
-            },
-            "onGround": true,
-            "alongGround": true
-          },
-          "gadgetID": 42603011,
-          "campID": 4001,
-          "campTargetType": "Alliance"
-        },
-        {
-          "$type": "CreateGadget",
-          "lifeByOwnerIsAlive": true,
-          "born": {
-            "$type": "ConfigBornBySelf",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 5.0
-            },
-            "onGround": true,
-            "alongGround": true
-          },
-          "gadgetID": 42603011,
-          "campID": 4001,
-          "campTargetType": "Alliance"
-        },
-        {
-          "$type": "CreateGadget",
-          "lifeByOwnerIsAlive": true,
-          "born": {
-            "$type": "ConfigBornBySelf",
-            "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": -5.0
-            },
-            "onGround": true,
-            "alongGround": true
-          },
-          "gadgetID": 42603011,
-          "campID": 4001,
-          "campTargetType": "Alliance"
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Monster_Wyrm_Rock_Roll_FindNext_Latency"
-        }
-      ]
+      }
     }
   },
   {
@@ -872,33 +937,35 @@
       "onAbilityStart": [
         {
           "$type": "AddGlobalValue",
+          "value": 1,
+          "key": "_WYRM_ROCK_ROLL_END",
+          "useLimitRange": true,
+          "maxValue": 1,
+          "minValue": 0,
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_WYRM_ROCK_ROLL_GADGETHIT",
-              "ratio": 0.0,
+              "value": 0,
               "compareType": "NoneOrEqual"
             },
             {
               "$type": "ByTargetGlobalValue",
               "key": "_WYRM_ROCK_ROLL_COUNT",
-              "ratio": 4.0,
-              "maxValue": 4.0
+              "value": 4,
+              "maxValue": 4,
+              "compareType": "Equal"
             }
-          ],
-          "ratio": 1.0,
-          "key": "_WYRM_ROCK_ROLL_END",
-          "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
+          ]
         },
         {
           "$type": "Predicated",
           "otherTargets": {
             "$type": "SelectTargetsByShape",
             "shapeName": "CircleR10",
+            "centerBasedOn": "Self",
             "campTargetType": "All",
-            "sizeRatio": 1.0
+            "campBasedOn": "Self"
           },
           "targetPredicates": [
             {
@@ -909,31 +976,32 @@
           "successActions": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
+              "value": 1,
               "key": "_WYRM_ROCK_ROLL_END",
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
+              "maxValue": 1,
+              "minValue": 0
             }
           ]
         },
         {
           "$type": "TriggerAbility",
+          "abilityName": "Monster_Wyrm_Rock_Roll_NextRound",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_WYRM_ROCK_ROLL_COUNT",
-              "ratio": 4.0,
-              "maxValue": 4.0
+              "value": 4,
+              "maxValue": 4,
+              "compareType": "Equal"
             },
             {
               "$type": "ByTargetGlobalValue",
               "key": "_WYRM_ROCK_ROLL_END",
-              "ratio": 0.0,
+              "value": 0,
               "compareType": "NoneOrEqual"
             }
-          ],
-          "abilityName": "Monster_Wyrm_Rock_Roll_NextRound"
+          ]
         }
       ]
     }
@@ -945,15 +1013,20 @@
       "onAdded": [
         {
           "$type": "AddGlobalValue",
-          "ratio": 1.0,
+          "value": 1,
           "key": "_WYRM_ROCK_ROLL_DESTINATION",
           "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
+          "maxValue": 1,
+          "minValue": 0
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  TailSweep
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -961,42 +1034,51 @@
       "onAbilityStart": [
         {
           "$type": "AddGlobalValue",
+          "value": 1,
+          "key": "_MONSTER_WYRM_ROCK_DIGMODE",
+          "useLimitRange": true,
+          "randomInRange": false,
+          "maxValue": 1,
+          "minValue": 0,
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_WYRM_ROCK_CRUSHING_COUNT",
-              "ratio": 0.0
+              "value": 0,
+              "compareType": "Equal"
             }
-          ],
-          "ratio": 1.0,
-          "key": "_MONSTER_WYRM_ROCK_DIGMODE",
-          "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
+          ]
         },
         {
           "$type": "AddGlobalValue",
+          "value": -1,
+          "key": "_MONSTER_WYRM_ROCK_DIGMODE",
+          "useLimitRange": true,
+          "randomInRange": false,
+          "maxValue": 1,
+          "minValue": 0,
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_WYRM_ROCK_CRUSHING_COUNT",
-              "ratio": 1.0
+              "value": 1,
+              "compareType": "Equal"
             }
-          ],
-          "ratio": -1.0,
-          "key": "_MONSTER_WYRM_ROCK_DIGMODE",
-          "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
+          ]
         },
         {
           "$type": "SetPoseBool",
           "boolID": "DigTime",
-          "ratio": true
+          "value": true
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  CrushAtk
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1004,24 +1086,26 @@
       "onAbilityStart": [
         {
           "$type": "SetPoseBool",
-          "boolID": "Crushing"
+          "boolID": "Crushing",
+          "value": false
         },
         {
           "$type": "AddGlobalValue",
-          "ratio": -1.0,
+          "value": -1,
           "key": "_WYRM_ROCK_CRUSHING_COUNT",
           "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
+          "maxValue": 1,
+          "minValue": 0
         },
         {
           "$type": "SetAnimatorBool",
-          "boolID": "CrushHitFlag"
+          "boolID": "CrushHitFlag",
+          "value": false
         },
         {
           "$type": "SetAnimatorBool",
           "boolID": "FinalHitFlag",
-          "ratio": true
+          "value": true
         }
       ]
     }
@@ -1030,6 +1114,13 @@
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Wyrm_Rock_CrushAtk",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "target": "AllPlayerAvatars",
+          "modifierName": "UNIQUE_Wyrm_Rock_CrushAtk_HitCheck"
+        }
+      ],
       "abilityMixins": [
         {
           "$type": "AttachToAnimatorStateIDMixin",
@@ -1049,11 +1140,8 @@
       ],
       "modifiers": {
         "UNIQUE_Wyrm_Rock_CrushAtk_HitCheck": {
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.20000000298023224,
+          "duration": 0.3,
           "onAdded": [
             {
               "$type": "Predicated",
@@ -1061,14 +1149,15 @@
               "targetPredicates": [
                 {
                   "$type": "ByTargetPositionToSelfPosition",
-                  "logic": "Lesser",
-                  "ratio": 3.0
+                  "compareType": "XZ",
+                  "value": 3.0,
+                  "logic": "Lesser"
                 },
                 {
                   "$type": "ByTargetPositionToSelfPosition",
-                  "logic": "Lesser",
                   "compareType": "Y",
-                  "ratio": 3.0
+                  "value": 3.0,
+                  "logic": "Lesser"
                 }
               ],
               "successActions": [
@@ -1085,19 +1174,20 @@
                   "successActions": [
                     {
                       "$type": "ApplyModifier",
-                      "target": "Caster",
-                      "modifierName": "Monster_Wyrm_Rock_CrushAtk_HitOnShield"
+                      "modifierName": "Monster_Wyrm_Rock_CrushAtk_HitOnShield",
+                      "target": "Caster"
                     }
                   ]
                 },
                 {
                   "$type": "ApplyModifier",
-                  "target": "Caster",
-                  "modifierName": "Monster_Wyrm_Rock_CrushAtk_HitResult"
+                  "modifierName": "Monster_Wyrm_Rock_CrushAtk_HitResult",
+                  "target": "Caster"
                 }
               ]
             }
           ],
+          "thinkInterval": 0.2,
           "onThinkInterval": [
             {
               "$type": "Predicated",
@@ -1105,14 +1195,15 @@
               "targetPredicates": [
                 {
                   "$type": "ByTargetPositionToSelfPosition",
-                  "logic": "Lesser",
-                  "ratio": 3.0
+                  "compareType": "XZ",
+                  "value": 3.0,
+                  "logic": "Lesser"
                 },
                 {
                   "$type": "ByTargetPositionToSelfPosition",
-                  "logic": "Lesser",
                   "compareType": "Y",
-                  "ratio": 3.0
+                  "value": 3.0,
+                  "logic": "Lesser"
                 }
               ],
               "successActions": [
@@ -1129,174 +1220,159 @@
                   "successActions": [
                     {
                       "$type": "ApplyModifier",
-                      "target": "Caster",
-                      "modifierName": "Monster_Wyrm_Rock_CrushAtk_HitOnShield"
+                      "modifierName": "Monster_Wyrm_Rock_CrushAtk_HitOnShield",
+                      "target": "Caster"
                     }
                   ]
                 },
                 {
                   "$type": "ApplyModifier",
-                  "target": "Caster",
-                  "modifierName": "Monster_Wyrm_Rock_CrushAtk_HitResult"
+                  "modifierName": "Monster_Wyrm_Rock_CrushAtk_HitResult",
+                  "target": "Caster"
                 }
               ]
             }
           ]
         },
         "Monster_Wyrm_Rock_CrushAtk_HitOnShield": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "SetAnimatorBool",
-              "boolID": "FinalHitFlag"
+              "boolID": "FinalHitFlag",
+              "value": false
             }
           ]
         },
         "Monster_Wyrm_Rock_CrushAtk_HitResult": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "SetAnimatorBool",
               "boolID": "CrushHitFlag",
-              "ratio": true
+              "value": true
             }
           ]
         },
         "Wyrm_Rock_CrushAtk_NoHit": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Wyrm_Rock_CrushAtk_Miss",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Wyrm_Rock_CrushAtk_Miss"
             }
           ]
         },
         "Wyrm_Rock_CrushAtk_Failed": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Wyrm_Rock_CrushAtk_Failed",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Wyrm_Rock_CrushAtk_Failed"
             },
             {
               "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
+                  "fanAngle": 270.0,
+                  "radius": 3.0,
                   "born": {
                     "$type": "ConfigBornBySelf",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     }
-                  },
-                  "fanAngle": 270.0,
-                  "DCMPFCIBIPA": 3.0
+                  }
                 },
                 "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "HBIOLEEGHPD": 0.6660000085830688,
-                    "CCNJGLPMIEP": 0.0,
-                    "bonusCriticalHurt": 100.0,
+                    "damagePercentage": 0.666,
                     "strikeType": "Blunt",
                     "enBreak": 200.0
                   },
                   "hitPattern": {
                     "onHitEffectName": "default",
-                    "hitImpulseType": "LV2"
+                    "hitImpulseType": "LV2",
+                    "reboundRatio": 0,
+                    "hitHaltTime": 0,
+                    "hitHaltTimeScale": 0,
+                    "muteHitText": false
                   },
+                  "forceCameraShake": false,
                   "cameraShake": {
                     "shakeType": "CustomVector",
-                    "shakeRange": 0.36000001430511475,
-                    "shakeTime": 0.36000001430511475,
+                    "shakeRange": 0.36,
+                    "shakeTime": 0.36,
                     "shakeDistance": 30.0,
                     "shakeDir": {
-                      "y": -1.0
+                      "x": 0,
+                      "y": -1,
+                      "z": 0
                     }
                   }
                 }
-              },
-              "targetType": "Enemy"
+              }
             }
           ]
         },
         "Wyrm_Rock_CrushAtk_FinalHit": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Wyrm_Rock_CrushAtk_Hit",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Wyrm_Rock_CrushAtk_Hit"
             },
             {
               "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
+                  "fanAngle": 270.0,
+                  "radius": 3.0,
                   "born": {
                     "$type": "ConfigBornBySelf",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     }
-                  },
-                  "fanAngle": 270.0,
-                  "DCMPFCIBIPA": 3.0
+                  }
                 },
                 "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "HBIOLEEGHPD": 0.8330000042915344,
-                    "CCNJGLPMIEP": 0.0,
-                    "bonusCriticalHurt": 100.0,
+                    "damagePercentage": 0.833,
                     "strikeType": "Blunt",
                     "enBreak": 200.0
                   },
                   "hitPattern": {
                     "onHitEffectName": "default",
-                    "hitImpulseType": "LV7"
+                    "hitImpulseType": "LV7",
+                    "reboundRatio": 0,
+                    "hitHaltTime": 0,
+                    "hitHaltTimeScale": 0,
+                    "muteHitText": false
                   },
+                  "forceCameraShake": false,
                   "cameraShake": {
                     "shakeType": "CustomVector",
-                    "shakeRange": 0.36000001430511475,
-                    "shakeTime": 0.36000001430511475,
+                    "shakeRange": 0.36,
+                    "shakeTime": 0.36,
                     "shakeDistance": 30.0,
                     "shakeDir": {
-                      "y": -1.0
+                      "x": 0,
+                      "y": -1,
+                      "z": 0
                     }
                   }
                 }
-              },
-              "targetType": "Enemy"
+              }
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "target": "AllPlayerAvatars",
-          "modifierName": "UNIQUE_Wyrm_Rock_CrushAtk_HitCheck"
-        }
-      ]
+      }
     }
   },
   {
@@ -1308,29 +1384,27 @@
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "CrushAtk_FinalHit",
           "modifierName": "Monster_Wyrm_Rock_CrushAtk_FinalHit_LineEffect",
-          "normalizeEnd": 0.4000000059604645
+          "normalizeStart": 0,
+          "normalizeEnd": 0.4
         }
       ],
-      "modifiers": {
-        "Monster_Wyrm_Rock_CrushAtk_FinalHit_LineEffect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Wyrm_Rock_CrushAtk_FinalHit_Line",
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        }
-      },
       "onAbilityStart": [
         {
           "$type": "SetPoseBool",
           "boolID": "IsNear",
-          "ratio": true
+          "value": true
         }
-      ]
+      ],
+      "modifiers": {
+        "Monster_Wyrm_Rock_CrushAtk_FinalHit_LineEffect": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Wyrm_Rock_CrushAtk_FinalHit_Line"
+            }
+          ]
+        }
+      }
     }
   },
   {
@@ -1341,15 +1415,16 @@
         {
           "$type": "SetPoseBool",
           "boolID": "DigTime",
-          "ratio": true
+          "value": true
         },
         {
           "$type": "AddGlobalValue",
-          "ratio": -1.0,
+          "value": -1,
           "key": "_MONSTER_WYRM_ROCK_DIGMODE",
           "useLimitRange": true,
-          "maxValue": 1.0,
-          "minValue": 0.0
+          "randomInRange": false,
+          "maxValue": 1,
+          "minValue": 0
         }
       ]
     }
@@ -1367,27 +1442,31 @@
       ],
       "modifiers": {
         "Monster_Wyrm_Rock_CrushAtk_FailedState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "SetPoseBool",
               "boolID": "DigTime",
-              "ratio": true
+              "value": true
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
+              "value": 1,
               "key": "_MONSTER_WYRM_ROCK_DIGMODE",
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
+              "randomInRange": false,
+              "maxValue": 1,
+              "minValue": 0
             }
           ]
         }
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Dig
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1395,67 +1474,74 @@
       "onAbilityStart": [
         {
           "$type": "TriggerBullet",
+          "campID": 1001,
           "bulletID": 42603012,
           "born": {
             "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "RootNode",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 1.0,
-              "PJCOKIGCJOK": 4.0
+              "x": 0.0,
+              "y": 1.0,
+              "z": 4.0
             },
             "direction": {
               "$type": "ConfigDirectionByEntity",
+              "randomAngleHor": 90,
               "angleOffset": {
-                "IBKBLDAJIMA": 0.0,
-                "LKHJADIPBFL": 1.0,
-                "PJCOKIGCJOK": 0.0
-              },
-              "randomAngleHor": 90.0
-            },
-            "attachPointName": "RootNode"
+                "x": 0.0,
+                "y": 1.0,
+                "z": 0.0
+              }
+            }
+            // "onGround":true,
           }
         },
         {
           "$type": "TriggerBullet",
+          "campID": 1001,
           "bulletID": 42603012,
           "born": {
             "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "RootNode",
             "offset": {
-              "IBKBLDAJIMA": -3.4000000953674316,
-              "LKHJADIPBFL": 1.0,
-              "PJCOKIGCJOK": -2.0
+              "x": -3.4,
+              "y": 1.0,
+              "z": -2.0
             },
             "direction": {
               "$type": "ConfigDirectionByEntity",
+              "randomAngleHor": 90,
               "angleOffset": {
-                "IBKBLDAJIMA": 0.0,
-                "LKHJADIPBFL": 1.0,
-                "PJCOKIGCJOK": 0.0
-              },
-              "randomAngleHor": 90.0
-            },
-            "attachPointName": "RootNode"
+                "x": 0.0,
+                "y": 1.0,
+                "z": 0.0
+              }
+            }
           }
+          // "onGround":true,
         },
         {
           "$type": "TriggerBullet",
+          "campID": 1001,
           "bulletID": 42603012,
           "born": {
             "$type": "ConfigBornBySelf",
+            "attachPointName": "RootNode",
             "offset": {
-              "IBKBLDAJIMA": 3.4000000953674316,
-              "LKHJADIPBFL": 1.0,
-              "PJCOKIGCJOK": -2.0
+              "x": 3.4,
+              "y": 1.0,
+              "z": -2.0
             },
             "direction": {
               "$type": "ConfigDirectionByEntity",
+              "randomAngleHor": 90,
               "angleOffset": {
-                "IBKBLDAJIMA": 0.0,
-                "LKHJADIPBFL": 1.0,
-                "PJCOKIGCJOK": 0.0
-              },
-              "randomAngleHor": 90.0
+                "x": 0.0,
+                "y": 1.0,
+                "z": 0.0
+              }
             }
+            // "onGround":true,
           }
         }
       ]
@@ -1475,13 +1561,12 @@
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "DigIn",
           "modifierName": "Monster_Wyrm_Rock_Dig_ModeManager",
-          "normalizeStart": 0.8999999761581421
+          "normalizeStart": 0.9,
+          "normalizeEnd": 1
         }
       ],
       "modifiers": {
         "Monster_Wyrm_Rock_Dig_ModeManager": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "RemoveUniqueModifier",
@@ -1493,39 +1578,40 @@
             },
             {
               "$type": "ApplyModifier",
+              "modifierName": "Monster_Wyrm_Rock_DigFindPosition_Near",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_MONSTER_WYRM_ROCK_DIGMODE",
-                  "ratio": 0.0,
-                  "maxValue": 1.0
+                  "value": 0,
+                  "maxValue": 1,
+                  "compareType": "Equal"
                 }
-              ],
-              "modifierName": "Monster_Wyrm_Rock_DigFindPosition_Near"
+              ]
             },
             {
               "$type": "ApplyModifier",
+              "modifierName": "Monster_Wyrm_Rock_DigFindPosition_Far",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_MONSTER_WYRM_ROCK_DIGMODE",
-                  "ratio": 1.0,
-                  "maxValue": 1.0,
+                  "value": 1,
+                  "maxValue": 1,
                   "compareType": "NoneOrEqual"
                 }
-              ],
-              "modifierName": "Monster_Wyrm_Rock_DigFindPosition_Far"
+              ]
             }
           ]
         },
         "UNIQUE_Monster_Wyrm_Rock_DigState": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
+            //关闭血条、影子和碰撞
             {
               "$type": "EnablePushColliderName",
-              "pushColliderNames": ["PushCollider", "PushCollider_Tail"]
+              "pushColliderNames": ["PushCollider", "PushCollider_Tail"],
+              "setEnable": false
             },
             {
               "$type": "HideUIBillBoard",
@@ -1547,7 +1633,8 @@
               "setEnable": true
             },
             {
-              "$type": "HideUIBillBoard"
+              "$type": "HideUIBillBoard",
+              "hide": false
             },
             {
               "$type": "RemoveModifier",
@@ -1560,19 +1647,13 @@
           ]
         },
         "UnderGround_Invincible": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "Invincible"
         },
         "UnderGround_DenyLockOn": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "DenyLockOn"
         },
         "Monster_Wyrm_Rock_DigFindPosition_Near": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.2,
           "onRemoved": [
             {
               "$type": "ApplyModifier",
@@ -1581,9 +1662,7 @@
           ]
         },
         "Monster_Wyrm_Rock_DigFindPosition_Far": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.800000011920929,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.8,
           "onRemoved": [
             {
               "$type": "ApplyModifier",
@@ -1592,14 +1671,12 @@
           ]
         },
         "Monster_Wyrm_Rock_DigOut_Alert_Near": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "TryFindBlinkPoint",
               "target": "SelfAttackTarget",
-              "forwardAngle": 360.0,
+              "forwardAngle": 360,
               "minRange": 2.0,
               "maxRange": 5.0,
               "ignoreWater": true
@@ -1609,18 +1686,17 @@
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Wyrm_Rock_DigOut_Alert",
+              "effectPattern": "Eff_Monster_Wyrm_Rock_DigOut_Alert",
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 },
                 "onGround": true,
                 "alongGround": true
-              },
-              "EBHJMLOKDGB": -1.0
+              }
             }
           ],
           "onRemoved": [
@@ -1631,14 +1707,12 @@
           ]
         },
         "Monster_Wyrm_Rock_DigOut_Alert_Far": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "TryFindBlinkPoint",
               "target": "SelfAttackTarget",
-              "forwardAngle": 360.0,
+              "forwardAngle": 360,
               "minRange": 15.0,
               "maxRange": 20.0,
               "ignoreWater": true
@@ -1648,18 +1722,17 @@
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Wyrm_Rock_DigOut_Alert",
+              "effectPattern": "Eff_Monster_Wyrm_Rock_DigOut_Alert",
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 },
                 "onGround": true,
                 "alongGround": true
-              },
-              "EBHJMLOKDGB": -1.0
+              }
             }
           ],
           "onRemoved": [
@@ -1679,18 +1752,17 @@
       "onAbilityStart": [
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Wyrm_Rock_DigOut",
+          "effectPattern": "Eff_Monster_Wyrm_Rock_DigOut",
           "born": {
             "$type": "ConfigBornBySelf",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 20.0,
-              "PJCOKIGCJOK": 0.0
+              "x": 0.0,
+              "y": 20.0,
+              "z": 0.0
             },
             "onGround": true,
             "alongGround": true
-          },
-          "EBHJMLOKDGB": -1.0
+          }
         }
       ]
     }
@@ -1704,17 +1776,48 @@
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "DigOut",
           "modifierName": "Monster_Wyrm_Rock_Dig_Collider",
-          "normalizeEnd": 0.550000011920929
+          "normalizeStart": 0.0,
+          "normalizeEnd": 0.55
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "SetSelfAttackTarget",
+          "turnToTargetImmediately": false,
+          "target": "SelfAttackTarget"
+        },
+        {
+          "$type": "TriggerAbility",
+          "abilityName": "Monster_Wyrm_Rock_PhaseCheck"
+        },
+        {
+          "$type": "SetPoseBool",
+          "boolID": "Crushing",
+          "value": true,
+          "predicates": [
+            {
+              "$type": "ByTargetPositionToSelfPosition",
+              "target": "SelfAttackTarget",
+              "compareType": "XZ",
+              "value": 10,
+              "logic": "Lesser"
+            },
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_WYRM_ROCK_CRUSHING_COUNT",
+              "value": 1,
+              "compareType": "Equal"
+            }
+          ]
         }
       ],
       "modifiers": {
         "Monster_Wyrm_Rock_Dig_Collider": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "EnablePushColliderName",
-              "pushColliderNames": ["PushCollider", "PushCollider_Tail"]
+              "pushColliderNames": ["PushCollider", "PushCollider_Tail"],
+              "setEnable": false
             }
           ],
           "onRemoved": [
@@ -1725,60 +1828,18 @@
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "SetSelfAttackTarget",
-          "target": "SelfAttackTarget"
-        },
-        {
-          "$type": "TriggerAbility",
-          "abilityName": "Monster_Wyrm_Rock_PhaseCheck"
-        },
-        {
-          "$type": "SetPoseBool",
-          "predicates": [
-            {
-              "$type": "ByTargetPositionToSelfPosition",
-              "target": "SelfAttackTarget",
-              "logic": "Lesser",
-              "ratio": 10.0
-            },
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_WYRM_ROCK_CRUSHING_COUNT",
-              "ratio": 1.0
-            }
-          ],
-          "boolID": "Crushing",
-          "ratio": true
-        }
-      ]
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Wyrm_Rock_DigEnd",
-      "modifiers": {
-        "UNIQUE_Monster_Wyrm_Rock_DigEnd_MaxTime": {
-          "modifierName": "",
-          "isUnique": true,
-          "HCJLIGBLGJA": 25.0,
-          "bonusCriticalHurt": 100.0,
-          "onRemoved": [
-            {
-              "$type": "SetPoseBool",
-              "boolID": "DigTime",
-              "ratio": true
-            }
-          ]
-        }
-      },
       "onAbilityStart": [
         {
           "$type": "SetPoseBool",
-          "boolID": "DigTime"
+          "boolID": "DigTime",
+          "value": false
         },
         {
           "$type": "ReTriggerAISkillInitialCD",
@@ -1788,9 +1849,27 @@
           "$type": "ApplyModifier",
           "modifierName": "UNIQUE_Monster_Wyrm_Rock_DigEnd_MaxTime"
         }
-      ]
+      ],
+      "modifiers": {
+        "UNIQUE_Monster_Wyrm_Rock_DigEnd_MaxTime": {
+          "isUnique": true,
+          "duration": 25,
+          "onRemoved": [
+            {
+              "$type": "SetPoseBool",
+              "boolID": "DigTime",
+              "value": true
+            }
+          ]
+        }
+      }
     }
   },
+  ////////////////////////////////////////////////
+  //
+  // SteerAttack
+  //
+  ////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1799,78 +1878,82 @@
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Turn"],
+          "startNormalizedTime": 0.0,
           "endNormalizedTime": 99.0,
-          "angularSpeed": 120.0,
+          "angularSpeed": 120,
           "attackTrigger": "",
-          "attackDistance": 12.0
+          "attackDistance": 12
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["NormalAtk"],
-          "endNormalizedTime": 0.30000001192092896,
-          "angularSpeed": 180.0,
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 0.3,
+          "angularSpeed": 180,
           "attackTrigger": "",
-          "attackDistance": 12.0
+          "attackDistance": 12
         },
         {
           "$type": "SteerAttackTraceMixin",
           "steerStateIDs": ["CrushAtk"],
-          "angularSpeed": 180.0,
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 1.0,
+          "angularSpeed": 180,
           "attackTrigger": "",
-          "attackDistance": 12.0
+          "attackDistance": 12
         },
         {
           "$type": "SteerAttackTraceMixin",
           "steerStateIDs": ["JumpAtk"],
-          "angularSpeed": 180.0,
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 1.0,
+          "angularSpeed": 180,
           "attackTrigger": "",
-          "attackDistance": 12.0
+          "attackDistance": 12
         },
         {
           "$type": "SteerAttackTraceMixin",
           "steerStateIDs": ["RollEnd"],
-          "angularSpeed": 60.0,
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 1,
+          "angularSpeed": 60,
           "attackTrigger": "",
-          "attackDistance": 12.0
+          "attackDistance": 12
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["DigOut"],
-          "angularSpeed": 180.0,
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 1.0,
+          "angularSpeed": 180,
           "attackTrigger": "",
-          "attackDistance": 12.0
+          "attackDistance": 12
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["TailSweep"],
-          "endNormalizedTime": 0.30000001192092896,
-          "angularSpeed": 180.0,
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 0.3,
+          "angularSpeed": 180,
           "attackTrigger": "",
-          "attackDistance": 12.0
+          "attackDistance": 12
         }
       ]
     }
   },
+  ////////////////////////////////////////////////
+  //
+  // CrystalSeed
+  //
+  ////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Wyrm_Rock_CrystalSeed_Trigger",
-      "modifiers": {
-        "Timer": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
-          "onRemoved": [
-            {
-              "$type": "EnableBulletCollisionPluginTrigger",
-              "setEnable": true
-            }
-          ]
-        }
-      },
       "onAdded": [
         {
-          "$type": "EnableBulletCollisionPluginTrigger"
+          "$type": "EnableBulletCollisionPluginTrigger",
+          "setEnable": false
         },
         {
           "$type": "ApplyModifier",
@@ -1878,51 +1961,127 @@
         },
         {
           "$type": "AttachEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Element_Crystal_Rock_Trail",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_Element_Crystal_Rock_Trail"
         }
       ],
       "onAbilityStart": [
         {
           "$type": "CreateGadget",
+          "gadgetID": 42603013,
+          "campID": 1001,
+          "campTargetType": "All",
           "born": {
             "$type": "ConfigBornByCollisionPoint",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             },
-            "onGround": true,
             "direction": {
               "$type": "ConfigDirectionByWorld",
               "eularAngles": {
-                "x": 0.10000000149011612,
-                "y": 0.10000000149011612,
-                "z": 0.10000000149011612
+                "x": 0.1,
+                "y": 0.1,
+                "z": 0.1
               }
-            }
-          },
-          "gadgetID": 42603013,
-          "campID": 1001,
-          "campTargetType": "All"
+            },
+            "onGround": true
+          }
         }
-      ]
+      ],
+      "modifiers": {
+        "Timer": {
+          "duration": 0.1,
+          "onRemoved": [
+            {
+              "$type": "EnableBulletCollisionPluginTrigger",
+              "setEnable": true
+            }
+          ]
+        }
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Wyrm_Rock_CrystalSeed",
-      "abilitySpecials": {
-        "Player_Rock_Shield_Level_Ratio": 0.0,
-        "Team_Crystal_Rock_SHield_Ratio": 0.0
-      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Crystal_Rock_Seed_Fx"
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Life_Timer" //这件事儿待定
+        }
+        // {
+        // 	"$type":"SetCrystalShieldHpToOverrideMap",//依据种子自身的等级及精通值确认护盾吸收量
+        // 	"overrideMapKey":"Player_Water_Shield_Level_Ratio",
+        // },
+      ],
+      // "onKill":
+      // [
+      // 	{
+      // 		"$type":"FireEffect",
+      // 		"effectPattern":"Eff_Element_Crystal_Rock_Seed_Disappear",
+      // 	},
+      // ],
+      "onFieldEnter": [
+        {
+          "$type": "SetSystemValueToOverrideMap", //依据获得种子玩家的等级，设置护盾的吸收量（不选择触发者，是能保证护盾吸收量的稳定）
+          "key": "Player_Rock_Shield_Level_Ratio",
+          "type": "PlayerShieldLevelCo",
+          "target": "Target",
+          "predicates": [
+            {
+              "$type": "ByEntityTypes",
+              "target": "Target",
+              "entityTypes": ["Avatar"]
+            }
+          ]
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_CrystalSeed_Rock_Shield_Handler",
+          "target": "Target",
+          "predicates": [
+            {
+              "$type": "ByEntityTypes",
+              "target": "Target",
+              "entityTypes": ["Avatar"]
+            }
+          ]
+        },
+        //岩龙蜥的晶石不需要给圣遗物发通知
+        // {
+        // 	"$type":"FireGainCrystalSeedEvent",
+        // 	"elementType":"Water",
+        // 	"target":"Target",
+        // 	"predicates":
+        // 	[
+        // 		{
+        // 			"$type":"ByEntityTypes",
+        // 			"target":"Target",
+        // 			"entityTypes":["Avatar"],
+        // 		},
+        // 	],
+        // },
+        {
+          "$type": "RemoveModifier",
+          "target": "Self",
+          "modifierName": "Crystal_Rock_Seed_Fx"
+        },
+        {
+          "$type": "KillSelf",
+          "duration": 1.0
+        }
+      ],
       "modifiers": {
         "UNIQUE_CrystalSeed_Rock_Shield_Handler": {
-          "modifierName": "",
+          "duration": 0.1,
           "isUnique": true,
-          "HCJLIGBLGJA": 0.10000000149011612,
-          "bonusCriticalHurt": 100.0,
+          //每次吃种子，移除老的护盾，添加新的护盾；
           "onAdded": [
             {
               "$type": "RemoveUniqueModifier",
@@ -1931,66 +2090,57 @@
             },
             {
               "$type": "ApplyModifier",
-              "target": "Team",
-              "modifierName": "UNIQUE_CrystalSeed_Rock_Shield"
+              "modifierName": "UNIQUE_CrystalSeed_Rock_Shield",
+              "target": "Team"
             },
             {
               "$type": "AttachEffect",
-              "target": "CurLocalAvatar",
-              "healLimitedByCasterMaxHPRatio": "Eff_Element_CrystalSeed_Absorb_Rock",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Element_CrystalSeed_Absorb_Rock",
+              "target": "CurLocalAvatar"
             }
           ]
         },
         "UNIQUE_CrystalSeed_Rock_Shield": {
-          "modifierName": "",
+          "duration": 15,
           "isUnique": true,
-          "HCJLIGBLGJA": 15.0,
-          "bonusCriticalHurt": 100.0,
-          "modifierMixins": [
-            {
-              "$type": "GlobalMainShieldMixin",
-              "shieldType": "Element_Rock",
-              "DJBPNOPNHFH": 360.0,
-              "effectPattern": "Player_Rock_Shield_Level_Ratio",
-              "costShieldRatioName": "",
-              "showDamageText": "INFO_ELITE_DEFENCE",
-              "onShieldBroken": [
-                {
-                  "$type": "FireEffect",
-                  "healLimitedByCasterMaxHPRatio": "Eff_Element_Crystal_Rock_Shield_Disappear",
-                  "EBHJMLOKDGB": -1.0
-                }
-              ],
-              "healLimitedByCasterMaxHPRatio": "Eff_Element_Crystal_Rock_Shield",
-              "childShieldModifierName": "UNIQUE_CrystalSeed_Rock_Shield_Child",
-              "targetMuteHitEffect": false
-            }
-          ],
+          "stacking": "Refresh",
           "onAdded": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Element_Absorb_Rock_02",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Element_Absorb_Rock_02"
             },
             {
               "$type": "AttachModifier",
               "modifierName": "UNIQUE_CrystalSeed_Rock_Shield_Mark"
             }
           ],
+          "modifierMixins": [
+            {
+              "$type": "GlobalMainShieldMixin",
+              "shieldType": "Element_Rock",
+              "shieldHP": "%Player_Rock_Shield_Level_Ratio",
+              "effectPattern": "Eff_Element_Crystal_Rock_Shield",
+              "targetMuteHitEffect": false,
+              "showDamageText": "INFO_ELITE_DEFENCE",
+              "childShieldModifierName": "UNIQUE_CrystalSeed_Rock_Shield_Child",
+              "onShieldBroken": [
+                {
+                  "$type": "FireEffect",
+                  "effectPattern": "Eff_Element_Crystal_Rock_Shield_Disappear"
+                }
+              ]
+            }
+          ],
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Element_Crystal_Rock_Shield_Disappear",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Element_Crystal_Rock_Shield_Disappear"
             }
           ]
         },
         "UNIQUE_CrystalSeed_Rock_Shield_Child": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
           "modifierMixins": [
             {
               "$type": "GlobalSubShieldMixin",
@@ -1998,7 +2148,7 @@
             }
           ],
           "properties": {
-            "Actor_EndureDelta": 0.0
+            "Actor_EndureDelta": 0
           },
           "onBeingHit": [
             {
@@ -2007,89 +2157,77 @@
               "targetPredicates": [
                 {
                   "$type": "ByHitEnBreak",
-                  "enBreak": 0.0
+                  "enBreak": 0,
+                  "logic": "Greater"
                 }
               ],
               "successActions": [
                 {
                   "$type": "ApplyModifier",
-                  "target": "Team",
-                  "modifierName": "CrystalShieldHitEffect"
+                  "modifierName": "CrystalShieldHitEffect",
+                  "target": "Team"
                 }
               ]
             }
           ]
         },
         "CrystalShieldHitEffect": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.30000001192092896,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.3,
           "onAdded": [
             {
               "$type": "SendEffectTrigger",
-              "parameter": "BeHit",
-              "attachPoint": "",
-              "healLimitedByCasterMaxHPRatio": "Eff_Element_Crystal_Rock_Shield"
+              "effectPattern": "Eff_Element_Crystal_Rock_Shield",
+              "parameter": "BeHit"
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Element_Crystal_Rock_BeHit",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Element_Crystal_Rock_BeHit"
             }
           ]
         },
         "UNIQUE_CrystalSeed_Rock_Shield_Mark": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
               "key": "_ABILITY_CrystalSeed_Rock_Shield_Mark",
+              "value": 1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 1.0
+              "maxValue": 1,
+              "minValue": 1
             }
           ],
           "onRemoved": [
             {
               "$type": "AddGlobalValue",
-              "ratio": -1.0,
               "key": "_ABILITY_CrystalSeed_Rock_Shield_Mark",
+              "value": -1,
               "useLimitRange": true,
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "maxValue": 0,
+              "minValue": 0
             }
           ]
         },
         "Crystal_Rock_Seed_Fx": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Element_Crystal_Rock_Seed",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Element_Crystal_Rock_Seed"
             }
           ],
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Element_Crystal_Rock_Seed_Disappear",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Element_Crystal_Rock_Seed_Disappear"
             }
           ]
         },
         "Life_Timer": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 15.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 15,
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Element_Crystal_Rock_Seed_Disappear",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Element_Crystal_Rock_Seed_Disappear"
             },
             {
               "$type": "KillSelf"
@@ -2097,49 +2235,10 @@
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "Crystal_Rock_Seed_Fx"
-        },
-        {
-          "$type": "AttachModifier",
-          "modifierName": "Life_Timer"
-        }
-      ],
-      "onFieldEnter": [
-        {
-          "$type": "SetSystemValueToOverrideMap",
-          "target": "Target",
-          "predicates": [
-            {
-              "$type": "ByEntityTypes",
-              "entityTypes": ["Avatar"]
-            }
-          ],
-          "key": "Player_Rock_Shield_Level_Ratio",
-          "type": "PlayerShieldLevelCo"
-        },
-        {
-          "$type": "ApplyModifier",
-          "target": "Target",
-          "predicates": [
-            {
-              "$type": "ByEntityTypes",
-              "entityTypes": ["Avatar"]
-            }
-          ],
-          "modifierName": "UNIQUE_CrystalSeed_Rock_Shield_Handler"
-        },
-        {
-          "$type": "RemoveModifier",
-          "modifierName": "Crystal_Rock_Seed_Fx"
-        },
-        {
-          "$type": "KillSelf",
-          "duration": 1.0
-        }
-      ]
+      "abilitySpecials": {
+        "Player_Rock_Shield_Level_Ratio": 0,
+        "Team_Crystal_Rock_SHield_Ratio": 0.0
+      }
     }
   }
 ]

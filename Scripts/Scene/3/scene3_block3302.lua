@@ -719,11 +719,13 @@ groups = {
 	{ id = 133302717, area = 20, pos = { x = -92.312, y = 251.685, z = 2905.099 }, dynamic_load = true, group_tag_list = { 3 }, is_replaceable = { value = true, version = 0, new_bin_only = true }, business = { type = 4 }, vision_type = 0 },
 	{ id = 133302719, area = 24, pos = { x = -785.595, y = 167.925, z = 2437.903 }, dynamic_load = true, is_replaceable = { value = true, version = 0, new_bin_only = true }, business = { type = 1 } },
 	{ id = 133302720, area = 24, pos = { x = -913.308, y = 201.355, z = 2731.429 }, dynamic_load = true, is_replaceable = { value = true, version = 0, new_bin_only = true }, business = { type = 1 } },
+	{ id = 133302721, area = 24, pos = { x = -414.078, y = 260.993, z = 2731.957 }, dynamic_load = true, is_replaceable = { value = true, version = 0, new_bin_only = true }, business = { type = 1 } },
 	{ id = 133302722, area = 19, pos = { x = -594.491, y = 276.645, z = 1947.773 }, dynamic_load = true, is_replaceable = { value = true, version = 0, new_bin_only = true }, business = { type = 2 } },
 	{ id = 133302723, area = 24, pos = { x = -428.750, y = 246.907, z = 2734.120 }, dynamic_load = true, is_replaceable = { value = false, version = 0, new_bin_only = true }, business = { type = 1 } },
 	{ id = 133302724, area = 19, pos = { x = -744.352, y = 254.520, z = 2061.950 }, dynamic_load = true, is_replaceable = { value = true, version = 0, new_bin_only = true }, business = { type = 1 } },
 	{ id = 133302725, area = 24, pos = { x = -321.252, y = 250.388, z = 2746.525 }, is_replaceable = { value = true, version = 0, new_bin_only = true } },
 	{ id = 133302726, area = 24, pos = { x = -321.407, y = 250.388, z = 2746.585 }, dynamic_load = true, is_replaceable = { value = true, version = 0, new_bin_only = true }, business = { type = 1 } },
 	{ id = 133302727, area = 24, pos = { x = -906.258, y = 211.635, z = 2639.988 }, dynamic_load = true, is_replaceable = { value = true, version = 0, new_bin_only = true }, business = { type = 1 } },
+	{ id = 133302728, area = 24, pos = { x = -715.261, y = 225.103, z = 2240.457 }, dynamic_load = true, is_replaceable = { value = false, version = 0, new_bin_only = true }, business = { type = 1 } },
 	{ id = 133302729, refresh_id = 1, area = 24, pos = { x = -551.706, y = 282.712, z = 2219.716 }, is_replaceable = { value = true, version = 0, new_bin_only = false }, vision_type = 0 }
 }

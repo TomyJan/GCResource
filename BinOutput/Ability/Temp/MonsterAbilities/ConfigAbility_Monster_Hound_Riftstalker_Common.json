@@ -1,17 +1,26 @@
 [
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Run State
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Hound_Riftstalker_RunState",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Run_RandomValue"
+        }
+      ],
       "modifiers": {
         "Run_RandomValue": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.20000000298023224,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.2,
           "onAdded": [
             {
               "$type": "Randomed",
-              "chance": 0.30000001192092896,
+              "chance": 0.3,
               "successActions": [
                 {
                   "$type": "SetAnimatorTrigger",
@@ -21,23 +30,27 @@
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Run_RandomValue"
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  LoseHP
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Hound_Corruption_LoseHP",
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Hound_Corruption_LoseHP_AttackCheck",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "Hound_Corruption_LoseHP_AttackCheck": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
@@ -45,7 +58,8 @@
               "targetPredicates": [
                 {
                   "$type": "ByEntityTypes",
-                  "entityTypes": ["Avatar"]
+                  "entityTypes": ["Avatar"],
+                  "target": "Target"
                 },
                 {
                   "$type": "ByAttackTags",
@@ -55,6 +69,7 @@
               "successActions": [
                 {
                   "$type": "ApplyModifier",
+                  "modifierName": "Hound_Corruption_LoseHP_Logic",
                   "target": "TargetTeam",
                   "predicates": [
                     {
@@ -65,11 +80,11 @@
                         }
                       ]
                     }
-                  ],
-                  "modifierName": "Hound_Corruption_LoseHP_Logic"
+                  ]
                 },
                 {
                   "$type": "ApplyModifier",
+                  "modifierName": "UNIQUE_Hound_Corruption_LoseHP_Effect_LocalHandler",
                   "target": "TargetTeam",
                   "predicates": [
                     {
@@ -80,26 +95,30 @@
                         }
                       ]
                     }
-                  ],
-                  "modifierName": "UNIQUE_Hound_Corruption_LoseHP_Effect_LocalHandler"
+                  ]
                 }
               ]
             }
           ]
         },
         "Hound_Corruption_LoseHP_Logic": {
-          "timeScale": "Level",
+          "duration": 9.5,
           "stacking": "Multiple",
-          "modifierName": "",
-          "HCJLIGBLGJA": 9.5,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 1.0,
+          "timeScale": "Level",
           "state": "UnlockFrequencyLimit",
+          "modifierTags": ["Corruption"],
           "onAdded": [
             {
               "$type": "LoseHP",
               "target": "CurTeamAvatars",
-              "RotationDampTime": true,
+              "amount": 0.0,
+              "amountByTargetMaxHPRatio": 0.005,
+              "enableInvincible": true, //无敌可以抵挡这个扣血行为
+              "enableLockHP": true, //锁血可以抵挡这个扣血行为
+              "lethal": false,
+              "doOffStage": true,
+              "disableWhenLoading": true,
+              "useMeta": true,
               "predicates": [
                 {
                   "$type": "ByNot",
@@ -111,45 +130,51 @@
                 },
                 {
                   "$type": "ByTargetHPRatio",
-                  "HPRatio": 0.15000000596046448
+                  "HPRatio": 0.15,
+                  "logic": "Greater"
                 },
                 {
-                  "$type": "ByGameTimeIsLocked"
+                  "$type": "ByGameTimeIsLocked",
+                  "isLocked": false
                 }
-              ],
-              "cdRatio": 0.0,
-              "amountByCasterMaxHPRatio": 0.004999999888241291,
-              "lethal": false,
-              "enableInvincible": true,
-              "enableLockHP": true,
-              "disableWhenLoading": true,
-              "amount": true
+              ]
             },
             {
               "$type": "LoseHP",
               "target": "CurTeamAvatars",
-              "RotationDampTime": true,
+              "amount": 0.0,
+              "amountByTargetMaxHPRatio": 0.005,
+              "enableInvincible": true, //无敌可以抵挡这个扣血行为
+              "enableLockHP": true, //锁血可以抵挡这个扣血行为
+              "lethal": true,
+              "doOffStage": true,
+              "disableWhenLoading": true,
+              "useMeta": true,
               "predicates": [
                 {
                   "$type": "ByIsLocalAvatar"
                 },
                 {
-                  "$type": "ByGameTimeIsLocked"
+                  "$type": "ByGameTimeIsLocked",
+                  "isLocked": false
                 }
-              ],
-              "cdRatio": 0.0,
-              "amountByCasterMaxHPRatio": 0.004999999888241291,
-              "enableInvincible": true,
-              "enableLockHP": true,
-              "disableWhenLoading": true,
-              "amount": true
+              ]
             }
           ],
+          "thinkInterval": 1,
+          "onThinkIntervalIsFixedUpdate": true,
           "onThinkInterval": [
             {
               "$type": "LoseHP",
               "target": "CurTeamAvatars",
-              "RotationDampTime": true,
+              "amount": 0.0,
+              "amountByTargetMaxHPRatio": 0.005,
+              "enableInvincible": true, //无敌可以抵挡这个扣血行为
+              "enableLockHP": true, //锁血可以抵挡这个扣血行为
+              "lethal": false,
+              "doOffStage": true,
+              "disableWhenLoading": true,
+              "useMeta": true,
               "predicates": [
                 {
                   "$type": "ByNot",
@@ -161,49 +186,43 @@
                 },
                 {
                   "$type": "ByTargetHPRatio",
-                  "HPRatio": 0.15000000596046448
+                  "HPRatio": 0.15,
+                  "logic": "Greater"
                 },
                 {
-                  "$type": "ByGameTimeIsLocked"
+                  "$type": "ByGameTimeIsLocked",
+                  "isLocked": false
                 }
-              ],
-              "cdRatio": 0.0,
-              "amountByCasterMaxHPRatio": 0.004999999888241291,
-              "lethal": false,
-              "enableInvincible": true,
-              "enableLockHP": true,
-              "disableWhenLoading": true,
-              "amount": true
+              ]
             },
             {
               "$type": "LoseHP",
               "target": "CurTeamAvatars",
-              "RotationDampTime": true,
+              "amount": 0.0,
+              "amountByTargetMaxHPRatio": 0.005,
+              "enableInvincible": true, //无敌可以抵挡这个扣血行为
+              "enableLockHP": true, //锁血可以抵挡这个扣血行为
+              "lethal": true,
+              "doOffStage": true,
+              "disableWhenLoading": true,
+              "useMeta": true,
               "predicates": [
                 {
                   "$type": "ByIsLocalAvatar"
                 },
                 {
-                  "$type": "ByGameTimeIsLocked"
+                  "$type": "ByGameTimeIsLocked",
+                  "isLocked": false
                 }
-              ],
-              "cdRatio": 0.0,
-              "amountByCasterMaxHPRatio": 0.004999999888241291,
-              "enableInvincible": true,
-              "enableLockHP": true,
-              "disableWhenLoading": true,
-              "amount": true
+              ]
             }
-          ],
-          "APPLHAOALHF": true,
-          "NMMMNMIMJJI": ["Corruption"]
+          ]
         },
         "UNIQUE_Hound_Corruption_LoseHP_Effect_LocalHandler": {
-          "stacking": "RefreshUniqueDurability",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": 9.5,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "RefreshUniqueDurability",
+          "duration": 9.5,
+          "modifierTags": ["Corruption"],
           "modifierMixins": [
             {
               "$type": "CurLocalAvatarMixinV2",
@@ -213,42 +232,34 @@
               "$type": "LocalAvatarsMixin",
               "modifierName": "Hound_Corruption_LoseHP_Icon"
             }
-          ],
-          "NMMMNMIMJJI": ["Corruption"]
+          ]
         },
         "Hound_Corruption_LoseHP_Effect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Common_Corruption_LoseHP",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Common_Corruption_LoseHP"
             },
             {
               "$type": "SendEffectTrigger",
               "parameter": "Stage",
-              "attachPoint": "",
               "type": "Int",
               "value": 2,
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Common_Corruption_LoseHP"
+              "effectPattern": "Eff_Monster_Common_Corruption_LoseHP"
             }
           ]
         },
         "Hound_Corruption_LoseHP_Icon": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "buffID": 90005
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Hound_Corruption_LoseHP_AttackCheck"
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  ExitBattle
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -262,19 +273,15 @@
       ],
       "modifiers": {
         "ExitBattle": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_Riftstalker_POSE_TAG_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             },
             {
               "$type": "SetChargeBarValue",
-              "ratio": 0.0
+              "value": 0
             }
           ]
         }

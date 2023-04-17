@@ -3,26 +3,37 @@
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_GravenCamp_GrassReaction_Impact",
+      "isDynamicAbility": true,
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "target": "Team",
+          "key": "ImpactState",
+          "value": 0
+        }
+      ],
       "abilityMixins": [
         {
           "$type": "CurLocalAvatarMixinV2",
           "modifierName": "UNIQUE_Activity_GravenCamp_GrassReaction_Impact"
         }
       ],
-      "abilitySpecials": {
-        "ImpactDamageSystemValue": 0.0,
-        "ImpactDamage": 6.0,
-        "ImpactInterval": 2.0
-      },
       "modifiers": {
         "UNIQUE_Activity_GravenCamp_GrassReaction_Impact": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
+          "onAdded": [
+            {
+              "$type": "SetSystemValueToOverrideMap",
+              "target": "Self",
+              "key": "ImpactDamageSystemValue",
+              "type": "ElementLevelCo"
+            }
+          ],
           "modifierMixins": [
             {
               "$type": "DoActionByElementReactionMixin",
+              "range": 20,
               "entityTypes": ["Monster"],
               "reactionTypes": [
                 "Burning",
@@ -37,16 +48,16 @@
                 {
                   "$type": "Predicated",
                   "target": "Other",
-                  "RotationDampTime": true,
+                  "doOffStage": true,
                   "targetPredicates": [
                     {
                       "$type": "ByTargetGlobalValue",
-                      "target": "Team",
                       "key": "ImpactState",
-                      "ratio": 0.0,
+                      "target": "Team",
+                      "value": 0,
                       "compareType": "NoneOrEqual"
                     }
-                  ],
+                  ], //通过可以生成冲击波的状态判断cd是否结束
                   "successActions": [
                     {
                       "$type": "ApplyModifier",
@@ -55,116 +66,96 @@
                     },
                     {
                       "$type": "ApplyModifier",
+                      "doOffStage": true,
                       "target": "Team",
-                      "RotationDampTime": true,
                       "modifierName": "UNIQUE_Activity_GravenCamp_GrassReaction_Impact_CD"
                     }
                   ]
                 }
               ]
             }
-          ],
-          "onAdded": [
-            {
-              "$type": "SetSystemValueToOverrideMap",
-              "key": "ImpactDamageSystemValue",
-              "type": "ElementLevelCo"
-            }
           ]
         },
+
         "Activity_GravenCamp_GrassReaction_Handler_Delay": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.05000000074505806,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.05,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_EnergyDisk_ElementalBurst_Wave_R40",
-              "EBHJMLOKDGB": -1.0
+              "doAfterDie": true,
+              "effectPattern": "Eff_EnergyDisk_ElementalBurst_Wave_R40"
             },
             {
               "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
+              "doAfterDie": true,
               "target": "Applier",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackSphere",
                   "triggerType": "TriggerNoRepeat",
+                  "radius": 4,
                   "born": {
                     "$type": "ConfigBornBySelf"
-                  },
-                  "DCMPFCIBIPA": 4.0
+                  }
                 },
                 "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
+                  "canBeModifiedBy": "OriginOwner",
                   "attackProperty": {
-                    "CCNJGLPMIEP": 0.0,
-                    "bonusCriticalHurt": 0.0,
-                    "ignoreAttackerProperty": true,
-                    "enBreak": 0.0,
-                    "attackType": "Melee",
-                    "damageExtra": [
-                      "ImpactDamage",
-                      "ImpactDamageSystemValue",
-                      "MUL"
-                    ],
+                    "damageExtra": "%ImpactDamage*%ImpactDamageSystemValue",
+                    "ignoreAttackerProperty": true, //忽略角色属性加成
+                    "ignoreModifyDamage": true,
                     "trueDamage": true,
-                    "bonusCritical": true
+                    "attackType": "Melee",
+                    "elementType": "None", //元素类型为无
+                    "elementDurability": 0, //元素含量为0
+                    "enBreak": 0
                   },
                   "hitPattern": {
-                    "onHitEffectName": "default",
-                    "hitImpulseType": "LV2",
-                    "hitHaltTimeScale": 0.019999999552965164
-                  },
-                  "canBeModifiedBy": "OriginOwner"
+                    "onHitEffectName": "default", //击中特效名称，
+                    "hitImpulseType": "LV2", //击退？
+                    "reboundRatio": 0, //需要解释
+                    "canBeDefenceHalt": false, //持盾防御者无法产生额外卡肉
+                    "hitHaltTime": 0,
+                    "hitHaltTimeScale": 0.02,
+                    "muteHitText": false //不跳字
+                  } //打击效果
                 }
-              },
-              "targetType": "Enemy"
-            }
+              }
+            } //生成圆形攻击盒
           ]
         },
         "UNIQUE_Activity_GravenCamp_GrassReaction_Impact_CD": {
-          "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "HCJLIGBLGJA": "ImpactInterval",
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Unique",
+          "duration": "%ImpactInterval",
           "onAdded": [
             {
               "$type": "SetGlobalValue",
+              "doOffStage": true,
+              "doAfterDie": true,
               "target": "Team",
-              "RotationDampTime": true,
-              "ratio": -1.0,
               "key": "ImpactState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": -1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
+              "doOffStage": true,
+              "doAfterDie": true,
               "target": "Team",
-              "RotationDampTime": true,
-              "ratio": 0.0,
               "key": "ImpactState",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "target": "Team",
-          "ratio": 0.0,
-          "key": "ImpactState",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        }
-      ],
-      "isDynamicAbility": true
+      "abilitySpecials": {
+        "ImpactDamageSystemValue": 0,
+        "ImpactDamage": 6,
+        "ImpactInterval": 2
+      }
     }
   }
 ]

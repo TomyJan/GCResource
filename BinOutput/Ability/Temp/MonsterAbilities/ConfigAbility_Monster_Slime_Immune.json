@@ -1,4 +1,9 @@
 [
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Fire_Immune
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -10,37 +15,43 @@
           "modifierName": "WaterDetect"
         }
       ],
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "OnFire_Trigger",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "OnFire_Trigger": {
+          "duration": 0.8,
           "stacking": "Unique",
-          "modifierName": "",
-          "DCEFILPANJI": 0.800000011920929,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorBool",
               "boolID": "FireShader",
-              "ratio": true
+              "value": true
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Slime_Fire_Absorption_Large",
-              "MEMHGJDEPJA": -1.0
+              "effectPattern": "Eff_Monster_Slime_Fire_Absorption_Large"
             }
           ],
           "onRemoved": [
             {
               "$type": "ApplyModifier",
-              "modifierName": "UNIQUE_FireBorn"
+              "modifierName": "UNIQUE_FireBorn",
+              "target": "Self"
             }
           ]
         },
         "UNIQUE_FireBorn": {
+          "duration": 30,
           "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "DCEFILPANJI": 30.0,
-          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_FireSubHurtDelta": 1
+          },
           "modifierMixins": [
             {
               "$type": "ReplaceEventPatternMixin",
@@ -53,107 +64,104 @@
                 "Monster_Slime_Fire_JumpAttack_Fire"
               ]
             }
-          ],
-          "properties": {
-            "Actor_FireSubHurtDelta": 1.0
-          },
-          "onAdded": [
-            {
-              "$type": "RemoveModifier",
-              "modifierName": "FireReborn"
-            },
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Slime_Fire_Burst_Large",
-              "MEMHGJDEPJA": -1.0
-            },
-            {
-              "$type": "SetPoseBool",
-              "boolID": "FireState",
-              "ratio": true
-            },
-            {
-              "$type": "SetAnimatorBool",
-              "boolID": "FireShader",
-              "ratio": true
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Slime_Fire_Extinguish_Large",
-              "MEMHGJDEPJA": -1.0
-            },
-            {
-              "$type": "SetPoseBool",
-              "boolID": "FireState"
-            },
-            {
-              "$type": "SetAnimatorBool",
-              "boolID": "FireShader"
-            },
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "FireReborn"
-            }
+            // {
+            // 	"$type": "RejectAttackMixin",
+            // 	"attackTag": "BurningDamage",
+            // },
           ],
           "onBeingHit": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Slime_Fire_BeHit",
+              "effectPattern": "Eff_Monster_Slime_Fire_BeHit",
               "born": {
                 "$type": "ConfigBornByHitPoint",
                 "direction": {
                   "$type": "ConfigDirectionByBackToHitBoxCenter"
                 },
                 "alongGround": true
-              },
-              "MEMHGJDEPJA": -1.0
+              }
+            }
+          ],
+          "onAdded": [
+            /*{
+							"$type": "AttachEffect",
+							"effectPattern": "Eff_Monster_Slime_Fire_Burning_Large",
+						},*/
+            {
+              "$type": "RemoveModifier",
+              "modifierName": "FireReborn"
+            },
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Slime_Fire_Burst_Large"
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "FireState",
+              "value": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "boolID": "FireShader",
+              "value": true
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Monster_Slime_Fire_Extinguish_Large"
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "FireState",
+              "value": false
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "boolID": "FireShader",
+              "value": false
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "FireReborn",
+              "target": "Self"
             }
           ]
         },
         "FireReborn": {
-          "modifierName": "",
-          "DCEFILPANJI": 20.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 20.0,
           "onAdded": [
             {
               "$type": "SetPoseBool",
               "boolID": "RebornGCD",
-              "ratio": true
+              "value": true
             }
           ],
           "onRemoved": [
             {
               "$type": "SetPoseBool",
-              "boolID": "RebornGCD"
+              "boolID": "RebornGCD",
+              "value": false
             }
           ]
         },
         "WaterDetect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetPoseBool",
               "boolID": "IsWet",
-              "ratio": true
+              "value": true
             }
           ],
           "onRemoved": [
             {
               "$type": "SetPoseBool",
-              "boolID": "IsWet"
+              "boolID": "IsWet",
+              "value": false
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "OnFire_Trigger"
-        }
-      ]
+      }
     }
   },
   {
@@ -167,37 +175,44 @@
           "modifierName": "WaterDetect"
         }
       ],
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "OnFire_Trigger",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "OnFire_Trigger": {
+          "duration": 0.8,
           "stacking": "Unique",
-          "modifierName": "",
-          "DCEFILPANJI": 0.800000011920929,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorBool",
               "boolID": "FireShader",
-              "ratio": true
+              "value": true
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Slime_Fire_Absorption_Large",
-              "MEMHGJDEPJA": -1.0
+              "effectPattern": "Eff_Monster_Slime_Fire_Absorption_Large"
             }
           ],
           "onRemoved": [
             {
               "$type": "ApplyModifier",
-              "modifierName": "UNIQUE_FireBorn"
+              "modifierName": "UNIQUE_FireBorn",
+              "target": "Self"
             }
           ]
         },
         "UNIQUE_FireBorn": {
           "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
           "elementType": "Fire",
-          "bonusCriticalHurt": 300.0,
+          "elementDurability": 300,
+          "properties": {
+            "Actor_FireSubHurtDelta": 1
+          },
           "modifierMixins": [
             {
               "$type": "ReplaceEventPatternMixin",
@@ -211,106 +226,99 @@
               ]
             }
           ],
-          "properties": {
-            "Actor_FireSubHurtDelta": 1.0
-          },
-          "onAdded": [
-            {
-              "$type": "RemoveModifier",
-              "modifierName": "FireReborn"
-            },
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Slime_Fire_Burst_Large",
-              "MEMHGJDEPJA": -1.0
-            },
-            {
-              "$type": "SetPoseBool",
-              "boolID": "FireState",
-              "ratio": true
-            },
-            {
-              "$type": "SetAnimatorBool",
-              "boolID": "FireShader",
-              "ratio": true
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Slime_Fire_Extinguish_Large",
-              "MEMHGJDEPJA": -1.0
-            },
-            {
-              "$type": "SetPoseBool",
-              "boolID": "FireState"
-            },
-            {
-              "$type": "SetAnimatorBool",
-              "boolID": "FireShader"
-            },
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "FireReborn"
-            }
-          ],
           "onBeingHit": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Slime_Fire_BeHit",
+              "effectPattern": "Eff_Monster_Slime_Fire_BeHit",
               "born": {
                 "$type": "ConfigBornByHitPoint",
                 "direction": {
                   "$type": "ConfigDirectionByBackToHitBoxCenter"
                 },
                 "alongGround": true
-              },
-              "MEMHGJDEPJA": -1.0
+              }
+            }
+          ],
+          "onAdded": [
+            /*{
+							"$type": "AttachEffect",
+							"effectPattern": "Eff_Monster_Slime_Fire_Burning_Large",
+						},*/
+            {
+              "$type": "RemoveModifier",
+              "modifierName": "FireReborn"
+            },
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Slime_Fire_Burst_Large"
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "FireState",
+              "value": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "boolID": "FireShader",
+              "value": true
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "FireEffect",
+              "effectPattern": "Eff_Monster_Slime_Fire_Extinguish_Large"
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "FireState",
+              "value": false
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "boolID": "FireShader",
+              "value": false
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "FireReborn",
+              "target": "Self"
             }
           ]
         },
         "FireReborn": {
-          "modifierName": "",
-          "DCEFILPANJI": 20.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 20.0,
           "onAdded": [
             {
               "$type": "SetPoseBool",
               "boolID": "RebornGCD",
-              "ratio": true
+              "value": true
             }
           ],
           "onRemoved": [
             {
               "$type": "SetPoseBool",
-              "boolID": "RebornGCD"
+              "boolID": "RebornGCD",
+              "value": false
             }
           ]
         },
         "WaterDetect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetPoseBool",
               "boolID": "IsWet",
-              "ratio": true
+              "value": true
             }
           ],
           "onRemoved": [
             {
               "$type": "SetPoseBool",
-              "boolID": "IsWet"
+              "boolID": "IsWet",
+              "value": false
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "OnFire_Trigger"
-        }
-      ]
+      }
     }
   },
   {
@@ -320,57 +328,73 @@
       "onAbilityStart": [
         {
           "$type": "TriggerBullet",
-          "predicates": [
-            {
-              "$type": "ByAnimatorFloat",
-              "ratio": 100.0,
-              "parameter": "PoseID"
-            }
-          ],
           "bulletID": 42101007,
           "born": {
             "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "RootNode",
             "offset": {
-              "AMODPKJAIGF": 0.0,
-              "DBJCBJPOOAP": 0.0,
-              "JDFJGADACKC": 0.800000011920929
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.8
             },
             "direction": {
               "$type": "ConfigDirectionByAttackTarget"
-            },
-            "attachPointName": "RootNode"
-          }
-        },
-        {
-          "$type": "FireEffect",
+            }
+          },
           "predicates": [
             {
               "$type": "ByAnimatorFloat",
-              "logic": "Lesser",
-              "ratio": 100.0,
-              "parameter": "PoseID"
+              "value": 100,
+              "parameter": "PoseID",
+              "logic": "Greater"
             }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_F_Slime_FireSmoke",
-          "MEMHGJDEPJA": -1.0
+          ]
+        },
+        {
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Monster_F_Slime_FireSmoke",
+          "predicates": [
+            {
+              "$type": "ByAnimatorFloat",
+              "value": 100,
+              "parameter": "PoseID",
+              "logic": "Lesser"
+            }
+          ]
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Electric_Immune
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Slime_Electric_03_Immune1_ElementState",
-      "abilitySpecials": {
-        "DischargeTime": 7.0
-      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_SLime_Electric_ElementState",
+          "target": "Self"
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_SLime_Electric_ElementState",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "UNIQUE_SLime_Electric_ElementState": {
-          "modifierName": "",
+          "duration": 30,
           "isUnique": true,
-          "DCEFILPANJI": 30.0,
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 1.0,
+          "properties": {
+            "Actor_ElecSubHurtDelta": 1
+          },
           "modifierMixins": [
             {
               "$type": "ReplaceEventPatternMixin",
@@ -386,90 +410,18 @@
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_SLIME_ELECTRIC_POSITIVE_COUNT",
-              "defaultGlobalValueOnCreate": 0.0,
-              "valueSteps": [-1.0, 0.5, 1.5],
+              "valueSteps": [-1, 0.5, 1.5],
+              "removeAppliedModifier": true,
               "modifierNameSteps": ["Discharge_Timer", "Discharge_Timer_Off"]
             }
           ],
-          "properties": {
-            "Actor_ElecSubHurtDelta": 1.0
-          },
-          "onAdded": [
-            {
-              "$type": "AddGlobalValue",
-              "ratio": 0.0,
-              "key": "_ABILITY_SLIME_ELECTRIC_PROPERITY",
-              "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
-            },
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "Discharge_Timer"
-            },
-            {
-              "$type": "SetPoseBool",
-              "boolID": "ElementState",
-              "ratio": true
-            },
-            {
-              "$type": "SetAnimatorBool",
-              "boolID": "SkinShader",
-              "ratio": true
-            },
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Slime_Electric_Idle",
-              "MEMHGJDEPJA": -1.0
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "ClearGlobalValue",
-              "key": "_ABILITY_SLIME_ELECTRIC_PROPERITY"
-            },
-            {
-              "$type": "RemoveModifier",
-              "modifierName": "Discharge_Timer"
-            },
-            {
-              "$type": "RemoveModifier",
-              "modifierName": "Discharge_Transition"
-            },
-            {
-              "$type": "SetPoseBool",
-              "boolID": "ElementState"
-            },
-            {
-              "$type": "SetAnimatorBool",
-              "boolID": "SkinShader"
-            },
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "RebornTimer"
-            }
-          ],
-          "onBeingHit": [
-            {
-              "$type": "AddElementDurability",
-              "predicates": [
-                {
-                  "$type": "ByHitElement",
-                  "element": "Electric"
-                }
-              ],
-              "ratio": 25.0,
-              "modifierName": "UNIQUE_SLime_Electric_ElementState",
-              "useLimitRange": true,
-              "maxValue": 200.0,
-              "minValue": 0.0
-            }
-          ],
+          "thinkInterval": 1.0,
           "onThinkInterval": [
             {
               "$type": "AddGlobalValue",
-              "ratio": -10.0,
+              "target": "Self",
               "key": "_ABILITY_SLIME_ELECTRIC_POSITIVE_COUNT",
+              "value": -10.0,
               "useLimitRange": true,
               "maxValue": 1.0,
               "minValue": 0.0
@@ -479,8 +431,9 @@
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR15",
+                "centerBasedOn": "Self",
                 "campTargetType": "SelfCamp",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
               "targetPredicates": [
                 {
@@ -490,19 +443,22 @@
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_SLIME_ELECTRIC_PROPERITY",
-                  "ratio": 1.0
+                  "value": 1.0,
+                  "compareType": "Equal"
                 },
                 {
                   "$type": "ByAnimatorFloat",
-                  "ratio": 100.0,
-                  "parameter": "PoseID"
+                  "value": 100,
+                  "parameter": "PoseID",
+                  "logic": "Greater"
                 }
               ],
               "successActions": [
                 {
                   "$type": "AddGlobalValue",
-                  "ratio": 1.0,
+                  "target": "Self",
                   "key": "_ABILITY_SLIME_ELECTRIC_POSITIVE_COUNT",
+                  "value": 1.0,
                   "useLimitRange": true,
                   "maxValue": 1.0,
                   "minValue": 0.0
@@ -516,11 +472,12 @@
             },
             {
               "$type": "Predicated",
+              "target": "Self",
               "targetPredicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_SLIME_ELECTRIC_POSITIVE_COUNT",
-                  "ratio": 0.0,
+                  "value": 0.0,
                   "compareType": "MoreThan"
                 }
               ],
@@ -528,12 +485,12 @@
                 {
                   "$type": "SetPoseBool",
                   "boolID": "IsAttract",
-                  "ratio": true
+                  "value": true
                 },
                 {
                   "$type": "SetAnimatorBool",
                   "boolID": "IsAttract",
-                  "ratio": true
+                  "value": true
                 },
                 {
                   "$type": "EnablePartControl",
@@ -544,141 +501,211 @@
               "failActions": [
                 {
                   "$type": "SetPoseBool",
-                  "boolID": "IsAttract"
+                  "boolID": "IsAttract",
+                  "value": false
                 },
                 {
                   "$type": "SetAnimatorBool",
-                  "boolID": "IsAttract"
+                  "boolID": "IsAttract",
+                  "value": false
                 },
                 {
                   "$type": "EnablePartControl",
-                  "partRootNames": ["AntennaControl"]
+                  "partRootNames": ["AntennaControl"],
+                  "enable": false
                 }
               ]
+            }
+          ],
+          "onAdded": [
+            {
+              "$type": "AddGlobalValue",
+              "target": "Self",
+              "key": "_ABILITY_SLIME_ELECTRIC_PROPERITY",
+              "value": 0.0,
+              "useLimitRange": true,
+              "maxValue": 1.0,
+              "minValue": 0.0
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "Discharge_Timer",
+              "target": "Self"
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "ElementState",
+              "value": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "boolID": "SkinShader",
+              "value": true
+            },
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Slime_Electric_Idle"
+            }
+          ],
+          "onBeingHit": [
+            {
+              "$type": "AddElementDurability",
+              "modifierName": "UNIQUE_SLime_Electric_ElementState",
+              "value": 25.0,
+              "useLimitRange": true,
+              "minValue": 0.0,
+              "maxValue": 200.0,
+              "predicates": [
+                {
+                  "$type": "ByHitElement",
+                  "element": "Electric"
+                }
+              ]
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "ClearGlobalValue",
+              "target": "Self",
+              "key": "_ABILITY_SLIME_ELECTRIC_PROPERITY"
+            },
+            {
+              "$type": "RemoveModifier",
+              "modifierName": "Discharge_Timer"
+            },
+            {
+              "$type": "RemoveModifier",
+              "modifierName": "Discharge_Transition"
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "ElementState",
+              "value": false
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "boolID": "SkinShader",
+              "value": false
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "RebornTimer",
+              "target": "Self"
             }
           ]
         },
         "RebornTimer": {
-          "modifierName": "",
-          "DCEFILPANJI": 15.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 15.0,
           "onAdded": [
             {
               "$type": "SetPoseBool",
               "boolID": "RebornGCD",
-              "ratio": true
+              "value": true
             }
           ],
           "onRemoved": [
             {
               "$type": "SetPoseBool",
-              "boolID": "RebornGCD"
+              "boolID": "RebornGCD",
+              "value": false
             }
           ]
         },
         "Discharge": {
-          "modifierName": "",
-          "DCEFILPANJI": 0.05000000074505806,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.05,
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Slime_Electric_Discharge_Ready",
-              "MEMHGJDEPJA": -1.0
+              "effectPattern": "Eff_Monster_Slime_Electric_Discharge_Ready"
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Slime_Electric_Discharge",
+              "effectPattern": "Eff_Monster_Slime_Electric_Discharge",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
-                "offset": {
-                  "AMODPKJAIGF": 0.0,
-                  "DBJCBJPOOAP": -0.30000001192092896,
-                  "JDFJGADACKC": 0.0
-                },
+                "attachPointName": "ElectrifiedBody",
                 "direction": {
                   "$type": "ConfigDirectionByEntity"
                 },
-                "attachPointName": "ElectrifiedBody"
-              },
-              "MEMHGJDEPJA": -1.0
+                "offset": {
+                  "x": 0.0,
+                  "y": -0.3,
+                  "z": 0.0
+                }
+              }
             },
             {
               "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
+                  "height": 0.75,
+                  "fanAngle": 360.0,
+                  "radius": 2.9,
                   "born": {
                     "$type": "ConfigBornBySelf",
                     "offset": {
-                      "AMODPKJAIGF": 0.0,
-                      "DBJCBJPOOAP": 0.75,
-                      "JDFJGADACKC": -0.6000000238418579
+                      "x": 0.0,
+                      "y": 0.75,
+                      "z": -0.6
                     }
-                  },
-                  "height": 0.75,
-                  "ILKJCNJJPEL": 2.9000000953674316
+                  }
                 },
                 "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "EHFOGJFHDPE": 1.0,
-                    "GDADKLDBGIM": 0.0,
-                    "elementType": "Electric",
-                    "bonusCriticalHurt": 50.0,
+                    "damagePercentage": 1.0,
                     "strikeType": "Default",
+                    "elementType": "Electric",
+                    "elementDurability": 50,
                     "enBreak": 80.0
                   },
                   "hitPattern": {
                     "onHitEffectName": "default",
-                    "hitLevel": "Light",
-                    "JHGPNBPAIHP": 200.0,
-                    "hitImpulseY": 0.0,
-                    "hitImpulseType": "",
-                    "hitHaltTimeScale": 0.009999999776482582
+                    "hitLevel": "Light", //hitlevel = 2
+                    "hitImpulseX": 200, //hitlevel = 2
+                    "hitImpulseY": 0, //hitlevel = 2
+                    "reboundRatio": 0,
+                    "hitHaltTime": 0,
+                    "hitHaltTimeScale": 0.01,
+                    "muteHitText": false
                   }
                 }
-              },
-              "targetType": "Enemy"
+              }
             },
             {
               "$type": "TriggerAttackEvent",
+              "targetType": "Alliance",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
+                  "height": 0.75,
+                  "fanAngle": 360.0,
+                  "radius": 2.9,
                   "born": {
                     "$type": "ConfigBornBySelf",
                     "offset": {
-                      "AMODPKJAIGF": 0.0,
-                      "DBJCBJPOOAP": 0.75,
-                      "JDFJGADACKC": -0.6000000238418579
+                      "x": 0.0,
+                      "y": 0.75,
+                      "z": -0.6
                     }
-                  },
-                  "height": 0.75,
-                  "ILKJCNJJPEL": 2.9000000953674316
+                  }
                 },
                 "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "EHFOGJFHDPE": 0.0,
-                    "GDADKLDBGIM": 0.0,
+                    "damagePercentage": 0.0,
                     "elementType": "Electric",
-                    "bonusCriticalHurt": 50.0,
+                    "elementDurability": 50,
                     "enBreak": 80.0
                   }
                 }
-              },
-              "targetType": "Alliance"
+              }
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 0.0,
+              "target": "Self",
               "key": "_ABILITY_SLIME_ELECTRIC_DISCHARGE",
               "useLimitRange": true,
               "randomInRange": true,
@@ -692,94 +719,92 @@
             },
             {
               "$type": "ApplyModifier",
-              "modifierName": "Discharge_Timer"
+              "modifierName": "Discharge_Timer",
+              "target": "Self"
             },
             {
               "$type": "AddElementDurability",
-              "ratio": -25.0,
               "modifierName": "UNIQUE_SLime_Electric_ElementState",
+              "value": -25.0,
               "useLimitRange": true,
-              "maxValue": 200.0,
-              "minValue": 0.0
+              "minValue": 0.0,
+              "maxValue": 200.0
             }
           ]
         },
         "Discharge_Timer": {
-          "modifierName": "",
-          "DCEFILPANJI": "DischargeTime",
-          "bonusCriticalHurt": 100.0,
+          "duration": "%DischargeTime",
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Slime_Electric_Discharge_Gap",
+              "effectPattern": "Eff_Monster_Slime_Electric_Discharge_Gap",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
                 "attachPointName": "ElectrifiedBody"
-              },
-              "MEMHGJDEPJA": -1.0
+              }
             }
           ],
           "onRemoved": [
             {
               "$type": "ApplyModifier",
+              "modifierName": "Discharge_Transition",
+              "target": "Self",
               "predicates": [
                 {
                   "$type": "ByAnimatorFloat",
-                  "ratio": 100.0,
-                  "parameter": "PoseID"
+                  "value": 100,
+                  "parameter": "PoseID",
+                  "logic": "Greater"
                 },
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_SLIME_ELECTRIC_POSITIVE_COUNT",
-                  "ratio": 0.0,
+                  "value": 0.0,
+                  "compareType": "Equal",
                   "forceByCaster": true
                 }
-              ],
-              "modifierName": "Discharge_Transition"
+              ]
             },
             {
               "$type": "SetAnimatorTrigger",
+              "triggerID": "Discharge",
+              "target": "Self",
               "predicates": [
                 {
                   "$type": "ByAnimatorFloat",
-                  "ratio": 100.0,
-                  "parameter": "PoseID"
+                  "value": 100,
+                  "parameter": "PoseID",
+                  "logic": "Greater"
                 },
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_SLIME_ELECTRIC_POSITIVE_COUNT",
-                  "ratio": 0.0,
+                  "value": 0.0,
+                  "compareType": "Equal",
                   "forceByCaster": true
                 }
-              ],
-              "triggerID": "Discharge"
+              ]
             }
           ]
         },
         "Discharge_Timer_Off": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Slime_Electric_Discharge_Gap",
+              "effectPattern": "Eff_Monster_Slime_Electric_Discharge_Gap",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
                 "attachPointName": "ElectrifiedBody"
-              },
-              "MEMHGJDEPJA": -1.0
+              }
             }
           ]
         },
         "Discharge_Transition": {
-          "modifierName": "",
-          "DCEFILPANJI": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Slime_Electric_Discharge_BS",
-              "MEMHGJDEPJA": -1.0
+              "effectPattern": "Eff_Monster_Slime_Electric_Discharge_BS"
             },
             {
               "$type": "TriggerFaceAnimation",
@@ -789,46 +814,49 @@
           "onRemoved": [
             {
               "$type": "ApplyModifier",
+              "modifierName": "Discharge",
+              "target": "Self",
               "predicates": [
                 {
                   "$type": "ByAnimatorFloat",
-                  "ratio": 100.0,
-                  "parameter": "PoseID"
+                  "value": 100,
+                  "parameter": "PoseID",
+                  "logic": "Greater"
                 }
-              ],
-              "modifierName": "Discharge"
+              ]
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "UNIQUE_SLime_Electric_ElementState"
-        }
-      ],
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "UNIQUE_SLime_Electric_ElementState"
-        }
-      ]
+      "abilitySpecials": {
+        "DischargeTime": 7.0
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Slime_Electric_03_Immune2_ElementState",
-      "abilitySpecials": {
-        "DischargeTime": 7.0
-      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_SLime_Electric_ElementState",
+          "target": "Self"
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_SLime_Electric_ElementState",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "UNIQUE_SLime_Electric_ElementState": {
-          "modifierName": "",
           "isUnique": true,
-          "elementType": "Electric",
-          "bonusCriticalHurt": 200.0,
-          "thinkInterval": 1.0,
+          "properties": {
+            "Actor_ElecSubHurtDelta": 1
+          },
           "modifierMixins": [
             {
               "$type": "ReplaceEventPatternMixin",
@@ -844,90 +872,20 @@
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_ABILITY_SLIME_ELECTRIC_POSITIVE_COUNT",
-              "defaultGlobalValueOnCreate": 0.0,
-              "valueSteps": [-1.0, 0.5, 1.5],
+              "valueSteps": [-1, 0.5, 1.5],
+              "removeAppliedModifier": true,
               "modifierNameSteps": ["Discharge_Timer", "Discharge_Timer_Off"]
             }
           ],
-          "properties": {
-            "Actor_ElecSubHurtDelta": 1.0
-          },
-          "onAdded": [
-            {
-              "$type": "AddGlobalValue",
-              "ratio": 0.0,
-              "key": "_ABILITY_SLIME_ELECTRIC_PROPERITY",
-              "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
-            },
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "Discharge_Timer"
-            },
-            {
-              "$type": "SetPoseBool",
-              "boolID": "ElementState",
-              "ratio": true
-            },
-            {
-              "$type": "SetAnimatorBool",
-              "boolID": "SkinShader",
-              "ratio": true
-            },
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Slime_Electric_Idle",
-              "MEMHGJDEPJA": -1.0
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "ClearGlobalValue",
-              "key": "_ABILITY_SLIME_ELECTRIC_PROPERITY"
-            },
-            {
-              "$type": "RemoveModifier",
-              "modifierName": "Discharge_Timer"
-            },
-            {
-              "$type": "RemoveModifier",
-              "modifierName": "Discharge_Transition"
-            },
-            {
-              "$type": "SetPoseBool",
-              "boolID": "ElementState"
-            },
-            {
-              "$type": "SetAnimatorBool",
-              "boolID": "SkinShader"
-            },
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "RebornTimer"
-            }
-          ],
-          "onBeingHit": [
-            {
-              "$type": "AddElementDurability",
-              "predicates": [
-                {
-                  "$type": "ByHitElement",
-                  "element": "Electric"
-                }
-              ],
-              "ratio": 25.0,
-              "modifierName": "UNIQUE_SLime_Electric_ElementState",
-              "useLimitRange": true,
-              "maxValue": 200.0,
-              "minValue": 0.0
-            }
-          ],
+          "elementType": "Electric",
+          "elementDurability": 200,
+          "thinkInterval": 1.0,
           "onThinkInterval": [
             {
               "$type": "AddGlobalValue",
-              "ratio": -10.0,
+              "target": "Self",
               "key": "_ABILITY_SLIME_ELECTRIC_POSITIVE_COUNT",
+              "value": -10.0,
               "useLimitRange": true,
               "maxValue": 1.0,
               "minValue": 0.0
@@ -937,8 +895,9 @@
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR15",
+                "centerBasedOn": "Self",
                 "campTargetType": "SelfCamp",
-                "sizeRatio": 1.0
+                "campBasedOn": "Self"
               },
               "targetPredicates": [
                 {
@@ -948,7 +907,8 @@
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_SLIME_ELECTRIC_PROPERITY",
-                  "ratio": 1.0
+                  "value": 1.0,
+                  "compareType": "Equal"
                 },
                 {
                   "$type": "ByHasElement",
@@ -958,8 +918,9 @@
               "successActions": [
                 {
                   "$type": "AddGlobalValue",
-                  "ratio": 1.0,
+                  "target": "Self",
                   "key": "_ABILITY_SLIME_ELECTRIC_POSITIVE_COUNT",
+                  "value": 1.0,
                   "useLimitRange": true,
                   "maxValue": 1.0,
                   "minValue": 0.0
@@ -973,11 +934,12 @@
             },
             {
               "$type": "Predicated",
+              "target": "Self",
               "targetPredicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_SLIME_ELECTRIC_POSITIVE_COUNT",
-                  "ratio": 0.0,
+                  "value": 0.0,
                   "compareType": "MoreThan"
                 }
               ],
@@ -985,12 +947,12 @@
                 {
                   "$type": "SetPoseBool",
                   "boolID": "IsAttract",
-                  "ratio": true
+                  "value": true
                 },
                 {
                   "$type": "SetAnimatorBool",
                   "boolID": "IsAttract",
-                  "ratio": true
+                  "value": true
                 },
                 {
                   "$type": "EnablePartControl",
@@ -1001,141 +963,211 @@
               "failActions": [
                 {
                   "$type": "SetPoseBool",
-                  "boolID": "IsAttract"
+                  "boolID": "IsAttract",
+                  "value": false
                 },
                 {
                   "$type": "SetAnimatorBool",
-                  "boolID": "IsAttract"
+                  "boolID": "IsAttract",
+                  "value": false
                 },
                 {
                   "$type": "EnablePartControl",
-                  "partRootNames": ["AntennaControl"]
+                  "partRootNames": ["AntennaControl"],
+                  "enable": false
                 }
               ]
+            }
+          ],
+          "onAdded": [
+            {
+              "$type": "AddGlobalValue",
+              "target": "Self",
+              "key": "_ABILITY_SLIME_ELECTRIC_PROPERITY",
+              "value": 0.0,
+              "useLimitRange": true,
+              "maxValue": 1.0,
+              "minValue": 0.0
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "Discharge_Timer",
+              "target": "Self"
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "ElementState",
+              "value": true
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "boolID": "SkinShader",
+              "value": true
+            },
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Slime_Electric_Idle"
+            }
+          ],
+          "onBeingHit": [
+            {
+              "$type": "AddElementDurability",
+              "modifierName": "UNIQUE_SLime_Electric_ElementState",
+              "value": 25.0,
+              "useLimitRange": true,
+              "minValue": 0.0,
+              "maxValue": 200.0,
+              "predicates": [
+                {
+                  "$type": "ByHitElement",
+                  "element": "Electric"
+                }
+              ]
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "ClearGlobalValue",
+              "target": "Self",
+              "key": "_ABILITY_SLIME_ELECTRIC_PROPERITY"
+            },
+            {
+              "$type": "RemoveModifier",
+              "modifierName": "Discharge_Timer"
+            },
+            {
+              "$type": "RemoveModifier",
+              "modifierName": "Discharge_Transition"
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "ElementState",
+              "value": false
+            },
+            {
+              "$type": "SetAnimatorBool",
+              "boolID": "SkinShader",
+              "value": false
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "RebornTimer",
+              "target": "Self"
             }
           ]
         },
         "RebornTimer": {
-          "modifierName": "",
-          "DCEFILPANJI": 15.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 15.0,
           "onAdded": [
             {
               "$type": "SetPoseBool",
               "boolID": "RebornGCD",
-              "ratio": true
+              "value": true
             }
           ],
           "onRemoved": [
             {
               "$type": "SetPoseBool",
-              "boolID": "RebornGCD"
+              "boolID": "RebornGCD",
+              "value": false
             }
           ]
         },
         "Discharge": {
-          "modifierName": "",
-          "DCEFILPANJI": 0.05000000074505806,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.05,
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Slime_Electric_Discharge_Ready",
-              "MEMHGJDEPJA": -1.0
+              "effectPattern": "Eff_Monster_Slime_Electric_Discharge_Ready"
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Slime_Electric_Discharge",
+              "effectPattern": "Eff_Monster_Slime_Electric_Discharge",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
-                "offset": {
-                  "AMODPKJAIGF": 0.0,
-                  "DBJCBJPOOAP": -0.30000001192092896,
-                  "JDFJGADACKC": 0.0
-                },
+                "attachPointName": "ElectrifiedBody",
                 "direction": {
                   "$type": "ConfigDirectionByEntity"
                 },
-                "attachPointName": "ElectrifiedBody"
-              },
-              "MEMHGJDEPJA": -1.0
+                "offset": {
+                  "x": 0.0,
+                  "y": -0.3,
+                  "z": 0.0
+                }
+              }
             },
             {
               "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
+                  "height": 0.75,
+                  "fanAngle": 360.0,
+                  "radius": 2.9,
                   "born": {
                     "$type": "ConfigBornBySelf",
                     "offset": {
-                      "AMODPKJAIGF": 0.0,
-                      "DBJCBJPOOAP": 0.75,
-                      "JDFJGADACKC": -0.6000000238418579
+                      "x": 0.0,
+                      "y": 0.75,
+                      "z": -0.6
                     }
-                  },
-                  "height": 0.75,
-                  "ILKJCNJJPEL": 2.9000000953674316
+                  }
                 },
                 "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "EHFOGJFHDPE": 1.0,
-                    "GDADKLDBGIM": 0.0,
-                    "elementType": "Electric",
-                    "bonusCriticalHurt": 50.0,
+                    "damagePercentage": 1.0,
                     "strikeType": "Default",
+                    "elementType": "Electric",
+                    "elementDurability": 50,
                     "enBreak": 80.0
                   },
                   "hitPattern": {
                     "onHitEffectName": "default",
-                    "hitLevel": "Light",
-                    "JHGPNBPAIHP": 200.0,
-                    "hitImpulseY": 0.0,
-                    "hitImpulseType": "",
-                    "hitHaltTimeScale": 0.009999999776482582
+                    "hitLevel": "Light", //hitlevel = 2
+                    "hitImpulseX": 200, //hitlevel = 2
+                    "hitImpulseY": 0, //hitlevel = 2
+                    "reboundRatio": 0,
+                    "hitHaltTime": 0,
+                    "hitHaltTimeScale": 0.01,
+                    "muteHitText": false
                   }
                 }
-              },
-              "targetType": "Enemy"
+              }
             },
             {
               "$type": "TriggerAttackEvent",
+              "targetType": "Alliance",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
+                  "height": 0.75,
+                  "fanAngle": 360.0,
+                  "radius": 2.9,
                   "born": {
                     "$type": "ConfigBornBySelf",
                     "offset": {
-                      "AMODPKJAIGF": 0.0,
-                      "DBJCBJPOOAP": 0.75,
-                      "JDFJGADACKC": -0.6000000238418579
+                      "x": 0.0,
+                      "y": 0.75,
+                      "z": -0.6
                     }
-                  },
-                  "height": 0.75,
-                  "ILKJCNJJPEL": 2.9000000953674316
+                  }
                 },
                 "attackInfo": {
-                  "attackTag": "",
-                  "attenuationTag": "",
-                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "EHFOGJFHDPE": 0.0,
-                    "GDADKLDBGIM": 0.0,
+                    "damagePercentage": 0.0,
                     "elementType": "Electric",
-                    "bonusCriticalHurt": 50.0,
+                    "elementDurability": 50,
                     "enBreak": 80.0
                   }
                 }
-              },
-              "targetType": "Alliance"
+              }
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": 0.0,
+              "target": "Self",
               "key": "_ABILITY_SLIME_ELECTRIC_DISCHARGE",
               "useLimitRange": true,
               "randomInRange": true,
@@ -1149,36 +1181,36 @@
             },
             {
               "$type": "ApplyModifier",
-              "modifierName": "Discharge_Timer"
+              "modifierName": "Discharge_Timer",
+              "target": "Self"
             },
             {
               "$type": "AddElementDurability",
-              "ratio": -25.0,
               "modifierName": "UNIQUE_SLime_Electric_ElementState",
+              "value": -25.0,
               "useLimitRange": true,
-              "maxValue": 200.0,
-              "minValue": 0.0
+              "minValue": 0.0,
+              "maxValue": 200.0
             }
           ]
         },
         "Discharge_Timer": {
-          "modifierName": "",
-          "DCEFILPANJI": "DischargeTime",
-          "bonusCriticalHurt": 100.0,
+          "duration": "%DischargeTime",
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Slime_Electric_Discharge_Gap",
+              "effectPattern": "Eff_Monster_Slime_Electric_Discharge_Gap",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
                 "attachPointName": "ElectrifiedBody"
-              },
-              "MEMHGJDEPJA": -1.0
+              }
             }
           ],
           "onRemoved": [
             {
               "$type": "ApplyModifier",
+              "modifierName": "Discharge_Transition",
+              "target": "Self",
               "predicates": [
                 {
                   "$type": "ByHasElement",
@@ -1187,14 +1219,16 @@
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_SLIME_ELECTRIC_POSITIVE_COUNT",
-                  "ratio": 0.0,
+                  "value": 0.0,
+                  "compareType": "Equal",
                   "forceByCaster": true
                 }
-              ],
-              "modifierName": "Discharge_Transition"
+              ]
             },
             {
               "$type": "SetAnimatorTrigger",
+              "triggerID": "Discharge",
+              "target": "Self",
               "predicates": [
                 {
                   "$type": "ByHasElement",
@@ -1203,38 +1237,32 @@
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_SLIME_ELECTRIC_POSITIVE_COUNT",
-                  "ratio": 0.0,
+                  "value": 0.0,
+                  "compareType": "Equal",
                   "forceByCaster": true
                 }
-              ],
-              "triggerID": "Discharge"
+              ]
             }
           ]
         },
         "Discharge_Timer_Off": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Slime_Electric_Discharge_Gap",
+              "effectPattern": "Eff_Monster_Slime_Electric_Discharge_Gap",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
                 "attachPointName": "ElectrifiedBody"
-              },
-              "MEMHGJDEPJA": -1.0
+              }
             }
           ]
         },
         "Discharge_Transition": {
-          "modifierName": "",
-          "DCEFILPANJI": 0.5,
-          "bonusCriticalHurt": 100.0,
+          "duration": 0.5,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Slime_Electric_Discharge_BS",
-              "MEMHGJDEPJA": -1.0
+              "effectPattern": "Eff_Monster_Slime_Electric_Discharge_BS"
             },
             {
               "$type": "TriggerFaceAnimation",
@@ -1244,31 +1272,28 @@
           "onRemoved": [
             {
               "$type": "ApplyModifier",
+              "modifierName": "Discharge",
+              "target": "Self",
               "predicates": [
                 {
                   "$type": "ByHasElement",
                   "element": "Electric"
                 }
-              ],
-              "modifierName": "Discharge"
+              ]
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "UNIQUE_SLime_Electric_ElementState"
-        }
-      ],
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "UNIQUE_SLime_Electric_ElementState"
-        }
-      ]
+      "abilitySpecials": {
+        "DischargeTime": 7.0
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Electric_Immune_JumpGround
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1276,60 +1301,69 @@
       "onAbilityStart": [
         {
           "$type": "TriggerSetCastShadow",
+          "castShadow": false,
+          "target": "Self",
           "predicates": [
             {
               "$type": "ByAnimatorFloat",
-              "ratio": 100.0,
-              "parameter": "PoseID"
+              "value": 100,
+              "parameter": "PoseID",
+              "logic": "Greater"
             }
           ]
         },
         {
           "$type": "EnablePushColliderName",
-          "pushColliderNames": ["PushCollider"]
+          "pushColliderNames": ["PushCollider"],
+          "setEnable": false
         },
         {
           "$type": "FireEffect",
+          "effectPattern": "Eff_Monster_Slime_Electric_JumpPrepared",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_SLIME_ELECTRIC_PROPERITY",
-              "ratio": 0.0
+              "value": 0.0,
+              "compareType": "Equal"
             },
             {
               "$type": "ByAnimatorFloat",
-              "ratio": 100.0,
-              "parameter": "PoseID"
+              "value": 100,
+              "parameter": "PoseID",
+              "logic": "Greater"
             }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Slime_Electric_JumpPrepared",
-          "MEMHGJDEPJA": -1.0
+          ]
         },
         {
           "$type": "FireEffect",
+          "effectPattern": "Eff_Monster_Slime_Electric_Positive_JumpPrepared",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_SLIME_ELECTRIC_PROPERITY",
-              "ratio": 1.0
+              "value": 1.0,
+              "compareType": "Equal"
             },
             {
               "$type": "ByAnimatorFloat",
-              "ratio": 100.0,
-              "parameter": "PoseID"
+              "value": 100,
+              "parameter": "PoseID",
+              "logic": "Greater"
             }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Slime_Electric_Positive_JumpPrepared",
-          "MEMHGJDEPJA": -1.0
+          ]
         },
         {
           "$type": "ActCameraShake",
           "cameraShake": {
             "shakeType": "CustomVector",
-            "shakeRange": 0.05999999865889549,
-            "shakeTime": 0.15000000596046448,
+            "shakeRange": 0.06,
+            "shakeTime": 0.15,
+            "shakeDistance": 20.0,
             "shakeDir": {
-              "y": 1.0
+              "x": 0,
+              "y": 1,
+              "z": 0
             }
           }
         }
@@ -1340,39 +1374,47 @@
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Slime_Electric_Immune_JumpGround_Alert",
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "JumpGround_Alert",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "JumpGround_Alert": {
-          "modifierName": "",
-          "DCEFILPANJI": 1.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 1.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "predicates": [
-                {
-                  "$type": "ByAnimatorFloat",
-                  "ratio": 100.0,
-                  "parameter": "PoseID"
-                }
-              ],
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Slime_Fire_JumpGround_Alert",
+              "effectPattern": "Eff_Monster_Slime_Fire_JumpGround_Alert",
+              "target": "Self",
               "born": {
                 "$type": "ConfigBornByRushToPoint"
               },
-              "MEMHGJDEPJA": -1.0
+              "predicates": [
+                {
+                  "$type": "ByAnimatorFloat",
+                  "value": 100,
+                  "parameter": "PoseID",
+                  "logic": "Greater"
+                }
+              ]
             }
           ],
           "onRemoved": [
             {
               "$type": "TriggerSetCastShadow",
+              "castShadow": true,
+              "target": "Self",
               "predicates": [
                 {
                   "$type": "ByAnimatorFloat",
-                  "ratio": 100.0,
-                  "parameter": "PoseID"
+                  "value": 100,
+                  "parameter": "PoseID",
+                  "logic": "Greater"
                 }
-              ],
-              "castShadow": true
+              ]
             },
             {
               "$type": "EnablePushColliderName",
@@ -1381,13 +1423,7 @@
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "JumpGround_Alert"
-        }
-      ]
+      }
     }
   },
   {
@@ -1397,106 +1433,113 @@
       "onAbilityStart": [
         {
           "$type": "FireEffect",
+          "effectPattern": "Eff_Monster_Slime_Electric_JumpGround",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_SLIME_ELECTRIC_PROPERITY",
-              "ratio": 0.0
+              "value": 0.0,
+              "compareType": "Equal"
             },
             {
               "$type": "ByAnimatorFloat",
-              "ratio": 100.0,
-              "parameter": "PoseID"
+              "value": 100,
+              "parameter": "PoseID",
+              "logic": "Greater"
             }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Slime_Electric_JumpGround",
-          "MEMHGJDEPJA": -1.0
+          ]
         },
         {
           "$type": "FireEffect",
+          "effectPattern": "Eff_Monster_Slime_Electric_Positive_JumpGround",
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_SLIME_ELECTRIC_PROPERITY",
-              "ratio": 1.0
+              "value": 1.0,
+              "compareType": "Equal"
             },
             {
               "$type": "ByAnimatorFloat",
-              "ratio": 100.0,
-              "parameter": "PoseID"
+              "value": 100,
+              "parameter": "PoseID",
+              "logic": "Greater"
             }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Slime_Electric_Positive_JumpGround",
-          "MEMHGJDEPJA": -1.0
+          ]
         },
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "predicates": [
             {
               "$type": "ByAnimatorFloat",
-              "ratio": 100.0,
-              "parameter": "PoseID"
+              "value": 100,
+              "parameter": "PoseID",
+              "logic": "Greater"
             }
           ],
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackCircle",
+              "duration": 0.0,
               "triggerType": "TriggerNoRepeat",
+              "height": 1.5,
+              "fanAngle": 360.0,
+              "radius": 2.0,
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "AMODPKJAIGF": 0.0,
-                  "DBJCBJPOOAP": 0.0,
-                  "JDFJGADACKC": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 }
-              },
-              "height": 1.5,
-              "ILKJCNJJPEL": 2.0
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
               "attackProperty": {
-                "EHFOGJFHDPE": 3.0,
-                "GDADKLDBGIM": 0.0,
-                "elementType": "Electric",
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 3.0,
                 "strikeType": "Blunt",
+                "elementType": "Electric",
+                "elementDurability": 50,
                 "enBreak": 200.0
               },
               "hitPattern": {
                 "onHitEffectName": "default",
-                "hitLevel": "Air",
-                "JHGPNBPAIHP": 655.0,
-                "hitImpulseY": 800.0,
-                "hitImpulseType": "",
-                "hitHaltTimeScale": 0.009999999776482582
+                "hitLevel": "Air", //hitlevel = 6
+                "hitImpulseX": 655, //hitlevel = 6
+                "hitImpulseY": 800, //hitlevel = 6
+                "reboundRatio": 0,
+                "hitHaltTime": 0,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
               },
               "forceCameraShake": true,
               "cameraShake": {
                 "shakeType": "CustomVector",
-                "shakeRange": 0.11999999731779099,
-                "shakeTime": 0.15000000596046448,
+                "shakeRange": 0.12,
+                "shakeTime": 0.15,
                 "shakeDistance": 25.0,
                 "shakeDir": {
-                  "y": -1.0
+                  "x": 0,
+                  "y": -1,
+                  "z": 0
                 }
               }
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "predicates": [
             {
               "$type": "ByNot",
               "predicates": [
                 {
                   "$type": "ByAnimatorFloat",
-                  "ratio": 100.0,
-                  "parameter": "PoseID"
+                  "value": 100,
+                  "parameter": "PoseID",
+                  "logic": "Greater"
                 }
               ]
             }
@@ -1504,54 +1547,60 @@
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackCircle",
+              "duration": 0.0,
               "triggerType": "TriggerNoRepeat",
+              "height": 1.5,
+              "fanAngle": 360.0,
+              "radius": 1.25,
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "AMODPKJAIGF": 0.0,
-                  "DBJCBJPOOAP": 0.0,
-                  "JDFJGADACKC": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 }
-              },
-              "height": 1.5,
-              "ILKJCNJJPEL": 1.25
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
               "attackProperty": {
-                "EHFOGJFHDPE": 2.0,
-                "GDADKLDBGIM": 0.0,
-                "bonusCriticalHurt": 100.0,
+                "damagePercentage": 2.0,
                 "strikeType": "Blunt",
                 "enBreak": 50.0
               },
               "hitPattern": {
                 "onHitEffectName": "default",
-                "hitLevel": "Air",
-                "JHGPNBPAIHP": 655.0,
-                "hitImpulseY": 800.0,
-                "hitImpulseType": "",
-                "hitHaltTimeScale": 0.009999999776482582
+                "hitLevel": "Air", //hitlevel = 6
+                "hitImpulseX": 655, //hitlevel = 6
+                "hitImpulseY": 800, //hitlevel = 6
+                "reboundRatio": 0,
+                "hitHaltTime": 0,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
               },
               "forceCameraShake": true,
               "cameraShake": {
                 "shakeType": "CustomVector",
-                "shakeRange": 0.11999999731779099,
-                "shakeTime": 0.15000000596046448,
+                "shakeRange": 0.12,
+                "shakeTime": 0.15,
                 "shakeDistance": 25.0,
                 "shakeDir": {
-                  "y": -1.0
+                  "x": 0,
+                  "y": -1,
+                  "z": 0
                 }
               }
             }
-          },
-          "targetType": "Enemy"
+          }
         }
       ]
     }
   },
+
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Slime_Fire_Immune: FireBall
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1559,87 +1608,124 @@
       "onAdded": [
         {
           "$type": "AddGlobalValue",
-          "ratio": 1.0,
+          "value": 1,
           "key": "_SLIME_FIRE_IMMUNE2_TAG",
-          "maxValue": 1.0,
-          "minValue": 0.0
+          "useLimitRange": false,
+          "randomInRange": false,
+          "maxValue": 1,
+          "minValue": 0,
+          "target": "Self"
         }
       ],
       "onAbilityStart": [
         {
           "$type": "TriggerBullet",
+          "bulletID": 42001023,
+          "target": "Self",
+          "trackTarget": "Self",
+          "lifeByOwnerIsAlive": true,
+          "born": {
+            "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "RootNode",
+            "offset": {
+              "x": 5.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "direction": {
+              "$type": "ConfigDirectionByAttackTarget"
+            }
+          },
           "predicates": [
             {
               "$type": "ByHasElement",
               "element": "Fire"
             }
-          ],
-          "bulletID": 42001023,
-          "born": {
-            "$type": "ConfigBornByAttachPoint",
-            "offset": {
-              "AMODPKJAIGF": 5.0,
-              "DBJCBJPOOAP": 0.0,
-              "JDFJGADACKC": 0.0
-            },
-            "direction": {
-              "$type": "ConfigDirectionByAttackTarget"
-            },
-            "attachPointName": "RootNode"
-          },
-          "lifeByOwnerIsAlive": true,
-          "trackTarget": "Self"
+          ]
         },
         {
           "$type": "TriggerBullet",
+          "bulletID": 42001023,
+          "target": "Self",
+          "trackTarget": "Self",
+          "lifeByOwnerIsAlive": true,
+          "born": {
+            "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "RootNode",
+            "offset": {
+              "x": -5.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "direction": {
+              "$type": "ConfigDirectionByAttackTarget"
+            }
+          },
           "predicates": [
             {
               "$type": "ByHasElement",
               "element": "Fire"
             }
-          ],
-          "bulletID": 42001023,
-          "born": {
-            "$type": "ConfigBornByAttachPoint",
-            "offset": {
-              "AMODPKJAIGF": -5.0,
-              "DBJCBJPOOAP": 0.0,
-              "JDFJGADACKC": 0.0
-            },
-            "direction": {
-              "$type": "ConfigDirectionByAttackTarget"
-            },
-            "attachPointName": "RootNode"
-          },
-          "lifeByOwnerIsAlive": true,
-          "trackTarget": "Self"
+          ]
         },
+        // {
+        // 	"$type": "TriggerBullet",
+        // 	"bulletID": 42001023,
+        // 	"target": "Self",
+        // 	"trackTarget": "Self",
+        //  "lifeByOwnerIsAlive": true,
+        // 	"born":
+        // 	{
+        // 		"$type": "ConfigBornByAttachPoint",
+        // 		"attachPointName" : "RootNode",
+        // 		"offset" :
+        // 		{
+        // 			"x": 0.0,
+        // 			"y": 0.0,
+        // 			"z": 5.0,
+        // 		},
+        // 		"direction":
+        // 		{
+        // 			"$type": "ConfigDirectionByAttackTarget"
+        // 		}
+        // 	},
+        // 	"predicates":
+        // 	[
+        // 		{
+        // 			"$type": "ByHasElement",
+        // 			"element": "Fire",
+        // 		},
+
+        // 	],
+        // },
         {
           "$type": "TriggerBullet",
+          "bulletID": 42001023,
+          "target": "Self",
+          "trackTarget": "Self",
+          "lifeByOwnerIsAlive": true,
+          "born": {
+            "$type": "ConfigBornByAttachPoint",
+            "attachPointName": "RootNode",
+            "offset": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": -5.0
+            },
+            "direction": {
+              "$type": "ConfigDirectionByAttackTarget"
+            }
+          },
           "predicates": [
             {
               "$type": "ByHasElement",
               "element": "Fire"
             }
-          ],
-          "bulletID": 42001023,
-          "born": {
-            "$type": "ConfigBornByAttachPoint",
-            "offset": {
-              "AMODPKJAIGF": 0.0,
-              "DBJCBJPOOAP": 0.0,
-              "JDFJGADACKC": -5.0
-            },
-            "direction": {
-              "$type": "ConfigDirectionByAttackTarget"
-            },
-            "attachPointName": "RootNode"
-          },
-          "lifeByOwnerIsAlive": true,
-          "trackTarget": "Self"
+          ]
         },
         {
           "$type": "FireEffect",
+          "effectPattern": "Eff_Monster_F_Slime_FireSmoke",
           "predicates": [
             {
               "$type": "ByNot",
@@ -1650,9 +1736,7 @@
                 }
               ]
             }
-          ],
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_F_Slime_FireSmoke",
-          "MEMHGJDEPJA": -1.0
+          ]
         }
       ]
     }
@@ -1661,37 +1745,11 @@
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Slime_Fire_Immune_FireBall_Explode",
-      "modifiers": {
-        "RebornAsRigidBody_Trigger": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onBeingHit": [
-            {
-              "$type": "TriggerAbility",
-              "target": "Owner",
-              "predicates": [
-                {
-                  "$type": "ByAttackTags",
-                  "attackTags": ["ExplodeDamage"]
-                }
-              ],
-              "abilityName": "Slime_Fire_Immune_FireBall_RebornAsRigidBody"
-            },
-            {
-              "$type": "AddGlobalValue",
-              "ratio": 1.0,
-              "key": "_SLIME_FIRE_IMMUNE_FIREBALL_HITFLAG",
-              "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
-            }
-          ]
-        }
-      },
       "onAdded": [
         {
           "$type": "ApplyModifier",
-          "modifierName": "RebornAsRigidBody_Trigger"
+          "modifierName": "RebornAsRigidBody_Trigger",
+          "target": "Self"
         }
       ],
       "onAbilityStart": [
@@ -1701,17 +1759,45 @@
         },
         {
           "$type": "KillSelf",
+          "duration": 0.2,
           "target": "Owner",
           "predicates": [
             {
               "$type": "ByTargetPositionToSelfPosition",
-              "logic": "Lesser",
-              "ratio": 1.0
+              "compareType": "XZ",
+              "value": 1,
+              "logic": "Lesser"
             }
-          ],
-          "duration": 0.20000000298023224
+          ]
         }
-      ]
+      ],
+      "modifiers": {
+        "RebornAsRigidBody_Trigger": {
+          "onBeingHit": [
+            {
+              "$type": "TriggerAbility",
+              "abilityID": "Slime_Fire_Immune_FireBall_RebornAsRigidBody",
+              "abilityName": "Slime_Fire_Immune_FireBall_RebornAsRigidBody",
+              "target": "Owner",
+              "predicates": [
+                {
+                  "$type": "ByAttackTags",
+                  "attackTags": ["ExplodeDamage"]
+                }
+              ]
+            },
+            {
+              "$type": "AddGlobalValue",
+              "value": 1,
+              "key": "_SLIME_FIRE_IMMUNE_FIREBALL_HITFLAG",
+              "useLimitRange": true,
+              "maxValue": 1,
+              "minValue": 0,
+              "target": "Self"
+            }
+          ]
+        }
+      }
     }
   },
   {
@@ -1721,47 +1807,52 @@
       "onAbilityStart": [
         {
           "$type": "CreateGadget",
+          "gadgetID": 42001025,
+          "campID": 4001,
+          "campTargetType": "Enemy",
           "otherTargets": {
             "$type": "SelectTargetsByShape",
-            "topLimit": 5,
             "shapeName": "CircleR10",
+            "centerBasedOn": "Self",
             "campTargetType": "SelfCamp",
-            "sizeRatio": 1.0
+            "topLimit": 5,
+            "campBasedOn": "Self"
           },
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_SLIME_FIRE_IMMUNE_FIREBALL_HITFLAG",
-              "ratio": 1.0
+              "value": 1,
+              "compareType": "Equal"
             }
           ],
           "born": {
             "$type": "ConfigBornByTarget"
-          },
-          "gadgetID": 42001025,
-          "campID": 4001,
-          "campTargetType": "Enemy"
+          }
         },
         {
           "$type": "KillSelf",
           "otherTargets": {
             "$type": "SelectTargetsByShape",
-            "topLimit": 5,
             "shapeName": "CircleR10",
+            "centerBasedOn": "Self",
             "campTargetType": "SelfCamp",
-            "sizeRatio": 1.0
+            "topLimit": 5,
+            "campBasedOn": "Self"
           },
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_SLIME_FIRE_IMMUNE_FIREBALL_HITFLAG",
-              "ratio": 1.0
+              "value": 1,
+              "compareType": "Equal"
             }
           ]
         }
       ]
     }
   },
+
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1769,50 +1860,51 @@
       "onAdded": [
         {
           "$type": "TriggerAttackEvent",
+          "target": "Self",
+          "targetType": "Self",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
+              "duration": 0.0,
               "triggerType": "TriggerNoRepeat",
+              "radius": 5.0,
               "born": {
                 "$type": "ConfigBornByTarget",
+                //"attachPointName" : "RootNode",
                 "offset": {
-                  "AMODPKJAIGF": 0.0,
-                  "DBJCBJPOOAP": 0.0,
-                  "JDFJGADACKC": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 }
-              },
-              "ILKJCNJJPEL": 5.0
+              }
+              // "filterByFrame":true,
             },
             "attackInfo": {
               "attackTag": "ExplodeDamage",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
               "attackProperty": {
-                "EHFOGJFHDPE": 0.0,
-                "GDADKLDBGIM": 0.0,
+                "damagePercentage": 0,
                 "elementType": "Fire",
-                "bonusCriticalHurt": 0.0,
-                "ignoreAttackerProperty": true,
+                "elementDurability": 0,
+                "damageExtra": 0,
                 "strikeType": "Blunt",
-                "enBreak": 130.0,
-                "damageExtra": 0.0
+                "ignoreAttackerProperty": true,
+                "enBreak": 130
               },
               "hitPattern": {
                 "onHitEffectName": "",
-                "hitLevel": "Air",
-                "JHGPNBPAIHP": 480.0,
-                "hitImpulseY": 600.0,
-                "hitImpulseType": "",
-                "hitHaltTimeScale": 0.05000000074505806
+                "hitLevel": "Air", //hitlevel = 5
+                "hitImpulseX": 480, //hitlevel = 5
+                "hitImpulseY": 600, //hitlevel = 5
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.05,
+                "muteHitText": false
               }
             }
-          },
-          "targetType": "Self"
+          }
         },
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Slime_Fire_FireBall_HitGround",
-          "MEMHGJDEPJA": -1.0
+          "effectPattern": "Eff_Monster_Slime_Fire_FireBall_HitGround"
         }
       ],
       "onAbilityStart": [
@@ -1822,6 +1914,12 @@
       ]
     }
   },
+
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Slime_Fire_Immune: JumpGround_Attack
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1829,6 +1927,7 @@
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "predicates": [
             {
               "$type": "ByHasElement",
@@ -1838,54 +1937,56 @@
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackCircle",
+              "duration": 0.0,
               "triggerType": "TriggerNoRepeat",
+              "height": 1.5,
+              "fanAngle": 360.0,
+              "radius": 2.0,
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "AMODPKJAIGF": 0.0,
-                  "DBJCBJPOOAP": 0.0,
-                  "JDFJGADACKC": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 }
-              },
-              "height": 1.5,
-              "ILKJCNJJPEL": 2.0
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
               "attackProperty": {
-                "EHFOGJFHDPE": 3.0,
-                "GDADKLDBGIM": 0.0,
+                "damagePercentage": 3.0,
                 "elementType": "Fire",
-                "bonusCriticalHurt": 50.0,
+                "elementDurability": 50,
                 "strikeType": "Blunt",
                 "enBreak": 200.0
               },
               "hitPattern": {
                 "onHitEffectName": "default",
-                "hitLevel": "Air",
-                "JHGPNBPAIHP": 480.0,
-                "hitImpulseY": 600.0,
-                "hitImpulseType": "",
-                "hitHaltTimeScale": 0.009999999776482582
+                "hitLevel": "Air", //hitlevel = 5
+                "hitImpulseX": 480, //hitlevel = 5
+                "hitImpulseY": 600, //hitlevel = 5
+                "reboundRatio": 0,
+                "hitHaltTime": 0,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
               },
               "forceCameraShake": true,
               "cameraShake": {
                 "shakeType": "CustomVector",
-                "shakeRange": 0.11999999731779099,
-                "shakeTime": 0.15000000596046448,
+                "shakeRange": 0.12,
+                "shakeTime": 0.15,
                 "shakeDistance": 25.0,
                 "shakeDir": {
-                  "y": -1.0
+                  "x": 0,
+                  "y": -1,
+                  "z": 0
                 }
               }
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "predicates": [
             {
               "$type": "ByNot",
@@ -1900,51 +2001,51 @@
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackCircle",
+              "duration": 0.0,
               "triggerType": "TriggerNoRepeat",
+              "height": 1.5,
+              "fanAngle": 360.0,
+              "radius": 1.25,
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "AMODPKJAIGF": 0.0,
-                  "DBJCBJPOOAP": 0.0,
-                  "JDFJGADACKC": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 }
-              },
-              "height": 1.5,
-              "ILKJCNJJPEL": 1.25
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
               "attackProperty": {
-                "EHFOGJFHDPE": 2.0,
-                "GDADKLDBGIM": 0.0,
-                "bonusCriticalHurt": 100.0,
-                "overrideByWeapon": true,
+                "damagePercentage": 2.0,
                 "strikeType": "Blunt",
+                "overrideByWeapon": true,
                 "enBreak": 50.0
               },
               "hitPattern": {
                 "onHitEffectName": "default",
-                "hitLevel": "Air",
-                "JHGPNBPAIHP": 480.0,
-                "hitImpulseY": 600.0,
-                "hitImpulseType": "",
-                "hitHaltTimeScale": 0.009999999776482582
+                "hitLevel": "Air", //hitlevel = 5
+                "hitImpulseX": 480, //hitlevel = 5
+                "hitImpulseY": 600, //hitlevel = 5
+                "reboundRatio": 0,
+                "hitHaltTime": 0,
+                "hitHaltTimeScale": 0.01,
+                "muteHitText": false
               },
               "forceCameraShake": true,
               "cameraShake": {
                 "shakeType": "CustomVector",
-                "shakeRange": 0.11999999731779099,
-                "shakeTime": 0.15000000596046448,
+                "shakeRange": 0.12,
+                "shakeTime": 0.15,
                 "shakeDistance": 25.0,
                 "shakeDir": {
-                  "y": -1.0
+                  "x": 0,
+                  "y": -1,
+                  "z": 0
                 }
               }
             }
-          },
-          "targetType": "Enemy"
+          }
         }
       ]
     }

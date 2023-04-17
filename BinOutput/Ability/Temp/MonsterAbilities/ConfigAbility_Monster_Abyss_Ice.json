@@ -1,4 +1,9 @@
 [
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Specials State
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -11,22 +16,25 @@
             {
               "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_ABYSS_ICE_ELEMENTSHIELD",
-              "ratio": 1.0,
-              "forceByCaster": true
+              "value": 1,
+              "forceByCaster": true,
+              "compareType": "Equal"
             }
           ],
           "exitPredicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_ABILITY_ABYSS_ICE_ELEMENTSHIELD",
-              "ratio": 0.0,
-              "forceByCaster": true
+              "value": 0,
+              "forceByCaster": true,
+              "compareType": "Equal"
             }
           ],
           "enterActions": [
             {
               "$type": "TriggerAbility",
-              "abilityName": "Abyss_Ice_ElementShield_Remove_NoBroken"
+              "abilityName": "Abyss_Ice_ElementShield_Remove_NoBroken",
+              "target": "Self"
             }
           ],
           "exitActions": [
@@ -37,17 +45,24 @@
             },
             {
               "$type": "TriggerAbility",
-              "abilityName": "Abyss_Ice_ElementShield"
+              "abilityName": "Abyss_Ice_ElementShield",
+              "target": "Self"
             },
             {
               "$type": "TriggerAbility",
-              "abilityName": "Abyss_Ice_ElementShield_Effect"
+              "abilityName": "Abyss_Ice_ElementShield_Effect",
+              "target": "Self"
             }
           ]
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Sacrifice
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -81,15 +96,22 @@
         },
         {
           "$type": "TriggerAbility",
-          "abilityName": "Abyss_Ice_ElementShield"
+          "abilityName": "Abyss_Ice_ElementShield",
+          "target": "Self"
         },
         {
           "$type": "TriggerAbility",
-          "abilityName": "Abyss_Ice_ElementShield_Effect"
+          "abilityName": "Abyss_Ice_ElementShield_Effect",
+          "target": "Self"
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  WeaponElement
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -103,13 +125,10 @@
       ],
       "modifiers": {
         "WeaponEffect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Abyss_Ice_WeaponElement",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Abyss_Ice_WeaponElement"
             }
           ],
           "onKill": [
@@ -122,6 +141,11 @@
       }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  ElementShield
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -133,8 +157,8 @@
           "height": 1.25,
           "doAction": {
             "$type": "AttachModifier",
-            "target": "Other",
-            "modifierName": "UNIQUE_IceSurface"
+            "modifierName": "UNIQUE_IceSurface",
+            "target": "Other"
           }
         },
         {
@@ -143,14 +167,49 @@
           "modifierName": "Abyss_Ice_ElementShield_RecoverHandler"
         }
       ],
-      "abilitySpecials": {
-        "ElementShield_DurabilityImprove": 0.0
-      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValueToOverrideMap",
+          "abilityFormula": "None",
+          "globalValueKey": "_MONSTERAFFIX_ELEMENTSHIELD_DURABILITYIMPROVE",
+          "overrideMapKey": "ElementShield_DurabilityImprove"
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_MonsterEliteAffix_DefaultState",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_ELITEAFFIX_TAG",
+              "value": 0,
+              "compareType": "NoneOrEqual"
+            }
+          ]
+        },
+        {
+          "$type": "SetPoseInt",
+          "intID": "ElementState",
+          "value": 2
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_Abyss_Ice_ElementShield"
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "SetPoseInt",
+          "intID": "ElementState",
+          "value": 2
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_Abyss_Ice_ElementShield"
+        }
+      ],
       "modifiers": {
         "Abyss_Ice_ElementShield_RecoverHandler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "LLJDPEONHMA": [
+          "onReconnect": [
             {
               "$type": "ApplyModifier",
               "modifierName": "UNIQUE_Abyss_Ice_ElementShield"
@@ -158,9 +217,7 @@
           ]
         },
         "UNIQUE_MonsterEliteAffix_DefaultState": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "UseSkillEliteSet",
@@ -169,31 +226,112 @@
           ]
         },
         "UNIQUE_IceSurface": {
-          "modifierName": "",
           "isUnique": true,
           "elementType": "Ice",
-          "bonusCriticalHurt": 80.0
+          "elementDurability": 80
         },
         "UNIQUE_Abyss_Ice_ElementShield": {
           "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
           "elementType": "Frozen",
-          "bonusCriticalHurt": [
-            300.0,
-            "ElementShield_DurabilityImprove",
-            "MUL",
-            300.0,
-            "ADD"
+          "elementDurability": "300*%ElementShield_DurabilityImprove+300",
+          "properties": {
+            "Actor_EndureDelta": 0.0
+          },
+          "onBeingHit": [
+            {
+              "$type": "DamageByAttackValue",
+              "target": "Target",
+              "attackInfo": {
+                "attackProperty": {
+                  "damagePercentage": 0.0,
+                  "elementType": "Ice",
+                  "elementDurability": 25,
+                  "strikeType": "None",
+                  "enBreak": 0
+                },
+                "hitPattern": {
+                  "onHitEffectName": "none",
+                  "hitImpulseType": "LV0",
+                  "reboundRatio": 0,
+                  "canBeDefenceHalt": false,
+                  "hitHaltTime": 0.0,
+                  "hitHaltTimeScale": 0.0,
+                  "muteHitText": true
+                }
+              },
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ELITEAFFIX_DEFENCE_ENHANCE",
+                  "value": 1,
+                  "forceByCaster": true,
+                  "compareType": "Equal"
+                },
+                {
+                  "$type": "ByEntityTypes",
+                  "entityTypes": ["Avatar"]
+                },
+                {
+                  "$type": "ByAnimatorFloat",
+                  "value": 301,
+                  "target": "Caster",
+                  "parameter": "PoseID",
+                  "logic": "GreaterOrEqual"
+                }
+              ]
+            },
+            {
+              "$type": "DamageByAttackValue",
+              "target": "TargetOwner",
+              "attackInfo": {
+                "attackProperty": {
+                  "damagePercentage": 0.0,
+                  "elementType": "Ice",
+                  "elementDurability": 25,
+                  "strikeType": "None",
+                  "enBreak": 0
+                },
+                "hitPattern": {
+                  "onHitEffectName": "none",
+                  "hitImpulseType": "LV0",
+                  "reboundRatio": 0,
+                  "canBeDefenceHalt": false,
+                  "hitHaltTime": 0.0,
+                  "hitHaltTimeScale": 0.0,
+                  "muteHitText": true
+                }
+              },
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ELITEAFFIX_DEFENCE_ENHANCE",
+                  "value": 1,
+                  "forceByCaster": true,
+                  "compareType": "Equal"
+                },
+                {
+                  "$type": "ByEntityTypes",
+                  "entityTypes": ["Avatar"]
+                },
+                {
+                  "$type": "ByAnimatorFloat",
+                  "value": 301,
+                  "target": "Caster",
+                  "parameter": "PoseID",
+                  "logic": "GreaterOrEqual"
+                }
+              ]
+            }
           ],
           "modifierMixins": [
             {
               "$type": "ElementShieldMixin",
               "elementType": "Frozen",
-              "showDamageText": "",
-              "DJBPNOPNHFH": 360.0,
-              "shieldHP": 1.0,
-              "damageRatio": 0.20000000298023224,
+              "shieldHPRatio": 1.0,
+              "damageRatio": 0.2,
+              "useMutiPlayerFixData": true,
+              "updateShieldByMaxHp": true,
               "onShieldSuccess": [
                 {
                   "$type": "Predicated",
@@ -235,21 +373,19 @@
                 },
                 {
                   "$type": "FireEffect",
-                  "healLimitedByCasterMaxHPRatio": "Eff_Monster_Abyss_Ice_ElementShield_Hit_Invalid",
+                  "effectPattern": "Eff_Monster_Abyss_Ice_ElementShield_Hit_Invalid",
                   "born": {
                     "$type": "ConfigBornByTarget",
                     "direction": {
                       "$type": "ConfigDirectionByGlobalValue",
                       "directionKey": "_ABILITY_ABYSS_ICE_ELEMENTSHIELD_HIT"
                     }
-                  },
-                  "EBHJMLOKDGB": -1.0
+                  }
                 },
                 {
                   "$type": "SendEffectTrigger",
-                  "parameter": "BeHitInvalid",
-                  "attachPoint": "",
-                  "healLimitedByCasterMaxHPRatio": "Eff_Monster_Abyss_Ice_ElementShield_BS"
+                  "effectPattern": "Eff_Monster_Abyss_Ice_ElementShield_BS",
+                  "parameter": "BeHitInvalid"
                 }
               ],
               "onShieldFailed": [
@@ -293,42 +429,35 @@
                 },
                 {
                   "$type": "FireEffect",
-                  "healLimitedByCasterMaxHPRatio": "Eff_Monster_Abyss_Ice_ElementShield_Hit",
+                  "effectPattern": "Eff_Monster_Abyss_Ice_ElementShield_Hit",
                   "born": {
                     "$type": "ConfigBornByTarget",
                     "direction": {
                       "$type": "ConfigDirectionByGlobalValue",
                       "directionKey": "_ABILITY_ABYSS_ICE_ELEMENTSHIELD_HIT"
                     }
-                  },
-                  "EBHJMLOKDGB": -1.0
+                  }
                 },
                 {
                   "$type": "SendEffectTrigger",
-                  "parameter": "BeHit",
-                  "attachPoint": "",
-                  "healLimitedByCasterMaxHPRatio": "Eff_Monster_Abyss_Ice_ElementShield_BS"
+                  "effectPattern": "Eff_Monster_Abyss_Ice_ElementShield_BS",
+                  "parameter": "BeHit"
                 }
-              ],
-              "useMutiPlayerFixData": true,
-              "shieldAngle": true
+              ]
             },
             {
               "$type": "VelocityForceMixin",
               "excludeForces": ["WindZoneType"]
             }
           ],
-          "properties": {
-            "Actor_EndureDelta": 0.0
-          },
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
               "key": "_ABILITY_ABYSS_ICE_ELEMENTSHIELD",
+              "value": 1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
+              "maxValue": 1,
+              "minValue": 0
             },
             {
               "$type": "AttachAbilityStateResistance",
@@ -343,34 +472,42 @@
               "resistanceListID": 14001
             }
           ],
+          "onKill": [
+            {
+              "$type": "RemoveUniqueModifier",
+              "modifierName": "UNIQUE_Abyss_Ice_ElementShield"
+            }
+          ],
           "onRemoved": [
             {
               "$type": "SetAnimatorTrigger",
-              "triggerID": "ShiledBrokenTrigger"
+              "triggerID": "ShiledBrokenTrigger",
+              "target": "Self"
             },
             {
               "$type": "SetPoseInt",
-              "intID": "ElementState"
+              "intID": "ElementState",
+              "value": 0
             },
             {
               "$type": "AddGlobalValue",
-              "ratio": -1.0,
               "key": "_ABILITY_ABYSS_ICE_ELEMENTSHIELD",
+              "value": -1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 0.0
+              "maxValue": 1,
+              "minValue": 0
             },
             {
               "$type": "RemoveUniqueModifier",
+              "modifierName": "UNIQUE_Abyss_Ice_MoveOnWaterHandler",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_RETURNTOBORN_TAG_",
-                  "ratio": 0.0,
+                  "value": 0,
                   "compareType": "NoneOrEqual"
                 }
-              ],
-              "modifierName": "UNIQUE_Abyss_Ice_MoveOnWaterHandler"
+              ]
             },
             {
               "$type": "RemoveUniqueModifier",
@@ -382,104 +519,15 @@
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_MONSTER_ForCharAmusement_Shield",
-                  "ratio": 1.0
+                  "value": 1,
+                  "compareType": "Equal"
                 }
               ]
-            }
-          ],
-          "onBeingHit": [
-            {
-              "$type": "DamageByAttackValue",
-              "target": "Target",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_ELITEAFFIX_DEFENCE_ENHANCE",
-                  "ratio": 1.0,
-                  "forceByCaster": true
-                },
-                {
-                  "$type": "ByEntityTypes",
-                  "entityTypes": ["Avatar"]
-                },
-                {
-                  "$type": "ByAnimatorFloat",
-                  "target": "Caster",
-                  "logic": "GreaterOrEqual",
-                  "ratio": 301.0,
-                  "parameter": "PoseID"
-                }
-              ],
-              "attackInfo": {
-                "attackTag": "",
-                "attenuationTag": "",
-                "attenuationGroup": "default",
-                "attackProperty": {
-                  "HBIOLEEGHPD": 0.0,
-                  "CCNJGLPMIEP": 0.0,
-                  "elementType": "Ice",
-                  "bonusCriticalHurt": 25.0,
-                  "enBreak": 0.0
-                },
-                "hitPattern": {
-                  "onHitEffectName": "none",
-                  "hitImpulseType": "LV0",
-                  "muteHitText": true
-                }
-              }
-            },
-            {
-              "$type": "DamageByAttackValue",
-              "target": "TargetOwner",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_ELITEAFFIX_DEFENCE_ENHANCE",
-                  "ratio": 1.0,
-                  "forceByCaster": true
-                },
-                {
-                  "$type": "ByEntityTypes",
-                  "entityTypes": ["Avatar"]
-                },
-                {
-                  "$type": "ByAnimatorFloat",
-                  "target": "Caster",
-                  "logic": "GreaterOrEqual",
-                  "ratio": 301.0,
-                  "parameter": "PoseID"
-                }
-              ],
-              "attackInfo": {
-                "attackTag": "",
-                "attenuationTag": "",
-                "attenuationGroup": "default",
-                "attackProperty": {
-                  "HBIOLEEGHPD": 0.0,
-                  "CCNJGLPMIEP": 0.0,
-                  "elementType": "Ice",
-                  "bonusCriticalHurt": 25.0,
-                  "enBreak": 0.0
-                },
-                "hitPattern": {
-                  "onHitEffectName": "none",
-                  "hitImpulseType": "LV0",
-                  "muteHitText": true
-                }
-              }
-            }
-          ],
-          "onKill": [
-            {
-              "$type": "RemoveUniqueModifier",
-              "modifierName": "UNIQUE_Abyss_Ice_ElementShield"
             }
           ]
         },
         "UNIQUE_Abyss_Ice_MoveOnWaterHandler": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "EnableCharacterMoveOnWaterMixin"
@@ -487,45 +535,9 @@
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValueToOverrideMap",
-          "globalValueKey": "_MONSTERAFFIX_ELEMENTSHIELD_DURABILITYIMPROVE",
-          "overrideMapKey": "ElementShield_DurabilityImprove"
-        },
-        {
-          "$type": "ApplyModifier",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_ELITEAFFIX_TAG",
-              "ratio": 0.0,
-              "compareType": "NoneOrEqual"
-            }
-          ],
-          "modifierName": "UNIQUE_MonsterEliteAffix_DefaultState"
-        },
-        {
-          "$type": "SetPoseInt",
-          "intID": "ElementState",
-          "value": 2
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "UNIQUE_Abyss_Ice_ElementShield"
-        }
-      ],
-      "onAbilityStart": [
-        {
-          "$type": "SetPoseInt",
-          "intID": "ElementState",
-          "value": 2
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "UNIQUE_Abyss_Ice_ElementShield"
-        }
-      ]
+      "abilitySpecials": {
+        "ElementShield_DurabilityImprove": 0.0
+      }
     }
   },
   {
@@ -539,11 +551,24 @@
           "modifierName": "Abyss_Ice_ElementShield_Effect_RecoverHandler"
         }
       ],
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_Abyss_Ice_ElementShield_Effect",
+          "target": "Self",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_ABILITY_ABYSS_ICE_ELEMENTSHIELD",
+              "value": 1.0,
+              "compareType": "Equal"
+            }
+          ]
+        }
+      ],
       "modifiers": {
         "Abyss_Ice_ElementShield_Effect_RecoverHandler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "LLJDPEONHMA": [
+          "onReconnect": [
             {
               "$type": "ApplyModifier",
               "modifierName": "UNIQUE_Abyss_Ice_ElementShield_Effect"
@@ -552,9 +577,7 @@
         },
         "UNIQUE_Abyss_Ice_ElementShield_Effect": {
           "stacking": "Unique",
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "EnableHitBoxByName",
@@ -563,7 +586,8 @@
             },
             {
               "$type": "EnableHitBoxByName",
-              "hitBoxNames": ["HitBox", "HeadBox"]
+              "hitBoxNames": ["HitBox", "HeadBox"],
+              "setEnable": false
             },
             {
               "$type": "EnablePushColliderName",
@@ -572,14 +596,14 @@
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Abyss_Ice_ElementShield_BS",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Abyss_Ice_ElementShield_BS"
             }
           ],
           "onRemoved": [
             {
               "$type": "EnableHitBoxByName",
-              "hitBoxNames": ["HitBox_ElementShield"]
+              "hitBoxNames": ["HitBox_ElementShield"],
+              "setEnable": false
             },
             {
               "$type": "EnableHitBoxByName",
@@ -588,24 +612,12 @@
             },
             {
               "$type": "EnablePushColliderName",
-              "pushColliderNames": ["PushCollider_ElementShield"]
+              "pushColliderNames": ["PushCollider_ElementShield"],
+              "setEnable": false
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "key": "_ABILITY_ABYSS_ICE_ELEMENTSHIELD",
-              "ratio": 1.0
-            }
-          ],
-          "modifierName": "UNIQUE_Abyss_Ice_ElementShield_Effect"
-        }
-      ]
+      }
     }
   },
   {
@@ -615,11 +627,17 @@
       "onAbilityStart": [
         {
           "$type": "RemoveUniqueModifier",
-          "modifierName": "UNIQUE_Abyss_Ice_ElementShield"
+          "modifierName": "UNIQUE_Abyss_Ice_ElementShield",
+          "target": "Self"
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Gather
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -631,20 +649,23 @@
           "modifierName": "Abyss_Ice_DizzyTimer_Handler"
         }
       ],
-      "abilitySpecials": {
-        "ElementShield_GapReduce": 0.0
-      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValueToOverrideMap",
+          "abilityFormula": "None",
+          "globalValueKey": "_MONSTERAFFIX_ELEMENTSHIELD_GAPREDUCE",
+          "overrideMapKey": "ElementShield_GapReduce"
+        }
+      ],
       "modifiers": {
         "Abyss_Ice_DizzyTimer_Handler": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
               "modifierName": "UNIQUE_Abyss_Ice_DizzyTimer"
             }
           ],
-          "LLJDPEONHMA": [
+          "onReconnect": [
             {
               "$type": "ApplyModifier",
               "modifierName": "UNIQUE_Abyss_Ice_DizzyTimer"
@@ -652,38 +673,32 @@
           ]
         },
         "UNIQUE_Abyss_Ice_DizzyTimer": {
-          "stacking": "Unique",
-          "modifierName": "",
-          "isUnique": true,
-          "HCJLIGBLGJA": [12.0, "ElementShield_GapReduce", "MUL", 12.0, "ADD"],
-          "bonusCriticalHurt": 100.0,
           "properties": {
-            "Actor_EndureDelta": 3.0
+            "Actor_EndureDelta": 3
           },
+          "isUnique": true,
+          "stacking": "Unique",
+          "duration": "12*%ElementShield_GapReduce+12",
           "onRemoved": [
             {
               "$type": "SetPoseInt",
+              "intID": "ElementState",
+              "value": 1,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_ABYSS_ICE_ELEMENTSHIELD",
-                  "ratio": 0.0,
+                  "value": 0.0,
                   "compareType": "NoneOrEqual"
                 }
-              ],
-              "intID": "ElementState",
-              "value": 1
+              ]
             }
           ]
         }
       },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValueToOverrideMap",
-          "globalValueKey": "_MONSTERAFFIX_ELEMENTSHIELD_GAPREDUCE",
-          "overrideMapKey": "ElementShield_GapReduce"
-        }
-      ]
+      "abilitySpecials": {
+        "ElementShield_GapReduce": 0.0
+      }
     }
   },
   {
@@ -704,43 +719,42 @@
       ],
       "modifiers": {
         "GatherEndure": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "properties": {
-            "Actor_EndureDelta": 0.4000000059604645
+            "Actor_EndureDelta": 0.4
           }
         },
         "GatherState": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": 1.0,
+              "target": "Self",
               "key": "_GATHERFAILEDSTATE_",
+              "value": 1,
               "useLimitRange": true,
-              "maxValue": 1.0,
-              "minValue": 1.0
+              "maxValue": 1,
+              "minValue": 1
             }
           ],
           "onRemoved": [
             {
               "$type": "SetPoseInt",
+              "intID": "ElementState",
+              "value": 0,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_ABYSS_ICE_ELEMENTSHIELD",
-                  "ratio": 0.0,
+                  "value": 0.0,
                   "compareType": "NoneOrEqual"
                 }
-              ],
-              "intID": "ElementState"
+              ]
             },
             {
               "$type": "TriggerAbility",
               "otherTargets": {
                 "$type": "SelectTargetsByChildren",
-                "configID": 42201013
+                "configID": 42201013,
+                "sortType": "Default"
               },
               "abilityName": "Abyss_Ice_SurroundCone_Explode"
             },
@@ -748,7 +762,8 @@
               "$type": "TriggerAbility",
               "otherTargets": {
                 "$type": "SelectTargetsByChildren",
-                "configID": 42201015
+                "configID": 42201015,
+                "sortType": "Default"
               },
               "abilityName": "Abyss_Ice_SurroundCone_Explode"
             }
@@ -780,132 +795,128 @@
       ],
       "modifiers": {
         "GatherLoop_Effect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Abyss_Ice_Gather",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Abyss_Ice_Gather"
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Abyss_Ice_WeaponElement",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Abyss_Ice_WeaponElement"
             }
           ]
         },
         "Gather_SurroundCone_02": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "thinkInterval": 0.5,
+          "onThinkInterval": [
+            {
+              "$type": "TriggerBullet",
+              "bulletID": 42201013,
+              "trackTarget": "Self",
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": 0.0,
+                  "y": 1.2,
+                  "z": -3.5
+                },
+                "direction": {
+                  "$type": "ConfigDirectionByLookAtEntity",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": 90.0,
+                    "z": 0.0
+                  }
+                }
+              },
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ABILITY_SURROUNDCONE_02",
+                  "value": 1.0,
+                  "compareType": "LessAndEqual",
+                  "forceByCaster": true
+                }
+              ]
+            },
+            {
+              "$type": "TriggerBullet",
+              "bulletID": 42201013,
+              "trackTarget": "Self",
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": 3.0,
+                  "y": 1.2,
+                  "z": 1.75
+                },
+                "direction": {
+                  "$type": "ConfigDirectionByLookAtEntity",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": 90.0,
+                    "z": 0.0
+                  }
+                }
+              },
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ABILITY_SURROUNDCONE_02",
+                  "value": 1.0,
+                  "compareType": "LessAndEqual",
+                  "forceByCaster": true
+                }
+              ]
+            },
+            {
+              "$type": "TriggerBullet",
+              "bulletID": 42201013,
+              "trackTarget": "Self",
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": -3.0,
+                  "y": 1.2,
+                  "z": 1.75
+                },
+                "direction": {
+                  "$type": "ConfigDirectionByLookAtEntity",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": 90.0,
+                    "z": 0.0
+                  }
+                }
+              },
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ABILITY_SURROUNDCONE_02",
+                  "value": 1.0,
+                  "compareType": "LessAndEqual",
+                  "forceByCaster": true
+                }
+              ]
+            }
+          ],
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": -10.0,
+              "target": "Self",
               "key": "_ABILITY_SURROUNDCONE_02",
+              "value": -10.0,
               "useLimitRange": true,
               "maxValue": 5.0,
               "minValue": 0.0
             }
           ],
-          "onThinkInterval": [
-            {
-              "$type": "TriggerBullet",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_ABILITY_SURROUNDCONE_02",
-                  "ratio": 1.0,
-                  "forceByCaster": true,
-                  "compareType": "LessAndEqual"
-                }
-              ],
-              "bulletID": 42201013,
-              "born": {
-                "$type": "ConfigBornByTarget",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 1.2000000476837158,
-                  "PJCOKIGCJOK": -3.5
-                },
-                "direction": {
-                  "$type": "ConfigDirectionByLookAtEntity",
-                  "angleOffset": {
-                    "IBKBLDAJIMA": 0.0,
-                    "LKHJADIPBFL": 90.0,
-                    "PJCOKIGCJOK": 0.0
-                  }
-                }
-              },
-              "trackTarget": "Self"
-            },
-            {
-              "$type": "TriggerBullet",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_ABILITY_SURROUNDCONE_02",
-                  "ratio": 1.0,
-                  "forceByCaster": true,
-                  "compareType": "LessAndEqual"
-                }
-              ],
-              "bulletID": 42201013,
-              "born": {
-                "$type": "ConfigBornByTarget",
-                "offset": {
-                  "IBKBLDAJIMA": 3.0,
-                  "LKHJADIPBFL": 1.2000000476837158,
-                  "PJCOKIGCJOK": 1.75
-                },
-                "direction": {
-                  "$type": "ConfigDirectionByLookAtEntity",
-                  "angleOffset": {
-                    "IBKBLDAJIMA": 0.0,
-                    "LKHJADIPBFL": 90.0,
-                    "PJCOKIGCJOK": 0.0
-                  }
-                }
-              },
-              "trackTarget": "Self"
-            },
-            {
-              "$type": "TriggerBullet",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_ABILITY_SURROUNDCONE_02",
-                  "ratio": 1.0,
-                  "forceByCaster": true,
-                  "compareType": "LessAndEqual"
-                }
-              ],
-              "bulletID": 42201013,
-              "born": {
-                "$type": "ConfigBornByTarget",
-                "offset": {
-                  "IBKBLDAJIMA": -3.0,
-                  "LKHJADIPBFL": 1.2000000476837158,
-                  "PJCOKIGCJOK": 1.75
-                },
-                "direction": {
-                  "$type": "ConfigDirectionByLookAtEntity",
-                  "angleOffset": {
-                    "IBKBLDAJIMA": 0.0,
-                    "LKHJADIPBFL": 90.0,
-                    "PJCOKIGCJOK": 0.0
-                  }
-                }
-              },
-              "trackTarget": "Self"
-            }
-          ],
-          "LLJDPEONHMA": [
+          "onReconnect": [
             {
               "$type": "AddGlobalValue",
-              "ratio": -10.0,
+              "target": "Self",
               "key": "_ABILITY_SURROUNDCONE_02",
+              "value": -10.0,
               "useLimitRange": true,
               "maxValue": 5.0,
               "minValue": 0.0
@@ -913,116 +924,116 @@
           ]
         },
         "Gather_SurroundCone_04": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "thinkInterval": 0.75,
+          "onThinkInterval": [
+            {
+              "$type": "TriggerBullet",
+              "bulletID": 42201015,
+              "trackTarget": "Self",
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": 0,
+                  "y": 1.2,
+                  "z": 7.0
+                },
+                "direction": {
+                  "$type": "ConfigDirectionByLookAtEntity",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": 90.0,
+                    "z": 0.0
+                  }
+                }
+              },
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ABILITY_SURROUNDCONE_04",
+                  "value": 1.0,
+                  "compareType": "LessAndEqual",
+                  "forceByCaster": true
+                }
+              ]
+            },
+            {
+              "$type": "TriggerBullet",
+              "bulletID": 42201015,
+              "trackTarget": "Self",
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": 6.0,
+                  "y": 1.2,
+                  "z": -3.5
+                },
+                "direction": {
+                  "$type": "ConfigDirectionByLookAtEntity",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": 90.0,
+                    "z": 0.0
+                  }
+                }
+              },
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ABILITY_SURROUNDCONE_04",
+                  "value": 1.0,
+                  "compareType": "LessAndEqual",
+                  "forceByCaster": true
+                }
+              ]
+            },
+            {
+              "$type": "TriggerBullet",
+              "bulletID": 42201015,
+              "trackTarget": "Self",
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": -6.0,
+                  "y": 1.2,
+                  "z": -3.5
+                },
+                "direction": {
+                  "$type": "ConfigDirectionByLookAtEntity",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": 90.0,
+                    "z": 0.0
+                  }
+                }
+              },
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ABILITY_SURROUNDCONE_04",
+                  "value": 1.0,
+                  "compareType": "LessAndEqual",
+                  "forceByCaster": true
+                }
+              ]
+            }
+          ],
           "onAdded": [
             {
               "$type": "AddGlobalValue",
-              "ratio": -10.0,
+              "target": "Self",
               "key": "_ABILITY_SURROUNDCONE_04",
+              "value": -10.0,
               "useLimitRange": true,
               "maxValue": 5.0,
               "minValue": 0.0
             }
           ],
-          "onThinkInterval": [
-            {
-              "$type": "TriggerBullet",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_ABILITY_SURROUNDCONE_04",
-                  "ratio": 1.0,
-                  "forceByCaster": true,
-                  "compareType": "LessAndEqual"
-                }
-              ],
-              "bulletID": 42201015,
-              "born": {
-                "$type": "ConfigBornByTarget",
-                "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 1.2000000476837158,
-                  "PJCOKIGCJOK": 7.0
-                },
-                "direction": {
-                  "$type": "ConfigDirectionByLookAtEntity",
-                  "angleOffset": {
-                    "IBKBLDAJIMA": 0.0,
-                    "LKHJADIPBFL": 90.0,
-                    "PJCOKIGCJOK": 0.0
-                  }
-                }
-              },
-              "trackTarget": "Self"
-            },
-            {
-              "$type": "TriggerBullet",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_ABILITY_SURROUNDCONE_04",
-                  "ratio": 1.0,
-                  "forceByCaster": true,
-                  "compareType": "LessAndEqual"
-                }
-              ],
-              "bulletID": 42201015,
-              "born": {
-                "$type": "ConfigBornByTarget",
-                "offset": {
-                  "IBKBLDAJIMA": 6.0,
-                  "LKHJADIPBFL": 1.2000000476837158,
-                  "PJCOKIGCJOK": -3.5
-                },
-                "direction": {
-                  "$type": "ConfigDirectionByLookAtEntity",
-                  "angleOffset": {
-                    "IBKBLDAJIMA": 0.0,
-                    "LKHJADIPBFL": 90.0,
-                    "PJCOKIGCJOK": 0.0
-                  }
-                }
-              },
-              "trackTarget": "Self"
-            },
-            {
-              "$type": "TriggerBullet",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_ABILITY_SURROUNDCONE_04",
-                  "ratio": 1.0,
-                  "forceByCaster": true,
-                  "compareType": "LessAndEqual"
-                }
-              ],
-              "bulletID": 42201015,
-              "born": {
-                "$type": "ConfigBornByTarget",
-                "offset": {
-                  "IBKBLDAJIMA": -6.0,
-                  "LKHJADIPBFL": 1.2000000476837158,
-                  "PJCOKIGCJOK": -3.5
-                },
-                "direction": {
-                  "$type": "ConfigDirectionByLookAtEntity",
-                  "angleOffset": {
-                    "IBKBLDAJIMA": 0.0,
-                    "LKHJADIPBFL": 90.0,
-                    "PJCOKIGCJOK": 0.0
-                  }
-                }
-              },
-              "trackTarget": "Self"
-            }
-          ],
-          "LLJDPEONHMA": [
+          "onReconnect": [
             {
               "$type": "AddGlobalValue",
-              "ratio": -10.0,
+              "target": "Self",
               "key": "_ABILITY_SURROUNDCONE_04",
+              "value": -10.0,
               "useLimitRange": true,
               "maxValue": 5.0,
               "minValue": 0.0
@@ -1045,13 +1056,10 @@
       ],
       "modifiers": {
         "GatherAlert": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Abyss_Ice_Gather_Alert",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Abyss_Ice_Gather_Alert"
             }
           ]
         }
@@ -1065,153 +1073,175 @@
       "onAbilityStart": [
         {
           "$type": "RemoveUniqueModifier",
-          "modifierName": "UNIQUE_Abyss_Ice_DizzyTimer"
+          "modifierName": "UNIQUE_Abyss_Ice_DizzyTimer",
+          "target": "Self"
         },
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Abyss_Ice_Gather_AS_Hor",
+          "effectPattern": "Eff_Monster_Abyss_Ice_Gather_AS_Hor",
           "born": {
             "$type": "ConfigBornByTarget",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 1.0,
-              "PJCOKIGCJOK": 0.0
+              "x": 0.0,
+              "y": 1.0,
+              "z": 0.0
             }
-          },
-          "EBHJMLOKDGB": -1.0
+          }
         },
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackCircle",
+              "duration": 0.0,
               "triggerType": "TriggerNoRepeat",
+              "fanAngle": 360.0,
+              "radius": 5.0,
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.75,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": 0.75,
+                  "z": 0.0
                 }
-              },
-              "DCMPFCIBIPA": 5.0
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
               "attackProperty": {
-                "HBIOLEEGHPD": 1.5,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Ice",
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 1.5,
                 "strikeType": "Default",
-                "enBreak": 200.0
+                "attackType": "Default",
+                "elementType": "Ice",
+                "elementDurability": 50,
+                "enBreak": 200
               },
               "hitPattern": {
-                "onHitEffectName": "default",
                 "hitImpulseType": "LV5",
-                "hitHaltTimeScale": 0.05000000074505806
+                "reboundRatio": 0,
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.05,
+                "muteHitText": false
               }
+              // "forceCameraShake": false,
+              // "cameraShake":
+              // {
+              // 	"shakeRange": 0.36,
+              // 	"shakeTime": 0.12,
+              // },
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Abyss_Ice_Gather_AS_Ver",
+          "effectPattern": "Eff_Monster_Abyss_Ice_Gather_AS_Ver",
           "born": {
             "$type": "ConfigBornByTarget",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.0,
-              "PJCOKIGCJOK": 0.0
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
             }
-          },
-          "EBHJMLOKDGB": -1.0
+          }
         },
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackBox",
               "triggerType": "TriggerNoRepeat",
+              "size": {
+                "x": 1.0,
+                "y": 10.0,
+                "z": 1.0
+              },
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 5.0,
-                  "PJCOKIGCJOK": -0.5
+                  "x": 0.0, // + means up, - means down
+                  "y": 5.0, // + means left, - means right
+                  "z": -0.5 // + means forward, - means backward
                 }
-              },
-              "size": {
-                "IBKBLDAJIMA": 1.0,
-                "LKHJADIPBFL": 10.0,
-                "PJCOKIGCJOK": 1.0
               }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
               "attackProperty": {
-                "HBIOLEEGHPD": 2.0,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Ice",
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 2.0,
                 "strikeType": "Default",
-                "enBreak": 200.0
+                "attackType": "Default",
+                "elementType": "Ice",
+                "elementDurability": 50,
+                "enBreak": 200
               },
               "hitPattern": {
-                "onHitEffectName": "default",
                 "hitImpulseType": "LV5",
-                "hitHaltTimeScale": 0.05000000074505806
+                "reboundRatio": 0,
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.05,
+                "muteHitText": false
               }
+              // "forceCameraShake": false,
+              // "cameraShake":
+              // {
+              // 	"shakeRange": 0.36,
+              // 	"shakeTime": 0.12,
+              // },
             }
-          },
-          "targetType": "Enemy"
+          }
         },
         {
           "$type": "ActCameraShake",
           "cameraShake": {
             "shakeType": "CustomVector",
-            "shakeRange": 0.1599999964237213,
-            "shakeTime": 0.30000001192092896,
-            "shakeDistance": 25.0,
+            "shakeRange": 0.16,
+            "shakeTime": 0.3,
+            "shakeDistance": 25,
             "shakeDir": {
-              "y": 1.0
+              "x": 0,
+              "y": 1,
+              "z": 0
             },
             "extension": {
-              "rangeAttenuation": 0.8999999761581421
+              "basecycle": 0.08,
+              "cycledamping": 0.04,
+              "rangeAttenuation": 0.9
             }
           }
         },
         {
           "$type": "AddGlobalValue",
-          "ratio": 0.0,
+          "target": "Self",
           "key": "_GATHERFAILEDSTATE_",
+          "value": 0,
           "useLimitRange": true,
-          "maxValue": 0.0,
-          "minValue": 0.0
+          "maxValue": 0,
+          "minValue": 0
         }
       ],
       "onKill": [
         {
           "$type": "DoWatcherSystemAction",
+          "watcherId": 82006,
+          "inThreatListOnly": true,
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "target": "Self",
               "key": "_GATHERFAILEDSTATE_",
-              "ratio": 1.0
+              "value": 1,
+              "compareType": "Equal"
             }
-          ],
-          "watcherId": 82006,
-          "inThreatListOnly": true
+          ]
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  Blink
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1223,10 +1253,26 @@
           "modifierName": "Blink_State"
         }
       ],
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_Blink_Shield"
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_Blink_Actions"
+        },
+        {
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Monster_Abyss_Ice_Blink_BS"
+        },
+        {
+          "$type": "ClearLockTarget",
+          "target": "CurLocalAvatar"
+        }
+      ],
       "modifiers": {
         "Blink_State": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "RemoveUniqueModifier",
@@ -1239,9 +1285,7 @@
           ]
         },
         "UNIQUE_Blink_Shield": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "RemoveUniqueModifier",
@@ -1251,79 +1295,89 @@
           "onRemoved": [
             {
               "$type": "TriggerAbility",
+              "abilityName": "Abyss_Ice_ElementShield_Effect",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_ABYSS_ICE_ELEMENTSHIELD",
-                  "ratio": 1.0
+                  "value": 1.0,
+                  "compareType": "Equal"
                 }
-              ],
-              "abilityName": "Abyss_Ice_ElementShield_Effect"
+              ]
             }
           ]
         },
         "UNIQUE_Blink_Actions": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
+            //精英化闪现强化逻辑///////////////////////////
             {
               "$type": "FireEffect",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_ELITEAFFIX_AGILITY_ENHANCE",
-                  "ratio": 1.0
-                }
-              ],
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Abyss_Ice_Blink_AS",
+              "effectPattern": "Eff_Monster_Abyss_Ice_Blink_AS",
               "born": {
                 "$type": "ConfigBornByTarget",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.6499999761581421,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": 0.65,
+                  "z": 0.0
                 }
               },
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "TriggerAbility",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_ELITEAFFIX_AGILITY_ENHANCE",
-                  "ratio": 1.0
+                  "value": 1,
+                  "compareType": "Equal"
                 }
-              ],
-              "abilityName": "Abyss_Ice_DoBlink_Damage"
+              ]
+            },
+            {
+              "$type": "TriggerAbility",
+              "abilityName": "Abyss_Ice_DoBlink_Damage",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ELITEAFFIX_AGILITY_ENHANCE",
+                  "value": 1,
+                  "compareType": "Equal"
+                }
+              ]
+            },
+            //////////////////////////////////////////////////
+            {
+              "$type": "AttachModifier",
+              "modifierName": "Blink_Invincible",
+              "target": "Self"
             },
             {
               "$type": "AttachModifier",
-              "modifierName": "Blink_Invincible"
+              "modifierName": "Blink_DenyLockOn",
+              "target": "Self"
             },
             {
-              "$type": "AttachModifier",
-              "modifierName": "Blink_DenyLockOn"
-            },
-            {
-              "$type": "TriggerSetVisible"
+              "$type": "TriggerSetVisible",
+              "visible": false,
+              "target": "Self"
             },
             {
               "$type": "TriggerHideWeapon",
+              "visible": false,
               "partNames": ["equip01"]
             },
             {
               "$type": "HideUIBillBoard",
-              "hide": true
+              "hide": true,
+              "target": "Self"
             },
             {
               "$type": "EnableHitBoxByName",
-              "hitBoxNames": ["HitBox", "HeadBox"]
+              "hitBoxNames": ["HitBox", "HeadBox"],
+              "setEnable": false
             },
             {
               "$type": "EnablePushColliderName",
-              "pushColliderNames": ["PushCollider"]
+              "pushColliderNames": ["PushCollider"],
+              "setEnable": false
             }
           ],
           "onRemoved": [
@@ -1339,7 +1393,8 @@
             },
             {
               "$type": "TriggerSetVisible",
-              "visible": true
+              "visible": true,
+              "target": "Self"
             },
             {
               "$type": "TriggerHideWeapon",
@@ -1347,40 +1402,19 @@
               "partNames": ["equip01"]
             },
             {
-              "$type": "HideUIBillBoard"
+              "$type": "HideUIBillBoard",
+              "hide": false,
+              "target": "Self"
             }
           ]
         },
         "Blink_Invincible": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "Invincible"
         },
         "Blink_DenyLockOn": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "DenyLockOn"
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "UNIQUE_Blink_Shield"
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "UNIQUE_Blink_Actions"
-        },
-        {
-          "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Abyss_Ice_Blink_BS",
-          "EBHJMLOKDGB": -1.0
-        },
-        {
-          "$type": "ClearLockTarget",
-          "target": "CurLocalAvatar"
-        }
-      ]
+      }
     }
   },
   {
@@ -1391,17 +1425,16 @@
         {
           "$type": "TryFindBlinkPoint",
           "target": "SelfAttackTarget",
-          "forwardAngle": 30.0,
+          "forwardAngle": 30,
           "minRange": 5.0,
           "maxRange": 7.0
         },
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Abyss_Ice_Blink",
+          "effectPattern": "Eff_Monster_Abyss_Ice_Blink",
           "born": {
             "$type": "ConfigBornByTeleportToPoint"
-          },
-          "EBHJMLOKDGB": -1.0
+          }
         }
       ]
     }
@@ -1424,16 +1457,15 @@
       "onAbilityStart": [
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Abyss_Ice_Blink_AS",
+          "effectPattern": "Eff_Monster_Abyss_Ice_Blink_AS",
           "born": {
             "$type": "ConfigBornByTarget",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.6499999761581421,
-              "PJCOKIGCJOK": 0.0
+              "x": 0.0,
+              "y": 0.65,
+              "z": 0.0
             }
-          },
-          "EBHJMLOKDGB": -1.0
+          }
         },
         {
           "$type": "RemoveUniqueModifier",
@@ -1449,41 +1481,49 @@
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
+              "height": 2.0,
+              "fanAngle": 360.0,
+              "radius": 2.5,
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 }
-              },
-              "height": 2.0,
-              "DCMPFCIBIPA": 2.5
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
               "attackProperty": {
-                "HBIOLEEGHPD": 1.0,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Ice",
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 1.0,
                 "strikeType": "Default",
-                "enBreak": 50.0
+                "attackType": "Default",
+                "elementType": "Ice",
+                "elementDurability": 50,
+                "enBreak": 50
               },
               "hitPattern": {
-                "onHitEffectName": "default",
                 "hitImpulseType": "LV2",
-                "hitHaltTimeScale": 0.05000000074505806
+                "reboundRatio": 0,
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.05,
+                "muteHitText": false
               }
+              // "forceCameraShake": false,
+              // "cameraShake":
+              // {
+              // 	"shakeType": "Center",
+              // 	"shakeRange": 0.16,
+              // 	"shakeTime": 0.15,
+              // 	"shakeDistance": 35,
+              // },
             }
-          },
-          "targetType": "Enemy"
+          }
         }
       ]
     }
@@ -1500,6 +1540,11 @@
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  ForceDefend
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1513,22 +1558,20 @@
       ],
       "modifiers": {
         "ForceDefend": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "MonsterDefendMixin",
               "stateIDs": ["BeHit", "BeHitThrow"],
               "defendTriggerID": "DefendTrigger",
-              "defendProbability": 0.20000000298023224,
-              "defendProbabilityDelta": 0.0,
-              "GNFIPJADKND": 8.0,
+              "defendAngle": 360,
+              "defendTimeInterval": 8,
+              "defendProbability": 0.2,
               "alwaysRecover": false,
-              "ELDOHIOFFJL": 0,
               "onDefendSucceded": [
                 {
                   "$type": "TriggerAbility",
-                  "abilityName": "Abyss_Ice_ForceBlink"
+                  "abilityName": "Abyss_Ice_ForceBlink",
+                  "target": "Self"
                 },
                 {
                   "$type": "ClearLockTarget",
@@ -1552,10 +1595,30 @@
           "modifierName": "ForceBlink_State"
         }
       ],
+      "onAbilityStart": [
+        {
+          "$type": "RemoveUniqueModifier",
+          "modifierName": "UNIQUE_Abyss_Ice_DizzyTimer",
+          "target": "Self"
+        },
+        {
+          "$type": "TryFindBlinkPoint",
+          "target": "SelfAttackTarget",
+          "forwardAngle": 30,
+          "minRange": 9.0,
+          "maxRange": 12.0
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "UNIQUE_ForceBlink_Actions"
+        },
+        {
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Monster_Abyss_Ice_Blink_BS"
+        }
+      ],
       "modifiers": {
         "ForceBlink_State": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "RemoveUniqueModifier",
@@ -1564,36 +1627,42 @@
           ]
         },
         "UNIQUE_ForceBlink_Actions": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachModifier",
-              "modifierName": "ForceBlink_Invincible"
+              "modifierName": "ForceBlink_Invincible",
+              "target": "Self"
             },
             {
               "$type": "AttachModifier",
-              "modifierName": "ForceBlink_DenyLockOn"
+              "modifierName": "ForceBlink_DenyLockOn",
+              "target": "Self"
             },
             {
-              "$type": "TriggerSetVisible"
+              "$type": "TriggerSetVisible",
+              "visible": false,
+              "target": "Self"
             },
             {
               "$type": "TriggerHideWeapon",
+              "visible": false,
               "partNames": ["equip01"]
             },
             {
               "$type": "HideUIBillBoard",
-              "hide": true
+              "hide": true,
+              "target": "Self"
             },
             {
               "$type": "EnableHitBoxByName",
-              "hitBoxNames": ["HitBox", "HeadBox"]
+              "hitBoxNames": ["HitBox", "HeadBox"],
+              "setEnable": false
             },
             {
               "$type": "EnablePushColliderName",
-              "pushColliderNames": ["PushCollider"]
+              "pushColliderNames": ["PushCollider"],
+              "setEnable": false
             }
           ],
           "onRemoved": [
@@ -1609,7 +1678,8 @@
             },
             {
               "$type": "TriggerSetVisible",
-              "visible": true
+              "visible": true,
+              "target": "Self"
             },
             {
               "$type": "TriggerHideWeapon",
@@ -1617,43 +1687,19 @@
               "partNames": ["equip01"]
             },
             {
-              "$type": "HideUIBillBoard"
+              "$type": "HideUIBillBoard",
+              "hide": false,
+              "target": "Self"
             }
           ]
         },
         "ForceBlink_Invincible": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "Invincible"
         },
         "ForceBlink_DenyLockOn": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "DenyLockOn"
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "RemoveUniqueModifier",
-          "modifierName": "UNIQUE_Abyss_Ice_DizzyTimer"
-        },
-        {
-          "$type": "TryFindBlinkPoint",
-          "target": "SelfAttackTarget",
-          "forwardAngle": 30.0,
-          "minRange": 9.0,
-          "maxRange": 12.0
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "UNIQUE_ForceBlink_Actions"
-        },
-        {
-          "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Abyss_Ice_Blink_BS",
-          "EBHJMLOKDGB": -1.0
-        }
-      ]
+      }
     }
   },
   {
@@ -1666,12 +1712,11 @@
         },
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Abyss_Ice_Blink_AS",
+          "effectPattern": "Eff_Monster_Abyss_Ice_Blink_AS",
           "born": {
             "$type": "ConfigBornByAttachPoint",
             "attachPointName": "RootNode"
-          },
-          "EBHJMLOKDGB": -1.0
+          }
         }
       ]
     }
@@ -1701,6 +1746,11 @@
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  ReturnToBorn
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1712,17 +1762,20 @@
           "modifierName": "ReturnToBorn_Disappear"
         }
       ],
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "key": "_RETURNTOBORN_TAG_",
+          "value": 0
+        }
+      ],
       "modifiers": {
         "ReturnToBorn_Disappear": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 1.0,
               "key": "_RETURNTOBORN_TAG_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 1
             },
             {
               "$type": "AttachModifier",
@@ -1738,24 +1791,19 @@
             },
             {
               "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Abyss_Ice_Blink_BS",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Abyss_Ice_Blink_BS"
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_RETURNTOBORN_TAG_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ]
         },
         "UNIQUE_ReturnToBorn_Shield": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "RemoveUniqueModifier",
@@ -1767,11 +1815,13 @@
             },
             {
               "$type": "AttachModifier",
-              "modifierName": "ReturnToBorn_Invincible"
+              "modifierName": "ReturnToBorn_Invincible",
+              "target": "Self"
             },
             {
               "$type": "AttachModifier",
-              "modifierName": "ReturnToBorn_DenyLockOn"
+              "modifierName": "ReturnToBorn_DenyLockOn",
+              "target": "Self"
             }
           ],
           "onRemoved": [
@@ -1782,18 +1832,18 @@
             },
             {
               "$type": "TriggerAbility",
-              "abilityName": "Abyss_Ice_ElementShield_Effect"
+              "abilityName": "Abyss_Ice_ElementShield_Effect",
+              "target": "Self"
             }
           ]
         },
         "UNIQUE_ReturnToBorn_Dizzy": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "RemoveUniqueModifier",
-              "modifierName": "UNIQUE_Abyss_Ice_DizzyTimer"
+              "modifierName": "UNIQUE_Abyss_Ice_DizzyTimer",
+              "target": "Self"
             },
             {
               "$type": "SetPoseInt",
@@ -1802,46 +1852,53 @@
             },
             {
               "$type": "TriggerAbility",
-              "abilityName": "Abyss_Ice_ElementShield"
+              "abilityName": "Abyss_Ice_ElementShield",
+              "target": "Self"
             },
             {
               "$type": "TriggerAbility",
-              "abilityName": "Abyss_Ice_ElementShield_Effect"
+              "abilityName": "Abyss_Ice_ElementShield_Effect",
+              "target": "Self"
             }
           ]
         },
         "UNIQUE_ReturnToBorn_Actions": {
-          "modifierName": "",
           "isUnique": true,
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
-              "$type": "TriggerSetVisible"
+              "$type": "TriggerSetVisible",
+              "visible": false,
+              "target": "Self"
             },
             {
               "$type": "TriggerHideWeapon",
+              "visible": false,
               "partNames": ["equip01"]
             },
             {
               "$type": "HideUIBillBoard",
-              "hide": true
+              "hide": true,
+              "target": "Self"
             },
             {
               "$type": "EnableHitBoxByName",
-              "hitBoxNames": ["HitBox", "HeadBox", "HitBox_ElementShield"]
+              "hitBoxNames": ["HitBox", "HeadBox", "HitBox_ElementShield"],
+              "setEnable": false
             },
             {
               "$type": "EnablePushColliderName",
               "pushColliderNames": [
                 "PushCollider",
                 "PushCollider_ElementShield"
-              ]
+              ],
+              "setEnable": false
             }
           ],
           "onRemoved": [
             {
               "$type": "TriggerSetVisible",
-              "visible": true
+              "visible": true,
+              "target": "Self"
             },
             {
               "$type": "TriggerHideWeapon",
@@ -1849,7 +1906,9 @@
               "partNames": ["equip01"]
             },
             {
-              "$type": "HideUIBillBoard"
+              "$type": "HideUIBillBoard",
+              "hide": false,
+              "target": "Self"
             },
             {
               "$type": "EnableHitBoxByName",
@@ -1864,25 +1923,12 @@
           ]
         },
         "ReturnToBorn_Invincible": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "Invincible"
         },
         "ReturnToBorn_DenyLockOn": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "state": "DenyLockOn"
         }
-      },
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "ratio": 0.0,
-          "key": "_RETURNTOBORN_TAG_",
-          "maxValue": 0.0,
-          "minValue": 0.0
-        }
-      ]
+      }
     }
   },
   {
@@ -1892,16 +1938,15 @@
       "onAbilityStart": [
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Abyss_Ice_Blink_AS",
+          "effectPattern": "Eff_Monster_Abyss_Ice_Blink_AS",
           "born": {
             "$type": "ConfigBornByTarget",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 0.6499999761581421,
-              "PJCOKIGCJOK": 0.0
+              "x": 0.0,
+              "y": 0.65,
+              "z": 0.0
             }
-          },
-          "EBHJMLOKDGB": -1.0
+          }
         },
         {
           "$type": "RemoveUniqueModifier",
@@ -1934,6 +1979,11 @@
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  IceArrow
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1945,24 +1995,6 @@
           "modifierName": "Normal_WeaponEffect"
         }
       ],
-      "modifiers": {
-        "Normal_WeaponEffect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Abyss_Ice_Normal_WeaponElement",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Abyss_Ice_WeaponElement",
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        }
-      },
       "onAbilityStart": [
         {
           "$type": "RemoveModifier",
@@ -1974,45 +2006,41 @@
           "born": {
             "$type": "ConfigBornByTarget",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 1.5,
-              "PJCOKIGCJOK": 1.0
+              "x": 0.0,
+              "y": 1.5,
+              "z": 1.0
             },
             "direction": {
               "$type": "ConfigDirectionByAttackTarget"
             }
           }
         }
-      ]
+      ],
+      "modifiers": {
+        "Normal_WeaponEffect": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Abyss_Ice_Normal_WeaponElement"
+            },
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Abyss_Ice_WeaponElement"
+            }
+          ]
+        }
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Abyss_Ice_IceArrow_Explode",
-      "modifiers": {
-        "IceArrow_Loop": {
-          "modifierName": "",
-          "elementType": "Frozen",
-          "bonusCriticalHurt": 50.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Abyss_Ice_Cone_Small",
-              "EBHJMLOKDGB": -1.0
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "KillSelf"
-            }
-          ]
-        }
-      },
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "modifierName": "IceArrow_Loop"
+          "modifierName": "IceArrow_Loop",
+          "target": "Self"
         }
       ],
       "onAbilityStart": [
@@ -2022,54 +2050,81 @@
         },
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Abyss_Ice_Cone_AS_Small",
+          "effectPattern": "Eff_Monster_Abyss_Ice_Cone_AS_Small",
           "born": {
             "$type": "ConfigBornByCollisionPoint"
-          },
-          "EBHJMLOKDGB": -1.0
+          }
         },
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "radius": 0.75,
               "born": {
                 "$type": "ConfigBornByCollisionPoint"
-              },
-              "DCMPFCIBIPA": 0.75
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
+              "canBeModifiedBy": "OriginOwner",
               "attackProperty": {
-                "HBIOLEEGHPD": 1.0,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Ice",
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 1.0,
                 "strikeType": "Default",
-                "enBreak": 80.0,
-                "attackType": "Range"
+                "attackType": "Range",
+                "elementType": "Ice",
+                "elementDurability": 50,
+                "enBreak": 80
               },
               "hitPattern": {
                 "onHitEffectName": "default",
                 "hitImpulseType": "LV2",
-                "hitHaltTimeScale": 0.05000000074505806
+                "reboundRatio": 0,
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.05,
+                "muteHitText": false
               },
+              "forceCameraShake": false,
               "cameraShake": {
-                "shakeRange": 0.11999999731779099,
-                "shakeTime": 0.10000000149011612,
-                "shakeDistance": 25.0
+                "shakeType": "Center",
+                "shakeRange": 0.12,
+                "shakeTime": 0.1,
+                "shakeDistance": 25
               },
-              "canBeModifiedBy": "OriginOwner"
+              "extension": {
+                "basecycle": 0.1,
+                "cycledamping": 0.1,
+                "rangeAttenuation": 0.7
+              }
             }
-          },
-          "targetType": "Enemy"
+          }
         }
-      ]
+      ],
+      "modifiers": {
+        "IceArrow_Loop": {
+          "elementType": "Frozen",
+          "elementDurability": 50,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Abyss_Ice_Cone_Small"
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "KillSelf"
+            }
+          ]
+        }
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  IceCone
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -2081,93 +2136,6 @@
           "modifierName": "Special_WeaponEffect"
         }
       ],
-      "modifiers": {
-        "Special_WeaponEffect": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Abyss_Ice_Special_WeaponElement",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Abyss_Ice_WeaponElement",
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        },
-        "IceCone_01": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.25,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "CreateGadget",
-              "target": "SelfAttackTarget",
-              "born": {
-                "$type": "ConfigBornByPredicatePoint",
-                "onGround": true,
-                "timeForPredictive": 0.5
-              },
-              "gadgetID": 42201011,
-              "campID": 4001,
-              "campTargetType": "Enemy"
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "IceCone_02"
-            }
-          ]
-        },
-        "IceCone_02": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.25,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "CreateGadget",
-              "target": "SelfAttackTarget",
-              "born": {
-                "$type": "ConfigBornByPredicatePoint",
-                "onGround": true,
-                "timeForPredictive": 0.5
-              },
-              "gadgetID": 42201011,
-              "campID": 4001,
-              "campTargetType": "Enemy"
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "IceCone_03"
-            }
-          ]
-        },
-        "IceCone_03": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 1.25,
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "CreateGadget",
-              "target": "SelfAttackTarget",
-              "born": {
-                "$type": "ConfigBornByPredicatePoint",
-                "onGround": true,
-                "timeForPredictive": 0.5
-              },
-              "gadgetID": 42201011,
-              "campID": 4001,
-              "campTargetType": "Enemy"
-            }
-          ]
-        }
-      },
       "onAbilityStart": [
         {
           "$type": "RemoveModifier",
@@ -2175,52 +2143,132 @@
         },
         {
           "$type": "ApplyModifier",
-          "modifierName": "IceCone_01"
+          "modifierName": "IceCone_01",
+          "target": "Self"
         },
         {
           "$type": "SetAnimatorInt",
+          "intID": "RandomFlag",
+          "value": 500,
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_ELITEAFFIX_AGILITY_ENHANCE",
-              "ratio": 0.0,
+              "value": 0,
               "compareType": "NoneOrEqual"
             },
             {
               "$type": "ByTargetGlobalValue",
               "key": "_ELITEAFFIX_ATTACK_ENHANCE",
-              "ratio": 0.0,
+              "value": 0,
               "compareType": "NoneOrEqual"
             }
-          ],
-          "intID": "RandomFlag",
-          "ratio": 500.0
+          ]
         },
         {
           "$type": "SetAnimatorInt",
           "intID": "RandomFlag",
-          "ratio": 300.0
+          "value": 300
         },
         {
           "$type": "SetAnimatorInt",
+          "intID": "RandomFlag",
+          "value": 500,
           "predicates": [
             {
               "$type": "ByTargetGlobalValue",
               "key": "_ELITEAFFIX_AGILITY_ENHANCE",
-              "ratio": 0.0,
+              "value": 0,
               "compareType": "NoneOrEqual"
             },
             {
               "$type": "ByTargetGlobalValue",
               "key": "_ELITEAFFIX_ATTACK_ENHANCE",
-              "ratio": 0.0,
+              "value": 0,
               "compareType": "NoneOrEqual"
             }
-          ],
-          "intID": "RandomFlag",
-          "ratio": 500.0
+          ]
         }
-      ]
+      ],
+      "modifiers": {
+        "Special_WeaponEffect": {
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Abyss_Ice_Special_WeaponElement"
+            },
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Abyss_Ice_WeaponElement"
+            }
+          ]
+        },
+        "IceCone_01": {
+          "duration": 1.25,
+          "onAdded": [
+            {
+              "$type": "CreateGadget",
+              "target": "SelfAttackTarget",
+              "gadgetID": 42201011,
+              "campID": 4001,
+              "campTargetType": "Enemy",
+              "born": {
+                "$type": "ConfigBornByPredicatePoint",
+                "onGround": true,
+                "timeForPredictive": 0.5
+              }
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "IceCone_02",
+              "target": "Self"
+            }
+          ]
+        },
+        "IceCone_02": {
+          "duration": 1.25,
+          "onAdded": [
+            {
+              "$type": "CreateGadget",
+              "target": "SelfAttackTarget",
+              "gadgetID": 42201011,
+              "campID": 4001,
+              "campTargetType": "Enemy",
+              "born": {
+                "$type": "ConfigBornByPredicatePoint",
+                "onGround": true,
+                "timeForPredictive": 0.5
+              }
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "IceCone_03",
+              "target": "Self"
+            }
+          ]
+        },
+        "IceCone_03": {
+          "duration": 1.25,
+          "onAdded": [
+            {
+              "$type": "CreateGadget",
+              "target": "SelfAttackTarget",
+              "gadgetID": 42201011,
+              "campID": 4001,
+              "campTargetType": "Enemy",
+              "born": {
+                "$type": "ConfigBornByPredicatePoint",
+                "onGround": true,
+                "timeForPredictive": 0.5
+              }
+            }
+          ]
+        }
+      }
     }
   },
   {
@@ -2234,9 +2282,9 @@
           "born": {
             "$type": "ConfigBornByTarget",
             "offset": {
-              "IBKBLDAJIMA": 0.0,
-              "LKHJADIPBFL": 4.0,
-              "PJCOKIGCJOK": 0.0
+              "x": 0.0,
+              "y": 4.0,
+              "z": 0.0
             },
             "direction": {
               "$type": "ConfigDirectionByLookAtEntity"
@@ -2245,8 +2293,7 @@
         },
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Abyss_Ice_Cone_Alert",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_Monster_Abyss_Ice_Cone_Alert"
         }
       ]
     }
@@ -2255,29 +2302,11 @@
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Abyss_Ice_IceCone_Explode",
-      "modifiers": {
-        "IceCone_Loop": {
-          "modifierName": "",
-          "elementType": "Frozen",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Abyss_Ice_Cone_BS",
-              "EBHJMLOKDGB": -1.0
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "KillSelf"
-            }
-          ]
-        }
-      },
       "onAdded": [
         {
           "$type": "AttachModifier",
-          "modifierName": "IceCone_Loop"
+          "modifierName": "IceCone_Loop",
+          "target": "Self"
         }
       ],
       "onAbilityStart": [
@@ -2287,37 +2316,54 @@
         },
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Abyss_Ice_Cone_AS_Large",
+          "effectPattern": "Eff_Monster_Abyss_Ice_Cone_AS_Large",
           "born": {
             "$type": "ConfigBornBySelfOwner",
             "onGround": true
-          },
-          "EBHJMLOKDGB": -1.0
+          }
         },
         {
           "$type": "TriggerAbility",
-          "target": "Owner",
-          "abilityName": "Abyss_Ice_Cone_Damage"
+          "abilityName": "Abyss_Ice_Cone_Damage",
+          "target": "Owner"
         },
         {
           "$type": "CreateGadget",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "target": "OriginOwner",
-              "key": "_ELITEAFFIX_ATTACK_ENHANCE",
-              "ratio": 1.0
-            }
-          ],
+          "gadgetID": 42201017,
+          "campID": 4001,
+          "campTargetType": "Enemy",
           "born": {
             "$type": "ConfigBornBySelfOwner",
             "onGround": true
           },
-          "gadgetID": 42201017,
-          "campID": 4001,
-          "campTargetType": "Enemy"
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_ELITEAFFIX_ATTACK_ENHANCE",
+              "target": "OriginOwner",
+              "value": 1,
+              "compareType": "Equal"
+            }
+          ]
         }
-      ]
+      ],
+      "modifiers": {
+        "IceCone_Loop": {
+          "elementType": "Frozen",
+          "elementDurability": 100,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Abyss_Ice_Cone_BS"
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "KillSelf"
+            }
+          ]
+        }
+      }
     }
   },
   {
@@ -2327,142 +2373,156 @@
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackCircle",
               "triggerType": "TriggerNoRepeat",
+              "height": 4.0,
+              "fanAngle": 360.0,
+              "radius": 1.5,
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": -1.5,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": -1.5,
+                  "z": 0.0
                 }
-              },
-              "height": 4.0,
-              "DCMPFCIBIPA": 1.5
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
+              "canBeModifiedBy": "OriginOwner",
               "attackProperty": {
-                "HBIOLEEGHPD": 1.0,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Ice",
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 1.0,
                 "strikeType": "Default",
+                "attackType": "Default",
+                "elementType": "Ice",
+                "elementDurability": 50,
                 "enBreak": 80.0
               },
               "hitPattern": {
-                "onHitEffectName": "default",
                 "hitImpulseType": "LV2",
-                "hitHaltTimeScale": 0.05000000074505806
+                "reboundRatio": 0,
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.05,
+                "muteHitText": false
               },
+              "forceCameraShake": false,
               "cameraShake": {
                 "shakeType": "HitVector",
-                "shakeRange": 0.11999999731779099,
-                "shakeTime": 0.09000000357627869,
-                "shakeDistance": 25.0,
+                "shakeRange": 0.12,
+                "shakeTime": 0.09,
+                "shakeDistance": 25,
                 "shakeDir": {
-                  "y": -1.0
+                  "x": 0,
+                  "y": -1,
+                  "z": 0
                 }
-              },
-              "canBeModifiedBy": "OriginOwner"
+              }
             }
-          },
-          "targetType": "Enemy"
+          }
         }
       ]
     }
   },
+  //强攻精英化增加冰柱破裂后的冰雾效果
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Abyss_Ice_EliteAffix_IceFog",
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Ice_Fog",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "Ice_Fog": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 20.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 20.0,
           "thinkInterval": 0.5,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Slime_Ice_Fog",
-              "EBHJMLOKDGB": -1.0
-            }
-          ],
           "onThinkInterval": [
             {
               "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
+                  "fanAngle": 360.0,
+                  "radius": 3.0,
                   "born": {
                     "$type": "ConfigBornBySelf",
                     "offset": {
-                      "IBKBLDAJIMA": 0.0,
-                      "LKHJADIPBFL": 0.0,
-                      "PJCOKIGCJOK": 0.0
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
                     }
-                  },
-                  "DCMPFCIBIPA": 3.0
+                  }
                 },
                 "attackInfo": {
-                  "attackTag": "",
+                  "canBeModifiedBy": "OriginOwner",
                   "attenuationTag": "Group1",
                   "attenuationGroup": "default",
                   "attackProperty": {
-                    "HBIOLEEGHPD": 0.30000001192092896,
-                    "CCNJGLPMIEP": 0.0,
+                    "damagePercentage": 0.3,
                     "elementType": "Ice",
-                    "bonusCriticalHurt": 25.0,
+                    "elementDurability": 25,
                     "enBreak": 0.0
                   },
                   "hitPattern": {
                     "onHitEffectName": "",
                     "hitImpulseType": "LV1",
-                    "hitHaltTimeScale": 0.05000000074505806
-                  },
-                  "canBeModifiedBy": "OriginOwner"
+                    "reboundRatio": 0,
+                    "hitHaltTime": 0.0,
+                    "hitHaltTimeScale": 0.05,
+                    "muteHitText": false
+                  }
                 }
-              },
-              "targetType": "Enemy"
+              }
+            }
+          ],
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "effectPattern": "Eff_Monster_Slime_Ice_Fog"
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Ice_Fog"
-        }
-      ]
+      }
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  SurroundCone
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Abyss_Ice_SurroundCone_02",
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "SurroundCone_Loop",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "SurroundCone_Loop": {
-          "modifierName": "",
           "elementType": "Frozen",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Abyss_Ice_Cone_Gather",
-              "scale": 0.7200000286102295,
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Abyss_Ice_Cone_Gather",
+              "scale": 0.72
             },
             {
               "$type": "AddGlobalValue",
               "target": "Owner",
-              "ratio": 1.0,
               "key": "_ABILITY_SURROUNDCONE_02",
+              "value": 1.0,
               "useLimitRange": true,
               "maxValue": 5.0,
               "minValue": 0.0
@@ -2472,47 +2532,48 @@
             {
               "$type": "AddGlobalValue",
               "target": "Owner",
-              "ratio": -1.0,
               "key": "_ABILITY_SURROUNDCONE_02",
+              "value": -1.0,
               "useLimitRange": true,
               "maxValue": 5.0,
               "minValue": 0.0
             },
             {
               "$type": "TriggerAbility",
-              "abilityName": "Abyss_Ice_SurroundCone_Explode"
+              "abilityName": "Abyss_Ice_SurroundCone_Explode",
+              "target": "Self"
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "SurroundCone_Loop"
-        }
-      ]
+      }
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Abyss_Ice_SurroundCone_04",
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "SurroundCone_Loop",
+          "target": "Self"
+        }
+      ],
       "modifiers": {
         "SurroundCone_Loop": {
-          "modifierName": "",
           "elementType": "Frozen",
-          "bonusCriticalHurt": 100.0,
+          "elementDurability": 100,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Abyss_Ice_Cone_Gather",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Abyss_Ice_Cone_Gather",
+              "scale": 1.0
             },
             {
               "$type": "AddGlobalValue",
               "target": "Owner",
-              "ratio": 1.0,
               "key": "_ABILITY_SURROUNDCONE_04",
+              "value": 1.0,
               "useLimitRange": true,
               "maxValue": 5.0,
               "minValue": 0.0
@@ -2522,25 +2583,20 @@
             {
               "$type": "AddGlobalValue",
               "target": "Owner",
-              "ratio": -1.0,
               "key": "_ABILITY_SURROUNDCONE_04",
+              "value": -1.0,
               "useLimitRange": true,
               "maxValue": 5.0,
               "minValue": 0.0
             },
             {
               "$type": "TriggerAbility",
-              "abilityName": "Abyss_Ice_SurroundCone_Explode"
+              "abilityName": "Abyss_Ice_SurroundCone_Explode",
+              "target": "Self"
             }
           ]
         }
-      },
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "SurroundCone_Loop"
-        }
-      ]
+      }
     }
   },
   {
@@ -2550,46 +2606,47 @@
       "onAbilityStart": [
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "radius": 1.5,
               "born": {
                 "$type": "ConfigBornByCollisionPoint"
-              },
-              "DCMPFCIBIPA": 1.5
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
+              "canBeModifiedBy": "OriginOwner",
               "attackProperty": {
-                "HBIOLEEGHPD": 0.699999988079071,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Ice",
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 0.7,
                 "strikeType": "Default",
-                "enBreak": 100.0,
-                "attackType": "Range"
+                "attackType": "Range",
+                "elementType": "Ice",
+                "elementDurability": 50,
+                "enBreak": 100.0
               },
               "hitPattern": {
-                "onHitEffectName": "default",
                 "hitImpulseType": "LV5",
-                "hitHaltTimeScale": 0.05000000074505806
+                "reboundRatio": 0,
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.05,
+                "muteHitText": false
               },
+              "forceCameraShake": false,
               "cameraShake": {
                 "shakeType": "HitVector",
-                "shakeRange": 0.1599999964237213,
-                "shakeTime": 0.09000000357627869,
-                "shakeDistance": 25.0,
+                "shakeRange": 0.16,
+                "shakeTime": 0.09,
+                "shakeDistance": 25,
                 "shakeDir": {
-                  "x": 1.0
+                  "x": 1,
+                  "y": 0,
+                  "z": 0
                 }
-              },
-              "canBeModifiedBy": "OriginOwner"
+              }
             }
-          },
-          "targetType": "Enemy"
+          }
         }
       ]
     }
@@ -2604,56 +2661,60 @@
         },
         {
           "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Abyss_Ice_Cone_AS_Large",
-          "EBHJMLOKDGB": -1.0
+          "effectPattern": "Eff_Monster_Abyss_Ice_Cone_AS_Large"
         },
         {
           "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
           "attackEvent": {
             "attackPattern": {
               "$type": "ConfigAttackSphere",
               "triggerType": "TriggerNoRepeat",
+              "radius": 1.5,
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "IBKBLDAJIMA": 0.0,
-                  "LKHJADIPBFL": 0.0,
-                  "PJCOKIGCJOK": 0.0
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
                 }
-              },
-              "DCMPFCIBIPA": 1.5
+              }
             },
             "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
+              "canBeModifiedBy": "OriginOwner",
               "attackProperty": {
-                "HBIOLEEGHPD": 0.699999988079071,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Ice",
-                "bonusCriticalHurt": 50.0,
+                "damagePercentage": 0.7,
                 "strikeType": "Default",
-                "enBreak": 200.0,
-                "attackType": "Range"
+                "attackType": "Range",
+                "elementType": "Ice",
+                "elementDurability": 50,
+                "enBreak": 200.0
               },
               "hitPattern": {
-                "onHitEffectName": "default",
                 "hitImpulseType": "LV4",
-                "hitHaltTimeScale": 0.05000000074505806
+                "reboundRatio": 0,
+                "hitHaltTime": 0.0,
+                "hitHaltTimeScale": 0.05,
+                "muteHitText": false
               },
+              "forceCameraShake": false,
               "cameraShake": {
-                "shakeRange": 0.1599999964237213,
-                "shakeTime": 0.15000000596046448,
-                "shakeDistance": 25.0
-              },
-              "canBeModifiedBy": "OriginOwner"
+                "shakeType": "Center",
+                "shakeRange": 0.16,
+                "shakeTime": 0.15,
+                "shakeDistance": 25
+              }
             }
-          },
-          "targetType": "Enemy"
+          }
         }
       ]
     }
   },
+  ////////////////////////////////////////////////////////////////
+  //
+  //  OtherConfig
+  //
+  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -2662,23 +2723,29 @@
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["NormalAtk"],
-          "angularSpeed": 180.0,
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 1.0,
+          "angularSpeed": 180,
           "attackTrigger": "",
-          "attackDistance": 12.0
+          "attackDistance": 12
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["SpecialAtk"],
-          "angularSpeed": 180.0,
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 1.0,
+          "angularSpeed": 180,
           "attackTrigger": "",
-          "attackDistance": 12.0
+          "attackDistance": 12
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["RandomAction"],
-          "angularSpeed": 180.0,
+          "startNormalizedTime": 0.0,
+          "endNormalizedTime": 1.0,
+          "angularSpeed": 180,
           "attackTrigger": "",
-          "attackDistance": 12.0
+          "attackDistance": 12
         }
       ]
     }

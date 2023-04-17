@@ -1,137 +1,48 @@
 [
+  // 蕈兽BVB活动 - 旋转雷    yiming.liao
+  // Index:
+  //
+  // //
+  // .d8888. d888888b d88888b d88888b d8888b.
+  // 88'  YP `~~88~~' 88'     88'     88  `8D
+  // `8bo.      88    88ooooo 88ooooo 88oobY'
+  //   `Y8b.    88    88~~~~~ 88~~~~~ 88`8b
+  // db   8D    88    88.     88.     88 `88.
+  // `8888Y'    YP    Y88888P Y88888P 88   YD
   {
     "Default": {
       "$type": "ConfigAbility",
-      "abilityName": "Fungus_Trois_BVB_Electric_UltraRotate",
-      "abilityMixins": [
-        {
-          "$type": "AttachToAnimatorStateIDMixin",
-          "stateIDs": ["UltraRotate"],
-          "modifierName": "Overdose_Shader_VFX"
-        },
-        {
-          "$type": "DoActionByAnimatorStateIDMixin",
-          "stateIDs": ["NormalRotate"],
-          "enterActions": [
-            {
-              "$type": "FireEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Fungus_Trois_Electric_NormalRotate",
-              "EBHJMLOKDGB": -1.0
-            }
-          ]
-        }
-      ],
-      "modifiers": {
-        "Overdose_Shader_VFX": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAdded": [
-            {
-              "$type": "SetAnimatorInt",
-              "intID": "ShaderState",
-              "ratio": 1.0
-            },
-            {
-              "$type": "SetAnimatorTrigger",
-              "triggerID": "UBShader"
-            },
-            {
-              "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Fungus_Trois_Electric_UltraRotate",
-              "EBHJMLOKDGB": -1.0
-            },
-            {
-              "$type": "AttachAbilityStateResistance",
-              "resistanceBuffDebuffs": ["ElementFreeze", "ElementFrozen"]
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "SetAnimatorInt",
-              "canBeHandledOnRecover": true,
-              "intID": "ShaderState",
-              "ratio": 2.0
-            }
-          ]
-        }
-      }
-    }
-  },
-  {
-    "Default": {
-      "$type": "ConfigAbility",
-      "abilityName": "Fungus_Trois_BVB_Electric_Passive_DefDebuff",
-      "modifiers": {
-        "Debuff_Attack_Monitor": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "onAttackLanded": [
-            {
-              "$type": "Predicated",
-              "target": "Target",
-              "targetPredicates": [
-                {
-                  "$type": "ByAttackTags",
-                  "attackTags": ["Trois_NormalRotate"]
-                },
-                {
-                  "$type": "ByEntityTypes",
-                  "entityTypes": ["Monster", "Avatar", "Partner"]
-                }
-              ],
-              "successActions": [
-                {
-                  "$type": "ApplyModifier",
-                  "target": "Target",
-                  "modifierName": "NormalRotate_Defence_Down"
-                }
-              ]
-            }
-          ]
-        },
-        "NormalRotate_Defence_Down": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 5.0,
-          "bonusCriticalHurt": 100.0,
-          "properties": {
-            "Actor_DefenceRatio": -0.33000001311302185
-          },
-          "state": "DefenseDown"
-        }
-      },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Debuff_Attack_Monitor"
-        }
-      ]
-    }
-  },
-  {
-    "Default": {
-      "$type": "ConfigAbility",
+      /// @desc 冲锋期间的旋转控制
       "abilityName": "Fungus_Trois_BVB_Electric_Steer",
       "abilityMixins": [
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Charge_Rotate"],
+          "startNormalizedTime": 0,
           "endNormalizedTime": 99.0,
-          "angularSpeed": 480.0,
-          "attackTrigger": ""
+          "angularSpeed": 480
         },
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["Charge_Attack"],
+          "startNormalizedTime": 0,
           "endNormalizedTime": 99.0,
-          "angularSpeed": 60.0,
-          "attackTrigger": ""
+          "angularSpeed": 60
         }
       ]
     }
   },
+  // //
+  //  .o88b. db   db  .d8b.  d8888b.  d888b  d88888b
+  // d8P  Y8 88   88 d8' `8b 88  `8D 88' Y8b 88'
+  // 8P      88ooo88 88ooo88 88oobY' 88      88ooooo
+  // 8b      88~~~88 88~~~88 88`8b   88  ooo 88~~~~~
+  // Y8b  d8 88   88 88   88 88 `88. 88. ~8~ 88.
+  //  `Y88P' YP   YP YP   YP 88   YD  Y888P  Y88888P
   {
     "Default": {
       "$type": "ConfigAbility",
+      /// @desc 普攻：冲刺攻击期间的特效管理与攻击盒管理
       "abilityName": "Fungus_Trois_BVB_Electric_ChargeAttack",
       "abilityMixins": [
         {
@@ -160,24 +71,56 @@
         }
       ],
       "modifiers": {
+        // 攻击动作下的伤害与表现逻辑
         "ChargeDecayed_Attack_Modifier": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.20999999344348907,
+          "thinkInterval": 0.21,
+          "onThinkInterval": [
+            // 攻击效果
+            {
+              "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
+              "attackEvent": {
+                "attackPattern": {
+                  "$type": "ConfigAttackSphere",
+                  "triggerType": "TriggerNoRepeat",
+                  "radius": 1.8,
+                  "born": {
+                    "$type": "ConfigBornBySelf"
+                  }
+                },
+                "attackInfo": {
+                  "attackProperty": {
+                    "elementType": "Electric",
+                    "attackType": "Melee",
+                    "elementDurability": 25,
+                    "damagePercentage": 0.62,
+                    "enBreak": 30.0
+                  },
+                  "attenuationTag": "Fungus_Trois_Atk",
+                  "attenuationGroup": "Fungus_Trois_Atk",
+                  "attackTag": "BVBChargeAttack",
+                  "hitPattern": {
+                    "hitImpulseType": "LV1"
+                  }
+                }
+              }
+            }
+          ],
           "onAdded": [
+            // 冲锋特效
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Fungus_Trois_Epsilon_Electric_ChargeDecayed_Loop",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Fungus_Trois_Epsilon_Electric_ChargeDecayed_Loop"
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Fungus_Trois_Epsilon_Electric_ChargeDecayed_Loop_Trail",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Fungus_Trois_Epsilon_Electric_ChargeDecayed_Loop_Trail"
             },
+            // 去掉自己的碰撞盒
             {
               "$type": "EnablePushColliderName",
-              "pushColliderNames": ["PushCollider"]
+              "pushColliderNames": ["PushCollider"],
+              "setEnable": false
             }
           ],
           "onRemoved": [
@@ -186,80 +129,76 @@
               "pushColliderNames": ["PushCollider"],
               "setEnable": true
             }
-          ],
-          "onThinkInterval": [
-            {
-              "$type": "TriggerAttackEvent",
-              "attackEvent": {
-                "attackPattern": {
-                  "$type": "ConfigAttackSphere",
-                  "triggerType": "TriggerNoRepeat",
-                  "born": {
-                    "$type": "ConfigBornBySelf"
-                  },
-                  "DCMPFCIBIPA": 1.7999999523162842
-                },
-                "attackInfo": {
-                  "attackTag": "BVBChargeAttack",
-                  "attenuationTag": "Fungus_Trois_Atk",
-                  "attenuationGroup": "Fungus_Trois_Atk",
-                  "attackProperty": {
-                    "HBIOLEEGHPD": 0.6200000047683716,
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Electric",
-                    "bonusCriticalHurt": 25.0,
-                    "attackType": "Melee"
-                  },
-                  "hitPattern": {
-                    "onHitEffectName": "default",
-                    "hitImpulseType": "LV1"
-                  }
-                }
-              },
-              "targetType": "Enemy"
-            }
           ]
         },
+        // 普通状态下 攻击特效
         "ChargeDecayed_Adjust_Modifier": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Fungus_Trois_Epsilon_Electric_ChargeDecayed_BSLoop",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Fungus_Trois_Epsilon_Electric_ChargeDecayed_BSLoop"
             }
           ]
         },
+        // 大招状态下  激化版本的攻击特效
         "ChargeOverdose_Adjust_Modifier": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Fungus_Trois_Epsilon_Electric_ChargeNormal_BSLoop",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Fungus_Trois_Epsilon_Electric_ChargeNormal_BSLoop"
             }
           ]
         },
+        // 攻击动作下的伤害与表现逻辑 - 激化态下的版本
         "ChargeOverdose_Attack_Modifier": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
-          "thinkInterval": 0.20999999344348907,
+          "thinkInterval": 0.21,
+          "onThinkInterval": [
+            // 攻击效果
+            {
+              "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
+              "attackEvent": {
+                "attackPattern": {
+                  "$type": "ConfigAttackSphere",
+                  "triggerType": "TriggerNoRepeat",
+                  "radius": 2,
+                  "born": {
+                    "$type": "ConfigBornBySelf"
+                  }
+                },
+                "attackInfo": {
+                  "attackProperty": {
+                    "elementType": "Electric",
+                    "damagePercentage": 2.03,
+                    "enBreak": 25,
+                    "elementDurability": 25,
+                    "attackType": "Melee"
+                  },
+                  "attenuationTag": "Fungus_Trois_Atk",
+                  "attenuationGroup": "Fungus_Trois_Atk",
+                  "attackTag": "BVBChargeAttack",
+                  "hitPattern": {
+                    "hitImpulseType": "LV1"
+                  }
+                }
+              }
+            }
+          ],
           "onAdded": [
+            // 冲锋特效
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Fungus_Trois_Epsilon_Electric_ChargeNormal_Loop",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Fungus_Trois_Epsilon_Electric_ChargeNormal_Loop"
             },
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Fungus_Trois_Epsilon_Electric_ChargeNormal_Loop_Trail",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Fungus_Trois_Epsilon_Electric_ChargeNormal_Loop_Trail"
             },
+            // 去掉自己的碰撞盒
             {
               "$type": "EnablePushColliderName",
-              "pushColliderNames": ["PushCollider"]
+              "pushColliderNames": ["PushCollider"],
+              "setEnable": false
             }
           ],
           "onRemoved": [
@@ -267,50 +206,26 @@
               "$type": "EnablePushColliderName",
               "pushColliderNames": ["PushCollider"],
               "setEnable": true
-            }
-          ],
-          "onThinkInterval": [
-            {
-              "$type": "TriggerAttackEvent",
-              "attackEvent": {
-                "attackPattern": {
-                  "$type": "ConfigAttackSphere",
-                  "triggerType": "TriggerNoRepeat",
-                  "born": {
-                    "$type": "ConfigBornBySelf"
-                  },
-                  "DCMPFCIBIPA": 2.0
-                },
-                "attackInfo": {
-                  "attackTag": "BVBChargeAttack",
-                  "attenuationTag": "Fungus_Trois_Atk",
-                  "attenuationGroup": "Fungus_Trois_Atk",
-                  "attackProperty": {
-                    "HBIOLEEGHPD": 2.0299999713897705,
-                    "CCNJGLPMIEP": 0.0,
-                    "elementType": "Electric",
-                    "bonusCriticalHurt": 25.0,
-                    "enBreak": 25.0,
-                    "attackType": "Melee"
-                  },
-                  "hitPattern": {
-                    "onHitEffectName": "default",
-                    "hitImpulseType": "LV1"
-                  }
-                }
-              },
-              "targetType": "Enemy"
             }
           ]
         }
       }
     }
   },
+  // //
+  // d888888b db   db db    db d8b   db d8888b. d88888b d8888b. d8888b.  .d88b.  db   d8b   db d88888b d8888b.
+  // `~~88~~' 88   88 88    88 888o  88 88  `8D 88'     88  `8D 88  `8D .8P  Y8. 88   I8I   88 88'     88  `8D
+  //    88    88ooo88 88    88 88V8o 88 88   88 88ooooo 88oobY' 88oodD' 88    88 88   I8I   88 88ooooo 88oobY'
+  //    88    88~~~88 88    88 88 V8o88 88   88 88~~~~~ 88`8b   88~~~   88    88 Y8   I8I   88 88~~~~~ 88`8b
+  //    88    88   88 88b  d88 88  V888 88  .8D 88.     88 `88. 88      `8b  d8' `8b d8'8b d8' 88.     88 `88.
+  //    YP    YP   YP ~Y8888P' VP   V8P Y8888D' Y88888P 88   YD 88       `Y88P'   `8b8' `8d8'  Y88888P 88   YD
   {
     "Default": {
       "$type": "ConfigAbility",
+      /// @desc 小技能：充能，使自己的下一次冲锋攻击额外附带一次雷伤的追击攻击  降低第一个命中目标的防御
       "abilityName": "Fungus_Trois_BVB_Electric_ThunderPower",
       "abilityMixins": [
+        // 在下一次攻击结束之后，移除这个Buff
         {
           "$type": "DoActionByAnimatorStateIDMixin",
           "stateIDs": ["Charge_AS", "OverdoseCharge_AS"],
@@ -322,10 +237,18 @@
           ]
         }
       ],
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "ThunderPower_Gen_Charging"
+        },
+        {
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Monster_Fungus_Trois_Electric_Enhanced_BS"
+        }
+      ],
       "modifiers": {
         "ThunderPower_Attack_Monitor": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
           "onAttackLanded": [
             {
               "$type": "Predicated",
@@ -333,8 +256,9 @@
               "targetPredicates": [
                 {
                   "$type": "ByHitDamage",
-                  "damage": 0.0,
-                  "OBDDNGMAGFE": true
+                  "logic": "Greater",
+                  "damage": 0,
+                  "useOriginDamage": true
                 },
                 {
                   "$type": "ByAttackTags",
@@ -356,22 +280,20 @@
           ]
         },
         "ThunderPower_Defence_Down": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 6.0,
-          "bonusCriticalHurt": 100.0,
+          "duration": 6,
+          "state": "DefenseDown",
           "properties": {
-            "Actor_DefenceRatio": -0.4000000059604645
-          },
-          "state": "DefenseDown"
+            "Actor_DefenceRatio": -0.4
+          }
         },
+        // 有这个状态时，攻击附加雷电伤害
         "ThunderPower_Gen_Charging": {
-          "modifierName": "",
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Refresh",
           "onAdded": [
+            // 特效表现
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Fungus_Trois_Electric_Enhanced_Loop",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Fungus_Trois_Electric_Enhanced_Loop"
             },
             {
               "$type": "AttachModifier",
@@ -385,8 +307,9 @@
               "targetPredicates": [
                 {
                   "$type": "ByHitDamage",
-                  "damage": 0.0,
-                  "OBDDNGMAGFE": true
+                  "logic": "Greater",
+                  "damage": 0,
+                  "useOriginDamage": true
                 },
                 {
                   "$type": "ByAttackTags",
@@ -396,20 +319,18 @@
               "successActions": [
                 {
                   "$type": "DamageByAttackValue",
+                  "attacker": "Caster",
                   "target": "Target",
                   "attackInfo": {
-                    "attackTag": "",
+                    "attackProperty": {
+                      "damagePercentage": 0.1,
+                      "elementDurability": 25,
+                      "elementType": "Electric",
+                      "enBreak": 0
+                    },
                     "attenuationTag": "ThunderPower_Charging",
                     "attenuationGroup": "FungusFight_Trois_FireRing",
-                    "attackProperty": {
-                      "HBIOLEEGHPD": 0.10000000149011612,
-                      "CCNJGLPMIEP": 0.0,
-                      "elementType": "Electric",
-                      "bonusCriticalHurt": 25.0,
-                      "enBreak": 0.0
-                    },
                     "hitPattern": {
-                      "onHitEffectName": "default",
                       "hitImpulseType": "LV0"
                     }
                   }
@@ -418,25 +339,23 @@
             }
           ]
         }
-      },
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "ThunderPower_Gen_Charging"
-        },
-        {
-          "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Fungus_Trois_Electric_Enhanced_BS",
-          "EBHJMLOKDGB": -1.0
-        }
-      ]
+      }
     }
   },
+  // //
+  //  .d88b.  db    db d88888b d8888b. d8888b.  .d88b.  .d8888. d88888b
+  // .8P  Y8. 88    88 88'     88  `8D 88  `8D .8P  Y8. 88'  YP 88'
+  // 88    88 Y8    8P 88ooooo 88oobY' 88   88 88    88 `8bo.   88ooooo
+  // 88    88 `8b  d8' 88~~~~~ 88`8b   88   88 88    88   `Y8b. 88~~~~~
+  // `8b  d8'  `8bd8'  88.     88 `88. 88  .8D `8b  d8' db   8D 88.
+  //  `Y88P'     YP    Y88888P 88   YD Y8888D'  `Y88P'  `8888Y' Y88888P
   {
     "Default": {
       "$type": "ConfigAbility",
+      /// @desc 必杀:进入激化态，普攻会被替换成连续冲锋效果(用状态机管理)
       "abilityName": "Fungus_Trois_BVB_Electric_Overdose",
       "abilityMixins": [
+        // 用于shader的控制
         {
           "$type": "DoActionByStateIDMixin",
           "stateIDs": ["UnionBurst"],
@@ -448,50 +367,98 @@
           ]
         }
       ],
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Overdose_Gen_Enhanced"
+        },
+        {
+          "$type": "FireEffect",
+          "effectPattern": "Eff_Monster_Fungus_Trois_Electric_Overdose_BS"
+        },
+        // 震屏设置
+        {
+          "$type": "ActCameraShake",
+          "cameraShake": {
+            "shakeDir": {
+              "y": 1
+            },
+            "extension": {
+              "baseCycle": 0.12,
+              "cycleDamping": 0.3
+            },
+            "shakeDistance": 9,
+            "shakeTime": 0.2,
+            "shakeRange": 0.4,
+            "shakeType": "CustomVector"
+          }
+        },
+        {
+          "$type": "TriggerAttackEvent",
+          "targetType": "Enemy",
+          "attackEvent": {
+            "attackPattern": {
+              "$type": "ConfigAttackSphere",
+              "triggerType": "TriggerNoRepeat",
+              "radius": 3.6,
+              "born": {
+                "$type": "ConfigBornBySelf"
+              }
+            },
+            "attackInfo": {
+              "attackProperty": {
+                "elementType": "Electric",
+                "elementDurability": 25,
+                "damagePercentage": 1,
+                "enBreak": 25.0
+              },
+              "hitPattern": {
+                "hitImpulseType": "LV1"
+              }
+            }
+          }
+        }
+      ],
+      "onAdded": [
+        {
+          "$type": "SetAnimatorBool",
+          "boolID": "UBEnhanced",
+          "value": false,
+          "canBeHandledOnRecover": true
+        }
+      ],
       "modifiers": {
+        // 效果表现
         "Overdose_Gen_Enhanced": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 15.0,
-          "bonusCriticalHurt": 100.0,
+          "stacking": "Refresh",
+          "duration": 15,
           "properties": {
             "Actor_EndureDelta": 0.0
           },
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Fungus_Trois_Electric_Overdose_Loop",
-              "EBHJMLOKDGB": -1.0
+              "effectPattern": "Eff_Monster_Fungus_Trois_Electric_Overdose_Loop"
             },
             {
               "$type": "SetAnimatorBool",
               "boolID": "UBEnhanced",
-              "ratio": true
+              "value": true
             },
+            // 激化态Shader
             {
               "$type": "SetAnimatorInt",
               "intID": "ShaderState",
-              "ratio": 1.0
+              "value": 1
             },
+            // 重置大招计数器
             {
               "$type": "SetGlobalValue",
-              "ratio": 0.0,
               "key": "_CHARGE_ATTACK_COUNT_",
-              "maxValue": 0.0,
-              "minValue": 0.0
+              "value": 0
             }
           ],
-          "onRemoved": [
-            {
-              "$type": "SetAnimatorBool",
-              "boolID": "UBEnhanced"
-            },
-            {
-              "$type": "SetAnimatorInt",
-              "canBeHandledOnRecover": true,
-              "intID": "ShaderState",
-              "ratio": 2.0
-            }
-          ],
+          // 普攻命中时计数，达到数量后移除Modifier
           "onAttackLanded": [
             {
               "$type": "Predicated",
@@ -502,9 +469,11 @@
                 },
                 {
                   "$type": "ByHitDamage",
-                  "damage": 0.0,
-                  "OBDDNGMAGFE": true
+                  "logic": "Greater",
+                  "useOriginDamage": true,
+                  "damage": 0
                 },
+                // 命中冷却计时
                 {
                   "$type": "ByNot",
                   "predicates": [
@@ -519,101 +488,51 @@
               "successActions": [
                 {
                   "$type": "AddGlobalValue",
-                  "ratio": 1.0,
+                  "target": "Self",
                   "key": "_CHARGE_ATTACK_COUNT_",
-                  "maxValue": 0.0,
-                  "minValue": 0.0
+                  "value": 1
                 },
                 {
                   "$type": "ApplyModifier",
                   "modifierName": "AttackLanded_Cooldown"
                 },
+                // 次数到了，就移除
                 {
                   "$type": "RemoveModifier",
+                  "modifierName": "Overdose_Gen_Enhanced",
                   "predicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "target": "Self",
                       "key": "_CHARGE_ATTACK_COUNT_",
-                      "ratio": 7.0,
-                      "compareType": "MoreThanAndEqual"
+                      "compareType": "MoreThanAndEqual",
+                      "value": 7
                     }
-                  ],
-                  "modifierName": "Overdose_Gen_Enhanced"
+                  ]
                 }
               ]
             }
+          ],
+          "onRemoved": [
+            {
+              "$type": "SetAnimatorBool",
+              "boolID": "UBEnhanced",
+              "value": false
+            },
+            // 恢复到衰亡态
+            {
+              "$type": "SetAnimatorInt",
+              "intID": "ShaderState",
+              "value": 2,
+              "canBeHandledOnRecover": true
+            }
           ]
         },
+        // 空Modifier，用于攻击命中计时
         "AttackLanded_Cooldown": {
-          "modifierName": "",
-          "HCJLIGBLGJA": 0.5,
-          "bonusCriticalHurt": 100.0
+          "duration": 0.5
         }
-      },
-      "onAdded": [
-        {
-          "$type": "SetAnimatorBool",
-          "canBeHandledOnRecover": true,
-          "boolID": "UBEnhanced"
-        }
-      ],
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Overdose_Gen_Enhanced"
-        },
-        {
-          "$type": "FireEffect",
-          "healLimitedByCasterMaxHPRatio": "Eff_Monster_Fungus_Trois_Electric_Overdose_BS",
-          "EBHJMLOKDGB": -1.0
-        },
-        {
-          "$type": "ActCameraShake",
-          "cameraShake": {
-            "shakeType": "CustomVector",
-            "shakeRange": 0.4000000059604645,
-            "shakeTime": 0.20000000298023224,
-            "shakeDistance": 9.0,
-            "shakeDir": {
-              "y": 1.0
-            },
-            "extension": {
-              "cycleDamping": 0.30000001192092896
-            }
-          }
-        },
-        {
-          "$type": "TriggerAttackEvent",
-          "attackEvent": {
-            "attackPattern": {
-              "$type": "ConfigAttackSphere",
-              "triggerType": "TriggerNoRepeat",
-              "born": {
-                "$type": "ConfigBornBySelf"
-              },
-              "DCMPFCIBIPA": 3.5999999046325684
-            },
-            "attackInfo": {
-              "attackTag": "",
-              "attenuationTag": "",
-              "attenuationGroup": "default",
-              "attackProperty": {
-                "HBIOLEEGHPD": 1.0,
-                "CCNJGLPMIEP": 0.0,
-                "elementType": "Electric",
-                "bonusCriticalHurt": 25.0,
-                "enBreak": 25.0
-              },
-              "hitPattern": {
-                "onHitEffectName": "default",
-                "hitImpulseType": "LV1"
-              }
-            }
-          },
-          "targetType": "Enemy"
-        }
-      ]
+      }
     }
   }
 ]
