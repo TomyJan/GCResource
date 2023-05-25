@@ -1,18 +1,11 @@
 [
-  ///////////////////////////////////////////////////////////////
-  //
-  // 2.3狗活动 烟雾发射器
-  //
-  ///////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_Area_Dq_Property_Prop_SmokeDevice_01",
       "abilityMixins": [
-        //状态流转：0 交互-> 201 duration到-> 202 duration到-> 0
         {
           "$type": "AttachToGadgetStateMixin",
-          "gadgetState": 0, //只有这个state能交互
           "modifierName": "Close"
         },
         {
@@ -26,64 +19,69 @@
           "modifierName": "CoolDown"
         }
       ],
-      "onAdded": [
-        {
-          "$type": "AttachAbilityStateResistance",
-          "resistanceListID": 11002 //位于AvatarSkillData，状态免疫大礼包
-        }
-      ],
       "modifiers": {
         "HachiSmokeArea": {
+          "modifierName": "",
           "duration": 1.5,
-          "stacking": "Refresh",
-          //"state": "DenyLockOn",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ServerLuaCall",
               "luaCallType": "FromGroup",
-              "funcName": "SLC_SmokeClearThreat"
+              "funcName": "SLC_SmokeClearThreat",
+              "MPPMFEDKGHC": 0.0,
+              "BOKNHLDBKKK": 0.0,
+              "CHOIIMHDNHK": 0.0
             }
           ],
           "onRemoved": [
             {
               "$type": "ServerLuaCall",
               "luaCallType": "FromGroup",
-              "funcName": "SLC_SmokeSetThreat"
+              "funcName": "SLC_SmokeSetThreat",
+              "MPPMFEDKGHC": 0.0,
+              "BOKNHLDBKKK": 0.0,
+              "CHOIIMHDNHK": 0.0
             }
           ]
         },
         "HachiDenyLockOn": {
+          "modifierName": "",
           "duration": 1.5,
-          "stacking": "Refresh",
+          "bonusCriticalHurt": 100.0,
           "state": "DenyLockOn"
         },
         "Close": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
-              //可交互提示特效
               "$type": "AttachEffect",
-              "effectPattern": "Eff_Item_Hint_SearchPoint"
+              "healLimitedByCasterMaxHPRatio": "Eff_Item_Hint_SearchPoint",
+              "effectTempleteID": -1.0
             }
           ],
           "onBeingHit": [
             {
               "$type": "ExecuteGadgetLua",
-              "param1": 201,
               "predicates": [
                 {
-                  "$type": "ByNot",
+                  "$type": "DDBJEPBNOGF",
                   "predicates": [
                     {
-                      "$type": "ByAttackTags",
+                      "$type": "LCCMCDGDKGI",
                       "attackTags": ["BurningDamage", "ShockDamage"]
                     }
                   ]
                 }
-              ]
+              ],
+              "param1": 201
             }
           ]
         },
         "CoolDown": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
@@ -92,8 +90,9 @@
           ]
         },
         "OpenStateTimer": {
-          //烟雾效果持续时间
-          "duration": 5,
+          "modifierName": "",
+          "duration": 5.0,
+          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "ExecuteGadgetLua",
@@ -102,46 +101,48 @@
           ]
         },
         "DisableInteractTimer": {
-          //烟雾结束后，几秒后可以交互
-          "duration": 10,
+          "modifierName": "",
+          "duration": 10.0,
+          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
-              "$type": "ExecuteGadgetLua",
-              "param1": 0
+              "$type": "ExecuteGadgetLua"
             }
           ]
         },
         "Open": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 0.5,
           "onAdded": [
             {
-              //烟雾特效
               "$type": "AttachEffect",
-              "effectPattern": "Eff_ScenObj_SmokeDevice_01_Fog",
-              "scale": 0.5
+              "healLimitedByCasterMaxHPRatio": "Eff_ScenObj_SmokeDevice_01_Fog",
+              "scale": 0.5,
+              "effectTempleteID": -1.0
             },
             {
               "$type": "ApplyModifier",
               "modifierName": "OpenStateTimer"
             },
             {
-              //运营埋点lua上报 param1 1-烟雾 2-诱饵
               "$type": "ServerLuaCall",
               "luaCallType": "FromGroup",
               "funcName": "SLC_HachiGadgetActionMark",
-              "paramNum": 1,
-              "param1": 1
+              "LIAAKLHNPEN": 1,
+              "MPPMFEDKGHC": 1.0,
+              "BOKNHLDBKKK": 0.0,
+              "CHOIIMHDNHK": 0.0
             }
           ],
-          "thinkInterval": 0.5,
           "onThinkInterval": [
             {
               "$type": "Predicated",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
                 "shapeName": "CircleR5",
-                "centerBasedOn": "Self",
                 "campTargetType": "All",
-                "campBasedOn": "Self"
+                "OBHNBNDMPFN": 1.0
               },
               "targetPredicates": [
                 {
@@ -152,26 +153,26 @@
               "successActions": [
                 {
                   "$type": "ApplyModifier",
-                  "modifierName": "HachiSmokeArea",
-                  "target": "Self"
+                  "modifierName": "HachiSmokeArea"
                 },
                 {
                   "$type": "ApplyModifier",
-                  "modifierName": "HachiDenyLockOn",
-                  "target": "Other"
+                  "target": "Other",
+                  "modifierName": "HachiDenyLockOn"
                 }
               ]
             }
           ]
         }
-      }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachAbilityStateResistance",
+          "resistanceListID": 11002
+        }
+      ]
     }
   },
-  ///////////////////////////////////////////////////////////////
-  //
-  // 2.3狗活动 烟花诱饵
-  //
-  ///////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -179,11 +180,9 @@
       "abilityMixins": [
         {
           "$type": "AttachToGadgetStateMixin",
-          "gadgetState": 0,
           "modifierName": "Close"
         },
         {
-          //开启,给狗传坐标，狗那侧取这个坐标，然后进pose放技能
           "$type": "AttachToGadgetStateMixin",
           "gadgetState": 201,
           "modifierName": "Open"
@@ -194,52 +193,51 @@
           "modifierName": "CoolDown"
         }
       ],
-      "onAdded": [
-        {
-          "$type": "AttachAbilityStateResistance",
-          "resistanceListID": 11002 //位于AvatarSkillData，状态免疫大礼包
-        }
-      ],
       "modifiers": {
         "Close": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
-              //可交互提示特效
               "$type": "AttachEffect",
-              "effectPattern": "Eff_Item_Hint_SearchPoint"
+              "healLimitedByCasterMaxHPRatio": "Eff_Item_Hint_SearchPoint",
+              "effectTempleteID": -1.0
             },
             {
               "$type": "AttachEffect",
-              "effectPattern": "Eff_Quest_SiteInteract_Event",
+              "healLimitedByCasterMaxHPRatio": "Eff_Quest_SiteInteract_Event",
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
                   "x": 0.0,
-                  "y": 0.6,
+                  "y": 0.6000000238418579,
                   "z": 0.0
                 }
-              }
+              },
+              "effectTempleteID": -1.0
             }
           ],
           "onBeingHit": [
             {
               "$type": "ExecuteGadgetLua",
-              "param1": 201,
               "predicates": [
                 {
-                  "$type": "ByNot",
+                  "$type": "DDBJEPBNOGF",
                   "predicates": [
                     {
-                      "$type": "ByAttackTags",
+                      "$type": "LCCMCDGDKGI",
                       "attackTags": ["BurningDamage", "ShockDamage"]
                     }
                   ]
                 }
-              ]
+              ],
+              "param1": 201
             }
           ]
         },
         "CoolDown": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
@@ -248,8 +246,9 @@
           ]
         },
         "OpenStateTimer": {
-          //烟雾效果持续时间
-          "duration": 10,
+          "modifierName": "",
+          "duration": 10.0,
+          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "ExecuteGadgetLua",
@@ -258,116 +257,112 @@
           ]
         },
         "DisableInteractTimer": {
-          //烟雾结束后，几秒后可以交互
-          "duration": 5,
+          "modifierName": "",
+          "duration": 5.0,
+          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
-              "$type": "ExecuteGadgetLua",
-              "param1": 0
+              "$type": "ExecuteGadgetLua"
             }
           ]
         },
         "Open": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 0.5,
           "onAdded": [
-            //开启状态表现
             {
               "$type": "ApplyModifier",
               "modifierName": "OpenStateTimer"
             },
             {
               "$type": "AttachEffect",
-              "effectPattern": "Eff_SceneObj_NoisyBait_01",
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_NoisyBait_01",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
                 "attachPointName": "RootNode"
-              }
+              },
+              "effectTempleteID": -1.0
             },
             {
-              //运营埋点lua上报 param1 1-烟雾 2-诱饵
               "$type": "ServerLuaCall",
               "luaCallType": "FromGroup",
               "funcName": "SLC_HachiGadgetActionMark",
-              "paramNum": 1,
-              "param1": 2
+              "LIAAKLHNPEN": 1,
+              "MPPMFEDKGHC": 2.0,
+              "BOKNHLDBKKK": 0.0,
+              "CHOIIMHDNHK": 0.0
             }
           ],
-          "thinkInterval": 0.5,
           "onThinkInterval": [
             {
               "$type": "Predicated",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
+                "sortType": "Nearest",
                 "shapeName": "CircleR10",
-                "centerBasedOn": "Self",
                 "campTargetType": "All",
-                "campBasedOn": "Self",
-                "sortType": "Nearest"
+                "OBHNBNDMPFN": 1.0
               },
               "targetPredicates": [
                 {
-                  //对狗的判据
                   "$type": "ByTargetGlobalValue",
-                  "target": "Target",
                   "key": "_IS_INU_SHIHANDAI",
-                  "value": 1,
-                  "compareType": "Equal"
+                  "ratio": 1.0
                 }
               ],
               "successActions": [
                 {
                   "$type": "ApplyModifier",
-                  "modifierName": "UNIQUE_HappyPoint_Attracted",
-                  "target": "Target"
+                  "target": "Target",
+                  "modifierName": "UNIQUE_HappyPoint_Attracted"
                 },
                 {
-                  //给狗传坐标
                   "$type": "SetGlobalPos",
-                  "key": "_HAPPY_POINT_POS",
                   "target": "Target",
+                  "key": "_HAPPY_POINT_POS",
                   "born": {
                     "$type": "ConfigBornBySelf"
-                    /*"offset":
-										{
-											"x" : 0.0,
-											"y" : 0.0,
-											"z" : 0.5,//偏移
-										},	*/
-                  },
-                  "setTarget": true
+                  }
                 }
               ]
             }
           ]
         },
         "UNIQUE_HappyPoint_Attracted": {
-          "duration": 1,
-          "isUnique": true,
           "stacking": "RefreshUniqueDurability",
+          "modifierName": "",
+          "isUnique": true,
+          "duration": 1.0,
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
+              "ratio": 1.0,
               "key": "_FIND_HAPPY_POINT",
-              "target": "Self",
-              "value": 1
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
+              "ratio": 0.0,
               "key": "_FIND_HAPPY_POINT",
-              "target": "Self",
-              "value": 0
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ]
         }
-      }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachAbilityStateResistance",
+          "resistanceListID": 11002
+        }
+      ]
     }
   },
-  ///////////////////////////////////////////////////////////////
-  //
-  // 2.3狗活动 巡逻特殊路点 通知进入field的狗进行环视动作
-  //
-  ///////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -380,29 +375,23 @@
             {
               "$type": "ByTargetGlobalValue",
               "key": "_IS_INU_SHIHANDAI",
-              "target": "Target",
-              "value": 1,
-              "compareType": "Equal"
+              "ratio": 1.0
             }
           ],
           "successActions": [
             {
               "$type": "SetGlobalValue",
-              "value": 1,
+              "target": "Target",
+              "ratio": 1.0,
               "key": "_SHIHANDAI_TO_SEARCH",
-              "target": "Target"
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ]
         }
-      ],
-      "modifiers": {}
+      ]
     }
   },
-  /////////////////////////////////////////////
-  //
-  //   狗子 可开启牢笼 战斗不可交互
-  //
-  /////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -416,14 +405,17 @@
       ],
       "modifiers": {
         "Door_Open": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "effectPattern": "Eff_CoverSmoke_Mini_01",
+              "healLimitedByCasterMaxHPRatio": "Eff_CoverSmoke_Mini_01",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
                 "attachPointName": "LockPosition"
-              }
+              },
+              "effectTempleteID": -1.0
             },
             {
               "$type": "ExecuteGadgetLua",
@@ -434,12 +426,6 @@
       }
     }
   },
-  //////////////////////////////////////////////////////
-  //
-  // 通用矮光柱提示点 可配Billboard图标
-  // Default:显示特效+显示图标， GearStart:隐藏特效隐藏图标
-  //
-  //////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -447,7 +433,6 @@
       "abilityMixins": [
         {
           "$type": "AttachToGadgetStateMixin",
-          "gadgetState": 0,
           "modifierName": "DefaultEffect"
         },
         {
@@ -456,31 +441,21 @@
           "modifierName": "HideEffect"
         }
       ],
-      /*"onAdded":
-			[
-				{
-					"$type": "AttachModifier",
-					"modifierName": "DefaultEffect",
-					"target": "Self",
-				},
-			],*/
       "modifiers": {
         "DefaultEffect": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "effectPattern": "Eff_QuestGuide_Position"
+              "healLimitedByCasterMaxHPRatio": "Eff_QuestGuide_Position",
+              "effectTempleteID": -1.0
             }
           ]
         },
         "HideEffect": {
-          /*"onAdded":
-					[
-						{
-							"$type": "RemoveModifier",
-							"modifierName": "DefaultEffect",
-						},
-					]*/
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
         }
       }
     }

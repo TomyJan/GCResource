@@ -1,4 +1,4 @@
-﻿function OnClientExecuteReq(context, param1, param2, param3)
+function OnClientExecuteReq(context, param1, param2, param3)
 	if param1 == 202 then
 		ScriptLib.SetGroupVariableValue(context, "SplitterShootType", 202)
 	end

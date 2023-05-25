@@ -1,4 +1,4 @@
-﻿function OnClientExecuteReq(context, param1, param2, param3)
+function OnClientExecuteReq(context, param1, param2, param3)
 
 	--ScriptLib.PrintLog("GadgetState Get Change！！！！！！！")
 	if param1 == 0 then

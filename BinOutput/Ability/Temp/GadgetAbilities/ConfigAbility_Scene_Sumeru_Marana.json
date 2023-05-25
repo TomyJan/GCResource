@@ -1,44 +1,8 @@
 [
-  //////////////////////////////////////////////////////////////////////////////////////////////////
-  //
-  // Create By Mazijun
-  //	该文件收纳零级WQBoss 无留坨
-  //
-  //////////////////////////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////////////////////////
-  //
-  // 3.0 零级WQ Boss 无留坨的化身//死域聚合体
-  //
-  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_Area_Xm_Property_Ani_Unique_Marana_01_Ability",
-      // "onAbilityStart":
-      // [
-      // 	{//每当一个攻击动作触发时会读取一下SGV_NextSkill
-      // 		"$type":"ApplyModifier",
-      // 		"modifierName":"DoNextSkill",
-      // 	},
-      // ],
-      "onAdded": [
-        {
-          //初始是阶段锁血
-          "$type": "SetGlobalValue",
-          "key": "_Marana_LockMode",
-          "value": 1
-        },
-        {
-          //初始化
-          "$type": "SetGlobalValue",
-          "key": "_NextSkill_04",
-          "value": 1
-        },
-        {
-          "$type": "EnableGadgetSpecialCamera",
-          "enable": true
-        }
-      ],
       "abilityMixins": [
         {
           "$type": "AttachToGadgetStateMutexMixin",
@@ -57,13 +21,11 @@
           ]
         },
         {
-          //待机常驻特效
           "$type": "AttachToAnimatorStateIDMixin",
           "stateIDs": ["Idle"],
           "modifierName": "IdleState"
         },
         {
-          //受击表现
           "$type": "AttachToAnimatorStateIDMixin",
           "stateIDs": [
             "Idle",
@@ -77,30 +39,27 @@
           "modifierName": "Proctected_HitEffect"
         },
         {
-          //锁血开关
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_IS_WeakMode",
+          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [-0.5, 0.5],
           "modifierNameSteps": ["LockHP"]
         },
         {
-          //管理HitBox可用
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_Marana_HitBox",
-          "removeAppliedModifier": true,
+          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [-0.5, 0.5, 1.5],
           "modifierNameSteps": ["HitBox_OFF", "HitBox_ON"]
         },
         {
-          //管理Boss锁血模式
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_Marana_LockMode",
-          "removeAppliedModifier": true,
+          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [0.5, 1.5, 2.5],
           "modifierNameSteps": ["PhaseLock", "LastLock"]
         },
         {
-          //进入浮空模式
           "$type": "AttachToStateIDMixin",
           "stateIDs": ["BattleMode"],
           "modifierName": "BattleMode"
@@ -126,7 +85,6 @@
           "modifierName": "StruggleEndEffect"
         },
         {
-          //进入虚弱状态
           "$type": "AttachToStateIDMixin",
           "stateIDs": ["WeakMode"],
           "modifierName": "WeakMode"
@@ -134,14 +92,19 @@
       ],
       "modifiers": {
         "IdleState": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_Idle"
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_Idle",
+              "effectTempleteID": -1.0
             }
           ]
         },
         "Proctected_HitEffect": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "EnableHitBoxByName",
@@ -150,140 +113,164 @@
             },
             {
               "$type": "SetGlobalValue",
+              "ratio": 0.0,
               "key": "_WeakReminder_Tag",
-              "value": 0
+              "maxValue": 0.0,
+              "minValue": 0.0
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "EnableHitBoxByName",
+              "hitBoxNames": ["SpecialHitBox"]
             }
           ],
           "onBeingHit": [
             {
               "$type": "FireEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_ProtectedHit",
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_ProtectedHit",
               "born": {
-                "$type": "ConfigBornByHitPoint",
+                "$type": "FLIPADNBJJF",
                 "offset": {
                   "x": 0.0,
                   "y": 2.0,
                   "z": 0.0
                 },
                 "direction": {
-                  "$type": "ConfigDirectionByBackToHitBoxCenter"
+                  "$type": "GGOJHCBJDOJ"
                 }
-              }
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "EnableHitBoxByName",
-              "hitBoxNames": ["SpecialHitBox"],
-              "setEnable": false
+              },
+              "effectTempleteID": -1.0
             }
           ]
         },
         "LockHP": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "state": "LockHP"
         },
         "WeakMode": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_WeakLoop"
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_WeakLoop",
+              "effectTempleteID": -1.0
             },
             {
               "$type": "SetGlobalValue",
+              "ratio": 1.0,
               "key": "_IS_WeakMode",
-              "value": 1
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
+              "ratio": 0.0,
               "key": "_IS_WeakMode",
-              "value": 0
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ]
         },
         "WeakStartEffect": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_WeakStart_Ground"
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_WeakStart_Ground",
+              "effectTempleteID": -1.0
             }
           ]
         },
         "StruggleStartEffect": {
-          //挣扎
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_Struggle"
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_Struggle",
+              "effectTempleteID": -1.0
             }
           ]
         },
         "StruggleEndEffect": {
-          //结束挣扎
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_StruggleEnd"
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_StruggleEnd",
+              "effectTempleteID": -1.0
             }
           ],
           "onRemoved": [
             {
               "$type": "EnablePushColliderName",
-              "pushColliderNames": ["PushCollider"],
-              "setEnable": false
+              "pushColliderNames": ["PushCollider"]
             }
           ]
         },
         "BattleMode": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_BubbleAtk_Bs"
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_BubbleAtk_Bs",
+              "effectTempleteID": -1.0
             }
           ],
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_BubbleAtk_As",
               "predicates": [
                 {
-                  "$type": "ByAnimatorBool",
-                  "parameter": "Weak",
-                  "value": false
+                  "$type": "CGKNNFNIILK",
+                  "parameter": "Weak"
                 }
-              ]
+              ],
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_BubbleAtk_As",
+              "effectTempleteID": -1.0
             }
           ]
         },
         "BubbleAttacking": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "thinkInterval": 12.0,
-          "onThinkIntervalIsFixedUpdate": true,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_BubbleAtk_Loop"
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_BubbleAtk_Loop",
+              "effectTempleteID": -1.0
             },
             {
               "$type": "TriggerAbility",
-              "abilityName": "SceneObj_Area_Xm_Property_Ani_Unique_Marana_01_BubbleAtk",
-              "target": "Self"
+              "abilityName": "SceneObj_Area_Xm_Property_Ani_Unique_Marana_01_BubbleAtk"
             }
           ],
           "onThinkInterval": [
             {
               "$type": "TriggerAbility",
-              "abilityName": "SceneObj_Area_Xm_Property_Ani_Unique_Marana_01_BubbleAtk",
-              "target": "Self"
+              "abilityName": "SceneObj_Area_Xm_Property_Ani_Unique_Marana_01_BubbleAtk"
             }
-          ]
+          ],
+          "OOBNPLAILMC": true
         },
         "PhaseLock": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
-              // %70 %40 %10
               "$type": "AttachModifierToHPPercentMixin",
-              "valueSteps": [0.701, 0.401, 0.101],
+              "valueSteps": [
+                0.7009999752044678, 0.4009999930858612, 0.10100000351667404
+              ],
               "modifierNameSteps": [
                 "UNIQUE_Marana_HpPhase01",
                 "UNIQUE_Marana_HpPhase02",
@@ -294,53 +281,56 @@
           ]
         },
         "LastLock": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToHPPercentMixin",
+              "valueSteps": [0.05999999865889549],
+              "modifierNameSteps": [
+                "UNIQUE_Marana_LastPhase",
+                "UNIQUE_Marana_LastPhase02"
+              ]
+            }
+          ],
           "onAdded": [
             {
               "$type": "HealHP",
-              "amountByTargetMaxHPRatio": 0.5,
-              "target": "Self",
+              "amountByCasterMaxHPRatio": 0.5,
               "muteHealEffect": true
             },
             {
               "$type": "ApplyModifier",
               "modifierName": "LastLock_HOT"
             }
-          ],
-          "modifierMixins": [
-            {
-              // %1
-              "$type": "AttachModifierToHPPercentMixin",
-              "valueSteps": [0.06],
-              "modifierNameSteps": [
-                "UNIQUE_Marana_LastPhase",
-                "UNIQUE_Marana_LastPhase02"
-              ]
-            }
           ]
         },
         "LastLock_HOT": {
-          "duration": 2.8,
+          "modifierName": "",
+          "duration": 2.799999952316284,
+          "bonusCriticalHurt": 100.0,
           "thinkInterval": 0.5,
-          "onThinkIntervalIsFixedUpdate": true,
           "onThinkInterval": [
             {
               "$type": "HealHP",
-              "amountByTargetMaxHPRatio": 0.1,
-              "target": "Self",
+              "amountByCasterMaxHPRatio": 0.10000000149011612,
               "muteHealEffect": true
             }
-          ]
+          ],
+          "OOBNPLAILMC": true
         },
         "HideState": {
-          "onAdded": []
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
         },
         "WaveAtkTest": {
-          //快速测试用
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorInt",
               "intID": "CurSkill",
-              "value": 1
+              "ratio": 1.0
             },
             {
               "$type": "SetAnimatorTrigger",
@@ -349,12 +339,13 @@
           ]
         },
         "BubbleAtkTest": {
-          //快速测试用
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorInt",
               "intID": "CurSkill",
-              "value": 2
+              "ratio": 2.0
             },
             {
               "$type": "SetAnimatorTrigger",
@@ -363,12 +354,13 @@
           ]
         },
         "LaserRainTest": {
-          //快速测试用
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorInt",
               "intID": "CurSkill",
-              "value": 3
+              "ratio": 3.0
             },
             {
               "$type": "SetAnimatorTrigger",
@@ -377,18 +369,20 @@
           ]
         },
         "BornState": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
-              //Boss出生后切一下，这个状态由cs控制
               "$type": "SetAnimatorBool",
               "boolID": "Born",
-              "value": true
+              "ratio": true
             }
           ]
         },
-        //用于游戏开始流程的被攻击状态
         "WaitHitState": {
-          "duration": 3,
+          "modifierName": "",
+          "duration": 3.0,
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorTrigger",
@@ -397,44 +391,57 @@
           ],
           "onRemoved": [
             {
-              //被攻击两次后持续通知关卡更换
               "$type": "ServerLuaTriggerEvent",
               "luaCallType": "FromGroup",
-              "sourceName": "TryAttackBoss"
+              "AEHHOKAPHGO": "TryAttackBoss",
+              "MPPMFEDKGHC": 0.0,
+              "BOKNHLDBKKK": 0.0,
+              "CHOIIMHDNHK": 0.0
             }
           ]
         },
         "BattleState": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
-              //战斗开始切镜
               "$type": "EnableGadgetSpecialCamera",
               "enable": true
             }
           ]
         },
         "WeakState": {
-          //有状态时会管理HitBox切换
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "modifierMixins": [
+            {
+              "$type": "AttachToAnimatorStateIDMixin",
+              "stateIDs": ["Weak_Loop"],
+              "modifierName": "Weak_Hit"
+            }
+          ],
           "onAdded": [
             {
               "$type": "SetGlobalValue",
+              "ratio": 1.0,
               "key": "_Marana_HitBox",
-              "value": 1
+              "maxValue": 0.0,
+              "minValue": 0.0
             },
             {
               "$type": "SetGlobalValue",
+              "ratio": 1.0,
               "key": "_Marana_LockMode",
-              "value": 1
+              "maxValue": 0.0,
+              "minValue": 0.0
             },
             {
               "$type": "SetAnimatorBool",
               "boolID": "Weak",
-              "value": true
+              "ratio": true
             },
             {
-              //关闭特殊镜头
-              "$type": "EnableGadgetSpecialCamera",
-              "enable": false
+              "$type": "EnableGadgetSpecialCamera"
             },
             {
               "$type": "ResetAnimatorTrigger",
@@ -443,13 +450,29 @@
             {
               "$type": "SetGlobalValue",
               "otherTargets": {
-                "$type": "SelectTargetsByTag",
-                "tag": "AranaraPlatform",
+                "$type": "OMJNAIFHGGH",
                 "topLimit": 1,
-                "sortType": "Nearest" //从近开始选
+                "sortType": "Nearest",
+                "tag": "AranaraPlatform"
               },
+              "ratio": 0.0,
               "key": "ShowBall",
-              "value": 0
+              "maxValue": 0.0,
+              "minValue": 0.0
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "SetAnimatorBool",
+              "boolID": "Weak"
+            },
+            {
+              "$type": "RemoveModifier",
+              "modifierName": "WeakReminder_Timer"
+            },
+            {
+              "$type": "RemoveModifier",
+              "modifierName": "WeakReminder"
             }
           ],
           "onBeingHit": [
@@ -457,40 +480,19 @@
               "$type": "ApplyModifier",
               "modifierName": "WeakReminder_Timer"
             }
-          ],
-          "modifierMixins": [
-            {
-              "$type": "AttachToAnimatorStateIDMixin",
-              "stateIDs": ["Weak_Loop"],
-              "modifierName": "Weak_Hit"
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "SetAnimatorBool",
-              "boolID": "Weak",
-              "value": false
-            },
-            {
-              "$type": "RemoveModifier",
-              "modifierName": "WeakReminder_Timer"
-            },
-            {
-              "$type": "RemoveModifier",
-              "modifierName": "WeakReminder"
-            }
           ]
         },
         "WeakReminder_Timer": {
-          "duration": 25,
-          "stacking": "Refresh",
+          "modifierName": "",
+          "duration": 25.0,
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 20.0,
           "onAdded": [
             {
               "$type": "RemoveModifier",
               "modifierName": "WeakReminder"
             }
           ],
-          "thinkInterval": 20,
           "onThinkInterval": [
             {
               "$type": "ApplyModifier",
@@ -499,13 +501,15 @@
           ]
         },
         "WeakReminder": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 20.0,
           "onAdded": [
             {
               "$type": "ShowReminder",
               "id": 33010226
             }
           ],
-          "thinkInterval": 20,
           "onThinkInterval": [
             {
               "$type": "ShowReminder",
@@ -514,37 +518,8 @@
           ]
         },
         "WeakSpecialState": {
-          //有状态时会管理HitBox切换
-          "onAdded": [
-            {
-              "$type": "SetAnimatorTrigger",
-              "triggerID": "WeakS",
-              "doOffStage": true
-            },
-            {
-              //关闭特殊镜头
-              "$type": "EnableGadgetSpecialCamera",
-              "enable": false,
-              "doOffStage": true
-            },
-            {
-              "$type": "ResetAnimatorTrigger",
-              "triggerID": "BeHit",
-              "doOffStage": true
-            },
-            {
-              "$type": "SetGlobalValue",
-              "otherTargets": {
-                "$type": "SelectTargetsByTag",
-                "tag": "AranaraPlatform",
-                "topLimit": 1,
-                "sortType": "Nearest" //从近开始选
-              },
-              "key": "ShowBall",
-              "value": 0,
-              "doOffStage": true
-            }
-          ],
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachToAnimatorStateIDMixin",
@@ -552,21 +527,54 @@
               "modifierName": "Weak_Hit"
             },
             {
-              //ThinkInterval性能优化
               "$type": "ThinkIntervalMixin",
               "thinkInterval": 2.0,
               "onThinkInterval": [
                 {
-                  //生命转变后立刻通知
                   "$type": "ServerLuaTriggerEvent",
                   "luaCallType": "FromGroup",
-                  "sourceName": "NoticeLastBattle"
+                  "AEHHOKAPHGO": "NoticeLastBattle",
+                  "MPPMFEDKGHC": 0.0,
+                  "BOKNHLDBKKK": 0.0,
+                  "CHOIIMHDNHK": 0.0
                 }
               ]
+            }
+          ],
+          "onAdded": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "RotationDampTime": true,
+              "triggerID": "WeakS"
+            },
+            {
+              "$type": "EnableGadgetSpecialCamera",
+              "RotationDampTime": true
+            },
+            {
+              "$type": "ResetAnimatorTrigger",
+              "RotationDampTime": true,
+              "triggerID": "BeHit"
+            },
+            {
+              "$type": "SetGlobalValue",
+              "otherTargets": {
+                "$type": "OMJNAIFHGGH",
+                "topLimit": 1,
+                "sortType": "Nearest",
+                "tag": "AranaraPlatform"
+              },
+              "RotationDampTime": true,
+              "ratio": 0.0,
+              "key": "ShowBall",
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ]
         },
         "Weak_Hit": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onBeingHit": [
             {
               "$type": "SetAnimatorTrigger",
@@ -574,179 +582,213 @@
             },
             {
               "$type": "FireEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_WeakHit",
               "predicates": [
                 {
-                  "$type": "ByTargetGadgetState",
+                  "$type": "LHCAGFAJMNF",
                   "target": "Caster",
                   "gadgetState": 203
                 }
-              ]
+              ],
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_WeakHit",
+              "effectTempleteID": -1.0
             }
           ]
         },
         "DeathState": {
-          "onAdded": []
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
         },
         "UNIQUE_Marana_HpPhase01": {
+          "modifierName": "",
           "isUnique": true,
-          "state": "Limbo",
+          "bonusCriticalHurt": 100.0,
           "properties": {
-            "Actor_HpThresholdRatio": 0.7
+            "Actor_HpThresholdRatio": 0.699999988079071
           },
+          "state": "Limbo",
           "onAdded": [
             {
-              //关闭受击盒
               "$type": "SetGlobalValue",
+              "ratio": 0.0,
               "key": "_Marana_HitBox",
-              "value": 0
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ],
           "onRemoved": [
             {
-              //生命转变后立刻通知
               "$type": "ServerLuaTriggerEvent",
               "luaCallType": "FromGroup",
-              "sourceName": "HpPhase01"
+              "AEHHOKAPHGO": "HpPhase01",
+              "MPPMFEDKGHC": 0.0,
+              "BOKNHLDBKKK": 0.0,
+              "CHOIIMHDNHK": 0.0
             }
           ]
         },
         "UNIQUE_Marana_HpPhase02": {
+          "modifierName": "",
           "isUnique": true,
-          "state": "Limbo",
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 1.0,
           "properties": {
-            "Actor_HpThresholdRatio": 0.4
+            "Actor_HpThresholdRatio": 0.4000000059604645
           },
-          "thinkInterval": 1,
-          "onThinkInterval": [
-            {
-              //生命转变后立刻通知
-              "$type": "ServerLuaTriggerEvent",
-              "luaCallType": "FromGroup",
-              "sourceName": "HpPhase01"
-            }
-          ],
+          "state": "Limbo",
           "onAdded": [
             {
-              //关闭受击盒
               "$type": "SetGlobalValue",
+              "ratio": 0.0,
               "key": "_Marana_HitBox",
-              "value": 0
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ],
           "onRemoved": [
             {
-              //生命转变后立刻通知
               "$type": "ServerLuaTriggerEvent",
               "luaCallType": "FromGroup",
-              "sourceName": "HpPhase02"
+              "AEHHOKAPHGO": "HpPhase02",
+              "MPPMFEDKGHC": 0.0,
+              "BOKNHLDBKKK": 0.0,
+              "CHOIIMHDNHK": 0.0
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "ServerLuaTriggerEvent",
+              "luaCallType": "FromGroup",
+              "AEHHOKAPHGO": "HpPhase01",
+              "MPPMFEDKGHC": 0.0,
+              "BOKNHLDBKKK": 0.0,
+              "CHOIIMHDNHK": 0.0
             }
           ]
         },
         "UNIQUE_Marana_HpPhase03": {
+          "modifierName": "",
           "isUnique": true,
-          "state": "Limbo",
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 1.0,
           "properties": {
-            "Actor_HpThresholdRatio": 0.1
+            "Actor_HpThresholdRatio": 0.10000000149011612
           },
-          "thinkInterval": 1,
-          "onThinkInterval": [
-            {
-              //生命转变后立刻通知
-              "$type": "ServerLuaTriggerEvent",
-              "luaCallType": "FromGroup",
-              "sourceName": "HpPhase02"
-            }
-          ],
+          "state": "Limbo",
           "onAdded": [
             {
-              //关闭受击盒
               "$type": "SetGlobalValue",
+              "ratio": 0.0,
               "key": "_Marana_HitBox",
-              "value": 0
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ],
           "onRemoved": [
             {
-              //死域值-50
               "$type": "AddRegionalPlayVarValue",
-              "varType": "DeathZoneExtraErosion",
-              "addValue": -50.0,
-              "doOffStage": true,
-              "target": "CurLocalAvatar"
+              "target": "CurLocalAvatar",
+              "RotationDampTime": true,
+              "CKFEHHBAJAD": "DeathZoneExtraErosion",
+              "KHBMAHHMOOI": -50.0
             },
             {
-              //生命转变后立刻通知
               "$type": "ServerLuaTriggerEvent",
               "luaCallType": "FromGroup",
-              "sourceName": "HpPhase03"
+              "AEHHOKAPHGO": "HpPhase03",
+              "MPPMFEDKGHC": 0.0,
+              "BOKNHLDBKKK": 0.0,
+              "CHOIIMHDNHK": 0.0
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "ServerLuaTriggerEvent",
+              "luaCallType": "FromGroup",
+              "AEHHOKAPHGO": "HpPhase02",
+              "MPPMFEDKGHC": 0.0,
+              "BOKNHLDBKKK": 0.0,
+              "CHOIIMHDNHK": 0.0
             }
           ]
         },
         "UNIQUE_Marana_HpPhase04": {
+          "modifierName": "",
           "isUnique": true,
-          "state": "Limbo",
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 1.0,
           "properties": {
-            "Actor_HpThresholdRatio": 0.01
+            "Actor_HpThresholdRatio": 0.009999999776482582
           },
-          "thinkInterval": 1,
-          "onThinkInterval": [
-            {
-              //死域值-50
-              "$type": "AddRegionalPlayVarValue",
-              "varType": "DeathZoneExtraErosion",
-              "addValue": -50.0,
-              "doOffStage": true,
-              "target": "CurLocalAvatar"
-            },
-            {
-              //生命转变后立刻通知
-              "$type": "ServerLuaTriggerEvent",
-              "luaCallType": "FromGroup",
-              "sourceName": "HpPhase03"
-            }
-          ],
+          "state": "Limbo",
           "onAdded": [
             {
-              //关闭受击盒
               "$type": "SetGlobalValue",
+              "ratio": 0.0,
               "key": "_Marana_HitBox",
-              "value": 0
+              "maxValue": 0.0,
+              "minValue": 0.0
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "AddRegionalPlayVarValue",
+              "target": "CurLocalAvatar",
+              "RotationDampTime": true,
+              "CKFEHHBAJAD": "DeathZoneExtraErosion",
+              "KHBMAHHMOOI": -50.0
+            },
+            {
+              "$type": "ServerLuaTriggerEvent",
+              "luaCallType": "FromGroup",
+              "AEHHOKAPHGO": "HpPhase03",
+              "MPPMFEDKGHC": 0.0,
+              "BOKNHLDBKKK": 0.0,
+              "CHOIIMHDNHK": 0.0
             }
           ]
         },
         "UNIQUE_Marana_LastPhase": {
+          "modifierName": "",
           "isUnique": true,
-          "state": "Limbo",
+          "bonusCriticalHurt": 100.0,
           "properties": {
-            "Actor_HpThresholdRatio": 0.02
+            "Actor_HpThresholdRatio": 0.019999999552965164
           },
+          "state": "Limbo",
           "onRemoved": [
             {
-              //生命转变后立刻通知
               "$type": "ServerLuaTriggerEvent",
               "luaCallType": "FromGroup",
-              "sourceName": "BossDie"
+              "AEHHOKAPHGO": "BossDie",
+              "MPPMFEDKGHC": 0.0,
+              "BOKNHLDBKKK": 0.0,
+              "CHOIIMHDNHK": 0.0
             }
           ]
         },
         "UNIQUE_Marana_LastPhase02": {
+          "modifierName": "",
           "isUnique": true,
-          "state": "Limbo",
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 1.0,
           "properties": {
-            "Actor_HpThresholdRatio": 0.01
+            "Actor_HpThresholdRatio": 0.009999999776482582
           },
-          "thinkInterval": 1,
+          "state": "Limbo",
           "onThinkInterval": [
             {
-              //生命转变后立刻通知
               "$type": "ServerLuaTriggerEvent",
               "luaCallType": "FromGroup",
-              "sourceName": "BossDie"
+              "AEHHOKAPHGO": "BossDie",
+              "MPPMFEDKGHC": 0.0,
+              "BOKNHLDBKKK": 0.0,
+              "CHOIIMHDNHK": 0.0
             }
           ]
         },
         "HitBox_ON": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "ChangeLockTypeMixin",
@@ -756,29 +798,50 @@
           "onAdded": [
             {
               "$type": "EnableHitBoxByName",
+              "RotationDampTime": true,
               "hitBoxNames": ["HitBox"],
-              "setEnable": true,
-              "doOffStage": true
+              "setEnable": true
             },
             {
               "$type": "EnablePushColliderName",
+              "RotationDampTime": true,
               "pushColliderNames": ["PushCollider"],
-              "setEnable": true,
-              "doOffStage": true
+              "setEnable": true
             }
           ]
         },
         "HitBox_OFF": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "EnableHitBoxByName",
-              "hitBoxNames": ["HitBox"],
-              "setEnable": false,
-              "doOffStage": true
+              "RotationDampTime": true,
+              "hitBoxNames": ["HitBox"]
             }
           ]
         }
-      }
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 1.0,
+          "key": "_Marana_LockMode",
+          "maxValue": 0.0,
+          "minValue": 0.0
+        },
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 1.0,
+          "key": "_NextSkill_04",
+          "maxValue": 0.0,
+          "minValue": 0.0
+        },
+        {
+          "$type": "EnableGadgetSpecialCamera",
+          "enable": true
+        }
+      ]
     }
   },
   {
@@ -800,226 +863,240 @@
           ]
         }
       ],
+      "abilitySpecials": {
+        "cd_timer": 10.0
+      },
       "modifiers": {
         "BattleState01": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
-              //ThinkInterval性能优化
               "$type": "ThinkIntervalMixin",
               "thinkInterval": 0.5,
               "onThinkInterval": [
                 {
                   "$type": "SetAnimatorInt",
                   "intID": "BattleState",
-                  "value": 1
+                  "ratio": 1.0
                 }
               ]
             }
           ]
         },
         "BattleState02": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorInt",
               "intID": "BattleState",
-              "value": 2
+              "ratio": 2.0
             }
           ]
         },
         "BattleState03": {
-          "onAdded": [
-            {
-              "$type": "SetAnimatorInt",
-              "intID": "BattleState",
-              "value": 3
-            },
-            {
-              "$type": "SetOverrideMapValue",
-              "overrideMapKey": "cd_timer",
-              "value": 120
-            }
-          ],
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_SCENEOBJ_LaserRain_ReadyTag",
-              "defaultGlobalValueOnCreate": 1,
+              "defaultGlobalValueOnCreate": 1.0,
               "valueSteps": [-0.5, 0.5, 1.5],
               "modifierNameSteps": [
                 "UNIQUE_LaserRain_CD",
                 "UNIQUE_LaserRain_TriggerOnce"
               ]
+            }
+          ],
+          "onAdded": [
+            {
+              "$type": "SetAnimatorInt",
+              "intID": "BattleState",
+              "ratio": 3.0
+            },
+            {
+              "$type": "SetOverrideMapValue",
+              "ratio": 120.0,
+              "overrideMapKey": "cd_timer"
             }
           ]
         },
         "BattleState04": {
-          "onAdded": [
-            {
-              "$type": "SetAnimatorInt",
-              "intID": "BattleState",
-              "value": 4
-            },
-            {
-              "$type": "SetOverrideMapValue",
-              "overrideMapKey": "cd_timer",
-              "value": 30
-            }
-          ],
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_SCENEOBJ_LaserRain_ReadyTag",
-              "defaultGlobalValueOnCreate": 1,
+              "defaultGlobalValueOnCreate": 1.0,
               "valueSteps": [-0.5, 0.5, 1.5],
               "modifierNameSteps": [
                 "UNIQUE_LaserRain_CD",
                 "UNIQUE_LaserRain_TriggerOnce"
               ]
+            }
+          ],
+          "onAdded": [
+            {
+              "$type": "SetAnimatorInt",
+              "intID": "BattleState",
+              "ratio": 4.0
+            },
+            {
+              "$type": "SetOverrideMapValue",
+              "ratio": 30.0,
+              "overrideMapKey": "cd_timer"
             }
           ]
         },
         "BattleState05": {
-          "onAdded": [
-            {
-              "$type": "SetAnimatorInt",
-              "intID": "BattleState",
-              "value": 5
-            },
-            {
-              "$type": "SetOverrideMapValue",
-              "overrideMapKey": "cd_timer",
-              "value": 15
-            }
-          ],
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_SCENEOBJ_LaserRain_ReadyTag",
-              "defaultGlobalValueOnCreate": 1,
+              "defaultGlobalValueOnCreate": 1.0,
               "valueSteps": [-0.5, 0.5, 1.5],
               "modifierNameSteps": [
                 "UNIQUE_LaserRain_CD",
                 "UNIQUE_LaserRain_TriggerOnce"
               ]
             }
+          ],
+          "onAdded": [
+            {
+              "$type": "SetAnimatorInt",
+              "intID": "BattleState",
+              "ratio": 5.0
+            },
+            {
+              "$type": "SetOverrideMapValue",
+              "ratio": 15.0,
+              "overrideMapKey": "cd_timer"
+            }
           ]
         },
         "BattleState06": {
-          "onAdded": [
-            {
-              "$type": "AttachModifier",
-              "modifierName": "SpecialBubbleAttacking",
-              "doOffStage": true
-            },
-            {
-              "$type": "SetGlobalValue",
-              "key": "_Marana_HitBox",
-              "value": 1,
-              "doOffStage": true
-            },
-            {
-              "$type": "SetGlobalValue",
-              "key": "_Marana_LockMode",
-              "value": 2,
-              "doOffStage": true
-            }
-          ],
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
-              //ThinkInterval性能优化
               "$type": "ThinkIntervalMixin",
               "thinkInterval": 0.5,
               "onThinkInterval": [
                 {
                   "$type": "SetAnimatorInt",
                   "intID": "BattleState",
-                  "value": 6
+                  "ratio": 6.0
                 }
               ]
+            }
+          ],
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "RotationDampTime": true,
+              "modifierName": "SpecialBubbleAttacking"
+            },
+            {
+              "$type": "SetGlobalValue",
+              "RotationDampTime": true,
+              "ratio": 1.0,
+              "key": "_Marana_HitBox",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            },
+            {
+              "$type": "SetGlobalValue",
+              "RotationDampTime": true,
+              "ratio": 2.0,
+              "key": "_Marana_LockMode",
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ]
         },
         "SpecialBubbleAttacking": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "thinkInterval": 8.0,
-          "onThinkIntervalIsFixedUpdate": true,
           "onAdded": [
             {
               "$type": "TriggerAbility",
-              "abilityName": "SceneObj_Area_Xm_Property_Ani_Unique_Marana_01_BubbleAtk",
-              "target": "Self"
+              "abilityName": "SceneObj_Area_Xm_Property_Ani_Unique_Marana_01_BubbleAtk"
             }
           ],
           "onThinkInterval": [
             {
               "$type": "TriggerAbility",
-              "abilityName": "SceneObj_Area_Xm_Property_Ani_Unique_Marana_01_BubbleAtk",
-              "target": "Self"
+              "abilityName": "SceneObj_Area_Xm_Property_Ani_Unique_Marana_01_BubbleAtk"
             }
-          ]
+          ],
+          "OOBNPLAILMC": true
         },
         "UNIQUE_LaserRain_TriggerOnce": {
-          "isUnique": true,
           "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorBool",
               "boolID": "LaserRainReady",
-              "value": true
+              "ratio": true
             }
           ]
         },
         "UNIQUE_LaserRain_CD": {
-          "isUnique": true,
           "stacking": "Unique",
-          "duration": "%cd_timer+1",
+          "modifierName": "",
+          "isUnique": true,
+          "duration": ["cd_timer", 1.0, "ADD"],
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": "cd_timer",
           "onAdded": [
             {
               "$type": "SetAnimatorBool",
-              "boolID": "LaserRainReady",
-              "value": false
+              "boolID": "LaserRainReady"
             }
           ],
-          "thinkInterval": "%cd_timer",
           "onThinkInterval": [
             {
               "$type": "SetGlobalValue",
+              "ratio": 1.0,
               "key": "_SCENEOBJ_LaserRain_ReadyTag",
-              "value": 1
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ]
         }
-      },
-      "abilitySpecials": {
-        "cd_timer": 10.0
       }
     }
   },
-  //////////////////////////////////////////////////////////////////////////////////////////////////
-  //
-  // 3.0 无留坨的化身 能量控制
-  //
-  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_Area_Xm_Property_Ani_Unique_Marana_01_EnergyDrop",
       "abilityMixins": [
         {
-          //两个阶段掉球方式不一样
           "$type": "AttachModifierToSelfGlobalValueMixin",
           "globalValueKey": "_Marana_LockMode",
-          "removeAppliedModifier": true,
+          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [0.5, 1.5, 2.5],
           "modifierNameSteps": ["EnergyDrop_Phase1", "EnergyDrop_Phase2"]
         }
       ],
       "modifiers": {
         "EnergyDrop_Phase1": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
-            //根据百分比吊球
             {
               "$type": "AttachModifierToHPPercentMixin",
-              "valueSteps": [0.75, 0.45, 0.15],
+              "valueSteps": [0.75, 0.44999998807907104, 0.15000000596046448],
               "modifierNameSteps": [
                 "Blank",
                 "SceneObj_Marana_EnergyDrop_Stage1",
@@ -1029,14 +1106,17 @@
             }
           ]
         },
-        //掉球逻辑
-        "Blank": {},
+        "Blank": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
+        },
         "SceneObj_Marana_EnergyDrop_Stage1": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "GenerateElemBall",
               "configID": 2008,
-              "baseEnergy": 6,
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
@@ -1044,23 +1124,26 @@
                   "y": 0.0,
                   "z": 0.0
                 },
-                "bornRandom": {
-                  "$type": "BornRandomFromCenter",
-                  "minRandomRange": 1,
-                  "maxRandomRange": 3
+                "IGAGDFFFGAO": {
+                  "$type": "FHDJJGOONEI",
+                  "OKDPGGJGGCJ": 1.0,
+                  "CPOKKADJBFH": 3.0
                 },
-                "onGround": true,
-                "onGroundRaycastUpDist": 5
-              }
+                "DAPKLNIFPID": true,
+                "HKNFOKFIKAG": 5.0
+              },
+              "value": 1.0,
+              "baseEnergy": 6.0
             }
           ]
         },
         "SceneObj_Marana_EnergyDrop_Stage2": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "GenerateElemBall",
               "configID": 2008,
-              "baseEnergy": 6,
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
@@ -1068,23 +1151,26 @@
                   "y": 0.0,
                   "z": 0.0
                 },
-                "bornRandom": {
-                  "$type": "BornRandomFromCenter",
-                  "minRandomRange": 1,
-                  "maxRandomRange": 3
+                "IGAGDFFFGAO": {
+                  "$type": "FHDJJGOONEI",
+                  "OKDPGGJGGCJ": 1.0,
+                  "CPOKKADJBFH": 3.0
                 },
-                "onGround": true,
-                "onGroundRaycastUpDist": 5
-              }
+                "DAPKLNIFPID": true,
+                "HKNFOKFIKAG": 5.0
+              },
+              "value": 1.0,
+              "baseEnergy": 6.0
             }
           ]
         },
         "SceneObj_Marana_EnergyDrop_Stage3": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "GenerateElemBall",
               "configID": 2008,
-              "baseEnergy": 6,
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
@@ -1092,28 +1178,26 @@
                   "y": 0.0,
                   "z": 0.0
                 },
-                "bornRandom": {
-                  "$type": "BornRandomFromCenter",
-                  "minRandomRange": 1,
-                  "maxRandomRange": 3
+                "IGAGDFFFGAO": {
+                  "$type": "FHDJJGOONEI",
+                  "OKDPGGJGGCJ": 1.0,
+                  "CPOKKADJBFH": 3.0
                 },
-                "onGround": true,
-                "onGroundRaycastUpDist": 5
-              }
+                "DAPKLNIFPID": true,
+                "HKNFOKFIKAG": 5.0
+              },
+              "value": 1.0,
+              "baseEnergy": 6.0
             }
           ]
         },
         "EnergyDrop_Phase2": {
-          //暂定啥都不掉
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
         }
       }
     }
   },
-  //////////////////////////////////////////////////////////////////////////////////////////////////
-  //
-  // 3.0 无留坨的化身 波浪攻击 （备用方案 42906128)
-  //
-  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1132,20 +1216,25 @@
       ],
       "modifiers": {
         "WaveAttacking_AlertEffect": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_WaveAtk_FieldLoop"
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_WaveAtk_FieldLoop",
+              "effectTempleteID": -1.0
             }
           ]
         },
         "WaveAttacking": {
-          "thinkInterval": 3,
-          "onThinkIntervalIsFixedUpdate": true,
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 3.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_WaveAtk_Loop"
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_WaveAtk_Loop",
+              "effectTempleteID": -1.0
             },
             {
               "$type": "ApplyModifier",
@@ -1157,14 +1246,18 @@
               "$type": "ApplyModifier",
               "modifierName": "SingleWave"
             }
-          ]
+          ],
+          "OOBNPLAILMC": true
         },
         "SingleWave": {
-          "duration": 2,
+          "modifierName": "",
+          "duration": 2.0,
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_WaveAtk_FieldOnce"
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_WaveAtk_FieldOnce",
+              "effectTempleteID": -1.0
             },
             {
               "$type": "ApplyModifier",
@@ -1182,162 +1275,164 @@
           "onAttackLanded": [
             {
               "$type": "FireEffect",
-              "effectPattern": "Eff_Hit_None_Default_Small",
               "target": "Target",
-              "born": {
-                "$type": "ConfigBornByTarget",
-                "offset": {
-                  "x": 0,
-                  "y": 0.33,
-                  "z": 0
-                },
-                "direction": {
-                  "$type": "ConfigDirectionByBackToHitBoxCenter"
-                }
-              },
               "predicates": [
                 {
                   "$type": "ByEntityTypes",
-                  "target": "Target",
                   "entityTypes": ["Avatar"]
                 }
-              ]
+              ],
+              "healLimitedByCasterMaxHPRatio": "Eff_Hit_None_Default_Small",
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.33000001311302185,
+                  "z": 0.0
+                },
+                "direction": {
+                  "$type": "GGOJHCBJDOJ"
+                }
+              },
+              "effectTempleteID": -1.0
             }
           ]
         },
         "WaveAtk1": {
-          "duration": 0.2,
+          "modifierName": "",
+          "duration": 0.20000000298023224,
+          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "TriggerAttackEvent",
-              "targetType": "Enemy",
-              "entityTypes": ["Avatar"],
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
-                  "height": 5.0,
-                  "fanAngle": 360.0,
-                  "radius": 6.3,
-                  "innerRadius": 0,
                   "born": {
                     "$type": "ConfigBornBySelf"
-                  }
+                  },
+                  "height": 5.0,
+                  "radius": 6.300000190734863,
+                  "innerRadius": 0.0
                 },
                 "attackInfo": {
-                  "canBeModifiedBy": "OriginOwner",
+                  "attackTag": "",
+                  "attenuationTag": "",
+                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "damagePercentage": 0.1,
+                    "damagePercentage": 0.10000000149011612,
+                    "damagePercentageRatio": 0.0,
+                    "bonusCriticalHurt": 25.0,
                     "strikeType": "Default",
-                    "elementType": "None",
-                    "elementDurability": 25,
-                    "enBreak": 100
+                    "enBreak": 100.0
                   },
                   "hitPattern": {
                     "onHitEffectName": "none",
                     "hitImpulseType": "LV3"
-                  }
+                  },
+                  "canBeModifiedBy": "OriginOwner"
                 }
-              }
+              },
+              "targetType": "Enemy",
+              "entityTypes": ["Avatar"]
             }
           ]
         },
         "WaveAtk2": {
-          "duration": 0.4,
+          "modifierName": "",
+          "duration": 0.4000000059604645,
+          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "TriggerAttackEvent",
-              "targetType": "Enemy",
-              "entityTypes": ["Avatar"],
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
-                  "height": 5.0,
-                  "fanAngle": 360.0,
-                  "radius": 13.5,
-                  "innerRadius": 6.3,
                   "born": {
                     "$type": "ConfigBornBySelf"
-                  }
+                  },
+                  "height": 5.0,
+                  "radius": 13.5,
+                  "innerRadius": 6.300000190734863
                 },
                 "attackInfo": {
-                  "canBeModifiedBy": "OriginOwner",
+                  "attackTag": "",
+                  "attenuationTag": "",
+                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "damagePercentage": 0.1,
+                    "damagePercentage": 0.10000000149011612,
+                    "damagePercentageRatio": 0.0,
+                    "bonusCriticalHurt": 25.0,
                     "strikeType": "Default",
-                    "elementType": "None",
-                    "elementDurability": 25,
-                    "enBreak": 100
+                    "enBreak": 100.0
                   },
                   "hitPattern": {
                     "onHitEffectName": "none",
                     "hitImpulseType": "LV3"
-                  }
+                  },
+                  "canBeModifiedBy": "OriginOwner"
                 }
-              }
+              },
+              "targetType": "Enemy",
+              "entityTypes": ["Avatar"]
             }
           ]
         },
         "WaveAtk3": {
-          "duration": 0.7,
+          "modifierName": "",
+          "duration": 0.699999988079071,
+          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "TriggerAttackEvent",
-              "targetType": "Enemy",
-              "entityTypes": ["Avatar"],
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackCircle",
                   "triggerType": "TriggerNoRepeat",
-                  "height": 5.0,
-                  "fanAngle": 360.0,
-                  "radius": 25,
-                  "innerRadius": 13.5,
                   "born": {
                     "$type": "ConfigBornBySelf"
-                  }
+                  },
+                  "height": 5.0,
+                  "radius": 25.0,
+                  "innerRadius": 13.5
                 },
                 "attackInfo": {
-                  "canBeModifiedBy": "OriginOwner",
+                  "attackTag": "",
+                  "attenuationTag": "",
+                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "damagePercentage": 0.1,
+                    "damagePercentage": 0.10000000149011612,
+                    "damagePercentageRatio": 0.0,
+                    "bonusCriticalHurt": 25.0,
                     "strikeType": "Default",
-                    "elementType": "None",
-                    "elementDurability": 25,
-                    "enBreak": 100
+                    "enBreak": 100.0
                   },
                   "hitPattern": {
                     "onHitEffectName": "none",
                     "hitImpulseType": "LV3"
-                  }
+                  },
+                  "canBeModifiedBy": "OriginOwner"
                 }
-              }
+              },
+              "targetType": "Enemy",
+              "entityTypes": ["Avatar"]
             }
           ]
         }
       }
     }
   },
-  //////////////////////////////////////////////////////////////////////////////////////////////////
-  //
-  // 3.0 无留坨的化身 水泡攻击
-  //
-  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_Area_Xm_Property_Ani_Unique_Marana_01_BubbleAtk",
-      "onAbilityStart": [
-        //找到玩家位置并释放一个水泡
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "BubleSummon_ThinkInterval"
-        }
-      ],
       "modifiers": {
         "BubleSummon_ThinkInterval": {
-          "duration": 4,
+          "modifierName": "",
+          "duration": 4.0,
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
@@ -1354,174 +1449,220 @@
             {
               "$type": "SetAnimatorBool",
               "boolID": "SkillCasting",
-              "value": true
+              "ratio": true
             }
           ],
           "onRemoved": [
             {
               "$type": "SetAnimatorBool",
-              "boolID": "SkillCasting",
-              "value": false
+              "boolID": "SkillCasting"
             }
           ]
         },
         "BubleSummon_LockAttack_Round1": {
+          "modifierName": "",
           "duration": 0.5,
+          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
-              //找位置
               "$type": "SetGlobalPos",
               "target": "CurLocalAvatar",
               "key": "_Marana_Lock_Pos",
               "born": {
-                "$type": "ConfigBornByPredicatePoint",
-                "onGround": true,
-                "timeForPredictive": 0.75,
+                "$type": "MOEKADMAMNK",
                 "offset": {
-                  "x": 0,
-                  "y": 1,
-                  "z": 4
+                  "x": 0.0,
+                  "y": 1.0,
+                  "z": 4.0
                 },
-                "bornRandom": {
-                  "$type": "BornRandomFromCenter",
-                  "minRandomRange": 2,
-                  "maxRandomRange": 4
-                }
+                "IGAGDFFFGAO": {
+                  "$type": "FHDJJGOONEI",
+                  "OKDPGGJGGCJ": 2.0,
+                  "CPOKKADJBFH": 4.0
+                },
+                "DAPKLNIFPID": true,
+                "ANKDEOLLEMK": 0.75
               },
               "setTarget": false
             },
             {
               "$type": "TriggerBullet",
-              "bulletID": 72000022, //水泡飞弹
+              "bulletID": 72000022,
               "born": {
                 "$type": "ConfigBornByGlobalValue",
-                "positionKey": "_Marana_Lock_Pos",
                 "offset": {
-                  "x": 0,
-                  "y": 20,
-                  "z": 0
+                  "x": 0.0,
+                  "y": 20.0,
+                  "z": 0.0
                 },
                 "direction": {
-                  "$type": "ConfigDirectionByEntity",
+                  "$type": "IOPNFLFHGID",
                   "angleOffset": {
                     "x": 90.0,
                     "y": 0.0,
                     "z": 0.0
                   }
-                }
+                },
+                "positionKey": "_Marana_Lock_Pos",
+                "directionKey": ""
               }
             }
           ]
         },
         "BubleSummon_LockAttack_Round2": {
+          "modifierName": "",
           "duration": 1.5,
+          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
-              //找位置
               "$type": "SetGlobalPos",
               "target": "CurLocalAvatar",
               "key": "_Marana_Lock_Pos",
               "born": {
-                "$type": "ConfigBornByPredicatePoint",
-                "onGround": true,
-                "timeForPredictive": 0.75,
+                "$type": "MOEKADMAMNK",
                 "offset": {
-                  "x": -3.46,
-                  "y": 1,
-                  "z": -2
+                  "x": -3.4600000381469727,
+                  "y": 1.0,
+                  "z": -2.0
                 },
-                "bornRandom": {
-                  "$type": "BornRandomFromCenter",
-                  "minRandomRange": 2,
-                  "maxRandomRange": 4
-                }
+                "IGAGDFFFGAO": {
+                  "$type": "FHDJJGOONEI",
+                  "OKDPGGJGGCJ": 2.0,
+                  "CPOKKADJBFH": 4.0
+                },
+                "DAPKLNIFPID": true,
+                "ANKDEOLLEMK": 0.75
               },
               "setTarget": false
             },
             {
               "$type": "TriggerBullet",
-              "bulletID": 72000022, //水泡飞弹
+              "bulletID": 72000022,
               "born": {
                 "$type": "ConfigBornByGlobalValue",
-                "positionKey": "_Marana_Lock_Pos",
                 "offset": {
-                  "x": 0,
-                  "y": 20,
-                  "z": 0
+                  "x": 0.0,
+                  "y": 20.0,
+                  "z": 0.0
                 },
                 "direction": {
-                  "$type": "ConfigDirectionByEntity",
+                  "$type": "IOPNFLFHGID",
                   "angleOffset": {
                     "x": 90.0,
                     "y": 0.0,
                     "z": 0.0
                   }
-                }
+                },
+                "positionKey": "_Marana_Lock_Pos",
+                "directionKey": ""
               }
             }
           ]
         },
         "BubleSummon_LockAttack_Round3": {
+          "modifierName": "",
           "duration": 2.5,
+          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
-              //找位置
               "$type": "SetGlobalPos",
               "target": "CurLocalAvatar",
               "key": "_Marana_Lock_Pos",
               "born": {
-                "$type": "ConfigBornByPredicatePoint",
-                "onGround": true,
-                "timeForPredictive": 0.75,
+                "$type": "MOEKADMAMNK",
                 "offset": {
-                  "x": -3.46,
-                  "y": 1,
-                  "z": -2
+                  "x": -3.4600000381469727,
+                  "y": 1.0,
+                  "z": -2.0
                 },
-                "bornRandom": {
-                  "$type": "BornRandomFromCenter",
-                  "minRandomRange": 2,
-                  "maxRandomRange": 4
-                }
+                "IGAGDFFFGAO": {
+                  "$type": "FHDJJGOONEI",
+                  "OKDPGGJGGCJ": 2.0,
+                  "CPOKKADJBFH": 4.0
+                },
+                "DAPKLNIFPID": true,
+                "ANKDEOLLEMK": 0.75
               },
               "setTarget": false
             },
             {
               "$type": "TriggerBullet",
-              "bulletID": 72000022, //水泡飞弹
+              "bulletID": 72000022,
               "born": {
                 "$type": "ConfigBornByGlobalValue",
-                "positionKey": "_Marana_Lock_Pos",
                 "offset": {
-                  "x": 0,
-                  "y": 20,
-                  "z": 0
+                  "x": 0.0,
+                  "y": 20.0,
+                  "z": 0.0
                 },
                 "direction": {
-                  "$type": "ConfigDirectionByEntity",
+                  "$type": "IOPNFLFHGID",
                   "angleOffset": {
                     "x": 90.0,
                     "y": 0.0,
                     "z": 0.0
                   }
-                }
+                },
+                "positionKey": "_Marana_Lock_Pos",
+                "directionKey": ""
               }
             }
           ]
         }
-      }
+      },
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "BubleSummon_ThinkInterval"
+        }
+      ]
     }
   },
-  //////////////////////////////////////////////////////////////////////////////////////////////////
-  //
-  //	3.0 零级WQ Boss 水泡飞弹
-  //	Todo:验证飞弹打中兰那罗护罩的感觉
-  //
-  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_Area_Xm_Property_Ani_Unique_MaranaSkill_02_Ability",
+      "modifiers": {
+        "BulletEffect": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "EnableBulletCollisionPluginTrigger",
+              "setEnable": true
+            },
+            {
+              "$type": "AttachEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_BubbleAtk_Bullet_01",
+              "effectTempleteID": -1.0
+            },
+            {
+              "$type": "FireEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_BubbleAtk_Warning",
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 20.0
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "AKNHOGLMAAH",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": 1.0,
+                    "z": 0.0
+                  }
+                },
+                "BJCIHELGKLP": true,
+                "IABNJPGBAOH": true
+              },
+              "effectTempleteID": -1.0
+            }
+          ]
+        }
+      },
       "onAdded": [
         {
           "$type": "SetGlobalPos",
@@ -1531,28 +1672,24 @@
           }
         },
         {
-          "$type": "EnableBulletCollisionPluginTrigger",
-          "target": "Self",
-          "setEnable": false
+          "$type": "EnableBulletCollisionPluginTrigger"
         },
         {
           "$type": "AttachModifier",
-          "modifierName": "BulletEffect",
           "predicates": [
             {
-              "$type": "ByGlobalPosToGround",
+              "$type": "PDMGNBAMNKK",
               "target": "Self",
-              "globalPos": "_DropRock_Position",
-              "toGroundHeight": 20,
-              "toWater": false,
-              "logic": "GreaterOrEqual"
+              "logic": "GreaterOrEqual",
+              "BFIBGHIJCEO": "_DropRock_Position",
+              "BLHBBLJKJCP": 20.0
             }
-          ]
+          ],
+          "modifierName": "BulletEffect"
         }
       ],
       "onAbilityStart": [
         {
-          //击中场景时
           "$type": "Predicated",
           "target": "Target",
           "targetPredicates": [
@@ -1564,108 +1701,66 @@
           "successActions": [
             {
               "$type": "FireEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_BubbleHit_Ground",
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_BubbleHit_Ground",
               "born": {
                 "$type": "ConfigBornBySelf",
-                "useRotation": true,
                 "offset": {
                   "x": 0.0,
                   "y": 0.0,
                   "z": 0.0
                 },
+                "DAPKLNIFPID": true,
                 "direction": {
-                  "$type": "ConfigDirectionByEntity",
+                  "$type": "IOPNFLFHGID",
                   "angleOffset": {
                     "x": 90.0,
                     "y": 0.0,
                     "z": 0.0
                   }
                 },
-                "alongGround": true,
-                "onGround": true
-              }
+                "BJCIHELGKLP": true,
+                "IABNJPGBAOH": true
+              },
+              "effectTempleteID": -1.0
             },
             {
               "$type": "TriggerAttackEvent",
-              "targetType": "Enemy",
-              "entityTypes": ["Avatar"],
               "attackEvent": {
                 "attackPattern": {
                   "$type": "ConfigAttackSphere",
-                  "radius": 3,
                   "triggerType": "TriggerNoRepeat",
                   "born": {
-                    "$type": "ConfigBornByCollisionPoint" //子弹限定
-                  }
+                    "$type": "ConfigBornByCollisionPoint"
+                  },
+                  "radius": 3.0
                 },
                 "attackInfo": {
-                  "canBeModifiedBy": "OriginOwner",
+                  "attackTag": "",
+                  "attenuationTag": "",
+                  "attenuationGroup": "default",
                   "attackProperty": {
-                    "damagePercentage": 0.3,
+                    "damagePercentage": 0.30000001192092896,
+                    "damagePercentageRatio": 0.0,
+                    "bonusCriticalHurt": 100.0,
                     "strikeType": "Pierce",
-                    "attackType": "Melee",
-                    "enBreak": 25.0
+                    "enBreak": 25.0,
+                    "attackType": "Melee"
                   },
                   "hitPattern": {
                     "onHitEffectName": "none",
                     "hitImpulseType": "LV1"
-                  }
+                  },
+                  "canBeModifiedBy": "OriginOwner"
                 }
-              }
+              },
+              "targetType": "Enemy",
+              "entityTypes": ["Avatar"]
             }
           ]
         }
-      ],
-      "modifiers": {
-        "BulletEffect": {
-          "onAdded": [
-            {
-              "$type": "EnableBulletCollisionPluginTrigger",
-              "target": "Self",
-              "setEnable": true
-            },
-            {
-              "$type": "AttachEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_BubbleAtk_Bullet_01"
-            },
-            {
-              //预警效果
-              "$type": "FireEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_BubbleAtk_Warning",
-              "born": {
-                "$type": "ConfigBornBySelf",
-                "useRotation": true,
-                "offset": {
-                  "x": 0,
-                  "y": 0,
-                  "z": 20
-                },
-                "direction": {
-                  "$type": "ConfigDirectionByWorld",
-                  "angleOffset": {
-                    "x": 0,
-                    "y": 1,
-                    "z": 0
-                  }
-                },
-                "alongGround": true,
-                "onGround": true
-              }
-            }
-          ]
-        }
-      }
+      ]
     }
   },
-  //////////////////////////////////////////////////////////////////////////////////////////////////
-  //
-  // 3.0 无留坨的化身 激光柱攻击
-  /*
-    1:释放后，先播Bs特效
-	2:2秒后，处理攻击盒整理效果
-*/
-  //
-  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -1679,6 +1774,8 @@
       ],
       "modifiers": {
         "LaserRainAttacking": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ApplyModifier",
@@ -1687,19 +1784,22 @@
           ]
         },
         "LaserRainAtk_Bs": {
+          "modifierName": "",
           "duration": 1.5,
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
-            //提前展开罩子
             {
               "$type": "SetGlobalValue",
               "otherTargets": {
-                "$type": "SelectTargetsByTag",
-                "tag": "AranaraPlatform",
+                "$type": "OMJNAIFHGGH",
                 "topLimit": 1,
-                "sortType": "Nearest" //从近开始选
+                "sortType": "Nearest",
+                "tag": "AranaraPlatform"
               },
+              "ratio": 1.0,
               "key": "ShowBall",
-              "value": 1
+              "maxValue": 0.0,
+              "minValue": 0.0
             },
             {
               "$type": "ShowReminder",
@@ -1714,575 +1814,538 @@
           ]
         },
         "LaserRainAtk_Attack": {
-          "duration": 5,
+          "modifierName": "",
+          "duration": 5.0,
+          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "TriggerWeatherMixin",
               "type": "Skill",
               "weatherPattern": "Weather_Marana_LaserRain",
-              "transDuration": 0.8,
-              "duration": 5
+              "transDuration": 0.800000011920929,
+              "duration": 5.0
             }
           ],
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_LaserRain_Bs"
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_LaserRain_Bs",
+              "effectTempleteID": -1.0
             },
             {
               "$type": "AttachEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_LaserRain_Bs_Body"
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_LaserRain_Bs_Body",
+              "effectTempleteID": -1.0
             },
-            //subEmit生命控制，所以要拆个gadget出来
             {
               "$type": "CreateGadget",
-              "lifeByOwnerV2": true,
-              "gadgetID": 72000027,
-              "campID": 4001,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "SGV_BattleState",
+                  "ratio": 3.0
+                }
+              ],
               "born": {
-                "$type": "ConfigBornByActionPoint",
+                "$type": "OHBNBLFMECJ",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                },
+                "DAPKLNIFPID": true,
+                "HKNFOKFIKAG": 5.0,
                 "actionPointType": "StandbyPoint",
-                "selectType": {
-                  "$type": "SelectActionPointByID",
+                "PANKEBCONMO": {
+                  "$type": "DMJJPCHLKEC",
                   "actionPointID": 330100001
-                },
+                }
+              },
+              "GKJDJDACPMC": true,
+              "gadgetID": 72000027,
+              "campID": 4001
+            },
+            {
+              "$type": "CreateGadget",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "SGV_BattleState",
+                  "ratio": 4.0
+                }
+              ],
+              "born": {
+                "$type": "OHBNBLFMECJ",
                 "offset": {
                   "x": 0.0,
                   "y": 0.0,
                   "z": 0.0
                 },
-                "onGround": true,
-                "onGroundRaycastUpDist": 5
-              },
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "SGV_BattleState",
-                  "value": 3,
-                  "compareType": "Equal"
-                }
-              ]
-            },
-            {
-              "$type": "CreateGadget",
-              "lifeByOwnerV2": true,
-              "gadgetID": 72000027,
-              "campID": 4001,
-              "born": {
-                "$type": "ConfigBornByActionPoint",
+                "DAPKLNIFPID": true,
+                "HKNFOKFIKAG": 5.0,
                 "actionPointType": "StandbyPoint",
-                "selectType": {
-                  "$type": "SelectActionPointByID",
+                "PANKEBCONMO": {
+                  "$type": "DMJJPCHLKEC",
                   "actionPointID": 330100002
-                },
-                "offset": {
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 0.0
-                },
-                "onGround": true,
-                "onGroundRaycastUpDist": 5
-              },
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "SGV_BattleState",
-                  "value": 4,
-                  "compareType": "Equal"
                 }
-              ]
+              },
+              "GKJDJDACPMC": true,
+              "gadgetID": 72000027,
+              "campID": 4001
             },
             {
               "$type": "CreateGadget",
-              "lifeByOwnerV2": true,
-              "gadgetID": 72000027,
-              "campID": 4001,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "SGV_BattleState",
+                  "ratio": 5.0
+                }
+              ],
               "born": {
-                "$type": "ConfigBornByActionPoint",
-                "actionPointType": "StandbyPoint",
-                "selectType": {
-                  "$type": "SelectActionPointByID",
-                  "actionPointID": 330100003
-                },
+                "$type": "OHBNBLFMECJ",
                 "offset": {
                   "x": 0.0,
                   "y": 0.0,
                   "z": 0.0
                 },
-                "onGround": true,
-                "onGroundRaycastUpDist": 5
-              },
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "SGV_BattleState",
-                  "value": 5,
-                  "compareType": "Equal"
+                "DAPKLNIFPID": true,
+                "HKNFOKFIKAG": 5.0,
+                "actionPointType": "StandbyPoint",
+                "PANKEBCONMO": {
+                  "$type": "DMJJPCHLKEC",
+                  "actionPointID": 330100003
                 }
-              ]
+              },
+              "GKJDJDACPMC": true,
+              "gadgetID": 72000027,
+              "campID": 4001
             }
           ],
           "onRemoved": [
             {
               "$type": "SetAnimatorBool",
-              "boolID": "SkillCasting",
-              "value": false
+              "boolID": "SkillCasting"
             },
             {
               "$type": "SetAnimatorBool",
-              "boolID": "LaserRainReady",
-              "value": false
+              "boolID": "LaserRainReady"
             },
             {
               "$type": "SetGlobalValue",
+              "ratio": 0.0,
               "key": "_SCENEOBJ_LaserRain_ReadyTag",
-              "value": 0
+              "maxValue": 0.0,
+              "minValue": 0.0
             },
             {
               "$type": "KillGadget",
               "gadgetInfo": {
-                "$type": "SelectTargetsByChildren",
-                "configID": 72000027,
-                "sortType": "Reversed"
+                "sortType": "Reversed",
+                "configID": 72000027
               }
             },
             {
               "$type": "SetGlobalValue",
               "otherTargets": {
-                "$type": "SelectTargetsByTag",
-                "tag": "AranaraPlatform",
+                "$type": "OMJNAIFHGGH",
                 "topLimit": 1,
-                "sortType": "Nearest" //从近开始选
+                "sortType": "Nearest",
+                "tag": "AranaraPlatform"
               },
+              "ratio": 0.0,
               "key": "ShowBall",
-              "value": 0
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ]
         }
       }
     }
   },
-  //subEmit生命控制，所以要拆个gadget出来
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_Area_Xm_Property_Ani_Unique_MaranaSkill_03_Manager",
-      "onAdded": [
-        //在每个岛需要置下不同的激光落点位置
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "LaserSetting_Island01",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "target": "Owner",
-              "key": "SGV_BattleState",
-              "value": 3,
-              "compareType": "NoneOrEqual"
-            }
-          ]
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "LaserSetting_Island02",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "target": "Owner",
-              "key": "SGV_BattleState",
-              "value": 4,
-              "compareType": "Equal"
-            }
-          ]
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "LaserSetting_Island03",
-          "predicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "target": "Owner",
-              "key": "SGV_BattleState",
-              "value": 5,
-              "compareType": "Equal"
-            }
-          ]
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "LaserRain_Manager"
-        }
-      ],
       "modifiers": {
         "LaserSetting_Island01": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalPos",
               "key": "_Marana_LaserAlert_Pos1",
               "born": {
-                "$type": "ConfigBornByActionPoint",
-                "actionPointType": "StandbyPoint",
-                "selectType": {
-                  "$type": "SelectActionPointByID",
-                  "actionPointID": 330100001
-                },
+                "$type": "OHBNBLFMECJ",
                 "offset": {
                   "x": 0.0,
                   "y": 0.0,
-                  "z": 10
+                  "z": 10.0
                 },
-                "onGround": true,
-                "onGroundRaycastUpDist": 5
+                "DAPKLNIFPID": true,
+                "HKNFOKFIKAG": 5.0,
+                "actionPointType": "StandbyPoint",
+                "PANKEBCONMO": {
+                  "$type": "DMJJPCHLKEC",
+                  "actionPointID": 330100001
+                }
               }
             },
             {
               "$type": "SetGlobalPos",
               "key": "_Marana_LaserAlert_Pos2",
               "born": {
-                "$type": "ConfigBornByActionPoint",
-                "actionPointType": "StandbyPoint",
-                "selectType": {
-                  "$type": "SelectActionPointByID",
-                  "actionPointID": 330100001
-                },
+                "$type": "OHBNBLFMECJ",
                 "offset": {
-                  "x": 8.66,
+                  "x": 8.65999984741211,
                   "y": 0.0,
-                  "z": 5
+                  "z": 5.0
                 },
-                "onGround": true,
-                "onGroundRaycastUpDist": 5
+                "DAPKLNIFPID": true,
+                "HKNFOKFIKAG": 5.0,
+                "actionPointType": "StandbyPoint",
+                "PANKEBCONMO": {
+                  "$type": "DMJJPCHLKEC",
+                  "actionPointID": 330100001
+                }
               }
             },
             {
               "$type": "SetGlobalPos",
               "key": "_Marana_LaserAlert_Pos3",
               "born": {
-                "$type": "ConfigBornByActionPoint",
-                "actionPointType": "StandbyPoint",
-                "selectType": {
-                  "$type": "SelectActionPointByID",
-                  "actionPointID": 330100001
-                },
+                "$type": "OHBNBLFMECJ",
                 "offset": {
-                  "x": 8.66,
+                  "x": 8.65999984741211,
                   "y": 0.0,
-                  "z": -5
+                  "z": -5.0
                 },
-                "onGround": true,
-                "onGroundRaycastUpDist": 5
+                "DAPKLNIFPID": true,
+                "HKNFOKFIKAG": 5.0,
+                "actionPointType": "StandbyPoint",
+                "PANKEBCONMO": {
+                  "$type": "DMJJPCHLKEC",
+                  "actionPointID": 330100001
+                }
               }
             },
             {
               "$type": "SetGlobalPos",
               "key": "_Marana_LaserAlert_Pos4",
               "born": {
-                "$type": "ConfigBornByActionPoint",
-                "actionPointType": "StandbyPoint",
-                "selectType": {
-                  "$type": "SelectActionPointByID",
-                  "actionPointID": 330100001
-                },
+                "$type": "OHBNBLFMECJ",
                 "offset": {
                   "x": 0.0,
                   "y": 0.0,
-                  "z": -10
+                  "z": -10.0
                 },
-                "onGround": true,
-                "onGroundRaycastUpDist": 5
+                "DAPKLNIFPID": true,
+                "HKNFOKFIKAG": 5.0,
+                "actionPointType": "StandbyPoint",
+                "PANKEBCONMO": {
+                  "$type": "DMJJPCHLKEC",
+                  "actionPointID": 330100001
+                }
               }
             },
             {
               "$type": "SetGlobalPos",
               "key": "_Marana_LaserAlert_Pos5",
               "born": {
-                "$type": "ConfigBornByActionPoint",
-                "actionPointType": "StandbyPoint",
-                "selectType": {
-                  "$type": "SelectActionPointByID",
-                  "actionPointID": 330100001
-                },
+                "$type": "OHBNBLFMECJ",
                 "offset": {
-                  "x": -8.66,
+                  "x": -8.65999984741211,
                   "y": 0.0,
-                  "z": -5
+                  "z": -5.0
                 },
-                "onGround": true,
-                "onGroundRaycastUpDist": 5
+                "DAPKLNIFPID": true,
+                "HKNFOKFIKAG": 5.0,
+                "actionPointType": "StandbyPoint",
+                "PANKEBCONMO": {
+                  "$type": "DMJJPCHLKEC",
+                  "actionPointID": 330100001
+                }
               }
             },
             {
               "$type": "SetGlobalPos",
               "key": "_Marana_LaserAlert_Pos6",
               "born": {
-                "$type": "ConfigBornByActionPoint",
-                "actionPointType": "StandbyPoint",
-                "selectType": {
-                  "$type": "SelectActionPointByID",
-                  "actionPointID": 330100001
-                },
+                "$type": "OHBNBLFMECJ",
                 "offset": {
-                  "x": -8.66,
+                  "x": -8.65999984741211,
                   "y": 0.0,
-                  "z": 5
+                  "z": 5.0
                 },
-                "onGround": true,
-                "onGroundRaycastUpDist": 5
+                "DAPKLNIFPID": true,
+                "HKNFOKFIKAG": 5.0,
+                "actionPointType": "StandbyPoint",
+                "PANKEBCONMO": {
+                  "$type": "DMJJPCHLKEC",
+                  "actionPointID": 330100001
+                }
               }
             }
           ]
         },
         "LaserSetting_Island02": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalPos",
               "key": "_Marana_LaserAlert_Pos1",
               "born": {
-                "$type": "ConfigBornByActionPoint",
-                "actionPointType": "StandbyPoint",
-                "selectType": {
-                  "$type": "SelectActionPointByID",
-                  "actionPointID": 330100002
-                },
+                "$type": "OHBNBLFMECJ",
                 "offset": {
                   "x": 0.0,
                   "y": 0.0,
-                  "z": 10
+                  "z": 10.0
                 },
-                "onGround": true,
-                "onGroundRaycastUpDist": 5
+                "DAPKLNIFPID": true,
+                "HKNFOKFIKAG": 5.0,
+                "actionPointType": "StandbyPoint",
+                "PANKEBCONMO": {
+                  "$type": "DMJJPCHLKEC",
+                  "actionPointID": 330100002
+                }
               }
             },
             {
               "$type": "SetGlobalPos",
               "key": "_Marana_LaserAlert_Pos2",
               "born": {
-                "$type": "ConfigBornByActionPoint",
-                "actionPointType": "StandbyPoint",
-                "selectType": {
-                  "$type": "SelectActionPointByID",
-                  "actionPointID": 330100002
-                },
+                "$type": "OHBNBLFMECJ",
                 "offset": {
-                  "x": 8.66,
+                  "x": 8.65999984741211,
                   "y": 0.0,
-                  "z": 5
+                  "z": 5.0
                 },
-                "onGround": true,
-                "onGroundRaycastUpDist": 5
+                "DAPKLNIFPID": true,
+                "HKNFOKFIKAG": 5.0,
+                "actionPointType": "StandbyPoint",
+                "PANKEBCONMO": {
+                  "$type": "DMJJPCHLKEC",
+                  "actionPointID": 330100002
+                }
               }
             },
             {
               "$type": "SetGlobalPos",
               "key": "_Marana_LaserAlert_Pos3",
               "born": {
-                "$type": "ConfigBornByActionPoint",
-                "actionPointType": "StandbyPoint",
-                "selectType": {
-                  "$type": "SelectActionPointByID",
-                  "actionPointID": 330100002
-                },
+                "$type": "OHBNBLFMECJ",
                 "offset": {
-                  "x": 8.66,
+                  "x": 8.65999984741211,
                   "y": 0.0,
-                  "z": 5
+                  "z": 5.0
                 },
-                "onGround": true,
-                "onGroundRaycastUpDist": 5
+                "DAPKLNIFPID": true,
+                "HKNFOKFIKAG": 5.0,
+                "actionPointType": "StandbyPoint",
+                "PANKEBCONMO": {
+                  "$type": "DMJJPCHLKEC",
+                  "actionPointID": 330100002
+                }
               }
             },
             {
               "$type": "SetGlobalPos",
               "key": "_Marana_LaserAlert_Pos4",
               "born": {
-                "$type": "ConfigBornByActionPoint",
-                "actionPointType": "StandbyPoint",
-                "selectType": {
-                  "$type": "SelectActionPointByID",
-                  "actionPointID": 330100002
-                },
+                "$type": "OHBNBLFMECJ",
                 "offset": {
                   "x": 0.0,
                   "y": 0.0,
-                  "z": -10
+                  "z": -10.0
                 },
-                "onGround": true,
-                "onGroundRaycastUpDist": 5
+                "DAPKLNIFPID": true,
+                "HKNFOKFIKAG": 5.0,
+                "actionPointType": "StandbyPoint",
+                "PANKEBCONMO": {
+                  "$type": "DMJJPCHLKEC",
+                  "actionPointID": 330100002
+                }
               }
             },
             {
               "$type": "SetGlobalPos",
               "key": "_Marana_LaserAlert_Pos5",
               "born": {
-                "$type": "ConfigBornByActionPoint",
-                "actionPointType": "StandbyPoint",
-                "selectType": {
-                  "$type": "SelectActionPointByID",
-                  "actionPointID": 330100002
-                },
+                "$type": "OHBNBLFMECJ",
                 "offset": {
-                  "x": -8.66,
+                  "x": -8.65999984741211,
                   "y": 0.0,
-                  "z": -5
+                  "z": -5.0
                 },
-                "onGround": true,
-                "onGroundRaycastUpDist": 5
+                "DAPKLNIFPID": true,
+                "HKNFOKFIKAG": 5.0,
+                "actionPointType": "StandbyPoint",
+                "PANKEBCONMO": {
+                  "$type": "DMJJPCHLKEC",
+                  "actionPointID": 330100002
+                }
               }
             },
             {
               "$type": "SetGlobalPos",
               "key": "_Marana_LaserAlert_Pos6",
               "born": {
-                "$type": "ConfigBornByActionPoint",
-                "actionPointType": "StandbyPoint",
-                "selectType": {
-                  "$type": "SelectActionPointByID",
-                  "actionPointID": 330100002
-                },
+                "$type": "OHBNBLFMECJ",
                 "offset": {
-                  "x": -8.66,
+                  "x": -8.65999984741211,
                   "y": 0.0,
-                  "z": 5
+                  "z": 5.0
                 },
-                "onGround": true,
-                "onGroundRaycastUpDist": 5
+                "DAPKLNIFPID": true,
+                "HKNFOKFIKAG": 5.0,
+                "actionPointType": "StandbyPoint",
+                "PANKEBCONMO": {
+                  "$type": "DMJJPCHLKEC",
+                  "actionPointID": 330100002
+                }
               }
             }
           ]
         },
         "LaserSetting_Island03": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalPos",
               "key": "_Marana_LaserAlert_Pos1",
               "born": {
-                "$type": "ConfigBornByActionPoint",
-                "actionPointType": "StandbyPoint",
-                "selectType": {
-                  "$type": "SelectActionPointByID",
-                  "actionPointID": 330100003
-                },
+                "$type": "OHBNBLFMECJ",
                 "offset": {
                   "x": 0.0,
                   "y": 0.0,
-                  "z": 10
+                  "z": 10.0
                 },
-                "onGround": true,
-                "onGroundRaycastUpDist": 5
+                "DAPKLNIFPID": true,
+                "HKNFOKFIKAG": 5.0,
+                "actionPointType": "StandbyPoint",
+                "PANKEBCONMO": {
+                  "$type": "DMJJPCHLKEC",
+                  "actionPointID": 330100003
+                }
               }
             },
             {
               "$type": "SetGlobalPos",
               "key": "_Marana_LaserAlert_Pos2",
               "born": {
-                "$type": "ConfigBornByActionPoint",
-                "actionPointType": "StandbyPoint",
-                "selectType": {
-                  "$type": "SelectActionPointByID",
-                  "actionPointID": 330100003
-                },
+                "$type": "OHBNBLFMECJ",
                 "offset": {
-                  "x": 8.66,
+                  "x": 8.65999984741211,
                   "y": 0.0,
-                  "z": 5
+                  "z": 5.0
                 },
-                "onGround": true,
-                "onGroundRaycastUpDist": 5
+                "DAPKLNIFPID": true,
+                "HKNFOKFIKAG": 5.0,
+                "actionPointType": "StandbyPoint",
+                "PANKEBCONMO": {
+                  "$type": "DMJJPCHLKEC",
+                  "actionPointID": 330100003
+                }
               }
             },
             {
               "$type": "SetGlobalPos",
               "key": "_Marana_LaserAlert_Pos3",
               "born": {
-                "$type": "ConfigBornByActionPoint",
-                "actionPointType": "StandbyPoint",
-                "selectType": {
-                  "$type": "SelectActionPointByID",
-                  "actionPointID": 330100003
-                },
+                "$type": "OHBNBLFMECJ",
                 "offset": {
-                  "x": 8.66,
+                  "x": 8.65999984741211,
                   "y": 0.0,
-                  "z": -5
+                  "z": -5.0
                 },
-                "onGround": true,
-                "onGroundRaycastUpDist": 5
+                "DAPKLNIFPID": true,
+                "HKNFOKFIKAG": 5.0,
+                "actionPointType": "StandbyPoint",
+                "PANKEBCONMO": {
+                  "$type": "DMJJPCHLKEC",
+                  "actionPointID": 330100003
+                }
               }
             },
             {
               "$type": "SetGlobalPos",
               "key": "_Marana_LaserAlert_Pos4",
               "born": {
-                "$type": "ConfigBornByActionPoint",
-                "actionPointType": "StandbyPoint",
-                "selectType": {
-                  "$type": "SelectActionPointByID",
-                  "actionPointID": 330100003
-                },
+                "$type": "OHBNBLFMECJ",
                 "offset": {
                   "x": 0.0,
                   "y": 0.0,
-                  "z": -10
+                  "z": -10.0
                 },
-                "onGround": true,
-                "onGroundRaycastUpDist": 5
+                "DAPKLNIFPID": true,
+                "HKNFOKFIKAG": 5.0,
+                "actionPointType": "StandbyPoint",
+                "PANKEBCONMO": {
+                  "$type": "DMJJPCHLKEC",
+                  "actionPointID": 330100003
+                }
               }
             },
             {
               "$type": "SetGlobalPos",
               "key": "_Marana_LaserAlert_Pos5",
               "born": {
-                "$type": "ConfigBornByActionPoint",
-                "actionPointType": "StandbyPoint",
-                "selectType": {
-                  "$type": "SelectActionPointByID",
-                  "actionPointID": 330100003
-                },
+                "$type": "OHBNBLFMECJ",
                 "offset": {
-                  "x": -8.66,
+                  "x": -8.65999984741211,
                   "y": 0.0,
-                  "z": -5
+                  "z": -5.0
                 },
-                "onGround": true,
-                "onGroundRaycastUpDist": 5
+                "DAPKLNIFPID": true,
+                "HKNFOKFIKAG": 5.0,
+                "actionPointType": "StandbyPoint",
+                "PANKEBCONMO": {
+                  "$type": "DMJJPCHLKEC",
+                  "actionPointID": 330100003
+                }
               }
             },
             {
               "$type": "SetGlobalPos",
               "key": "_Marana_LaserAlert_Pos6",
               "born": {
-                "$type": "ConfigBornByActionPoint",
-                "actionPointType": "StandbyPoint",
-                "selectType": {
-                  "$type": "SelectActionPointByID",
-                  "actionPointID": 330100003
-                },
+                "$type": "OHBNBLFMECJ",
                 "offset": {
-                  "x": -8.66,
+                  "x": -8.65999984741211,
                   "y": 0.0,
-                  "z": 5
+                  "z": 5.0
                 },
-                "onGround": true,
-                "onGroundRaycastUpDist": 5
+                "DAPKLNIFPID": true,
+                "HKNFOKFIKAG": 5.0,
+                "actionPointType": "StandbyPoint",
+                "PANKEBCONMO": {
+                  "$type": "DMJJPCHLKEC",
+                  "actionPointID": 330100003
+                }
               }
             }
           ]
         },
         "LaserRain_Manager": {
-          //duration只是保底，自身生命周期4s
-          "duration": 5,
+          "modifierName": "",
+          "duration": 5.0,
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 3.5,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_LaserRain_ShieldHit",
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_LaserRain_ShieldHit",
               "born": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "x": 0,
+                  "x": 0.0,
                   "y": -1.5,
-                  "z": 0
+                  "z": 0.0
                 }
-              }
+              },
+              "effectTempleteID": -1.0
             },
             {
               "$type": "ApplyModifier",
@@ -2309,118 +2372,110 @@
               "modifierName": "LaserRain_Position06"
             }
           ],
-          "thinkInterval": 3.5,
           "onThinkInterval": [
             {
               "$type": "FireSubEmitterEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_LaserRain_LandHit",
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_LaserRain_LandHit",
               "born": {
                 "$type": "ConfigBornByGlobalValue",
+                "direction": {
+                  "$type": "AKNHOGLMAAH",
+                  "eularAngles": {
+                    "x": 1.0
+                  }
+                },
                 "positionKey": "_Marana_LaserAlert_Pos1",
-                "direction": {
-                  "$type": "ConfigDirectionByWorld",
-                  "eularAngles": {
-                    "x": 1,
-                    "y": 0,
-                    "z": 0
-                  }
-                }
+                "directionKey": ""
               }
             },
             {
               "$type": "FireSubEmitterEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_LaserRain_LandHit",
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_LaserRain_LandHit",
               "born": {
                 "$type": "ConfigBornByGlobalValue",
+                "direction": {
+                  "$type": "AKNHOGLMAAH",
+                  "eularAngles": {
+                    "x": 1.0
+                  }
+                },
                 "positionKey": "_Marana_LaserAlert_Pos2",
-                "direction": {
-                  "$type": "ConfigDirectionByWorld",
-                  "eularAngles": {
-                    "x": 1,
-                    "y": 0,
-                    "z": 0
-                  }
-                }
+                "directionKey": ""
               }
             },
             {
               "$type": "FireSubEmitterEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_LaserRain_LandHit",
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_LaserRain_LandHit",
               "born": {
                 "$type": "ConfigBornByGlobalValue",
+                "direction": {
+                  "$type": "AKNHOGLMAAH",
+                  "eularAngles": {
+                    "x": 1.0
+                  }
+                },
                 "positionKey": "_Marana_LaserAlert_Pos3",
-                "direction": {
-                  "$type": "ConfigDirectionByWorld",
-                  "eularAngles": {
-                    "x": 1,
-                    "y": 0,
-                    "z": 0
-                  }
-                }
+                "directionKey": ""
               }
             },
             {
               "$type": "FireSubEmitterEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_LaserRain_LandHit",
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_LaserRain_LandHit",
               "born": {
                 "$type": "ConfigBornByGlobalValue",
+                "direction": {
+                  "$type": "AKNHOGLMAAH",
+                  "eularAngles": {
+                    "x": 1.0
+                  }
+                },
                 "positionKey": "_Marana_LaserAlert_Pos4",
-                "direction": {
-                  "$type": "ConfigDirectionByWorld",
-                  "eularAngles": {
-                    "x": 1,
-                    "y": 0,
-                    "z": 0
-                  }
-                }
+                "directionKey": ""
               }
             },
             {
               "$type": "FireSubEmitterEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_LaserRain_LandHit",
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_LaserRain_LandHit",
               "born": {
                 "$type": "ConfigBornByGlobalValue",
+                "direction": {
+                  "$type": "AKNHOGLMAAH",
+                  "eularAngles": {
+                    "x": 1.0
+                  }
+                },
                 "positionKey": "_Marana_LaserAlert_Pos5",
-                "direction": {
-                  "$type": "ConfigDirectionByWorld",
-                  "eularAngles": {
-                    "x": 1,
-                    "y": 0,
-                    "z": 0
-                  }
-                }
+                "directionKey": ""
               }
             },
             {
               "$type": "FireSubEmitterEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_LaserRain_LandHit",
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_LaserRain_LandHit",
               "born": {
                 "$type": "ConfigBornByGlobalValue",
-                "positionKey": "_Marana_LaserAlert_Pos6",
                 "direction": {
-                  "$type": "ConfigDirectionByWorld",
+                  "$type": "AKNHOGLMAAH",
                   "eularAngles": {
-                    "x": 1,
-                    "y": 0,
-                    "z": 0
+                    "x": 1.0
                   }
-                }
+                },
+                "positionKey": "_Marana_LaserAlert_Pos6",
+                "directionKey": ""
               }
             },
             {
               "$type": "Predicated",
               "otherTargets": {
-                "$type": "SelectTargetsByTag",
-                "tag": "AranaraPlatform",
+                "$type": "OMJNAIFHGGH",
                 "topLimit": 1,
-                "sortType": "Nearest" //从近开始选
+                "sortType": "Nearest",
+                "tag": "AranaraPlatform"
               },
               "targetPredicates": [
                 {
                   "$type": "ByTargetGlobalValue",
-                  "target": "Target",
                   "key": "AvatarCount",
-                  "value": 1,
+                  "ratio": 1.0,
                   "compareType": "MoreThanAndEqual"
                 }
               ],
@@ -2428,88 +2483,81 @@
                 {
                   "$type": "ActCameraShake",
                   "target": "Caster",
-                  "born": {
-                    "$type": "ConfigBornByTarget"
-                  },
                   "cameraShake": {
                     "shakeType": "CustomVector",
-                    "shakeRange": 0.9,
-                    "shakeTime": 0.3,
+                    "shakeRange": 0.8999999761581421,
+                    "shakeTime": 0.30000001192092896,
                     "shakeDistance": 40.0,
                     "shakeDir": {
-                      "x": 0,
-                      "y": -1,
-                      "z": 0
+                      "y": -1.0
                     },
                     "extension": {
-                      "baseCycle": 0.2,
-                      "cycleDamping": 0.1,
-                      "rangeAttenuation": 0.5
+                      "baseCycle": 0.20000000298023224,
+                      "cycleDamping": 0.10000000149011612
                     }
+                  },
+                  "born": {
+                    "$type": "ConfigBornByTarget"
                   }
                 }
               ],
               "failActions": [
                 {
-                  //范围攻击
                   "$type": "DamageByAttackValue",
                   "target": "Caster",
-                  "attacker": "Self",
-                  "born": {
-                    "$type": "ConfigBornByTarget"
-                  },
                   "otherTargets": {
                     "$type": "SelectTargetsByShape",
                     "shapeName": "CircleR18",
-                    "centerBasedOn": "Self",
                     "campTargetType": "Enemy",
-                    "campBasedOn": "Self"
+                    "OBHNBNDMPFN": 1.0
                   },
                   "predicates": [
-                    //避开兰那罗护罩
                     {
                       "$type": "ByEntityTypes",
                       "entityTypes": ["Avatar"]
                     }
                   ],
+                  "attacker": "Self",
+                  "born": {
+                    "$type": "ConfigBornByTarget"
+                  },
                   "attackInfo": {
+                    "attackTag": "",
+                    "attenuationTag": "",
+                    "attenuationGroup": "default",
                     "attackProperty": {
-                      "damagePercentage": 1,
+                      "damagePercentage": 1.0,
+                      "damagePercentageRatio": 0.0,
+                      "bonusCriticalHurt": 50.0,
                       "strikeType": "Pierce",
-                      "elementType": "None",
-                      "elementDurability": 50,
-                      "enBreak": 200,
+                      "enBreak": 200.0,
                       "attackType": "Range"
                     },
                     "hitPattern": {
+                      "onHitEffectName": "default",
                       "hitImpulseType": "LV6",
-                      "hitHaltTime": 0.0,
-                      "hitHaltTimeScale": 0.05,
-                      "muteHitText": false
+                      "hitHaltTimeScale": 0.05000000074505806
                     }
                   }
                 },
                 {
                   "$type": "ActCameraShake",
                   "target": "Caster",
-                  "born": {
-                    "$type": "ConfigBornByTarget"
-                  },
                   "cameraShake": {
                     "shakeType": "CustomVector",
-                    "shakeRange": 1.8,
+                    "shakeRange": 1.7999999523162842,
                     "shakeTime": 0.5,
                     "shakeDistance": 50.0,
                     "shakeDir": {
-                      "x": 0,
-                      "y": -1,
-                      "z": 0
+                      "y": -1.0
                     },
                     "extension": {
-                      "baseCycle": 0.2,
-                      "cycleDamping": 0.1,
-                      "rangeAttenuation": 0.5
+                      "baseCycle": 0.20000000298023224,
+                      "cycleDamping": 0.10000000149011612
                     }
+                  },
+                  "born": {
+                    "$type": "ConfigBornByTarget"
                   }
                 }
               ]
@@ -2517,570 +2565,584 @@
           ]
         },
         "LaserRain_Position01": {
-          "duration": 0.2,
+          "modifierName": "",
+          "duration": 0.20000000298023224,
+          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "FireSubEmitterEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_LaserRain_LandAlert",
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_LaserRain_LandAlert",
               "born": {
                 "$type": "ConfigBornByGlobalValue",
-                "positionKey": "_Marana_LaserAlert_Pos1",
                 "direction": {
-                  "$type": "ConfigDirectionByWorld",
+                  "$type": "AKNHOGLMAAH",
                   "eularAngles": {
-                    "x": 1,
-                    "y": 0,
-                    "z": 0
+                    "x": 1.0
                   }
-                }
+                },
+                "positionKey": "_Marana_LaserAlert_Pos1",
+                "directionKey": ""
               }
             },
             {
               "$type": "CreateGadget",
-              "lifeByOwnerV2": true,
-              "gadgetID": 72000023,
-              "campID": 4001,
               "born": {
                 "$type": "ConfigBornByGlobalValue",
-                "positionKey": "_Marana_LaserAlert_Pos1",
+                "DAPKLNIFPID": true,
+                "HKNFOKFIKAG": 5.0,
                 "direction": {
-                  "$type": "ConfigDirectionByWorld",
+                  "$type": "AKNHOGLMAAH",
                   "eularAngles": {
-                    "x": 1,
-                    "y": 0,
-                    "z": 0
+                    "x": 1.0
                   }
                 },
-                "onGround": true,
-                "onGroundRaycastUpDist": 5
-              }
+                "positionKey": "_Marana_LaserAlert_Pos1",
+                "directionKey": ""
+              },
+              "GKJDJDACPMC": true,
+              "gadgetID": 72000023,
+              "campID": 4001
             }
           ]
         },
         "LaserRain_Position02": {
-          "duration": 0.4,
+          "modifierName": "",
+          "duration": 0.4000000059604645,
+          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "FireSubEmitterEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_LaserRain_LandAlert",
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_LaserRain_LandAlert",
               "born": {
                 "$type": "ConfigBornByGlobalValue",
-                "positionKey": "_Marana_LaserAlert_Pos2",
                 "direction": {
-                  "$type": "ConfigDirectionByWorld",
+                  "$type": "AKNHOGLMAAH",
                   "eularAngles": {
-                    "x": 1,
-                    "y": 0,
-                    "z": 0
+                    "x": 1.0
                   }
-                }
+                },
+                "positionKey": "_Marana_LaserAlert_Pos2",
+                "directionKey": ""
               }
             },
             {
               "$type": "CreateGadget",
-              "lifeByOwnerV2": true,
-              "gadgetID": 72000023,
-              "campID": 4001,
               "born": {
                 "$type": "ConfigBornByGlobalValue",
-                "positionKey": "_Marana_LaserAlert_Pos2",
+                "DAPKLNIFPID": true,
+                "HKNFOKFIKAG": 5.0,
                 "direction": {
-                  "$type": "ConfigDirectionByWorld",
+                  "$type": "AKNHOGLMAAH",
                   "eularAngles": {
-                    "x": 1,
-                    "y": 0,
-                    "z": 0
+                    "x": 1.0
                   }
                 },
-                "onGround": true,
-                "onGroundRaycastUpDist": 5
-              }
+                "positionKey": "_Marana_LaserAlert_Pos2",
+                "directionKey": ""
+              },
+              "GKJDJDACPMC": true,
+              "gadgetID": 72000023,
+              "campID": 4001
             }
           ]
         },
         "LaserRain_Position03": {
-          "duration": 0.6,
+          "modifierName": "",
+          "duration": 0.6000000238418579,
+          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "FireSubEmitterEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_LaserRain_LandAlert",
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_LaserRain_LandAlert",
               "born": {
                 "$type": "ConfigBornByGlobalValue",
-                "positionKey": "_Marana_LaserAlert_Pos3",
                 "direction": {
-                  "$type": "ConfigDirectionByWorld",
+                  "$type": "AKNHOGLMAAH",
                   "eularAngles": {
-                    "x": 1,
-                    "y": 0,
-                    "z": 0
+                    "x": 1.0
                   }
-                }
+                },
+                "positionKey": "_Marana_LaserAlert_Pos3",
+                "directionKey": ""
               }
             },
             {
               "$type": "CreateGadget",
-              "lifeByOwnerV2": true,
-              "gadgetID": 72000023,
-              "campID": 4001,
               "born": {
                 "$type": "ConfigBornByGlobalValue",
-                "positionKey": "_Marana_LaserAlert_Pos3",
+                "DAPKLNIFPID": true,
+                "HKNFOKFIKAG": 5.0,
                 "direction": {
-                  "$type": "ConfigDirectionByWorld",
+                  "$type": "AKNHOGLMAAH",
                   "eularAngles": {
-                    "x": 1,
-                    "y": 0,
-                    "z": 0
+                    "x": 1.0
                   }
                 },
-                "onGround": true,
-                "onGroundRaycastUpDist": 5
-              }
+                "positionKey": "_Marana_LaserAlert_Pos3",
+                "directionKey": ""
+              },
+              "GKJDJDACPMC": true,
+              "gadgetID": 72000023,
+              "campID": 4001
             }
           ]
         },
         "LaserRain_Position04": {
-          "duration": 0.8,
+          "modifierName": "",
+          "duration": 0.800000011920929,
+          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "FireSubEmitterEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_LaserRain_LandAlert",
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_LaserRain_LandAlert",
               "born": {
                 "$type": "ConfigBornByGlobalValue",
-                "positionKey": "_Marana_LaserAlert_Pos4",
                 "direction": {
-                  "$type": "ConfigDirectionByWorld",
+                  "$type": "AKNHOGLMAAH",
                   "eularAngles": {
-                    "x": 1,
-                    "y": 0,
-                    "z": 0
+                    "x": 1.0
                   }
-                }
+                },
+                "positionKey": "_Marana_LaserAlert_Pos4",
+                "directionKey": ""
               }
             },
             {
               "$type": "CreateGadget",
-              "lifeByOwnerV2": true,
-              "gadgetID": 72000023,
-              "campID": 4001,
               "born": {
                 "$type": "ConfigBornByGlobalValue",
-                "positionKey": "_Marana_LaserAlert_Pos4",
+                "DAPKLNIFPID": true,
+                "HKNFOKFIKAG": 5.0,
                 "direction": {
-                  "$type": "ConfigDirectionByWorld",
+                  "$type": "AKNHOGLMAAH",
                   "eularAngles": {
-                    "x": 1,
-                    "y": 0,
-                    "z": 0
+                    "x": 1.0
                   }
                 },
-                "onGround": true,
-                "onGroundRaycastUpDist": 5
-              }
+                "positionKey": "_Marana_LaserAlert_Pos4",
+                "directionKey": ""
+              },
+              "GKJDJDACPMC": true,
+              "gadgetID": 72000023,
+              "campID": 4001
             }
           ]
         },
         "LaserRain_Position05": {
-          "duration": 1,
+          "modifierName": "",
+          "duration": 1.0,
+          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "FireSubEmitterEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_LaserRain_LandAlert",
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_LaserRain_LandAlert",
               "born": {
                 "$type": "ConfigBornByGlobalValue",
-                "positionKey": "_Marana_LaserAlert_Pos5",
                 "direction": {
-                  "$type": "ConfigDirectionByWorld",
+                  "$type": "AKNHOGLMAAH",
                   "eularAngles": {
-                    "x": 1,
-                    "y": 0,
-                    "z": 0
+                    "x": 1.0
                   }
-                }
+                },
+                "positionKey": "_Marana_LaserAlert_Pos5",
+                "directionKey": ""
               }
             },
             {
               "$type": "CreateGadget",
-              "lifeByOwnerV2": true,
-              "gadgetID": 72000023,
-              "campID": 4001,
               "born": {
                 "$type": "ConfigBornByGlobalValue",
-                "positionKey": "_Marana_LaserAlert_Pos5",
+                "DAPKLNIFPID": true,
+                "HKNFOKFIKAG": 5.0,
                 "direction": {
-                  "$type": "ConfigDirectionByWorld",
+                  "$type": "AKNHOGLMAAH",
                   "eularAngles": {
-                    "x": 1,
-                    "y": 0,
-                    "z": 0
+                    "x": 1.0
                   }
                 },
-                "onGround": true,
-                "onGroundRaycastUpDist": 5
-              }
+                "positionKey": "_Marana_LaserAlert_Pos5",
+                "directionKey": ""
+              },
+              "GKJDJDACPMC": true,
+              "gadgetID": 72000023,
+              "campID": 4001
             }
           ]
         },
         "LaserRain_Position06": {
-          "duration": 1.2,
+          "modifierName": "",
+          "duration": 1.2000000476837158,
+          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "FireSubEmitterEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_LaserRain_LandAlert",
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_LaserRain_LandAlert",
               "born": {
                 "$type": "ConfigBornByGlobalValue",
-                "positionKey": "_Marana_LaserAlert_Pos6",
                 "direction": {
-                  "$type": "ConfigDirectionByWorld",
+                  "$type": "AKNHOGLMAAH",
                   "eularAngles": {
-                    "x": 1,
-                    "y": 0,
-                    "z": 0
+                    "x": 1.0
                   }
-                }
+                },
+                "positionKey": "_Marana_LaserAlert_Pos6",
+                "directionKey": ""
               }
             },
             {
               "$type": "CreateGadget",
-              "lifeByOwnerV2": true,
-              "gadgetID": 72000023,
-              "campID": 4001,
               "born": {
                 "$type": "ConfigBornByGlobalValue",
-                "positionKey": "_Marana_LaserAlert_Pos6",
+                "DAPKLNIFPID": true,
+                "HKNFOKFIKAG": 5.0,
                 "direction": {
-                  "$type": "ConfigDirectionByWorld",
+                  "$type": "AKNHOGLMAAH",
                   "eularAngles": {
-                    "x": 1,
-                    "y": 0,
-                    "z": 0
+                    "x": 1.0
                   }
                 },
-                "onGround": true,
-                "onGroundRaycastUpDist": 5
-              }
+                "positionKey": "_Marana_LaserAlert_Pos6",
+                "directionKey": ""
+              },
+              "GKJDJDACPMC": true,
+              "gadgetID": 72000023,
+              "campID": 4001
             }
           ]
         }
-      }
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Owner",
+              "key": "SGV_BattleState",
+              "ratio": 3.0,
+              "compareType": "NoneOrEqual"
+            }
+          ],
+          "modifierName": "LaserSetting_Island01"
+        },
+        {
+          "$type": "ApplyModifier",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Owner",
+              "key": "SGV_BattleState",
+              "ratio": 4.0
+            }
+          ],
+          "modifierName": "LaserSetting_Island02"
+        },
+        {
+          "$type": "ApplyModifier",
+          "predicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Owner",
+              "key": "SGV_BattleState",
+              "ratio": 5.0
+            }
+          ],
+          "modifierName": "LaserSetting_Island03"
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "LaserRain_Manager"
+        }
+      ]
     }
   },
-  //////////////////////////////////////////////////////////////////////////////////////////////////
-  //
-  //	3.0 零级WQ Boss 激光炮效果
-  //
-  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_Area_Xm_Property_Ani_Unique_MaranaSkill_03_Ability",
+      "modifiers": {
+        "LaserRainAttack_AlertDamage": {
+          "modifierName": "",
+          "duration": 4.0,
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 0.5,
+          "onAdded": [
+            {
+              "$type": "TriggerAttackEvent",
+              "attackEvent": {
+                "attackPattern": {
+                  "$type": "ConfigAttackCircle",
+                  "triggerType": "TriggerNoRepeat",
+                  "born": {
+                    "$type": "ConfigBornBySelf"
+                  },
+                  "height": 12.5,
+                  "radius": 3.0
+                },
+                "attackInfo": {
+                  "attackTag": "",
+                  "attenuationTag": "",
+                  "attenuationGroup": "default",
+                  "attackProperty": {
+                    "damagePercentage": 0.10000000149011612,
+                    "damagePercentageRatio": 0.0,
+                    "bonusCriticalHurt": 50.0,
+                    "strikeType": "Pierce",
+                    "enBreak": 25.0,
+                    "attackType": "Range"
+                  },
+                  "hitPattern": {
+                    "onHitEffectName": "default",
+                    "hitImpulseType": "LV2",
+                    "hitHaltTimeScale": 0.05000000074505806
+                  },
+                  "cameraShake": {
+                    "shakeType": "HitVector",
+                    "shakeRange": 0.05999999865889549,
+                    "shakeTime": 0.11999999731779099,
+                    "shakeDir": {
+                      "z": 1.0
+                    }
+                  },
+                  "canBeModifiedBy": "OriginOwner"
+                }
+              },
+              "targetType": "Enemy",
+              "entityTypes": ["Avatar"]
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "TriggerAttackEvent",
+              "attackEvent": {
+                "attackPattern": {
+                  "$type": "ConfigAttackCircle",
+                  "triggerType": "TriggerNoRepeat",
+                  "born": {
+                    "$type": "ConfigBornBySelf"
+                  },
+                  "height": 12.5,
+                  "radius": 3.0
+                },
+                "attackInfo": {
+                  "attackTag": "",
+                  "attenuationTag": "",
+                  "attenuationGroup": "default",
+                  "attackProperty": {
+                    "damagePercentage": 0.10000000149011612,
+                    "damagePercentageRatio": 0.0,
+                    "bonusCriticalHurt": 50.0,
+                    "strikeType": "Pierce",
+                    "enBreak": 25.0,
+                    "attackType": "Range"
+                  },
+                  "hitPattern": {
+                    "onHitEffectName": "default",
+                    "hitImpulseType": "LV2",
+                    "hitHaltTimeScale": 0.05000000074505806
+                  },
+                  "cameraShake": {
+                    "shakeType": "HitVector",
+                    "shakeRange": 0.05999999865889549,
+                    "shakeTime": 0.11999999731779099,
+                    "shakeDir": {
+                      "z": 1.0
+                    }
+                  },
+                  "canBeModifiedBy": "OriginOwner"
+                }
+              },
+              "targetType": "Enemy",
+              "entityTypes": ["Avatar"]
+            }
+          ]
+        }
+      },
       "onAdded": [
         {
           "$type": "AttachModifier",
           "modifierName": "LaserRainAttack_AlertDamage"
         }
-      ],
-      "modifiers": {
-        "LaserRainAttack_AlertDamage": {
-          "duration": 4,
-          "thinkInterval": 0.5,
-          "onThinkInterval": [
-            {
-              "$type": "TriggerAttackEvent",
-              "targetType": "Enemy",
-              "entityTypes": ["Avatar"],
-              "attackEvent": {
-                "attackPattern": {
-                  "$type": "ConfigAttackCircle",
-                  "triggerType": "TriggerNoRepeat",
-                  "fanAngle": 360.0,
-                  "radius": 3,
-                  "height": 12.5,
-                  "born": {
-                    "$type": "ConfigBornBySelf"
-                  }
-                },
-                "attackInfo": {
-                  "canBeModifiedBy": "OriginOwner",
-                  "attackProperty": {
-                    "damagePercentage": 0.1,
-                    "strikeType": "Pierce",
-                    "elementType": "None",
-                    "elementDurability": 50,
-                    "enBreak": 25,
-                    "attackType": "Range"
-                  },
-                  "hitPattern": {
-                    "hitImpulseType": "LV2",
-                    "hitHaltTime": 0.0,
-                    "hitHaltTimeScale": 0.05,
-                    "muteHitText": false
-                  },
-                  "forceCameraShake": false,
-                  "cameraShake": {
-                    "shakeType": "HitVector",
-                    "shakeRange": 0.06,
-                    "shakeTime": 0.12,
-                    "shakeDistance": 20,
-                    "shakeDir": {
-                      "x": 0,
-                      "y": 0,
-                      "z": 1
-                    }
-                  }
-                }
-              }
-            }
-          ],
-          "onAdded": [
-            {
-              "$type": "TriggerAttackEvent",
-              "targetType": "Enemy",
-              "entityTypes": ["Avatar"],
-              "attackEvent": {
-                "attackPattern": {
-                  "$type": "ConfigAttackCircle",
-                  "triggerType": "TriggerNoRepeat",
-                  "fanAngle": 360.0,
-                  "radius": 3,
-                  "height": 12.5,
-                  "born": {
-                    "$type": "ConfigBornBySelf"
-                  }
-                },
-                "attackInfo": {
-                  "canBeModifiedBy": "OriginOwner",
-                  "attackProperty": {
-                    "damagePercentage": 0.1,
-                    "strikeType": "Pierce",
-                    "elementType": "None",
-                    "elementDurability": 50,
-                    "enBreak": 25,
-                    "attackType": "Range"
-                  },
-                  "hitPattern": {
-                    "hitImpulseType": "LV2",
-                    "hitHaltTime": 0.0,
-                    "hitHaltTimeScale": 0.05,
-                    "muteHitText": false
-                  },
-                  "forceCameraShake": false,
-                  "cameraShake": {
-                    "shakeType": "HitVector",
-                    "shakeRange": 0.06,
-                    "shakeTime": 0.12,
-                    "shakeDistance": 20,
-                    "shakeDir": {
-                      "x": 0,
-                      "y": 0,
-                      "z": 1
-                    }
-                  }
-                }
-              }
-            }
-          ]
-        }
-      }
+      ]
     }
   },
-  //////////////////////////////////////////////////////////////////////////////////////////////////
-  //
-  // 3.0 无留坨的化身 激光柱攻击(天驹测试用)
-  //
-  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SceneObj_Area_Xm_Property_Ani_Unique_Marana_01_LaserRainAtk_Test",
-      "onAbilityStart": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "Marana_EffectTest"
-        }
-      ],
       "modifiers": {
-        ///////白盒测试逻辑
         "Marana_EffectTest": {
-          "duration": 5,
+          "modifierName": "",
+          "duration": 5.0,
+          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "AttachModifierToSelfGlobalValueMixin",
               "globalValueKey": "_SCENEOBJ_LaserState",
+              "defaultGlobalValueOnCreate": 0.0,
               "valueSteps": [0.5, 1.5],
               "modifierNameSteps": ["LaserEffect"]
             }
           ],
           "onAdded": [
-            //每次触发换一个岛，最后循环
             {
               "$type": "AddGlobalValue",
+              "ratio": 1.0,
               "key": "_SCENEOBJ_Island_TempCount",
-              "value": 1,
               "useLimitRange": true,
-              "maxValue": 4,
-              "minValue": 0
+              "maxValue": 4.0,
+              "minValue": 0.0
             },
             {
               "$type": "SetGlobalValue",
-              "key": "_SCENEOBJ_Island_TempCount",
-              "value": 1,
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_SCENEOBJ_Island_TempCount",
-                  "value": 4,
-                  "compareType": "Equal"
+                  "ratio": 4.0
                 }
-              ]
+              ],
+              "ratio": 1.0,
+              "key": "_SCENEOBJ_Island_TempCount",
+              "maxValue": 0.0,
+              "minValue": 0.0
             },
-            //根据不同位置射不同位置
             {
               "$type": "Predicated",
-              "target": "Self",
               "targetPredicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_SCENEOBJ_Island_TempCount",
-                  "value": 1,
-                  "compareType": "Equal"
+                  "ratio": 1.0
                 }
               ],
               "successActions": [
                 {
                   "$type": "SetGlobalPos",
-                  "target": "Self",
                   "key": "_SCENEOBJ_Island_Center",
                   "born": {
-                    "$type": "ConfigBornByActionPoint",
-                    "actionPointType": "StandbyPoint",
-                    "selectType": {
-                      "$type": "SelectActionPointByID",
-                      "actionPointID": 330100001
-                    },
+                    "$type": "OHBNBLFMECJ",
                     "offset": {
                       "x": 0.0,
                       "y": 0.0,
                       "z": 0.0
                     },
-                    "onGround": true,
-                    "onGroundRaycastUpDist": 5
+                    "DAPKLNIFPID": true,
+                    "HKNFOKFIKAG": 5.0,
+                    "actionPointType": "StandbyPoint",
+                    "PANKEBCONMO": {
+                      "$type": "DMJJPCHLKEC",
+                      "actionPointID": 330100001
+                    }
                   }
                 },
                 {
                   "$type": "SetGlobalPos",
-                  "target": "Self",
                   "key": "_SCENEOBJ_Island_Shield",
                   "born": {
-                    "$type": "ConfigBornByActionPoint",
-                    "actionPointType": "StandbyPoint",
-                    "selectType": {
-                      "$type": "SelectActionPointByID",
-                      "actionPointID": 330100004
-                    },
+                    "$type": "OHBNBLFMECJ",
                     "offset": {
                       "x": 0.0,
                       "y": 0.0,
                       "z": 0.0
                     },
-                    "onGround": true,
-                    "onGroundRaycastUpDist": 5
+                    "DAPKLNIFPID": true,
+                    "HKNFOKFIKAG": 5.0,
+                    "actionPointType": "StandbyPoint",
+                    "PANKEBCONMO": {
+                      "$type": "DMJJPCHLKEC",
+                      "actionPointID": 330100004
+                    }
                   }
                 }
               ],
               "failActions": [
                 {
                   "$type": "Predicated",
-                  "target": "Self",
                   "targetPredicates": [
                     {
                       "$type": "ByTargetGlobalValue",
                       "key": "_SCENEOBJ_Island_TempCount",
-                      "value": 2,
-                      "compareType": "Equal"
+                      "ratio": 2.0
                     }
                   ],
                   "successActions": [
                     {
                       "$type": "SetGlobalPos",
-                      "target": "Self",
                       "key": "_SCENEOBJ_Island_Center",
                       "born": {
-                        "$type": "ConfigBornByActionPoint",
-                        "actionPointType": "StandbyPoint",
-                        "selectType": {
-                          "$type": "SelectActionPointByID",
-                          "actionPointID": 330100002
-                        },
+                        "$type": "OHBNBLFMECJ",
                         "offset": {
                           "x": 0.0,
                           "y": 0.0,
                           "z": 0.0
                         },
-                        "onGround": true,
-                        "onGroundRaycastUpDist": 5
+                        "DAPKLNIFPID": true,
+                        "HKNFOKFIKAG": 5.0,
+                        "actionPointType": "StandbyPoint",
+                        "PANKEBCONMO": {
+                          "$type": "DMJJPCHLKEC",
+                          "actionPointID": 330100002
+                        }
                       }
                     },
                     {
                       "$type": "SetGlobalPos",
-                      "target": "Self",
                       "key": "_SCENEOBJ_Island_Shield",
                       "born": {
-                        "$type": "ConfigBornByActionPoint",
-                        "actionPointType": "StandbyPoint",
-                        "selectType": {
-                          "$type": "SelectActionPointByID",
-                          "actionPointID": 330100005
-                        },
+                        "$type": "OHBNBLFMECJ",
                         "offset": {
                           "x": 0.0,
                           "y": 0.0,
                           "z": 0.0
                         },
-                        "onGround": true,
-                        "onGroundRaycastUpDist": 5
+                        "DAPKLNIFPID": true,
+                        "HKNFOKFIKAG": 5.0,
+                        "actionPointType": "StandbyPoint",
+                        "PANKEBCONMO": {
+                          "$type": "DMJJPCHLKEC",
+                          "actionPointID": 330100005
+                        }
                       }
                     }
                   ],
                   "failActions": [
                     {
                       "$type": "SetGlobalPos",
-                      "target": "Self",
                       "key": "_SCENEOBJ_Island_Center",
                       "born": {
-                        "$type": "ConfigBornByActionPoint",
-                        "actionPointType": "StandbyPoint",
-                        "selectType": {
-                          "$type": "SelectActionPointByID",
-                          "actionPointID": 330100003
-                        },
+                        "$type": "OHBNBLFMECJ",
                         "offset": {
                           "x": 0.0,
                           "y": 0.0,
                           "z": 0.0
                         },
-                        "onGround": true,
-                        "onGroundRaycastUpDist": 5
+                        "DAPKLNIFPID": true,
+                        "HKNFOKFIKAG": 5.0,
+                        "actionPointType": "StandbyPoint",
+                        "PANKEBCONMO": {
+                          "$type": "DMJJPCHLKEC",
+                          "actionPointID": 330100003
+                        }
                       }
                     },
                     {
                       "$type": "SetGlobalPos",
-                      "target": "Self",
                       "key": "_SCENEOBJ_Island_Shield",
                       "born": {
-                        "$type": "ConfigBornByActionPoint",
-                        "actionPointType": "StandbyPoint",
-                        "selectType": {
-                          "$type": "SelectActionPointByID",
-                          "actionPointID": 330100006
-                        },
+                        "$type": "OHBNBLFMECJ",
                         "offset": {
                           "x": 0.0,
                           "y": 0.0,
                           "z": 0.0
                         },
-                        "onGround": true,
-                        "onGroundRaycastUpDist": 5
+                        "DAPKLNIFPID": true,
+                        "HKNFOKFIKAG": 5.0,
+                        "actionPointType": "StandbyPoint",
+                        "PANKEBCONMO": {
+                          "$type": "DMJJPCHLKEC",
+                          "actionPointID": 330100006
+                        }
                       }
                     }
                   ]
@@ -3090,15 +3152,16 @@
             {
               "$type": "CreateGadget",
               "lifeByOwnerIsAlive": true,
-              "gadgetID": 42608006,
-              "campID": 4001,
-              "sightGroupWithOwner": true,
               "born": {
                 "$type": "ConfigBornByGlobalValue",
+                "DAPKLNIFPID": true,
+                "HKNFOKFIKAG": 5.0,
                 "positionKey": "_SCENEOBJ_Island_Center",
-                "onGround": true,
-                "onGroundRaycastUpDist": 5
-              }
+                "directionKey": ""
+              },
+              "sightGroupWithOwner": true,
+              "gadgetID": 42608006,
+              "campID": 4001
             },
             {
               "$type": "EnablePartControl",
@@ -3113,67 +3176,80 @@
           "onRemoved": [
             {
               "$type": "EnablePartControl",
-              "partRootNames": ["LaserControl"],
-              "enable": false
+              "partRootNames": ["LaserControl"]
             },
-            //清下辅助定位gadget
             {
               "$type": "KillGadget",
               "gadgetInfo": {
-                "$type": "SelectTargetsByChildren",
-                "configID": 42608006,
-                "sortType": "Reversed"
+                "sortType": "Reversed",
+                "configID": 42608006
               }
             },
             {
               "$type": "SetGlobalValue",
+              "ratio": 0.0,
               "key": "_SCENEOBJ_LaserState",
-              "value": 0
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ]
         },
         "LaserLatency": {
+          "modifierName": "",
           "duration": 0.5,
+          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
+              "ratio": 1.0,
               "key": "_SCENEOBJ_LaserState",
-              "value": 1
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ]
         },
         "LaserEffect": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetPartControlTarget",
               "otherTargets": {
                 "$type": "SelectTargetsByChildren",
-                "configID": 42608006,
+                "entityTypePriority": ["Gadget"],
                 "sortType": "Nearest",
-                "entityTypePriority": ["Gadget"]
+                "configID": 42608006
               },
               "partRootNames": ["LaserControl"]
             },
             {
               "$type": "AttachEffect",
-              "effectPattern": "Eff_SceneObj_IceShieldActivated_01",
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_IceShieldActivated_01",
               "born": {
                 "$type": "ConfigBornByGlobalValue",
-                "positionKey": "_SCENEOBJ_Island_Shield"
-              }
+                "positionKey": "_SCENEOBJ_Island_Shield",
+                "directionKey": ""
+              },
+              "effectTempleteID": -1.0
             },
             {
               "$type": "AttachEffect",
-              "effectPattern": "Eff_SceneObj_DeathZero_LaserRain",
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DeathZero_LaserRain",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
                 "attachPointName": "LaserControl"
-              }
+              },
+              "effectTempleteID": -1.0
             }
           ]
         }
-        ///////
-      }
+      },
+      "onAbilityStart": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Marana_EffectTest"
+        }
+      ]
     }
   }
 ]

@@ -1,40 +1,8 @@
 [
-  ////////////////////////////////////////////////////////////////
-  //
-  //  钓鱼系统 - 钓鱼状态及按键处理
-  //
-  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Common_Fishing",
-      "isDynamicAbility": true,
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "Avatar_Fishing_AddSkillInfo"
-        },
-        {
-          "$type": "AttachModifier",
-          "modifierName": "Avatar_Fishing_ChangePlayMode"
-        },
-        {
-          "$type": "AttachModifier",
-          "modifierName": "Avatar_Fishing_Start"
-        },
-        {
-          "$type": "AttachModifier",
-          "modifierName": "Avatar_Fishing_Invincible_Buff"
-        },
-        {
-          "$type": "AttachModifier",
-          "modifierName": "Avatar_Fishing_DenyLock_Buff"
-        },
-        {
-          "$type": "AttachModifier",
-          "modifierName": "Avatar_Fishing_Ghost_Buff"
-        }
-      ],
       "abilityMixins": [
         {
           "$type": "AttachToStateIDMixin",
@@ -66,11 +34,6 @@
           "stateIDs": ["Fishing_Wait"],
           "modifierName": "UNIQUE_Avatar_Fishing_ChangeButton_Wait"
         },
-        // {
-        //     "$type": "AttachToStateIDMixin",
-        //     "stateIDs": ["Fishing_Battle"],
-        //     "modifierName": "Avatar_Fishing_ChangeButton_Battle",
-        // },
         {
           "$type": "AttachToStateIDMixin",
           "stateIDs": [
@@ -86,9 +49,10 @@
         }
       ],
       "modifiers": {
-        //进入钓鱼选杆选饵阶段
         "Avatar_Fishing_Start": {
+          "modifierName": "",
           "duration": 0.5,
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorTrigger",
@@ -96,67 +60,70 @@
             }
           ]
         },
-        //切换钓鱼模式，屏蔽一些不用的按键
         "Avatar_Fishing_ChangePlayMode": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "ChangePlayMode",
+              "RotationDampTime": true,
               "muteRemoteAction": true,
-              "toPlayMode": "Fishing",
-              "doOffStage": true
+              "toPlayMode": "Fishing"
             }
           ],
           "onRemoved": [
             {
               "$type": "ChangePlayMode",
+              "RotationDampTime": true,
               "muteRemoteAction": true,
-              "toPlayMode": "Normal",
-              "doOffStage": true
+              "LEMNHMBJBFH": "Fishing"
             }
           ]
         },
-        //选杆阶段   暂时和抛竿按键一致，否则导致按键会断掉
         "Avatar_Fishing_ChangeButton_Choose": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
-              "$type": "SwitchSkillIDMixin", //抛竿按键
+              "$type": "SwitchSkillIDMixin",
               "priority": "Playmode",
-              "skillIndex": 0,
               "skillID": 20311
             },
             {
-              "$type": "SwitchSkillIDMixin", //换饵按键
+              "$type": "SwitchSkillIDMixin",
               "priority": "Playmode",
               "skillIndex": 2,
               "skillID": 20316
             }
           ]
         },
-        //等待阶段
         "UNIQUE_Avatar_Fishing_ChangeButton_Wait": {
+          "modifierName": "",
           "isUnique": true,
+          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
-              "$type": "SwitchSkillIDMixin", //收杆按键
+              "$type": "SwitchSkillIDMixin",
               "priority": "Playmode",
-              "skillIndex": 0,
               "skillID": 20314
             }
           ]
         },
-        //退出按钮显示
         "Avatar_Fishing_ChangeButton_Exit": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
-              "$type": "SwitchSkillIDMixin", //退出按键
+              "$type": "SwitchSkillIDMixin",
               "priority": "Playmode",
               "skillIndex": 3,
               "skillID": 20315
             }
           ]
         },
-        //动态上下钓鱼按键SkillInfo
         "Avatar_Fishing_AddSkillInfo": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AddAvatarSkillInfo",
@@ -202,27 +169,34 @@
             }
           ]
         },
-        //钓鱼状态下Tag标记
         "Avatar_Fishing_StateTag": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
+              "RotationDampTime": true,
+              "ratio": 1.0,
               "key": "_ABILITY_Fishing_Tag",
-              "value": 1,
-              "doOffStage": true
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
+              "RotationDampTime": true,
+              "ratio": 0.0,
               "key": "_ABILITY_Fishing_Tag",
-              "value": 0,
-              "doOffStage": true
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ]
         },
-        //钓鱼状态中的无敌Buff
         "Avatar_Fishing_Invincible_Buff": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 2.0,
           "state": "Invincible",
           "onAdded": [
             {
@@ -230,89 +204,92 @@
               "resistanceListID": 11002
             }
           ],
-          "thinkInterval": 2.0,
           "onThinkInterval": [
             {
               "$type": "RemoveModifier",
-              "modifierName": "Avatar_Fishing_Invincible_Buff",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Fishing_Tag",
-                  "value": 0,
-                  "compareType": "Equal"
+                  "ratio": 0.0
                 }
-              ]
+              ],
+              "modifierName": "Avatar_Fishing_Invincible_Buff"
             }
           ]
         },
         "Avatar_Fishing_DenyLock_Buff": {
-          "state": "DenyLockOn",
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "thinkInterval": 2.0,
+          "state": "DenyLockOn",
           "onThinkInterval": [
             {
               "$type": "RemoveModifier",
-              "modifierName": "Avatar_Fishing_DenyLock_Buff",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Fishing_Tag",
-                  "value": 0,
-                  "compareType": "Equal"
+                  "ratio": 0.0
                 }
-              ]
+              ],
+              "modifierName": "Avatar_Fishing_DenyLock_Buff"
             }
           ]
         },
         "Avatar_Fishing_Ghost_Buff": {
-          "state": "IsGhostToEnemy",
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "thinkInterval": 2.0,
+          "state": "IsGhostToEnemy",
           "onThinkInterval": [
             {
               "$type": "RemoveModifier",
-              "modifierName": "Avatar_Fishing_Ghost_Buff",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Fishing_Tag",
-                  "value": 0,
-                  "compareType": "Equal"
+                  "ratio": 0.0
                 }
-              ]
+              ],
+              "modifierName": "Avatar_Fishing_Ghost_Buff"
             }
           ]
         }
-      }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Avatar_Fishing_AddSkillInfo"
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Avatar_Fishing_ChangePlayMode"
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Avatar_Fishing_Start"
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Avatar_Fishing_Invincible_Buff"
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Avatar_Fishing_DenyLock_Buff"
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Avatar_Fishing_Ghost_Buff"
+        }
+      ],
+      "isDynamicAbility": true
     }
   },
-
-  ////////////////////////////////////////////////////////////////
-  //
-  //  钓鱼系统 - 抛竿瞄准阶段
-  //
-  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Common_Fishing_Cast",
-      "isDynamicAbility": true,
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "key": "_ABILITY_Fishing_Aim_Length", //镜头俯仰角控制抛射距离
-          "value": 0
-        },
-        {
-          "$type": "SetGlobalValue",
-          "key": "_ABILITY_Fishing_Pool_Legal", //瞄准区域是否合法判定
-          "value": 0
-        },
-        {
-          "$type": "SetGlobalValue",
-          "key": "_ABILITY_Fishing_IsBaitEnough", //判断鱼饵是否充足
-          "value": 0
-        }
-      ],
       "abilityMixins": [
         {
           "$type": "AttachToStateIDMixin",
@@ -332,21 +309,21 @@
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "Fishing_Cast_AS",
           "modifierName": "Fishing_Cast_TriggerBullet",
-          "normalizeStart": 0.26
+          "normalizeStart": 0.25999999046325684
         },
         {
           "$type": "ButtonHoldChargeMixin",
           "skillID": 20311,
-          "chargeTime": 99999,
+          "chargeTime": 99999.0,
+          "secondChargeTime": 999999.0,
           "OnBeginUncharged": [
             {
               "$type": "Predicated",
               "targetPredicates": [
                 {
                   "$type": "ByTargetGlobalValue",
-                  "key": "_ABILITY_Fishing_IsBaitEnough", //抛竿时检测是否有鱼饵
-                  "value": 1,
-                  "compareType": "Equal"
+                  "key": "_ABILITY_Fishing_IsBaitEnough",
+                  "ratio": 1.0
                 }
               ],
               "successActions": [
@@ -389,9 +366,10 @@
         }
       ],
       "modifiers": {
-        //延迟一点再强制退出一次
         "Delay_SetTrigger": {
-          "duration": 0.6,
+          "modifierName": "",
+          "duration": 0.6000000238418579,
+          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "SetAnimatorTrigger",
@@ -399,39 +377,33 @@
             }
           ]
         },
-        //瞄准进入Focus镜头(自由移动镜头)
         "Fishing_Cast_Focus": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AvatarEnterFocus",
               "cameraFollowLower": {
-                "x": 0.8,
+                "x": 0.800000011920929,
                 "y": 1.0,
                 "z": -2.5
               },
               "cameraFollowUpper": {
-                "x": 0.5,
-                "y": 0.0,
-                "z": 0.0
+                "x": 0.5
               },
+              "cameraFollowMaxDegree": 0.0,
               "cameraFastFocusMode": true,
-              "cameraFollowMaxDegree": 0,
-              "cameraFollowMinDegree": -60, //原本上下限 -60,60
               "dragButtonName": "Skill1",
               "assistance": {
-                "ps4": {
-                  "useGyro": false
-                },
-                "ps5": {
-                  "useGyro": false
-                },
+                "ps4": {},
+                "ps5": {},
                 "other": {
                   "useGyro": true
                 }
               },
               "canMove": false,
               "showCrosshair": false,
-              "vcam_fov": 20
+              "vcamFov": 20.0
             },
             {
               "$type": "PlayEmoSync",
@@ -452,68 +424,64 @@
               "emoSyncAssetPath": "Cutscene/ShortDialog/Cs_Emo_Avatar_Simple_Common_Set/Cs_Emo_Avatar_Common_Normal"
             },
             {
-              "$type": "ControlEmotion",
-              "toggleBlink": true
+              "$type": "ControlEmotion"
             }
           ]
         },
-        //控制瞄准线与发射鱼漂
         "Fishing_Aim": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "modifierMixins": [
+            {
+              "$type": "FishingAimParabolaMixin",
+              "minAngle": -60.0,
+              "minRange": 2.0,
+              "maxRange": 15.0,
+              "globalValueKey": "_ABILITY_Fishing_Aim_Length",
+              "otherTargets": {
+                "$type": "DGGJIJFHAPM",
+                "entityType": "FishRod"
+              }
+            }
+          ],
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "effectPattern": "Eff_Avatar_Fishing_Aim_Line", //特效由鱼竿端点发射
               "otherTargets": {
-                "$type": "SelectTargetsByChildrenEntityType",
-                "entityType": "FishRod",
-                "sortType": "Default"
-              }
+                "$type": "DGGJIJFHAPM",
+                "entityType": "FishRod"
+              },
+              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Fishing_Aim_Line",
+              "effectTempleteID": -1.0
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalPos",
-              "key": "_ABILITY_FishingRod_Pos", //将鱼竿端点位置存在角色身上
               "otherTargets": {
-                "$type": "SelectTargetsByChildrenEntityType",
-                "entityType": "FishRod",
-                "sortType": "Default"
+                "$type": "DGGJIJFHAPM",
+                "entityType": "FishRod"
               },
+              "key": "_ABILITY_FishingRod_Pos",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
-                "attachPointName": "LinePoint",
-                "attachPointTargetType": "Target"
+                "attachPointName": "LinePoint"
               },
               "setTarget": false
             }
-          ],
-          //通过镜头俯仰角实时更新GV值
-          "modifierMixins": [
-            {
-              "$type": "FishingAimParabolaMixin",
-              "globalValueKey": "_ABILITY_Fishing_Aim_Length",
-              "minAngle": -60,
-              "maxAngle": 0,
-              "minRange": 2,
-              "maxRange": 15,
-              //同时把GlobalValue值传给Target
-              "otherTargets": {
-                "$type": "SelectTargetsByChildrenEntityType",
-                "entityType": "FishRod",
-                "sortType": "Default"
-              }
-            }
           ]
         },
-        //发射鱼漂
         "Fishing_Cast_TriggerBullet": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "TriggerBullet",
               "bulletID": 42000001,
               "born": {
                 "$type": "ConfigBornByGlobalValue",
-                "positionKey": "_ABILITY_FishingRod_Pos"
+                "positionKey": "_ABILITY_FishingRod_Pos",
+                "directionKey": ""
               }
             },
             {
@@ -522,60 +490,125 @@
             }
           ]
         }
-      }
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 0.0,
+          "key": "_ABILITY_Fishing_Aim_Length",
+          "maxValue": 0.0,
+          "minValue": 0.0
+        },
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 0.0,
+          "key": "_ABILITY_Fishing_Pool_Legal",
+          "maxValue": 0.0,
+          "minValue": 0.0
+        },
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 0.0,
+          "key": "_ABILITY_Fishing_IsBaitEnough",
+          "maxValue": 0.0,
+          "minValue": 0.0
+        }
+      ],
+      "isDynamicAbility": true
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
-      "abilityName": "Avatar_Common_Fishing_CreateAnchor", //鱼漂发射器通知主角创建鱼漂
-      "isDynamicAbility": true,
+      "abilityName": "Avatar_Common_Fishing_CreateAnchor",
       "onAbilityStart": [
         {
           "$type": "CreateGadget",
-          "gadgetID": 42000002,
-          "campID": 1001,
-          "campTargetType": "Enemy",
           "born": {
             "$type": "ConfigBornByGlobalValue",
-            "positionKey": "_ABILITY_Fishing_AnchorPoint",
             "offset": {
-              "x": 0,
-              "y": 0,
-              "z": 0
-            }
-          }
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "positionKey": "_ABILITY_Fishing_AnchorPoint",
+            "directionKey": ""
+          },
+          "gadgetID": 42000002,
+          "campID": 1001,
+          "campTargetType": "Enemy"
         },
         {
           "$type": "FireFishingEvent",
           "eventType": "CastAnchorPoint"
         }
-      ]
+      ],
+      "isDynamicAbility": true
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
-      "abilityName": "Avatar_Common_Fishing_SelectBait", //响应更换鱼饵按钮
-      "isDynamicAbility": true,
+      "abilityName": "Avatar_Common_Fishing_SelectBait",
       "onAbilityStart": [
         {
           "$type": "FireFishingEvent",
           "eventType": "SelectBait"
         }
-      ]
+      ],
+      "isDynamicAbility": true
     }
   },
-  // Gadget_42000001  瞄准射线发射器，射线碰撞点为实际钓点
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Common_Fishing_Cast_Bullet",
+      "modifiers": {
+        "Avatar_Fishing_Cast_OnAvatar": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "otherTargets": {
+                "$type": "DGGJIJFHAPM",
+                "entityType": "FishRod"
+              },
+              "modifierName": "Avatar_Fishing_Cast_OnRod"
+            }
+          ]
+        },
+        "Avatar_Fishing_Cast_OnRod": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "target": "Caster",
+              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Fishing_Line_01",
+              "effectTempleteID": -1.0,
+              "KIGIKJMMKEJ": true
+            }
+          ]
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "SetAnimatorBool",
+          "target": "OriginOwner",
+          "boolID": "PRIVATE_Fishing_CanPullRod"
+        },
+        {
+          "$type": "AttachEffect",
+          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Fishing_Cast_Bullet",
+          "effectTempleteID": -1.0
+        }
+      ],
       "onAbilityStart": [
         {
           "$type": "SetGlobalPos",
-          "key": "_ABILITY_Fishing_AnchorPoint",
           "target": "OriginOwner",
+          "key": "_ABILITY_Fishing_AnchorPoint",
           "born": {
             "$type": "ConfigBornByCollisionPoint",
             "offset": {
@@ -583,16 +616,13 @@
               "y": 0.0,
               "z": 0.0
             },
-            "onGround": true,
-            "onGroundIgnoreWater": false,
-            "alongGround": true,
-            "onGroundRaycastUpDist": 2
+            "DAPKLNIFPID": true,
+            "BJCIHELGKLP": true
           }
         },
         {
           "$type": "SetGlobalPos",
           "key": "_ABILITY_Fishing_AnchorPoint",
-          "target": "Self",
           "born": {
             "$type": "ConfigBornByCollisionPoint",
             "offset": {
@@ -600,24 +630,13 @@
               "y": 0.0,
               "z": 0.0
             },
-            "onGround": true,
-            "onGroundIgnoreWater": false,
-            "alongGround": true,
-            "onGroundRaycastUpDist": 2
+            "DAPKLNIFPID": true,
+            "BJCIHELGKLP": true
           }
         },
-        // {
-        //     "$type": "FireEffect",
-        //     "effectPattern": "Eff_Avatar_Fishing_Cork_Bloom",
-        //     "born":
-        //     {
-        //         "$type": "ConfigBornByGlobalValue",
-        //         "positionKey": "_ABILITY_Fishing_AnchorPoint",
-        //     },
-        // },
-
         {
           "$type": "FireHitEffect",
+          "hitEntity": "",
           "hitScene": {
             "defaultEffect": "Eff_Avatar_Fishing_Cork_HitScene",
             "surfaceEffect": {
@@ -631,84 +650,65 @@
           "targetPredicates": [
             {
               "$type": "ByTargetGlobalValue",
-              "key": "_ABILITY_Fishing_Pool_Legal", //判断抛射区域是否合法
-              "value": 1,
-              "compareType": "Equal"
+              "key": "_ABILITY_Fishing_Pool_Legal",
+              "ratio": 1.0
             }
           ],
-          //合法继续垂钓
           "successActions": [
             {
               "$type": "TriggerAbility",
-              "abilityName": "Avatar_Common_Fishing_CreateAnchor",
-              "target": "OriginOwner"
+              "target": "OriginOwner",
+              "abilityName": "Avatar_Common_Fishing_CreateAnchor"
             }
           ],
-          //非法直接收竿
           "failActions": [
             {
               "$type": "SetAnimatorTrigger",
-              "triggerID": "PRIVATE_Fishing_Pull",
-              "target": "OriginOwner"
+              "target": "OriginOwner",
+              "triggerID": "PRIVATE_Fishing_Pull"
             }
           ]
         }
-      ],
-      "onAdded": [
-        {
-          "$type": "SetAnimatorBool",
-          "boolID": "PRIVATE_Fishing_CanPullRod",
-          "value": false,
-          "target": "OriginOwner"
-        },
-        {
-          "$type": "AttachEffect",
-          "effectPattern": "Eff_Avatar_Fishing_Cast_Bullet"
-        }
-        // {
-        //     "$type": "AttachModifier",
-        //     "modifierName": "Avatar_Fishing_Cast_OnAvatar",
-        //     "target": "OriginOwner",
-        // },
-      ],
-      "modifiers": {
-        //挂在角色身上找鱼竿
-        "Avatar_Fishing_Cast_OnAvatar": {
-          "onAdded": [
-            {
-              "$type": "AttachModifier",
-              "modifierName": "Avatar_Fishing_Cast_OnRod",
-              "otherTargets": {
-                "$type": "SelectTargetsByChildrenEntityType",
-                "entityType": "FishRod",
-                "sortType": "Default"
-              }
-            }
-          ]
-        },
-        //鱼竿与抛点连线
-        "Avatar_Fishing_Cast_OnRod": {
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "effectPattern": "Eff_Avatar_Fishing_Line_01",
-              "target": "Caster",
-              "setSelfAsEffectPluginTarget": true
-            }
-          ]
-        }
-      }
+      ]
     }
   },
-  // Gadget_42000002  鱼漂
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Common_Fishing_Cork",
+      "modifiers": {
+        "UNIQUE_Avatar_Fishing_Waiting_LineEffect": {
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "otherTargets": {
+                "$type": "DGGJIJFHAPM",
+                "entityType": "FishRod"
+              },
+              "modifierName": "Avatar_Fishing_Waiting_LineEffect_OnWeapon"
+            }
+          ]
+        },
+        "Avatar_Fishing_Waiting_LineEffect_OnWeapon": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "target": "Caster",
+              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Fishing_Line_01",
+              "effectTempleteID": -1.0,
+              "KIGIKJMMKEJ": true
+            }
+          ]
+        }
+      },
       "onAdded": [
         {
           "$type": "SetAnimatorTrigger",
-          "triggerID": "PRIVATE_Fishing_Pull", //生成鱼漂时发现不在水面直接收竿
           "target": "OriginOwner",
           "predicates": [
             {
@@ -717,39 +717,40 @@
               "predicates": [
                 {
                   "$type": "ByTargetAltitude",
-                  "TargetAltitudeType": "GroundOnly",
-                  "value": 0.3,
-                  "logic": "Lesser"
+                  "logic": "Lesser",
+                  "ratio": 0.30000001192092896,
+                  "OKDOMGOMNFE": "GroundOnly"
                 },
                 {
                   "$type": "ByTargetAltitude",
-                  "TargetAltitudeType": "WaterOnly",
-                  "value": 0.3,
-                  "logic": "Greater"
+                  "ratio": 0.30000001192092896,
+                  "OKDOMGOMNFE": "WaterOnly"
                 }
               ]
             }
-          ]
+          ],
+          "triggerID": "PRIVATE_Fishing_Pull"
         },
         {
           "$type": "AttachEffect",
-          "effectPattern": "Eff_Avatar_Fishing_Cork"
+          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Fishing_Cork",
+          "effectTempleteID": -1.0
         },
         {
           "$type": "TriggerAbility",
-          "abilityName": "Avatar_Common_FishingLine_Manager", //通知自己创建鱼线
-          "target": "OriginOwner"
+          "target": "OriginOwner",
+          "abilityName": "Avatar_Common_FishingLine_Manager"
         },
         {
           "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Avatar_Fishing_Waiting_LineEffect",
-          "target": "OriginOwner"
+          "target": "OriginOwner",
+          "modifierName": "UNIQUE_Avatar_Fishing_Waiting_LineEffect"
         },
         {
           "$type": "SetAnimatorBool",
-          "boolID": "PRIVATE_Fishing_CanPullRod", //必须要鱼漂发射器碰撞后才能收竿
-          "value": true,
-          "target": "OriginOwner"
+          "target": "OriginOwner",
+          "boolID": "PRIVATE_Fishing_CanPullRod",
+          "ratio": true
         }
       ],
       "onAbilityStart": [
@@ -760,84 +761,19 @@
       "onKill": [
         {
           "$type": "FireEffect",
-          "effectPattern": "Eff_Avatar_Fishing_Cork_Pull", //鱼漂消失时的过度效果
+          "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Fishing_Cork_Pull",
           "born": {
             "$type": "ConfigBornBySelf"
-          }
+          },
+          "effectTempleteID": -1.0
         }
-      ],
-      "modifiers": {
-        //等待阶段的动态鱼线
-        "UNIQUE_Avatar_Fishing_Waiting_LineEffect": {
-          "isUnique": true,
-          "onAdded": [
-            {
-              "$type": "AttachModifier",
-              "modifierName": "Avatar_Fishing_Waiting_LineEffect_OnWeapon",
-              "otherTargets": {
-                "$type": "SelectTargetsByChildrenEntityType",
-                "entityType": "FishRod",
-                "sortType": "Default"
-              }
-            }
-          ]
-        },
-        //特效必须是鱼竿创建
-        "Avatar_Fishing_Waiting_LineEffect_OnWeapon": {
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "effectPattern": "Eff_Avatar_Fishing_Line_01",
-              "target": "Caster",
-              "setSelfAsEffectPluginTarget": true
-            }
-          ]
-        }
-      }
+      ]
     }
   },
-
-  ////////////////////////////////////////////////////////////////
-  //
-  //  钓鱼系统 - 等待阶段
-  //
-  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Common_Fishing_Waiting",
-      "isDynamicAbility": true,
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "modifierName": "Avatar_Fishing_AddBattleSkill"
-        }
-      ],
-      //鱼儿上钩时进入Trigger
-      "onAbilityStart": [
-        {
-          "$type": "RemoveUniqueModifier",
-          "modifierName": "UNIQUE_Avatar_Fishing_ChangeButton_Wait"
-        },
-        {
-          "$type": "AttachModifier",
-          "modifierName": "Avatar_Fishing_ChangeButton_Battle"
-        },
-        {
-          "$type": "SetSelfAttackTarget",
-          "target": "Other"
-        },
-        {
-          "$type": "TriggerAbility",
-          "abilityName": "Avatar_Common_FishingRod",
-          "otherTargets": {
-            "$type": "SelectTargetsByChildrenEntityType",
-            "entityType": "FishRod",
-            "sortType": "Default"
-          },
-          "forceUseSelfCurrentAttackTarget": true //把自己的SelfAttackTarget传过去
-        }
-      ],
       "abilityMixins": [
         {
           "$type": "AttachToStateIDMixin",
@@ -861,8 +797,9 @@
         }
       ],
       "modifiers": {
-        //动态上下Battle技能信息(必须得放在这个ability内，否则会下不了)
         "Avatar_Fishing_AddBattleSkill": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AddAvatarSkillInfo",
@@ -876,36 +813,40 @@
             }
           ]
         },
-        //鱼儿咬钩时替换响应及Battle按键
         "Avatar_Fishing_ChangeButton_Battle": {
-          "onAdded": [
-            {
-              "$type": "SetGlobalValue",
-              "key": "_ABILITY_Fishing_IsBattle", //用于判定自己是否处Battle状态中
-              "value": 0
-            }
-          ],
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "modifierMixins": [
             {
               "$type": "SwitchSkillIDMixin",
-              "priority": "Playmode", //优先级高一些，覆盖收竿
-              "skillIndex": 0,
-              "skillID": 20313 //启动及QTE按键，用同一个
+              "priority": "Playmode",
+              "skillID": 20313
+            }
+          ],
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "ratio": 0.0,
+              "key": "_ABILITY_Fishing_IsBattle",
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ]
         },
-        //脱离Waiting阶段去掉响应按钮
         "Avatar_Fishing_RemoveChangeSkill": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "RemoveModifier",
-              "modifierName": "Avatar_Fishing_ChangeButton_Battle",
-              "doOffStage": true
+              "RotationDampTime": true,
+              "modifierName": "Avatar_Fishing_ChangeButton_Battle"
             }
           ]
         },
-        //主动或被动抬竿时需要发送指定事件
         "Avatar_Fishing_Pull": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "FireFishingEvent",
@@ -913,80 +854,100 @@
             }
           ]
         },
-        //等待阶段镜头对焦偏移
         "Avatar_Fishing_Camera_FocusBias_Waiting": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AvatarEnterViewBias",
-              "sphereBiasPole": 45, //正数为向右偏移
-              "sphereBiasElev": 75, //正数为向上偏移
-              "sphereRadius": 2,
-              "postForwardPoleDeltaAngle": 48, //正数为右侧偏角
-              "postForwardElevDeltaAngle": 45, //正数为上侧偏角
-              "lockZoom": true,
-              "lockResetBack": true
+              "BAMFNNDMDHL": 45.0,
+              "JCNCFFHEHHM": 75.0,
+              "FBPNHOFGKKM": 2.0,
+              "OOPAFKJEDHM": 48.0,
+              "IGDPJJODBNB": 45.0,
+              "CLGANMMNCHN": true,
+              "PBEKGIMPMIA": true
             }
           ],
           "onRemoved": [
             {
               "$type": "AvatarExitViewBias",
-              "lerpRadius": 4.0,
-              "lerpDuration": 0.5,
-              "doOffStage": true
+              "RotationDampTime": true,
+              "DGCCEDGOMCH": 0.5
             }
           ]
         },
-        //Battle阶段的镜头对焦偏移
         "Avatar_Fishing_Camera_FocusBias_Battle": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AvatarEnterViewBias",
-              "sphereBiasPole": 45, //正数为向右偏移
-              "sphereBiasElev": 20, //正数为向上偏移
-              "sphereRadius": 4,
-              "postForwardPoleDeltaAngle": 23, //正数为右侧偏角
-              "postForwardElevDeltaAngle": 0, //正数为上侧偏角
-              "lockZoom": false,
-              "lockResetBack": true
+              "BAMFNNDMDHL": 45.0,
+              "JCNCFFHEHHM": 20.0,
+              "FBPNHOFGKKM": 4.0,
+              "OOPAFKJEDHM": 23.0,
+              "PBEKGIMPMIA": true
             }
           ],
           "onRemoved": [
             {
               "$type": "AvatarExitViewBias",
-              "lerpRadius": 4.0,
-              "lerpDuration": 0.5,
-              "doOffStage": true
+              "RotationDampTime": true,
+              "DGCCEDGOMCH": 0.5
             }
           ]
         }
-      }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Avatar_Fishing_AddBattleSkill"
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "RemoveUniqueModifier",
+          "modifierName": "UNIQUE_Avatar_Fishing_ChangeButton_Wait"
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Avatar_Fishing_ChangeButton_Battle"
+        },
+        {
+          "$type": "SetSelfAttackTarget",
+          "target": "Other"
+        },
+        {
+          "$type": "TriggerAbility",
+          "otherTargets": {
+            "$type": "DGGJIJFHAPM",
+            "entityType": "FishRod"
+          },
+          "abilityName": "Avatar_Common_FishingRod",
+          "forceUseSelfCurrentAttackTarget": true
+        }
+      ],
+      "isDynamicAbility": true
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Common_Fishing_Delay",
-      "isDynamicAbility": true,
-      //鱼儿上钩超时未响应
       "onAbilityStart": [
         {
           "$type": "SetAnimatorTrigger",
           "triggerID": "PRIVATE_Fishing_Pull"
         }
-      ]
+      ],
+      "isDynamicAbility": true
     }
   },
-
-  ////////////////////////////////////////////////////////////////
-  //
-  //  钓鱼系统 - Battle QTE阶段
-  //
-  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Common_Fishing_Battle",
-      "isDynamicAbility": true,
       "abilityMixins": [
         {
           "$type": "AttachToStateIDMixin",
@@ -996,19 +957,19 @@
         {
           "$type": "ButtonHoldChargeMixin",
           "skillID": 20313,
-          "chargeTime": 999999,
+          "chargeTime": 999999.0,
+          "secondChargeTime": 999999.0,
           "OnBeginUncharged": [
             {
               "$type": "ApplyModifier",
-              "modifierName": "Avatar_Fishing_Battle_Start",
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_ABILITY_Fishing_IsBattle",
-                  "value": 0,
-                  "compareType": "Equal"
+                  "ratio": 0.0
                 }
-              ]
+              ],
+              "modifierName": "Avatar_Fishing_Battle_Start"
             },
             {
               "$type": "AttachModifier",
@@ -1032,21 +993,24 @@
           "chargeStateIDs": ["Fishing_Battle"]
         }
       ],
+      "abilitySpecials": {
+        "Override_Fishing_Blend": 0.0
+      },
       "modifiers": {
-        //Battle阶段按键反馈
         "Avatar_Fishing_Battle": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "FireFishingEvent",
               "eventType": "QteStart"
             }
           ],
-          //记得在退出动作的时候清一下Handler
           "onRemoved": [
             {
               "$type": "RemoveModifier",
-              "modifierName": "Avatar_Fishing_Battle_QteHandler",
-              "doOffStage": true
+              "RotationDampTime": true,
+              "modifierName": "Avatar_Fishing_Battle_QteHandler"
             },
             {
               "$type": "RemoveModifier",
@@ -1054,34 +1018,38 @@
             },
             {
               "$type": "SetGlobalValue",
+              "ratio": 0.0,
               "key": "_ABILITY_Fishing_BattleBlend",
-              "value": 0
+              "maxValue": 0.0,
+              "minValue": 0.0
             },
             {
               "$type": "SetAnimatorFloat",
               "floatID": "Fishing_BattleBlend",
-              "value": 0
+              "ratio": 0.0
             },
             {
               "$type": "SetAnimatorFloat",
-              "floatID": "Blend",
-              "value": 0,
               "otherTargets": {
-                "$type": "SelectTargetsByChildrenEntityType",
-                "entityType": "FishRod",
-                "sortType": "Default"
-              }
+                "$type": "DGGJIJFHAPM",
+                "entityType": "FishRod"
+              },
+              "floatID": "Blend",
+              "ratio": 0.0
             }
           ]
         },
-        //开启钓鱼QTE阶段
         "Avatar_Fishing_Battle_Start": {
+          "modifierName": "",
           "duration": 0.5,
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
+              "ratio": 1.0,
               "key": "_ABILITY_Fishing_IsBattle",
-              "value": 1
+              "maxValue": 0.0,
+              "minValue": 0.0
             },
             {
               "$type": "SetAnimatorTrigger",
@@ -1089,15 +1057,16 @@
             }
           ]
         },
-        //处理QTE按键反馈与Trigger发送逻辑
         "Avatar_Fishing_Battle_QteHandler": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 0.07000000029802322,
           "onAdded": [
             {
               "$type": "FireFishingEvent",
               "eventType": "QteTrigger"
             }
           ],
-          "thinkInterval": 0.07,
           "onThinkInterval": [
             {
               "$type": "FireFishingEvent",
@@ -1105,11 +1074,11 @@
             },
             {
               "$type": "AddGlobalValue",
+              "ratio": 0.11999999731779099,
               "key": "_ABILITY_Fishing_BattleBlend",
-              "value": 0.12,
               "useLimitRange": true,
-              "maxValue": 1,
-              "minValue": 0
+              "maxValue": 1.0,
+              "minValue": 0.0
             },
             {
               "$type": "SetGlobalValueToOverrideMap",
@@ -1117,35 +1086,35 @@
               "overrideMapKey": "Override_Fishing_Blend"
             },
             {
-              "$type": "SetAnimatorFloat", //更改人的Blend值
+              "$type": "SetAnimatorFloat",
               "floatID": "Fishing_BattleBlend",
-              "value": "%Override_Fishing_Blend",
-              "transitionTime": 0.1
+              "ratio": "Override_Fishing_Blend",
+              "MINKNEOBHLI": 0.10000000149011612
             },
             {
-              "$type": "SetAnimatorFloat", //更改竿的Blend值
-              "floatID": "Blend",
-              "value": "%Override_Fishing_Blend",
-              "transitionTime": 0.1,
+              "$type": "SetAnimatorFloat",
               "otherTargets": {
-                "$type": "SelectTargetsByChildrenEntityType",
-                "entityType": "FishRod",
-                "sortType": "Default"
-              }
+                "$type": "DGGJIJFHAPM",
+                "entityType": "FishRod"
+              },
+              "floatID": "Blend",
+              "ratio": "Override_Fishing_Blend",
+              "MINKNEOBHLI": 0.10000000149011612
             }
           ]
         },
-        //松手时角色的动作放缓
         "Avatar_Fishing_Battle_ReduceBlend": {
-          "thinkInterval": 0.1,
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 0.10000000149011612,
           "onThinkInterval": [
             {
               "$type": "AddGlobalValue",
+              "ratio": -0.10000000149011612,
               "key": "_ABILITY_Fishing_BattleBlend",
-              "value": -0.1,
               "useLimitRange": true,
-              "maxValue": 1,
-              "minValue": 0
+              "maxValue": 1.0,
+              "minValue": 0.0
             },
             {
               "$type": "SetGlobalValueToOverrideMap",
@@ -1155,35 +1124,29 @@
             {
               "$type": "SetAnimatorFloat",
               "floatID": "Fishing_BattleBlend",
-              "value": "%Override_Fishing_Blend",
-              "transitionTime": 0.1
+              "ratio": "Override_Fishing_Blend",
+              "MINKNEOBHLI": 0.10000000149011612
             },
             {
               "$type": "SetAnimatorFloat",
-              "floatID": "Blend",
-              "value": "%Override_Fishing_Blend",
-              "transitionTime": 0.1,
               "otherTargets": {
-                "$type": "SelectTargetsByChildrenEntityType",
-                "entityType": "FishRod",
-                "sortType": "Default"
-              }
+                "$type": "DGGJIJFHAPM",
+                "entityType": "FishRod"
+              },
+              "floatID": "Blend",
+              "ratio": "Override_Fishing_Blend",
+              "MINKNEOBHLI": 0.10000000149011612
             }
           ]
         }
       },
-      "abilitySpecials": {
-        "Override_Fishing_Blend": 0 //用于OverrideMap中间值计算
-      }
+      "isDynamicAbility": true
     }
   },
-  //钓鱼系统 - QTE成败判定（客户端发送Trigger）
   {
-    //客户端发送QteSuccess
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Common_Fishing_QteSuccess",
-      "isDynamicAbility": true,
       "onAbilityStart": [
         {
           "$type": "SetAnimatorTrigger",
@@ -1193,117 +1156,96 @@
           "$type": "DebugLog",
           "content": "QTE成功"
         }
-      ]
+      ],
+      "isDynamicAbility": true
     }
   },
   {
-    //客户端发送QteFail
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Common_Fishing_QteFail",
-      "isDynamicAbility": true,
       "onAbilityStart": [
         {
           "$type": "SetAnimatorTrigger",
-          "triggerID": "PRIVATE_Fishing_QteFail" //暂时用同一个Trigger，主要用于作动作表现区分
+          "triggerID": "PRIVATE_Fishing_QteFail"
         },
         {
           "$type": "DebugLog",
           "content": "QTE失败"
         }
-      ]
+      ],
+      "isDynamicAbility": true
     }
   },
-
-  ////////////////////////////////////////////////////////////////
-  //
-  //  钓鱼系统 - 任何阶段请求大退
-  //
-  ////////////////////////////////////////////////////////////////
   {
-    //向客户端发送退出请求
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Common_Fishing_RequestQuit",
-      "isDynamicAbility": true,
       "onAbilityStart": [
         {
           "$type": "FireFishingEvent",
           "eventType": "RequestQuit"
         }
-      ]
+      ],
+      "isDynamicAbility": true
     }
   },
   {
-    //客户端确认发送退出Trigger
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Common_Fishing_Quit",
-      "isDynamicAbility": true,
-      "onAbilityStart": [
-        {
-          "$type": "SetAnimatorTrigger",
-          "triggerID": "PRIVATE_Fishing_End",
-          "doOffStage": true
-        }
-      ],
-      //AbilityGroup下掉时也需要退出
       "onRemoved": [
         {
           "$type": "SetAnimatorTrigger",
-          "triggerID": "PRIVATE_Fishing_End",
-          "doOffStage": true
+          "RotationDampTime": true,
+          "triggerID": "PRIVATE_Fishing_End"
         }
-      ]
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "SetAnimatorTrigger",
+          "RotationDampTime": true,
+          "triggerID": "PRIVATE_Fishing_End"
+        }
+      ],
+      "isDynamicAbility": true
     }
   },
-
-  ////////////////////////////////////////////////////////////////
-  //
-  //  钓鱼系统 - 断线重连（处理疑难恢复逻辑）
-  //
-  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Common_Fishing_OnTeam",
+      "modifiers": {
+        "Team_Fishing_Recovery": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onRemoved": [
+            {
+              "$type": "ChangePlayMode",
+              "RotationDampTime": true,
+              "muteRemoteAction": true,
+              "LEMNHMBJBFH": "Fishing"
+            },
+            {
+              "$type": "AvatarExitViewBias",
+              "RotationDampTime": true,
+              "DGCCEDGOMCH": 0.5
+            }
+          ]
+        }
+      },
       "onAdded": [
         {
           "$type": "AttachModifier",
           "modifierName": "Team_Fishing_Recovery"
         }
-      ],
-      "modifiers": {
-        //钓鱼流程中断时的全局恢复逻辑
-        "Team_Fishing_Recovery": {
-          "onRemoved": [
-            {
-              "$type": "ChangePlayMode",
-              "muteRemoteAction": true,
-              "toPlayMode": "Normal",
-              "doOffStage": true
-            },
-            {
-              "$type": "AvatarExitViewBias",
-              "lerpDuration": 0.5,
-              "doOffStage": true
-            }
-          ]
-        }
-      }
+      ]
     }
   },
-
-  ////////////////////////////////////////////////////////////////
-  //
-  //  鱼竿生命周期管理
-  //
-  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Common_FishingRod_Manager",
-      "isDynamicAbility": true,
       "abilityMixins": [
         {
           "$type": "AttachToStateIDMixin",
@@ -1356,126 +1298,127 @@
         }
       ],
       "modifiers": {
-        //无论是创生还是消灭均需要拿到鱼竿的Entity，可以新增一种SelectTarget类型去搜索自身创建的鱼竿
-        //控制鱼竿创生与销毁
         "Avatar_FishingRod_Handler": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "FireEffect",
-              "effectPattern": "Eff_Avatar_Fishing_Rod_Disappear",
+              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Fishing_Rod_Disappear",
               "born": {
                 "$type": "ConfigBornByAttachPoint",
                 "attachPointName": "WeaponR"
-              }
+              },
+              "effectTempleteID": -1.0
             }
           ]
         },
         "FishingRod_Trigger_Choose": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorTrigger",
-              "triggerID": "Fishing_Choose",
               "otherTargets": {
-                "$type": "SelectTargetsByChildrenEntityType",
-                "entityType": "FishRod",
-                "sortType": "Default"
-              }
+                "$type": "DGGJIJFHAPM",
+                "entityType": "FishRod"
+              },
+              "triggerID": "Fishing_Choose"
             }
           ]
         },
         "FishingRod_Trigger_Cast": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorTrigger",
-              "triggerID": "Fishing_Cast",
               "otherTargets": {
-                "$type": "SelectTargetsByChildrenEntityType",
-                "entityType": "FishRod",
-                "sortType": "Default"
-              }
+                "$type": "DGGJIJFHAPM",
+                "entityType": "FishRod"
+              },
+              "triggerID": "Fishing_Cast"
             }
           ]
         },
         "FishingRod_Trigger_Cast_AS": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorTrigger",
-              "triggerID": "Fishing_Cast_AS",
               "otherTargets": {
-                "$type": "SelectTargetsByChildrenEntityType",
-                "entityType": "FishRod",
-                "sortType": "Default"
-              }
+                "$type": "DGGJIJFHAPM",
+                "entityType": "FishRod"
+              },
+              "triggerID": "Fishing_Cast_AS"
             }
           ]
         },
         "FishingRod_Trigger_Battle": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorTrigger",
-              "triggerID": "Fishing_Battle",
               "otherTargets": {
-                "$type": "SelectTargetsByChildrenEntityType",
-                "entityType": "FishRod",
-                "sortType": "Default"
-              }
+                "$type": "DGGJIJFHAPM",
+                "entityType": "FishRod"
+              },
+              "triggerID": "Fishing_Battle"
             }
           ]
         },
         "FishingRod_Trigger_Pull": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorTrigger",
-              "triggerID": "Fishing_Pull",
               "otherTargets": {
-                "$type": "SelectTargetsByChildrenEntityType",
-                "entityType": "FishRod",
-                "sortType": "Default"
-              }
+                "$type": "DGGJIJFHAPM",
+                "entityType": "FishRod"
+              },
+              "triggerID": "Fishing_Pull"
             }
           ]
         },
         "FishingRod_Trigger_Pull_Fail": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorTrigger",
-              "triggerID": "Fishing_Pull_Fail",
               "otherTargets": {
-                "$type": "SelectTargetsByChildrenEntityType",
-                "entityType": "FishRod",
-                "sortType": "Default"
-              }
+                "$type": "DGGJIJFHAPM",
+                "entityType": "FishRod"
+              },
+              "triggerID": "Fishing_Pull_Fail"
             }
           ]
         },
         "FishingRod_Trigger_End": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetAnimatorTrigger",
-              "triggerID": "Fishing_End",
               "otherTargets": {
-                "$type": "SelectTargetsByChildrenEntityType",
-                "entityType": "FishRod",
-                "sortType": "Default"
-              }
+                "$type": "DGGJIJFHAPM",
+                "entityType": "FishRod"
+              },
+              "triggerID": "Fishing_End"
             }
           ]
         }
-      }
+      },
+      "isDynamicAbility": true
     }
   },
-
-  ////////////////////////////////////////////////////////////////
-  //
-  //  鱼线管理
-  //
-  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Common_FishingLine_Manager",
-      "isDynamicAbility": true,
-      "onAbilityStart": [],
       "abilityMixins": [
         {
           "$type": "AttachToStateIDMixin",
@@ -1491,97 +1434,105 @@
           "$type": "AttachToNormalizedTimeMixin",
           "stateID": "Fishing_Pull_01",
           "modifierName": "Delay_RemoveBattleLine",
-          "normalizeStart": 0.1,
-          "normalizeEnd": 1.0
+          "normalizeStart": 0.10000000149011612
         }
       ],
       "modifiers": {
-        //鱼儿上钩时需要隐藏鱼漂与鱼线（生成新鱼线连到鱼嘴）
         "UNIQUE_Avatar_Fishing_RemoveCork": {
+          "modifierName": "",
           "isUnique": true,
+          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "KillGadget",
-              "doOffStage": true,
+              "RotationDampTime": true,
               "gadgetInfo": {
-                "$type": "SelectTargetsByChildren",
-                "configID": 42000002,
-                "sortType": "Default"
+                "configID": 42000002
               }
             },
             {
               "$type": "RemoveUniqueModifier",
-              "modifierName": "UNIQUE_Avatar_Fishing_Waiting_LineEffect",
-              "doOffStage": true
+              "RotationDampTime": true,
+              "modifierName": "UNIQUE_Avatar_Fishing_Waiting_LineEffect"
             }
           ]
         },
-        //离开QTE状态时干掉鱼线
         "UNIQUE_Avatar_Fishing_RemoveBattleLine": {
+          "modifierName": "",
           "isUnique": true,
+          "bonusCriticalHurt": 100.0,
           "onRemoved": [
             {
               "$type": "KillGadget",
-              "doOffStage": true,
+              "RotationDampTime": true,
               "gadgetInfo": {
-                "$type": "SelectTargetsByChildren",
-                "configID": 42000002,
-                "sortType": "Default"
+                "configID": 42000002
               }
             },
             {
               "$type": "RemoveUniqueModifier",
-              "modifierName": "UNIQUE_Avatar_Fishing_Battle_LineEffect",
-              "doOffStage": true,
               "otherTargets": {
-                "$type": "SelectTargetsByChildrenEntityType",
-                "entityType": "FishRod",
-                "sortType": "Default"
-              }
+                "$type": "DGGJIJFHAPM",
+                "entityType": "FishRod"
+              },
+              "RotationDampTime": true,
+              "modifierName": "UNIQUE_Avatar_Fishing_Battle_LineEffect"
             }
           ]
         },
-        //抬杆时去除battle鱼线特效，起保护效果
         "Delay_RemoveBattleLine": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "RemoveUniqueModifier",
-              "modifierName": "UNIQUE_Avatar_Fishing_Battle_LineEffect",
-              "doOffStage": true,
               "otherTargets": {
-                "$type": "SelectTargetsByChildrenEntityType",
-                "entityType": "FishRod",
-                "sortType": "Default"
-              }
+                "$type": "DGGJIJFHAPM",
+                "entityType": "FishRod"
+              },
+              "RotationDampTime": true,
+              "modifierName": "UNIQUE_Avatar_Fishing_Battle_LineEffect"
             }
           ]
         }
-      }
+      },
+      "isDynamicAbility": true
     }
   },
-
-  ////////////////////////////////////////////////////////////////
-  //
-  //  鱼竿物件 Gadget
-  //
-  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Avatar_Common_FishingRod",
+      "modifiers": {
+        "UNIQUE_Avatar_Fishing_Battle_LineEffect": {
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "target": "SelfAttackTarget",
+              "healLimitedByCasterMaxHPRatio": "Eff_Avatar_Fishing_Line_02",
+              "effectTempleteID": -1.0,
+              "KIGIKJMMKEJ": true
+            }
+          ]
+        }
+      },
       "onAdded": [
         {
           "$type": "SetGlobalValue",
+          "ratio": 0.0,
           "key": "_ABILITY_Fishing_Aim_Length",
-          "value": 0
+          "maxValue": 0.0,
+          "minValue": 0.0
         }
       ],
-      //鱼儿咬钩时Trigger
       "onAbilityStart": [
         {
           "$type": "RemoveUniqueModifier",
-          "modifierName": "UNIQUE_Avatar_Fishing_RemoveCork",
-          "target": "OriginOwner"
+          "target": "OriginOwner",
+          "modifierName": "UNIQUE_Avatar_Fishing_RemoveCork"
         },
         {
           "$type": "SetSelfAttackTarget",
@@ -1591,21 +1542,7 @@
           "$type": "AttachModifier",
           "modifierName": "UNIQUE_Avatar_Fishing_Battle_LineEffect"
         }
-      ],
-      "modifiers": {
-        //鱼儿上钩后的鱼线特效
-        "UNIQUE_Avatar_Fishing_Battle_LineEffect": {
-          "isUnique": true,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "effectPattern": "Eff_Avatar_Fishing_Line_02",
-              "target": "SelfAttackTarget",
-              "setSelfAsEffectPluginTarget": true
-            }
-          ]
-        }
-      }
+      ]
     }
   }
 ]

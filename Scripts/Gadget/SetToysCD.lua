@@ -1,4 +1,4 @@
-﻿function SetToysCD_MD_Success(context)
+function SetToysCD_MD_Success(context)
 		return ScriptLib.SetWidgetClientDetectorCoolDown(context, 220009, true)
 end
 

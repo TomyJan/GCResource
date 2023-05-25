@@ -2,20 +2,138 @@
   {
     "Default": {
       "$type": "ConfigAbility",
-      /// @desc 脉冲元素 - 首领获得冲击波能力 - Affix-ID: 6118
       "abilityName": "MonsterAffix_LowImpulse_Water",
-      // 周期以自身为中心触发一次脉冲波，对处于一定高度以下的玩家造成水元素伤害。
-      "isDynamicAbility": true,
+      "abilityMixins": [
+        {
+          "$type": "AttachToAIAlertnessMixin",
+          "alertness": [1, 2],
+          "modifierName": "UNIQUE_GeneralSkill_LowImpulse_Water_Ver2"
+        }
+      ],
+      "abilitySpecials": {
+        "GeneralSkill_ElementLevelCo": 0.0,
+        "GeneralSkill_LowImpulse": 4.0
+      },
+      "modifiers": {
+        "UNIQUE_GeneralSkill_LowImpulse_Water_Effect_Ver2": {
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_Monster_GeneralSkill_LowImpulse_FootCircle",
+              "effectTempleteID": -1.0
+            },
+            {
+              "$type": "AddGlobalValue",
+              "ratio": 1.0,
+              "key": "_GENERALSKILL_LowImpulse_Tag",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            }
+          ]
+        },
+        "UNIQUE_GeneralSkill_LowImpulse_Water_Ver2": {
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 15.0,
+          "onThinkInterval": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "GeneralSkill_LowImpulse_Water_Alert"
+            }
+          ]
+        },
+        "GeneralSkill_LowImpulse_Water_Alert": {
+          "modifierName": "",
+          "duration": 4.0,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_Monster_GeneralSkill_LowImpulse_Water_Alert",
+              "effectTempleteID": -1.0
+            },
+            {
+              "$type": "AttachEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_Monster_GeneralSkill_LowImpulse_Water_Area",
+              "effectTempleteID": -1.0
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "FireEffect",
+              "predicates": [
+                {
+                  "$type": "GMGEIHHLMCO",
+                  "target": "Self",
+                  "KONBGFMBNDO": 0.0
+                }
+              ],
+              "healLimitedByCasterMaxHPRatio": "Eff_Monster_GeneralSkill_LowImpulse_Water_DamageWave",
+              "effectTempleteID": -1.0
+            },
+            {
+              "$type": "TriggerAttackEvent",
+              "predicates": [
+                {
+                  "$type": "GMGEIHHLMCO",
+                  "target": "Self",
+                  "KONBGFMBNDO": 0.0
+                }
+              ],
+              "attackEvent": {
+                "attackPattern": {
+                  "$type": "ConfigAttackCircle",
+                  "triggerType": "TriggerNoRepeat",
+                  "born": {
+                    "$type": "ConfigBornBySelf"
+                  },
+                  "height": 1.2000000476837158,
+                  "radius": 15.0
+                },
+                "attackInfo": {
+                  "attackTag": "",
+                  "attenuationTag": "",
+                  "attenuationGroup": "default",
+                  "attackProperty": {
+                    "damagePercentage": 0.0,
+                    "damagePercentageRatio": 0.0,
+                    "elementType": "Water",
+                    "bonusCriticalHurt": 25.0,
+                    "ignoreAttackerProperty": true,
+                    "strikeType": "Default",
+                    "enBreak": 100.0,
+                    "attackType": "Range",
+                    "damageExtra": [
+                      "GeneralSkill_ElementLevelCo",
+                      "GeneralSkill_LowImpulse",
+                      "MUL"
+                    ]
+                  },
+                  "hitPattern": {
+                    "onHitEffectName": "default",
+                    "hitImpulseType": "LV2"
+                  }
+                }
+              },
+              "targetType": "Enemy"
+            }
+          ]
+        }
+      },
       "onAdded": [
         {
           "$type": "ApplyModifier",
-          "modifierName": "UNIQUE_GeneralSkill_LowImpulse_Water_Effect_Ver2",
           "predicates": [
             {
               "$type": "ByEntityTypes",
               "entityTypes": ["Monster"]
             }
-          ]
+          ],
+          "modifierName": "UNIQUE_GeneralSkill_LowImpulse_Water_Effect_Ver2"
         },
         {
           "$type": "SetSystemValueToOverrideMap",
@@ -37,131 +155,158 @@
           "modifierName": "GeneralSkill_LowImpulse_Water_Alert"
         }
       ],
-      "abilityMixins": [
-        {
-          "$type": "AttachToAIAlertnessMixin",
-          "alertness": [1, 2],
-          "modifierName": "UNIQUE_GeneralSkill_LowImpulse_Water_Ver2"
-        }
-      ],
-      "modifiers": {
-        "UNIQUE_GeneralSkill_LowImpulse_Water_Effect_Ver2": {
-          "isUnique": true,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "effectPattern": "Eff_Monster_GeneralSkill_LowImpulse_FootCircle"
-            },
-            {
-              "$type": "AddGlobalValue",
-              "value": 1,
-              "key": "_GENERALSKILL_LowImpulse_Tag"
-            }
-          ]
-        },
-        "UNIQUE_GeneralSkill_LowImpulse_Water_Ver2": {
-          "isUnique": true,
-          "thinkInterval": 15,
-          "onThinkInterval": [
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "GeneralSkill_LowImpulse_Water_Alert"
-            }
-          ]
-        },
-        "GeneralSkill_LowImpulse_Water_Alert": {
-          "duration": 4,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "effectPattern": "Eff_Monster_GeneralSkill_LowImpulse_Water_Alert"
-            },
-            {
-              "$type": "AttachEffect",
-              "effectPattern": "Eff_Monster_GeneralSkill_LowImpulse_Water_Area"
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "FireEffect",
-              "effectPattern": "Eff_Monster_GeneralSkill_LowImpulse_Water_DamageWave",
-              "predicates": [
-                {
-                  "$type": "ByTargetHPRatio",
-                  "target": "Self",
-                  "HPRatio": 0,
-                  "logic": "Greater"
-                }
-              ]
-            },
-            {
-              "$type": "TriggerAttackEvent",
-              "targetType": "Enemy",
-              "attackEvent": {
-                "attackPattern": {
-                  "$type": "ConfigAttackCircle",
-                  "triggerType": "TriggerNoRepeat",
-                  "height": 1.2,
-                  "fanAngle": 360.0,
-                  "radius": 15.0,
-                  "born": {
-                    "$type": "ConfigBornBySelf"
-                  }
-                },
-                "attackInfo": {
-                  "attackProperty": {
-                    "damagePercentage": 0.0,
-                    "damageExtra": "%GeneralSkill_ElementLevelCo*%GeneralSkill_LowImpulse",
-                    "strikeType": "Default",
-                    "attackType": "Range",
-                    "elementType": "Water",
-                    "elementDurability": 25,
-                    "enBreak": 100.0,
-                    "ignoreAttackerProperty": true
-                  },
-                  "hitPattern": {
-                    "onHitEffectName": "default",
-                    "hitImpulseType": "LV2",
-                    "hitHaltTime": 0,
-                    "hitHaltTimeScale": 0
-                  }
-                }
-              },
-              "predicates": [
-                {
-                  "$type": "ByTargetHPRatio",
-                  "target": "Self",
-                  "HPRatio": 0,
-                  "logic": "Greater"
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "abilitySpecials": {
-        "GeneralSkill_ElementLevelCo": 0,
-        "GeneralSkill_LowImpulse": 4
-      }
+      "isDynamicAbility": true
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
-      /// @desc 脉冲元素 - 首领获得冲击波能力 - Affix-ID: 6119
       "abilityName": "MonsterAffix_LowImpulse_Electric",
-      // 周期以自身为中心触发一次脉冲波，对处于一定高度以下的玩家造成雷元素伤害。
-      "isDynamicAbility": true,
+      "abilityMixins": [
+        {
+          "$type": "AttachToAIAlertnessMixin",
+          "alertness": [1, 2],
+          "modifierName": "UNIQUE_GeneralSkill_LowImpulse_Electric_Ver2"
+        }
+      ],
+      "abilitySpecials": {
+        "GeneralSkill_ElementLevelCo": 0.0,
+        "GeneralSkill_LowImpulse": 4.0
+      },
+      "modifiers": {
+        "UNIQUE_GeneralSkill_LowImpulse_Electric_Effect_Ver2": {
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_Monster_GeneralSkill_LowImpulse_FootCircle",
+              "effectTempleteID": -1.0
+            },
+            {
+              "$type": "AddGlobalValue",
+              "ratio": 1.0,
+              "key": "_GENERALSKILL_LowImpulse_Tag",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            }
+          ]
+        },
+        "UNIQUE_GeneralSkill_LowImpulse_Electric_Ver2": {
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 15.0,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_Monster_GeneralSkill_LowImpulse_FootCircle",
+              "effectTempleteID": -1.0
+            },
+            {
+              "$type": "AddGlobalValue",
+              "ratio": 1.0,
+              "key": "_GENERALSKILL_LowImpulse_Tag",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "GeneralSkill_LowImpulse_Electric_Alert"
+            }
+          ]
+        },
+        "GeneralSkill_LowImpulse_Electric_Alert": {
+          "modifierName": "",
+          "duration": 4.0,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_Monster_GeneralSkill_LowImpulse_Electric_Alert",
+              "effectTempleteID": -1.0
+            },
+            {
+              "$type": "AttachEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_Monster_GeneralSkill_LowImpulse_Electric_Area",
+              "effectTempleteID": -1.0
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "FireEffect",
+              "predicates": [
+                {
+                  "$type": "GMGEIHHLMCO",
+                  "target": "Self",
+                  "KONBGFMBNDO": 0.0
+                }
+              ],
+              "healLimitedByCasterMaxHPRatio": "Eff_Monster_GeneralSkill_LowImpulse_Electric_DamageWave",
+              "effectTempleteID": -1.0
+            },
+            {
+              "$type": "TriggerAttackEvent",
+              "predicates": [
+                {
+                  "$type": "GMGEIHHLMCO",
+                  "target": "Self",
+                  "KONBGFMBNDO": 0.0
+                }
+              ],
+              "attackEvent": {
+                "attackPattern": {
+                  "$type": "ConfigAttackCircle",
+                  "triggerType": "TriggerNoRepeat",
+                  "born": {
+                    "$type": "ConfigBornBySelf"
+                  },
+                  "height": 1.2000000476837158,
+                  "radius": 15.0
+                },
+                "attackInfo": {
+                  "attackTag": "",
+                  "attenuationTag": "",
+                  "attenuationGroup": "default",
+                  "attackProperty": {
+                    "damagePercentage": 0.0,
+                    "damagePercentageRatio": 0.0,
+                    "elementType": "Electric",
+                    "bonusCriticalHurt": 25.0,
+                    "ignoreAttackerProperty": true,
+                    "strikeType": "Default",
+                    "enBreak": 100.0,
+                    "attackType": "Range",
+                    "damageExtra": [
+                      "GeneralSkill_ElementLevelCo",
+                      "GeneralSkill_LowImpulse",
+                      "MUL"
+                    ]
+                  },
+                  "hitPattern": {
+                    "onHitEffectName": "default",
+                    "hitImpulseType": "LV2"
+                  }
+                }
+              },
+              "targetType": "Enemy"
+            }
+          ]
+        }
+      },
       "onAdded": [
         {
           "$type": "ApplyModifier",
-          "modifierName": "UNIQUE_GeneralSkill_LowImpulse_Electric_Effect_Ver2",
           "predicates": [
             {
               "$type": "ByEntityTypes",
               "entityTypes": ["Monster"]
             }
-          ]
+          ],
+          "modifierName": "UNIQUE_GeneralSkill_LowImpulse_Electric_Effect_Ver2"
         },
         {
           "$type": "SetSystemValueToOverrideMap",
@@ -183,141 +328,382 @@
           "modifierName": "GeneralSkill_LowImpulse_Electric_Alert"
         }
       ],
-      "abilityMixins": [
-        {
-          "$type": "AttachToAIAlertnessMixin",
-          "alertness": [1, 2],
-          "modifierName": "UNIQUE_GeneralSkill_LowImpulse_Electric_Ver2"
-        }
-      ],
-      "modifiers": {
-        "UNIQUE_GeneralSkill_LowImpulse_Electric_Effect_Ver2": {
-          "isUnique": true,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "effectPattern": "Eff_Monster_GeneralSkill_LowImpulse_FootCircle"
-            },
-            {
-              "$type": "AddGlobalValue",
-              "value": 1,
-              "key": "_GENERALSKILL_LowImpulse_Tag"
-            }
-          ]
-        },
-        "UNIQUE_GeneralSkill_LowImpulse_Electric_Ver2": {
-          "isUnique": true,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "effectPattern": "Eff_Monster_GeneralSkill_LowImpulse_FootCircle"
-            },
-            {
-              "$type": "AddGlobalValue",
-              "value": 1,
-              "key": "_GENERALSKILL_LowImpulse_Tag"
-            }
-          ],
-          "thinkInterval": 15,
-          "onThinkInterval": [
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "GeneralSkill_LowImpulse_Electric_Alert"
-            }
-          ]
-        },
-        "GeneralSkill_LowImpulse_Electric_Alert": {
-          "duration": 4,
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "effectPattern": "Eff_Monster_GeneralSkill_LowImpulse_Electric_Alert"
-            },
-            {
-              "$type": "AttachEffect",
-              "effectPattern": "Eff_Monster_GeneralSkill_LowImpulse_Electric_Area"
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "FireEffect",
-              "effectPattern": "Eff_Monster_GeneralSkill_LowImpulse_Electric_DamageWave",
-              "predicates": [
-                {
-                  "$type": "ByTargetHPRatio",
-                  "target": "Self",
-                  "HPRatio": 0,
-                  "logic": "Greater"
-                }
-              ]
-            },
-            {
-              "$type": "TriggerAttackEvent",
-              "targetType": "Enemy",
-              "attackEvent": {
-                "attackPattern": {
-                  "$type": "ConfigAttackCircle",
-                  "triggerType": "TriggerNoRepeat",
-                  "height": 1.2,
-                  "fanAngle": 360.0,
-                  "radius": 15.0,
-                  "born": {
-                    "$type": "ConfigBornBySelf"
-                  }
-                },
-                "attackInfo": {
-                  "attackProperty": {
-                    "damagePercentage": 0.0,
-                    "damageExtra": "%GeneralSkill_ElementLevelCo*%GeneralSkill_LowImpulse",
-                    "strikeType": "Default",
-                    "attackType": "Range",
-                    "elementType": "Electric",
-                    "elementDurability": 25,
-                    "enBreak": 100.0,
-                    "ignoreAttackerProperty": true
-                  },
-                  "hitPattern": {
-                    "onHitEffectName": "default",
-                    "hitImpulseType": "LV2",
-                    "hitHaltTime": 0,
-                    "hitHaltTimeScale": 0
-                  }
-                }
-              },
-              "predicates": [
-                {
-                  "$type": "ByTargetHPRatio",
-                  "target": "Self",
-                  "HPRatio": 0,
-                  "logic": "Greater"
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "abilitySpecials": {
-        "GeneralSkill_ElementLevelCo": 0,
-        "GeneralSkill_LowImpulse": 4
-      }
+      "isDynamicAbility": true
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
-      /// @desc 远程光环机制：首领脚底下有个圆环，如果玩家在环外，发落雷攻击玩家。 Affix-ID: 6120
       "abilityName": "MonsterAffix_ElecDamage_ThunderArea",
-      "isDynamicAbility": true,
+      "abilitySpecials": {
+        "ElementLevelCo": 0.0,
+        "ThunderArea_Ratio": 3.0
+      },
+      "modifiers": {
+        "UNIQUE_GeneralSkill_ElecDamage_ThunderArea_Host_Ver2": {
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 0.25,
+          "onAdded": [
+            {
+              "$type": "AddGlobalValue",
+              "ratio": 1.0,
+              "key": "_MONSTESR_GeneralSkill_ElecDamage_ThunderArea_OwnerTag",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            },
+            {
+              "$type": "AttachEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_Monster_GeneralSkill_ElecDamage_ThunderArea_FootCircle",
+              "effectTempleteID": -1.0
+            },
+            {
+              "$type": "AttachEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_Monster_GeneralSkill_ElecDamage_ThunderArea_InnerCircle",
+              "effectTempleteID": -1.0
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "AddGlobalValue",
+              "ratio": -1.0,
+              "key": "_MONSTESR_GeneralSkill_ElecDamage_ThunderArea_OwnerTag",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "ApplyModifier",
+              "target": "AllTeams",
+              "predicates": [
+                {
+                  "$type": "HPJOHDHEPCG",
+                  "ratio": 8.0
+                },
+                {
+                  "$type": "HPJOHDHEPCG",
+                  "logic": "Lesser",
+                  "ratio": 20.0
+                },
+                {
+                  "$type": "HPJOHDHEPCG",
+                  "logic": "Lesser",
+                  "compareType": "Y",
+                  "ratio": 20.0
+                }
+              ],
+              "modifierName": "UNIQUE_GeneralSkill_ElecDamage_ThunderArea_DamageTrigger_Ver2"
+            },
+            {
+              "$type": "ApplyModifier",
+              "target": "AllPlayerAvatars",
+              "predicates": [
+                {
+                  "$type": "ByAny",
+                  "predicates": [
+                    {
+                      "$type": "HPJOHDHEPCG",
+                      "logic": "LesserOrEqual",
+                      "ratio": 8.0
+                    },
+                    {
+                      "$type": "HPJOHDHEPCG",
+                      "logic": "GreaterOrEqual",
+                      "ratio": 20.0
+                    }
+                  ]
+                }
+              ],
+              "modifierName": "GeneralSkill_ElecDamage_ThunderArea_TeamRemover"
+            }
+          ]
+        },
+        "GeneralSkill_ElecDamage_ThunderArea_TeamRemover": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "duration": 0.10000000149011612,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "RemoveUniqueModifier",
+              "target": "Team",
+              "modifierName": "UNIQUE_GeneralSkill_ElecDamage_ThunderArea_Team_Ver2"
+            }
+          ]
+        },
+        "UNIQUE_GeneralSkill_ElecDamage_ThunderArea_Team_Ver2": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 1.0,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_ThunderStorm_Gathering",
+              "effectTempleteID": -1.0
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "UNIQUE_GeneralSkill_ElecDamage_ThunderArea_DamageMask_Ver2"
+            },
+            {
+              "$type": "AddGlobalValue",
+              "ratio": 1.0,
+              "key": "_MONSTER_GeneralSkill_ElecDamage_ThunderArea_HasEffect",
+              "useLimitRange": true,
+              "maxValue": 1.0,
+              "minValue": 0.0
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "RemoveUniqueModifier",
+              "modifierName": "UNIQUE_GeneralSkill_ElecDamage_ThunderArea_DamageMask_Ver2"
+            },
+            {
+              "$type": "AddGlobalValue",
+              "ratio": -1.0,
+              "key": "_MONSTER_GeneralSkill_ElecDamage_ThunderArea_HasEffect",
+              "useLimitRange": true,
+              "maxValue": 1.0,
+              "minValue": 0.0
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "AddGlobalValue",
+              "ratio": -1.0,
+              "key": "_MONSTER_GeneralSkill_ElecDamage_ThunderArea_HasOwner",
+              "useLimitRange": true,
+              "maxValue": 1.0,
+              "minValue": 0.0
+            },
+            {
+              "$type": "Predicated",
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR20",
+                "centerBasedOn": "CurLocalAvatar",
+                "campTargetType": "Alliance",
+                "campBasedOn": "Caster",
+                "OBHNBNDMPFN": 1.0
+              },
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_MONSTESR_GeneralSkill_ElecDamage_ThunderArea_OwnerTag",
+                  "ratio": 1.0
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "AddGlobalValue",
+                  "ratio": 1.0,
+                  "key": "_MONSTER_GeneralSkill_ElecDamage_ThunderArea_HasOwner",
+                  "useLimitRange": true,
+                  "maxValue": 1.0,
+                  "minValue": 0.0
+                }
+              ]
+            },
+            {
+              "$type": "RemoveUniqueModifier",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Self",
+                  "key": "_MONSTER_GeneralSkill_ElecDamage_ThunderArea_HasOwner",
+                  "ratio": 0.0,
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "modifierName": "UNIQUE_GeneralSkill_ElecDamage_ThunderArea_Team_Ver2"
+            }
+          ]
+        },
+        "UNIQUE_GeneralSkill_ElecDamage_ThunderArea_DamageMask_Ver2": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "duration": 2.0,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "AddGlobalValue",
+              "ratio": 1.0,
+              "key": "_MONSTER_GeneralSkill_ElecDamage_ThunderArea_DamageMask",
+              "useLimitRange": true,
+              "maxValue": 1.0,
+              "minValue": 0.0
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "AddGlobalValue",
+              "ratio": -1.0,
+              "key": "_MONSTER_GeneralSkill_ElecDamage_ThunderArea_DamageMask",
+              "useLimitRange": true,
+              "maxValue": 1.0,
+              "minValue": 0.0
+            }
+          ]
+        },
+        "UNIQUE_GeneralSkill_ElecDamage_ThunderArea_DamageTrigger_Ver2": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "duration": 2.0,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "ApplyModifier",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Self",
+                  "key": "_MONSTESR_GeneralSkill_ElecDamage_ThunderArea_HasEffect",
+                  "ratio": 0.0,
+                  "compareType": "NoneOrEqual"
+                },
+                {
+                  "$type": "HPJOHDHEPCG",
+                  "target": "Applier",
+                  "logic": "Lesser",
+                  "ratio": 20.0
+                }
+              ],
+              "modifierName": "UNIQUE_GeneralSkill_ElecDamage_ThunderArea_Team_Ver2"
+            },
+            {
+              "$type": "AddGlobalValue",
+              "ratio": -1.0,
+              "key": "_MONSTESR_GeneralSkill_ElecDamage_ThunderArea_HasOwner",
+              "useLimitRange": true,
+              "maxValue": 1.0,
+              "minValue": 0.0
+            },
+            {
+              "$type": "Predicated",
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR20",
+                "centerBasedOn": "CurLocalAvatar",
+                "campTargetType": "Alliance",
+                "campBasedOn": "Caster",
+                "OBHNBNDMPFN": 1.0
+              },
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Self",
+                  "key": "_MONSTER_GeneralSkill_ElecDamage_ThunderArea_DamageMask",
+                  "ratio": 0.0,
+                  "compareType": "NoneOrEqual"
+                },
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Self",
+                  "key": "_MONSTER_GeneralSkill_ElecDamage_ThunderArea_HasEffect",
+                  "ratio": 1.0
+                }
+              ],
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_MONSTESR_GeneralSkill_ElecDamage_ThunderArea_OwnerTag",
+                  "ratio": 1.0
+                },
+                {
+                  "$type": "HPJOHDHEPCG",
+                  "ratio": 8.0
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "DamageByAttackValue",
+                  "target": "CurLocalAvatar",
+                  "attackInfo": {
+                    "attackTag": "",
+                    "attenuationTag": "",
+                    "attenuationGroup": "default",
+                    "attackProperty": {
+                      "damagePercentageRatio": 0.0,
+                      "elementType": "Electric",
+                      "bonusCriticalHurt": 25.0,
+                      "ignoreAttackerProperty": true,
+                      "enBreak": 0.0,
+                      "damageExtra": [
+                        "ThunderArea_Ratio",
+                        "ElementLevelCo",
+                        "MUL"
+                      ]
+                    },
+                    "hitPattern": {
+                      "onHitEffectName": "",
+                      "hitImpulseType": "LV0",
+                      "retreatType": "ByHitDirection"
+                    }
+                  }
+                },
+                {
+                  "$type": "FireEffect",
+                  "target": "CurLocalAvatar",
+                  "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_ThunderStorm_Blast",
+                  "effectTempleteID": -1.0
+                },
+                {
+                  "$type": "AddGlobalValue",
+                  "ratio": 1.0,
+                  "key": "_MONSTER_GeneralSkill_ElecDamage_ThunderArea_HasOwner",
+                  "useLimitRange": true,
+                  "maxValue": 1.0,
+                  "minValue": 0.0
+                }
+              ]
+            },
+            {
+              "$type": "RemoveUniqueModifier",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Self",
+                  "key": "_MONSTER_GeneralSkill_ElecDamage_ThunderArea_HasOwner",
+                  "ratio": 0.0,
+                  "compareType": "NoneOrEqual"
+                },
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Self",
+                  "key": "_MONSTER_GeneralSkill_ElecDamage_ThunderArea_DamageMask",
+                  "ratio": 0.0,
+                  "compareType": "NoneOrEqual"
+                },
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Self",
+                  "key": "_MONSTER_GeneralSkill_ElecDamage_ThunderArea_HasEffect",
+                  "ratio": 0.0,
+                  "compareType": "NoneOrEqual"
+                }
+              ],
+              "modifierName": "UNIQUE_GeneralSkill_ElecDamage_ThunderArea_Team_Ver2"
+            }
+          ]
+        }
+      },
       "onAdded": [
         {
           "$type": "ApplyModifier",
-          "modifierName": "UNIQUE_GeneralSkill_ElecDamage_ThunderArea_Host_Ver2",
           "predicates": [
             {
               "$type": "ByEntityTypes",
               "entityTypes": ["Monster"]
             }
-          ]
+          ],
+          "modifierName": "UNIQUE_GeneralSkill_ElecDamage_ThunderArea_Host_Ver2"
         },
         {
           "$type": "SetSystemValueToOverrideMap",
@@ -331,491 +717,136 @@
           "modifierName": "UNIQUE_GeneralSkill_ElecDamage_ThunderArea_Host_Ver2"
         }
       ],
-      "modifiers": {
-        "UNIQUE_GeneralSkill_ElecDamage_ThunderArea_Host_Ver2": {
-          "isUnique": true,
-          "onAdded": [
-            {
-              "$type": "AddGlobalValue",
-              "value": 1,
-              "key": "_MONSTESR_GeneralSkill_ElecDamage_ThunderArea_OwnerTag"
-            },
-            {
-              "$type": "AttachEffect",
-              "effectPattern": "Eff_Monster_GeneralSkill_ElecDamage_ThunderArea_FootCircle"
-            },
-            {
-              "$type": "AttachEffect",
-              "effectPattern": "Eff_Monster_GeneralSkill_ElecDamage_ThunderArea_InnerCircle"
-            }
-          ],
-          "thinkInterval": 0.25,
-          "onThinkInterval": [
-            {
-              "$type": "ApplyModifier",
-              "target": "AllTeams",
-              "modifierName": "UNIQUE_GeneralSkill_ElecDamage_ThunderArea_DamageTrigger_Ver2",
-              "predicates": [
-                {
-                  "$type": "ByTargetPositionToSelfPosition",
-                  "compareType": "XZ",
-                  "value": 8,
-                  "logic": "Greater"
-                },
-                {
-                  "$type": "ByTargetPositionToSelfPosition",
-                  "compareType": "XZ",
-                  "value": 20,
-                  "logic": "Lesser"
-                },
-                {
-                  "$type": "ByTargetPositionToSelfPosition",
-                  "compareType": "Y",
-                  "value": 20,
-                  "logic": "Lesser"
-                }
-              ]
-            },
-            {
-              "$type": "ApplyModifier",
-              "target": "AllPlayerAvatars",
-              "modifierName": "GeneralSkill_ElecDamage_ThunderArea_TeamRemover",
-              "predicates": [
-                {
-                  "$type": "ByAny",
-                  "predicates": [
-                    {
-                      "$type": "ByTargetPositionToSelfPosition",
-                      "compareType": "XZ",
-                      "value": 8,
-                      "logic": "LesserOrEqual"
-                    },
-                    {
-                      "$type": "ByTargetPositionToSelfPosition",
-                      "compareType": "XZ",
-                      "value": 20,
-                      "logic": "GreaterOrEqual"
-                    }
-                  ]
-                }
-              ]
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "AddGlobalValue",
-              "value": -1,
-              "key": "_MONSTESR_GeneralSkill_ElecDamage_ThunderArea_OwnerTag"
-            }
-          ]
-        },
-        "GeneralSkill_ElecDamage_ThunderArea_TeamRemover": {
-          "duration": 0.1,
-          "stacking": "Unique",
-          "onAdded": [
-            {
-              "$type": "RemoveUniqueModifier",
-              "modifierName": "UNIQUE_GeneralSkill_ElecDamage_ThunderArea_Team_Ver2",
-              "target": "Team"
-            }
-          ]
-        },
-        "UNIQUE_GeneralSkill_ElecDamage_ThunderArea_Team_Ver2": {
-          "isUnique": true,
-          "stacking": "Unique",
-          "onAdded": [
-            {
-              "$type": "AttachEffect",
-              "effectPattern": "Eff_SceneObj_ThunderStorm_Gathering"
-            },
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "UNIQUE_GeneralSkill_ElecDamage_ThunderArea_DamageMask_Ver2"
-            },
-            {
-              "$type": "AddGlobalValue",
-              "value": 1,
-              "key": "_MONSTER_GeneralSkill_ElecDamage_ThunderArea_HasEffect",
-              "useLimitRange": true,
-              "maxValue": 1,
-              "minValue": 0
-            }
-          ],
-          "thinkInterval": 1,
-          "onThinkInterval": [
-            {
-              "$type": "AddGlobalValue",
-              "value": -1,
-              "key": "_MONSTER_GeneralSkill_ElecDamage_ThunderArea_HasOwner",
-              "useLimitRange": true,
-              "maxValue": 1,
-              "minValue": 0
-            },
-            {
-              "$type": "Predicated",
-              "otherTargets": {
-                "$type": "SelectTargetsByShape",
-                "shapeName": "CircleR20",
-                "centerBasedOn": "CurLocalAvatar",
-                "campTargetType": "Alliance",
-                "campBasedOn": "Caster"
-              },
-              "targetPredicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "target": "Target",
-                  "key": "_MONSTESR_GeneralSkill_ElecDamage_ThunderArea_OwnerTag",
-                  "value": 1,
-                  "compareType": "Equal"
-                }
-              ],
-              "successActions": [
-                {
-                  "$type": "AddGlobalValue",
-                  "value": 1,
-                  "key": "_MONSTER_GeneralSkill_ElecDamage_ThunderArea_HasOwner",
-                  "useLimitRange": true,
-                  "maxValue": 1,
-                  "minValue": 0
-                }
-              ]
-            },
-            {
-              "$type": "RemoveUniqueModifier",
-              "modifierName": "UNIQUE_GeneralSkill_ElecDamage_ThunderArea_Team_Ver2",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_MONSTER_GeneralSkill_ElecDamage_ThunderArea_HasOwner",
-                  "target": "Self",
-                  "value": 0,
-                  "compareType": "NoneOrEqual"
-                }
-              ]
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "RemoveUniqueModifier",
-              "modifierName": "UNIQUE_GeneralSkill_ElecDamage_ThunderArea_DamageMask_Ver2"
-            },
-            {
-              "$type": "AddGlobalValue",
-              "value": -1,
-              "key": "_MONSTER_GeneralSkill_ElecDamage_ThunderArea_HasEffect",
-              "useLimitRange": true,
-              "maxValue": 1,
-              "minValue": 0
-            }
-          ]
-        },
-        "UNIQUE_GeneralSkill_ElecDamage_ThunderArea_DamageMask_Ver2": {
-          "duration": 2,
-          "isUnique": true,
-          "stacking": "Unique",
-          "onAdded": [
-            {
-              "$type": "AddGlobalValue",
-              "value": 1,
-              "key": "_MONSTER_GeneralSkill_ElecDamage_ThunderArea_DamageMask",
-              "useLimitRange": true,
-              "maxValue": 1,
-              "minValue": 0
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "AddGlobalValue",
-              "value": -1,
-              "key": "_MONSTER_GeneralSkill_ElecDamage_ThunderArea_DamageMask",
-              "useLimitRange": true,
-              "maxValue": 1,
-              "minValue": 0
-            }
-          ]
-        },
-        "UNIQUE_GeneralSkill_ElecDamage_ThunderArea_DamageTrigger_Ver2": {
-          "duration": 2,
-          "isUnique": true,
-          "stacking": "Unique",
-          "onAdded": [
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "UNIQUE_GeneralSkill_ElecDamage_ThunderArea_Team_Ver2",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_MONSTESR_GeneralSkill_ElecDamage_ThunderArea_HasEffect",
-                  "target": "Self",
-                  "value": 0,
-                  "compareType": "NoneOrEqual"
-                },
-                {
-                  "$type": "ByTargetPositionToSelfPosition",
-                  "target": "Applier",
-                  "compareType": "XZ",
-                  "value": 20,
-                  "logic": "Lesser"
-                }
-              ]
-            },
-            {
-              "$type": "AddGlobalValue",
-              "value": -1,
-              "key": "_MONSTESR_GeneralSkill_ElecDamage_ThunderArea_HasOwner",
-              "useLimitRange": true,
-              "maxValue": 1,
-              "minValue": 0
-            },
-            {
-              "$type": "Predicated",
-              "otherTargets": {
-                "$type": "SelectTargetsByShape",
-                "shapeName": "CircleR20",
-                "centerBasedOn": "CurLocalAvatar",
-                "campTargetType": "Alliance",
-                "campBasedOn": "Caster"
-              },
-              "targetPredicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "target": "Target",
-                  "key": "_MONSTESR_GeneralSkill_ElecDamage_ThunderArea_OwnerTag",
-                  "value": 1,
-                  "compareType": "Equal"
-                },
-                {
-                  "$type": "ByTargetPositionToSelfPosition",
-                  "compareType": "XZ",
-                  "value": 8,
-                  "logic": "Greater"
-                }
-              ],
-              "successActions": [
-                {
-                  "$type": "DamageByAttackValue",
-                  "attacker": "Caster",
-                  "target": "CurLocalAvatar",
-                  "attackInfo": {
-                    "attackProperty": {
-                      "ignoreAttackerProperty": true,
-                      "damageExtra": "%ThunderArea_Ratio*%ElementLevelCo",
-                      "strikeType": "None",
-                      "elementType": "Electric",
-                      "elementDurability": 25,
-                      "enBreak": 0
-                    },
-                    "hitPattern": {
-                      "onHitEffectName": "",
-                      "hitImpulseType": "LV0",
-                      "retreatType": "ByHitDirection",
-                      "hitHaltTime": 0.0,
-                      "hitHaltTimeScale": 0.0,
-                      "muteHitText": false
-                    },
-                    "forceCameraShake": false
-                  }
-                },
-                {
-                  "$type": "FireEffect",
-                  "effectPattern": "Eff_SceneObj_ThunderStorm_Blast",
-                  "target": "CurLocalAvatar"
-                },
-                {
-                  "$type": "AddGlobalValue",
-                  "value": 1,
-                  "key": "_MONSTER_GeneralSkill_ElecDamage_ThunderArea_HasOwner",
-                  "useLimitRange": true,
-                  "maxValue": 1,
-                  "minValue": 0
-                }
-              ],
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "target": "Self",
-                  "key": "_MONSTER_GeneralSkill_ElecDamage_ThunderArea_DamageMask",
-                  "value": 0,
-                  "compareType": "NoneOrEqual"
-                },
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_MONSTER_GeneralSkill_ElecDamage_ThunderArea_HasEffect",
-                  "target": "Self",
-                  "value": 1,
-                  "compareType": "Equal"
-                }
-              ]
-            },
-            {
-              "$type": "RemoveUniqueModifier",
-              "modifierName": "UNIQUE_GeneralSkill_ElecDamage_ThunderArea_Team_Ver2",
-              "predicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_MONSTER_GeneralSkill_ElecDamage_ThunderArea_HasOwner",
-                  "target": "Self",
-                  "value": 0,
-                  "compareType": "NoneOrEqual"
-                },
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "target": "Self",
-                  "key": "_MONSTER_GeneralSkill_ElecDamage_ThunderArea_DamageMask",
-                  "value": 0,
-                  "compareType": "NoneOrEqual"
-                },
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_MONSTER_GeneralSkill_ElecDamage_ThunderArea_HasEffect",
-                  "target": "Self",
-                  "value": 0,
-                  "compareType": "NoneOrEqual"
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "abilitySpecials": {
-        "ElementLevelCo": 0,
-        "ThunderArea_Ratio": 3
-      }
+      "isDynamicAbility": true
     }
   },
-  //////////////////////
-  //
-  // 3.2奇趣妙园   4182~4184
-  //
-  /////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "MonsterAffix_Property_ForCharAmusement_Shield",
-      "isDynamicAbility": true,
+      "abilitySpecials": {
+        "HPRatio": 0.0,
+        "AttackRatio": 0.0,
+        "SubHurtDelta_AllType": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Property_ForCharAmusement_Shield": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_MaxHPRatio": "HPRatio",
+            "Actor_AttackRatio": "AttackRatio",
+            "Actor_PhysicalSubHurtDelta": "SubHurtDelta_AllType",
+            "Actor_FireSubHurtDelta": "SubHurtDelta_AllType",
+            "Actor_ElecSubHurtDelta": "SubHurtDelta_AllType",
+            "Actor_IceSubHurtDelta": "SubHurtDelta_AllType",
+            "Actor_WaterSubHurtDelta": "SubHurtDelta_AllType",
+            "Actor_GrassSubHurtDelta": "SubHurtDelta_AllType",
+            "Actor_WindSubHurtDelta": "SubHurtDelta_AllType",
+            "Actor_RockSubHurtDelta": "SubHurtDelta_AllType"
+          },
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "ratio": 1.0,
+              "key": "_MONSTER_ForCharAmusement_Shield",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            }
+          ]
+        }
+      },
       "onAdded": [
         {
           "$type": "AttachModifier",
           "modifierName": "UNIQUE_MonsterAffix_Property_ForCharAmusement_Shield"
         }
       ],
-      "modifiers": {
-        "UNIQUE_MonsterAffix_Property_ForCharAmusement_Shield": {
-          "stacking": "Unique",
-          "isUnique": true,
-          "properties": {
-            "Actor_MaxHPRatio": "%HPRatio",
-            "Actor_AttackRatio": "%AttackRatio",
-            "Actor_PhysicalSubHurtDelta": "%SubHurtDelta_AllType",
-            "Actor_FireSubHurtDelta": "%SubHurtDelta_AllType",
-            "Actor_ElecSubHurtDelta": "%SubHurtDelta_AllType",
-            "Actor_IceSubHurtDelta": "%SubHurtDelta_AllType",
-            "Actor_WaterSubHurtDelta": "%SubHurtDelta_AllType",
-            "Actor_GrassSubHurtDelta": "%SubHurtDelta_AllType",
-            "Actor_WindSubHurtDelta": "%SubHurtDelta_AllType",
-            "Actor_RockSubHurtDelta": "%SubHurtDelta_AllType"
-          },
-          "onAdded": [
-            {
-              "$type": "SetGlobalValue",
-              "key": "_MONSTER_ForCharAmusement_Shield",
-              "value": 1
-            }
-          ]
-        }
-      },
-      "abilitySpecials": {
-        "HPRatio": 0,
-        "AttackRatio": 0,
-        "SubHurtDelta_AllType": 0
-      }
+      "isDynamicAbility": true
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "MonsterAffix_Property_ForCharAmusement_Chain",
-      "isDynamicAbility": true,
+      "abilitySpecials": {
+        "HPRatio": 0.0,
+        "AttackRatio": 0.0,
+        "SubHurtDelta_AllType": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Property_ForCharAmusement_Chain": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_MaxHPRatio": "HPRatio",
+            "Actor_AttackRatio": "AttackRatio",
+            "Actor_PhysicalSubHurtDelta": "SubHurtDelta_AllType",
+            "Actor_FireSubHurtDelta": "SubHurtDelta_AllType",
+            "Actor_ElecSubHurtDelta": "SubHurtDelta_AllType",
+            "Actor_IceSubHurtDelta": "SubHurtDelta_AllType",
+            "Actor_WaterSubHurtDelta": "SubHurtDelta_AllType",
+            "Actor_GrassSubHurtDelta": "SubHurtDelta_AllType",
+            "Actor_WindSubHurtDelta": "SubHurtDelta_AllType",
+            "Actor_RockSubHurtDelta": "SubHurtDelta_AllType"
+          }
+        }
+      },
       "onAdded": [
         {
           "$type": "AttachModifier",
           "modifierName": "UNIQUE_MonsterAffix_Property_ForCharAmusement_Chain"
         }
       ],
-      "modifiers": {
-        "UNIQUE_MonsterAffix_Property_ForCharAmusement_Chain": {
-          "stacking": "Unique",
-          "isUnique": true,
-          "properties": {
-            "Actor_MaxHPRatio": "%HPRatio",
-            "Actor_AttackRatio": "%AttackRatio",
-            "Actor_PhysicalSubHurtDelta": "%SubHurtDelta_AllType",
-            "Actor_FireSubHurtDelta": "%SubHurtDelta_AllType",
-            "Actor_ElecSubHurtDelta": "%SubHurtDelta_AllType",
-            "Actor_IceSubHurtDelta": "%SubHurtDelta_AllType",
-            "Actor_WaterSubHurtDelta": "%SubHurtDelta_AllType",
-            "Actor_GrassSubHurtDelta": "%SubHurtDelta_AllType",
-            "Actor_WindSubHurtDelta": "%SubHurtDelta_AllType",
-            "Actor_RockSubHurtDelta": "%SubHurtDelta_AllType"
-          }
-        }
-      },
-      "abilitySpecials": {
-        "HPRatio": 0,
-        "AttackRatio": 0,
-        "SubHurtDelta_AllType": 0
-      }
+      "isDynamicAbility": true
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "MonsterAffix_Property_ForCharAmusement_FastKill",
-      "isDynamicAbility": true,
+      "abilitySpecials": {
+        "HPRatio": 0.0,
+        "AttackRatio": 0.0,
+        "SubHurtDelta_AllType": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Property_ForCharAmusement_FastKill": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_MaxHPRatio": "HPRatio",
+            "Actor_AttackRatio": "AttackRatio",
+            "Actor_PhysicalSubHurtDelta": "SubHurtDelta_AllType",
+            "Actor_FireSubHurtDelta": "SubHurtDelta_AllType",
+            "Actor_ElecSubHurtDelta": "SubHurtDelta_AllType",
+            "Actor_IceSubHurtDelta": "SubHurtDelta_AllType",
+            "Actor_WaterSubHurtDelta": "SubHurtDelta_AllType",
+            "Actor_GrassSubHurtDelta": "SubHurtDelta_AllType",
+            "Actor_WindSubHurtDelta": "SubHurtDelta_AllType",
+            "Actor_RockSubHurtDelta": "SubHurtDelta_AllType"
+          }
+        }
+      },
       "onAdded": [
         {
           "$type": "AttachModifier",
           "modifierName": "UNIQUE_MonsterAffix_Property_ForCharAmusement_FastKill"
         }
       ],
-      "modifiers": {
-        "UNIQUE_MonsterAffix_Property_ForCharAmusement_FastKill": {
-          "stacking": "Unique",
-          "isUnique": true,
-          "properties": {
-            "Actor_MaxHPRatio": "%HPRatio",
-            "Actor_AttackRatio": "%AttackRatio",
-            "Actor_PhysicalSubHurtDelta": "%SubHurtDelta_AllType",
-            "Actor_FireSubHurtDelta": "%SubHurtDelta_AllType",
-            "Actor_ElecSubHurtDelta": "%SubHurtDelta_AllType",
-            "Actor_IceSubHurtDelta": "%SubHurtDelta_AllType",
-            "Actor_WaterSubHurtDelta": "%SubHurtDelta_AllType",
-            "Actor_GrassSubHurtDelta": "%SubHurtDelta_AllType",
-            "Actor_WindSubHurtDelta": "%SubHurtDelta_AllType",
-            "Actor_RockSubHurtDelta": "%SubHurtDelta_AllType"
-          }
-        }
-      },
-      "abilitySpecials": {
-        "HPRatio": 0,
-        "AttackRatio": 0,
-        "SubHurtDelta_AllType": 0
-      }
+      "isDynamicAbility": true
     }
   },
-  //////////////////////////////////////////////////////////////////////////////////////////////////
-  //
-  //  3.4 连线地城_连线 判断Team身上的Value获得增伤
-  //
-  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "MonsterAffix_ActivityTeamChainV3.4_UpDamage",
-      "isDynamicAbility": true,
-      "abilitySpecials": {
-        "DamageUp": 0
-      },
       "abilityMixins": [
         {
           "$type": "AttachModifierToGlobalValueMixin",
@@ -825,37 +856,37 @@
           "modifierNameSteps": ["Crazy_In_Peace", "Crazy_DamageUp"]
         }
       ],
+      "abilitySpecials": {
+        "DamageUp": 0.0
+      },
       "modifiers": {
-        "Crazy_In_Peace": {},
+        "Crazy_In_Peace": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
+        },
         "Crazy_DamageUp": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "properties": {
-            "Actor_AddHurtDelta": "%DamageUp"
-          }
+            "Actor_FireAddHurtDelta": "DamageUp",
+            "Actor_ElecAddHurtDelta": "DamageUp",
+            "Actor_WaterAddHurtDelta": "DamageUp",
+            "Actor_GrassAddHurtDelta": "DamageUp",
+            "Actor_WindAddHurtDelta": "DamageUp",
+            "Actor_IceAddHurtDelta": "DamageUp",
+            "Actor_RockAddHurtDelta": "DamageUp",
+            "Actor_PhysicalAddHurtDelta": "DamageUp"
+          },
+          "state": "AttackUp"
         }
-      }
+      },
+      "isDynamicAbility": true
     }
   },
-  //////////////////////////////////////////////////////////////////////////////////////////////////
-  //
-  //  3.4 连线地城_连线 阵眼怪
-  //
-  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "MonsterAffix_ActivityTeamChainV3.4_Master",
-      "isDynamicAbility": true,
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "key": "_IS_TEAMCHAIN_MASTER_V3.4",
-          "value": 1
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "MonsterAffix_ActivityTeamChain_MasterEffect"
-        }
-      ],
       "abilityMixins": [
         {
           "$type": "ServerCreateGadgetOnKillMixin",
@@ -866,112 +897,114 @@
       ],
       "modifiers": {
         "MonsterAffix_ActivityTeamChain_MasterEffect": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "effectPattern": "Eff_Monster_Common_MarkPowerful"
+              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Common_MarkPowerful",
+              "effectTempleteID": -1.0
             }
           ]
         }
       },
-      "onKill": [
+      "onAdded": [
         {
           "$type": "SetGlobalValue",
+          "ratio": 1.0,
           "key": "_IS_TEAMCHAIN_MASTER_V3.4",
-          "value": 0
+          "maxValue": 0.0,
+          "minValue": 0.0
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "MonsterAffix_ActivityTeamChain_MasterEffect"
         }
-      ]
+      ],
+      "onKill": [
+        {
+          "$type": "RemoveModifier",
+          "modifierName": "MonsterAffix_ActivityTeamChain_MasterEffect"
+        },
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 0.0,
+          "key": "_IS_TEAMCHAIN_MASTER_V3.4",
+          "maxValue": 0.0,
+          "minValue": 0.0
+        }
+      ],
+      "isDynamicAbility": true
     }
   },
-  //////////////////////////////////////////////////////////////////////////////////////////////////
-  //
-  //  3.4 连线地城_连线 从属怪
-  //
-  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "MonsterAffix_ActivityTeamChainV3.4_Slave",
-      "isDynamicAbility": true,
       "abilitySpecials": {
-        "DamageUp": 0,
-        "SubHurtUp": 0,
-        "HealThinkinverval": 0,
-        "HealPercent": 0
+        "DamageUp": 0.0,
+        "SubHurtUp": 0.0,
+        "HealThinkinverval": 0.0,
+        "HealPercent": 0.0
       },
-      "onAdded": [
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "MonsterAffix_ActivityTeamChainV3.4_LinkHandler"
-        }
-      ],
-      "abilityMixins": [
-        // {
-        // 	"$type": "AttachModifierToGlobalValueMixin",
-        // 	"otherTargets":{
-        // 		"$type": "SelectTargetsByShape",
-        // 		"campBasedOn": "Self",
-        // 		"campTargetType": "AllExceptSelf",
-        // 		"centerBasedOn": "Self",
-        // 		"shapeName": "CircleR50"
-        // 	},
-        // 	"globalValueKey": "_IS_TEAMCHAIN_MASTER_V3.4",
-        // 	"valueSteps": [-0.5,0.5,1.5],
-        // 	"modifierNameSteps": ["No_ActionEmpty","PowerUp_Buff"]
-        // }
-      ],
       "modifiers": {
-        "No_ActionEmpty": {},
+        "No_ActionEmpty": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
+        },
         "PowerUp_Buff": {
-          "duration": 1.2,
+          "modifierName": "",
+          "duration": 1.2000000476837158,
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": "HealThinkinverval",
           "properties": {
-            "Actor_FireAddHurtDelta": "%DamageUp",
-            "Actor_ElecAddHurtDelta": "%DamageUp",
-            "Actor_WaterAddHurtDelta": "%DamageUp",
-            "Actor_GrassAddHurtDelta": "%DamageUp",
-            "Actor_WindAddHurtDelta": "%DamageUp",
-            "Actor_IceAddHurtDelta": "%DamageUp",
-            "Actor_RockAddHurtDelta": "%DamageUp",
-            "Actor_PhysicalAddHurtDelta": "%DamageUp",
-            "Actor_PhysicalSubHurtDelta": "%SubHurtUp",
-            "Actor_FireSubHurtDelta": "%SubHurtUp",
-            "Actor_ElecSubHurtDelta": "%SubHurtUp",
-            "Actor_WaterSubHurtDelta": "%SubHurtUp",
-            "Actor_GrassSubHurtDelta": "%SubHurtUp",
-            "Actor_WindSubHurtDelta": "%SubHurtUp",
-            "Actor_IceSubHurtDelta": "%SubHurtUp",
-            "Actor_RockSubHurtDelta": "%SubHurtUp"
+            "Actor_FireAddHurtDelta": "DamageUp",
+            "Actor_ElecAddHurtDelta": "DamageUp",
+            "Actor_WaterAddHurtDelta": "DamageUp",
+            "Actor_GrassAddHurtDelta": "DamageUp",
+            "Actor_WindAddHurtDelta": "DamageUp",
+            "Actor_IceAddHurtDelta": "DamageUp",
+            "Actor_RockAddHurtDelta": "DamageUp",
+            "Actor_PhysicalAddHurtDelta": "DamageUp",
+            "Actor_PhysicalSubHurtDelta": "SubHurtUp",
+            "Actor_FireSubHurtDelta": "SubHurtUp",
+            "Actor_ElecSubHurtDelta": "SubHurtUp",
+            "Actor_WaterSubHurtDelta": "SubHurtUp",
+            "Actor_GrassSubHurtDelta": "SubHurtUp",
+            "Actor_WindSubHurtDelta": "SubHurtUp",
+            "Actor_IceSubHurtDelta": "SubHurtUp",
+            "Actor_RockSubHurtDelta": "SubHurtUp"
           },
-          "thinkInterval": "%HealThinkinverval",
           "onThinkInterval": [
             {
               "$type": "HealHP",
-              "amountByCasterMaxHPRatio": "%HealPercent"
+              "HFNJHOGGFKB": "HealPercent"
             },
             {
               "$type": "FireEffect",
-              "effectPattern": "Eff_Monster_GeneralSkill_SelfHeal_HealEffect"
+              "healLimitedByCasterMaxHPRatio": "Eff_Monster_GeneralSkill_SelfHeal_HealEffect",
+              "effectTempleteID": -1.0
             }
           ]
         },
         "MonsterAffix_ActivityTeamChainV3.4_LinkHandler": {
-          "thinkInterval": 1,
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 1.0,
           "onThinkInterval": [
             {
               "$type": "Predicated",
               "otherTargets": {
                 "$type": "SelectTargetsByShape",
-                "campBasedOn": "Self",
+                "shapeName": "CircleR50",
                 "campTargetType": "AllExceptSelf",
-                "centerBasedOn": "Self",
-                "shapeName": "CircleR50"
+                "OBHNBNDMPFN": 1.0
               },
               "targetPredicates": [
                 {
                   "$type": "ByTargetGlobalValue",
                   "key": "_IS_TEAMCHAIN_MASTER_V3.4",
-                  "value": 1,
-                  "compareType": "Equal"
+                  "ratio": 1.0
                 }
               ],
               "successActions": [
@@ -989,58 +1022,54 @@
           ]
         },
         "MonsterAffix_ActivityTeamChainV3.4_Link": {
-          "duration": 2,
+          "modifierName": "",
+          "duration": 2.0,
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
               "target": "Applier",
-              "effectPattern": "Eff_Monster_Common_LinkEff_Recover",
-              "setSelfAsEffectPluginTarget": true
+              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Common_LinkEff_Recover",
+              "effectTempleteID": -1.0,
+              "KIGIKJMMKEJ": true
             }
           ]
         }
-      }
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "MonsterAffix_ActivityTeamChainV3.4_LinkHandler"
+        }
+      ],
+      "isDynamicAbility": true
     }
   },
-  //////////////////////////////////////////////////////////////////////////////////////////////////
-  //
-  //  3.4 连线地城_连线 关卡5隔山打牛
-  //
-  //////////////////////////////////////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "MonsterAffix_ActivityTeamChainV3.4_HitOtherMonster",
-      "isDynamicAbility": true,
       "abilitySpecials": {
-        "DamageRatio": 0,
-        "DamageCD": 0
+        "DamageRatio": 0.0,
+        "DamageCD": 0.0
       },
-      "onAdded": [
-        {
-          "$type": "SetSystemValueToOverrideMap",
-          "key": "DamageSystemValue",
-          "type": "ElementLevelCo"
-        },
-        {
-          "$type": "ApplyModifier",
-          "modifierName": "MonsterAffix_ActivityTeamChainV3.4_HitOtherMonster"
-        }
-      ],
       "modifiers": {
         "MonsterAffix_ActivityTeamChainV3.4_HitOtherMonster": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onBeingHit": [
             {
               "$type": "Predicated",
               "targetPredicates": [
                 {
                   "$type": "ByTargetGlobalValue",
+                  "target": "Team",
                   "key": "_CJB_IN_CDV3.4",
-                  "value": 0,
+                  "ratio": 0.0,
                   "compareType": "NoneOrEqual"
                 },
                 {
-                  "$type": "ByAttackTags",
+                  "$type": "LCCMCDGDKGI",
                   "attackTags": [
                     "NormalAttack_01",
                     "NormalAttack_02",
@@ -1060,16 +1089,22 @@
                   "$type": "ApplyModifier",
                   "otherTargets": {
                     "$type": "SelectTargetsByShape",
-                    "campBasedOn": "Self",
+                    "shapeName": "CircleR50",
                     "campTargetType": "Alliance",
-                    "centerBasedOn": "Self",
-                    "shapeName": "CircleR50"
+                    "OBHNBNDMPFN": 1.0
                   },
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "_IS_SP_MONSTER",
+                      "ratio": 1.0
+                    }
+                  ],
                   "modifierName": "MonsterAffix_ActivityTeamChainV3.4_HitOtherMonsterDamage"
                 },
                 {
                   "$type": "ApplyModifier",
-                  "target": "Self",
+                  "target": "Team",
                   "modifierName": "MonsterAffix_ActivityTeamChainV3.4_HitOtherMonster_CD"
                 }
               ]
@@ -1077,18 +1112,21 @@
           ]
         },
         "MonsterAffix_ActivityTeamChainV3.4_HitOtherMonsterDamage": {
-          "duration": 0.3,
+          "modifierName": "",
+          "duration": 0.30000001192092896,
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "FireEffect",
-              "effectPattern": "Eff_EnergyDisk_ExtraAtkWave",
+              "healLimitedByCasterMaxHPRatio": "Eff_Stages_DebuffRay_01",
               "born": {
-                "$type": "ConfigBornBySelf"
-              }
+                "$type": "ConfigBornBySelf",
+                "IABNJPGBAOH": true
+              },
+              "effectTempleteID": -1.0
             },
             {
               "$type": "DamageByAttackValue",
-              "target": "Self",
               "born": {
                 "$type": "ConfigBornByTarget",
                 "offset": {
@@ -1098,47 +1136,3616 @@
                 }
               },
               "attackInfo": {
+                "attackTag": "",
+                "attenuationTag": "",
+                "attenuationGroup": "default",
                 "attackProperty": {
+                  "damagePercentage": 0.0,
+                  "damagePercentageRatio": 0.0,
+                  "bonusCriticalHurt": 25.0,
                   "ignoreAttackerProperty": true,
-                  "trueDamage": true,
-                  "damagePercentage": 0,
-                  "damageExtra": "%DamageRatio*%ElementLevelCo",
-                  "strikeType": "None",
-                  "elementType": "None",
-                  "elementDurability": 25,
-                  "enBreak": 0
+                  "enBreak": 0.0,
+                  "damageExtra": ["DamageRatio", "DamageSystemValue", "MUL"],
+                  "trueDamage": true
                 },
                 "hitPattern": {
                   "onHitEffectName": "",
                   "hitImpulseType": "LV0",
-                  "retreatType": "ByHitDirection",
-                  "hitHaltTime": 0.0,
-                  "hitHaltTimeScale": 0.0,
-                  "muteHitText": false
-                },
-                "forceCameraShake": false
+                  "retreatType": "ByHitDirection"
+                }
               }
             }
           ]
         },
         "MonsterAffix_ActivityTeamChainV3.4_HitOtherMonster_CD": {
-          "duration": "%DamageCD",
+          "modifierName": "",
+          "duration": "DamageCD",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "SetGlobalValue",
+              "ratio": 1.0,
               "key": "_CJB_IN_CDV3.4",
-              "value": 1
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ],
           "onRemoved": [
             {
               "$type": "SetGlobalValue",
+              "ratio": 0.0,
               "key": "_CJB_IN_CDV3.4",
-              "value": 0
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ]
         }
-      }
+      },
+      "onAdded": [
+        {
+          "$type": "SetSystemValueToOverrideMap",
+          "key": "DamageSystemValue",
+          "type": "ElementLevelCo"
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "MonsterAffix_ActivityTeamChainV3.4_HitOtherMonster"
+        },
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 1.0,
+          "key": "_IS_SP_MONSTER",
+          "maxValue": 0.0,
+          "minValue": 0.0
+        }
+      ],
+      "onKill": [
+        {
+          "$type": "RemoveModifier",
+          "modifierName": "MonsterAffix_ActivityTeamChainV3.4_HitOtherMonster"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_CrystalLinkV2_IsElite",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 1.0,
+          "key": "_CrystalLink_IsElite",
+          "maxValue": 0.0,
+          "minValue": 0.0
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_AkaFes_EliteMark",
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Activity_AkaFes_Elite_BillBoardMark": {
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "modifierMixins": [
+            {
+              "$type": "BillboardFixedMarkMixin",
+              "IIBFEAKOPKK": "Eff_UI_BillBoard_FixedMark_HighAlert",
+              "GJOACLDEAKC": true,
+              "DCOCBFOMHPD": 20.0
+            }
+          ]
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "canBeHandledOnRecover": true,
+          "ratio": 1.0,
+          "key": "_ACTIVITY_AKAFES_ELITE_",
+          "useLimitRange": true,
+          "maxValue": 1.0,
+          "minValue": 0.0
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_MonsterAffix_Activity_AkaFes_Elite_BillBoardMark"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_AkaFes_NormalMark",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "canBeHandledOnRecover": true,
+          "ratio": 1.0,
+          "key": "_ACTIVITY_AKAFES_NORMAL_",
+          "useLimitRange": true,
+          "maxValue": 1.0,
+          "minValue": 0.0
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_AkaFes_Level_01",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_ACTIVITY_AKAFES_ELITE_",
+          "defaultGlobalValueOnCreate": 0.0,
+          "valueSteps": [-0.5, 0.5, 1.5],
+          "modifierNameSteps": ["Empty", "UNIQUE_Level_01_Elite_Properties_UP"]
+        },
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_ACTIVITY_AKAFES_NORMAL_",
+          "defaultGlobalValueOnCreate": 0.0,
+          "valueSteps": [-0.5, 0.5, 1.5],
+          "modifierNameSteps": ["Empty", "UNIQUE_Level_01_Normal_Properties_UP"]
+        }
+      ],
+      "abilitySpecials": {
+        "Normal_HP_Ratio": 0.0,
+        "Normal_Attack_Ratio": 0.0,
+        "Elite_HP_Ratio": 0.0,
+        "Elite_Attack_Ratio": 0.0
+      },
+      "modifiers": {
+        "Empty": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
+        },
+        "UNIQUE_Level_01_Normal_Properties_UP": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_MaxHPRatio": "Normal_HP_Ratio",
+            "Actor_AttackRatio": "Normal_Attack_Ratio"
+          }
+        },
+        "UNIQUE_Level_01_Elite_Properties_UP": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_MaxHPRatio": "Elite_HP_Ratio",
+            "Actor_AttackRatio": "Elite_Attack_Ratio"
+          }
+        }
+      },
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_AkaFes_Level_02",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_ACTIVITY_AKAFES_ELITE_",
+          "defaultGlobalValueOnCreate": 0.0,
+          "valueSteps": [-0.5, 0.5, 1.5],
+          "modifierNameSteps": ["Empty", "UNIQUE_Level_02_Elite_Properties_UP"]
+        },
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_ACTIVITY_AKAFES_NORMAL_",
+          "defaultGlobalValueOnCreate": 0.0,
+          "valueSteps": [-0.5, 0.5, 1.5],
+          "modifierNameSteps": ["Empty", "UNIQUE_Level_02_Normal_Properties_UP"]
+        }
+      ],
+      "abilitySpecials": {
+        "Normal_HP_Ratio": 0.0,
+        "Normal_Attack_Ratio": 0.0,
+        "Elite_HP_Ratio": 0.0,
+        "Elite_Attack_Ratio": 0.0
+      },
+      "modifiers": {
+        "Empty": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
+        },
+        "UNIQUE_Level_02_Normal_Properties_UP": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_MaxHPRatio": "Normal_HP_Ratio",
+            "Actor_AttackRatio": "Normal_Attack_Ratio"
+          }
+        },
+        "UNIQUE_Level_02_Elite_Properties_UP": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_MaxHPRatio": "Elite_HP_Ratio",
+            "Actor_AttackRatio": "Elite_Attack_Ratio"
+          }
+        }
+      },
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_AkaFes_Level_03",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_ACTIVITY_AKAFES_ELITE_",
+          "defaultGlobalValueOnCreate": 0.0,
+          "valueSteps": [-0.5, 0.5, 1.5],
+          "modifierNameSteps": ["Empty", "UNIQUE_Level_03_Elite_Properties_UP"]
+        },
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_ACTIVITY_AKAFES_NORMAL_",
+          "defaultGlobalValueOnCreate": 0.0,
+          "valueSteps": [-0.5, 0.5, 1.5],
+          "modifierNameSteps": ["Empty", "UNIQUE_Level_03_Normal_Properties_UP"]
+        }
+      ],
+      "abilitySpecials": {
+        "Normal_HP_Ratio": 0.0,
+        "Normal_Attack_Ratio": 0.0,
+        "Elite_HP_Ratio": 0.0,
+        "Elite_Attack_Ratio": 0.0
+      },
+      "modifiers": {
+        "Empty": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
+        },
+        "UNIQUE_Level_03_Normal_Properties_UP": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_MaxHPRatio": "Normal_HP_Ratio",
+            "Actor_AttackRatio": "Normal_Attack_Ratio"
+          }
+        },
+        "UNIQUE_Level_03_Elite_Properties_UP": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_MaxHPRatio": "Elite_HP_Ratio",
+            "Actor_AttackRatio": "Elite_Attack_Ratio"
+          }
+        }
+      },
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_AkaFes_Elite_DefendUp",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_ACTIVITY_AKAFES_ELITE_",
+          "defaultGlobalValueOnCreate": 0.0,
+          "valueSteps": [-0.5, 0.5, 1.5],
+          "modifierNameSteps": [
+            "Empty",
+            "MonsterAffix_Activity_AkaFes_FindSlave"
+          ]
+        }
+      ],
+      "abilitySpecials": {
+        "SubHurtDelta_Ratio": 0.0
+      },
+      "modifiers": {
+        "Empty": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
+        },
+        "MonsterAffix_Activity_AkaFes_FindSlave": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 2.0,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "sortType": "Nearest",
+                "shapeName": "CircleR60",
+                "campTargetType": "Alliance",
+                "OBHNBNDMPFN": 1.0
+              },
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ACTIVITY_AKAFES_NORMAL_",
+                  "ratio": 1.0
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "ApplyModifier",
+                  "target": "Target",
+                  "modifierName": "UNIQUE_Activity_AkaFes_Elite_DefenceUp"
+                }
+              ]
+            }
+          ]
+        },
+        "UNIQUE_Activity_AkaFes_Elite_DefenceUp": {
+          "modifierName": "",
+          "isUnique": true,
+          "duration": 2.0999999046325684,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_PhysicalSubHurtDelta": "SubHurtDelta_Ratio",
+            "Actor_FireSubHurtDelta": "SubHurtDelta_Ratio",
+            "Actor_ElecSubHurtDelta": "SubHurtDelta_Ratio",
+            "Actor_IceSubHurtDelta": "SubHurtDelta_Ratio",
+            "Actor_WaterSubHurtDelta": "SubHurtDelta_Ratio",
+            "Actor_GrassSubHurtDelta": "SubHurtDelta_Ratio",
+            "Actor_WindSubHurtDelta": "SubHurtDelta_Ratio",
+            "Actor_RockSubHurtDelta": "SubHurtDelta_Ratio"
+          },
+          "state": "DefenseUp"
+        }
+      },
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_AkaFes_Normal_HPUp",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_ACTIVITY_AKAFES_NORMAL_",
+          "defaultGlobalValueOnCreate": 0.0,
+          "valueSteps": [-0.5, 0.5, 1.5],
+          "modifierNameSteps": [
+            "Empty",
+            "UNIQUE_MonsterAffix_Activity_AkaFes_Normal_HPUp"
+          ]
+        }
+      ],
+      "abilitySpecials": {
+        "HP_Ratio": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Activity_AkaFes_Normal_HPUp": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_MaxHPRatio": "HP_Ratio"
+          }
+        },
+        "Empty": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
+        }
+      },
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_AkaFes_Normal_DefendUP",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_ACTIVITY_AKAFES_NORMAL_",
+          "defaultGlobalValueOnCreate": 0.0,
+          "valueSteps": [-0.5, 0.5, 1.5],
+          "modifierNameSteps": [
+            "Empty",
+            "MonsterAffix_Activity_AkaFes_Normal_DefendUP"
+          ]
+        }
+      ],
+      "abilitySpecials": {
+        "SubHurtDelta_Ratio": 0.0
+      },
+      "modifiers": {
+        "Empty": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
+        },
+        "MonsterAffix_Activity_AkaFes_Normal_DefendUP": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 3.0,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "sortType": "Nearest",
+                "shapeName": "CircleR60",
+                "campTargetType": "Alliance",
+                "OBHNBNDMPFN": 1.0
+              },
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ACTIVITY_AKAFES_ELITE_",
+                  "ratio": 1.0
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "ApplyModifier",
+                  "target": "Target",
+                  "modifierName": "Activity_AkaFes_Normal_DefenceUp"
+                }
+              ]
+            }
+          ]
+        },
+        "Activity_AkaFes_Normal_DefenceUp": {
+          "stacking": "Multiple",
+          "stackingOption": {
+            "abilitySpecialName": "",
+            "maxModifierNumForMultipleType": 5.0
+          },
+          "modifierName": "",
+          "duration": 3.0999999046325684,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_PhysicalSubHurtDelta": "SubHurtDelta_Ratio",
+            "Actor_FireSubHurtDelta": "SubHurtDelta_Ratio",
+            "Actor_ElecSubHurtDelta": "SubHurtDelta_Ratio",
+            "Actor_IceSubHurtDelta": "SubHurtDelta_Ratio",
+            "Actor_WaterSubHurtDelta": "SubHurtDelta_Ratio",
+            "Actor_GrassSubHurtDelta": "SubHurtDelta_Ratio",
+            "Actor_WindSubHurtDelta": "SubHurtDelta_Ratio",
+            "Actor_RockSubHurtDelta": "SubHurtDelta_Ratio"
+          },
+          "state": "DefenseUp"
+        }
+      },
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_AkaFes_Elete_HPUp",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_ACTIVITY_AKAFES_ELITE_",
+          "defaultGlobalValueOnCreate": 0.0,
+          "valueSteps": [-0.5, 0.5, 1.5],
+          "modifierNameSteps": [
+            "Empty",
+            "UNIQUE_MonsterAffix_Activity_AkaFes_Elete_HPUp"
+          ]
+        }
+      ],
+      "abilitySpecials": {
+        "HP_Ratio": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Activity_AkaFes_Elete_HPUp": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_MaxHPRatio": "HP_Ratio"
+          }
+        },
+        "Empty": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
+        }
+      },
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_AkaFes_Normal_HealLatency",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_ACTIVITY_AKAFES_NORMAL_",
+          "defaultGlobalValueOnCreate": 0.0,
+          "valueSteps": [-0.5, 0.5, 1.5],
+          "modifierNameSteps": [
+            "Empty",
+            "MonsterAffix_Activity_AkaFes_Normal_FindElete"
+          ]
+        }
+      ],
+      "abilitySpecials": {
+        "HealHP_Ratio": 0.0,
+        "Interval": 0.0
+      },
+      "modifiers": {
+        "Empty": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
+        },
+        "MonsterAffix_Activity_AkaFes_Normal_FindElete": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 0.4000000059604645,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "sortType": "Nearest",
+                "shapeName": "CircleR60",
+                "campTargetType": "Alliance",
+                "OBHNBNDMPFN": 1.0
+              },
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ACTIVITY_AKAFES_ELITE_",
+                  "ratio": 1.0
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "ApplyModifier",
+                  "modifierName": "MonsterAffix_Activity_AkaFes_Normal_HealLatency"
+                }
+              ]
+            }
+          ]
+        },
+        "MonsterAffix_Activity_AkaFes_Normal_HealLatency": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": "Interval",
+          "onThinkInterval": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "HealLatency"
+            }
+          ]
+        },
+        "HealLatency": {
+          "modifierName": "",
+          "duration": 1.5,
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 1.0,
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_Monster_GeneralSkill_Sovereign_Slave_Alert",
+              "effectTempleteID": -1.0
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "sortType": "Nearest",
+                "shapeName": "CircleR60",
+                "campTargetType": "Alliance",
+                "OBHNBNDMPFN": 1.0
+              },
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ACTIVITY_AKAFES_ELITE_",
+                  "ratio": 1.0
+                },
+                {
+                  "$type": "GMGEIHHLMCO",
+                  "target": "Self",
+                  "KONBGFMBNDO": 0.0
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "ApplyModifier",
+                  "target": "Target",
+                  "modifierName": "UNIQUE_HealLatency_Effect"
+                },
+                {
+                  "$type": "FireEffect",
+                  "target": "Target",
+                  "healLimitedByCasterMaxHPRatio": "Eff_Monster_GeneralSkill_Sovereign_Slave_LifeLine",
+                  "born": {
+                    "$type": "ConfigBornByAttachPoint",
+                    "IABNJPGBAOH": true,
+                    "attachPointName": "RootNode",
+                    "ABIMPICHJNC": "Caster"
+                  },
+                  "effectTempleteID": -1.0
+                },
+                {
+                  "$type": "HealHP",
+                  "target": "Target",
+                  "amountByCasterMaxHPRatio": "HealHP_Ratio"
+                }
+              ]
+            }
+          ]
+        },
+        "UNIQUE_HealLatency_Effect": {
+          "modifierName": "",
+          "isUnique": true,
+          "duration": 0.5,
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 0.6000000238418579,
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_Monster_GeneralSkill_Sovereign_Master_Heal",
+              "effectTempleteID": -1.0
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "FireEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_Monster_GeneralSkill_Sovereign_Master_Heal",
+              "effectTempleteID": -1.0
+            }
+          ]
+        }
+      },
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_AkaFes_RockDamage_LowWave",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_ACTIVITY_AKAFES_ELITE_",
+          "defaultGlobalValueOnCreate": 0.0,
+          "valueSteps": [-0.5, 0.5, 1.5],
+          "modifierNameSteps": [
+            "Empty",
+            "UNIQUE_MonsterAffix_Activity_AkaFes_RockDamage_LowWave_Host"
+          ]
+        }
+      ],
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Activity_AkaFes_RockDamage_LowWave_Host": {
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 5.0,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_Monster_GeneralSkill_RockDamage_FootCircle",
+              "effectTempleteID": -1.0
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "ApplyModifier",
+              "target": "SelfAttackTarget",
+              "modifierName": "GeneralSkill_RockDamage_LowWave_TeamSearcher"
+            }
+          ]
+        },
+        "GeneralSkill_RockDamage_LowWave_TeamSearcher": {
+          "modifierName": "",
+          "duration": 0.10000000149011612,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "ApplyModifier",
+              "target": "Team",
+              "predicates": [
+                {
+                  "$type": "GMGEIHHLMCO",
+                  "target": "Caster",
+                  "KONBGFMBNDO": 0.0
+                }
+              ],
+              "modifierName": "UNIQUE_MonsterAffix_Activity_AkaFes_RockDamage_LowWave_Team"
+            }
+          ]
+        },
+        "UNIQUE_MonsterAffix_Activity_AkaFes_RockDamage_LowWave_Team": {
+          "modifierName": "",
+          "isUnique": true,
+          "duration": 4.0,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "UNIQUE_MonsterAffix_Activity_AkaFes_RockDamage_LowWave_Creator"
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "RemoveUniqueModifier",
+              "modifierName": "UNIQUE_MonsterAffix_Activity_AkaFes_RockDamage_LowWave_Creator"
+            },
+            {
+              "$type": "KillGadget",
+              "gadgetInfo": {
+                "sortType": "Reversed",
+                "configID": 49001024
+              }
+            }
+          ]
+        },
+        "UNIQUE_MonsterAffix_Activity_AkaFes_RockDamage_LowWave_Creator": {
+          "modifierName": "",
+          "isUnique": true,
+          "duration": 3.0,
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 4.0,
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "target": "CurLocalAvatar",
+              "healLimitedByCasterMaxHPRatio": "Eff_Monster_GeneralSkill_RockDamage_Alert",
+              "effectTempleteID": -1.0
+            },
+            {
+              "$type": "CreateGadget",
+              "target": "CurLocalAvatar",
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": 0.0,
+                  "y": 2.0,
+                  "z": 8.0
+                },
+                "DAPKLNIFPID": true
+              },
+              "gadgetID": 49001024,
+              "campID": 4001
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "FireEffect",
+              "target": "CurLocalAvatar",
+              "healLimitedByCasterMaxHPRatio": "Eff_Monster_GeneralSkill_RockDamage_Alert",
+              "effectTempleteID": -1.0
+            },
+            {
+              "$type": "CreateGadget",
+              "target": "CurLocalAvatar",
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": 0.0,
+                  "y": 2.0,
+                  "z": 8.0
+                },
+                "DAPKLNIFPID": true
+              },
+              "gadgetID": 49001024,
+              "campID": 4001
+            }
+          ]
+        },
+        "Empty": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
+        }
+      },
+      "onKill": [
+        {
+          "$type": "RemoveUniqueModifier",
+          "modifierName": "UNIQUE_MonsterAffix_Activity_AkaFes_RockDamage_LowWave_Host"
+        },
+        {
+          "$type": "RemoveModifier",
+          "target": "SelfAttackTarget",
+          "modifierName": "GeneralSkill_RockDamage_LowWave_TeamSearcher"
+        },
+        {
+          "$type": "RemoveUniqueModifier",
+          "target": "AllTeams",
+          "modifierName": "UNIQUE_MonsterAffix_Activity_AkaFes_RockDamage_LowWave_Team"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_AkaFes_RockDamage_LowWave_Emitter",
+      "modifiers": {
+        "BarrageWave1": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 0.8999999761581421,
+          "onThinkInterval": [
+            {
+              "$type": "AddGlobalValue",
+              "ratio": 0.0,
+              "key": "_OFFSET_RANDOM_Z",
+              "randomInRange": true,
+              "maxValue": 0.5,
+              "minValue": -0.5
+            },
+            {
+              "$type": "SetGlobalValueToOverrideMap",
+              "globalValueKey": "_OFFSET_RANDOM_Z",
+              "overrideMapKey": "offset_random_z"
+            },
+            {
+              "$type": "TriggerBullet",
+              "bulletID": 49001025,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.75,
+                  "z": "offset_random_z"
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "DOCDLGLJKND",
+                  "attachPointName": "BarrageAttachPoint1",
+                  "ABIMPICHJNC": "Self"
+                },
+                "IABNJPGBAOH": true,
+                "attachPointName": "BarrageAttachPoint1"
+              }
+            },
+            {
+              "$type": "AddGlobalValue",
+              "ratio": 0.0,
+              "key": "_OFFSET_RANDOM_Z",
+              "randomInRange": true,
+              "maxValue": 0.5,
+              "minValue": -0.5
+            },
+            {
+              "$type": "SetGlobalValueToOverrideMap",
+              "globalValueKey": "_OFFSET_RANDOM_Z",
+              "overrideMapKey": "offset_random_z"
+            },
+            {
+              "$type": "TriggerBullet",
+              "bulletID": 49001025,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.75,
+                  "z": "offset_random_z"
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "DOCDLGLJKND",
+                  "attachPointName": "BarrageAttachPoint2",
+                  "ABIMPICHJNC": "Self"
+                },
+                "IABNJPGBAOH": true,
+                "attachPointName": "BarrageAttachPoint2"
+              }
+            },
+            {
+              "$type": "AddGlobalValue",
+              "ratio": 0.0,
+              "key": "_OFFSET_RANDOM_Z",
+              "randomInRange": true,
+              "maxValue": 0.5,
+              "minValue": -0.5
+            },
+            {
+              "$type": "SetGlobalValueToOverrideMap",
+              "globalValueKey": "_OFFSET_RANDOM_Z",
+              "overrideMapKey": "offset_random_z"
+            },
+            {
+              "$type": "TriggerBullet",
+              "bulletID": 49001025,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.75,
+                  "z": "offset_random_z"
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "DOCDLGLJKND",
+                  "attachPointName": "BarrageAttachPoint3",
+                  "ABIMPICHJNC": "Self"
+                },
+                "IABNJPGBAOH": true,
+                "attachPointName": "BarrageAttachPoint3"
+              }
+            },
+            {
+              "$type": "AddGlobalValue",
+              "ratio": 0.0,
+              "key": "_OFFSET_RANDOM_Z",
+              "randomInRange": true,
+              "maxValue": 0.5,
+              "minValue": -0.5
+            },
+            {
+              "$type": "SetGlobalValueToOverrideMap",
+              "globalValueKey": "_OFFSET_RANDOM_Z",
+              "overrideMapKey": "offset_random_z"
+            },
+            {
+              "$type": "TriggerBullet",
+              "bulletID": 49001025,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.75,
+                  "z": "offset_random_z"
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "DOCDLGLJKND",
+                  "attachPointName": "BarrageAttachPoint4",
+                  "ABIMPICHJNC": "Self"
+                },
+                "IABNJPGBAOH": true,
+                "attachPointName": "BarrageAttachPoint4"
+              }
+            },
+            {
+              "$type": "AddGlobalValue",
+              "ratio": 0.0,
+              "key": "_OFFSET_RANDOM_Z",
+              "randomInRange": true,
+              "maxValue": 0.5,
+              "minValue": -0.5
+            },
+            {
+              "$type": "SetGlobalValueToOverrideMap",
+              "globalValueKey": "_OFFSET_RANDOM_Z",
+              "overrideMapKey": "offset_random_z"
+            },
+            {
+              "$type": "TriggerBullet",
+              "bulletID": 49001025,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.75,
+                  "z": "offset_random_z"
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "DOCDLGLJKND",
+                  "attachPointName": "BarrageAttachPoint5",
+                  "ABIMPICHJNC": "Self"
+                },
+                "IABNJPGBAOH": true,
+                "attachPointName": "BarrageAttachPoint5"
+              }
+            }
+          ]
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "BarrageWave1"
+        }
+      ],
+      "onKill": [
+        {
+          "$type": "RemoveModifier",
+          "modifierName": "BarrageWave1"
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_AkaFes_RockDamage_LowWave_SingleBullet",
+      "abilitySpecials": {
+        "GeneralSkill_ElementLevelCo": 0.0,
+        "GeneralSkill_RockDamage_LowWave": 3.0
+      },
+      "modifiers": {
+        "BulletTrigger": {
+          "modifierName": "",
+          "duration": 0.25,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "EnableBulletCollisionPluginTrigger"
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "EnableBulletCollisionPluginTrigger",
+              "setEnable": true
+            }
+          ]
+        },
+        "Bullet_Effect": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_Monster_GeneralSkill_RockDamage_Bullet",
+              "effectTempleteID": -1.0
+            }
+          ]
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Bullet_Effect"
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "BulletTrigger"
+        },
+        {
+          "$type": "SetSystemValueToOverrideMap",
+          "key": "GeneralSkill_ElementLevelCo",
+          "type": "ElementLevelCo"
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "TriggerAttackEvent",
+          "attackEvent": {
+            "attackPattern": {
+              "$type": "ConfigAttackSphere",
+              "triggerType": "TriggerNoRepeat",
+              "JGCLJPCGHMC": true,
+              "born": {
+                "$type": "ConfigBornByCollisionPoint"
+              },
+              "radius": 0.25
+            },
+            "attackInfo": {
+              "attackTag": "",
+              "attenuationTag": "",
+              "attenuationGroup": "default",
+              "attackProperty": {
+                "damagePercentage": 0.0,
+                "damagePercentageRatio": 0.0,
+                "elementType": "Rock",
+                "bonusCriticalHurt": 25.0,
+                "ignoreAttackerProperty": true,
+                "strikeType": "Blunt",
+                "enBreak": 1.0,
+                "damageExtra": [
+                  "GeneralSkill_ElementLevelCo",
+                  "GeneralSkill_RockDamage_LowWave",
+                  "MUL"
+                ]
+              },
+              "hitPattern": {
+                "onHitEffectName": "default",
+                "hitImpulseType": "LV2"
+              },
+              "cameraShake": {
+                "shakeRange": 0.05999999865889549,
+                "shakeTime": 0.09000000357627869
+              }
+            }
+          },
+          "targetType": "Enemy"
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_HitMan_DisAppearHandle",
+      "abilityMixins": [
+        {
+          "$type": "AttachToPoseIDMixin",
+          "poseIDs": [
+            9001, 9002, 9003, 9004, 9010, 9011, 9012, 9013, 9014, 9015, 9016,
+            9017, 9018
+          ],
+          "modifierName": "Entity_WeightRatio"
+        },
+        {
+          "$type": "AttachToStateIDMixin",
+          "stateIDs": ["BeHitThrow", "BeHit"],
+          "modifierName": "Sorushtrial_Hiding_Handle"
+        }
+      ],
+      "modifiers": {
+        "Empty": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "SetNeuronMute",
+              "neuronName": "HIDING",
+              "enable": true
+            }
+          ]
+        },
+        "Sorushtrial_Hiding_Handle": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "MonsterAffix_SetPose"
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "NeuronEnable"
+            },
+            {
+              "$type": "SetNeuronMute",
+              "neuronName": "HIDING"
+            },
+            {
+              "$type": "SetNeuronEnable",
+              "neuronName": "HIDING",
+              "enable": true
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "DisappearEffect"
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "MonsterAffix_Activity_Hitman_Disappear"
+            }
+          ]
+        },
+        "MonsterAffix_Activity_HitMan_HitDetcction": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onBeingHit": [
+            {
+              "$type": "SetGlobalValue",
+              "canBeHandledOnRecover": true,
+              "predicates": [
+                {
+                  "$type": "LCCMCDGDKGI",
+                  "attackTags": [
+                    "SorushtrialAttackWithFire",
+                    "SorushtrialAttackNoFire"
+                  ]
+                }
+              ],
+              "ratio": 1.0,
+              "key": "_ACTIVITY_SORUSHTRIAL_DISAPPEAR_",
+              "useLimitRange": true,
+              "maxValue": 1.0,
+              "minValue": 0.0
+            }
+          ]
+        },
+        "MonsterAffix_Activity_Hitman_Disappear": {
+          "modifierName": "",
+          "duration": 4.0,
+          "bonusCriticalHurt": 100.0,
+          "onRemoved": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "dither"
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "KillSelf"
+            }
+          ]
+        },
+        "MonsterAffix_SetPose": {
+          "modifierName": "",
+          "duration": 1.0,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "boolID": "Sleep"
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "Sit"
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "CrossBow_Fixed"
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "Practice"
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "Threat"
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "Surround"
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "Build"
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "Make"
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "Search"
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "Dance"
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "Mining"
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "LearnBox"
+            }
+          ]
+        },
+        "Entity_WeightRatio": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Entity_WeightRatio": -5.0
+          }
+        },
+        "dither": {
+          "modifierName": "",
+          "duration": 2.0,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "StartDither",
+              "duration": 2.0
+            }
+          ]
+        },
+        "KillSelf": {
+          "modifierName": "",
+          "duration": 2.0,
+          "bonusCriticalHurt": 100.0,
+          "onRemoved": [
+            {
+              "$type": "FireEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_Death_Monster_Optimize",
+              "effectTempleteID": -1.0
+            },
+            {
+              "$type": "KillSelf"
+            }
+          ]
+        },
+        "DisappearEffect": {
+          "modifierName": "",
+          "duration": 1.0,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_EmojiBubble_Emoji_SorushTrialPerspectivePage_Surprise",
+              "effectTempleteID": -1.0
+            }
+          ]
+        },
+        "NeuronEnable": {
+          "modifierName": "",
+          "duration": 1.0,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "SetNeuronMute",
+              "neuronName": "DANCE",
+              "enable": true
+            },
+            {
+              "$type": "SetNeuronMute",
+              "neuronName": "SIT",
+              "enable": true
+            }
+          ]
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "MonsterAffix_Activity_HitMan_HitDetcction"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_HitMan_ActionHandle",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_ACTIVITY_SORUSHTRIAL_ACTION_",
+          "defaultGlobalValueOnCreate": 0.0,
+          "valueSteps": [-0.5, 0.5, 1.5, 2.5],
+          "modifierNameSteps": [
+            "Empty",
+            "SorushtrialAction_Dance",
+            "SorushtrialAction_Sit"
+          ]
+        }
+      ],
+      "abilitySpecials": {
+        "randomtime": 0.0
+      },
+      "modifiers": {
+        "Empty": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "SetNeuronMute",
+              "neuronName": "DANCE",
+              "enable": true
+            },
+            {
+              "$type": "SetNeuronMute",
+              "neuronName": "SIT",
+              "enable": true
+            }
+          ]
+        },
+        "SorushtrialAction_Dance": {
+          "modifierName": "",
+          "duration": "randomtime",
+          "bonusCriticalHurt": 100.0,
+          "onRemoved": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "MonsterAffix_SetPose"
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "Alert_Effect"
+            },
+            {
+              "$type": "SetNeuronMute",
+              "neuronName": "DANCE"
+            },
+            {
+              "$type": "SetNeuronEnable",
+              "neuronName": "DANCE",
+              "enable": true
+            }
+          ]
+        },
+        "SorushtrialAction_Sit": {
+          "modifierName": "",
+          "duration": "randomtime",
+          "bonusCriticalHurt": 100.0,
+          "onRemoved": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "Alert_Effect"
+            },
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "MonsterAffix_SetPose"
+            },
+            {
+              "$type": "SetNeuronMute",
+              "neuronName": "SIT"
+            },
+            {
+              "$type": "SetNeuronEnable",
+              "neuronName": "SIT",
+              "enable": true
+            }
+          ]
+        },
+        "MonsterAffix_SetPose": {
+          "modifierName": "",
+          "duration": 1.0,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "boolID": "Sleep"
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "Sit"
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "CrossBow_Fixed"
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "Practice"
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "Threat"
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "Surround"
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "Build"
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "Make"
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "Search"
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "Dance"
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "Mining"
+            },
+            {
+              "$type": "SetPoseBool",
+              "boolID": "LearnBox"
+            }
+          ]
+        },
+        "Alert_Effect": {
+          "modifierName": "",
+          "duration": 1.0,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "Sorushtrial_Alert"
+            },
+            {
+              "$type": "FireEffect",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ACTIVITY_SORUSHTRIAL_EMOJI_VALUE_",
+                  "ratio": 1.0
+                }
+              ],
+              "healLimitedByCasterMaxHPRatio": "Eff_EmojiBubble_Emoji_SorushTrialPerspectivePage_Happy",
+              "effectTempleteID": -1.0
+            },
+            {
+              "$type": "FireEffect",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ACTIVITY_SORUSHTRIAL_EMOJI_VALUE_",
+                  "ratio": 2.0
+                }
+              ],
+              "healLimitedByCasterMaxHPRatio": "Eff_EmojiBubble_Emoji_SorushTrialPerspectivePage_Angry",
+              "effectTempleteID": -1.0
+            },
+            {
+              "$type": "FireEffect",
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ACTIVITY_SORUSHTRIAL_EMOJI_VALUE_",
+                  "ratio": 3.0
+                }
+              ],
+              "healLimitedByCasterMaxHPRatio": "Eff_EmojiBubble_Emoji_SorushTrialPerspectivePage_Worry",
+              "effectTempleteID": -1.0
+            }
+          ]
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "SetRandomOverrideMapValue",
+          "valueRangeMax": 2.5,
+          "valueRangeMin": 0.5,
+          "overrideMapKey": "randomtime"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_HitMan_Teach_01",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 1.0,
+          "key": "_ACTIVITY_SORUSHTRIAL_TEACH_VALUE_",
+          "useLimitRange": true,
+          "maxValue": 99.0,
+          "minValue": 1.0
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_HitMan_Teach_02",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 2.0,
+          "key": "_ACTIVITY_SORUSHTRIAL_TEACH_VALUE_",
+          "useLimitRange": true,
+          "maxValue": 99.0,
+          "minValue": 1.0
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_HitMan_Teach_03",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 3.0,
+          "key": "_ACTIVITY_SORUSHTRIAL_TEACH_VALUE_",
+          "useLimitRange": true,
+          "maxValue": 99.0,
+          "minValue": 1.0
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_HitMan_Teach_04",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 4.0,
+          "key": "_ACTIVITY_SORUSHTRIAL_TEACH_VALUE_",
+          "useLimitRange": true,
+          "maxValue": 99.0,
+          "minValue": 1.0
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_HitMan_Teach_05",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 5.0,
+          "key": "_ACTIVITY_SORUSHTRIAL_TEACH_VALUE_",
+          "useLimitRange": true,
+          "maxValue": 99.0,
+          "minValue": 1.0
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_HitMan_Teach_06",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 6.0,
+          "key": "_ACTIVITY_SORUSHTRIAL_TEACH_VALUE_",
+          "useLimitRange": true,
+          "maxValue": 99.0,
+          "minValue": 1.0
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_HitMan_Teach_07",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 7.0,
+          "key": "_ACTIVITY_SORUSHTRIAL_TEACH_VALUE_",
+          "useLimitRange": true,
+          "maxValue": 99.0,
+          "minValue": 1.0
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_HitMan_Teach_08",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 8.0,
+          "key": "_ACTIVITY_SORUSHTRIAL_TEACH_VALUE_",
+          "useLimitRange": true,
+          "maxValue": 99.0,
+          "minValue": 1.0
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_HitMan_Teach_09",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 9.0,
+          "key": "_ACTIVITY_SORUSHTRIAL_TEACH_VALUE_",
+          "useLimitRange": true,
+          "maxValue": 99.0,
+          "minValue": 1.0
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_HitMan_Teach_10",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 10.0,
+          "key": "_ACTIVITY_SORUSHTRIAL_TEACH_VALUE_",
+          "useLimitRange": true,
+          "maxValue": 99.0,
+          "minValue": 1.0
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_HitMan_Teach_11",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 11.0,
+          "key": "_ACTIVITY_SORUSHTRIAL_TEACH_VALUE_",
+          "useLimitRange": true,
+          "maxValue": 99.0,
+          "minValue": 1.0
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_HitMan_Teach_12",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 12.0,
+          "key": "_ACTIVITY_SORUSHTRIAL_TEACH_VALUE_",
+          "useLimitRange": true,
+          "maxValue": 99.0,
+          "minValue": 1.0
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_HitMan_Teach_13",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 13.0,
+          "key": "_ACTIVITY_SORUSHTRIAL_TEACH_VALUE_",
+          "useLimitRange": true,
+          "maxValue": 99.0,
+          "minValue": 1.0
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_HitMan_Teach_14",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 14.0,
+          "key": "_ACTIVITY_SORUSHTRIAL_TEACH_VALUE_",
+          "useLimitRange": true,
+          "maxValue": 99.0,
+          "minValue": 1.0
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_HitMan_Teach_15",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 15.0,
+          "key": "_ACTIVITY_SORUSHTRIAL_TEACH_VALUE_",
+          "useLimitRange": true,
+          "maxValue": 99.0,
+          "minValue": 1.0
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_HitMan_Teach_16",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 16.0,
+          "key": "_ACTIVITY_SORUSHTRIAL_TEACH_VALUE_",
+          "useLimitRange": true,
+          "maxValue": 99.0,
+          "minValue": 1.0
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_HitMan_Teach_17",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 17.0,
+          "key": "_ACTIVITY_SORUSHTRIAL_TEACH_VALUE_",
+          "useLimitRange": true,
+          "maxValue": 99.0,
+          "minValue": 1.0
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_HitMan_Teach_18",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 18.0,
+          "key": "_ACTIVITY_SORUSHTRIAL_TEACH_VALUE_",
+          "useLimitRange": true,
+          "maxValue": 99.0,
+          "minValue": 1.0
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_HitMan_Teach_19",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 19.0,
+          "key": "_ACTIVITY_SORUSHTRIAL_TEACH_VALUE_",
+          "useLimitRange": true,
+          "maxValue": 99.0,
+          "minValue": 1.0
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_HitMan_Teach_20",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 20.0,
+          "key": "_ACTIVITY_SORUSHTRIAL_TEACH_VALUE_",
+          "useLimitRange": true,
+          "maxValue": 99.0,
+          "minValue": 1.0
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_HitMan_Teach_21",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 21.0,
+          "key": "_ACTIVITY_SORUSHTRIAL_TEACH_VALUE_",
+          "useLimitRange": true,
+          "maxValue": 99.0,
+          "minValue": 1.0
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_HitMan_Teach_22",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 22.0,
+          "key": "_ACTIVITY_SORUSHTRIAL_TEACH_VALUE_",
+          "useLimitRange": true,
+          "maxValue": 99.0,
+          "minValue": 1.0
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_HitMan_Teach_23",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 23.0,
+          "key": "_ACTIVITY_SORUSHTRIAL_TEACH_VALUE_",
+          "useLimitRange": true,
+          "maxValue": 99.0,
+          "minValue": 1.0
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_Sorushtrial_Invincible",
+      "abilityMixins": [
+        {
+          "$type": "AttachToStateIDMixin",
+          "stateIDs": ["Sleep", "SleepFree01", "SleepFree02", "SleepFree03"],
+          "modifierName": "SleepEffect"
+        },
+        {
+          "$type": "AttachToPoseIDMixin",
+          "poseIDs": [
+            9001, 9002, 9003, 9010, 9011, 9013, 9014, 9015, 9016, 9017, 9018
+          ],
+          "modifierName": "FreezoPo"
+        }
+      ],
+      "modifiers": {
+        "HideUIBillBoard": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "HideUIBillBoard",
+              "hide": true
+            }
+          ]
+        },
+        "State_MuteTaunt": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "state": "MuteTaunt"
+        },
+        "State_LockHP": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "state": "LockHP"
+        },
+        "MonsterAffix_Activity_Quick_Death_Effect": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "modifierMixins": [
+            {
+              "$type": "DiePatternSwitchMixin",
+              "muteAllShaderDieEff": true,
+              "dieForceDisappearTime": 0.0,
+              "dieDisappearEffect": "",
+              "PBDBIECLPMF": true,
+              "KNHKIABOIFF": true,
+              "LGOIFHPIPJM": true
+            }
+          ]
+        },
+        "SleepEffect": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_EmojiBubble_Emoji_SorushTrialPerspectivePage_Sleep",
+              "effectTempleteID": -1.0
+            }
+          ]
+        },
+        "State_WindZoneFreezePo": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "modifierMixins": [
+            {
+              "$type": "VelocityForceMixin",
+              "excludeForces": ["WindZoneType"]
+            }
+          ]
+        },
+        "FreezoPo": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "modifierMixins": [
+            {
+              "$type": "RigidBodyFreezeMixin"
+            }
+          ]
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "ResetAIThreatBroadcastRange",
+          "canBeHandledOnRecover": true,
+          "range": 0.0
+        },
+        {
+          "$type": "SetAIHitFeeling"
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "HideUIBillBoard"
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "State_MuteTaunt"
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "State_LockHP"
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "MonsterAffix_Activity_Quick_Death_Effect"
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "State_WindZoneFreezePo"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_AkaFesArchaeology_BillBoardMark",
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Activity_AkaFesArchaeology_BillBoardMark": {
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "modifierMixins": [
+            {
+              "$type": "BillboardFixedMarkMixin",
+              "IIBFEAKOPKK": "Eff_UI_BillBoard_FixedMark_Hint_ForHunting",
+              "GJOACLDEAKC": true,
+              "DCOCBFOMHPD": 13.0
+            }
+          ]
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_MonsterAffix_Activity_AkaFesArchaeology_BillBoardMark"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_UGC_Property_Level_01",
+      "abilitySpecials": {
+        "HP_Ratio": 0.0,
+        "Attack_Ratio": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Activity_UGC_Property_Level_01": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_MaxHPRatio": "HP_Ratio",
+            "Actor_AttackRatio": "Attack_Ratio"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_MonsterAffix_Activity_UGC_Property_Level_01"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_UGC_Property_Level_02",
+      "abilitySpecials": {
+        "HP_Ratio": 0.0,
+        "Attack_Ratio": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Activity_UGC_Property_Level_02": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_MaxHPRatio": "HP_Ratio",
+            "Actor_AttackRatio": "Attack_Ratio"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_MonsterAffix_Activity_UGC_Property_Level_02"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_UGC_Property_Level_03",
+      "abilitySpecials": {
+        "HP_Ratio": 0.0,
+        "Attack_Ratio": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Activity_UGC_Property_Level_03": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_MaxHPRatio": "HP_Ratio",
+            "Actor_AttackRatio": "Attack_Ratio"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_MonsterAffix_Activity_UGC_Property_Level_03"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_UGC_Property_Level_04",
+      "abilitySpecials": {
+        "HP_Ratio": 0.0,
+        "Attack_Ratio": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Activity_UGC_Property_Level_04": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_MaxHPRatio": "HP_Ratio",
+            "Actor_AttackRatio": "Attack_Ratio"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_MonsterAffix_Activity_UGC_Property_Level_04"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_UGC_Property_Level_05",
+      "abilitySpecials": {
+        "HP_Ratio": 0.0,
+        "Attack_Ratio": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Activity_UGC_Property_Level_05": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_MaxHPRatio": "HP_Ratio",
+            "Actor_AttackRatio": "Attack_Ratio"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_MonsterAffix_Activity_UGC_Property_Level_05"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_UGC_DieOptimize",
+      "modifiers": {
+        "DieOptimize": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "modifierMixins": [
+            {
+              "$type": "DiePatternSwitchMixin",
+              "muteAllShaderDieEff": true,
+              "dieForceDisappearTime": 0.0,
+              "dieDisappearEffect": "",
+              "PBDBIECLPMF": true,
+              "KNHKIABOIFF": true,
+              "LGOIFHPIPJM": true
+            }
+          ]
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "DieOptimize"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_UGC_BossMark",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 1.0,
+          "key": "_ACTIVITY_UGC_BOSS_MARK_",
+          "maxValue": 0.0,
+          "minValue": 0.0
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_FireSubHurt_01",
+      "abilitySpecials": {
+        "Actor_FireSubHurtDelta": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Activity_BossChallengeV4_FireSubHurt01": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_FireSubHurtDelta": "Actor_FireSubHurtDelta"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_MonsterAffix_Activity_BossChallengeV4_FireSubHurt01"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_FireSubHurt_02",
+      "abilitySpecials": {
+        "Actor_FireSubHurtDelta": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Activity_BossChallengeV4_FireSubHurt02": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_FireSubHurtDelta": "Actor_FireSubHurtDelta"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_MonsterAffix_Activity_BossChallengeV4_FireSubHurt02"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_FireSubHurt_03",
+      "abilitySpecials": {
+        "Actor_FireSubHurtDelta": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Activity_BossChallengeV4_FireSubHurt03": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_FireSubHurtDelta": "Actor_FireSubHurtDelta"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_MonsterAffix_Activity_BossChallengeV4_FireSubHurt03"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_IceSubHurt_01",
+      "abilitySpecials": {
+        "Actor_IceSubHurtDelta": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Activity_BossChallengeV4_IceSubHurt01": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_IceSubHurtDelta": "Actor_IceSubHurtDelta"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_MonsterAffix_Activity_BossChallengeV4_IceSubHurt01"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_IceSubHurt_02",
+      "abilitySpecials": {
+        "Actor_IceSubHurtDelta": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Activity_BossChallengeV4_IceSubHurt02": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_IceSubHurtDelta": "Actor_IceSubHurtDelta"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_MonsterAffix_Activity_BossChallengeV4_IceSubHurt02"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_IceSubHurt_03",
+      "abilitySpecials": {
+        "Actor_IceSubHurtDelta": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Activity_BossChallengeV4_IceSubHurt03": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_IceSubHurtDelta": "Actor_IceSubHurtDelta"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_MonsterAffix_Activity_BossChallengeV4_IceSubHurt03"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_WaterSubHurt_01",
+      "abilitySpecials": {
+        "Actor_WaterSubHurtDelta": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Activity_BossChallengeV4_WaterSubHurt01": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_WaterSubHurtDelta": "Actor_WaterSubHurtDelta"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_MonsterAffix_Activity_BossChallengeV4_WaterSubHurt01"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_WaterSubHurt_02",
+      "abilitySpecials": {
+        "Actor_WaterSubHurtDelta": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Activity_BossChallengeV4_WaterSubHurt02": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_WaterSubHurtDelta": "Actor_WaterSubHurtDelta"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_MonsterAffix_Activity_BossChallengeV4_WaterSubHurt02"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_WaterSubHurt_03",
+      "abilitySpecials": {
+        "Actor_WaterSubHurtDelta": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Activity_BossChallengeV4_WaterSubHurt03": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_WaterSubHurtDelta": "Actor_WaterSubHurtDelta"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_MonsterAffix_Activity_BossChallengeV4_WaterSubHurt03"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_ElectricSubHurt_01",
+      "abilitySpecials": {
+        "Actor_ElectricSubHurtDelta": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Activity_BossChallengeV4_ElectricSubHurt01": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_ElecSubHurtDelta": "Actor_ElectricSubHurtDelta"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_MonsterAffix_Activity_BossChallengeV4_ElectricSubHurt01"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_ElectricSubHurt_02",
+      "abilitySpecials": {
+        "Actor_ElectricSubHurtDelta": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Activity_BossChallengeV4_ElectricSubHurt02": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_ElecSubHurtDelta": "Actor_ElectricSubHurtDelta"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_MonsterAffix_Activity_BossChallengeV4_ElectricSubHurt02"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_ElectricSubHurt_03",
+      "abilitySpecials": {
+        "Actor_ElectricSubHurtDelta": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Activity_BossChallengeV4_ElectricSubHurt03": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_ElecSubHurtDelta": "Actor_ElectricSubHurtDelta"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_MonsterAffix_Activity_BossChallengeV4_ElectricSubHurt03"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_GrassSubHurt_01",
+      "abilitySpecials": {
+        "Actor_GrassSubHurtDelta": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Activity_BossChallengeV4_GrassSubHurt01": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_GrassSubHurtDelta": "Actor_GrassSubHurtDelta"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_MonsterAffix_Activity_BossChallengeV4_GrassSubHurt01"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_GrassSubHurt_02",
+      "abilitySpecials": {
+        "Actor_GrassSubHurtDelta": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Activity_BossChallengeV4_GrassSubHurt02": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_GrassSubHurtDelta": "Actor_GrassSubHurtDelta"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_MonsterAffix_Activity_BossChallengeV4_GrassSubHurt02"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_GrassSubHurt_03",
+      "abilitySpecials": {
+        "Actor_GrassSubHurtDelta": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Activity_BossChallengeV4_GrassSubHurt03": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_GrassSubHurtDelta": "Actor_GrassSubHurtDelta"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_MonsterAffix_Activity_BossChallengeV4_GrassSubHurt03"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_WindSubHurt_01",
+      "abilitySpecials": {
+        "Actor_WindSubHurtDelta": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Activity_BossChallengeV4_WindSubHurt01": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_WindSubHurtDelta": "Actor_WindSubHurtDelta"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_MonsterAffix_Activity_BossChallengeV4_WindSubHurt01"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_WindSubHurt_02",
+      "abilitySpecials": {
+        "Actor_WindSubHurtDelta": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Activity_BossChallengeV4_WindSubHurt02": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_WindSubHurtDelta": "Actor_WindSubHurtDelta"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_MonsterAffix_Activity_BossChallengeV4_WindSubHurt02"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_WindSubHurt_03",
+      "abilitySpecials": {
+        "Actor_WindSubHurtDelta": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Activity_BossChallengeV4_WindSubHurt03": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_WindSubHurtDelta": "Actor_WindSubHurtDelta"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_MonsterAffix_Activity_BossChallengeV4_WindSubHurt03"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_RockSubHurt_01",
+      "abilitySpecials": {
+        "Actor_RockSubHurtDelta": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Activity_BossChallengeV4_RockSubHurt01": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_RockSubHurtDelta": "Actor_RockSubHurtDelta"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_MonsterAffix_Activity_BossChallengeV4_RockSubHurt01"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_RockSubHurt_02",
+      "abilitySpecials": {
+        "Actor_RockSubHurtDelta": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Activity_BossChallengeV4_RockSubHurt02": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_RockSubHurtDelta": "Actor_RockSubHurtDelta"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_MonsterAffix_Activity_BossChallengeV4_RockSubHurt02"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_RockSubHurt_03",
+      "abilitySpecials": {
+        "Actor_RockSubHurtDelta": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_MonsterAffix_Activity_BossChallengeV4_RockSubHurt03": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_RockSubHurtDelta": "Actor_RockSubHurtDelta"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_MonsterAffix_Activity_BossChallengeV4_RockSubHurt03"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_Monster_Raijin_Buff_01",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_MONSTER_RAIJIN_ELITE_CRYSTALCOUNT_",
+          "defaultGlobalValueOnCreate": 0.0,
+          "valueSteps": [0.5, 1.5, 2.5, 3.5],
+          "modifierNameSteps": [
+            "UNIQUE_Monster_Raijin_CrystalCount_AttackUp01",
+            "UNIQUE_Monster_Raijin_CrystalCount_AttackUp02",
+            "UNIQUE_Monster_Raijin_CrystalCount_AttackUp03"
+          ]
+        }
+      ],
+      "abilitySpecials": {
+        "Attack_Ratio": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_Monster_Raijin_CrystalCount_AttackUp01": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_AttackRatio": "Attack_Ratio"
+          }
+        },
+        "UNIQUE_Monster_Raijin_CrystalCount_AttackUp02": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_AttackRatio": [2.0, "Attack_Ratio", "MUL"]
+          }
+        },
+        "UNIQUE_Monster_Raijin_CrystalCount_AttackUp03": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_AttackRatio": [3.0, "Attack_Ratio", "MUL"]
+          }
+        }
+      },
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_Monster_Raijin_Buff_02",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_MONSTER_RAIJIN_HAS_DETECTED",
+          "defaultGlobalValueOnCreate": 0.0,
+          "valueSteps": [-0.5, 0.5, 1.5],
+          "modifierNameSteps": [
+            "Empty",
+            "UNIQUE_Monster_Raijin_AvatarDetected_AttackUp02"
+          ]
+        }
+      ],
+      "abilitySpecials": {
+        "Attack_Ratio": 0.0
+      },
+      "modifiers": {
+        "Empty": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
+        },
+        "UNIQUE_Monster_Raijin_AvatarDetected_AttackUp02": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_AttackRatio": "Attack_Ratio"
+          }
+        }
+      },
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_Monster_Raijin_Buff_03",
+      "abilitySpecials": {
+        "Damage": 0.0,
+        "DamageSystemValue": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_Monster_Raijin_TeamBeDetectedHandler": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "TEAM_BE_DETECTED_BY_RAIJIN",
+              "defaultGlobalValueOnCreate": 0.0,
+              "valueSteps": [-0.5, 0.5, 1.5],
+              "modifierNameSteps": [
+                "Empty",
+                "UNIQUE_Monster_Raijin_TeamBeDetected"
+              ]
+            }
+          ]
+        },
+        "UNIQUE_Monster_Raijin_TeamBeDetected": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "modifierMixins": [
+            {
+              "$type": "CurLocalAvatarMixinV2",
+              "modifierName": "UNIQUE_Monster_Raijin_TeamBeDetected_Damage"
+            }
+          ]
+        },
+        "UNIQUE_Monster_Raijin_TeamBeDetected_Damage": {
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 1.0,
+          "onAdded": [
+            {
+              "$type": "DamageByAttackValue",
+              "attackInfo": {
+                "attackTag": "",
+                "attenuationTag": "",
+                "attenuationGroup": "default",
+                "attackProperty": {
+                  "damagePercentageRatio": 0.0,
+                  "elementType": "Electric",
+                  "bonusCriticalHurt": 100.0,
+                  "ignoreAttackerProperty": true,
+                  "strikeType": "Default",
+                  "enBreak": 25.0,
+                  "damageExtra": ["Damage", "DamageSystemValue", "MUL"],
+                  "trueDamage": true
+                },
+                "hitPattern": {
+                  "onHitEffectName": "none",
+                  "hitImpulseType": "Default",
+                  "hitHaltTimeScale": 0.009999999776482582
+                }
+              }
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "DamageByAttackValue",
+              "attackInfo": {
+                "attackTag": "",
+                "attenuationTag": "",
+                "attenuationGroup": "default",
+                "attackProperty": {
+                  "damagePercentageRatio": 0.0,
+                  "elementType": "Electric",
+                  "bonusCriticalHurt": 100.0,
+                  "ignoreAttackerProperty": true,
+                  "strikeType": "Default",
+                  "enBreak": 25.0,
+                  "damageExtra": ["Damage", "DamageSystemValue", "MUL"],
+                  "trueDamage": true
+                },
+                "hitPattern": {
+                  "onHitEffectName": "none",
+                  "hitImpulseType": "Default",
+                  "hitHaltTimeScale": 0.009999999776482582
+                }
+              }
+            }
+          ]
+        },
+        "Empty": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "target": "AllTeams",
+          "modifierName": "UNIQUE_Monster_Raijin_TeamBeDetectedHandler"
+        },
+        {
+          "$type": "SetSystemValueToOverrideMap",
+          "RotationDampTime": true,
+          "key": "DamageSystemValue",
+          "type": "ElementLevelCo"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_Monster_Drake_Buff_01",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_DRAKE_DEEPSEA_ELECTRIC_DYING",
+          "defaultGlobalValueOnCreate": 0.0,
+          "valueSteps": [-0.5, 0.5, 1.5],
+          "modifierNameSteps": [
+            "Empty",
+            "UNIQUE_Monster_Drake_ElectricDrakeDying_AttackUp01"
+          ]
+        },
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_DRAKE_DEEPSEA_ICE_DYING",
+          "defaultGlobalValueOnCreate": 0.0,
+          "valueSteps": [-0.5, 0.5, 1.5],
+          "modifierNameSteps": [
+            "Empty",
+            "UNIQUE_Monster_Drake_IceDrakeDying_AttackUp01"
+          ]
+        }
+      ],
+      "abilitySpecials": {
+        "Attack_Ratio": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_Monster_Drake_ElectricDrakeDying_AttackUp01": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_AttackRatio": "Attack_Ratio"
+          }
+        },
+        "UNIQUE_Monster_Drake_IceDrakeDying_AttackUp01": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_AttackRatio": "Attack_Ratio"
+          }
+        },
+        "Empty": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
+        }
+      },
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_Monster_Drake_Buff_02",
+      "abilitySpecials": {
+        "HealHp_Additional_Ratio": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_Monster_Drake_Backlife_Additional": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "ratio": "HealHp_Additional_Ratio",
+              "key": "_MONSTER_DRAKE_BACKLIFEADDITIONAL_",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            }
+          ]
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_Monster_Drake_Backlife_Additional"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_Monster_Drake_Buff_03",
+      "abilitySpecials": {
+        "AttackByEnergy_Ratio": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_Monster_Drake_AttackByEnergyUp": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "ratio": "AttackByEnergy_Ratio",
+              "key": "_MONSTER_DRAKE_ATTACKBYENERGYRATIO_",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            }
+          ]
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_Monster_Drake_AttackByEnergyUp"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_Monster_Gargoyle_Fafnir_Buff_01",
+      "abilityMixins": [
+        {
+          "$type": "AttachToPoseIDMixin",
+          "poseIDs": [301, 311, 321],
+          "modifierName": "Monster_Gargoyle_Fafnir_InAir_AttackUp"
+        }
+      ],
+      "abilitySpecials": {
+        "Attack_Ratio": 0.0
+      },
+      "modifiers": {
+        "Monster_Gargoyle_Fafnir_InAir_AttackUp": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_AttackRatio": "Attack_Ratio"
+          }
+        }
+      },
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_Monster_Gargoyle_Fafnir_Buff_02",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_MONSTER_GARGOYLE_FAFNIR_ELEMENTARKFLAG_",
+          "defaultGlobalValueOnCreate": 0.0,
+          "valueSteps": [-0.5, 0.5, 1.5],
+          "modifierNameSteps": [
+            "Empty",
+            "UNIQUE_Monster_Gargoyle_Fafnir_ElementAtkSuccess_AttackUp"
+          ]
+        }
+      ],
+      "abilitySpecials": {
+        "Attack_Ratio": 0.0
+      },
+      "modifiers": {
+        "UNIQUE_Monster_Gargoyle_Fafnir_ElementAtkSuccess_AttackUp": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_AttackRatio": "Attack_Ratio"
+          }
+        },
+        "Empty": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
+        }
+      },
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_Monster_Gargoyle_Fafnir_Buff_03",
+      "abilityMixins": [
+        {
+          "$type": "AttachToStateIDMixin",
+          "stateIDs": ["Weak_Air"],
+          "modifierName": "Monster_Gargoyle_Fafnir_WeakAirState_Elite"
+        }
+      ],
+      "abilitySpecials": {
+        "WeakTimer_Ratio": 0.0
+      },
+      "modifiers": {
+        "Monster_Gargoyle_Fafnir_WeakAirState_Elite": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "UNIQUE_Monster_Gargoyle_Fafnir_WeakTimer"
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "RemoveModifier",
+              "modifierName": "UNIQUE_Monster_Gargoyle_Fafnir_WeakTimer"
+            }
+          ]
+        },
+        "UNIQUE_Monster_Gargoyle_Fafnir_WeakTimer": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "duration": [7.0, 6.0, "WeakTimer_Ratio", "MUL", "SUB"],
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": [6.0, 6.0, "WeakTimer_Ratio", "MUL", "SUB"],
+          "onThinkInterval": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "WeakEndElite",
+              "MPTriggerOnRemote": true
+            }
+          ]
+        }
+      },
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_Monster_Common_AttackUp_01",
+      "abilitySpecials": {
+        "Attack_Ratio": 0.0
+      },
+      "modifiers": {
+        "Monster_BossChallengeV4_Monster_Common_AttackUp_01": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_AttackRatio": "Attack_Ratio"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Monster_BossChallengeV4_Monster_Common_AttackUp_01"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_Monster_Common_AttackUp_02",
+      "abilitySpecials": {
+        "Attack_Ratio": 0.0
+      },
+      "modifiers": {
+        "Monster_BossChallengeV4_Monster_Common_AttackUp_02": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_AttackRatio": "Attack_Ratio"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Monster_BossChallengeV4_Monster_Common_AttackUp_02"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_Monster_Common_AttackUp_03",
+      "abilitySpecials": {
+        "Attack_Ratio": 0.0
+      },
+      "modifiers": {
+        "Monster_BossChallengeV4_Monster_Common_AttackUp_03": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_AttackRatio": "Attack_Ratio"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Monster_BossChallengeV4_Monster_Common_AttackUp_03"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_Monster_Common_HpUp_01",
+      "abilitySpecials": {
+        "HpMax_Ratio": 0.0
+      },
+      "modifiers": {
+        "Monster_BossChallengeV4_Monster_Common_HpUp_01": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_MaxHPRatio": "HpMax_Ratio"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Monster_BossChallengeV4_Monster_Common_HpUp_01"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_Monster_Common_HpUp_02",
+      "abilitySpecials": {
+        "HpMax_Ratio": 0.0
+      },
+      "modifiers": {
+        "Monster_BossChallengeV4_Monster_Common_HpUp_02": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_MaxHPRatio": "HpMax_Ratio"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Monster_BossChallengeV4_Monster_Common_HpUp_02"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_Monster_Common_HpUp_03",
+      "abilitySpecials": {
+        "HpMax_Ratio": 0.0
+      },
+      "modifiers": {
+        "Monster_BossChallengeV4_Monster_Common_HpUp_03": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_MaxHPRatio": "HpMax_Ratio"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Monster_BossChallengeV4_Monster_Common_HpUp_03"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_Monster_Common_AttackUp_Special",
+      "abilitySpecials": {
+        "Attack_Ratio": 0.0
+      },
+      "modifiers": {
+        "Monster_BossChallengeV4_Monster_Common_AttackUp_Special": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_AttackRatio": "Attack_Ratio"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Monster_BossChallengeV4_Monster_Common_AttackUp_Special"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_BossChallengeV4_Monster_Common_HpUp_Special",
+      "abilitySpecials": {
+        "HpMax_Ratio": 0.0
+      },
+      "modifiers": {
+        "Monster_BossChallengeV4_Monster_Common_HpUp_Special": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_MaxHPRatio": "HpMax_Ratio"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Monster_BossChallengeV4_Monster_Common_HpUp_Special"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_CardJourney_Stage1",
+      "abilitySpecials": {
+        "Stage1HPRatio": 0.0,
+        "Stage1AtkRatio": 0.0
+      },
+      "modifiers": {
+        "MonsterAffix_Activity_CardJourney_Stage1_Value": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_MaxHPRatio": "Stage1HPRatio",
+            "Actor_AttackRatio": "Stage1AtkRatio"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "MonsterAffix_Activity_CardJourney_Stage1_Value"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_CardJourney_Stage2",
+      "abilitySpecials": {
+        "Stage2HPRatio": 0.0,
+        "Stage2AtkRatio": 0.0
+      },
+      "modifiers": {
+        "MonsterAffix_Activity_CardJourney_Stage2_Value": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_MaxHPRatio": "Stage2HPRatio",
+            "Actor_AttackRatio": "Stage2AtkRatio"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "MonsterAffix_Activity_CardJourney_Stage2_Value"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_CardJourney_Stage3",
+      "abilitySpecials": {
+        "Stage3HPRatio": 0.0,
+        "Stage3AtkRatio": 0.0
+      },
+      "modifiers": {
+        "MonsterAffix_Activity_CardJourney_Stage3_Value": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_MaxHPRatio": "Stage3HPRatio",
+            "Actor_AttackRatio": "Stage3AtkRatio"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "MonsterAffix_Activity_CardJourney_Stage3_Value"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "MonsterAffix_Activity_CardJourney_Stage4",
+      "abilitySpecials": {
+        "Stage4HPRatio": 0.0,
+        "Stage4AtkRatio": 0.0
+      },
+      "modifiers": {
+        "MonsterAffix_Activity_CardJourney_Stage4_Value": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Actor_MaxHPRatio": "Stage4HPRatio",
+            "Actor_AttackRatio": "Stage4AtkRatio"
+          }
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "MonsterAffix_Activity_CardJourney_Stage4_Value"
+        }
+      ],
+      "isDynamicAbility": true
     }
   }
 ]

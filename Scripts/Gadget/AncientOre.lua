@@ -1,4 +1,4 @@
-﻿function OnClientExecuteReq(context, param1, param2, param3)
+function OnClientExecuteReq(context, param1, param2, param3)
 		local this_config = ScriptLib.GetContextGadgetConfigId(context)
         local this_group = ScriptLib.GetContextGroupId(context)
 	--ScriptLib.PrintLog("GadgetState Get Change！！！！！！！")

@@ -1,4 +1,4 @@
-﻿function OnClientExecuteReq(context, param1, param2, param3)
+function OnClientExecuteReq(context, param1, param2, param3)
 
 		local ret = ScriptLib.SetGadgetState(context, param1)
 		if 0 ~= ret then

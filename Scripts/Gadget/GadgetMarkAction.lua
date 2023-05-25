@@ -1,4 +1,4 @@
-﻿--[[======================================
+--[[======================================
 ||	filename:       GadgetMarkAction
 ||	owner:          zijun.ma
 ||	description:    3.0开始应用的通用物件MarkAction

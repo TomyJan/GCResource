@@ -1,89 +1,4 @@
 [
-  ////////////////////////////////////////////////////////////////
-  //
-  //  TestAbilitys------记得最后删除
-  //
-  ////////////////////////////////////////////////////////////////
-  {
-    "Default": {
-      "$type": "ConfigAbility",
-      "abilityName": "Monster_Apep_TestAbility_PoseChange",
-      "abilityMixins": [
-        {
-          "$type": "AttachToAnimatorStateIDMixin",
-          "stateIDs": [
-            "RushMoveL_BS",
-            "RushMoveR_BS",
-            "CrashAttack",
-            "SwipeAttack",
-            "FlapAttack",
-            "DiveIn",
-            "TailWhip",
-            "StompAttack_BS",
-            "Stage1_UltAttack",
-            "Stage1_Alert"
-          ],
-          "modifierName": "Monster_Apep_TestAbility_Stage1_PoseChange"
-        },
-        {
-          "$type": "AttachToAnimatorStateIDMixin",
-          "stateIDs": [
-            "BlinkAttack_BS",
-            "RangeAttack1",
-            "RangeAttack2",
-            "RangeAttack3",
-            "Stage3_UltAttack"
-          ],
-          "modifierName": "Monster_Apep_TestAbility_Stage3_PoseChange"
-        }
-      ],
-      "modifiers": {
-        "Monster_Apep_TestAbility_Stage1_PoseChange": {
-          "onAdded": [
-            {
-              "$type": "SetAnimatorFloat",
-              "floatID": "PoseID",
-              "value": 101
-            },
-            {
-              "$type": "SetLockingV3Config",
-              "enable": true,
-              "specialCameraName": "default"
-            },
-            {
-              "$type": "SetLockingV3Config",
-              "enable": false,
-              "specialCameraName": "Stage3"
-            }
-          ]
-        },
-        "Monster_Apep_TestAbility_Stage3_PoseChange": {
-          "onAdded": [
-            {
-              "$type": "SetAnimatorFloat",
-              "floatID": "PoseID",
-              "value": 301
-            },
-            {
-              "$type": "SetLockingV3Config",
-              "enable": false,
-              "specialCameraName": "default"
-            },
-            {
-              "$type": "SetLockingV3Config",
-              "enable": true,
-              "specialCameraName": "Stage3"
-            }
-          ]
-        }
-      }
-    }
-  },
-  ////////////////////////////////////////////////////////////////
-  //
-  //  NormalState
-  //
-  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -91,56 +6,218 @@
       "abilityMixins": [
         {
           "$type": "AttachToPoseIDMixin",
-          "poseIDs": [101],
+          "poseIDs": [1],
+          "modifierName": "Monster_Apep_Stage1_UnAlert"
+        },
+        {
+          "$type": "AttachToPoseIDMixin",
+          "poseIDs": [101, 102],
           "modifierName": "Monster_Apep_Stage1_NormalState"
         }
       ],
       "modifiers": {
-        "Monster_Apep_Stage1_NormalState": {
+        "Monster_Apep_Stage1_UnAlert": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "modifierMixins": [
+            {
+              "$type": "AttachActionToModifierMixin",
+              "onAdded": [
+                {
+                  "$type": "EnablePushColliderName",
+                  "pushColliderNames": [
+                    "PushCollider_Stage3_Body",
+                    "PushCollider_Stage3_Occluder",
+                    "PushCollider_Stage3_Occluder",
+                    "PushCollider_Stage1_Body_Main",
+                    "PushCollider_Stage1_Body_Forearm_Right",
+                    "PushCollider_Stage1_Body_Forearm_Left",
+                    "PushCollider_Stage1_Occluder"
+                  ]
+                },
+                {
+                  "$type": "EnableHitBoxByName",
+                  "hitBoxNames": [
+                    "HitBox_Head",
+                    "HitBox_Body01",
+                    "HitBox_Body02",
+                    "HitBox_Hand01_L",
+                    "HitBox_Hand01_R",
+                    "HitBox_Hand03_L",
+                    "HitBox_Hand03_R",
+                    "HitBox_Hand04_L",
+                    "HitBox_Hand04_R",
+                    "HitBox_Hand06_L",
+                    "HitBox_Hand06_R",
+                    "HitBox_Tail01",
+                    "HitBox_Tail02"
+                  ]
+                }
+              ],
+              "onRemoved": [
+                {
+                  "$type": "EnablePushColliderName",
+                  "pushColliderNames": [
+                    "PushCollider_Stage1_Body_Main",
+                    "PushCollider_Stage1_Body_Forearm_Right",
+                    "PushCollider_Stage1_Body_Forearm_Left",
+                    "PushCollider_Stage1_Occluder"
+                  ],
+                  "setEnable": true
+                },
+                {
+                  "$type": "EnableHitBoxByName",
+                  "hitBoxNames": [
+                    "HitBox_Head",
+                    "HitBox_Body01",
+                    "HitBox_Body02",
+                    "HitBox_Hand01_L",
+                    "HitBox_Hand01_R",
+                    "HitBox_Hand03_L",
+                    "HitBox_Hand03_R",
+                    "HitBox_Hand04_L",
+                    "HitBox_Hand04_R",
+                    "HitBox_Hand06_L",
+                    "HitBox_Hand06_R",
+                    "HitBox_Tail01",
+                    "HitBox_Tail02"
+                  ],
+                  "setEnable": true
+                }
+              ]
+            }
+          ],
           "onAdded": [
-            //切换镜头配置
+            {
+              "$type": "AttachEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Apep_Stage1_Alert_Ground_BS",
+              "effectTempleteID": -1.0
+            },
+            {
+              "$type": "AttachModifier",
+              "modifierName": "UnAlert_Invincible"
+            },
+            {
+              "$type": "AttachModifier",
+              "modifierName": "UnAlert_IsGhostToAllied"
+            },
+            {
+              "$type": "AttachModifier",
+              "modifierName": "UnAlert_IsGhostToEnemy"
+            },
+            {
+              "$type": "AttachModifier",
+              "modifierName": "UnAlert_MuteTaunt"
+            }
+          ]
+        },
+        "UnAlert_Invincible": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "state": "Invincible"
+        },
+        "UnAlert_IsGhostToAllied": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "state": "IsGhostToAllied"
+        },
+        "UnAlert_IsGhostToEnemy": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "state": "IsGhostToEnemy"
+        },
+        "UnAlert_MuteTaunt": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "state": "MuteTaunt"
+        },
+        "Monster_Apep_Stage1_NormalState": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_MONSTER_Apep_Stage1_Core_Invisible",
+              "defaultGlobalValueOnCreate": 0.0,
+              "valueSteps": [-0.5, 0.5],
+              "modifierNameSteps": [
+                "Monster_Apep_Stage1_NormalState_CoreEffect"
+              ]
+            },
+            {
+              "$type": "AttachModifierToHPPercentMixinV2",
+              "valueSteps": [0.5],
+              "modifierNameSteps": ["Blank", "Apep_UltTrigger"]
+            }
+          ],
+          "onAdded": [
             {
               "$type": "SetLockingV3Config",
               "enable": true,
-              "specialCameraName": "default"
-            },
-            {
-              "$type": "SetLockingV3Config",
-              "enable": false,
-              "specialCameraName": "Stage3"
-            },
-            //切换碰撞盒
-            {
-              "$type": "EnablePushColliderName",
-              "pushColliderNames": [],
-              "setEnable": false
+              "PIHDNBBNEFN": "default",
+              "EMCDHODLGGL": ""
             },
             {
               "$type": "EnablePushColliderName",
-              "pushColliderNames": [],
-              "setEnable": true
-            },
-            //切换受击盒
-            {
-              "$type": "EnableHitBoxByName",
-              "hitBoxNames": [],
-              "setEnable": false
+              "pushColliderNames": [
+                "PushCollider_Stage3_Body",
+                "PushCollider_Stage3_Occluder"
+              ]
             },
             {
-              "$type": "EnableHitBoxByName",
-              "hitBoxNames": [],
+              "$type": "EnablePushColliderName",
+              "pushColliderNames": [
+                "PushCollider_Stage1_Body_Main",
+                "PushCollider_Stage1_Body_Forearm_Right",
+                "PushCollider_Stage1_Body_Forearm_Left",
+                "PushCollider_Stage1_Occluder"
+              ],
               "setEnable": true
+            },
+            {
+              "$type": "TriggerSetRenderersEnable",
+              "renderNames": ["Body"],
+              "setEnable": true
+            },
+            {
+              "$type": "TriggerSetRenderersEnable",
+              "renderNames": ["Body_Stage3"]
+            },
+            {
+              "$type": "AttachAbilityStateResistance",
+              "resistanceListID": 13002
+            }
+          ]
+        },
+        "Monster_Apep_Stage1_NormalState_CoreEffect": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Apep_Stage1_Standby",
+              "effectTempleteID": -1.0
+            }
+          ]
+        },
+        "Blank": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
+        },
+        "Apep_UltTrigger": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "SetAISkillCDAvailableNow",
+              "skillIDs": [223]
             }
           ]
         }
       }
     }
   },
-  ////////////////////////////////////////////////////////////////
-  //
-  //  Alert
-  //
-  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -154,252 +231,69 @@
       ],
       "modifiers": {
         "Monster_Apep_Stage1_Alert_Camera": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
-              "$type": "AvatarEnterCameraShot",
-              "cameraMoveCfgPath": "Camera_Monster_Apep_Stage1_Alert"
+              "$type": "AvatarEnterCameraShotByDistance",
+              "cameraMoveCfgPath": "Camera_Monster_Apep_Stage1_Alert",
+              "distance": 25.0
+            },
+            {
+              "$type": "SetGlobalValue",
+              "ratio": 1.0,
+              "key": "_MONSTER_Apep_Stage1_Core_Invisible",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            },
+            {
+              "$type": "AttachModifier",
+              "modifierName": "UnAlert_Invincible"
+            },
+            {
+              "$type": "AttachModifier",
+              "modifierName": "UnAlert_IsGhostToAllied"
+            },
+            {
+              "$type": "AttachModifier",
+              "modifierName": "UnAlert_IsGhostToEnemy"
+            },
+            {
+              "$type": "AttachModifier",
+              "modifierName": "UnAlert_MuteTaunt"
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "ratio": 0.0,
+              "key": "_MONSTER_Apep_Stage1_Core_Invisible",
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ]
+        },
+        "UnAlert_Invincible": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "state": "Invincible"
+        },
+        "UnAlert_IsGhostToAllied": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "state": "IsGhostToAllied"
+        },
+        "UnAlert_IsGhostToEnemy": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "state": "IsGhostToEnemy"
+        },
+        "UnAlert_MuteTaunt": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "state": "MuteTaunt"
         }
       }
-    }
-  },
-  ////////////////////////////////////////////////////////////////
-  //
-  //  RushMove
-  //
-  ////////////////////////////////////////////////////////////////
-  {
-    "Default": {
-      "$type": "ConfigAbility",
-      "abilityName": "Monster_Apep_Stage1_RushMove_ChooseDirection",
-      "abilityMixins": [
-        {
-          "$type": "AttachToAnimatorStateIDMixin",
-          "stateIDs": ["DecisionWindow"],
-          "modifierName": "Monster_Apep_Stage1_RushMove_ChooseDirection_Manager"
-        }
-      ],
-      "modifiers": {
-        "Monster_Apep_Stage1_RushMove_ChooseDirection_Manager": {
-          "onAdded": [
-            //决策前重置下状态
-            {
-              "$type": "SetGlobalValue",
-              "key": "_MONSTER_Apep_AnchorGadget_Left_Distance",
-              "value": -1
-            },
-            {
-              "$type": "SetGlobalValue",
-              "key": "_MONSTER_Apep_AnchorGadget_Right_Distance",
-              "value": -1
-            },
-            {
-              "$type": "SetGlobalValue",
-              "key": "_MONSTER_Apep_AnchorGadget_ReadyState",
-              "value": 0
-            },
-            //建左右两个位置辅助定位gadget
-            {
-              "$type": "CreateGadget",
-              "gadgetID": 42603011,
-              "campID": 4001,
-              "lifeByOwnerIsAlive": true,
-              "campTargetType": "Alliance",
-              "born": {
-                "$type": "ConfigBornBySelf",
-                "offset": {
-                  "x": 5.0,
-                  "y": 0.0,
-                  "z": 10.0
-                },
-                "onGround": true,
-                "alongGround": true
-              }
-            },
-            {
-              "$type": "CreateGadget",
-              "gadgetID": 42603011,
-              "campID": 4001,
-              "lifeByOwnerIsAlive": true,
-              "campTargetType": "Alliance",
-              "born": {
-                "$type": "ConfigBornBySelf",
-                "offset": {
-                  "x": -5.0,
-                  "y": 0.0,
-                  "z": 10.0
-                },
-                "onGround": true,
-                "alongGround": true
-              }
-            }
-          ],
-          "modifierMixins": [
-            //监听GV值有没有被Copy
-            {
-              "$type": "AttachModifierToSelfGlobalValueMixin",
-              "defaultGlobalValueOnCreate": -1,
-              "globalValueKey": "_MONSTER_Apep_AnchorGadget_Left_Distance",
-              "valueSteps": [0, 999],
-              "modifierNameSteps": ["AnchorGadget_Left_Distance_Check"]
-            },
-            {
-              "$type": "AttachModifierToSelfGlobalValueMixin",
-              "defaultGlobalValueOnCreate": -1,
-              "globalValueKey": "_MONSTER_Apep_AnchorGadget_Right_Distance",
-              "valueSteps": [0, 999],
-              "modifierNameSteps": ["AnchorGadget_Right_Distance_Check"]
-            },
-            {
-              "$type": "AttachModifierToSelfGlobalValueMixin",
-              "defaultGlobalValueOnCreate": 0,
-              "globalValueKey": "_MONSTER_Apep_AnchorGadget_ReadyState",
-              "valueSteps": [1.5, 2.5],
-              "modifierNameSteps": [
-                "Monster_Apep_Stage1_RushMove_ChooseDirection"
-              ]
-            }
-          ]
-        },
-        //距离GV是否置上
-        "AnchorGadget_Left_Distance_Check": {
-          "onAdded": [
-            {
-              "$type": "AddGlobalValue",
-              "key": "_MONSTER_Apep_AnchorGadget_ReadyState",
-              "value": 1
-            }
-          ]
-        },
-        "AnchorGadget_Right_Distance_Check": {
-          "onAdded": [
-            {
-              "$type": "SetGlobalValue",
-              "key": "_MONSTER_Apep_AnchorGadget_ReadyState",
-              "value": 1
-            }
-          ]
-        },
-        "Monster_Apep_Stage1_RushMove_ChooseDirection": {
-          "onAdded": [
-            {
-              "$type": "SetGlobalValueToOverrideMap",
-              "globalValueKey": "_MONSTER_Apep_AnchorGadget_Right_Distance",
-              "overrideMapKey": "Right_Distance"
-            },
-            {
-              "$type": "Predicated",
-              "target": "Self",
-              "targetPredicates": [
-                {
-                  "$type": "ByTargetGlobalValue",
-                  "key": "_MONSTER_Apep_AnchorGadget_Left_Distance",
-                  "value": "%Right_Distance",
-                  "compareType": "MoreThanAndEqual"
-                }
-              ],
-              "successActions": [
-                {
-                  "$type": "SetAnimatorTrigger",
-                  "triggerID": "TurnLeft"
-                }
-              ],
-              "failActions": [
-                {
-                  "$type": "SetAnimatorTrigger",
-                  "triggerID": "TurnRight"
-                }
-              ]
-            }
-          ]
-        }
-      },
-      "abilitySpecials": {
-        "Right_Distance": 0.0
-      }
-    }
-  },
-  {
-    "Default": {
-      "$type": "ConfigAbility",
-      "abilityName": "Apep_Stage1_RushMove_AnchorGadget_Left",
-      "onAdded": [
-        {
-          "$type": "Predicated",
-          "otherTargets": {
-            "$type": "SelectTargetsByShape",
-            "shapeName": "CircleR50",
-            "centerBasedOn": "Self",
-            "campTargetType": "SelfCamp",
-            "campBasedOn": "Self"
-          },
-          "targetPredicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "target": "Target",
-              "key": "_MONSTER_Apep_CenterGadget",
-              "value": 1
-            }
-          ],
-          "successActions": [
-            {
-              "$type": "SetGlobalValueByTargetDistance",
-              "target": "Target",
-              "key": "_MONSTER_Apep_AnchorGadget_Left_Distance",
-              "isXZ": true
-            },
-            {
-              "$type": "CopyGlobalValue",
-              "srcTarget": "Self",
-              "srcKey": "_MONSTER_Apep_AnchorGadget_Left_Distance",
-              "dstTarget": "Owner",
-              "dstKey": "_MONSTER_Apep_AnchorGadget_Left_Distance"
-            }
-          ]
-        }
-      ]
-    }
-  },
-  {
-    "Default": {
-      "$type": "ConfigAbility",
-      "abilityName": "Apep_Stage1_RushMove_AnchorGadget_Right",
-      "onAdded": [
-        {
-          "$type": "Predicated",
-          "otherTargets": {
-            "$type": "SelectTargetsByShape",
-            "shapeName": "CircleR50",
-            "centerBasedOn": "Self",
-            "campTargetType": "SelfCamp",
-            "campBasedOn": "Self"
-          },
-          "targetPredicates": [
-            {
-              "$type": "ByTargetGlobalValue",
-              "target": "Target",
-              "key": "_MONSTER_Apep_CenterGadget",
-              "value": 1
-            }
-          ],
-          "successActions": [
-            {
-              "$type": "SetGlobalValueByTargetDistance",
-              "target": "Target",
-              "key": "_MONSTER_Apep_AnchorGadget_Right_Distance",
-              "isXZ": true
-            },
-            {
-              "$type": "CopyGlobalValue",
-              "srcTarget": "Self",
-              "srcKey": "_MONSTER_Apep_AnchorGadget_Right_Distance",
-              "dstTarget": "Owner",
-              "dstKey": "_MONSTER_Apep_AnchorGadget_Right_Distance"
-            }
-          ]
-        }
-      ]
     }
   },
   {
@@ -410,14 +304,9 @@
         {
           "$type": "SteerAttackMixin",
           "steerStateIDs": ["RushMoveL_BS"],
-          "startNormalizedTime": 0.1,
-          "endNormalizedTime": 1,
-          "angularSpeed": 90
-        },
-        {
-          "$type": "AttachToAnimatorStateIDMixin",
-          "stateIDs": ["RushMoveL_BS"],
-          "modifierName": "Monster_Apep_Stage1_RushMoveL_Decision"
+          "startNormalizedTime": 0.10000000149011612,
+          "angularSpeed": 90.0,
+          "attackTrigger": ""
         },
         {
           "$type": "AttachToAnimatorStateIDMixin",
@@ -432,92 +321,67 @@
         }
       ],
       "modifiers": {
-        "Monster_Apep_Stage1_RushMoveL_Decision": {
-          "onRemoved": [
+        "Monster_Apep_Stage1_RushMoveL_RushState": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 0.20000000298023224,
+          "onAdded": [
             {
-              "$type": "SetGlobalValueByTargetDistance",
-              "target": "SelfAttackTarget",
-              "key": "_MONSTER_Apep_RushMove_TargetDistance"
+              "$type": "FixedMonsterRushMove",
+              "toPos": {
+                "$type": "ConfigBornBySelf",
+                "offset": {
+                  "x": -6.0,
+                  "y": 0.0,
+                  "z": 8.0
+                },
+                "IABNJPGBAOH": true
+              },
+              "timeRange": 0.5830000042915344,
+              "maxRange": 10.0,
+              "animatorStateIDs": ["RushMoveL_Move"],
+              "overrideMoveCollider": ""
             },
             {
-              "$type": "SetGlobalValue",
-              "key": "_MONSTER_Apep_TurnMode",
-              "value": 0
+              "$type": "AttachEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Apep_Stage1_RushMove",
+              "effectTempleteID": -1.0
             },
             {
-              "$type": "SetGlobalValue",
-              "key": "_MONSTER_Apep_TurnMode",
-              "value": 1,
+              "$type": "SetAISkillCDAvailableNow",
+              "skillIDs": [202]
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "ApplyModifier",
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR5",
+                "campTargetType": "All",
+                "OBHNBNDMPFN": 1.0
+              },
               "predicates": [
                 {
                   "$type": "ByTargetGlobalValue",
-                  "key": "_MONSTER_Apep_RushMove_TargetDistance",
-                  "value": 15,
-                  "compareType": "MoreThanAndEqual"
+                  "key": "_COMMON_GADGET_ISSUMMON",
+                  "ratio": 0.0,
+                  "compareType": "MoreThan"
                 }
-              ]
+              ],
+              "modifierName": "Kill_Summon_Gadget"
             }
           ]
         },
-        "Monster_Apep_Stage1_RushMoveL_RushState": {
-          "modifierMixins": [
-            {
-              "$type": "AttachModifierToSelfGlobalValueMixin",
-              "globalValueKey": "_MONSTER_Apep_TurnMode",
-              "valueSteps": [-0.5, 0.5, 1.5],
-              "modifierNameSteps": [
-                "Monster_Apep_Stage1_RushMoveL_ShortDis",
-                "Monster_Apep_Stage1_RushMoveL_LongDis"
-              ]
-            }
-          ]
-        },
-        "Monster_Apep_Stage1_RushMoveL_ShortDis": {
+        "Kill_Summon_Gadget": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
-              "$type": "FixedMonsterRushMove",
-              "target": "Self",
-              "animatorStateIDs": ["RushMoveL_Move"],
-              "toPos": {
-                "$type": "ConfigBornBySelf",
-                "offset": {
-                  "x": -6,
-                  "y": 0,
-                  "z": 8
-                }
-              },
-              "maxRange": 10,
-              "timeRange": 0.583
-            }
-          ]
-        },
-        "Monster_Apep_Stage1_RushMoveL_LongDis": {
-          "onAdded": [
-            {
-              "$type": "SetGlobalValueToOverrideMap",
-              "globalValueKey": "_MONSTER_Apep_RushMove_TargetDistance",
-              "overrideMapKey": "Distance"
-            },
-            {
-              "$type": "FixedMonsterRushMove",
-              "target": "Self",
-              "animatorStateIDs": ["RushMoveL_Move"],
-              "toPos": {
-                "$type": "ConfigBornBySelf",
-                "offset": {
-                  "x": -8,
-                  "y": 0,
-                  "z": "%Distance"
-                }
-              },
-              "maxRange": 20,
-              "timeRange": 0.583
+              "$type": "KillSelf"
             }
           ]
         }
-      },
-      "abilitySpecials": {
-        "Distance": 0
       }
     }
   },
@@ -526,83 +390,110 @@
       "$type": "ConfigAbility",
       "abilityName": "Monster_Apep_Stage1_RushMoveR",
       "abilityMixins": [
-        // {
-        // 	"$type": "AttachToAnimatorStateIDMixin",
-        // 	"stateIDs": ["RushMoveL_Jump"],
-        // 	"modifierName": "Monster_Apep_RushMoveL_JumpState"
-        // },
+        {
+          "$type": "SteerAttackMixin",
+          "steerStateIDs": ["RushMoveR_BS"],
+          "startNormalizedTime": 0.10000000149011612,
+          "angularSpeed": 90.0,
+          "attackTrigger": ""
+        },
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "stateIDs": ["RushMoveR_Move"],
+          "modifierName": "Monster_Apep_Stage1_RushMoveR_RushState"
+        },
         {
           "$type": "AnimatorRotationCompensateMixin",
           "animatorStateIDs": ["RushMoveR_Turn"],
-          "animationRotate": -90.0,
+          "animationRotate": -45.0,
           "angleLimit": 180.0
         }
       ],
       "modifiers": {
-        "Monster_Apep_Stage1_RushMoveL_JumpState": {
+        "Monster_Apep_Stage1_RushMoveR_RushState": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 0.20000000298023224,
           "onAdded": [
             {
               "$type": "FixedMonsterRushMove",
-              "target": "Self",
-              "animatorStateIDs": ["RushMoveL_Jump"],
               "toPos": {
                 "$type": "ConfigBornBySelf",
                 "offset": {
-                  "x": 5,
-                  "y": 0,
-                  "z": 10
-                }
+                  "x": 6.0,
+                  "y": 0.0,
+                  "z": 8.0
+                },
+                "IABNJPGBAOH": true
               },
-              "maxRange": 15,
-              "timeRange": 0.23
+              "timeRange": 0.5830000042915344,
+              "maxRange": 10.0,
+              "animatorStateIDs": ["RushMoveR_Move"],
+              "overrideMoveCollider": ""
+            },
+            {
+              "$type": "AttachEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Apep_Stage1_RushMove",
+              "effectTempleteID": -1.0
+            },
+            {
+              "$type": "SetAISkillCDAvailableNow",
+              "skillIDs": [202]
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "ApplyModifier",
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR5",
+                "campTargetType": "All",
+                "OBHNBNDMPFN": 1.0
+              },
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_COMMON_GADGET_ISSUMMON",
+                  "ratio": 0.0,
+                  "compareType": "MoreThan"
+                }
+              ],
+              "modifierName": "Kill_Summon_Gadget"
+            }
+          ]
+        },
+        "Kill_Summon_Gadget": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "KillSelf"
             }
           ]
         }
       }
     }
   },
-  ////////////////////////////////////////////////////////////////
-  //
-  //  Combo_Decision
-  //
-  ////////////////////////////////////////////////////////////////
-  {
-    "Default": {
-      "$type": "ConfigAbility",
-      "abilityName": "Monster_Apep_Stage1_Combo_Decision"
-    }
-  },
-  ////////////////////////////////////////////////////////////////
-  //
-  //  StompAttack
-  //
-  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Apep_Stage1_StompAttack",
       "abilityMixins": [
         {
-          "$type": "SteerAttackMixin",
-          "steerStateIDs": ["StompAttack_BS"],
-          "startNormalizedTime": 0.78,
-          "endNormalizedTime": 1.0,
-          "angularSpeed": 60
+          "$type": "AnimatorRotationCompensateMixin",
+          "animatorStateIDs": ["StompAttack_Turn"],
+          "animationRotate": -90.0,
+          "angleLimit": 180.0
         },
         {
           "$type": "AnimatorRotationCompensateMixin",
-          "animatorStateIDs": ["StompAttack_Turn"],
+          "animatorStateIDs": ["StompAttack_TurnRight_Turn"],
           "animationRotate": -90.0,
           "angleLimit": 180.0
         }
       ]
     }
   },
-  ////////////////////////////////////////////////////////////////
-  //
-  //  SwipeAttack
-  //
-  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
@@ -610,213 +501,742 @@
       "abilityMixins": [
         {
           "$type": "SteerAttackMixin",
-          "steerStateIDs": ["SwipeAttack"],
-          "startNormalizedTime": 0.09,
-          "endNormalizedTime": 0.146,
-          "angularSpeed": 60
+          "steerStateIDs": ["SwipeAttack_FullCombo"],
+          "startNormalizedTime": 0.0860000029206276,
+          "endNormalizedTime": 0.164000004529953,
+          "angularSpeed": 45.0,
+          "attackTrigger": ""
         },
         {
           "$type": "SteerAttackMixin",
-          "steerStateIDs": ["SwipeAttack"],
-          "startNormalizedTime": 0.266,
-          "endNormalizedTime": 0.3,
-          "angularSpeed": 60
+          "steerStateIDs": ["SwipeAttack_FullCombo"],
+          "startNormalizedTime": 0.2409999966621399,
+          "endNormalizedTime": 0.32199999690055847,
+          "angularSpeed": 45.0,
+          "attackTrigger": ""
         },
         {
           "$type": "SteerAttackMixin",
-          "steerStateIDs": ["SwipeAttack"],
-          "startNormalizedTime": 0.37,
-          "endNormalizedTime": 0.412,
-          "angularSpeed": 60
+          "steerStateIDs": ["SwipeAttack_FullCombo"],
+          "startNormalizedTime": 0.37700000405311584,
+          "endNormalizedTime": 0.44699999690055847,
+          "angularSpeed": 45.0,
+          "attackTrigger": ""
         },
         {
           "$type": "SteerAttackMixin",
-          "steerStateIDs": ["SwipeAttack"],
-          "startNormalizedTime": 0.512,
-          "endNormalizedTime": 0.553,
-          "angularSpeed": 60
+          "steerStateIDs": ["SwipeAttack_FullCombo"],
+          "startNormalizedTime": 0.48399999737739563,
+          "endNormalizedTime": 0.5960000157356262,
+          "angularSpeed": 45.0,
+          "attackTrigger": ""
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "steerStateIDs": ["SwipeAttack_DoubleStrike"],
+          "startNormalizedTime": 0.12099999934434891,
+          "endNormalizedTime": 0.23199999332427979,
+          "angularSpeed": 45.0,
+          "attackTrigger": ""
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "steerStateIDs": ["SwipeAttack_DoubleStrike"],
+          "startNormalizedTime": 0.3400000035762787,
+          "endNormalizedTime": 0.45399999618530273,
+          "angularSpeed": 45.0,
+          "attackTrigger": ""
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "steerStateIDs": ["SwipeAttack_TripleStrike"],
+          "startNormalizedTime": 0.08799999952316284,
+          "endNormalizedTime": 0.19900000095367432,
+          "angularSpeed": 45.0,
+          "attackTrigger": ""
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "steerStateIDs": ["SwipeAttack_TripleStrike"],
+          "startNormalizedTime": 0.2669999897480011,
+          "endNormalizedTime": 0.3479999899864197,
+          "angularSpeed": 45.0,
+          "attackTrigger": ""
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "steerStateIDs": ["SwipeAttack_TripleStrike"],
+          "startNormalizedTime": 0.4050000011920929,
+          "endNormalizedTime": 0.5239999890327454,
+          "angularSpeed": 45.0,
+          "attackTrigger": ""
         }
       ]
     }
   },
-  ////////////////////////////////////////////////////////////////
-  //
-  //  CrashAttack
-  //
-  ////////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Monster_Apep_Stage1_CrashAttack",
+      "abilityMixins": [
+        {
+          "$type": "SteerAttackMixin",
+          "steerStateIDs": ["CrashAttack"],
+          "endNormalizedTime": 0.30000001192092896,
+          "angularSpeed": 90.0,
+          "attackTrigger": ""
+        },
+        {
+          "$type": "AttachToNormalizedTimeMixin",
+          "stateID": "CrashAttack",
+          "modifierName": "Monster_Apep_Stage1_CrashAttack_Hitbox",
+          "normalizeStart": 0.23600000143051147,
+          "normalizeEnd": 0.7639999985694885
+        }
+      ],
+      "abilitySpecials": {
+        "Radius": 10.0
+      },
+      "modifiers": {
+        "Monster_Apep_Stage1_CrashAttack_TargetFar": {
+          "modifierName": "",
+          "duration": 0.5,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "CreateGadget",
+              "target": "SelfAttackTarget",
+              "born": {
+                "$type": "ConfigBornByTarget"
+              },
+              "GKJDJDACPMC": true,
+              "gadgetID": 42908106,
+              "campID": 4001
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "SetSelfAttackTarget",
+              "otherTargets": {
+                "$type": "SelectTargetsByChildren",
+                "configID": 42908106
+              }
+            },
+            {
+              "$type": "Predicated",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_MONSTER_Apep_CrashAttack_MissPoint01",
+                  "ratio": 1.0,
+                  "compareType": "MoreThan"
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "CreateGadget",
+                  "target": "SelfAttackTarget",
+                  "born": {
+                    "$type": "ConfigBornByTarget",
+                    "offset": {
+                      "x": [
+                        0.0,
+                        0.8659999966621399,
+                        "Radius",
+                        "MUL",
+                        "SUB"
+                      ],
+                      "y": 0.0,
+                      "z": [0.5, "Radius", "MUL"]
+                    },
+                    "DAPKLNIFPID": true,
+                    "direction": {
+                      "$type": "IHINHODOMIN"
+                    },
+                    "BJCIHELGKLP": true
+                  },
+                  "GKJDJDACPMC": true,
+                  "gadgetID": 42908101,
+                  "campID": 4001
+                },
+                {
+                  "$type": "Predicated",
+                  "targetPredicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "_MONSTER_Apep_CrashAttack_MissPoint01",
+                      "ratio": 2.0,
+                      "compareType": "MoreThan"
+                    }
+                  ],
+                  "successActions": [
+                    {
+                      "$type": "CreateGadget",
+                      "target": "SelfAttackTarget",
+                      "born": {
+                        "$type": "ConfigBornByTarget",
+                        "offset": {
+                          "x": 0.0,
+                          "y": 0.0,
+                          "z": "Radius"
+                        },
+                        "DAPKLNIFPID": true,
+                        "direction": {
+                          "$type": "IHINHODOMIN"
+                        },
+                        "BJCIHELGKLP": true
+                      },
+                      "GKJDJDACPMC": true,
+                      "gadgetID": 42908102,
+                      "campID": 4001
+                    }
+                  ],
+                  "failActions": [
+                    {
+                      "$type": "CreateGadget",
+                      "target": "SelfAttackTarget",
+                      "born": {
+                        "$type": "ConfigBornByTarget",
+                        "offset": {
+                          "x": [0.8659999966621399, "Radius", "MUL"],
+                          "y": 0.0,
+                          "z": [0.5, "Radius", "MUL"]
+                        },
+                        "DAPKLNIFPID": true,
+                        "direction": {
+                          "$type": "IHINHODOMIN"
+                        },
+                        "BJCIHELGKLP": true
+                      },
+                      "GKJDJDACPMC": true,
+                      "gadgetID": 42908102,
+                      "campID": 4001
+                    }
+                  ]
+                }
+              ],
+              "failActions": [
+                {
+                  "$type": "CreateGadget",
+                  "target": "SelfAttackTarget",
+                  "born": {
+                    "$type": "ConfigBornByTarget",
+                    "offset": {
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": "Radius"
+                    },
+                    "DAPKLNIFPID": true,
+                    "direction": {
+                      "$type": "IHINHODOMIN"
+                    },
+                    "BJCIHELGKLP": true
+                  },
+                  "GKJDJDACPMC": true,
+                  "gadgetID": 42908101,
+                  "campID": 4001
+                },
+                {
+                  "$type": "CreateGadget",
+                  "target": "SelfAttackTarget",
+                  "born": {
+                    "$type": "ConfigBornByTarget",
+                    "offset": {
+                      "x": [0.8659999966621399, "Radius", "MUL"],
+                      "y": 0.0,
+                      "z": [0.5, "Radius", "MUL"]
+                    },
+                    "DAPKLNIFPID": true,
+                    "direction": {
+                      "$type": "IHINHODOMIN"
+                    },
+                    "BJCIHELGKLP": true
+                  },
+                  "GKJDJDACPMC": true,
+                  "gadgetID": 42908102,
+                  "campID": 4001
+                }
+              ]
+            },
+            {
+              "$type": "Predicated",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_MONSTER_Apep_CrashAttack_MissPoint02",
+                  "ratio": 1.0,
+                  "compareType": "MoreThan"
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "CreateGadget",
+                  "target": "SelfAttackTarget",
+                  "born": {
+                    "$type": "ConfigBornByTarget",
+                    "offset": {
+                      "x": [0.8659999966621399, "Radius", "MUL"],
+                      "y": 0.0,
+                      "z": [0.0, 0.5, "Radius", "MUL", "SUB"]
+                    },
+                    "DAPKLNIFPID": true,
+                    "direction": {
+                      "$type": "IHINHODOMIN"
+                    },
+                    "BJCIHELGKLP": true
+                  },
+                  "GKJDJDACPMC": true,
+                  "gadgetID": 42908103,
+                  "campID": 4001
+                },
+                {
+                  "$type": "Predicated",
+                  "targetPredicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "_MONSTER_Apep_CrashAttack_MissPoint02",
+                      "ratio": 2.0,
+                      "compareType": "MoreThan"
+                    }
+                  ],
+                  "successActions": [
+                    {
+                      "$type": "CreateGadget",
+                      "target": "SelfAttackTarget",
+                      "born": {
+                        "$type": "ConfigBornByTarget",
+                        "offset": {
+                          "x": 0.0,
+                          "y": 0.0,
+                          "z": [0.0, 1.0, "Radius", "MUL", "SUB"]
+                        },
+                        "DAPKLNIFPID": true,
+                        "direction": {
+                          "$type": "IHINHODOMIN"
+                        },
+                        "BJCIHELGKLP": true
+                      },
+                      "GKJDJDACPMC": true,
+                      "gadgetID": 42908104,
+                      "campID": 4001
+                    }
+                  ],
+                  "failActions": [
+                    {
+                      "$type": "CreateGadget",
+                      "target": "SelfAttackTarget",
+                      "born": {
+                        "$type": "ConfigBornByTarget",
+                        "offset": {
+                          "x": [
+                            0.0,
+                            0.8659999966621399,
+                            "Radius",
+                            "MUL",
+                            "SUB"
+                          ],
+                          "y": 0.0,
+                          "z": [0.0, 0.5, "Radius", "MUL", "SUB"]
+                        },
+                        "DAPKLNIFPID": true,
+                        "direction": {
+                          "$type": "IHINHODOMIN"
+                        },
+                        "BJCIHELGKLP": true
+                      },
+                      "GKJDJDACPMC": true,
+                      "gadgetID": 42908104,
+                      "campID": 4001
+                    }
+                  ]
+                }
+              ],
+              "failActions": [
+                {
+                  "$type": "CreateGadget",
+                  "target": "SelfAttackTarget",
+                  "born": {
+                    "$type": "ConfigBornByTarget",
+                    "offset": {
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": [0.0, 1.0, "Radius", "MUL", "SUB"]
+                    },
+                    "DAPKLNIFPID": true,
+                    "direction": {
+                      "$type": "IHINHODOMIN"
+                    },
+                    "BJCIHELGKLP": true
+                  },
+                  "GKJDJDACPMC": true,
+                  "gadgetID": 42908103,
+                  "campID": 4001
+                },
+                {
+                  "$type": "CreateGadget",
+                  "target": "SelfAttackTarget",
+                  "born": {
+                    "$type": "ConfigBornByTarget",
+                    "offset": {
+                      "x": [
+                        0.0,
+                        0.8659999966621399,
+                        "Radius",
+                        "MUL",
+                        "SUB"
+                      ],
+                      "y": 0.0,
+                      "z": [0.0, 0.5, "Radius", "MUL", "SUB"]
+                    },
+                    "DAPKLNIFPID": true,
+                    "direction": {
+                      "$type": "IHINHODOMIN"
+                    },
+                    "BJCIHELGKLP": true
+                  },
+                  "GKJDJDACPMC": true,
+                  "gadgetID": 42908104,
+                  "campID": 4001
+                }
+              ]
+            }
+          ]
+        },
+        "Monster_Apep_Stage1_CrashAttack_TargetNear": {
+          "modifierName": "",
+          "duration": 0.5,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "CreateGadget",
+              "target": "SelfAttackTarget",
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 12.0
+                },
+                "IABNJPGBAOH": true
+              },
+              "GKJDJDACPMC": true,
+              "gadgetID": 42908106,
+              "campID": 4001
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "SetSelfAttackTarget",
+              "otherTargets": {
+                "$type": "SelectTargetsByChildren",
+                "configID": 42908106
+              }
+            },
+            {
+              "$type": "Predicated",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_MONSTER_Apep_CrashAttack_MissPoint01",
+                  "ratio": 1.0,
+                  "compareType": "MoreThan"
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "CreateGadget",
+                  "target": "SelfAttackTarget",
+                  "born": {
+                    "$type": "ConfigBornByTarget",
+                    "offset": {
+                      "x": [
+                        0.0,
+                        0.8659999966621399,
+                        "Radius",
+                        "MUL",
+                        "SUB"
+                      ],
+                      "y": 0.0,
+                      "z": [0.5, "Radius", "MUL"]
+                    },
+                    "DAPKLNIFPID": true,
+                    "direction": {
+                      "$type": "IHINHODOMIN"
+                    },
+                    "BJCIHELGKLP": true
+                  },
+                  "GKJDJDACPMC": true,
+                  "gadgetID": 42908101,
+                  "campID": 4001
+                },
+                {
+                  "$type": "Predicated",
+                  "targetPredicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "_MONSTER_Apep_CrashAttack_MissPoint01",
+                      "ratio": 2.0,
+                      "compareType": "MoreThan"
+                    }
+                  ],
+                  "successActions": [
+                    {
+                      "$type": "CreateGadget",
+                      "target": "SelfAttackTarget",
+                      "born": {
+                        "$type": "ConfigBornByTarget",
+                        "offset": {
+                          "x": 0.0,
+                          "y": 0.0,
+                          "z": "Radius"
+                        },
+                        "DAPKLNIFPID": true,
+                        "direction": {
+                          "$type": "IHINHODOMIN"
+                        },
+                        "BJCIHELGKLP": true
+                      },
+                      "GKJDJDACPMC": true,
+                      "gadgetID": 42908102,
+                      "campID": 4001
+                    }
+                  ],
+                  "failActions": [
+                    {
+                      "$type": "CreateGadget",
+                      "target": "SelfAttackTarget",
+                      "born": {
+                        "$type": "ConfigBornByTarget",
+                        "offset": {
+                          "x": [0.8659999966621399, "Radius", "MUL"],
+                          "y": 0.0,
+                          "z": [0.5, "Radius", "MUL"]
+                        },
+                        "DAPKLNIFPID": true,
+                        "direction": {
+                          "$type": "IHINHODOMIN"
+                        },
+                        "BJCIHELGKLP": true
+                      },
+                      "GKJDJDACPMC": true,
+                      "gadgetID": 42908102,
+                      "campID": 4001
+                    }
+                  ]
+                }
+              ],
+              "failActions": [
+                {
+                  "$type": "CreateGadget",
+                  "target": "SelfAttackTarget",
+                  "born": {
+                    "$type": "ConfigBornByTarget",
+                    "offset": {
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": "Radius"
+                    },
+                    "DAPKLNIFPID": true,
+                    "direction": {
+                      "$type": "IHINHODOMIN"
+                    },
+                    "BJCIHELGKLP": true
+                  },
+                  "GKJDJDACPMC": true,
+                  "gadgetID": 42908101,
+                  "campID": 4001
+                },
+                {
+                  "$type": "CreateGadget",
+                  "target": "SelfAttackTarget",
+                  "born": {
+                    "$type": "ConfigBornByTarget",
+                    "offset": {
+                      "x": [0.8659999966621399, "Radius", "MUL"],
+                      "y": 0.0,
+                      "z": [0.5, "Radius", "MUL"]
+                    },
+                    "DAPKLNIFPID": true,
+                    "direction": {
+                      "$type": "IHINHODOMIN"
+                    },
+                    "BJCIHELGKLP": true
+                  },
+                  "GKJDJDACPMC": true,
+                  "gadgetID": 42908102,
+                  "campID": 4001
+                }
+              ]
+            },
+            {
+              "$type": "CreateGadget",
+              "target": "SelfAttackTarget",
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": [0.8659999966621399, "Radius", "MUL"],
+                  "y": 0.0,
+                  "z": [0.0, 0.5, "Radius", "MUL", "SUB"]
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "IHINHODOMIN"
+                },
+                "BJCIHELGKLP": true
+              },
+              "GKJDJDACPMC": true,
+              "gadgetID": 42908103,
+              "campID": 4001
+            },
+            {
+              "$type": "CreateGadget",
+              "target": "SelfAttackTarget",
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": [
+                    0.0,
+                    0.8659999966621399,
+                    "Radius",
+                    "MUL",
+                    "SUB"
+                  ],
+                  "y": 0.0,
+                  "z": [0.0, 0.5, "Radius", "MUL", "SUB"]
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "IHINHODOMIN"
+                },
+                "BJCIHELGKLP": true
+              },
+              "GKJDJDACPMC": true,
+              "gadgetID": 42908104,
+              "campID": 4001
+            }
+          ]
+        },
+        "Monster_Apep_Stage1_CrashAttack_Hitbox": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "modifierMixins": [
+            {
+              "$type": "AttachActionToModifierMixin",
+              "onAdded": [
+                {
+                  "$type": "EnableHitBoxByName",
+                  "hitBoxNames": ["HitBox_Hand01_L", "HitBox_Hand01_R"]
+                }
+              ],
+              "onRemoved": [
+                {
+                  "$type": "EnableHitBoxByName",
+                  "hitBoxNames": ["HitBox_Hand01_L", "HitBox_Hand01_R"],
+                  "setEnable": true
+                }
+              ]
+            }
+          ]
+        }
+      },
       "onAbilityStart": [
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 0.0,
+          "key": "_MONSTER_Apep_CrashAttack_MissPoint01",
+          "useLimitRange": true,
+          "randomInRange": true,
+          "maxValue": 3.0,
+          "minValue": 0.0
+        },
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 0.0,
+          "key": "_MONSTER_Apep_CrashAttack_MissPoint02",
+          "useLimitRange": true,
+          "randomInRange": true,
+          "maxValue": 3.0,
+          "minValue": 0.0
+        },
+        {
+          "$type": "ResetAIAttackTarget"
+        },
         {
           "$type": "Predicated",
           "target": "SelfAttackTarget",
           "targetPredicates": [
             {
-              "$type": "ByTargetPositionToSelfPosition",
-              "compareType": "XZ",
-              "value": "10",
-              "logic": "GreaterOrEqual"
+              "$type": "HPJOHDHEPCG",
+              "logic": "GreaterOrEqual",
+              "ratio": 16.0
             }
           ],
           "successActions": [
             {
-              "$type": "CreateGadget",
-              "gadgetID": 42908101,
-              "campID": 4001,
-              "target": "SelfAttackTarget",
-              "lifeByOwnerIsAlive": true,
-              "born": {
-                "$type": "ConfigBornByTarget",
-                "offset": {
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 0.0
-                },
-                "onGround": true,
-                "alongGround": true
-              }
-            },
-            {
-              "$type": "CreateGadget",
-              "gadgetID": 42908102,
-              "campID": 4001,
-              "target": "SelfAttackTarget",
-              "lifeByOwnerIsAlive": true,
-              "born": {
-                "$type": "ConfigBornByTarget",
-                "offset": {
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 0.0
-                },
-                "onGround": true,
-                "alongGround": true
-              }
-            },
-            {
-              "$type": "CreateGadget",
-              "gadgetID": 42908103,
-              "campID": 4001,
-              "target": "SelfAttackTarget",
-              "lifeByOwnerIsAlive": true,
-              "born": {
-                "$type": "ConfigBornByTarget",
-                "offset": {
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 0.0
-                },
-                "onGround": true,
-                "alongGround": true
-              }
-            },
-            {
-              "$type": "CreateGadget",
-              "gadgetID": 42908104,
-              "campID": 4001,
-              "target": "SelfAttackTarget",
-              "lifeByOwnerIsAlive": true,
-              "born": {
-                "$type": "ConfigBornByTarget",
-                "offset": {
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 0.0
-                },
-                "onGround": true,
-                "alongGround": true
-              }
+              "$type": "ApplyModifier",
+              "modifierName": "Monster_Apep_Stage1_CrashAttack_TargetFar"
             }
           ],
           "failActions": [
             {
-              "$type": "CreateGadget",
-              "gadgetID": 42908101,
-              "campID": 4001,
-              "target": "SelfAttackTarget",
-              "lifeByOwnerIsAlive": true,
-              "born": {
-                "$type": "ConfigBornBySelf",
-                "offset": {
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 7.0
-                },
-                "direction": {
-                  "$type": "ConfigDirectionByAttackTarget"
-                },
-                "onGround": true,
-                "alongGround": true
-              }
-            },
-            {
-              "$type": "CreateGadget",
-              "gadgetID": 42908102,
-              "campID": 4001,
-              "target": "SelfAttackTarget",
-              "lifeByOwnerIsAlive": true,
-              "born": {
-                "$type": "ConfigBornBySelf",
-                "offset": {
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 7.0
-                },
-                "direction": {
-                  "$type": "ConfigDirectionByAttackTarget"
-                },
-                "onGround": true,
-                "alongGround": true
-              }
-            },
-            {
-              "$type": "CreateGadget",
-              "gadgetID": 42908103,
-              "campID": 4001,
-              "target": "SelfAttackTarget",
-              "lifeByOwnerIsAlive": true,
-              "born": {
-                "$type": "ConfigBornBySelf",
-                "offset": {
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 7.0
-                },
-                "direction": {
-                  "$type": "ConfigDirectionByAttackTarget"
-                },
-                "onGround": true,
-                "alongGround": true
-              }
-            },
-            {
-              "$type": "CreateGadget",
-              "gadgetID": 42908104,
-              "campID": 4001,
-              "target": "SelfAttackTarget",
-              "lifeByOwnerIsAlive": true,
-              "born": {
-                "$type": "ConfigBornBySelf",
-                "offset": {
-                  "x": 0.0,
-                  "y": 0.0,
-                  "z": 7.0
-                },
-                "direction": {
-                  "$type": "ConfigDirectionByAttackTarget"
-                },
-                "onGround": true,
-                "alongGround": true
-              }
+              "$type": "ApplyModifier",
+              "modifierName": "Monster_Apep_Stage1_CrashAttack_TargetNear"
             }
           ]
-        },
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Apep_Stage1_Forearm_CrashAttack",
+      "onAbilityStart": [
         {
-          "$type": "SetPoseInt",
-          "intID": "Stage",
-          "value": 1
+          "$type": "TriggerAttackEvent",
+          "attackEvent": {
+            "attackPattern": {
+              "$type": "ConfigAttackBox",
+              "triggerType": "TriggerNoRepeat",
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 1.0
+                },
+                "IABNJPGBAOH": true
+              },
+              "size": {
+                "x": 5.0,
+                "y": 7.0,
+                "z": 12.0
+              }
+            },
+            "attackInfo": {
+              "attackTag": "",
+              "attenuationTag": "Apep_Stage1_CrashAttack",
+              "attenuationGroup": "Apep_Stage1_CrashAttack",
+              "attackProperty": {
+                "damagePercentage": 0.699999988079071,
+                "damagePercentageRatio": 0.0,
+                "bonusCriticalHurt": 100.0,
+                "strikeType": "Blunt",
+                "enBreak": 50.0
+              },
+              "hitPattern": {
+                "onHitEffectName": "default",
+                "hitImpulseType": "LV3"
+              },
+              "cameraShake": {
+                "shakeRange": 0.11999999731779099,
+                "shakeTime": 0.11999999731779099,
+                "shakeDistance": 25.0
+              },
+              "canBeModifiedBy": "OriginOwner"
+            }
+          },
+          "targetType": "Enemy"
         }
       ]
     }
@@ -829,41 +1249,9 @@
         {
           "$type": "SetAnimatorInt",
           "intID": "ArmTag",
-          "value": 1
+          "ratio": 1.0
         }
-      ],
-      "abilityMixins": [
-        {
-          "$type": "AttachToNormalizedTimeMixin",
-          "stateID": "CrashAttack01",
-          "normalizeStart": 0.153,
-          "normalizeEnd": 0.73,
-          "modifierName": "Apep_Stage1_Forearm_CrashAttack01_Onground"
-        }
-      ],
-      "modifiers": {
-        "Apep_Stage1_Forearm_CrashAttack01_Onground": {
-          "modifierMixins": [
-            {
-              "$type": "AttachActionToModifierMixin",
-              "onAdded": [
-                {
-                  "$type": "EnablePushColliderName",
-                  "pushColliderNames": ["PushCollider_1"],
-                  "setEnable": true
-                }
-              ],
-              "onRemoved": [
-                {
-                  "$type": "EnablePushColliderName",
-                  "pushColliderNames": ["PushCollider_1"],
-                  "setEnable": false
-                }
-              ]
-            }
-          ]
-        }
-      }
+      ]
     }
   },
   {
@@ -874,41 +1262,9 @@
         {
           "$type": "SetAnimatorInt",
           "intID": "ArmTag",
-          "value": 2
+          "ratio": 2.0
         }
-      ],
-      "abilityMixins": [
-        {
-          "$type": "AttachToNormalizedTimeMixin",
-          "stateID": "CrashAttack02",
-          "normalizeStart": 0.192,
-          "normalizeEnd": 0.769,
-          "modifierName": "Apep_Stage1_Forearm_CrashAttack02_Onground"
-        }
-      ],
-      "modifiers": {
-        "Apep_Stage1_Forearm_CrashAttack02_Onground": {
-          "modifierMixins": [
-            {
-              "$type": "AttachActionToModifierMixin",
-              "onAdded": [
-                {
-                  "$type": "EnablePushColliderName",
-                  "pushColliderNames": ["PushCollider_2"],
-                  "setEnable": true
-                }
-              ],
-              "onRemoved": [
-                {
-                  "$type": "EnablePushColliderName",
-                  "pushColliderNames": ["PushCollider_2"],
-                  "setEnable": false
-                }
-              ]
-            }
-          ]
-        }
-      }
+      ]
     }
   },
   {
@@ -919,41 +1275,9 @@
         {
           "$type": "SetAnimatorInt",
           "intID": "ArmTag",
-          "value": 3
+          "ratio": 3.0
         }
-      ],
-      "abilityMixins": [
-        {
-          "$type": "AttachToNormalizedTimeMixin",
-          "stateID": "CrashAttack03",
-          "normalizeStart": 0.23,
-          "normalizeEnd": 0.807,
-          "modifierName": "Apep_Stage1_Forearm_CrashAttack03_Onground"
-        }
-      ],
-      "modifiers": {
-        "Apep_Stage1_Forearm_CrashAttack03_Onground": {
-          "modifierMixins": [
-            {
-              "$type": "AttachActionToModifierMixin",
-              "onAdded": [
-                {
-                  "$type": "EnablePushColliderName",
-                  "pushColliderNames": ["PushCollider_3"],
-                  "setEnable": true
-                }
-              ],
-              "onRemoved": [
-                {
-                  "$type": "EnablePushColliderName",
-                  "pushColliderNames": ["PushCollider_3"],
-                  "setEnable": false
-                }
-              ]
-            }
-          ]
-        }
-      }
+      ]
     }
   },
   {
@@ -964,41 +1288,2265 @@
         {
           "$type": "SetAnimatorInt",
           "intID": "ArmTag",
-          "value": 4
+          "ratio": 4.0
         }
-      ],
+      ]
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Apep_Stage1_Forearm_CrashAttack_CenterGadget"
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Monster_Apep_Stage1_DiveIn",
       "abilityMixins": [
         {
-          "$type": "AttachToNormalizedTimeMixin",
-          "stateID": "CrashAttack04",
-          "normalizeStart": 0.269,
-          "normalizeEnd": 0.846,
-          "modifierName": "Apep_Stage1_Forearm_CrashAttack04_Onground"
+          "$type": "AttachToAnimatorStateIDMixin",
+          "stateIDs": ["DiveIn", "StageChange_Skin"],
+          "modifierName": "Monster_Apep_Stage1_DiveIn_TriggerBullet"
+        },
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "stateIDs": ["DiveIn_Underground"],
+          "modifierName": "DiveIn_BulletTrigger_Manager"
+        },
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "stateIDs": ["SlashAttack"],
+          "modifierName": "Monster_Apep_Stage1_SlashAttack"
+        },
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "stateIDs": ["DiveOut"],
+          "modifierName": "Monster_Apep_Stage1_DiveOut"
+        },
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "stateIDs": ["DiveIn", "DiveIn_Trigger", "DiveIn_Underground"],
+          "modifierName": "DiveIn_Reconnect"
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "steerStateIDs": ["DiveIn"],
+          "angularSpeed": 90.0,
+          "attackTrigger": ""
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "steerStateIDs": ["DiveIn_Trigger"],
+          "angularSpeed": 90.0,
+          "attackTrigger": ""
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "steerStateIDs": ["StageChange_Skin"],
+          "angularSpeed": 90.0,
+          "attackTrigger": ""
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "steerStateIDs": ["StageChange_Trigger"],
+          "angularSpeed": 90.0,
+          "attackTrigger": ""
+        },
+        {
+          "$type": "AttachModifierToGlobalValueMixin",
+          "globalValueKey": "_MONSTER_Apep_Stage1_DiveIn_Invisible",
+          "valueSteps": [-0.5, 0.5, 1.5],
+          "modifierNameSteps": ["Visible", "Invisible"]
         }
       ],
       "modifiers": {
-        "Apep_Stage1_Forearm_CrashAttack04_Onground": {
+        "Monster_Apep_Stage1_DiveIn_TriggerBullet": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "ApplyModifier",
+              "otherTargets": {
+                "$type": "SelectTargetsByChildren",
+                "configID": 42908105
+              },
+              "modifierName": "Gadget_KillSelf"
+            },
+            {
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "Skin_DiveIn",
+              "MPTriggerOnRemote": true
+            },
+            {
+              "$type": "Predicated",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_MONSTER_Apep_DiveMode",
+                  "ratio": 2.0
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "CreateGadget",
+                  "born": {
+                    "$type": "OHBNBLFMECJ",
+                    "offset": {
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
+                    },
+                    "DAPKLNIFPID": true,
+                    "HKNFOKFIKAG": 5.0,
+                    "IABNJPGBAOH": true,
+                    "actionPointType": "AureaePoint",
+                    "PANKEBCONMO": {
+                      "$type": "DMJJPCHLKEC",
+                      "actionPointID": 4
+                    }
+                  },
+                  "gadgetID": 42908112,
+                  "campID": 4001
+                }
+              ],
+              "failActions": [
+                {
+                  "$type": "Predicated",
+                  "targetPredicates": [
+                    {
+                      "$type": "ByAnimatorInt",
+                      "target": "Self",
+                      "logic": "Equal",
+                      "ratio": 221,
+                      "parameter": "SkillID"
+                    }
+                  ],
+                  "successActions": [
+                    {
+                      "$type": "SetGlobalValue",
+                      "ratio": 0.0,
+                      "key": "_MONSTER_Apep_DiveMode",
+                      "maxValue": 0.0,
+                      "minValue": 0.0
+                    }
+                  ],
+                  "failActions": [
+                    {
+                      "$type": "SetGlobalValue",
+                      "ratio": 1.0,
+                      "key": "_MONSTER_Apep_DiveMode",
+                      "maxValue": 0.0,
+                      "minValue": 0.0
+                    },
+                    {
+                      "$type": "CreateGadget",
+                      "born": {
+                        "$type": "OHBNBLFMECJ",
+                        "offset": {
+                          "x": 0.0,
+                          "y": 0.0,
+                          "z": 0.0
+                        },
+                        "DAPKLNIFPID": true,
+                        "HKNFOKFIKAG": 5.0,
+                        "IABNJPGBAOH": true,
+                        "actionPointType": "AureaePoint",
+                        "PANKEBCONMO": {
+                          "$type": "DMJJPCHLKEC",
+                          "actionPointID": 1
+                        }
+                      },
+                      "GKJDJDACPMC": true,
+                      "gadgetID": 42908107,
+                      "campID": 4001
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "Predicated",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_MONSTER_Apep_DiveMode",
+                  "ratio": 2.0
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "TriggerBullet",
+                  "target": "SelfAttackTarget",
+                  "bulletID": 42908105,
+                  "born": {
+                    "$type": "ConfigBornBySelf",
+                    "offset": {
+                      "x": 0.0,
+                      "y": 0.10000000149011612,
+                      "z": 0.0
+                    },
+                    "DAPKLNIFPID": true,
+                    "BJCIHELGKLP": true,
+                    "IABNJPGBAOH": true
+                  }
+                }
+              ],
+              "failActions": [
+                {
+                  "$type": "TriggerBullet",
+                  "target": "SelfAttackTarget",
+                  "bulletID": 42908105,
+                  "born": {
+                    "$type": "ConfigBornBySelf",
+                    "offset": {
+                      "x": 0.0,
+                      "y": 0.10000000149011612,
+                      "z": 0.0
+                    },
+                    "DAPKLNIFPID": true,
+                    "BJCIHELGKLP": true,
+                    "IABNJPGBAOH": true
+                  },
+                  "GKJDJDACPMC": true
+                }
+              ]
+            }
+          ]
+        },
+        "DiveIn_BulletTrigger_Manager": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 5.0,
           "modifierMixins": [
+            {
+              "$type": "AttachModifierToGlobalValueMixin",
+              "otherTargets": {
+                "$type": "SelectTargetsByChildren",
+                "configID": 42908105
+              },
+              "globalValueKey": "_MONSTER_Apep_Stage1_DiveIn_BulletTrigger",
+              "valueSteps": [0.5, 1.5],
+              "modifierNameSteps": ["DiveIn_BulletTrigger"]
+            },
             {
               "$type": "AttachActionToModifierMixin",
               "onAdded": [
                 {
+                  "$type": "EnableHitBoxByName",
+                  "hitBoxNames": [
+                    "HitBox_Head",
+                    "HitBox_Body01",
+                    "HitBox_Body02",
+                    "HitBox_Hand01_L",
+                    "HitBox_Hand01_R",
+                    "HitBox_Hand03_L",
+                    "HitBox_Hand03_R",
+                    "HitBox_Hand04_L",
+                    "HitBox_Hand04_R",
+                    "HitBox_Hand06_L",
+                    "HitBox_Hand06_R",
+                    "HitBox_Tail01",
+                    "HitBox_Tail02"
+                  ]
+                },
+                {
                   "$type": "EnablePushColliderName",
-                  "pushColliderNames": ["PushCollider_4"],
-                  "setEnable": true
+                  "pushColliderNames": [
+                    "PushCollider_Stage1_Body_Main",
+                    "PushCollider_Stage1_Body_Forearm_Right",
+                    "PushCollider_Stage1_Body_Forearm_Left"
+                  ]
                 }
               ],
               "onRemoved": [
                 {
+                  "$type": "EnableHitBoxByName",
+                  "hitBoxNames": [
+                    "HitBox_Head",
+                    "HitBox_Body01",
+                    "HitBox_Body02",
+                    "HitBox_Hand01_L",
+                    "HitBox_Hand01_R",
+                    "HitBox_Hand03_L",
+                    "HitBox_Hand03_R",
+                    "HitBox_Hand04_L",
+                    "HitBox_Hand04_R",
+                    "HitBox_Hand06_L",
+                    "HitBox_Hand06_R",
+                    "HitBox_Tail01",
+                    "HitBox_Tail02"
+                  ],
+                  "setEnable": true
+                },
+                {
                   "$type": "EnablePushColliderName",
-                  "pushColliderNames": ["PushCollider_4"],
-                  "setEnable": false
+                  "pushColliderNames": [
+                    "PushCollider_Stage1_Body_Main",
+                    "PushCollider_Stage1_Body_Forearm_Right",
+                    "PushCollider_Stage1_Body_Forearm_Left"
+                  ],
+                  "setEnable": true
+                }
+              ]
+            }
+          ],
+          "onAdded": [
+            {
+              "$type": "ClearLockTarget",
+              "target": "CurLocalAvatar"
+            },
+            {
+              "$type": "AttachModifier",
+              "modifierName": "Underground_Invincible"
+            },
+            {
+              "$type": "AttachModifier",
+              "modifierName": "Underground_DenyLockOn"
+            },
+            {
+              "$type": "AttachModifier",
+              "modifierName": "Underground_Ghost"
+            },
+            {
+              "$type": "SetGlobalValue",
+              "ratio": 0.0,
+              "key": "_MONSTER_Apep_Stage1_DiveIn_TriggerTag",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            },
+            {
+              "$type": "SetGlobalValue",
+              "ratio": 1.0,
+              "key": "_MONSTER_Apep_Stage1_DiveIn_Invisible",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "ratio": 1.0,
+              "key": "_MONSTER_Apep_Stage1_DiveIn_TriggerTag",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            },
+            {
+              "$type": "SetGlobalValue",
+              "ratio": 0.0,
+              "key": "_MONSTER_Apep_Stage1_DiveIn_Invisible",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "DiveEnd",
+              "MPTriggerOnRemote": true
+            }
+          ]
+        },
+        "DiveIn_BulletTrigger": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "DiveEnd",
+              "MPTriggerOnRemote": true
+            }
+          ]
+        },
+        "Monster_Apep_Stage1_SlashAttack": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "SetGlobalPos",
+              "otherTargets": {
+                "$type": "SelectTargetsByChildren",
+                "configID": 42908105
+              },
+              "key": "_MONSTER_Apep_SlashAttack_Position",
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": -0.10000000149011612
+                }
+              },
+              "setTarget": false
+            },
+            {
+              "$type": "TryFindBlinkPointByBorn",
+              "born": {
+                "$type": "ConfigBornByGlobalValue",
+                "positionKey": "_MONSTER_Apep_SlashAttack_Position",
+                "directionKey": ""
+              },
+              "hitSceneType": "BlinkHitSceneTestByThreeSegments",
+              "limitY": 2.5
+            },
+            {
+              "$type": "DoBlink"
+            },
+            {
+              "$type": "TurnDirectionToPos",
+              "otherTargets": {
+                "$type": "SelectTargetsByChildren",
+                "configID": 42908105
+              },
+              "toPos": {
+                "$type": "ConfigBornByTarget"
+              }
+            },
+            {
+              "$type": "ApplyModifier",
+              "otherTargets": {
+                "$type": "SelectTargetsByChildren",
+                "configID": 42908105
+              },
+              "modifierName": "Gadget_KillSelf"
+            },
+            {
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "Skin_DiveOut",
+              "MPTriggerOnRemote": true
+            }
+          ]
+        },
+        "Monster_Apep_Stage1_DiveOut": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "SetPoseBool",
+              "boolID": "UltStage",
+              "ratio": true
+            },
+            {
+              "$type": "SetGlobalPos",
+              "otherTargets": {
+                "$type": "SelectTargetsByChildren",
+                "configID": 42908105
+              },
+              "key": "_MONSTER_Apep_SlashAttack_Position",
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": -0.10000000149011612
+                }
+              },
+              "setTarget": false
+            },
+            {
+              "$type": "TryFindBlinkPointByBorn",
+              "born": {
+                "$type": "ConfigBornByGlobalValue",
+                "positionKey": "_MONSTER_Apep_SlashAttack_Position",
+                "directionKey": ""
+              },
+              "hitSceneType": "BlinkHitSceneTestByThreeSegments",
+              "limitY": 2.5
+            },
+            {
+              "$type": "DoBlink"
+            },
+            {
+              "$type": "TurnDirectionToPos",
+              "otherTargets": {
+                "$type": "SelectTargetsByChildren",
+                "configID": 42908105
+              },
+              "toPos": {
+                "$type": "ConfigBornByTarget"
+              }
+            },
+            {
+              "$type": "ApplyModifier",
+              "otherTargets": {
+                "$type": "SelectTargetsByChildren",
+                "configID": 42908105
+              },
+              "modifierName": "Gadget_KillSelf"
+            },
+            {
+              "$type": "KillGadget",
+              "gadgetInfo": {
+                "configID": 42908107
+              }
+            },
+            {
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "Skin_DiveOut",
+              "MPTriggerOnRemote": true
+            }
+          ]
+        },
+        "Underground_Invincible": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "state": "Invincible"
+        },
+        "Underground_DenyLockOn": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "state": "DenyLockOn"
+        },
+        "Underground_Ghost": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "state": "IsGhostToEnemy"
+        },
+        "Visible": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "TriggerSetVisible",
+              "visible": true
+            }
+          ]
+        },
+        "Invisible": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "TriggerSetVisible"
+            }
+          ]
+        },
+        "Gadget_KillSelf": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "KillSelf"
+            }
+          ]
+        },
+        "DiveIn_Reconnect": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "LGJBJJBCBEH": [
+            {
+              "$type": "ApplyModifier",
+              "otherTargets": {
+                "$type": "SelectTargetsByChildren",
+                "configID": 42908105
+              },
+              "modifierName": "Gadget_KillSelf"
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Apep_Stage1_DiveIn_Underground",
+      "abilityMixins": [
+        {
+          "$type": "SteerAttackMixin",
+          "steerStateIDs": ["Underground_BS"],
+          "angularSpeed": 90.0,
+          "attackTrigger": ""
+        },
+        {
+          "$type": "SteerAttackMixin",
+          "steerStateIDs": ["Underground_Loop"],
+          "endNormalizedTime": 99.0,
+          "angularSpeed": 90.0,
+          "attackTrigger": ""
+        },
+        {
+          "$type": "AttachToAnimatorStateIDMixin",
+          "stateIDs": ["Underground_Loop"],
+          "modifierName": "Apep_Stage1_DiveIn_Underground_Active"
+        }
+      ],
+      "modifiers": {
+        "Apep_Stage1_DiveIn_Underground_Active": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToGlobalValueMixin",
+              "globalValueTarget": "Owner",
+              "globalValueKey": "_MONSTER_Apep_DiveMode",
+              "valueSteps": [-0.5, 0.5, 1.5],
+              "modifierNameSteps": ["CheckAvatar", "CheckGadget"]
+            },
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "TargetCount",
+              "defaultGlobalValueOnCreate": 0.0,
+              "valueSteps": [0.5, 5.0],
+              "modifierNameSteps": ["Apep_Underground_Field_Trigger"]
+            }
+          ],
+          "onAdded": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "Apep_Stage1_DiveIn_Underground_Effect"
+            },
+            {
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "TurnStart",
+              "MPTriggerOnRemote": true
+            }
+          ]
+        },
+        "CheckAvatar": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "modifierMixins": [
+            {
+              "$type": "FieldEntityCountChangeMixin",
+              "campTargetType": "Enemy",
+              "targetPredicates": [
+                {
+                  "$type": "ByEntityTypes",
+                  "entityTypes": ["Avatar"]
+                }
+              ],
+              "onFieldEnter": [
+                {
+                  "$type": "AddGlobalValue",
+                  "ratio": 1.0,
+                  "key": "TargetCount",
+                  "maxValue": 0.0,
+                  "minValue": 0.0
+                }
+              ],
+              "FIDNIDJEPFD": "",
+              "AIPILJKBJLI": 0.0,
+              "PADAIOIPHKO": 0.0
+            }
+          ]
+        },
+        "CheckGadget": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 0.20000000298023224,
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "sortType": "Nearest",
+                "shapeName": "CircleR5",
+                "campTargetType": "SelfCamp",
+                "OBHNBNDMPFN": 1.0
+              },
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_Apep_Stage1_UltAttack_PosGadget",
+                  "ratio": 1.0
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "SetGlobalValue",
+                  "ratio": 1.0,
+                  "key": "TargetCount",
+                  "maxValue": 0.0,
+                  "minValue": 0.0
+                }
+              ]
+            }
+          ]
+        },
+        "Apep_Underground_Field_Trigger": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "target": "Caster",
+              "ratio": 1.0,
+              "key": "_MONSTER_Apep_Stage1_DiveIn_BulletTrigger",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            },
+            {
+              "$type": "EnableBulletCollisionPluginTrigger"
+            },
+            {
+              "$type": "TriggerSetRenderersEnable",
+              "renderNames": ["Monster_Apep_Flat_01_Model"]
+            },
+            {
+              "$type": "RemoveModifier",
+              "modifierName": "Apep_Stage1_DiveIn_Underground_Effect"
+            },
+            {
+              "$type": "ApplyModifier",
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR20",
+                "campTargetType": "All",
+                "OBHNBNDMPFN": 1.0
+              },
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_COMMON_GADGET_ISSUMMON",
+                  "ratio": 0.0,
+                  "compareType": "MoreThan"
+                }
+              ],
+              "modifierName": "Kill_Summon_Gadget"
+            }
+          ]
+        },
+        "Apep_Stage1_DiveIn_Underground_Effect": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Apep_Stage1_Underground",
+              "effectTempleteID": -1.0
+            }
+          ]
+        },
+        "Kill_Summon_Gadget": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "KillSelf"
+            }
+          ]
+        },
+        "FadeOut_Latency": {
+          "modifierName": "",
+          "duration": 1.8200000524520874,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "KillSelf",
+              "duration": 2.5
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "FadeOut",
+              "MPTriggerOnRemote": true
+            },
+            {
+              "$type": "RemoveModifier",
+              "modifierName": "Apep_Stage1_DiveIn_Underground_Effect"
+            }
+          ]
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "Predicated",
+          "target": "Owner",
+          "targetPredicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_MONSTER_Apep_DiveMode",
+              "ratio": 0.0,
+              "compareType": "NoneOrEqual"
+            }
+          ],
+          "successActions": [
+            {
+              "$type": "SetSelfAttackTarget",
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "topLimit": 1,
+                "sortType": "Nearest",
+                "shapeName": "CircleR50",
+                "campTargetType": "Enemy",
+                "OBHNBNDMPFN": 1.0
+              },
+              "predicates": [
+                {
+                  "$type": "ByEntityTypes",
+                  "entityTypes": ["Avatar"]
+                }
+              ]
+            }
+          ],
+          "failActions": [
+            {
+              "$type": "Predicated",
+              "target": "Owner",
+              "targetPredicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_MONSTER_Apep_DiveMode",
+                  "ratio": 1.0
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "SetSelfAttackTarget",
+                  "otherTargets": {
+                    "$type": "SelectTargetsByShape",
+                    "topLimit": 1,
+                    "sortType": "Nearest",
+                    "shapeName": "CircleR50",
+                    "campTargetType": "SelfCamp",
+                    "OBHNBNDMPFN": 1.0
+                  },
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "_Apep_Stage1_UltAttack_PosGadget",
+                      "ratio": 1.0
+                    }
+                  ]
+                }
+              ],
+              "failActions": [
+                {
+                  "$type": "SetSelfAttackTarget",
+                  "otherTargets": {
+                    "$type": "SelectTargetsByShape",
+                    "topLimit": 1,
+                    "sortType": "Nearest",
+                    "shapeName": "CircleR50",
+                    "campTargetType": "SelfCamp",
+                    "OBHNBNDMPFN": 1.0
+                  },
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "_Apep_Stage1_StageChange_PosGadget",
+                      "ratio": 1.0
+                    }
+                  ]
+                },
+                {
+                  "$type": "ApplyModifier",
+                  "modifierName": "FadeOut_Latency"
                 }
               ]
             }
           ]
         }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Apep_Stage1_UltAttack_PosGadget",
+      "modifiers": {
+        "PosGadget_TriggerTaunt": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 0.5,
+          "onAdded": [
+            {
+              "$type": "TriggerTaunt",
+              "target": "Owner",
+              "tauntLevel": "Ability_TauntLevel_5",
+              "careValue": 100.0
+            },
+            {
+              "$type": "SetGlobalValue",
+              "ratio": 1.0,
+              "key": "_Apep_Stage1_UltAttack_PosGadget",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "TriggerTaunt",
+              "target": "Owner",
+              "tauntLevel": "Ability_TauntLevel_5",
+              "careValue": 100.0
+            }
+          ]
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "PosGadget_TriggerTaunt"
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Monster_Apep_Stage1_UltAttack_FirstRound",
+      "onAbilityStart": [
+        {
+          "$type": "TriggerBullet",
+          "target": "SelfAttackTarget",
+          "bulletID": 42908110,
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "offset": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "IABNJPGBAOH": true
+          }
+        },
+        {
+          "$type": "Predicated",
+          "targetPredicates": [
+            {
+              "$type": "ByAnimatorFloat",
+              "logic": "Lesser",
+              "ratio": 45.0,
+              "parameter": "TargetRelativeAngleYaw"
+            },
+            {
+              "$type": "ByAnimatorFloat",
+              "logic": "GreaterOrEqual",
+              "ratio": -45.0,
+              "parameter": "TargetRelativeAngleYaw"
+            }
+          ],
+          "successActions": [
+            {
+              "$type": "TriggerBullet",
+              "target": "SelfAttackTarget",
+              "bulletID": 42908108,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "offset": {
+                  "x": 4.0,
+                  "y": 0.0,
+                  "z": 4.0
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "DOCDLGLJKND",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": 30.0,
+                    "z": 0.0
+                  },
+                  "attachPointName": "Stage1_Ult_Front1",
+                  "ABIMPICHJNC": "Caster"
+                },
+                "BJCIHELGKLP": true,
+                "IABNJPGBAOH": true,
+                "attachPointName": "Stage1_Ult_Front1",
+                "ABIMPICHJNC": "Caster"
+              }
+            },
+            {
+              "$type": "TriggerBullet",
+              "target": "SelfAttackTarget",
+              "bulletID": 42908108,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "offset": {
+                  "x": -4.0,
+                  "y": 0.0,
+                  "z": 4.0
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "DOCDLGLJKND",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": -30.0,
+                    "z": 0.0
+                  },
+                  "attachPointName": "Stage1_Ult_Front1",
+                  "ABIMPICHJNC": "Caster"
+                },
+                "BJCIHELGKLP": true,
+                "IABNJPGBAOH": true,
+                "attachPointName": "Stage1_Ult_Front1",
+                "ABIMPICHJNC": "Caster"
+              }
+            }
+          ]
+        },
+        {
+          "$type": "Predicated",
+          "targetPredicates": [
+            {
+              "$type": "ByAnimatorFloat",
+              "logic": "GreaterOrEqual",
+              "ratio": 45.0,
+              "parameter": "TargetRelativeAngleYaw"
+            },
+            {
+              "$type": "ByAnimatorFloat",
+              "logic": "Lesser",
+              "ratio": 135.0,
+              "parameter": "TargetRelativeAngleYaw"
+            }
+          ],
+          "successActions": [
+            {
+              "$type": "TriggerBullet",
+              "target": "SelfAttackTarget",
+              "bulletID": 42908108,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "offset": {
+                  "x": 4.0,
+                  "y": 0.0,
+                  "z": 4.0
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "DOCDLGLJKND",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": 30.0,
+                    "z": 0.0
+                  },
+                  "attachPointName": "Stage1_Ult_Right1",
+                  "ABIMPICHJNC": "Caster"
+                },
+                "BJCIHELGKLP": true,
+                "IABNJPGBAOH": true,
+                "attachPointName": "Stage1_Ult_Right1",
+                "ABIMPICHJNC": "Caster"
+              }
+            },
+            {
+              "$type": "TriggerBullet",
+              "target": "SelfAttackTarget",
+              "bulletID": 42908108,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "offset": {
+                  "x": -4.0,
+                  "y": 0.0,
+                  "z": 4.0
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "DOCDLGLJKND",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": -30.0,
+                    "z": 0.0
+                  },
+                  "attachPointName": "Stage1_Ult_Right1",
+                  "ABIMPICHJNC": "Caster"
+                },
+                "BJCIHELGKLP": true,
+                "IABNJPGBAOH": true,
+                "attachPointName": "Stage1_Ult_Right1",
+                "ABIMPICHJNC": "Caster"
+              }
+            }
+          ]
+        },
+        {
+          "$type": "Predicated",
+          "targetPredicates": [
+            {
+              "$type": "ByAny",
+              "predicates": [
+                {
+                  "$type": "ByAnimatorFloat",
+                  "logic": "GreaterOrEqual",
+                  "ratio": 135.0,
+                  "parameter": "TargetRelativeAngleYaw"
+                },
+                {
+                  "$type": "ByAnimatorFloat",
+                  "logic": "Lesser",
+                  "ratio": -135.0,
+                  "parameter": "TargetRelativeAngleYaw"
+                }
+              ]
+            }
+          ],
+          "successActions": [
+            {
+              "$type": "TriggerBullet",
+              "target": "SelfAttackTarget",
+              "bulletID": 42908108,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "offset": {
+                  "x": 4.0,
+                  "y": 0.0,
+                  "z": 4.0
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "DOCDLGLJKND",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": 30.0,
+                    "z": 0.0
+                  },
+                  "attachPointName": "Stage1_Ult_Back1",
+                  "ABIMPICHJNC": "Caster"
+                },
+                "BJCIHELGKLP": true,
+                "IABNJPGBAOH": true,
+                "attachPointName": "Stage1_Ult_Back1",
+                "ABIMPICHJNC": "Caster"
+              }
+            },
+            {
+              "$type": "TriggerBullet",
+              "target": "SelfAttackTarget",
+              "bulletID": 42908108,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "offset": {
+                  "x": -4.0,
+                  "y": 0.0,
+                  "z": 4.0
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "DOCDLGLJKND",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": -30.0,
+                    "z": 0.0
+                  },
+                  "attachPointName": "Stage1_Ult_Back1",
+                  "ABIMPICHJNC": "Caster"
+                },
+                "BJCIHELGKLP": true,
+                "IABNJPGBAOH": true,
+                "attachPointName": "Stage1_Ult_Back1",
+                "ABIMPICHJNC": "Caster"
+              }
+            }
+          ]
+        },
+        {
+          "$type": "Predicated",
+          "targetPredicates": [
+            {
+              "$type": "ByAnimatorFloat",
+              "logic": "Lesser",
+              "ratio": -45.0,
+              "parameter": "TargetRelativeAngleYaw"
+            },
+            {
+              "$type": "ByAnimatorFloat",
+              "logic": "GreaterOrEqual",
+              "ratio": -135.0,
+              "parameter": "TargetRelativeAngleYaw"
+            }
+          ],
+          "successActions": [
+            {
+              "$type": "TriggerBullet",
+              "target": "SelfAttackTarget",
+              "bulletID": 42908108,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "offset": {
+                  "x": 4.0,
+                  "y": 0.0,
+                  "z": 4.0
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "DOCDLGLJKND",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": 30.0,
+                    "z": 0.0
+                  },
+                  "attachPointName": "Stage1_Ult_Left1",
+                  "ABIMPICHJNC": "Caster"
+                },
+                "BJCIHELGKLP": true,
+                "IABNJPGBAOH": true,
+                "attachPointName": "Stage1_Ult_Left1",
+                "ABIMPICHJNC": "Caster"
+              }
+            },
+            {
+              "$type": "TriggerBullet",
+              "target": "SelfAttackTarget",
+              "bulletID": 42908108,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "offset": {
+                  "x": -4.0,
+                  "y": 0.0,
+                  "z": 4.0
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "DOCDLGLJKND",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": -30.0,
+                    "z": 0.0
+                  },
+                  "attachPointName": "Stage1_Ult_Left1",
+                  "ABIMPICHJNC": "Caster"
+                },
+                "BJCIHELGKLP": true,
+                "IABNJPGBAOH": true,
+                "attachPointName": "Stage1_Ult_Left1",
+                "ABIMPICHJNC": "Caster"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Monster_Apep_Stage1_UltAttack_SecondRound",
+      "onAbilityStart": [
+        {
+          "$type": "TriggerBullet",
+          "target": "SelfAttackTarget",
+          "bulletID": 42908110,
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "offset": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "IABNJPGBAOH": true
+          }
+        },
+        {
+          "$type": "Predicated",
+          "targetPredicates": [
+            {
+              "$type": "ByAnimatorFloat",
+              "logic": "Lesser",
+              "ratio": 45.0,
+              "parameter": "TargetRelativeAngleYaw"
+            },
+            {
+              "$type": "ByAnimatorFloat",
+              "logic": "GreaterOrEqual",
+              "ratio": -45.0,
+              "parameter": "TargetRelativeAngleYaw"
+            }
+          ],
+          "successActions": [
+            {
+              "$type": "TriggerBullet",
+              "target": "SelfAttackTarget",
+              "bulletID": 42908108,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "offset": {
+                  "x": 4.0,
+                  "y": 0.0,
+                  "z": 4.0
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "DOCDLGLJKND",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": 30.0,
+                    "z": 0.0
+                  },
+                  "attachPointName": "Stage1_Ult_Front2",
+                  "ABIMPICHJNC": "Caster"
+                },
+                "BJCIHELGKLP": true,
+                "IABNJPGBAOH": true,
+                "attachPointName": "Stage1_Ult_Front2",
+                "ABIMPICHJNC": "Caster"
+              }
+            },
+            {
+              "$type": "TriggerBullet",
+              "target": "SelfAttackTarget",
+              "bulletID": 42908108,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "offset": {
+                  "x": -4.0,
+                  "y": 0.0,
+                  "z": 4.0
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "DOCDLGLJKND",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": -30.0,
+                    "z": 0.0
+                  },
+                  "attachPointName": "Stage1_Ult_Front2",
+                  "ABIMPICHJNC": "Caster"
+                },
+                "BJCIHELGKLP": true,
+                "IABNJPGBAOH": true,
+                "attachPointName": "Stage1_Ult_Front2",
+                "ABIMPICHJNC": "Caster"
+              }
+            }
+          ]
+        },
+        {
+          "$type": "Predicated",
+          "targetPredicates": [
+            {
+              "$type": "ByAnimatorFloat",
+              "logic": "GreaterOrEqual",
+              "ratio": 45.0,
+              "parameter": "TargetRelativeAngleYaw"
+            },
+            {
+              "$type": "ByAnimatorFloat",
+              "logic": "Lesser",
+              "ratio": 135.0,
+              "parameter": "TargetRelativeAngleYaw"
+            }
+          ],
+          "successActions": [
+            {
+              "$type": "TriggerBullet",
+              "target": "SelfAttackTarget",
+              "bulletID": 42908108,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "offset": {
+                  "x": 4.0,
+                  "y": 0.0,
+                  "z": 4.0
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "DOCDLGLJKND",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": 30.0,
+                    "z": 0.0
+                  },
+                  "attachPointName": "Stage1_Ult_Right2",
+                  "ABIMPICHJNC": "Caster"
+                },
+                "BJCIHELGKLP": true,
+                "IABNJPGBAOH": true,
+                "attachPointName": "Stage1_Ult_Right2",
+                "ABIMPICHJNC": "Caster"
+              }
+            },
+            {
+              "$type": "TriggerBullet",
+              "target": "SelfAttackTarget",
+              "bulletID": 42908108,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "offset": {
+                  "x": -4.0,
+                  "y": 0.0,
+                  "z": 4.0
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "DOCDLGLJKND",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": -30.0,
+                    "z": 0.0
+                  },
+                  "attachPointName": "Stage1_Ult_Right2",
+                  "ABIMPICHJNC": "Caster"
+                },
+                "BJCIHELGKLP": true,
+                "IABNJPGBAOH": true,
+                "attachPointName": "Stage1_Ult_Right2",
+                "ABIMPICHJNC": "Caster"
+              }
+            }
+          ]
+        },
+        {
+          "$type": "Predicated",
+          "targetPredicates": [
+            {
+              "$type": "ByAny",
+              "predicates": [
+                {
+                  "$type": "ByAnimatorFloat",
+                  "logic": "GreaterOrEqual",
+                  "ratio": 135.0,
+                  "parameter": "TargetRelativeAngleYaw"
+                },
+                {
+                  "$type": "ByAnimatorFloat",
+                  "logic": "Lesser",
+                  "ratio": -135.0,
+                  "parameter": "TargetRelativeAngleYaw"
+                }
+              ]
+            }
+          ],
+          "successActions": [
+            {
+              "$type": "TriggerBullet",
+              "target": "SelfAttackTarget",
+              "bulletID": 42908108,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "offset": {
+                  "x": 4.0,
+                  "y": 0.0,
+                  "z": 4.0
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "DOCDLGLJKND",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": 30.0,
+                    "z": 0.0
+                  },
+                  "attachPointName": "Stage1_Ult_Back2",
+                  "ABIMPICHJNC": "Caster"
+                },
+                "BJCIHELGKLP": true,
+                "IABNJPGBAOH": true,
+                "attachPointName": "Stage1_Ult_Back2",
+                "ABIMPICHJNC": "Caster"
+              }
+            },
+            {
+              "$type": "TriggerBullet",
+              "target": "SelfAttackTarget",
+              "bulletID": 42908108,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "offset": {
+                  "x": -4.0,
+                  "y": 0.0,
+                  "z": 4.0
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "DOCDLGLJKND",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": -30.0,
+                    "z": 0.0
+                  },
+                  "attachPointName": "Stage1_Ult_Back2",
+                  "ABIMPICHJNC": "Caster"
+                },
+                "BJCIHELGKLP": true,
+                "IABNJPGBAOH": true,
+                "attachPointName": "Stage1_Ult_Back2",
+                "ABIMPICHJNC": "Caster"
+              }
+            }
+          ]
+        },
+        {
+          "$type": "Predicated",
+          "targetPredicates": [
+            {
+              "$type": "ByAnimatorFloat",
+              "logic": "Lesser",
+              "ratio": -45.0,
+              "parameter": "TargetRelativeAngleYaw"
+            },
+            {
+              "$type": "ByAnimatorFloat",
+              "logic": "GreaterOrEqual",
+              "ratio": -135.0,
+              "parameter": "TargetRelativeAngleYaw"
+            }
+          ],
+          "successActions": [
+            {
+              "$type": "TriggerBullet",
+              "target": "SelfAttackTarget",
+              "bulletID": 42908108,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "offset": {
+                  "x": 4.0,
+                  "y": 0.0,
+                  "z": 4.0
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "DOCDLGLJKND",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": 30.0,
+                    "z": 0.0
+                  },
+                  "attachPointName": "Stage1_Ult_Left2",
+                  "ABIMPICHJNC": "Caster"
+                },
+                "BJCIHELGKLP": true,
+                "IABNJPGBAOH": true,
+                "attachPointName": "Stage1_Ult_Left2",
+                "ABIMPICHJNC": "Caster"
+              }
+            },
+            {
+              "$type": "TriggerBullet",
+              "target": "SelfAttackTarget",
+              "bulletID": 42908108,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "offset": {
+                  "x": -4.0,
+                  "y": 0.0,
+                  "z": 4.0
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "DOCDLGLJKND",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": -30.0,
+                    "z": 0.0
+                  },
+                  "attachPointName": "Stage1_Ult_Left2",
+                  "ABIMPICHJNC": "Caster"
+                },
+                "BJCIHELGKLP": true,
+                "IABNJPGBAOH": true,
+                "attachPointName": "Stage1_Ult_Left2",
+                "ABIMPICHJNC": "Caster"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Monster_Apep_Stage1_UltAttack_FinalRound",
+      "onAbilityStart": [
+        {
+          "$type": "SetPoseBool",
+          "boolID": "UltStage"
+        },
+        {
+          "$type": "TriggerBullet",
+          "target": "SelfAttackTarget",
+          "bulletID": 42908111,
+          "born": {
+            "$type": "ConfigBornBySelf",
+            "offset": {
+              "x": 0.0,
+              "y": 0.0,
+              "z": 0.0
+            },
+            "IABNJPGBAOH": true
+          }
+        },
+        {
+          "$type": "Predicated",
+          "targetPredicates": [
+            {
+              "$type": "ByAnimatorFloat",
+              "logic": "Lesser",
+              "ratio": 45.0,
+              "parameter": "TargetRelativeAngleYaw"
+            },
+            {
+              "$type": "ByAnimatorFloat",
+              "logic": "GreaterOrEqual",
+              "ratio": -45.0,
+              "parameter": "TargetRelativeAngleYaw"
+            }
+          ],
+          "successActions": [
+            {
+              "$type": "TriggerBullet",
+              "target": "SelfAttackTarget",
+              "bulletID": 42908109,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "offset": {
+                  "x": 4.0,
+                  "y": 0.0,
+                  "z": 4.0
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "DOCDLGLJKND",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": 30.0,
+                    "z": 0.0
+                  },
+                  "attachPointName": "Stage1_Ult_Front3",
+                  "ABIMPICHJNC": "Caster"
+                },
+                "BJCIHELGKLP": true,
+                "IABNJPGBAOH": true,
+                "attachPointName": "Stage1_Ult_Front3",
+                "ABIMPICHJNC": "Caster"
+              }
+            },
+            {
+              "$type": "TriggerBullet",
+              "target": "SelfAttackTarget",
+              "bulletID": 42908109,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "offset": {
+                  "x": -4.0,
+                  "y": 0.0,
+                  "z": 4.0
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "DOCDLGLJKND",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": -30.0,
+                    "z": 0.0
+                  },
+                  "attachPointName": "Stage1_Ult_Front3",
+                  "ABIMPICHJNC": "Caster"
+                },
+                "BJCIHELGKLP": true,
+                "IABNJPGBAOH": true,
+                "attachPointName": "Stage1_Ult_Front3",
+                "ABIMPICHJNC": "Caster"
+              }
+            }
+          ]
+        },
+        {
+          "$type": "Predicated",
+          "targetPredicates": [
+            {
+              "$type": "ByAnimatorFloat",
+              "logic": "GreaterOrEqual",
+              "ratio": 45.0,
+              "parameter": "TargetRelativeAngleYaw"
+            },
+            {
+              "$type": "ByAnimatorFloat",
+              "logic": "Lesser",
+              "ratio": 135.0,
+              "parameter": "TargetRelativeAngleYaw"
+            }
+          ],
+          "successActions": [
+            {
+              "$type": "TriggerBullet",
+              "target": "SelfAttackTarget",
+              "bulletID": 42908109,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "offset": {
+                  "x": 4.0,
+                  "y": 0.0,
+                  "z": 4.0
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "DOCDLGLJKND",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": 30.0,
+                    "z": 0.0
+                  },
+                  "attachPointName": "Stage1_Ult_Right3",
+                  "ABIMPICHJNC": "Caster"
+                },
+                "BJCIHELGKLP": true,
+                "IABNJPGBAOH": true,
+                "attachPointName": "Stage1_Ult_Right3",
+                "ABIMPICHJNC": "Caster"
+              }
+            },
+            {
+              "$type": "TriggerBullet",
+              "target": "SelfAttackTarget",
+              "bulletID": 42908109,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "offset": {
+                  "x": -4.0,
+                  "y": 0.0,
+                  "z": 4.0
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "DOCDLGLJKND",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": -30.0,
+                    "z": 0.0
+                  },
+                  "attachPointName": "Stage1_Ult_Right3",
+                  "ABIMPICHJNC": "Caster"
+                },
+                "BJCIHELGKLP": true,
+                "IABNJPGBAOH": true,
+                "attachPointName": "Stage1_Ult_Right3",
+                "ABIMPICHJNC": "Caster"
+              }
+            }
+          ]
+        },
+        {
+          "$type": "Predicated",
+          "targetPredicates": [
+            {
+              "$type": "ByAny",
+              "predicates": [
+                {
+                  "$type": "ByAnimatorFloat",
+                  "logic": "GreaterOrEqual",
+                  "ratio": 135.0,
+                  "parameter": "TargetRelativeAngleYaw"
+                },
+                {
+                  "$type": "ByAnimatorFloat",
+                  "logic": "Lesser",
+                  "ratio": -135.0,
+                  "parameter": "TargetRelativeAngleYaw"
+                }
+              ]
+            }
+          ],
+          "successActions": [
+            {
+              "$type": "TriggerBullet",
+              "target": "SelfAttackTarget",
+              "bulletID": 42908109,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "offset": {
+                  "x": 4.0,
+                  "y": 0.0,
+                  "z": 4.0
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "DOCDLGLJKND",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": 30.0,
+                    "z": 0.0
+                  },
+                  "attachPointName": "Stage1_Ult_Back3",
+                  "ABIMPICHJNC": "Caster"
+                },
+                "BJCIHELGKLP": true,
+                "IABNJPGBAOH": true,
+                "attachPointName": "Stage1_Ult_Back3",
+                "ABIMPICHJNC": "Caster"
+              }
+            },
+            {
+              "$type": "TriggerBullet",
+              "target": "SelfAttackTarget",
+              "bulletID": 42908109,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "offset": {
+                  "x": -4.0,
+                  "y": 0.0,
+                  "z": 4.0
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "DOCDLGLJKND",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": -30.0,
+                    "z": 0.0
+                  },
+                  "attachPointName": "Stage1_Ult_Back3",
+                  "ABIMPICHJNC": "Caster"
+                },
+                "BJCIHELGKLP": true,
+                "IABNJPGBAOH": true,
+                "attachPointName": "Stage1_Ult_Back3",
+                "ABIMPICHJNC": "Caster"
+              }
+            }
+          ]
+        },
+        {
+          "$type": "Predicated",
+          "targetPredicates": [
+            {
+              "$type": "ByAnimatorFloat",
+              "logic": "Lesser",
+              "ratio": -45.0,
+              "parameter": "TargetRelativeAngleYaw"
+            },
+            {
+              "$type": "ByAnimatorFloat",
+              "logic": "GreaterOrEqual",
+              "ratio": -135.0,
+              "parameter": "TargetRelativeAngleYaw"
+            }
+          ],
+          "successActions": [
+            {
+              "$type": "TriggerBullet",
+              "target": "SelfAttackTarget",
+              "bulletID": 42908109,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "offset": {
+                  "x": 4.0,
+                  "y": 0.0,
+                  "z": 4.0
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "DOCDLGLJKND",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": 30.0,
+                    "z": 0.0
+                  },
+                  "attachPointName": "Stage1_Ult_Left3",
+                  "ABIMPICHJNC": "Caster"
+                },
+                "BJCIHELGKLP": true,
+                "IABNJPGBAOH": true,
+                "attachPointName": "Stage1_Ult_Left3",
+                "ABIMPICHJNC": "Caster"
+              }
+            },
+            {
+              "$type": "TriggerBullet",
+              "target": "SelfAttackTarget",
+              "bulletID": 42908109,
+              "born": {
+                "$type": "ConfigBornByAttachPoint",
+                "offset": {
+                  "x": -4.0,
+                  "y": 0.0,
+                  "z": 4.0
+                },
+                "DAPKLNIFPID": true,
+                "direction": {
+                  "$type": "DOCDLGLJKND",
+                  "angleOffset": {
+                    "x": 0.0,
+                    "y": -30.0,
+                    "z": 0.0
+                  },
+                  "attachPointName": "Stage1_Ult_Left3",
+                  "ABIMPICHJNC": "Caster"
+                },
+                "BJCIHELGKLP": true,
+                "IABNJPGBAOH": true,
+                "attachPointName": "Stage1_Ult_Left3",
+                "ABIMPICHJNC": "Caster"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Apep_Stage1_UltAttack_PatternBullet",
+      "onAbilityStart": [
+        {
+          "$type": "TriggerAttackEvent",
+          "attackEvent": {
+            "attackPattern": {
+              "$type": "ConfigAttackSphere",
+              "triggerType": "TriggerNoRepeat",
+              "born": {
+                "$type": "ConfigBornByCollisionPoint"
+              },
+              "radius": 0.5
+            },
+            "attackInfo": {
+              "attackTag": "",
+              "attenuationTag": "Apep_Bullet_Attenuation",
+              "attenuationGroup": "Apep_Bullet_Attenuation",
+              "attackProperty": {
+                "damagePercentage": 0.699999988079071,
+                "damagePercentageRatio": 0.0,
+                "bonusCriticalHurt": 100.0,
+                "strikeType": "Pierce",
+                "enBreak": 100.0
+              },
+              "hitPattern": {
+                "onHitEffectName": "default",
+                "hitImpulseType": "LV4"
+              },
+              "canBeModifiedBy": "OriginOwner"
+            }
+          },
+          "targetType": "Enemy"
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Apep_Stage1_UltAttack_PatternBullet_Final",
+      "onAbilityStart": [
+        {
+          "$type": "TriggerAttackEvent",
+          "attackEvent": {
+            "attackPattern": {
+              "$type": "ConfigAttackSphere",
+              "triggerType": "TriggerNoRepeat",
+              "born": {
+                "$type": "ConfigBornByCollisionPoint"
+              },
+              "radius": 0.5
+            },
+            "attackInfo": {
+              "attackTag": "",
+              "attenuationTag": "Apep_Bullet_Attenuation",
+              "attenuationGroup": "Apep_Bullet_Attenuation",
+              "attackProperty": {
+                "damagePercentage": 0.800000011920929,
+                "damagePercentageRatio": 0.0,
+                "bonusCriticalHurt": 100.0,
+                "strikeType": "Pierce",
+                "enBreak": 100.0
+              },
+              "hitPattern": {
+                "onHitEffectName": "default",
+                "hitImpulseType": "LV4"
+              },
+              "canBeModifiedBy": "OriginOwner"
+            }
+          },
+          "targetType": "Enemy"
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Apep_Stage1_UltAttack_TrackBullet",
+      "modifiers": {
+        "Apep_Stage1_UltAttack_TrackBullet_Effect": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Apep_Stage1_UltAttack_TrackBullet",
+              "effectTempleteID": -1.0
+            }
+          ]
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Apep_Stage1_UltAttack_TrackBullet_Effect"
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "TriggerAttackEvent",
+          "attackEvent": {
+            "attackPattern": {
+              "$type": "ConfigAttackSphere",
+              "triggerType": "TriggerNoRepeat",
+              "born": {
+                "$type": "ConfigBornByCollisionPoint"
+              },
+              "radius": 0.5
+            },
+            "attackInfo": {
+              "attackTag": "",
+              "attenuationTag": "Apep_Bullet_Attenuation",
+              "attenuationGroup": "Apep_Bullet_Attenuation",
+              "attackProperty": {
+                "damagePercentage": 0.699999988079071,
+                "damagePercentageRatio": 0.0,
+                "bonusCriticalHurt": 100.0,
+                "strikeType": "Pierce",
+                "enBreak": 100.0
+              },
+              "hitPattern": {
+                "onHitEffectName": "default",
+                "hitImpulseType": "LV4"
+              },
+              "canBeModifiedBy": "OriginOwner"
+            }
+          },
+          "targetType": "Enemy"
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Apep_Stage1_UltAttack_TrackBullet_Final",
+      "modifiers": {
+        "Apep_Stage1_UltAttack_TrackBullet_Final_Effect": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_Monster_Apep_Stage1_UltAttack_TrackBullet_Final",
+              "effectTempleteID": -1.0
+            }
+          ]
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Apep_Stage1_UltAttack_TrackBullet_Final_Effect"
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "TriggerAttackEvent",
+          "attackEvent": {
+            "attackPattern": {
+              "$type": "ConfigAttackSphere",
+              "triggerType": "TriggerNoRepeat",
+              "born": {
+                "$type": "ConfigBornByCollisionPoint"
+              },
+              "radius": 0.5
+            },
+            "attackInfo": {
+              "attackTag": "",
+              "attenuationTag": "Apep_Bullet_Attenuation",
+              "attenuationGroup": "Apep_Bullet_Attenuation",
+              "attackProperty": {
+                "damagePercentage": 0.800000011920929,
+                "damagePercentageRatio": 0.0,
+                "bonusCriticalHurt": 100.0,
+                "strikeType": "Pierce",
+                "enBreak": 100.0
+              },
+              "hitPattern": {
+                "onHitEffectName": "default",
+                "hitImpulseType": "LV4"
+              },
+              "canBeModifiedBy": "OriginOwner"
+            }
+          },
+          "targetType": "Enemy"
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Monster_Apep_Stage1_StageChange",
+      "abilityMixins": [
+        {
+          "$type": "AttachToPoseIDMixin",
+          "poseIDs": [101, 102],
+          "modifierName": "UNIQUE_Monster_Apep_Stage1_StageChange_Limbo"
+        }
+      ],
+      "modifiers": {
+        "UNIQUE_Monster_Apep_Stage1_StageChange_Limbo": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToHPPercentMixinV2",
+              "valueSteps": [0.009999999776482582],
+              "modifierNameSteps": ["Blank", "StageChange_Trigger"]
+            }
+          ],
+          "properties": {
+            "Actor_HpThresholdRatio": 0.004999999888241291
+          },
+          "state": "Limbo"
+        },
+        "Blank": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
+        },
+        "StageChange_Trigger": {
+          "modifierName": "",
+          "duration": 4.300000190734863,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "StageChange",
+              "MPTriggerOnRemote": true
+            },
+            {
+              "$type": "SetGlobalValue",
+              "ratio": 2.0,
+              "key": "_MONSTER_Apep_DiveMode",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            },
+            {
+              "$type": "ApplyModifier",
+              "otherTargets": {
+                "$type": "SelectTargetsByChildren",
+                "configID": 42908105
+              },
+              "modifierName": "Gadget_KillSelf"
+            },
+            {
+              "$type": "ApplyModifier",
+              "otherTargets": {
+                "$type": "SelectTargetsByChildren",
+                "configID": 42908101
+              },
+              "modifierName": "Gadget_KillSelf"
+            },
+            {
+              "$type": "ApplyModifier",
+              "otherTargets": {
+                "$type": "SelectTargetsByChildren",
+                "configID": 42908102
+              },
+              "modifierName": "Gadget_KillSelf"
+            },
+            {
+              "$type": "ApplyModifier",
+              "otherTargets": {
+                "$type": "SelectTargetsByChildren",
+                "configID": 42908103
+              },
+              "modifierName": "Gadget_KillSelf"
+            },
+            {
+              "$type": "ApplyModifier",
+              "otherTargets": {
+                "$type": "SelectTargetsByChildren",
+                "configID": 42908104
+              },
+              "modifierName": "Gadget_KillSelf"
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "KillSelf"
+            }
+          ],
+          "LGJBJJBCBEH": [
+            {
+              "$type": "KillSelf"
+            }
+          ]
+        },
+        "Gadget_KillSelf": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "KillSelf"
+            }
+          ]
+        }
       }
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Apep_Stage1_StageChange_PosGadget01",
+      "modifiers": {
+        "PosGadget_TriggerTaunt": {
+          "modifierName": "",
+          "duration": 1.0,
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 0.5,
+          "onAdded": [
+            {
+              "$type": "TriggerTaunt",
+              "target": "Owner",
+              "tauntLevel": "Ability_TauntLevel_5",
+              "careValue": 100.0
+            },
+            {
+              "$type": "SetGlobalValue",
+              "ratio": 1.0,
+              "key": "_Apep_Stage1_StageChange_PosGadget",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "TriggerTaunt",
+              "target": "Owner",
+              "tauntLevel": "Ability_TauntLevel_5",
+              "careValue": 100.0
+            }
+          ]
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "PosGadget_TriggerTaunt"
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Apep_Stage1_StageChange_PosGadget02",
+      "modifiers": {
+        "PosGadget_Tag": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "ratio": 2.0,
+              "key": "_Apep_Stage1_StageChange_PosGadget",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            }
+          ]
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "PosGadget_Tag"
+        }
+      ]
     }
   }
 ]

@@ -1,4 +1,4 @@
-﻿local default_time = 18
+local default_time = 18
 
 function OnTimer(context, now)
 	local state_begin_time = ScriptLib.GetGadgetStateBeginTime(context)

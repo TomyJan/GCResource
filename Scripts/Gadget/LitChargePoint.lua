@@ -1,4 +1,4 @@
-﻿function OnClientExecuteReq(context, param1, param2, param3)
+function OnClientExecuteReq(context, param1, param2, param3)
 	if param1~=nil then
 	--ScriptLib.PrintLog("GadgetState Get Change！！！！！！！")
 		ScriptLib.SetGadgetState(context, param1)

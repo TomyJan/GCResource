@@ -1,4 +1,4 @@
-﻿function OnClientExecuteReq(context, param1, param2, param3)
+function OnClientExecuteReq(context, param1, param2, param3)
 
 	--当物件被设为Default状态时，将物件设为可交互
 	if param1 == 0 then

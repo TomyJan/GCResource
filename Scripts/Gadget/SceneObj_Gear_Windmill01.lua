@@ -8,15 +8,15 @@ function OnClientExecuteReq(context, param1, param2, param3)
 	end
 end
 
--- ¶¨Ê±Æ÷»Øµ÷
+-- å®šæ—¶å™¨å›è°ƒ
 function OnTimer(context, now)
-	-- »ñÈ¡»ú¹Øµ±Ç°×´Ì¬
+	-- è·å–æœºå…³å½“å‰çŠ¶æ€
 	local state = ScriptLib.GetGadgetState(context)
 	if state ~= GadgetState.Default then
-		-- »ñÈ¡µ±Ç°×´Ì¬µÄ¿ªÊ¼Ê±¼ä
+		-- è·å–å½“å‰çŠ¶æ€çš„å¼€å§‹æ—¶é—´
 		local state_begin_time = ScriptLib.GetGadgetStateBeginTime(context)
 		if now >= state_begin_time + _delay then
-			-- Èç¹ûÆô¶¯Ê±¼ä³¬¹ıÆô¶¯³ÖĞøÊ±¼ä£¬Ôò×ª»»ÎªDefault×´Ì¬
+			-- å¦‚æœå¯åŠ¨æ—¶é—´è¶…è¿‡å¯åŠ¨æŒç»­æ—¶é—´ï¼Œåˆ™è½¬æ¢ä¸ºDefaultçŠ¶æ€
 			ScriptLib.SetGadgetState(context, GadgetState.Default)
 		end
 	end

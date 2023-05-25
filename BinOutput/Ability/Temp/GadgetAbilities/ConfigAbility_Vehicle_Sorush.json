@@ -1,18 +1,192 @@
 [
-  ///////////////////////////////////////////////////////////////
-  //
-  // 船
-  //
-  ///////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Vehicle_Sorush_Normal_01",
-      "onAdded": [
+      "abilityMixins": [
         {
-          "$type": "FireEffect",
-          "effectPattern": "Eff_Skiff_Normal_Born"
+          "$type": "AttachToStateIDMixin",
+          "stateIDs": ["Sprint"],
+          "modifierName": "Sorush_Sprint_On"
         },
+        {
+          "$type": "AttachToStateIDMixin",
+          "stateIDs": ["Sprint", "FastSkill", "ChargeSkill"],
+          "modifierName": "Sorush_Sprint_Handler"
+        },
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_ABILITY_Sorush_Sprint_Mark",
+          "defaultGlobalValueOnCreate": 0.0,
+          "valueSteps": [-0.5, 0.5, 1.5],
+          "modifierNameSteps": ["Blank", "UNIQUE_Sorush_Sprint"]
+        },
+        {
+          "$type": "InvisibleInTalkAndCSMixin",
+          "pushColliderNames": [
+            "MoveCollider",
+            "MoveColliderDummy",
+            "PushColliderExtra"
+          ]
+        }
+      ],
+      "modifiers": {
+        "Sorush_Sprint_On": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "ratio": 1.0,
+              "key": "_ABILITY_Sorush_Sprint_Mark",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            }
+          ]
+        },
+        "Sorush_Sprint_Handler": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 0.20000000298023224,
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValue",
+              "ratio": 0.0,
+              "key": "_ABILITY_Sorush_Sprint_Mark",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "targetPredicates": [
+                {
+                  "$type": "ByAnimatorInt",
+                  "logic": "Equal",
+                  "ratio": 5,
+                  "parameter": "MotionFlag"
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "SetGlobalValue",
+                  "ratio": 1.0,
+                  "key": "_ABILITY_Sorush_Sprint_Mark",
+                  "maxValue": 0.0,
+                  "minValue": 0.0
+                }
+              ],
+              "failActions": [
+                {
+                  "$type": "SetGlobalValue",
+                  "ratio": 0.0,
+                  "key": "_ABILITY_Sorush_Sprint_Mark",
+                  "maxValue": 0.0,
+                  "minValue": 0.0
+                }
+              ]
+            }
+          ]
+        },
+        "UNIQUE_Sorush_Sprint": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "modifierMixins": [
+            {
+              "$type": "TriggerPostProcessEffectMixin",
+              "postEffectAssetName": "PostEffect_Skiff_Sprint",
+              "duration": 0.0
+            }
+          ],
+          "onAdded": [
+            {
+              "$type": "ActCameraRadialBlur",
+              "cameraRadialBlur": {
+                "power": 0.6000000238418579,
+                "blurTime": 0.20000000298023224,
+                "fadeTime": 0.20000000298023224
+              }
+            },
+            {
+              "$type": "AttachEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_Sorush_Normal_Sprint",
+              "effectTempleteID": -1.0
+            }
+          ]
+        },
+        "UNIQUE_Sorush_MuteIce": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 0.5,
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_Sorush_Normal_Born",
+              "effectTempleteID": -1.0
+            },
+            {
+              "$type": "AttachEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_Sorush_Normal_Trail",
+              "effectTempleteID": -1.0
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "TriggerAttackEvent",
+              "attackEvent": {
+                "attackPattern": {
+                  "$type": "ConfigAttackBox",
+                  "triggerType": "TriggerNoRepeat",
+                  "MJLCPIAKNCP": "OnlyHitMassiveEntity",
+                  "born": {
+                    "$type": "ConfigBornBySelf",
+                    "offset": {
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": -3.299999952316284
+                    },
+                    "IABNJPGBAOH": true
+                  },
+                  "size": {
+                    "x": 5.0,
+                    "y": 4.0,
+                    "z": 8.0
+                  }
+                },
+                "attackInfo": {
+                  "attackTag": "",
+                  "attenuationTag": "",
+                  "attenuationGroup": "default",
+                  "attackProperty": {
+                    "damagePercentage": 0.0,
+                    "damagePercentageRatio": 0.0,
+                    "elementType": "VehicleMuteIce",
+                    "bonusCriticalHurt": 10.0,
+                    "enBreak": 0.0
+                  },
+                  "hitPattern": {
+                    "onHitEffectName": "none",
+                    "hitImpulseType": "LV0",
+                    "retreatType": "ByHitDirection",
+                    "muteHitText": true
+                  }
+                }
+              },
+              "targetType": "Enemy"
+            }
+          ]
+        },
+        "Blank": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
+        }
+      },
+      "onAdded": [
         {
           "$type": "AttachAbilityStateResistance",
           "resistanceListID": 15001
@@ -24,108 +198,8 @@
         {
           "$type": "AttachModifier",
           "modifierName": "UNIQUE_Sorush_MuteIce"
-        },
-        {
-          "$type": "AttachEffect",
-          "effectPattern": "Eff_Skiff_Normal_EnergyHalo_01"
-        },
-        {
-          "$type": "AttachEffect",
-          "effectPattern": "Eff_Skiff_Normal_EnergyHalo_02"
-        },
-        {
-          "$type": "SetGlobalValue",
-          "key": "_ABILITY_Skiff_SprintMark",
-          "value": 0
         }
-      ],
-      "abilityMixins": [
-        {
-          "$type": "AttachToStateIDMixin",
-          "stateIDs": ["Sprint"],
-          "modifierName": "UNIQUE_Sorush_Sprint_Handler"
-        }
-      ],
-      "modifiers": {
-        "UNIQUE_Sorush_Sprint_Handler": {
-          "isUnique": true,
-          "stacking": "Unique",
-          "onAdded": [
-            {
-              "$type": "ActCameraRadialBlur",
-              "cameraRadialBlur": {
-                "power": 0.6,
-                "blurTime": 0.2,
-                "fadeTime": 0.2
-              }
-            },
-            {
-              "$type": "AttachEffect",
-              "effectPattern": "Eff_Skiff_Normal_Sprint_Loop_01"
-            },
-            {
-              "$type": "AttachEffect",
-              "effectPattern": "Eff_Skiff_Normal_Sprint_Loop_02"
-            }
-          ],
-          "modifierMixins": [
-            {
-              "$type": "TriggerPostProcessEffectMixin",
-              "postEffectAssetName": "PostEffect_Skiff_Sprint",
-              "duration": 0
-            }
-          ]
-        },
-        "UNIQUE_Sorush_MuteIce": {
-          "isUnique": true,
-          "stacking": "Unique",
-          "thinkInterval": 0.5,
-          "onThinkInterval": [
-            {
-              "$type": "TriggerAttackEvent", //开场把怪往外挤
-              "targetType": "Enemy",
-              "attackEvent": {
-                "attackPattern": {
-                  "$type": "ConfigAttackBox",
-                  "triggerType": "TriggerNoRepeat",
-                  "checkHitLayerType": "OnlyHitMassiveEntity",
-                  "size": {
-                    "x": 5.0,
-                    "y": 4.0,
-                    "z": 8.0
-                  },
-                  "born": {
-                    "$type": "ConfigBornBySelf",
-                    "offset": {
-                      "x": 0.0,
-                      "y": 0.0,
-                      "z": -3.3
-                    }
-                  }
-                },
-                "attackInfo": {
-                  "attackProperty": {
-                    "damagePercentage": 0,
-                    "elementType": "VehicleMuteIce",
-                    "elementDurability": 10,
-                    "enBreak": 0
-                  },
-                  "hitPattern": {
-                    "onHitEffectName": "none",
-                    "hitImpulseType": "LV0",
-                    "retreatType": "ByHitDirection",
-                    "reboundRatio": 0,
-                    "hitHaltTime": 0.0,
-                    "hitHaltTimeScale": 0.0,
-                    "muteHitText": true
-                  }
-                }
-              }
-            }
-          ]
-        },
-        "Blank": {}
-      }
+      ]
     }
   },
   {
@@ -135,38 +209,19 @@
       "abilityMixins": [
         {
           "$type": "AttachModifierToSelfGlobalValueMixin",
-          "globalValueKey": "_ABILITY_Skiff_AutoHeal_Count",
+          "globalValueKey": "_ABILITY_Sorush_AutoHeal_Count",
+          "defaultGlobalValueOnCreate": 0.0,
           "valueSteps": [0.5, 4.5, 5.5],
-          "removeAppliedModifier": true,
           "modifierNameSteps": ["Blank", "UNIQUE_Sorush_AutoHeal_Interval"]
-        }
-      ],
-      "onAdded": [
-        {
-          "$type": "SetGlobalValue",
-          "key": "_ABILITY_Skiff_AutoHeal_Count",
-          "value": 0
-        },
-        {
-          "$type": "AttachModifier",
-          "modifierName": "UNIQUE_Sorush_AutoHeal_Handler"
         }
       ],
       "modifiers": {
         "UNIQUE_Sorush_AutoHeal_Handler": {
-          "isUnique": true,
           "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
           "thinkInterval": 1.0,
-          "onThinkInterval": [
-            {
-              "$type": "AddGlobalValue",
-              "key": "_ABILITY_Skiff_AutoHeal_Count",
-              "value": 1,
-              "useLimitRange": true,
-              "maxValue": 5,
-              "minValue": 0
-            }
-          ],
           "modifierMixins": [
             {
               "$type": "DoActionByEventMixin",
@@ -175,14 +230,17 @@
               "actions": [
                 {
                   "$type": "SetGlobalValue",
-                  "key": "_ABILITY_Skiff_AutoHeal_Count",
-                  "value": 0
+                  "ratio": 0.0,
+                  "key": "_ABILITY_Sorush_AutoHeal_Count",
+                  "maxValue": 0.0,
+                  "minValue": 0.0
                 },
                 {
                   "$type": "DebugLog",
                   "content": "!!!!!!!!!!!HPDown!!!!!!!!!!"
                 }
-              ]
+              ],
+              "FHIACPHKPOP": ""
             }
           ],
           "onBeingHit": [
@@ -191,235 +249,497 @@
               "target": "Other",
               "targetPredicates": [
                 {
-                  "$type": "ByHitDamage",
-                  "damage": 0,
-                  "logic": "Greater"
+                  "$type": "BKKNINKONEL",
+                  "BOJCAKJDAKM": 0.0
                 }
               ],
               "successActions": [
                 {
                   "$type": "SetGlobalValue",
-                  "key": "_ABILITY_Skiff_AutoHeal_Count",
-                  "value": 0
+                  "ratio": 0.0,
+                  "key": "_ABILITY_Sorush_AutoHeal_Count",
+                  "maxValue": 0.0,
+                  "minValue": 0.0
                 }
               ]
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "AddGlobalValue",
+              "ratio": 1.0,
+              "key": "_ABILITY_Sorush_AutoHeal_Count",
+              "useLimitRange": true,
+              "maxValue": 5.0,
+              "minValue": 0.0
             }
           ]
         },
         "UNIQUE_Sorush_AutoHeal_Interval": {
-          "isUnique": true,
           "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 2.0,
           "onAdded": [
             {
               "$type": "HealHP",
-              "amountByTargetMaxHPRatio": 0.05,
               "predicates": [
                 {
-                  "$type": "ByTargetHPRatio",
-                  "HPRatio": 1,
-                  "logic": "Lesser"
+                  "$type": "GMGEIHHLMCO",
+                  "logic": "Lesser",
+                  "KONBGFMBNDO": 1.0
                 },
                 {
                   "$type": "ByTargetGlobalValue",
-                  "key": "_ABILITY_Skiff_AvatarIn_Mark",
-                  "value": 1,
-                  "compareType": "Equal"
+                  "key": "_ABILITY_Sorush_AvatarIn_Mark",
+                  "ratio": 1.0
                 }
-              ]
+              ],
+              "amountByCasterMaxHPRatio": 0.05000000074505806
             },
             {
               "$type": "HealHP",
-              "amountByTargetMaxHPRatio": 0.0065,
               "predicates": [
                 {
-                  "$type": "ByTargetHPRatio",
-                  "HPRatio": 1,
-                  "logic": "Lesser"
+                  "$type": "GMGEIHHLMCO",
+                  "logic": "Lesser",
+                  "KONBGFMBNDO": 1.0
                 },
                 {
                   "$type": "ByTargetGlobalValue",
-                  "key": "_ABILITY_Skiff_AvatarIn_Mark",
-                  "value": 0,
+                  "key": "_ABILITY_Sorush_AvatarIn_Mark",
+                  "ratio": 0.0,
                   "compareType": "NoneOrEqual"
                 }
-              ]
+              ],
+              "amountByCasterMaxHPRatio": 0.006500000134110451
             },
             {
               "$type": "FireEffect",
-              "effectPattern": "Eff_Skiff_Normal_Heal",
               "predicates": [
                 {
-                  "$type": "ByTargetHPRatio",
-                  "HPRatio": 1,
-                  "logic": "Lesser"
+                  "$type": "GMGEIHHLMCO",
+                  "logic": "Lesser",
+                  "KONBGFMBNDO": 1.0
                 }
-              ]
+              ],
+              "healLimitedByCasterMaxHPRatio": "Eff_Skiff_Normal_Heal",
+              "effectTempleteID": -1.0
             }
           ],
-          "thinkInterval": 2.0,
           "onThinkInterval": [
             {
               "$type": "HealHP",
-              "amountByTargetMaxHPRatio": 0.05,
               "predicates": [
                 {
-                  "$type": "ByTargetHPRatio",
-                  "HPRatio": 1,
-                  "logic": "Lesser"
+                  "$type": "GMGEIHHLMCO",
+                  "logic": "Lesser",
+                  "KONBGFMBNDO": 1.0
                 },
                 {
                   "$type": "ByTargetGlobalValue",
-                  "key": "_ABILITY_Skiff_AvatarIn_Mark",
-                  "value": 1,
-                  "compareType": "Equal"
+                  "key": "_ABILITY_Sorush_AvatarIn_Mark",
+                  "ratio": 1.0
                 }
-              ]
+              ],
+              "amountByCasterMaxHPRatio": 0.05000000074505806
             },
             {
               "$type": "HealHP",
-              "amountByTargetMaxHPRatio": 0.0065,
               "predicates": [
                 {
-                  "$type": "ByTargetHPRatio",
-                  "HPRatio": 1,
-                  "logic": "Lesser"
+                  "$type": "GMGEIHHLMCO",
+                  "logic": "Lesser",
+                  "KONBGFMBNDO": 1.0
                 },
                 {
                   "$type": "ByTargetGlobalValue",
-                  "key": "_ABILITY_Skiff_AvatarIn_Mark",
-                  "value": 0,
+                  "key": "_ABILITY_Sorush_AvatarIn_Mark",
+                  "ratio": 0.0,
                   "compareType": "NoneOrEqual"
                 }
-              ]
+              ],
+              "amountByCasterMaxHPRatio": 0.006500000134110451
             },
             {
               "$type": "FireEffect",
-              "effectPattern": "Eff_Skiff_Normal_Heal",
               "predicates": [
                 {
-                  "$type": "ByTargetHPRatio",
-                  "HPRatio": 1,
-                  "logic": "Lesser"
+                  "$type": "GMGEIHHLMCO",
+                  "logic": "Lesser",
+                  "KONBGFMBNDO": 1.0
                 }
-              ]
+              ],
+              "healLimitedByCasterMaxHPRatio": "Eff_Skiff_Normal_Heal",
+              "effectTempleteID": -1.0
             }
           ]
         },
-        "Blank": {}
-      }
+        "Blank": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 0.0,
+          "key": "_ABILITY_Sorush_AutoHeal_Count",
+          "maxValue": 0.0,
+          "minValue": 0.0
+        },
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_Sorush_AutoHeal_Handler"
+        }
+      ]
     }
   },
-  ///////////////////////////////////////////////////////////////
-  //
-  // 飞行载具 ServerBuff
-  //
-  ///////////////////////////////////////////////////////////////
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "Vehicle_Sorush_Normal_ServerBuff_Handler",
-      "isDynamicAbility": true,
       "modifiers": {
         "SERVER_Sorush_Normal_AvatarStatue_Handler": {
-          // "isUnique": true,
           "stacking": "Multiple",
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 1.0,
           "onAdded": [
             {
               "$type": "AttachModifier",
-              "modifierName": "UNIQUE_Sorush_Normal_AvatarStatue_DenyLockOn",
-              "doOffStage": true
+              "RotationDampTime": true,
+              "modifierName": "UNIQUE_Sorush_Normal_AvatarStatue_DenyLockOn"
             },
             {
               "$type": "AttachModifier",
-              "modifierName": "UNIQUE_Sorush_Normal_AvatarStatue_Invincible",
-              "doOffStage": true
+              "RotationDampTime": true,
+              "modifierName": "UNIQUE_Sorush_Normal_AvatarStatue_Invincible"
             },
             {
               "$type": "AttachModifier",
-              "modifierName": "UNIQUE_Sorush_Normal_AvatarStatue_IsGhostToEnemy",
-              "doOffStage": true
+              "RotationDampTime": true,
+              "modifierName": "UNIQUE_Sorush_Normal_AvatarStatue_IsGhostToEnemy"
             },
             {
               "$type": "AttachModifier",
-              "modifierName": "UNIQUE_Sorush_Normal_AvatarStatue_LockHP",
-              "doOffStage": true
+              "RotationDampTime": true,
+              "modifierName": "UNIQUE_Sorush_Normal_AvatarStatue_LockHP"
             },
             {
               "$type": "AttachModifier",
-              "modifierName": "UNIQUE_Sorush_Normal_OutofCombat_Handler",
-              "doOffStage": true
+              "RotationDampTime": true,
+              "modifierName": "UNIQUE_Sorush_Normal_OutofCombat_Handler"
             },
             {
               "$type": "AttachAbilityStateResistance",
-              "resistanceListID": 15001,
-              "doOffStage": true
+              "RotationDampTime": true,
+              "resistanceListID": 15001
             },
             {
               "$type": "AttachAbilityStateResistance",
-              "resistanceListID": 15002,
-              "doOffStage": true
+              "RotationDampTime": true,
+              "resistanceListID": 15002
             },
             {
               "$type": "ApplyModifier",
-              "modifierName": "UNIQUE_Sorush_Normal_AvatarStatue_GrandHandler",
-              "target": "Vehicle"
-            },
-            {
-              "$type": "SetGlobalValue",
-              "key": "_ABILITY_Avatar_InSkiff_Mark",
-              "value": 1,
-              "target": "Self",
-              "doOffStage": true
-            }
-          ],
-          "onVehicleIn": [
-            {
-              "$type": "ApplyModifier",
-              "modifierName": "UNIQUE_Sorush_Normal_AvatarStatue_GrandHandler",
-              "target": "Vehicle"
+              "target": "Vehicle",
+              "modifierName": "UNIQUE_Sorush_Normal_AvatarStatue_GrandHandler"
             },
             {
               "$type": "SetGlobalValue",
-              "key": "_ABILITY_Avatar_InSkiff_Mark",
-              "value": 1,
-              "target": "Self",
-              "doOffStage": true
-            }
-          ],
-          "thinkInterval": 1.0,
-          "onThinkInterval": [
+              "RotationDampTime": true,
+              "ratio": 1.0,
+              "key": "_ABILITY_Avatar_InSorush_Mark",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            },
             {
-              "$type": "ApplyModifier",
-              "modifierName": "UNIQUE_Sorush_Normal_AvatarStatue_GrandHandler",
-              "target": "Vehicle"
+              "$type": "Predicated",
+              "target": "CurLocalAvatar",
+              "targetPredicates": [
+                {
+                  "$type": "NNPEGIOOOCJ"
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "ApplyModifier",
+                  "target": "Vehicle",
+                  "RotationDampTime": true,
+                  "modifierName": "Vehicle_Sorush_isHost"
+                }
+              ],
+              "failActions": [
+                {
+                  "$type": "ApplyModifier",
+                  "target": "Vehicle",
+                  "RotationDampTime": true,
+                  "modifierName": "Vehicle_Sorush_notHost"
+                }
+              ]
+            },
+            {
+              "$type": "EnableHDMesh",
+              "RotationDampTime": true,
+              "BPKOFFOCMNG": "Default"
             }
           ],
           "onRemoved": [
             {
               "$type": "TriggerAbility",
-              "abilityName": "SorushStatue_WithOutAvatar",
-              "target": "Vehicle"
-            },
-            {
-              "$type": "SetGlobalValue",
-              "key": "_ABILITY_Skiff_AvatarIn_Mark",
-              "value": 0,
               "target": "Vehicle",
-              "doOffStage": true
+              "abilityName": "SorushStatue_WithOutAvatar"
             },
             {
               "$type": "SetGlobalValue",
-              "key": "_ABILITY_Avatar_InSkiff_Mark",
-              "value": 0,
-              "target": "Self",
-              "doOffStage": true
+              "target": "Vehicle",
+              "ratio": 0.0,
+              "key": "_ABILITY_Sorush_AvatarIn_Mark",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            },
+            {
+              "$type": "SetGlobalValue",
+              "RotationDampTime": true,
+              "ratio": 0.0,
+              "key": "_ABILITY_Avatar_InSorush_Mark",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            },
+            {
+              "$type": "EnableHDMesh",
+              "RotationDampTime": true,
+              "enable": true,
+              "BPKOFFOCMNG": "Default"
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "ApplyModifier",
+              "target": "Vehicle",
+              "modifierName": "UNIQUE_Sorush_Normal_AvatarStatue_GrandHandler"
+            },
+            {
+              "$type": "Predicated",
+              "target": "CurLocalAvatar",
+              "targetPredicates": [
+                {
+                  "$type": "NNPEGIOOOCJ"
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "ApplyModifier",
+                  "target": "Vehicle",
+                  "RotationDampTime": true,
+                  "modifierName": "Vehicle_Sorush_isHost"
+                }
+              ],
+              "failActions": [
+                {
+                  "$type": "ApplyModifier",
+                  "target": "Vehicle",
+                  "RotationDampTime": true,
+                  "modifierName": "Vehicle_Sorush_notHost"
+                }
+              ]
+            }
+          ],
+          "DGIIMFGPEEC": [
+            {
+              "$type": "ApplyModifier",
+              "target": "Vehicle",
+              "modifierName": "UNIQUE_Sorush_Normal_AvatarStatue_GrandHandler"
+            },
+            {
+              "$type": "SetGlobalValue",
+              "RotationDampTime": true,
+              "ratio": 1.0,
+              "key": "_ABILITY_Avatar_InSorush_Mark",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            },
+            {
+              "$type": "SetGlobalValueV2",
+              "target": "Team",
+              "ratio": 0.0,
+              "key": "SORUSH_GrapplingHook_Mark",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            },
+            {
+              "$type": "AttachModifier",
+              "target": "Team",
+              "modifierName": "SGVListener_Sorush_HookPoint"
+            },
+            {
+              "$type": "Predicated",
+              "target": "CurLocalAvatar",
+              "targetPredicates": [
+                {
+                  "$type": "NNPEGIOOOCJ"
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "ApplyModifier",
+                  "target": "Vehicle",
+                  "RotationDampTime": true,
+                  "modifierName": "Vehicle_Sorush_isHost"
+                },
+                {
+                  "$type": "SetGlobalValueV2",
+                  "target": "CurLocalAvatar",
+                  "ratio": 0.0,
+                  "key": "SORUSH_GrapplingHook_Mark",
+                  "maxValue": 0.0,
+                  "minValue": 0.0
+                }
+              ],
+              "failActions": [
+                {
+                  "$type": "ApplyModifier",
+                  "target": "Vehicle",
+                  "RotationDampTime": true,
+                  "modifierName": "Vehicle_Sorush_notHost"
+                },
+                {
+                  "$type": "SetGlobalValueV2",
+                  "target": "CurLocalAvatar",
+                  "ratio": 0.0,
+                  "key": "SORUSH_GrapplingHook_Mark",
+                  "maxValue": 0.0,
+                  "minValue": 0.0
+                }
+              ]
+            }
+          ]
+        },
+        "Vehicle_Sorush_isHost": {
+          "stacking": "Multiple",
+          "modifierName": "",
+          "duration": 0.5,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "RotationDampTime": true,
+              "ratio": 1.0,
+              "key": "_ABILITY_Sorush_isHost_Mark",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            }
+          ]
+        },
+        "Vehicle_Sorush_notHost": {
+          "stacking": "Multiple",
+          "modifierName": "",
+          "duration": 0.5,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "SetGlobalValue",
+              "RotationDampTime": true,
+              "ratio": 0.0,
+              "key": "_ABILITY_Sorush_isHost_Mark",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            }
+          ]
+        },
+        "SGVListener_Sorush_HookPoint": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "modifierMixins": [
+            {
+              "$type": "DoActionOnGlobalValueChangeMixin",
+              "globalValueKey": "SGV_IsInHookRegion",
+              "actions": [
+                {
+                  "$type": "Predicated",
+                  "targetPredicates": [
+                    {
+                      "$type": "PHHIBIFDCJD",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetGlobalValue",
+                          "target": "Self",
+                          "key": "SGV_IsInHookRegion",
+                          "ratio": 0.0,
+                          "compareType": "NoneOrEqual"
+                        },
+                        {
+                          "$type": "ByTargetGlobalValue",
+                          "target": "Vehicle",
+                          "key": "SORUSH_GrapplingHook_Mark",
+                          "ratio": 1.0
+                        }
+                      ]
+                    }
+                  ],
+                  "successActions": [
+                    {
+                      "$type": "SetGlobalValue",
+                      "target": "Vehicle",
+                      "ratio": 0.0,
+                      "key": "SORUSH_GrapplingHook_Mark",
+                      "maxValue": 0.0,
+                      "minValue": 0.0
+                    },
+                    {
+                      "$type": "ShowReminder",
+                      "muteRemoteAction": true,
+                      "id": 400922
+                    },
+                    {
+                      "$type": "ApplyModifier",
+                      "otherTargets": {
+                        "$type": "OMJNAIFHGGH",
+                        "tag": "SlushaHookRegion"
+                      },
+                      "modifierName": "Set_EmptyGadget_SendRefreshSLC"
+                    }
+                  ],
+                  "failActions": [
+                    {
+                      "$type": "DebugLog",
+                      "content": "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!FAILED!!!!!!!!!!!!!!!!!"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "DebugLog",
+              "content": "!!!!!!!!!!!!!!!!!SGVListener_Sorush_HookPoint_REMOVED!!!!!!!!!!!!!!"
+            }
+          ]
+        },
+        "Set_EmptyGadget_SendRefreshSLC": {
+          "modifierName": "",
+          "duration": 0.10000000149011612,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "ServerLuaCall",
+              "luaCallType": "FromGroup",
+              "funcName": "SLC_Refresh_Hookpoint_By_Leave_Region",
+              "MPPMFEDKGHC": 0.0,
+              "BOKNHLDBKKK": 0.0,
+              "CHOIIMHDNHK": 0.0
             }
           ]
         },
         "UNIQUE_Sorush_Normal_AvatarStatue_GrandHandler": {
+          "stacking": "RefreshUniqueDurability",
+          "modifierName": "",
           "isUnique": true,
           "duration": 1.5,
-          "stacking": "RefreshUniqueDurability",
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "TriggerAbility",
@@ -427,8 +747,10 @@
             },
             {
               "$type": "SetGlobalValue",
-              "key": "_ABILITY_Skiff_AvatarIn_Mark",
-              "value": 1
+              "ratio": 1.0,
+              "key": "_ABILITY_Sorush_AvatarIn_Mark",
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ],
           "onRemoved": [
@@ -438,61 +760,92 @@
             },
             {
               "$type": "SetGlobalValue",
-              "key": "_ABILITY_Skiff_AvatarIn_Mark",
-              "value": 0
+              "ratio": 0.0,
+              "key": "_ABILITY_Sorush_AvatarIn_Mark",
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ]
         },
         "UNIQUE_Sorush_Normal_AvatarStatue_DenyLockOn": {
-          "isUnique": true,
           "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
           "state": "DenyLockOn"
         },
         "UNIQUE_Sorush_Normal_AvatarStatue_Invincible": {
-          "isUnique": true,
           "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
           "state": "Invincible"
         },
         "UNIQUE_Sorush_Normal_AvatarStatue_IsGhostToEnemy": {
-          "isUnique": true,
           "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
           "state": "IsGhostToEnemy"
         },
         "UNIQUE_Sorush_Normal_AvatarStatue_LockHP": {
-          "isUnique": true,
           "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
           "state": "LockHP"
         },
         "UNIQUE_Sorush_Normal_OutofCombat_Handler": {
-          "isUnique": true,
           "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
           "thinkInterval": 1.0,
           "onThinkInterval": [
             {
               "$type": "SetGlobalValue",
-              "key": "_ABILITY_Skiff_AutoHeal_Count",
-              "value": 0,
               "target": "Vehicle",
               "predicates": [
                 {
-                  "$type": "ByVehicleIsCombat",
+                  "$type": "DDHBJACPPDM",
                   "target": "Self"
                 },
                 {
-                  "$type": "ByIsLocalAvatar",
+                  "$type": "KLHDCNCGDGM",
                   "target": "Self"
                 }
-              ]
+              ],
+              "ratio": 0.0,
+              "key": "_ABILITY_Sorush_AutoHeal_Count",
+              "maxValue": 0.0,
+              "minValue": 0.0
             }
           ]
         }
-      }
+      },
+      "isDynamicAbility": true
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SorushStatue_WithOutAvatar",
+      "modifiers": {
+        "UNIQUE_SorushStatue_WithOutAvatar_DenyLockOn": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "state": "DenyLockOn"
+        },
+        "UNIQUE_SorushStatue_WithOutAvatar_IsGhostToEnemy": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "state": "IsGhostToEnemy"
+        }
+      },
       "onAdded": [
         {
           "$type": "TriggerAbility",
@@ -507,37 +860,108 @@
         {
           "$type": "AttachModifier",
           "modifierName": "UNIQUE_SorushStatue_WithOutAvatar_IsGhostToEnemy"
-        }
-      ],
-      "modifiers": {
-        "UNIQUE_SorushStatue_WithOutAvatar_DenyLockOn": {
-          "isUnique": true,
-          "stacking": "Unique",
-          "state": "DenyLockOn"
         },
-        "UNIQUE_SorushStatue_WithOutAvatar_IsGhostToEnemy": {
-          "isUnique": true,
-          "stacking": "Unique",
-          "state": "IsGhostToEnemy"
+        {
+          "$type": "RemoveUniqueModifier",
+          "modifierName": "UNIQUE_SorushStatue_WithAvatar_HitShake_Handler"
+        },
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 0.0,
+          "key": "_ABILITY_Sorush_ChargeSkillValue",
+          "maxValue": 0.0,
+          "minValue": 0.0
         }
-      }
+      ]
     }
   },
   {
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "SorushStatue_WithAvatar",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_ABILITY_Sorush_AvatarIn_Mark",
+          "defaultGlobalValueOnCreate": 0.0,
+          "valueSteps": [-0.5, 0.5, 1.5],
+          "modifierNameSteps": ["Blank", "UNIQUE_ElfView_Handler"]
+        }
+      ],
+      "modifiers": {
+        "UNIQUE_ElfView_Handler": {
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "modifierMixins": [
+            {
+              "$type": "ElfViewControllerMixin"
+            }
+          ]
+        },
+        "UNIQUE_SorushStatue_WithAvatar_HitShake_Handler": {
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "onBeingHit": [
+            {
+              "$type": "Predicated",
+              "target": "Target",
+              "targetPredicates": [
+                {
+                  "$type": "ByAny",
+                  "predicates": [
+                    {
+                      "$type": "BKKNINKONEL",
+                      "BOJCAKJDAKM": 0.0
+                    },
+                    {
+                      "$type": "NBKDFLDAGEH",
+                      "ABCEMJKANKB": 0.0
+                    }
+                  ]
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "ApplyModifier",
+                  "modifierName": "SorushStatue_WithAvatar_HitShake"
+                }
+              ]
+            }
+          ]
+        },
+        "SorushStatue_WithAvatar_HitShake": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "duration": 0.5,
+          "bonusCriticalHurt": 100.0,
+          "properties": {
+            "Animator_OverallSpeedRatioMultiplied": 0.6000000238418579
+          },
+          "onAdded": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "Shake",
+              "MPTriggerOnRemote": true
+            }
+          ]
+        },
+        "Blank": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
+        }
+      },
       "onAbilityStart": [
         {
           "$type": "RemoveUniqueModifier",
-          "modifierName": "UNIQUE_SorushStatue_WithOutAvatar_DenyLockOn"
+          "modifierName": "UNIQUE_SorushStatue_WithOutAvatar_IsGhostToEnemy"
         },
         {
-          "$type": "RemoveUniqueModifier",
-          "modifierName": "UNIQUE_SorushStatue_WithOutAvatar_IsGhostToEnemy"
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_SorushStatue_WithAvatar_HitShake_Handler"
         }
-      ],
-      "modifiers": {}
+      ]
     }
   },
   {
@@ -546,30 +970,1707 @@
       "abilityName": "Vehicle_Sorush_ActionSkill",
       "abilityMixins": [
         {
-          "$type": "InputActionHoldChargeMixin",
-          "inputActionControllerType": "VehicleSkillController",
-          "inputActionType": "Action2",
-          "chargeTime": 1.0,
-          "secondChargeTime": 1.0,
-          "OnReleaseUncharged": [
-            {
-              "$type": "SetGlobalValue",
-              "key": "_ABILITY_Sorush_Test",
-              "value": 1
-            }
-          ],
-          "OnBeginCharged": [
-            {
-              "$type": "SetGlobalValue",
-              "key": "_ABILITY_Sorush_Test",
-              "value": 2
-            }
-          ],
-          "chargeStateIDs": ["Idle", "Move", "Sprint"]
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_ABILITY_Sorush_LoopSkill_Mark",
+          "defaultGlobalValueOnCreate": 0.0,
+          "valueSteps": [-0.5, 0.5, 1.5],
+          "modifierNameSteps": [
+            "UNIQUE_Sorush_notLoopSkill",
+            "UNIQUE_Sorush_isLoopSkill"
+          ]
         }
       ],
-      "onAbilityStart": [],
-      "modifiers": {}
+      "modifiers": {
+        "Vehicle_Sorush_onReconnect": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "LGJBJJBCBEH": [
+            {
+              "$type": "SetGlobalValue",
+              "RotationDampTime": true,
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "key": "_ABILITY_Sorush_AvatarIn_Mark",
+                  "ratio": 1.0
+                }
+              ],
+              "ratio": 0.0,
+              "key": "_ABILITY_Sorush_LoopSkill_Mark",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            }
+          ]
+        },
+        "UNIQUE_Sorush_notLoopSkill": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 0.5,
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "boolID": "StartSkill"
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "SetAnimatorBool",
+              "boolID": "StartSkill"
+            }
+          ]
+        },
+        "UNIQUE_Sorush_isLoopSkill": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 0.5,
+          "onAdded": [
+            {
+              "$type": "SetAnimatorBool",
+              "boolID": "StartSkill",
+              "ratio": true
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "SetAnimatorBool",
+              "boolID": "StartSkill",
+              "ratio": true
+            }
+          ]
+        },
+        "Vehicle_Sorush_Detect_Input_Delay": {
+          "modifierName": "",
+          "duration": 1.0,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "HatOn"
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "Vehicle_Sorush_Detect_Input"
+            },
+            {
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "HatOff"
+            }
+          ]
+        },
+        "Vehicle_Sorush_Detect_Input": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "modifierMixins": [
+            {
+              "$type": "InputActionHoldChargeMixin",
+              "chargeTime": 0.5,
+              "secondChargeTime": 0.5,
+              "OnReleaseUncharged": [
+                {
+                  "$type": "TriggerInputActionCD",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "_ABILITY_Sorush_AvatarIn_Mark",
+                      "ratio": 1.0
+                    }
+                  ],
+                  "MIIPMMBOCEL": "VehicleSkillController",
+                  "HHBLDNOONPK": "Action3",
+                  "LNDGGJPGLFP": 2.0
+                },
+                {
+                  "$type": "SetAnimatorTrigger",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "_ABILITY_Sorush_AvatarIn_Mark",
+                      "ratio": 1.0
+                    }
+                  ],
+                  "triggerID": "FastSkill",
+                  "MPTriggerOnRemote": true
+                },
+                {
+                  "$type": "DebugLog",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "_ABILITY_Sorush_AvatarIn_Mark",
+                      "ratio": 1.0
+                    }
+                  ],
+                  "content": "！！！！！！！！！！！OnReleaseUncharged"
+                }
+              ],
+              "OnBeginCharged": [
+                {
+                  "$type": "SetGlobalValue",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "_ABILITY_Sorush_AvatarIn_Mark",
+                      "ratio": 1.0
+                    }
+                  ],
+                  "ratio": 1.0,
+                  "key": "_ABILITY_Sorush_LoopSkill_Mark",
+                  "maxValue": 0.0,
+                  "minValue": 0.0
+                },
+                {
+                  "$type": "DebugLog",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "key": "_ABILITY_Sorush_AvatarIn_Mark",
+                      "ratio": 1.0
+                    }
+                  ],
+                  "content": "！！！！！！！！！！！OnBeginCharged"
+                }
+              ],
+              "chargeStateIDs": ["Idle", "Move", "Sprint"],
+              "MIIPMMBOCEL": "VehicleSkillController",
+              "HHBLDNOONPK": "Action3"
+            },
+            {
+              "$type": "AttachToStateIDMixin",
+              "stateIDs": ["ActionSkill_Loop"],
+              "modifierName": "Vehicle_Sorush_ActionSkill_Interaction"
+            }
+          ]
+        },
+        "Vehicle_Sorush_ActionSkill_Interaction": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 1.5,
+          "modifierMixins": [
+            {
+              "$type": "ElfViewControllerMixin",
+              "KCBAGOBFGBH": 15.0
+            }
+          ],
+          "onAdded": [
+            {
+              "$type": "TriggerInputActionCD",
+              "MIIPMMBOCEL": "VehicleSkillController",
+              "HHBLDNOONPK": "Action3",
+              "LNDGGJPGLFP": 10.0
+            },
+            {
+              "$type": "TriggerAbility",
+              "target": "Vehicle",
+              "abilityName": "Vehicle_Sorush_HookPoint_DropHandler"
+            },
+            {
+              "$type": "TriggerVehicleOff",
+              "DCCCHKBPCEB": true
+            },
+            {
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "HatOn"
+            },
+            {
+              "$type": "SetGlobalValueV2",
+              "ratio": 1.0,
+              "key": "_ABILITY_Sorush_Hovering_Mark",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            },
+            {
+              "$type": "AttachEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_Sorush_Normal_Skill1_Attack_Loop",
+              "effectTempleteID": -1.0
+            },
+            {
+              "$type": "TriggerAttackEvent",
+              "attackEvent": {
+                "attackPattern": {
+                  "$type": "ConfigAttackSphere",
+                  "triggerType": "TriggerNoRepeat",
+                  "born": {
+                    "$type": "ConfigBornByTarget",
+                    "offset": {
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
+                    }
+                  },
+                  "radius": 5.5
+                },
+                "attackInfo": {
+                  "attackTag": "ElfContinWaveInteract",
+                  "attenuationTag": "",
+                  "attenuationGroup": "default",
+                  "attackProperty": {
+                    "damagePercentage": 0.0,
+                    "damagePercentageRatio": 0.0,
+                    "bonusCriticalHurt": 100.0,
+                    "strikeType": "Default",
+                    "enBreak": 0.0
+                  },
+                  "hitPattern": {
+                    "onHitEffectName": "none",
+                    "hitImpulseType": "LV0",
+                    "hitHaltTimeScale": 0.10000000149011612,
+                    "muteHitText": true
+                  }
+                }
+              },
+              "targetType": "Enemy"
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "SetGlobalValueV2",
+              "ratio": 0.0,
+              "key": "_ABILITY_Sorush_Hovering_Mark",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "TriggerAttackEvent",
+              "attackEvent": {
+                "attackPattern": {
+                  "$type": "ConfigAttackSphere",
+                  "triggerType": "TriggerNoRepeat",
+                  "born": {
+                    "$type": "ConfigBornByTarget",
+                    "offset": {
+                      "x": 0.0,
+                      "y": 0.0,
+                      "z": 0.0
+                    }
+                  },
+                  "radius": 5.5
+                },
+                "attackInfo": {
+                  "attackTag": "ElfContinWaveInteract",
+                  "attenuationTag": "",
+                  "attenuationGroup": "default",
+                  "attackProperty": {
+                    "damagePercentage": 0.0,
+                    "damagePercentageRatio": 0.0,
+                    "bonusCriticalHurt": 100.0,
+                    "strikeType": "Default",
+                    "enBreak": 0.0
+                  },
+                  "hitPattern": {
+                    "onHitEffectName": "none",
+                    "hitImpulseType": "LV0",
+                    "hitHaltTimeScale": 0.10000000149011612,
+                    "muteHitText": true
+                  }
+                }
+              },
+              "targetType": "Enemy"
+            }
+          ]
+        },
+        "Blank": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Vehicle_Sorush_Detect_Input_Delay"
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Vehicle_Sorush_onReconnect"
+        },
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 0.0,
+          "key": "_ABILITY_Sorush_Hovering_Mark",
+          "maxValue": 0.0,
+          "minValue": 0.0
+        },
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 0.0,
+          "key": "SORUSH_GrapplingHook_Mark",
+          "maxValue": 0.0,
+          "minValue": 0.0
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "TriggerAttackEvent",
+          "attackEvent": {
+            "attackPattern": {
+              "$type": "ConfigAttackSphere",
+              "triggerType": "TriggerNoRepeat",
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                }
+              },
+              "radius": 5.5
+            },
+            "attackInfo": {
+              "attackTag": "ElfWaveInteract",
+              "attenuationTag": "",
+              "attenuationGroup": "default",
+              "attackProperty": {
+                "damagePercentage": 0.0,
+                "damagePercentageRatio": 0.0,
+                "bonusCriticalHurt": 100.0,
+                "strikeType": "Default",
+                "enBreak": 0.0
+              },
+              "hitPattern": {
+                "onHitEffectName": "none",
+                "hitImpulseType": "LV0",
+                "hitHaltTimeScale": 0.10000000149011612,
+                "muteHitText": true
+              }
+            }
+          },
+          "targetType": "Enemy"
+        },
+        {
+          "$type": "TriggerAttackEvent",
+          "attackEvent": {
+            "attackPattern": {
+              "$type": "ConfigAttackSphere",
+              "triggerType": "TriggerNoRepeat",
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                }
+              },
+              "radius": 5.5
+            },
+            "attackInfo": {
+              "attackTag": "ElfWaveInteract",
+              "attenuationTag": "",
+              "attenuationGroup": "default",
+              "attackProperty": {
+                "damagePercentage": 0.0,
+                "damagePercentageRatio": 0.0,
+                "bonusCriticalHurt": 100.0,
+                "strikeType": "Default",
+                "enBreak": 0.0
+              },
+              "hitPattern": {
+                "onHitEffectName": "none",
+                "hitImpulseType": "LV0",
+                "hitHaltTimeScale": 0.10000000149011612,
+                "muteHitText": true
+              }
+            }
+          },
+          "targetType": "Alliance"
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Vehicle_Sorush_ActionSkillHighLight",
+      "modifiers": {
+        "Vehicle_Sorush_SkillHighLight_Detect": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 0.5,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_ABILITY_Sorush_SkillHighLight_Mark",
+              "defaultGlobalValueOnCreate": 0.0,
+              "valueSteps": [-0.5, 0.5, 1.5],
+              "modifierNameSteps": ["Blank", "Vehicle_Sorush_SkillHighLight"]
+            }
+          ],
+          "onAdded": [
+            {
+              "$type": "Predicated",
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR5H5HC",
+                "campTargetType": "AllExceptSelf",
+                "OBHNBNDMPFN": 1.0
+              },
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Caster",
+                  "key": "_ABILITY_Sorush_isHost_Mark",
+                  "ratio": 1.0
+                }
+              ],
+              "targetPredicates": [
+                {
+                  "$type": "PJGLIDHKMJE",
+                  "tag": "_Mark_Sorush_Interact"
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "SetGlobalValue",
+                  "ratio": 1.0,
+                  "key": "_ABILITY_Sorush_SkillHighLight_Mark",
+                  "maxValue": 0.0,
+                  "minValue": 0.0
+                }
+              ],
+              "failActions": [
+                {
+                  "$type": "SetGlobalValue",
+                  "ratio": 0.0,
+                  "key": "_ABILITY_Sorush_SkillHighLight_Mark",
+                  "maxValue": 0.0,
+                  "minValue": 0.0
+                }
+              ]
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR5H5HC",
+                "campTargetType": "AllExceptSelf",
+                "OBHNBNDMPFN": 1.0
+              },
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Caster",
+                  "key": "_ABILITY_Sorush_isHost_Mark",
+                  "ratio": 1.0
+                }
+              ],
+              "targetPredicates": [
+                {
+                  "$type": "PJGLIDHKMJE",
+                  "tag": "_Mark_Sorush_Interact"
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "SetGlobalValue",
+                  "ratio": 1.0,
+                  "key": "_ABILITY_Sorush_SkillHighLight_Mark",
+                  "maxValue": 0.0,
+                  "minValue": 0.0
+                }
+              ],
+              "failActions": [
+                {
+                  "$type": "SetGlobalValue",
+                  "ratio": 0.0,
+                  "key": "_ABILITY_Sorush_SkillHighLight_Mark",
+                  "maxValue": 0.0,
+                  "minValue": 0.0
+                }
+              ]
+            }
+          ]
+        },
+        "Vehicle_Sorush_SkillHighLight": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "modifierMixins": [
+            {
+              "$type": "SkillHighLightMixin",
+              "MLGLNMKMCNI": 10201
+            }
+          ]
+        },
+        "Blank": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Vehicle_Sorush_SkillHighLight_Detect"
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Vehicle_Sorush_ActionSkillHighLight_WithCrown",
+      "modifiers": {
+        "Vehicle_Sorush_SkillHighLight_Detect": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 0.5,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_ABILITY_Sorush_SkillHighLight_Mark",
+              "defaultGlobalValueOnCreate": 0.0,
+              "valueSteps": [-0.5, 0.5, 1.5],
+              "modifierNameSteps": ["Blank", "Vehicle_Sorush_SkillHighLight"]
+            }
+          ],
+          "onAdded": [
+            {
+              "$type": "Predicated",
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR5H5HC",
+                "campTargetType": "AllExceptSelf",
+                "OBHNBNDMPFN": 1.0
+              },
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Caster",
+                  "key": "_ABILITY_Sorush_isHost_Mark",
+                  "ratio": 1.0
+                }
+              ],
+              "targetPredicates": [
+                {
+                  "$type": "ByAny",
+                  "predicates": [
+                    {
+                      "$type": "PJGLIDHKMJE",
+                      "tag": "_Mark_Sorush_Interact"
+                    },
+                    {
+                      "$type": "PJGLIDHKMJE",
+                      "tag": "_Mark_CrownSorush_Only"
+                    }
+                  ]
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "SetGlobalValue",
+                  "ratio": 1.0,
+                  "key": "_ABILITY_Sorush_SkillHighLight_Mark",
+                  "maxValue": 0.0,
+                  "minValue": 0.0
+                }
+              ],
+              "failActions": [
+                {
+                  "$type": "SetGlobalValue",
+                  "ratio": 0.0,
+                  "key": "_ABILITY_Sorush_SkillHighLight_Mark",
+                  "maxValue": 0.0,
+                  "minValue": 0.0
+                }
+              ]
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "Predicated",
+              "otherTargets": {
+                "$type": "SelectTargetsByShape",
+                "shapeName": "CircleR5H5HC",
+                "campTargetType": "AllExceptSelf",
+                "OBHNBNDMPFN": 1.0
+              },
+              "predicates": [
+                {
+                  "$type": "ByTargetGlobalValue",
+                  "target": "Caster",
+                  "key": "_ABILITY_Sorush_isHost_Mark",
+                  "ratio": 1.0
+                }
+              ],
+              "targetPredicates": [
+                {
+                  "$type": "ByAny",
+                  "predicates": [
+                    {
+                      "$type": "PJGLIDHKMJE",
+                      "tag": "_Mark_Sorush_Interact"
+                    },
+                    {
+                      "$type": "PJGLIDHKMJE",
+                      "tag": "_Mark_CrownSorush_Only"
+                    }
+                  ]
+                }
+              ],
+              "successActions": [
+                {
+                  "$type": "SetGlobalValue",
+                  "ratio": 1.0,
+                  "key": "_ABILITY_Sorush_SkillHighLight_Mark",
+                  "maxValue": 0.0,
+                  "minValue": 0.0
+                }
+              ],
+              "failActions": [
+                {
+                  "$type": "SetGlobalValue",
+                  "ratio": 0.0,
+                  "key": "_ABILITY_Sorush_SkillHighLight_Mark",
+                  "maxValue": 0.0,
+                  "minValue": 0.0
+                }
+              ]
+            }
+          ]
+        },
+        "Vehicle_Sorush_SkillHighLight": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "modifierMixins": [
+            {
+              "$type": "SkillHighLightMixin",
+              "MLGLNMKMCNI": 10201
+            }
+          ]
+        },
+        "Blank": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Vehicle_Sorush_SkillHighLight_Detect"
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Vehicle_Sorush_ChargeSkill",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueMixin",
+          "globalValueKey": "_ABILITY_Sorush_ChargeSkillValue",
+          "defaultGlobalValueOnCreate": 0.0,
+          "valueSteps": [-0.5, 0.5, 999.5],
+          "modifierNameSteps": ["Blank", "Sorush_BombAlertFX"]
+        }
+      ],
+      "modifiers": {
+        "Vehicle_Sorush_ChargeSkill_Delay": {
+          "modifierName": "",
+          "duration": 0.20000000298023224,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "FireEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_Sorush_Normal_Skill2",
+              "effectTempleteID": -1.0
+            },
+            {
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "HatOn"
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "TriggerBullet",
+              "bulletID": 70220147,
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "offset": {
+                  "x": 0.0,
+                  "y": -0.10000000149011612,
+                  "z": 0.0
+                },
+                "IABNJPGBAOH": true
+              }
+            },
+            {
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "HatOff"
+            }
+          ]
+        },
+        "Sorush_BombAlertFX": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_Sorush_BombAlert",
+              "effectTempleteID": -1.0
+            }
+          ]
+        },
+        "Blank": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
+        }
+      },
+      "onAbilityStart": [
+        {
+          "$type": "AddGlobalValue",
+          "ratio": -10.0,
+          "key": "_ABILITY_Sorush_ChargeSkillValue",
+          "useLimitRange": true,
+          "maxValue": 80.0,
+          "minValue": 0.0
+        },
+        {
+          "$type": "SetAnimatorTrigger",
+          "triggerID": "ChargeSkill",
+          "MPTriggerOnRemote": true
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Vehicle_Sorush_ChargeSkill_Delay"
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Bullet_Sorush_Bomb",
+      "modifiers": {
+        "Bullet_Sorush_Bomb_FX": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObject_SlushaFruit_01_Bullet",
+              "effectTempleteID": -1.0
+            }
+          ]
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Bullet_Sorush_Bomb_FX"
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "RemoveModifier",
+          "modifierName": "Bullet_Sorush_Bomb_FX"
+        },
+        {
+          "$type": "TriggerAttackEvent",
+          "attackEvent": {
+            "attackPattern": {
+              "$type": "ConfigAttackSphere",
+              "triggerType": "TriggerNoRepeat",
+              "born": {
+                "$type": "ConfigBornByCollisionPoint"
+              },
+              "radius": 3.0
+            },
+            "attackInfo": {
+              "attackTag": "Sorush_Bomb_Attack",
+              "attenuationTag": "",
+              "attenuationGroup": "default",
+              "attackProperty": {
+                "damagePercentage": 0.0,
+                "damagePercentageRatio": 0.0,
+                "bonusCriticalHurt": 100.0,
+                "strikeType": "Blunt"
+              },
+              "hitPattern": {
+                "onHitEffectName": "default",
+                "hitImpulseType": "LV0",
+                "hitHaltTimeScale": 0.05000000074505806,
+                "muteHitText": true
+              }
+            }
+          },
+          "targetType": "Enemy"
+        },
+        {
+          "$type": "FireEffect",
+          "healLimitedByCasterMaxHPRatio": "Eff_SceneObject_SlushaFruit_01_Bomb",
+          "born": {
+            "$type": "ConfigBornByCollisionPoint"
+          },
+          "effectTempleteID": -1.0
+        },
+        {
+          "$type": "KillSelf"
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Vehicle_Sorush_GrapplingHookSkill",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToSelfGlobalValueNoInitMixin",
+          "globalValueKey": "_ABILITY_Sorush_AvatarIn_Mark",
+          "valueSteps": [-0.5, 0.5, 1.5],
+          "modifierNameSteps": ["Btn_T_Handler_Off", "Btn_T_Handler_On"]
+        },
+        {
+          "$type": "StageReadyMixin",
+          "onStageReady": [
+            {
+              "$type": "DebugLog",
+              "content": "!!!!!!!OnStageReady!!!!!!!!!"
+            },
+            {
+              "$type": "AddGlobalValue",
+              "target": "Team",
+              "predicates": [
+                {
+                  "$type": "NLJIFDHAJJG",
+                  "MPPHBAOEHGH": true
+                }
+              ],
+              "ratio": -1.0,
+              "key": "SORUSH_GrapplingHook_Mark",
+              "useLimitRange": true,
+              "maxValue": 1.0,
+              "minValue": 0.0
+            },
+            {
+              "$type": "AddGlobalValue",
+              "ratio": -1.0,
+              "key": "SORUSH_GrapplingHook_Mark",
+              "useLimitRange": true,
+              "maxValue": 1.0,
+              "minValue": 0.0
+            },
+            {
+              "$type": "AddGlobalValue",
+              "target": "CurLocalAvatar",
+              "predicates": [
+                {
+                  "$type": "NLJIFDHAJJG",
+                  "MPPHBAOEHGH": true
+                }
+              ],
+              "ratio": -1.0,
+              "key": "SORUSH_GrapplingHook_Mark",
+              "useLimitRange": true,
+              "maxValue": 1.0,
+              "minValue": 0.0
+            }
+          ]
+        },
+        {
+          "$type": "DoActionOnGlobalValueChangeMixin",
+          "globalValueKey": "SORUSH_GrapplingHook_Mark",
+          "actions": [
+            {
+              "$type": "CopyGlobalValue",
+              "srcTarget": "Self",
+              "dstTarget": "Team",
+              "srcKey": "SORUSH_GrapplingHook_Mark",
+              "dstKey": "SORUSH_GrapplingHook_Mark"
+            }
+          ]
+        }
+      ],
+      "modifiers": {
+        "Btn_T_Handler_Off": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
+        },
+        "Btn_T_Handler_On": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "ApplyModifier",
+              "target": "Team",
+              "modifierName": "Btn_T_Handler_OnTeam"
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "RemoveModifier",
+              "target": "Team",
+              "modifierName": "Btn_T_Handler_OnTeam"
+            }
+          ]
+        },
+        "Btn_T_Handler_OnTeam": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "modifierMixins": [
+            {
+              "$type": "DoActionOnGlobalValueChangeMixin",
+              "globalValueKey": "SORUSH_GrapplingHook_Mark",
+              "actions": [
+                {
+                  "$type": "ShowExtraAbility",
+                  "RotationDampTime": true,
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Team",
+                      "key": "SORUSH_GrapplingHook_Mark",
+                      "ratio": 1.0
+                    },
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Team",
+                      "key": "SGV_IsInHookRegion",
+                      "ratio": 0.0,
+                      "compareType": "MoreThan"
+                    }
+                  ],
+                  "skillID": 20046
+                },
+                {
+                  "$type": "ShowExtraAbility",
+                  "RotationDampTime": true,
+                  "predicates": [
+                    {
+                      "$type": "ByAny",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetGlobalValue",
+                          "target": "Team",
+                          "key": "SORUSH_GrapplingHook_Mark",
+                          "ratio": 0.0,
+                          "compareType": "NoneOrEqual"
+                        },
+                        {
+                          "$type": "ByTargetGlobalValue",
+                          "target": "Team",
+                          "key": "SGV_IsInHookRegion",
+                          "ratio": 0.0,
+                          "compareType": "NoneOrEqual"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "ShowExtraAbility",
+              "RotationDampTime": true
+            }
+          ],
+          "LGJBJJBCBEH": [
+            {
+              "$type": "ShowExtraAbility",
+              "RotationDampTime": true,
+              "predicates": [
+                {
+                  "$type": "ByAny",
+                  "predicates": [
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Team",
+                      "key": "SORUSH_GrapplingHook_Mark",
+                      "ratio": 0.0,
+                      "compareType": "NoneOrEqual"
+                    },
+                    {
+                      "$type": "ByTargetGlobalValue",
+                      "target": "Team",
+                      "key": "SGV_IsInHookRegion",
+                      "ratio": 0.0,
+                      "compareType": "NoneOrEqual"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "Set_EmptyGadget_SendRefreshSLC": {
+          "modifierName": "",
+          "duration": 0.10000000149011612,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "ServerLuaCall",
+              "luaCallType": "FromGroup",
+              "funcName": "SLC_Refresh_Hookpoint_By_Leave_Region",
+              "MPPMFEDKGHC": 0.0,
+              "BOKNHLDBKKK": 0.0,
+              "CHOIIMHDNHK": 0.0
+            }
+          ]
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValueV2",
+          "ratio": 0.0,
+          "key": "SORUSH_GrapplingHook_Mark",
+          "maxValue": 0.0,
+          "minValue": 0.0
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "DebugLog",
+          "content": "!!!!!!!Skill Be Trigger!!!!!!!!!"
+        },
+        {
+          "$type": "Predicated",
+          "targetPredicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "SORUSH_GrapplingHook_Mark",
+              "ratio": 1.0
+            },
+            {
+              "$type": "ByTargetGlobalValue",
+              "key": "_ABILITY_Sorush_AvatarIn_Mark",
+              "ratio": 1.0
+            },
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Team",
+              "key": "SGV_IsInHookRegion",
+              "ratio": 0.0,
+              "compareType": "MoreThan"
+            }
+          ],
+          "successActions": [
+            {
+              "$type": "CreateGadget",
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                },
+                "IABNJPGBAOH": true
+              },
+              "gadgetID": 70220157,
+              "campID": 5001,
+              "campTargetType": "Enemy"
+            }
+          ]
+        },
+        {
+          "$type": "AddGlobalValue",
+          "target": "Team",
+          "predicates": [
+            {
+              "$type": "NLJIFDHAJJG",
+              "MPPHBAOEHGH": true
+            }
+          ],
+          "ratio": -1.0,
+          "key": "SORUSH_GrapplingHook_Mark",
+          "useLimitRange": true,
+          "maxValue": 1.0,
+          "minValue": 0.0
+        },
+        {
+          "$type": "AddGlobalValue",
+          "ratio": -1.0,
+          "key": "SORUSH_GrapplingHook_Mark",
+          "useLimitRange": true,
+          "maxValue": 1.0,
+          "minValue": 0.0
+        },
+        {
+          "$type": "AddGlobalValue",
+          "target": "CurLocalAvatar",
+          "predicates": [
+            {
+              "$type": "NLJIFDHAJJG",
+              "MPPHBAOEHGH": true
+            }
+          ],
+          "ratio": -1.0,
+          "key": "SORUSH_GrapplingHook_Mark",
+          "useLimitRange": true,
+          "maxValue": 1.0,
+          "minValue": 0.0
+        }
+      ],
+      "onKill": [
+        {
+          "$type": "DebugLog",
+          "content": "!!!!!!!On Kill In!!!!!!!!!"
+        },
+        {
+          "$type": "Predicated",
+          "targetPredicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Self",
+              "key": "SORUSH_GrapplingHook_Mark",
+              "ratio": 1.0
+            }
+          ],
+          "successActions": [
+            {
+              "$type": "DebugLog",
+              "content": "!!!!!!!modifier Add Succ!!!!!!!!!"
+            },
+            {
+              "$type": "ApplyModifier",
+              "otherTargets": {
+                "$type": "OMJNAIFHGGH",
+                "tag": "SlushaHookRegion"
+              },
+              "RotationDampTime": true,
+              "modifierName": "Set_EmptyGadget_SendRefreshSLC"
+            },
+            {
+              "$type": "AddGlobalValue",
+              "target": "Team",
+              "predicates": [
+                {
+                  "$type": "NLJIFDHAJJG",
+                  "MPPHBAOEHGH": true
+                }
+              ],
+              "ratio": -1.0,
+              "key": "SORUSH_GrapplingHook_Mark",
+              "useLimitRange": true,
+              "maxValue": 1.0,
+              "minValue": 0.0
+            },
+            {
+              "$type": "AddGlobalValue",
+              "ratio": -1.0,
+              "key": "SORUSH_GrapplingHook_Mark",
+              "useLimitRange": true,
+              "maxValue": 1.0,
+              "minValue": 0.0
+            },
+            {
+              "$type": "AddGlobalValue",
+              "target": "CurLocalAvatar",
+              "predicates": [
+                {
+                  "$type": "NLJIFDHAJJG",
+                  "MPPHBAOEHGH": true
+                }
+              ],
+              "ratio": -1.0,
+              "key": "SORUSH_GrapplingHook_Mark",
+              "useLimitRange": true,
+              "maxValue": 1.0,
+              "minValue": 0.0
+            }
+          ],
+          "failActions": [
+            {
+              "$type": "DebugLog",
+              "content": "!!!!!!!modifier Add Failed!!!!!!!!!"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "SceneObj_Level_Xm_Property_Ani_Prop_SlushaMovingHook_01_Creator",
+      "abilitySpecials": {
+        "pos_x": 0.0,
+        "pos_y": 0.0,
+        "pos_z": 0.0
+      },
+      "modifiers": {
+        "SaveGlobalPos": {
+          "modifierName": "",
+          "duration": 0.10000000149011612,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "SetGlobalPos",
+              "key": "_TempPos",
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                }
+              },
+              "setTarget": false
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "ApplyModifier",
+              "modifierName": "GV_Overrider"
+            }
+          ]
+        },
+        "GV_Overrider": {
+          "modifierName": "",
+          "duration": 0.10000000149011612,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "SetGlobalValueToOverrideMap",
+              "globalValueKey": "_TempPos_0",
+              "overrideMapKey": "pos_x"
+            },
+            {
+              "$type": "SetGlobalValueToOverrideMap",
+              "globalValueKey": "_TempPos_1",
+              "overrideMapKey": "pos_y"
+            },
+            {
+              "$type": "SetGlobalValueToOverrideMap",
+              "globalValueKey": "_TempPos_2",
+              "overrideMapKey": "pos_z"
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "ApplyModifier",
+              "otherTargets": {
+                "$type": "OMJNAIFHGGH",
+                "tag": "SlushaHookRegion"
+              },
+              "modifierName": "Set_EmptyGadget_CreateHookpoint"
+            }
+          ]
+        },
+        "Set_EmptyGadget_CreateHookpoint": {
+          "modifierName": "",
+          "duration": 1.0,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "ServerLuaCall",
+              "luaCallType": "FromGroup",
+              "funcName": "SLC_Create_HookPoint",
+              "LIAAKLHNPEN": 3,
+              "MPPMFEDKGHC": "pos_x",
+              "BOKNHLDBKKK": "pos_y",
+              "CHOIIMHDNHK": "pos_z"
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "KillSelf",
+              "target": "Applier"
+            }
+          ]
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "SaveGlobalPos"
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Vehicle_Sorush_HookPoint_DropHandler",
+      "modifiers": {
+        "Set_EmptyGadget_SendRefreshSLC": {
+          "modifierName": "",
+          "duration": 0.10000000149011612,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "ServerLuaCall",
+              "luaCallType": "FromGroup",
+              "funcName": "SLC_Refresh_Hookpoint_By_Leave_Region",
+              "MPPMFEDKGHC": 0.0,
+              "BOKNHLDBKKK": 0.0,
+              "CHOIIMHDNHK": 0.0
+            }
+          ]
+        }
+      },
+      "onAbilityStart": [
+        {
+          "$type": "DebugLog",
+          "content": "!!!!!!!DorperTirgger!!!!!!!!!"
+        },
+        {
+          "$type": "Predicated",
+          "targetPredicates": [
+            {
+              "$type": "ByTargetGlobalValue",
+              "target": "Self",
+              "key": "SORUSH_GrapplingHook_Mark",
+              "ratio": 1.0
+            }
+          ],
+          "successActions": [
+            {
+              "$type": "DebugLog",
+              "content": "!!!!!!!modifier Add Succ!!!!!!!!!"
+            },
+            {
+              "$type": "ApplyModifier",
+              "otherTargets": {
+                "$type": "OMJNAIFHGGH",
+                "tag": "SlushaHookRegion"
+              },
+              "RotationDampTime": true,
+              "modifierName": "Set_EmptyGadget_SendRefreshSLC"
+            },
+            {
+              "$type": "AddGlobalValue",
+              "target": "Team",
+              "predicates": [
+                {
+                  "$type": "NLJIFDHAJJG",
+                  "MPPHBAOEHGH": true
+                }
+              ],
+              "ratio": -1.0,
+              "key": "SORUSH_GrapplingHook_Mark",
+              "useLimitRange": true,
+              "maxValue": 1.0,
+              "minValue": 0.0
+            },
+            {
+              "$type": "AddGlobalValue",
+              "ratio": -1.0,
+              "key": "SORUSH_GrapplingHook_Mark",
+              "useLimitRange": true,
+              "maxValue": 1.0,
+              "minValue": 0.0
+            },
+            {
+              "$type": "AddGlobalValue",
+              "target": "CurLocalAvatar",
+              "predicates": [
+                {
+                  "$type": "NLJIFDHAJJG",
+                  "MPPHBAOEHGH": true
+                }
+              ],
+              "ratio": -1.0,
+              "key": "SORUSH_GrapplingHook_Mark",
+              "useLimitRange": true,
+              "maxValue": 1.0,
+              "minValue": 0.0
+            }
+          ],
+          "failActions": [
+            {
+              "$type": "DebugLog",
+              "content": "!!!!!!!modifier Add Failed!!!!!!!!!"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Vehicle_Sorush_KillTeamChildren",
+      "modifiers": {
+        "KILLSELF": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "KillSelf"
+            }
+          ]
+        }
+      },
+      "onRemoved": [
+        {
+          "$type": "ApplyModifier",
+          "otherTargets": {
+            "$type": "SelectTargetsByChildren",
+            "configID": 70220142
+          },
+          "modifierName": "KILLSELF"
+        }
+      ],
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Vehicle_Sorush_DynamicCollisionHandler",
+      "abilityMixins": [
+        {
+          "$type": "DynamicCollisionMixin",
+          "tags": ["SORUSH_WITH_HAT"],
+          "PJBIACEBCJH": true
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Vehicle_Sorush_SorushWithCrown",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValueV2",
+          "ratio": 1.0,
+          "key": "_Ability_Sorush_Crown_Mark",
+          "maxValue": 0.0,
+          "minValue": 0.0
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Vehicle_Sorush_ActivityVehicleMark",
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "ratio": 1.0,
+          "key": "_ABILITY_Sorush_ActivityVehicleMark",
+          "maxValue": 0.0,
+          "minValue": 0.0
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "ActivityAbility_Team_Hitman_Sorush_FireBomb",
+      "abilityMixins": [
+        {
+          "$type": "VehicleSkillDepotChangeMixin",
+          "MOMENHGBPJH": [45002003],
+          "JLPODDPLPIH": 99002001
+        },
+        {
+          "$type": "ModifyCameraAircraftParamMixin",
+          "JKKIOFODBBL": 15.0,
+          "DLJBDNJGNBH": {
+            "y": -2.5999999046325684
+          },
+          "NACFMCENDFF": 5.0,
+          "BDFFKMOAPGM": 0.800000011920929
+        },
+        {
+          "$type": "CurLocalAvatarMixinV2",
+          "modifierName": "UNIQUE_Hitman_Sorush_FireBomb_FX_Handler"
+        }
+      ],
+      "modifiers": {
+        "UNIQUE_Hitman_Sorush_FireBomb_FX_Handler": {
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "modifierMixins": [
+            {
+              "$type": "AttachModifierToSelfGlobalValueMixin",
+              "globalValueKey": "_ABILITY_Avatar_InSorush_Mark",
+              "defaultGlobalValueOnCreate": 0.0,
+              "valueSteps": [-0.5, 0.5, 1.5],
+              "modifierNameSteps": ["Blank", "Sorush_BombAlertFX_Handler"]
+            }
+          ]
+        },
+        "Sorush_BombAlertFX_Handler": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "thinkInterval": 1.0,
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "target": "Vehicle",
+              "RotationDampTime": true,
+              "modifierName": "Sorush_BombAlertFX"
+            }
+          ],
+          "onThinkInterval": [
+            {
+              "$type": "AttachModifier",
+              "target": "Vehicle",
+              "RotationDampTime": true,
+              "modifierName": "Sorush_BombAlertFX"
+            }
+          ]
+        },
+        "Sorush_BombAlertFX": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_Sorush_BombAlert",
+              "effectTempleteID": -1.0
+            }
+          ]
+        },
+        "Blank": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
+        }
+      },
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "ActivityAbility_Hitman_Sorush_FireBomb",
+      "modifiers": {
+        "Vehicle_Sorush_ChargeSkill_Delay": {
+          "modifierName": "",
+          "duration": 0.20000000298023224,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "HatOn"
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "FireEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Slusha_FireBomb_01_Attack",
+              "effectTempleteID": -1.0
+            },
+            {
+              "$type": "TriggerBullet",
+              "bulletID": 70220151,
+              "born": {
+                "$type": "ConfigBornBySelf",
+                "offset": {
+                  "x": 0.0,
+                  "y": -0.10000000149011612,
+                  "z": 0.0
+                },
+                "IABNJPGBAOH": true
+              }
+            },
+            {
+              "$type": "SetAnimatorTrigger",
+              "triggerID": "HatOff"
+            }
+          ]
+        }
+      },
+      "onAbilityStart": [
+        {
+          "$type": "SetAnimatorTrigger",
+          "triggerID": "ChargeSkill",
+          "MPTriggerOnRemote": true
+        },
+        {
+          "$type": "ApplyModifier",
+          "modifierName": "Vehicle_Sorush_ChargeSkill_Delay"
+        },
+        {
+          "$type": "ServerLuaCall",
+          "RotationDampTime": true,
+          "luaCallType": "CurGalleryControlGroup",
+          "funcName": "SLC_Activity_SorushTrialHitman_SorushFireBomb",
+          "MPPMFEDKGHC": 0.0,
+          "BOKNHLDBKKK": 0.0,
+          "CHOIIMHDNHK": 0.0
+        }
+      ]
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "Bullet_Sorush_Hitman_FireBomb",
+      "modifiers": {
+        "Bullet_Sorush_Bomb_FX": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Slusha_FireBomb_01_Bullet",
+              "effectTempleteID": -1.0
+            }
+          ]
+        }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "Bullet_Sorush_Bomb_FX"
+        }
+      ],
+      "onAbilityStart": [
+        {
+          "$type": "RemoveModifier",
+          "modifierName": "Bullet_Sorush_Bomb_FX"
+        },
+        {
+          "$type": "TriggerAttackEvent",
+          "attackEvent": {
+            "attackPattern": {
+              "$type": "ConfigAttackSphere",
+              "triggerType": "TriggerNoRepeat",
+              "born": {
+                "$type": "ConfigBornByCollisionPoint"
+              },
+              "radius": 3.0
+            },
+            "attackInfo": {
+              "attackTag": "Sorush_Hitman_Bomb_Attack",
+              "attenuationTag": "",
+              "attenuationGroup": "default",
+              "attackProperty": {
+                "damagePercentage": 0.0,
+                "damagePercentageRatio": 0.0,
+                "elementType": "Fire",
+                "bonusCriticalHurt": 25.0,
+                "strikeType": "Blunt"
+              },
+              "hitPattern": {
+                "onHitEffectName": "default",
+                "hitImpulseType": "LV0",
+                "hitHaltTimeScale": 0.05000000074505806,
+                "muteHitText": true
+              }
+            }
+          },
+          "targetType": "Enemy",
+          "entityTypes": ["Gadget", "Field"]
+        },
+        {
+          "$type": "FireEffect",
+          "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_Slusha_FireBomb_01_Bomb",
+          "born": {
+            "$type": "ConfigBornByCollisionPoint"
+          },
+          "effectTempleteID": -1.0
+        },
+        {
+          "$type": "KillSelf"
+        }
+      ]
     }
   }
 ]

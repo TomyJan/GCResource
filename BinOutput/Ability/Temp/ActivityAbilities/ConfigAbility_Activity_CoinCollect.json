@@ -3,217 +3,360 @@
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CoinCollect_TestAbility",
-      "isDynamicAbility": true,
-      "onAdded": []
+      "isDynamicAbility": true
     }
   },
   {
-    //移动速度加快
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CoinCollect_MoveSpeedUp",
-      "isDynamicAbility": true,
       "abilityMixins": [
         {
           "$type": "AttachModifierToGlobalValueMixin",
           "globalValueTarget": "Team",
           "globalValueKey": "SGV_CoinCollect_Widget_SkillEnabled",
-          "valueSteps": [0.5, 1.5],
-          "modifierNameSteps": ["UNIQUE_CoinCollect_MoveSpeedUp"]
+          "valueSteps": [-0.5, 0.5, 1.5],
+          "modifierNameSteps": ["Blank", "UNIQUE_CoinCollect_MoveSpeedUp"]
         }
       ],
+      "abilitySpecials": {
+        "SpeedUpRatio": 0.0
+      },
       "modifiers": {
+        "Blank": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
+        },
         "UNIQUE_CoinCollect_MoveSpeedUp": {
-          "isUnique": true,
           "stacking": "Unique",
-          "isLimitedProperties": true,
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
           "properties": {
-            "Animator_MoveSpeedRatio": "%SpeedUpRatio"
-          }
+            "Animator_MoveSpeedRatio": "SpeedUpRatio"
+          },
+          "isLimitedProperties": true
         }
       },
-      "abilitySpecials": {
-        "SpeedUpRatio": 0
-      }
+      "isDynamicAbility": true
     }
   },
   {
-    //超级跳
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CoinCollect_RocketJump",
-      "isDynamicAbility": true,
       "abilityMixins": [
         {
           "$type": "AttachModifierToGlobalValueMixin",
           "globalValueTarget": "Team",
           "globalValueKey": "SGV_CoinCollect_Widget_SkillEnabled",
-          "valueSteps": [0.5, 1.5],
-          "modifierNameSteps": ["UNIQUE_CoinCollect_RocketJump"]
+          "valueSteps": [-0.5, 0.5, 1.5],
+          "modifierNameSteps": ["Blank", "UNIQUE_CoinCollect_RocketJump"]
         }
       ],
       "modifiers": {
+        "Blank": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
+        },
         "UNIQUE_CoinCollect_RocketJump": {
-          "isUnique": true,
           "stacking": "Unique",
-          "isLimitedProperties": true,
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "EnableRocketJump",
+              "RotationDampTime": true,
               "canBeHandledOnRecover": true,
-              "target": "Self",
-              "doOffStage": true,
               "type": "DungeonJump",
               "enable": true,
               "extention": {
-                "xzMultiplier": 2, //xz平面速度乘子
-                "yMultiplier": 3.0 //y轴跳跃速度乘子
+                "xzMultiplier": 2.0,
+                "yMultiplier": 6.0
               }
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "EnableRocketJump",
+              "RotationDampTime": true,
+              "type": "DungeonJump"
             }
           ],
           "onAvatarIn": [
             {
               "$type": "EnableRocketJump",
+              "RotationDampTime": true,
               "canBeHandledOnRecover": true,
-              "target": "Self",
-              "doOffStage": true,
               "type": "DungeonJump",
               "enable": true,
               "extention": {
-                "xzMultiplier": 2, //xz平面速度乘子
-                "yMultiplier": 3.0 //y轴跳跃速度乘子
+                "xzMultiplier": 2.0,
+                "yMultiplier": 6.0
               }
             }
           ],
-          "onRemoved": [
-            {
-              "$type": "EnableRocketJump",
-              "type": "DungeonJump",
-              "target": "Self",
-              "doOffStage": true,
-              "enable": false
-            }
-          ]
+          "isLimitedProperties": true
         }
-      }
+      },
+      "isDynamicAbility": true
     }
   },
   {
-    //创建风场
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CoinCollect_CreateWindField",
-      "isDynamicAbility": true,
       "abilityMixins": [
         {
           "$type": "AttachModifierToGlobalValueMixin",
           "globalValueTarget": "Team",
-          "globalValueKey": "SGV_CoinCollect_Widget_SkillEnabled",
-          "valueSteps": [0.5, 1.5],
-          "modifierNameSteps": ["UNIQUE_CoinCollect_CreateWindField"]
+          "globalValueKey": "GV_WINDFIELD",
+          "valueSteps": [-0.5, 0.5, 1.5],
+          "modifierNameSteps": [
+            "Blank",
+            "UNIQUE_CoinCollect_CreateWindField_ApplyTeam"
+          ]
         }
       ],
       "modifiers": {
-        "UNIQUE_CoinCollect_CreateWindField": {
-          "isUnique": true,
+        "Blank": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
+        },
+        "UNIQUE_CoinCollect_CreateWindField_ApplyTeam": {
           "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "duration": 0.10000000149011612,
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
-              "$type": "CreateGadget",
-              "doOffStage": true,
-              "gadgetID": 44000549,
-              "campID": 1001,
-              "campTargetType": "Enemy",
+              "$type": "SetGlobalPos",
+              "target": "Team",
+              "key": "CoinCollect_WindField_Pos",
               "born": {
-                "$type": "ConfigBornBySelf"
+                "$type": "ConfigBornBySelf",
+                "IABNJPGBAOH": true
               }
+            },
+            {
+              "$type": "ApplyModifier",
+              "target": "Team",
+              "modifierName": "CoinCollect_CreateWindField"
             }
           ],
           "onRemoved": [
             {
+              "$type": "SetGlobalValue",
+              "target": "Team",
+              "RotationDampTime": true,
+              "ratio": 0.0,
+              "key": "GV_WINDFIELD",
+              "maxValue": 0.0,
+              "minValue": 0.0
+            }
+          ]
+        },
+        "CoinCollect_CreateWindField": {
+          "modifierName": "",
+          "duration": 0.10000000149011612,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
               "$type": "KillGadget",
-              "doOffStage": true,
+              "RotationDampTime": true,
               "gadgetInfo": {
-                "$type": "SelectTargetsByChildren",
+                "configID": 44000549
+              }
+            },
+            {
+              "$type": "CreateGadget",
+              "born": {
+                "$type": "ConfigBornByGlobalValue",
+                "offset": {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                },
+                "direction": {
+                  "$type": "AKNHOGLMAAH",
+                  "eularAngles": {
+                    "x": 0.10000000149011612,
+                    "y": 0.10000000149011612,
+                    "z": 0.10000000149011612
+                  }
+                },
+                "IABNJPGBAOH": true,
+                "positionKey": "CoinCollect_WindField_Pos",
+                "directionKey": ""
+              },
+              "gadgetID": 44000549,
+              "campID": 1001,
+              "campTargetType": "Enemy"
+            }
+          ]
+        },
+        "CoinCollect_RemoveWindField": {
+          "modifierName": "",
+          "duration": 0.10000000149011612,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "KillGadget",
+              "RotationDampTime": true,
+              "gadgetInfo": {
                 "configID": 44000549
               }
             }
           ]
         }
-      }
+      },
+      "onAdded": [
+        {
+          "$type": "SetGlobalValue",
+          "target": "Team",
+          "ratio": 0.0,
+          "key": "GV_WINDFIELD",
+          "maxValue": 0.0,
+          "minValue": 0.0
+        }
+      ],
+      "onRemoved": [
+        {
+          "$type": "ApplyModifier",
+          "target": "Team",
+          "modifierName": "CoinCollect_RemoveWindField"
+        }
+      ],
+      "isDynamicAbility": true
     }
   },
   {
-    //风场gadget
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CoinCollect_CreateWindZone",
-      "isDynamicAbility": true,
-      "onAdded": [
-        {
-          "$type": "AttachModifier",
-          "target": "Self",
-          "modifierName": "UNIQUE_CoinCollect_WindFiled_Effect"
-        }
-      ],
       "modifiers": {
         "UNIQUE_CoinCollect_WindFiled_Effect": {
+          "modifierName": "",
           "isUnique": true,
+          "duration": 10.0,
+          "bonusCriticalHurt": 100.0,
           "onAdded": [
             {
               "$type": "AttachEffect",
-              "effectPattern": "Eff_Item_WindSeed_WindField"
+              "healLimitedByCasterMaxHPRatio": "Eff_Item_WindSeed_WindField",
+              "effectTempleteID": -1.0
+            }
+          ],
+          "onRemoved": [
+            {
+              "$type": "KillSelf"
             }
           ]
         }
-      }
+      },
+      "onAdded": [
+        {
+          "$type": "AttachModifier",
+          "modifierName": "UNIQUE_CoinCollect_WindFiled_Effect"
+        }
+      ],
+      "isDynamicAbility": true
     }
   },
   {
-    //不消耗体力
     "Default": {
       "$type": "ConfigAbility",
       "abilityName": "ActivityAbility_CoinCollect_CostStamina_Zero",
-      "isDynamicAbility": true,
       "abilityMixins": [
         {
           "$type": "AttachModifierToGlobalValueMixin",
           "globalValueTarget": "Team",
           "globalValueKey": "SGV_CoinCollect_Widget_SkillEnabled",
-          "valueSteps": [0.5, 1.5],
-          "modifierNameSteps": [
-            "UNIQUE_CoinCollect_CostStamina_Zero_Decision_Dash"
-          ]
+          "valueSteps": [-0.5, 0.5, 1.5],
+          "modifierNameSteps": ["Blank", "UNIQUE_CoinCollect_CostStamina_Zero"]
         }
       ],
       "modifiers": {
-        "UNIQUE_CoinCollect_CostStamina_Zero_Decision_Dash": {
-          "isUnique": true,
-          "stacking": "Unique",
-          "isLimitedProperties": true,
-          "modifierMixins": [
-            {
-              "$type": "AttachToStateIDMixin",
-              "stateIDs": ["SprintBS", "Sprint"],
-              "modifierName": "UNIQUE_CoinCollect_CostStamina_Zero" //名字需要一样
-            }
-          ],
-          "onRemoved": [
-            {
-              "$type": "RemoveUniqueModifier",
-              "modifierName": "UNIQUE_CoinCollect_CostStamina_Zero"
-            }
-          ]
+        "Blank": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
         },
         "UNIQUE_CoinCollect_CostStamina_Zero": {
-          "isUnique": true,
           "stacking": "Unique",
-          "isLimitedProperties": true,
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
           "properties": {
-            "Actor_CostStaminaRatio": -2
-          }
+            "Actor_CostStaminaRatio": -999.0
+          },
+          "isLimitedProperties": true
         }
-      }
+      },
+      "isDynamicAbility": true
+    }
+  },
+  {
+    "Default": {
+      "$type": "ConfigAbility",
+      "abilityName": "ActivityAbility_CoinCollect_Range_Eff",
+      "abilityMixins": [
+        {
+          "$type": "AttachModifierToGlobalValueMixin",
+          "globalValueTarget": "Team",
+          "globalValueKey": "SGV_CoinCollect_Widget_SkillEnabled",
+          "valueSteps": [-0.5, 0.5, 1.5],
+          "modifierNameSteps": ["Blank", "UNIQUE_CoinCollect_Range_Eff_Handler"]
+        }
+      ],
+      "modifiers": {
+        "Blank": {
+          "modifierName": "",
+          "bonusCriticalHurt": 100.0
+        },
+        "UNIQUE_CoinCollect_Range_Eff_Handler": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "modifierName": "UNIQUE_CoinCollect_Range_Eff"
+            }
+          ],
+          "onAvatarIn": [
+            {
+              "$type": "AttachModifier",
+              "modifierName": "UNIQUE_CoinCollect_Range_Eff"
+            }
+          ],
+          "onAvatarOut": [
+            {
+              "$type": "RemoveUniqueModifier",
+              "RotationDampTime": true,
+              "modifierName": "UNIQUE_CoinCollect_Range_Eff"
+            }
+          ],
+          "isLimitedProperties": true
+        },
+        "UNIQUE_CoinCollect_Range_Eff": {
+          "stacking": "Unique",
+          "modifierName": "",
+          "isUnique": true,
+          "bonusCriticalHurt": 100.0,
+          "onAdded": [
+            {
+              "$type": "AttachEffect",
+              "healLimitedByCasterMaxHPRatio": "Eff_SceneObj_DIK_BUFFC_01_Buff",
+              "effectTempleteID": -1.0
+            }
+          ],
+          "isLimitedProperties": true
+        }
+      },
+      "isDynamicAbility": true
     }
   }
 ]

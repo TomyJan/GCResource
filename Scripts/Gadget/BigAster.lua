@@ -1,4 +1,4 @@
-﻿local defs = {
+local defs = {
 	player_energy = "AVATAR_ASTER_SCORE"
 }
 

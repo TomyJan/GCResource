@@ -1,4 +1,4 @@
-﻿function OnClientExecuteReq(context, param1, param2, param3)
+function OnClientExecuteReq(context, param1, param2, param3)
 	--联机状态下,由于未被及时卸载时被交互的保险
 	if true == ScriptLib.CheckIsInMpMode(context) then	
 		ScriptLib.PrintContextLog(context, "#SetGadgetState_BanMP# Is in MP mode, refuse state change.")
