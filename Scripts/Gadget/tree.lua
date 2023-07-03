@@ -1,10 +1,8 @@
-function OnBeHurt(context, element_type, strike_type, is_host)
-    local gather_config_ids = ScriptLib.GetGatherConfigIdList(context)
-    local length = #gather_config_ids
-    ScriptLib.PrintLog("gather_config_ids length: " ..length)
+function OnBeHurt(context, element_type, unkParam, is_host)
+    local configIds = ScriptLib.GetGatherConfigIdList(context)
+    local count = #configIds
+
     if length > 0 then
-        if 0 ~= ScriptLib.SetGadgetStateByConfigId(context, gather_config_ids[1], GadgetState.GatherDrop) then
-            ScriptLib.PrintLog("Drop config_id:" .. gather_config_ids[1] .." failed")
-        end 
-    end 
+        ScriptLib.SetGadgetStateByConfigId(context, configIds[1], GadgetState.GatherDrop)
+    end
 end
