@@ -11,9 +11,9 @@ local base_info = {
 
 -- 怪物
 monsters = {
-	{ config_id = 709001, monster_id = 25210403, pos = { x = -1258.719, y = -5.705, z = 5415.259 }, rot = { x = 0.000, y = 90.921, z = 0.000 }, level = 1, drop_id = 1000100 },
-	{ config_id = 709002, monster_id = 25210402, pos = { x = -1260.851, y = -5.705, z = 5416.721 }, rot = { x = 0.000, y = 106.499, z = 0.000 }, level = 1, drop_id = 1000100 },
-	{ config_id = 709003, monster_id = 25210302, pos = { x = -1262.739, y = -4.895, z = 5416.444 }, rot = { x = 0.000, y = 111.095, z = 0.000 }, level = 1, drop_id = 1000100 }
+	{ config_id = 709001, monster_id = 25210403, pos = { x = -1258.719, y = -5.705, z = 5415.259 }, rot = { x = 0.000, y = 90.921, z = 0.000 }, level = 1, drop_id = 1000100, area_id = 32 },
+	{ config_id = 709002, monster_id = 25210402, pos = { x = -1260.851, y = -5.705, z = 5416.721 }, rot = { x = 0.000, y = 106.499, z = 0.000 }, level = 1, drop_id = 1000100, area_id = 32 },
+	{ config_id = 709003, monster_id = 25210302, pos = { x = -1262.739, y = -4.895, z = 5416.444 }, rot = { x = 0.000, y = 111.095, z = 0.000 }, level = 1, drop_id = 1000100, area_id = 32 }
 }
 
 -- NPC
