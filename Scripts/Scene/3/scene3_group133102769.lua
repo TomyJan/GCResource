@@ -1048,7 +1048,7 @@ function action_EVENT_ENTER_REGION_769059(context, evt)
 					big_region=regions[i]
 				end
 			end
-			TrySetPlayerEyePoint(context, small_region, big_region, 1, {0})
+			ScriptLib.TrySetPlayerEyePoint(context, small_region, big_region, 1, {0})
 	return 0
 end
 

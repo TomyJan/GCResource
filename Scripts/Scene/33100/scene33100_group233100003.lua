@@ -57,12 +57,12 @@ triggers = {
 	{ config_id = 1003028, name = "CHALLENGE_SUCCESS_3028", event = EventType.EVENT_CHALLENGE_SUCCESS, source = "1", condition = "", action = "action_EVENT_CHALLENGE_SUCCESS_3028" }
 }
 
--- 变量
+-- variable
 variables = {
 	{ config_id = 1, name = "monster_wave", value = 0, no_refresh = false }
 }
 
--- 废弃数据
+-- obsolete data
 garbages = {
 	triggers = {
 		{ config_id = 1003029, name = "CHALLENGE_FAIL_3029", event = EventType.EVENT_CHALLENGE_FAIL, source = "1", condition = "", action = "action_EVENT_CHALLENGE_FAIL_3029" }
@@ -71,11 +71,11 @@ garbages = {
 
 --================================================================
 -- 
--- 初始化配置
+-- Initial configuration
 -- 
 --================================================================
 
--- 初始化时创建
+-- Created at initialization
 init_config = {
 	suite = 1,
 	end_suite = 0,
@@ -84,7 +84,7 @@ init_config = {
 
 --================================================================
 -- 
--- 小组配置
+-- group configuration
 -- 
 --================================================================
 
@@ -102,20 +102,21 @@ suites = {
 
 --================================================================
 -- 
--- 触发器
+-- trigger
 -- 
 --================================================================
 
--- 触发条件
+-- Triggering conditions
 function condition_EVENT_MONSTER_TIDE_DIE_3025(context, evt)
 	if 20 ~= evt.param1 then
+		ScriptLib.PrintContextLog(context, "failed: " .. evt.param1)
 		return false
 	end
 	
 	return true
 end
 
--- 触发操作
+-- trigger action (this only takes effect if 19 (aka 20) monsters are killed)?
 function action_EVENT_MONSTER_TIDE_DIE_3025(context, evt)
 	-- 延迟0秒刷怪
 	if 0 ~= ScriptLib.CreateMonster(context, { config_id = 3020, delay_time = 0 }) then
@@ -140,13 +141,13 @@ end
 
 -- 触发操作
 function action_EVENT_CHALLENGE_FAIL_3026(context, evt)
-		-- 重新生成指定group，指定suite
+		-- Regenerate the specified group and specified suite
 		if 0 ~= ScriptLib.RefreshGroup(context, { group_id = 233100003, suite = 1 }) then
 	    ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : refresh_group_to_suite")
 			return -1
 		end
 	
-	-- 地城失败结算
+	-- Dungeon failure settlement
 	if 0 ~= ScriptLib.CauseDungeonFail(context) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : cause_dungeonfail")
 		return -1
@@ -155,24 +156,25 @@ function action_EVENT_CHALLENGE_FAIL_3026(context, evt)
 	return 0
 end
 
--- 触发条件
+-- Triggering conditions
 function condition_EVENT_ANY_MONSTER_LIVE_3027(context, evt)
 	if 3001 ~= evt.param1 then
+		ScriptLib.PrintContextLog(context, "no start yet: " .. evt.param1)
 		return false
 	end
 	
 	return true
 end
 
--- 触发操作
+-- trigger action
 function action_EVENT_ANY_MONSTER_LIVE_3027(context, evt)
-	-- 创建编号为1（该挑战的识别id),挑战内容为1000的区域挑战，具体参数填写方式，见DungeonChallengeData表中的注释，所有填写的值都必须是int类型
+	-- Create an area challenge with the number 1 (the identification id of the challenge) and the challenge content as 1000. For the specific parameter filling method, see the notes in the DungeonChallengeData table. All the filled values must be of type int
 	if 0 ~= ScriptLib.ActiveChallenge(context, 1, 1000, 300, 233100003, 23, 0) then
 	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : active_challenge")
 		return -1
 	end
 	
-	-- 爬塔三星计时（is_stop:  0:开始计时、1:暂停计时）
+	-- Three-star timing for climbing the tower (is_stop: 0: start timing, 1: stop timing)
 	if 0 ~= ScriptLib.TowerCountTimeStatus(context, 0) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : tower_time_status")
 		return -1
@@ -181,15 +183,15 @@ function action_EVENT_ANY_MONSTER_LIVE_3027(context, evt)
 	return 0
 end
 
--- 触发操作
+-- trigger action
 function action_EVENT_CHALLENGE_SUCCESS_3028(context, evt)
-	-- 改变指定group组233100001中， configid为1002的gadget的state
+	-- Change the state of the gadget whose configid is 1002 in the specified group 233100001
 	if 0 ~= ScriptLib.SetGroupGadgetStateByConfigId(context, 233100001, 1002, GadgetState.GearStart) then
 	      ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : set_gadget_state_by_GroupId_ConfigId")
 			return -1
 		end 
 	
-	-- 爬塔三星计时（is_stop:  0:开始计时、1:暂停计时）
+	-- Three-star timing for climbing the tower (is_stop: 0: start timing, 1: stop timing)
 	if 0 ~= ScriptLib.TowerCountTimeStatus(context, 1) then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : tower_time_status")
 		return -1

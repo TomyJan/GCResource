@@ -1,4 +1,4 @@
--- 基础信息
+-- 基础信息 (Jadeplume Terrors)
 local base_info = {
 	group_id = 133301272
 }
@@ -125,7 +125,8 @@ function action_EVENT_ENTER_REGION_272005(context, evt)
 					big_region=regions[i]
 				end
 			end
-			TrySetPlayerEyePoint(context, small_region, big_region, 0, {0})
+			ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : shit lol")
+			ScriptLib.TrySetPlayerEyePoint(context, small_region, big_region, 0, {0})
 		end
 	
 	return 0

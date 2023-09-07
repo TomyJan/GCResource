@@ -1,4 +1,4 @@
--- 基础信息
+-- this is a group where there are 3 monsters during quest `Going Upon The Breeze: Clear Out the Nearby Hilichurl Camp: Lumine and Amber`
 local base_info = {
 	group_id = 133003136
 }
@@ -41,12 +41,12 @@ gadgets = {
 regions = {
 }
 
--- 触发器
+-- trigger
 triggers = {
 	{ config_id = 1000511, name = "ANY_MONSTER_DIE_511", event = EventType.EVENT_ANY_MONSTER_DIE, source = "", condition = "condition_EVENT_ANY_MONSTER_DIE_511", action = "action_EVENT_ANY_MONSTER_DIE_511" }
 }
 
--- 变量
+-- variable
 variables = {
 }
 
@@ -56,7 +56,7 @@ variables = {
 -- 
 --================================================================
 
--- 初始化时创建
+-- Created at initialization
 init_config = {
 	suite = 2,
 	end_suite = 0,
@@ -65,7 +65,7 @@ init_config = {
 
 --================================================================
 -- 
--- 小组配置
+-- group configuration
 -- 
 --================================================================
 
@@ -93,35 +93,38 @@ suites = {
 
 --================================================================
 -- 
--- 触发器
+-- trigger
 -- 
 --================================================================
 
--- 触发条件
+-- Triggering conditions (It will take action if 3 monsters are killed)
 function condition_EVENT_ANY_MONSTER_DIE_511(context, evt)
-	-- 判断剩余怪物数量是否是0
-	if ScriptLib.GetGroupMonsterCount(context) ~= 0 then
-		return false
-	end
+	-- Determine whether the number of remaining monsters is 0
+	local count_kill = ScriptLib.GetGroupMonsterCount(context)
+    if count_kill > 0 then
+        ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : Not all monsters killed. Remaining count: " .. count_kill)
+        return false
+    end
 	
 	return true
 end
 
--- 触发操作
+-- trigger action
 function action_EVENT_ANY_MONSTER_DIE_511(context, evt)
-	-- 解锁目标4125
+	-- Unlock target 4125 aka treasure
 	if 0 ~= ScriptLib.ChangeGroupGadget(context, { config_id = 4125, state = GadgetState.Default }) then
-	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : unlock_gadget")
-		return -1
+	  ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : skip bacuse treasure here should be here but because we are on a private server and have finished then resetting the quest from the beginning again makes the treasure not appear because we have taken it before.")
+		--return -1
 	end
 	
-	-- 通知任务系统完成条件类型"LUA通知"，复杂参数为quest_param的进度+1
+	-- The notification task system completes the condition type "LUA notification", and the complex parameter is the progress of quest_param +1
+	-- maybe need hack QUEST_CONTENT_ADD_QUEST_PROGRESS?
 	if 0 ~= ScriptLib.AddQuestProgress(context, "133003136") then
 		ScriptLib.PrintContextLog(context, "@@ LUA_WARNING : add_quest_progress")
 	  return -1
 	end
 	
-	-- 设置指定Group为可竞争
+	-- Set the specified Group to be contestable
 	    ScriptLib.SetGroupReplaceable(context, 133003136, true)
 	
 	return 0
